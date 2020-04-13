@@ -1,7 +1,10 @@
 package model;
 
 public abstract class User {
-    private PersonalInfo personalInfo;
+    protected PersonalInfo personalInfo;
 
+    public User(String username, String firstName, String lastName, String emailAddress,
+                String phoneNumber, String password, String role) {
 
+    }
 }

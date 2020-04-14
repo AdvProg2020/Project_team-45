@@ -17,7 +17,7 @@ public class Controller {
         this.market = Market.getInstance();
     }
 
-    public void addUser(String username, String firstname, String lastname, String emailAddress, String phoneNumber, String password, String role) {
+    public void addUser(String username, String firstName, String lastName, String emailAddress, String phoneNumber, String password, String role) {
     }
 
     public User loginUserByUsernameAndPassword(String username, String password) {

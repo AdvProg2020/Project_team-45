@@ -3,90 +3,186 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="338.0" y="232.0">model.BuyLog</node>
-    <node x="614.0" y="79.0">model.request.ProductEditionRequest</node>
-    <node x="340.0" y="380.0">model.Category</node>
-    <node x="0.0" y="232.0">model.Admin</node>
-    <node x="405.25" y="153.0">model.Log</node>
-    <node x="141.0" y="454.0">model.Market</node>
-    <node x="629.0" y="380.0">model.Company</node>
-    <node x="213.0" y="306.0">model.ProductFilters</node>
-    <node x="102.0" y="232.0">model.Buyer</node>
-    <node x="404.0" y="306.0">model.CodedDiscount</node>
-    <node x="275.0" y="454.0">model.Rate</node>
-    <node x="0.0" y="380.0">model.PersonalInfo</node>
-    <node x="588.0" y="306.0">model.request.AddOffRequest</node>
-    <node x="177.0" y="380.0">model.OffFilters</node>
-    <node x="394.0" y="454.0">model.Off</node>
-    <node x="208.99999999999997" y="79.0">model.request.SellerRegisterRequest</node>
-    <node x="106.0" y="153.0">model.User</node>
-    <node x="488.0" y="380.0">model.Comment</node>
-    <node x="426.0" y="79.0">model.request.AddProductRequest</node>
-    <node x="0.0" y="454.0">model.Product</node>
-    <node x="0.0" y="79.0">model.request.RemoveProductRequest</node>
-    <node x="360.75" y="0.0">model.request.Request</node>
-    <node x="447.0" y="232.0">model.SellLog</node>
-    <node x="204.0" y="232.0">model.Seller</node>
-    <node x="0.0" y="306.0">model.request.OffEditionRequest</node>
-    <node x="588.0" y="153.0">model.ProductInfoForSeller</node>
+    <node x="209.33750000000003" y="554.0">model.BuyLog</node>
+    <node x="614.0" y="707.0">model.request.ProductEditionRequest</node>
+    <node x="551.5875" y="237.0">model.Category</node>
+    <node x="377.45637254901965" y="158.0">model.Admin</node>
+    <node x="277.46250000000003" y="475.0">model.Log</node>
+    <node x="0.0" y="855.0">model.Market</node>
+    <node x="435.58750000000003" y="237.0">model.Company</node>
+    <node x="213.0" y="781.0">model.ProductFilters</node>
+    <node x="275.45637254901965" y="158.0">model.Buyer</node>
+    <node x="404.0" y="781.0">model.CodedDiscount</node>
+    <node x="225.5875" y="237.0">model.Rate</node>
+    <node x="228.47867647058828" y="0.0">model.PersonalInfo</node>
+    <node x="588.0" y="781.0">model.request.AddOffRequest</node>
+    <node x="772.0" y="781.0">model.OffFilters</node>
+    <node x="151.65" y="158.0">model.Off</node>
+    <node x="208.99999999999997" y="707.0">model.request.SellerRegisterRequest</node>
+    <node x="257.4786764705883" y="79.0">model.User</node>
+    <node x="319.5875" y="237.0">model.Comment</node>
+    <node x="426.0" y="707.0">model.request.AddProductRequest</node>
+    <node x="262.96250000000003" y="396.0">model.Product</node>
+    <node x="0.0" y="707.0">model.request.RemoveProductRequest</node>
+    <node x="360.75" y="628.0">model.request.Request</node>
+    <node x="318.33750000000003" y="554.0">model.SellLog</node>
+    <node x="4.125" y="158.0">model.Seller</node>
+    <node x="0.0" y="781.0">model.request.OffEditionRequest</node>
+    <node x="0.0" y="237.0">model.ProductInfoForSeller</node>
   </nodes>
   <notes />
   <edges>
+    <edge source="model.Comment" target="model.Product">
+      <point x="36.0" y="14.5" />
+      <point x="403.5875" y="316.0" />
+      <point x="327.76250000000005" y="316.0" />
+      <point x="16.80000000000001" y="-14.5" />
+    </edge>
     <edge source="model.request.AddProductRequest" target="model.request.Request">
       <point x="0.0" y="-14.5" />
-      <point x="510.0" y="59.0" />
-      <point x="420.75" y="59.0" />
+      <point x="510.0" y="687.0" />
+      <point x="420.75" y="687.0" />
       <point x="12.0" y="14.5" />
     </edge>
-    <edge source="model.SellLog" target="model.Log">
-      <point x="-2.8421709430404007E-14" y="-14.5" />
-      <point x="495.0" y="207.0" />
-      <point x="455.5" y="207.0" />
-      <point x="16.75" y="14.5" />
+    <edge source="model.ProductInfoForSeller" target="model.Off">
+      <point x="23.625" y="-14.5" />
+      <point x="118.125" y="217.0" />
+      <point x="160.025" y="217.0" />
+      <point x="-25.125" y="14.5" />
     </edge>
     <edge source="model.BuyLog" target="model.Log">
-      <point x="0.0" y="-14.5" />
-      <point x="382.5" y="207.0" />
-      <point x="422.0" y="207.0" />
-      <point x="-16.75" y="14.5" />
+      <point x="-22.25" y="-14.5" />
+      <point x="231.58750000000003" y="524.0" />
+      <point x="285.83750000000003" y="524.0" />
+      <point x="-25.125" y="14.5" />
     </edge>
-    <edge source="model.Admin" target="model.User">
-      <point x="0.0" y="-14.5" />
-      <point x="41.0" y="207.0" />
-      <point x="118.33333333333331" y="207.0" />
-      <point x="-24.666666666666686" y="14.5" />
+    <edge source="model.Comment" target="model.Buyer">
+      <point x="-24.0" y="-14.5" />
+      <point x="343.5875" y="217.0" />
+      <point x="326.70637254901965" y="217.0" />
+      <point x="10.25" y="14.5" />
     </edge>
-    <edge source="model.Buyer" target="model.User">
+    <edge source="model.Product" target="model.Company">
+      <point x="26.399999999999977" y="-14.5" />
+      <point x="337.3625" y="336.0" />
+      <point x="507.58750000000003" y="336.0" />
+      <point x="24.0" y="14.5" />
+    </edge>
+    <edge source="model.Product" target="model.Comment">
+      <point x="7.199999999999989" y="-14.5" />
+      <point x="318.1625" y="296.0" />
+      <point x="355.5875" y="296.0" />
+      <point x="-12.0" y="14.5" />
+    </edge>
+    <edge source="model.ProductInfoForSeller" target="model.Seller">
+      <point x="-23.625" y="-14.5" />
+      <point x="22.25" y="14.5" />
+    </edge>
+    <edge source="model.Rate" target="model.Product">
+      <point x="27.75" y="14.5" />
+      <point x="290.3375" y="286.0" />
+      <point x="308.56250000000006" y="286.0" />
+      <point x="-2.3999999999999773" y="-14.5" />
+    </edge>
+    <edge source="model.User" target="model.PersonalInfo">
       <point x="0.0" y="-14.5" />
       <point x="0.0" y="14.5" />
     </edge>
-    <edge source="model.request.SellerRegisterRequest" target="model.request.Request">
-      <point x="0.0" y="-14.5" />
-      <point x="307.5" y="59.0" />
-      <point x="396.75" y="59.0" />
-      <point x="-12.0" y="14.5" />
+    <edge source="model.Product" target="model.Category">
+      <point x="31.19999999999999" y="-14.5" />
+      <point x="342.1625" y="346.0" />
+      <point x="564.4625" y="346.0" />
+      <point x="-38.625" y="14.5" />
     </edge>
-    <edge source="model.Seller" target="model.User">
+    <edge source="model.Rate" target="model.Buyer">
+      <point x="-18.5" y="-14.5" />
+      <point x="244.0875" y="207.0" />
+      <point x="285.70637254901965" y="207.0" />
+      <point x="-30.75" y="14.5" />
+    </edge>
+    <edge source="model.Admin" target="model.User">
       <point x="0.0" y="-14.5" />
-      <point x="248.5" y="207.0" />
-      <point x="167.66666666666669" y="207.0" />
+      <point x="418.45637254901965" y="128.0" />
+      <point x="319.14534313725494" y="128.0" />
       <point x="24.666666666666686" y="14.5" />
+    </edge>
+    <edge source="model.ProductInfoForSeller" target="model.Product">
+      <point x="70.875" y="14.5" />
+      <point x="165.375" y="346.0" />
+      <point x="279.76250000000005" y="346.0" />
+      <point x="-31.19999999999999" y="-14.5" />
+    </edge>
+    <edge source="model.Buyer" target="model.User">
+      <point x="0.0" y="-14.5" />
+      <point x="316.45637254901965" y="138.0" />
+      <point x="294.4786764705883" y="138.0" />
+      <point x="0.0" y="14.5" />
     </edge>
     <edge source="model.request.RemoveProductRequest" target="model.request.Request">
       <point x="0.0" y="-14.5" />
-      <point x="94.5" y="49.0" />
-      <point x="372.75" y="49.0" />
+      <point x="94.5" y="677.0" />
+      <point x="372.75" y="677.0" />
       <point x="-36.0" y="14.5" />
+    </edge>
+    <edge source="model.Seller" target="model.User">
+      <point x="0.0" y="-14.5" />
+      <point x="48.625" y="138.0" />
+      <point x="269.81200980392157" y="138.0" />
+      <point x="-24.666666666666686" y="14.5" />
+    </edge>
+    <edge source="model.Product" target="model.ProductInfoForSeller">
+      <point x="-40.799999999999955" y="-14.5" />
+      <point x="270.1625000000001" y="366.0" />
+      <point x="70.875" y="366.0" />
+      <point x="-23.625" y="14.5" />
+    </edge>
+    <edge source="model.Log" target="model.Product">
+      <point x="0.0" y="-14.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="model.SellLog" target="model.Log">
+      <point x="-24.00000000000003" y="-14.5" />
+      <point x="342.3375" y="534.0" />
+      <point x="319.33750000000003" y="534.0" />
+      <point x="8.375" y="14.5" />
+    </edge>
+    <edge source="model.Category" target="model.Product">
+      <point x="12.875" y="14.5" />
+      <point x="615.9625" y="366.0" />
+      <point x="351.76250000000005" y="366.0" />
+      <point x="40.80000000000001" y="-14.5" />
+    </edge>
+    <edge source="model.Off" target="model.Product">
+      <point x="25.125" y="14.5" />
+      <point x="210.275" y="217.0" />
+      <point x="204.3" y="217.0" />
+      <point x="204.3" y="326.0" />
+      <point x="289.36250000000007" y="326.0" />
+      <point x="-21.599999999999966" y="-14.5" />
+    </edge>
+    <edge source="model.Product" target="model.Rate">
+      <point x="-16.799999999999955" y="-14.5" />
+      <point x="294.1625000000001" y="316.0" />
+      <point x="234.8375" y="316.0" />
+      <point x="-27.75" y="14.5" />
+    </edge>
+    <edge source="model.request.SellerRegisterRequest" target="model.request.Request">
+      <point x="0.0" y="-14.5" />
+      <point x="307.5" y="687.0" />
+      <point x="396.75" y="687.0" />
+      <point x="-12.0" y="14.5" />
     </edge>
     <edge source="model.request.ProductEditionRequest" target="model.request.Request">
       <point x="0.0" y="-14.5" />
-      <point x="712.5" y="49.0" />
-      <point x="444.75" y="49.0" />
+      <point x="712.5" y="677.0" />
+      <point x="444.75" y="677.0" />
       <point x="36.0" y="14.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.5000000000000001" x="330.0" y="330.9999999999999" />
-  <SelectedNodes />
+  <settings layout="Hierarchic Group" zoom="0.8" x="415.5714285714283" y="349.99999999999994" />
+  <SelectedNodes>
+    <node>model.Seller</node>
+  </SelectedNodes>
   <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>

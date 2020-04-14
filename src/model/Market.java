@@ -14,7 +14,7 @@ public class Market {
 
     }
 
-    public Market getInstance() {
+    public static Market getInstance() {
 
     }
 

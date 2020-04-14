@@ -1,5 +1,8 @@
 package contreller;
 
+import model.Product;
+import model.ProductInfoForSeller;
+import model.Seller;
 import model.User;
 
 import java.awt.print.Printable;
@@ -41,6 +44,18 @@ public class Controller_methods {
         return null;
     }
 
+    public HashMap<String, Printable> getAllOffsList() {
+        return null;
+    }
+
+    public HashMap<String, Printable> getCartProductsList() {
+        return null;
+    }
+
+    public HashMap<String, Printable> getCustomerOrdersList() {
+        return null;
+    }
+
     public void deleteProduct(String productId) throws Exception {
     }
 
@@ -63,6 +78,27 @@ public class Controller_methods {
     }
 
     public void removeCategory() {
+    }
+
+    public void getSalesHistory(Seller seller) {
+    }
+
+    public void getProductBuyers(Product product, Seller seller) {
+    }
+
+    public void editProduct(ProductInfoForSeller productInfoForSeller) {
+    }
+
+    public void addProduct_Request() {
+    }
+
+    public void removeProduct_Request() {
+    }
+
+    public void changeProductAmountInCart() {
+    }
+
+    public void rateProduct() {
     }
 
 }

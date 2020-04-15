@@ -6,7 +6,7 @@ public class AnonymousUser {
     private Cart cart;
 
     public AnonymousUser() {
-        cart = new Cart();
+        this.cart = new Cart();
     }
 
     public Cart getCart() {

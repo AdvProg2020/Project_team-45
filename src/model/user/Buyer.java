@@ -1,48 +1,52 @@
 package model.user;
 
-import model.BuyLog;
-import model.Cart;
-import model.CodedDiscount;
+import model.*;
+import model.log.BuyLog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Buyer extends User {
     private Cart cart;
     private ArrayList<CodedDiscount> listOfCodedDiscounts;
     private int balance;
     private ArrayList<BuyLog> listOfBuyLogs;
+    private HashMap<Product, Rate> purchasedProducts;
 
-    public Buyer(String username, String firstName, String lastName, String emailAddress, String phoneNumber,
-                 String password, String role, ArrayList<CodedDiscount> listOfCodedDiscounts) {
-        super(username, firstName, lastName, emailAddress, phoneNumber, password, role);
-        this.listOfCodedDiscounts = listOfCodedDiscounts;
+    public Buyer(PersonalInfo personalInfo) {
+        super(personalInfo);
+        this.cart = new Cart();
     }
 
-    public boolean canBuy(int price) {
-
+    public Cart getCart() {
+        return cart;
     }
 
-    public void buy() {
+    public ArrayList<CodedDiscount> getListOfCodedDiscounts() {
+        return listOfCodedDiscounts;
+    }
 
+    public int getBalance() {
+        return balance;
     }
 
     public ArrayList<BuyLog> getListOfBuyLogs() {
+        return listOfBuyLogs;
+    }
+
+    public boolean canBuy() {
+        return false;
+    }
+
+    public void purchase() {
 
     }
 
     public BuyLog getOrderByOrderId(String orderId) {
-
+        return null;
     }
 
-    public void rateProductByProductId(String productId, int rateAmount) {
-
-    }
-
-    int getBalance() {
-
-    }
-
-    ArrayList<CodedDiscount> getListOfCodedDiscounts() {
+    public void rateProduct(Product product, Rate rate) {
 
     }
 

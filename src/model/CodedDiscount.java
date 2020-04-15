@@ -3,18 +3,18 @@ package model;
 import java.util.Date;
 
 public class CodedDiscount {
-    private String discountCode;
+    private String code;
     private Date startDate;
     private Date endDate;
 
-    public CodedDiscount(String discountCode, Date startDate, Date endDate) {
-        this.discountCode = discountCode;
+    public CodedDiscount(String code, Date startDate, Date endDate) {
+        this.code = code;
         this.startDate = startDate;
         this.endDate = endDate;
     }
 
-    public String getDiscountCode() {
-        return discountCode;
+    public String getCode() {
+        return code;
     }
 
     public Date getStartDate() {
@@ -25,8 +25,8 @@ public class CodedDiscount {
         return endDate;
     }
 
-    public void setDiscountCode(String discountCode) {
-        this.discountCode = discountCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public void setStartDate(Date startDate) {
@@ -37,12 +37,4 @@ public class CodedDiscount {
         this.endDate = endDate;
     }
 
-    @Override
-    public String toString() {
-        return "CodedDiscount{" +
-                "discountCode='" + discountCode + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
-    }
 }

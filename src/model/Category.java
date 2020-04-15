@@ -9,12 +9,11 @@ public class Category {
     private ArrayList<Category> subCategory;
     private ArrayList<Product> productList;
 
-    public Category(String name, Category parent, ArrayList<String> specialFeatures, ArrayList<Category> subCategory, ArrayList<Product> productList) {
+    public Category(String name, Category parent, ArrayList<String> specialFeatures) {
         this.name = name;
         this.parent = parent;
-
-        this.subCategory = subCategory;
-        this.productList = productList;
+        this.subCategory = new ArrayList<>();
+        this.productList = new ArrayList<>();
     }
 
     public String getName() {
@@ -39,6 +38,10 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setParent(Category parent) {
+        this.parent = parent;
     }
 
     public void addSpecialFeature(String newSpecialFeature) {

@@ -1,6 +1,7 @@
 package model.user;
 
 import model.*;
+import model.log.SellLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;

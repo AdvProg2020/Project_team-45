@@ -3,12 +3,12 @@ package model;
 import model.user.Buyer;
 
 public class Rate {
-    private Buyer user;
+    private Buyer buyer;
     private int score;
     private Product product;
 
     public Rate(Buyer user, int score, Product product) {
-        this.user = user;
+        this.buyer = user;
         this.score = score;
         this.product = product;
     }

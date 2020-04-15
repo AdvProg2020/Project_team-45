@@ -9,30 +9,24 @@ public class Product {
     private String productId;
     private String name;
     private Company company;
-    private ProductStatus condition;
-    private HashMap<Seller, SellerInfoForProduct> sellersList;
+    private ProductStatus productStatus;
+    private ArrayList<SellerInfoForProduct> sellersList;
+    private int minimumPrice;
     private Category category;
-    private HashMap<String, String> categorySpecifications;
+    private HashMap<String, String> categoryFeatures;
     private String description;
     private float averageScore;
     private ArrayList<Comment> comments;
     private ArrayList<Rate> rates;
-
-//    public Product(String productId, String name, Company company, Category category, HashMap<String, String> categorySpecifications, String description) {
-//        this.productId = productId;
-//        this.name = name;
-//        this.company = company;
-//        this.category = category;
-//        this.categorySpecifications = categorySpecifications;
-//        this.description = description;
-//    }
+    private int sellCount;
+    private int seen;
 
     public Product(String productId, String name, Company company, Category category, String description) {
         this.productId = productId;
         this.name = name;
         this.company = company;
         this.category = category;
-        this.categorySpecifications = new HashMap<>();
+        this.categoryFeatures = new HashMap<>();
         this.description = description;
     }
 
@@ -48,11 +42,11 @@ public class Product {
         return company;
     }
 
-    public ProductStatus getCondition() {
-        return condition;
+    public ProductStatus getProductStatus() {
+        return productStatus;
     }
 
-    public HashMap<Seller, SellerInfoForProduct> getSellersList() {
+    public ArrayList<SellerInfoForProduct> getSellersList() {
         return sellersList;
     }
 
@@ -60,8 +54,8 @@ public class Product {
         return category;
     }
 
-    public HashMap<String, String> getCategorySpecifications() {
-        return categorySpecifications;
+    public HashMap<String, String> getCategoryFeatures() {
+        return categoryFeatures;
     }
 
     public String getDescription() {
@@ -76,8 +70,12 @@ public class Product {
         return comments;
     }
 
-    public ArrayList<Rate> getRates() {
-        return rates;
+    public int getSellCount() {
+        return sellCount;
+    }
+
+    public int getSeen() {
+        return seen;
     }
 
     public void setName(String name) {
@@ -96,15 +94,11 @@ public class Product {
         this.description = description;
     }
 
-    public void addSellersInformation(Seller seller, SellerInfoForProduct productInfoForSeller) {
+    public void addSeller(SellerInfoForProduct sellerInfoForProduct) {
 
     }
 
-    public void addCategorySpecifications(HashMap<String, String> newCategorySpecifications) {
-
-    }
-
-    public boolean addCategorySpecifications(String , String ) {
+    public boolean addCategoryFeatures(String feature, String measure) {
         return false;
     }
 
@@ -116,37 +110,37 @@ public class Product {
 
     }
 
-    public boolean removeSellers(Seller seller) {
+    public boolean removeSeller(Seller seller) {
         return false;
     }
 
-    public boolean removeCategorySpecifications(String , String ) {
+    public boolean removeCategoryFeatures(String feature, String measure) {
         return false;
     }
 
-    public void requestEditing() {
+    public void increaseSeen() {
 
     }
 
-    public void approvingOff() {
+    public void changeSellCount(int sellCount) {
 
     }
 
-    public void updateAverageScore(int) {
+    public void requestForEdition() {
 
     }
 
-    public void updateAverageScore(int, int) {
+    public void approveProduct() {
 
     }
 
-//    public String showDigestInformation() {
-//
-//    }
-//
-//    public String showAttributes() {
-//
-//    }
+    public void updateAverageScoreAfterNewRate() {
+
+    }
+
+    public void updateAverageScoreAfterEditingRate(int oldRate, int newRate) {
+
+    }
 
     enum ProductStatus {
         UNDER_REVIEW_FOR_CREATE,

@@ -3,79 +3,82 @@ package model;
 import model.user.User;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Market {
     private static Market marketInstance;
-    private ArrayList<User> listOfUsers;
-    private ArrayList<CodedDiscount> listOfCodedDiscount;
-    private ArrayList<Category> listOfCategories;
-    private ArrayList<Product> listOfProducts;
+    private ArrayList<User> allUsers;
+    private ArrayList<CodedDiscount> allCodedDiscounts;
+    private ArrayList<Category> allCategories;
+    private ArrayList<Product> allProducts;
     private boolean hasAdmin;
 
     private Market() {
-
+        allUsers = new ArrayList<>();
+        allCategories = new ArrayList<>();
+        allCodedDiscounts = new ArrayList<>();
+        allProducts = new ArrayList<>();
     }
 
     public static Market getInstance() {
-
+        if (marketInstance == null)
+            marketInstance = new Market();
+        return marketInstance;
     }
 
-    public ArrayList<User> getListOfUsers() {
-        return listOfUsers;
+    public ArrayList<User> getAllUsers() {
+        return allUsers;
     }
 
-    public ArrayList<Category> getListOfCategories() {
-        return listOfCategories;
+    public ArrayList<Category> getAllCategories() {
+        return allCategories;
+    }
+
+    public ArrayList<CodedDiscount> getAllCodedDiscounts() {
+        return allCodedDiscounts;
     }
 
     public User getUserByUsername(String username) {
-
+        return null;
     }
 
     public boolean getHasAdmin() {
-
+        return hasAdmin;
     }
 
-    public void setHasAdmin(boolean hasAdmin) {
-
+    public void changeHasAdmin() {
+        hasAdmin = true;
     }
 
-    public void addUser(String username, String firstName, String lastName,
-                        String emailAddress, String phoneNumber, String password, String role) {
+    public void addUser(User user) {
 
     }
 
     public Product getProductByProductId(String productId) {
-
+        return null;
     }
 
-    public ArrayList<CodedDiscount> getListOfCodedDiscount() {
-        return listOfCodedDiscount;
-    }
-
-    public CodedDiscount getCodedDiscountByDiscountCode(String discountCode) {
-
+    public CodedDiscount getCodedDiscountByCode(String code) {
+        return null;
     }
 
     public Category getCategoryByName(String name) {
-
+        return null;
     }
 
     public ArrayList<Product> filterProducts(ProductFilters productFilters) {
-
+        return null;
     }
 
     public ArrayList<Product> sortProducts(String attribute) {
-
+        return null;
     }
 
     public ArrayList<Off> filterOffs(OffFilters offFilters) {
-
+        return null;
     }
 
     public ArrayList<Off> sortOffs(String attribute) {
-
+        return null;
     }
 
     public void deleteUserByUsername(String username) {
@@ -86,19 +89,11 @@ public class Market {
 
     }
 
-    public void editCodedDiscountByDiscountCode(String discountCode, Date startDate, Date endDate) {
+    public void removeCodedDiscountByCode(String discountCode) {
 
     }
 
-    public void removeCodedDiscountByDiscountCode(String discountCode) {
-
-    }
-
-    public void editCategoryByName(String name, CategoryInfo ... ?) {
-
-    }
-
-    public void addCategory(CategoryInfo ... ?) {
+    public void addCategory(Category category) {
 
     }
 

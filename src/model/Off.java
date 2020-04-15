@@ -6,15 +6,15 @@ import java.util.ArrayList;
 public class Off {
     private String offId;
     private ArrayList<Product> productList;
-    private OffStatus condition;
+    private OffStatus offStatus;
     private LocalDateTime starTime;
     private LocalDateTime endTime;
     private int discountAmount;
 
-    public Off(String offId, ArrayList<Product> productList, OffStatus condition, LocalDateTime endTime, int discountAmount) {
+    public Off(String offId, ArrayList<Product> productList, OffStatus offStatus, LocalDateTime endTime, int discountAmount) {
         this.offId = offId;
         this.productList = productList;
-        this.condition = condition;
+        this.offStatus = offStatus;
         this.endTime = endTime;
         this.discountAmount = discountAmount;
     }
@@ -27,8 +27,8 @@ public class Off {
         return productList;
     }
 
-    public OffStatus getCondition() {
-        return condition;
+    public OffStatus getOffStatus() {
+        return offStatus;
     }
 
     public LocalDateTime getStarTime() {
@@ -63,11 +63,11 @@ public class Off {
         return false;
     }
 
-    public void requestEditing() {
+    public void requestForEdition() {
 
     }
 
-    public void approvingOff() {
+    public void approveOff() {
 
     }
 

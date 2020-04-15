@@ -11,6 +11,7 @@ public abstract class UIPage {
     protected static Controller controller;
 
     protected String name;
+    protected static Menu activeMenu;
 
     protected UIPage(String name) {
         this.name = name;

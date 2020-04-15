@@ -6,7 +6,6 @@ import model.Product;
 import model.request.Request;
 import model.user.User;
 
-import java.awt.print.Printable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,23 +31,23 @@ public class Controller {
     public void deleteUser(User user) throws Exception {
     }
 
-    public HashMap<String, Printable> getAllUsersList() {
+    public HashMap<String, Object> getAllUsersList() {
         return null;
     }
 
-    public HashMap<String, Printable> getAllProductsList() {
+    public HashMap<String, Object> getAllProductsList() {
         return null;
     }
 
-    public HashMap<String, Printable> getAllDiscountCodesList() {
+    public HashMap<String, Object> getAllDiscountCodesList() {
         return null;
     }
 
-    public HashMap<String, Printable> getAllRequestsList() {
+    public HashMap<String, Object> getAllRequestsList() {
         return null;
     }
 
-    public HashMap<String, Printable> getAllCategoriesList() {
+    public HashMap<String, Object> getAllCategoriesList() {
         return null;
     }
 
@@ -77,6 +76,10 @@ public class Controller {
     }
 
     public void sendRequest(Request request) {
+    }
+
+    public ArrayList<Product> sortCategory(Category category, String sortName) {
+        return null;
     }
 
 }

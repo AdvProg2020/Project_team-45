@@ -1,7 +1,9 @@
 package view;
 
+import model.user.Seller;
+
 public class ProductsManagingMenu extends ManagingMenu {
-    private model.Seller seller;
+    private Seller seller;
 
     public void viewProductBuyers(String productId) {
     }

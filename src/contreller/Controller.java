@@ -3,7 +3,7 @@ package contreller;
 import model.Category;
 import model.Market;
 import model.Product;
-import model.User;
+import model.user.User;
 
 import java.awt.print.Printable;
 import java.util.ArrayList;

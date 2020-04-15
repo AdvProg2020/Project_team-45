@@ -1,4 +1,4 @@
-package model;
+package model.user;
 
 public class PersonalInfo {
     private String username;
@@ -7,16 +7,14 @@ public class PersonalInfo {
     private String emailAddress;
     private String phoneNumber;
     private String password;
-    private String role;
 
-    public PersonalInfo(String username, String firstName, String lastName, String emailAddress, String phoneNumber, String password, String role) {
+    public PersonalInfo(String username, String firstName, String lastName, String emailAddress, String phoneNumber, String password) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.role = role;
     }
 
     public String getUsername() {
@@ -43,14 +41,6 @@ public class PersonalInfo {
         return password;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -71,16 +61,4 @@ public class PersonalInfo {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "PersonalInfo{" +
-                "username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                '}';
-    }
 }

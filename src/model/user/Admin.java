@@ -1,4 +1,4 @@
-package model;
+package model.user;
 
 import model.request.Request;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Admin extends User {
-    private ArrayList<Request> listOfRequests;
+    private static ArrayList<Request> listOfRequests;
 
     public Admin(String username, String firstName, String lastName, String emailAddress,
                  String phoneNumber, String password, String role, ArrayList<Request> listOfRequests) {
@@ -15,16 +15,16 @@ public class Admin extends User {
     }
 
     public void addAdmin(String username, String firstName, String lastName, String emailAddress,
-                         String phoneNumber, String password, String role, ArrayList<Request> listOfRequests) {
+                         String phoneNumber, String password) {
     }
 
-    public void deleteUserByUsername(String username) {
-
-    }
-
-    public void removeProductByProductId(String productId) {
-
-    }
+//    public void deleteUserByUsername(String username) {
+//
+//    }
+//
+//    public void removeProductByProductId(String productId) {
+//
+//    }
 
     public void editCodedDiscountByDiscountCode(String discountCode, Date startDate, Date endDate) {
 
@@ -34,24 +34,24 @@ public class Admin extends User {
 
     }
 
-    public void editCategoryByName(String name, CategoryInfo ... ?) {
+//    public void editCategoryByName(String name, CategoryInfo ... ?) {
+//
+//    }
 
-    }
+//    public void addCategory(CategoryInfo ... ?) {
+//
+//    }
 
-    public void addCategory(CategoryInfo ... ?) {
-
-    }
-
-    public void removeCategoryByName(String name) {
-
-    }
+//    public void removeCategoryByName(String name) {
+//
+//    }
 
     public ArrayList<Request> getListOfRequests() {
-
+        return null;
     }
 
     public Request getRequestByRequestId(String requestId) {
-
+        return null;
     }
 
     public void acceptRequest(String requestId) {
@@ -60,5 +60,10 @@ public class Admin extends User {
 
     public void declineRequest(String requestId) {
 
+    }
+
+    @Override
+    public String getRole() {
+        return "Admin";
     }
 }

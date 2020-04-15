@@ -25,6 +25,18 @@ public class Category {
         return parent;
     }
 
+    public ArrayList<String> getSpecialFeatures() {
+        return specialFeatures;
+    }
+
+    public ArrayList<Category> getSubCategory() {
+        return subCategory;
+    }
+
+    public ArrayList<Product> getProductList() {
+        return productList;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -41,15 +53,15 @@ public class Category {
 
     }
 
-    public boolean removeSpecialFeature(String name) {
-
+    public boolean removeSpecialFeature(String specialFeature) {
+        return false;
     }
 
-    public boolean removeSubCategory (Category name) {
-
+    public boolean removeSubCategory(Category subCategory) {
+        return false;
     }
 
-    public boolean removeProduct (Product name) {
-
+    public boolean removeProduct(Product removeProduct) {
+        return false;
     }
 }

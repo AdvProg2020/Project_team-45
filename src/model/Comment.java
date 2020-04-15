@@ -1,5 +1,7 @@
 package model;
 
+import model.user.Buyer;
+
 public class Comment {
     private Buyer userCommended;
     private Product product;
@@ -20,7 +22,7 @@ public class Comment {
 
     }
 
-    public void notAproveingComment () {
+    public void notApprovingComment () {
 
     }
 

@@ -1,5 +1,7 @@
 package model;
 
+import model.user.User;
+
 import java.util.ArrayList;
 
 public class Market {
@@ -26,7 +28,7 @@ public class Market {
         return listOfCategories;
     }
 
-    public User getUserByUsername(username :String) {
+    public User getUserByUsername(String username) {
 
     }
 

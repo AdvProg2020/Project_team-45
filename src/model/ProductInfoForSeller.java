@@ -1,8 +1,10 @@
 package model;
 
+import model.user.Seller;
+
 public class ProductInfoForSeller {
     private Product product;
-    private Seller seller;
+    private Seller seller; //useless
     private int price;
     private int stock;
     private Off off;
@@ -47,6 +49,6 @@ public class ProductInfoForSeller {
     }
 
     private boolean isItAtOff() {
-
+        return false;
     }
 }

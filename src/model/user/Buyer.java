@@ -1,8 +1,13 @@
-package model;
+package model.user;
+
+import model.BuyLog;
+import model.Cart;
+import model.CodedDiscount;
 
 import java.util.ArrayList;
 
 public class Buyer extends User {
+    private Cart cart;
     private ArrayList<CodedDiscount> listOfCodedDiscounts;
     private int balance;
     private ArrayList<BuyLog> listOfBuyLogs;
@@ -39,5 +44,10 @@ public class Buyer extends User {
 
     ArrayList<CodedDiscount> getListOfCodedDiscounts() {
 
+    }
+
+    @Override
+    public String getRole() {
+        return "Buyer";
     }
 }

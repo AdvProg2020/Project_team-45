@@ -1,7 +1,7 @@
 package view;
 
 import Controller.Controller;
-import model.User;
+import model.user.User;
 
 public class UI {
     private static User ActiveUser;

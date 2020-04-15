@@ -1,5 +1,7 @@
 package model;
 
+import model.user.Buyer;
+
 public class Rate {
     private Buyer user;
     private int score;

@@ -1,4 +1,10 @@
-package model;
+package model.user;
+
+import model.Company;
+import model.Off;
+import model.Product;
+import model.SellLog;
+import model.user.User;
 
 import java.util.ArrayList;
 
@@ -61,5 +67,10 @@ public class Seller extends User {
 
     public int getBalance() {
         return balance;
+    }
+
+    @Override
+    public String getRole() {
+        return "Seller";
     }
 }

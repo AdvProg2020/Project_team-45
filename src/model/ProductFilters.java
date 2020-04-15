@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProductFilters {
+    private static ArrayList<String> availableFilters = new ArrayList<>();
     private ArrayList<String> companyName;
     private ArrayList<String> sellerUsername;
     private ArrayList<String> categoryName;
@@ -19,6 +20,10 @@ public class ProductFilters {
         sellerUsername = new ArrayList<>();
         categoryName = new ArrayList<>();
         featuresAndAmounts = new HashMap<>();
+    }
+
+    public static ArrayList<String> getAvailableFilters() {
+        return availableFilters;
     }
 
     public ArrayList<String> getCompanyName() {

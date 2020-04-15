@@ -39,7 +39,6 @@ public class Buyer extends User {
     }
 
     public void purchase() {
-
     }
 
     public BuyLog getOrderByOrderId(String orderId) {
@@ -47,7 +46,6 @@ public class Buyer extends User {
     }
 
     public void rateProduct(Product product, Rate rate) {
-
     }
 
     @Override

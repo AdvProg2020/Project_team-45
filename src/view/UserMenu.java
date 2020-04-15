@@ -1,12 +1,17 @@
 package view;
 
-public class UserMenu extends Menu {
+public abstract class UserMenu extends Menu {
+    protected UserMenu(String name, Menu parent) {
+        super(name, parent);
+    }
+
     public void showPersonalInfo() {
     }
 
-    public void editUserInfo() {
-        new Panel() {
+    private void editUserInfo(String fieldName) {
+        new Panel("") {
 
         };
     }
+
 }

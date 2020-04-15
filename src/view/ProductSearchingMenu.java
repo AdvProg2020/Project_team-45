@@ -1,6 +1,11 @@
 package view;
 
+import model.ProductFilters;
+
+import java.util.ArrayList;
+
 public class ProductSearchingMenu extends ManagingMenu {
-    private ArrayList<ProductFilter> activeFilters;
-    private ArrayList<ProductFilter> availableFilters;
+    private ProductFilters activeFilters;
+    private ArrayList<String> availableFilters;
+    private model.Category activeCategory;
 }

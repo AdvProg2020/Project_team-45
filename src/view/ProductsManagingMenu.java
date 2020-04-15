@@ -8,6 +8,6 @@ public class ProductsManagingMenu extends ManagingMenu {
     public void viewProductBuyers(String productId) {
     }
 
-    public void getProductEditorPanel(String productId) {
+    private EditingPanel getProductEditorPanel(String productId) {
     }
 }

@@ -3,129 +3,100 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="125.0657407407407" y="319.0">view.Panel</node>
-    <node x="532.5" y="761.0">view.CustomerMenu</node>
-    <node x="0.0" y="879.0">view.NOTE__Yeki_kardan_editor_h</node>
-    <node x="1395.5" y="717.0">view.UsersManagingMenu</node>
-    <node x="315.0" y="594.0">view.Login_RegisterPanel</node>
-    <node x="1653.5" y="738.0">view.ProductsManagingMenu</node>
-    <node x="1904.5" y="761.0">view.RequestsManagingMenu</node>
-    <node x="1829.5" y="594.0">view.MainMenu</node>
-    <node x="1138.5" y="749.0">view.CategoryManagingMenu</node>
-    <node x="273.5" y="738.0">view.AdminMenu</node>
-    <node x="680.5" y="738.0">view.SellerMenu</node>
-    <node x="0.0" y="594.0">view.SearchPanel</node>
-    <node x="1681.5" y="594.0">view.ProductsMenu</node>
-    <node x="266.0" y="879.0">view.CartMenu</node>
-    <node x="870.125" y="0.0">view.UI</node>
-    <node x="1541.0" y="297.0">view.Menu</node>
-    <node x="509.0" y="571.0">view.UserMenu</node>
-    <node x="882.5" y="727.0">view.DiscountCodesManagingMenu</node>
-    <node x="141.0" y="594.0">view.createAdminPanel</node>
-    <node x="1367.5" y="550.0">view.ManagingMenu</node>
+    <node x="72.75" y="582.0">view.Panel</node>
+    <node x="372.0" y="582.0">view.NOTE__Yeki_kardan_editor_h</node>
+    <node x="1221.0" y="452.0">view.CustomerMenu</node>
+    <node x="714.0" y="420.0">view.UsersManagingMenu</node>
+    <node x="0.0" y="791.0">view.Login_RegisterPanel</node>
+    <node x="256.0" y="420.0">view.ProductsManagingMenu</node>
+    <node x="505.0" y="464.0">view.RequestsManagingMenu</node>
+    <node x="1710.0" y="285.0">view.MainMenu</node>
+    <node x="0.0" y="452.0">view.CategoryManagingMenu</node>
+    <node x="1713.0" y="441.0">view.AdminMenu</node>
+    <node x="1516.0" y="441.0">view.SellerMenu</node>
+    <node x="202.0" y="791.0">view.SearchPanel</node>
+    <node x="650.0" y="582.0">view.CartMenu</node>
+    <node x="1484.5" y="0.0">view.Menu</node>
+    <node x="1519.0" y="274.0">view.UserMenu</node>
+    <node x="967.0" y="430.0">view.DiscountCodesManagingMenu</node>
+    <node x="454.0" y="253.0">view.ManagingMenu</node>
   </nodes>
   <notes />
   <edges>
     <edge source="view.UserMenu" target="view.Menu">
       <point x="0.0" y="-37.5" />
-      <point x="596.5" y="520.0" />
-      <point x="1563.25" y="520.0" />
-      <point x="-66.75" y="101.5" />
+      <point x="0.0" y="101.5" />
     </edge>
     <edge source="view.AdminMenu" target="view.UserMenu">
       <point x="0.0" y="-37.5" />
-      <point x="393.0" y="697.0" />
-      <point x="538.1666666666667" y="697.0" />
-      <point x="-58.33333333333326" y="37.5" />
+      <point x="1832.5" y="400.0" />
+      <point x="1661.5" y="400.0" />
+      <point x="57.0" y="37.5" />
     </edge>
     <edge source="view.ManagingMenu" target="view.Menu">
       <point x="0.0" y="-58.5" />
-      <point x="1514.5" y="530.0" />
-      <point x="1607.75" y="530.0" />
-      <point x="-22.25" y="101.5" />
+      <point x="599.5" y="228.0" />
+      <point x="1524.5" y="228.0" />
+      <point x="-80.0" y="101.5" />
     </edge>
     <edge source="view.MainMenu" target="view.Menu">
-      <point x="0.0" y="-14.5" />
-      <point x="1880.0" y="520.0" />
-      <point x="1696.75" y="520.0" />
-      <point x="66.75" y="101.5" />
+      <point x="0.0" y="-26.5" />
+      <point x="1799.0" y="228.0" />
+      <point x="1684.5" y="228.0" />
+      <point x="80.0" y="101.5" />
     </edge>
     <edge source="view.CustomerMenu" target="view.UserMenu">
-      <point x="0.0" y="-14.5" />
-      <point x="0.0" y="37.5" />
-    </edge>
-    <edge source="view.createAdminPanel" target="view.Panel">
-      <point x="0.0" y="-14.5" />
-      <point x="218.0" y="530.0" />
-      <point x="232.5657407407407" y="530.0" />
-      <point x="0.0" y="79.5" />
-    </edge>
-    <edge source="view.Menu" target="view.UI">
-      <point x="0.0" y="-101.5" />
-      <point x="1630.0" y="272.0" />
-      <point x="1020.875" y="272.0" />
-      <point x="50.25" y="123.5" />
+      <point x="0.0" y="-26.5" />
+      <point x="1358.5" y="400.0" />
+      <point x="1547.5" y="400.0" />
+      <point x="-57.0" y="37.5" />
     </edge>
     <edge source="view.SearchPanel" target="view.Panel">
       <point x="0.0" y="-14.5" />
-      <point x="60.5" y="530.0" />
-      <point x="160.89907407407395" y="530.0" />
-      <point x="-71.66666666666669" y="79.5" />
-    </edge>
-    <edge source="view.ProductsMenu" target="view.Menu">
-      <point x="0.0" y="-14.5" />
-      <point x="1745.5" y="530.0" />
-      <point x="1652.25" y="530.0" />
-      <point x="22.25" y="101.5" />
-    </edge>
-    <edge source="view.Login_RegisterPanel" target="view.Panel">
-      <point x="0.0" y="-14.5" />
-      <point x="402.0" y="530.0" />
-      <point x="304.23240740740744" y="530.0" />
-      <point x="71.66666666666669" y="79.5" />
+      <point x="264.5" y="766.0" />
+      <point x="230.25" y="766.0" />
+      <point x="52.5" y="79.5" />
     </edge>
     <edge source="view.RequestsManagingMenu" target="view.ManagingMenu">
       <point x="0.0" y="-14.5" />
-      <point x="1995.0" y="687.0" />
-      <point x="1632.1000000000001" y="687.0" />
-      <point x="117.60000000000002" y="58.5" />
+      <point x="0.0" y="58.5" />
     </edge>
-    <edge source="view.Panel" target="view.UI">
-      <point x="0.0" y="-79.5" />
-      <point x="232.5657407407407" y="272.0" />
-      <point x="920.375" y="272.0" />
-      <point x="-50.25" y="123.5" />
+    <edge source="view.Login_RegisterPanel" target="view.Panel">
+      <point x="0.0" y="-14.5" />
+      <point x="91.0" y="766.0" />
+      <point x="125.25" y="766.0" />
+      <point x="-52.5" y="79.5" />
+    </edge>
+    <edge source="view.ProductsManagingMenu" target="view.ManagingMenu">
+      <point x="0.0" y="-58.5" />
+      <point x="370.5" y="400.0" />
+      <point x="541.3" y="400.0" />
+      <point x="-58.200000000000045" y="58.5" />
     </edge>
     <edge source="view.CategoryManagingMenu" target="view.ManagingMenu">
       <point x="0.0" y="-26.5" />
-      <point x="1257.0" y="697.0" />
-      <point x="1455.7" y="697.0" />
-      <point x="-58.799999999999955" y="58.5" />
-    </edge>
-    <edge source="view.ProductsManagingMenu" target="view.ManagingMenu">
-      <point x="0.0" y="-37.5" />
-      <point x="1769.0" y="697.0" />
-      <point x="1573.3000000000002" y="697.0" />
-      <point x="58.80000000000007" y="58.5" />
+      <point x="118.0" y="390.0" />
+      <point x="483.0999999999999" y="390.0" />
+      <point x="-116.40000000000009" y="58.5" />
     </edge>
     <edge source="view.UsersManagingMenu" target="view.ManagingMenu">
       <point x="0.0" y="-58.5" />
-      <point x="0.0" y="58.5" />
+      <point x="830.5" y="400.0" />
+      <point x="657.7" y="400.0" />
+      <point x="58.200000000000045" y="58.5" />
     </edge>
     <edge source="view.DiscountCodesManagingMenu" target="view.ManagingMenu">
       <point x="0.0" y="-48.5" />
-      <point x="1000.5" y="687.0" />
-      <point x="1396.9" y="687.0" />
-      <point x="-117.60000000000002" y="58.5" />
+      <point x="1084.0" y="390.0" />
+      <point x="715.9000000000001" y="390.0" />
+      <point x="116.40000000000009" y="58.5" />
     </edge>
     <edge source="view.SellerMenu" target="view.UserMenu">
       <point x="0.0" y="-37.5" />
-      <point x="771.5" y="697.0" />
-      <point x="654.8333333333333" y="697.0" />
-      <point x="58.33333333333326" y="37.5" />
+      <point x="0.0" y="37.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6" x="793.3333333333335" y="388.3333333333326" />
+  <settings layout="Hierarchic Group" zoom="0.5" x="1666.7499999999995" y="133.83333333333303" />
   <SelectedNodes>
     <node>view.Panel</node>
   </SelectedNodes>

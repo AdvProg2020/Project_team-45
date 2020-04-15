@@ -3,6 +3,7 @@ package contreller;
 import model.Category;
 import model.Market;
 import model.Product;
+import model.request.Request;
 import model.user.User;
 
 import java.awt.print.Printable;
@@ -28,7 +29,7 @@ public class Controller {
         return null;
     }
 
-    public void deleteUserByUsername(String username) throws Exception {
+    public void deleteUser(User user) throws Exception {
     }
 
     public HashMap<String, Printable> getAllUsersList() {
@@ -54,10 +55,10 @@ public class Controller {
     public void deleteProduct(String productId) throws Exception {
     }
 
-    public void addCodedDiscount(String discountCode,int discountPercentage, Date startDate, Date endDate) {
+    public void addCodedDiscount(String discountCode, int discountPercentage, Date startDate, Date endDate) {
     }
 
-    public void editCodedDiscount(String discountCode,int discountPercentage, Date startDate, Date endDate) {
+    public void editCodedDiscount(String discountCode, int discountPercentage, Date startDate, Date endDate) {
     }
 
     public void removeCodedDiscount(String discountCode) {
@@ -73,6 +74,9 @@ public class Controller {
     }
 
     public void removeCategory(String name) {
+    }
+
+    public void sendRequest(Request request) {
     }
 
 }

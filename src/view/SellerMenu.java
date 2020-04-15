@@ -6,4 +6,7 @@ public class SellerMenu extends UserMenu {
 
     public void showSalesHistory() {
     }
+
+    public void showAllCategories() {
+    }
 }

@@ -1,11 +1,13 @@
 package view;
 
-import model.Printable;
-
 import java.util.HashMap;
 
-public class ManagingMenu extends Menu {
-    protected HashMap<String, Printable> managingObjects;
+public abstract class ManagingMenu extends Menu {
+    protected HashMap<String, Object> managingObjects;
+
+    public ManagingMenu(String name, Menu parent) {
+        super(name, parent);
+    }
 
     protected void showAll() {
     }

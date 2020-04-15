@@ -2,7 +2,7 @@ package view;
 
 import java.util.HashMap;
 
-public class Panel extends UI {
+public abstract class Panel extends UIPage {
     private HashMap<String, String> fields;
 
     public Panel(String name) {

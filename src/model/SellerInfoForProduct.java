@@ -2,22 +2,16 @@ package model;
 
 import model.user.Seller;
 
-public class ProductInfoForSeller {
-    private Product product;
-    private Seller seller; //useless
+public class SellerInfoForProduct {
+    private Seller seller;
     private int price;
     private int stock;
     private Off off;
 
-    public ProductInfoForSeller(Product product, Seller seller, int price, int stock) {
-        this.product = product;
+    public SellerInfoForProduct(Seller seller, int price, int stock) {
         this.seller = seller;
         this.price = price;
         this.stock = stock;
-    }
-
-    public Product getProduct() {
-        return product;
     }
 
     public Seller getSeller() {
@@ -48,7 +42,7 @@ public class ProductInfoForSeller {
         this.off = off;
     }
 
-    private boolean isItAtOff() {
-        return false;
+    public int getFinalPrice() {
+        return 0;
     }
 }

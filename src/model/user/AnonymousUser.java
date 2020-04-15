@@ -6,6 +6,10 @@ public class AnonymousUser {
     private Cart cart;
 
     public AnonymousUser() {
+        cart = new Cart();
+    }
 
+    public Cart getCart() {
+        return cart;
     }
 }

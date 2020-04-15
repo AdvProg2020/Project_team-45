@@ -1,24 +1,23 @@
 package model.user;
 
-import model.Company;
-import model.Off;
-import model.Product;
-import model.SellLog;
-import model.user.User;
+import model.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Seller extends User {
     private Company company;
     private ArrayList<SellLog> listOfSellLogs;
-    private ArrayList<Product> listOfProducts;
+    private HashMap<Product, SellerInfoForProduct> availableProducts;
     private ArrayList<Off> listOfOffs;
     private int balance;
 
-    public Seller(String username, String firstName, String lastName, String emailAddress,
-                  String phoneNumber, String password, String role, Company company) {
-        super(username, firstName, lastName, emailAddress, phoneNumber, password, role);
+    public Seller(PersonalInfo personalInfo, Company company) {
+        super(personalInfo);
         this.company = company;
+        listOfOffs = new ArrayList<>();
+        availableProducts = new HashMap<>();
+        listOfOffs = new ArrayList<>();
     }
 
     public Company getCompany() {
@@ -29,44 +28,36 @@ public class Seller extends User {
         return listOfSellLogs;
     }
 
-    public ArrayList<Product> getListOfProducts() {
-        return listOfProducts;
+    public HashMap<Product, SellerInfoForProduct> getAvailableProducts() {
+        return availableProducts;
     }
 
-    public Product getProductByProductId(String productId) {
-
-    }
-
-    public void editProductByProductId(String productId, productInfo ... ?) {
-
-    }
-
-    public void addProduct (productInfo ... ?){
-
-    }
-
-    public void removeProductByProductId (String productId) {
-
+    public Product getAvailableProductByProductId(String productId) {
+        return null;
     }
 
     public ArrayList<Off> getListOfOffs() {
         return listOfOffs;
     }
 
-    public Off getOffByOffId (String offId) {
-
-    }
-
-    public void editOffByOffId (String offId, offInfo ... ?) {
-
-    }
-
-    public void addOff(offInfo ... ?) {
-
-    }
-
     public int getBalance() {
         return balance;
+    }
+
+    public void addProduct(Product product, SellerInfoForProduct sellerInfoForProduct) {
+
+    }
+
+    public void removeProductByProductId(String productId) {
+
+    }
+
+    public Off getOffByOffId(String offId) {
+        return null;
+    }
+
+    public void addOff(Off off) {
+
     }
 
     @Override

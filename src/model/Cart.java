@@ -1,60 +1,64 @@
 package model;
 
-import model.user.Seller;
-
 import java.util.ArrayList;
 
 
 public class Cart {
-    private ArrayList<productInfo> listOfProducts;
-    private int totalPrice;
+    private ArrayList<productInfo> products;
 
     public Cart() {
-        listOfProducts = new ArrayList<>();
+        products = new ArrayList<>();
     }
 
-    public Product getProductById(String productId) {
+    public Product getProductByProductIdAndSellerUsername(String productId, String sellerUsername) {
         return null;
     }
 
-    public void increaseProductById(String productId, String sellerName) {
+    public ArrayList<productInfo> getProducts() {
+        return products;
+    }
+
+    public void addProduct(Product product, SellerInfoForProduct sellerInfoForProduct) {
 
     }
 
-    public void decreaseProductById(String productId, String sellerName) {
+    public void removeProduct(Product product, SellerInfoForProduct sellerInfoForProduct) {
+
+    }
+
+    public void changeProductByProductIdAndSellerUsername(String productId, String sellerUsername, int amountChange) {
 
     }
 
     public int getTotalPrice() {
-        return totalPrice;
+        return 0;
     }
-
 }
 
-class productInfo{
+class productInfo {
     private Product product;
-    private Seller seller;
-    private int number;
+    private SellerInfoForProduct sellerInfoForProduct;
+    private int amount;
 
-    public productInfo(Product product, Seller seller) {
+    public productInfo(Product product, SellerInfoForProduct sellerInfoForProduct) {
         this.product = product;
-        this.seller = seller;
-        this.number = 1;
+        this.sellerInfoForProduct = sellerInfoForProduct;
+        this.amount = 1;
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public Seller getSeller() {
-        return seller;
+    public SellerInfoForProduct getSellerInfoForProduct() {
+        return sellerInfoForProduct;
     }
 
-    public int getNumber() {
-        return number;
+    public int getAmount() {
+        return amount;
     }
 
-    public void increaseNumber() {
+    public void changeAmount(int amountChange) {
 
     }
 }

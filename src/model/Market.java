@@ -3,6 +3,7 @@ package model;
 import model.user.User;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Market {
     private static Market marketInstance;
@@ -74,6 +75,34 @@ public class Market {
     }
 
     public ArrayList<Off> sortOffs(String attribute) {
+
+    }
+
+    public void deleteUserByUsername(String username) {
+
+    }
+
+    public void removeProductByProductId(String productId) {
+
+    }
+
+    public void editCodedDiscountByDiscountCode(String discountCode, Date startDate, Date endDate) {
+
+    }
+
+    public void removeCodedDiscountByDiscountCode(String discountCode) {
+
+    }
+
+    public void editCategoryByName(String name, CategoryInfo ... ?) {
+
+    }
+
+    public void addCategory(CategoryInfo ... ?) {
+
+    }
+
+    public void removeCategoryByName(String name) {
 
     }
 }

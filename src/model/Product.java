@@ -10,7 +10,7 @@ public class Product {
     private String name;
     private Company company;
     private ProductStatus condition;
-    private HashMap<Seller, ProductInfoForSeller> sellersList;
+    private HashMap<Seller, SellerInfoForProduct> sellersList;
     private Category category;
     private HashMap<String, String> categorySpecifications;
     private String description;
@@ -52,7 +52,7 @@ public class Product {
         return condition;
     }
 
-    public HashMap<Seller, ProductInfoForSeller> getSellersList() {
+    public HashMap<Seller, SellerInfoForProduct> getSellersList() {
         return sellersList;
     }
 
@@ -96,7 +96,7 @@ public class Product {
         this.description = description;
     }
 
-    public void addSellersInformation(Seller seller, ProductInfoForSeller productInfoForSeller) {
+    public void addSellersInformation(Seller seller, SellerInfoForProduct productInfoForSeller) {
 
     }
 

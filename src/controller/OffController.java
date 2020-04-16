@@ -14,4 +14,8 @@ public class OffController {
     }
 
     public void setFieldOfOff(Off off, String field, String value) {}
+
+    public Off getOffById(String offId) {
+        return null;
+    }
 }

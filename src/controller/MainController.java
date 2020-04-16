@@ -1,6 +1,7 @@
 package controller;
 
 import model.Market;
+import model.ProductFilters;
 
 import java.util.HashMap;
 
@@ -45,7 +46,7 @@ public class MainController {
         return null;
     }
 
-    public HashMap<String, Object> getAllProductsList() {
+    public HashMap<String, Object> getAllProductsList(ProductFilters productFilters) {
         return null;
     }
 

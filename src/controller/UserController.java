@@ -11,13 +11,22 @@ import java.util.ArrayList;
 
 public class UserController {
     private MainController mainController;
+    private boolean logined;
 
     public UserController(MainController mainController) {
         this.mainController = mainController;
+        this.logined = false;
     }
 
-    public void addUser(User user) {
+    public boolean isLogined() {
+        return logined;
     }
+
+    public User createUser() {
+        return null;
+    }
+
+    public void setFieldOfUserOrDownCast(User user, String field, String value) {}
 
     public User loginUserByUsernameAndPassword(String username, String password) {
         return null;
@@ -33,10 +42,11 @@ public class UserController {
     public void acceptOrDeclineRequest(String requestId, String statusToSet) {
     }
 
-    public void setUserField(User user, String fieldName, String value) {
+    public ArrayList<SellLog> getSellerSalesHistory(User user) {
+        return null;
     }
 
-    public ArrayList<SellLog> getSellerSaleHistory(User user) {
+    public Product getSellerProductById(String productId) {
         return null;
     }
 

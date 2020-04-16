@@ -17,7 +17,7 @@ public class CartController {
         return null;
     }
 
-    public void addProductToCart(User user, Product product) {
+    public void addProductToCart(User user, Product product, String sellerUsername) {
     }
 
     public Product getCartProductById(User user, String productId) {

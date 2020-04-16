@@ -12,9 +12,9 @@ public class ProductController {
         this.mainController = mainController;
     }
 
-    public Product createProduct() {
-        return null;
-    }
+//    public Product createProduct() {
+//        return null;
+//    }
 
     public void setFieldOfProduct(Product product, String field, String value) {}
 
@@ -31,4 +31,5 @@ public class ProductController {
     public ArrayList<Comment> getProductComments(Product product) {
         return null;
     }
+
 }

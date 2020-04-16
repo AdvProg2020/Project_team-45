@@ -2,7 +2,7 @@ package model.user;
 
 import model.Cart;
 
-public class AnonymousUser {
+public class AnonymousUser implements CartHolder {
     private Cart cart;
 
     public AnonymousUser() {

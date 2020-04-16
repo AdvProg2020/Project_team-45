@@ -6,7 +6,7 @@ import model.log.BuyLog;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Buyer extends User {
+public class Buyer extends User implements CartHolder {
     private Cart cart;
     private ArrayList<CodedDiscount> listOfCodedDiscounts;
     private int balance;

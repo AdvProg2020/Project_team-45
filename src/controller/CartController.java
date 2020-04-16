@@ -1,8 +1,8 @@
 package controller;
 
-import model.Cart;
 import model.Product;
-import model.user.User;
+import model.user.Buyer;
+import model.user.CartHolder;
 
 import java.util.ArrayList;
 
@@ -13,20 +13,21 @@ public class CartController {
         this.mainController = mainController;
     }
 
-    public ArrayList<Product> getCartProducts(User user) {
+    public ArrayList<Product> getCartProducts(CartHolder cartHolder) {
         return null;
     }
 
-    public void addProductToCart(User user, Product product, String sellerUsername) {
+    public void addProductToCart(CartHolder cartHolder, Product product, String sellerUsername) {
     }
 
-    public Product getCartProductById(User user, String productId) {
+    public Product getCartProductById(CartHolder cartHolder, String productId) {
         return null;
     }
 
-    public void changeCartProductAmount(User user, String productId, String increaseOrDecrease) {
+    public void changeCartProductAmount(CartHolder cartHolder, String productId, String increaseOrDecrease) {
     }
 
-    public void purchaseTheCart(User user) {
+    public void purchaseTheCart(Buyer buyer) {
     }
+
 }

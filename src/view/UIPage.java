@@ -1,6 +1,6 @@
 package view;
 
-import contreller.Controller;
+import controller.Controller;
 import model.user.User;
 
 import java.util.regex.Matcher;

@@ -15,11 +15,17 @@ import java.util.HashMap;
 
 public class Controller {
     private Market market;
+    private String productSort;
+    private String offSort;
     private AnonymousUser anonymousUser;
     private User user;
     private boolean didLogin;
     private Category category;
     private Product product;
+    //
+    private ArrayList<Product> showingProducts;
+    private ArrayList<Off> showingOffs;
+    //
     private Off off;
     private CodedDiscount codedDiscount;
     private Comment comment;
@@ -37,7 +43,8 @@ public class Controller {
 
     // from past
 
-    public void addUser(String username, String firstName, String lastName, String emailAddress, String phoneNumber, String password) {
+    public void addUser(String role, String username, String firstName, String lastName, String emailAddress,
+                        String phoneNumber, String password) {
     }
 
     public User loginUserByUsernameAndPassword(String username, String password) {
@@ -48,7 +55,11 @@ public class Controller {
         return null;
     }
 
-    public void deleteUser(User user) {
+    public void deleteUserByUsername(String username) {
+    }
+
+    public Request getRequestById(String requestId) {
+        return null;
     }
 
     public void acceptOrDeclineRequest(String requestId, String statusToSet) {
@@ -63,11 +74,15 @@ public class Controller {
     public void setUserField(String fieldName, String newValue) {
     }
 
-    public ArrayList<SellLog> getSellerSalesHistory(Seller seller) {
+    public ArrayList<SellLog> getSellerSalesHistory() {
         return null;
     }
 
     public ArrayList<BuyLog> getBuyerOrders() {
+        return null;
+    }
+
+    public ArrayList<CodedDiscount> getBuyerDiscountCodes() {
         return null;
     }
 
@@ -96,7 +111,11 @@ public class Controller {
         return null;
     }
 
-    public void changeCartProductAmount(Product product, int amount) {
+    public Product getCartProductById(String productId) {
+        return null;
+    }
+
+    public void changeCartProductAmount(String productId, String increaseOrDecrease) {
     }
 
     public void purchaseTheCart() {
@@ -116,11 +135,13 @@ public class Controller {
     public void addCategory(String name, Category parent, ArrayList<String> features) {
     }
 
-    public void addFeatureToCategory(Category category, String feature) {
+    public void addFeatureToCategory(String name, String feature) {
     }
 
-    public void removeFeatureFromCategory(Category category, String feature) {
+    public void removeFeatureFromCategory(String name, String feature) {
     }
+
+    public void setParentOfCategory(String name, String parentName) {}
 
     //================================================================================
     // control product
@@ -131,12 +152,16 @@ public class Controller {
     public void deleteProduct(String productId) {
     }
 
-    public void getProductBuyers(Product product) {
+    public void getProductBuyers(String productId) {
     }
 
     // new
 
-    public ArrayList<Comment> getProductComments(Product product) {
+    public Product getProductByProductId(String productId) {
+        return null;
+    }
+
+    public ArrayList<Comment> getProductComments() {
         return null;
     }
 
@@ -149,6 +174,10 @@ public class Controller {
     //================================================================================
 
     // from past
+
+    public CodedDiscount getCodedDiscountByCode(String discountCode) {
+        return null;
+    }
 
     public void addCodedDiscount(String discountCode, int discountPercentage, Date startDate, Date endDate) {
     }
@@ -198,6 +227,30 @@ public class Controller {
     public void setFieldOfOffFilters(String field, String value) {}
 
     //================================================================================
+    // control sort
+    //================================================================================
+
+    public ArrayList<String> getAvailableSortsForProducts() {
+        return null;
+    }
+
+    public void setProductSort(String productSort) {
+        this.productSort = productSort;
+    }
+
+    public void disableCurrentSortForProduct() {}
+
+    public ArrayList<String> getAvailableSortsForOffs() {
+        return null;
+    }
+
+    public void setOffSort(String offSort) {
+        this.offSort = offSort;
+    }
+
+    public void disableCurrentSortForOff() {}
+
+    //================================================================================
     // control requests
     //================================================================================
 
@@ -235,6 +288,51 @@ public class Controller {
 
     public void setFieldOfOffEditionRequest(OffEditionRequest offEditionRequest, String field, String value) {
     }
+
+    //================================================================================
+    // getters
+    //================================================================================
+
+    public AnonymousUser getAnonymousUser() {
+        return anonymousUser;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public boolean isDidLogin() {
+        return didLogin;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Off getOff() {
+        return off;
+    }
+
+    public CodedDiscount getCodedDiscount() {
+        return codedDiscount;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public ProductFilters getProductFilters() {
+        return productFilters;
+    }
+
+    public OffFilters getOffFilters() {
+        return offFilters;
+    }
+
 
     //================================================================================
     // from past (can be erased)

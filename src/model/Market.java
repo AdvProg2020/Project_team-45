@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 public class Market {
     private static Market marketInstance;
+    private static ArrayList<String> availableSortsForProducts;
+    private static ArrayList<String> availableSortsForOffs;
     private ArrayList<User> allUsers;
     private ArrayList<CodedDiscount> allCodedDiscounts;
     private ArrayList<Category> allCategories;
@@ -23,6 +25,22 @@ public class Market {
         if (marketInstance == null)
             marketInstance = new Market();
         return marketInstance;
+    }
+
+    public static ArrayList<String> getAvailableSortsForProducts() {
+        return availableSortsForProducts;
+    }
+
+    public static ArrayList<String> getAvailableSortsForOffs() {
+        return availableSortsForOffs;
+    }
+
+    public ArrayList<Product> getAllProducts() {
+        return allProducts;
+    }
+
+    public boolean doesHaveAdmin() {
+        return hasAdmin;
     }
 
     public ArrayList<User> getAllUsers() {

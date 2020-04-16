@@ -10,6 +10,10 @@ public class SellerRegisterRequest extends Request {
         this.seller = seller;
     }
 
+    public Seller getSeller() {
+        return seller;
+    }
+
     @Override
     public void apply() {
 

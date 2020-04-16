@@ -10,6 +10,10 @@ public class AddOffRequest extends Request{
         this.off = off;
     }
 
+    public Off getOff() {
+        return off;
+    }
+
     @Override
     public void apply() {
 

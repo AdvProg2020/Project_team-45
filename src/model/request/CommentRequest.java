@@ -10,6 +10,10 @@ public class CommentRequest extends Request {
         this.comment = comment;
     }
 
+    public Comment getComment() {
+        return comment;
+    }
+
     @Override
     public void apply() {}
 }

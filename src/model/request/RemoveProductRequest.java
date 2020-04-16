@@ -8,6 +8,10 @@ public class RemoveProductRequest extends Request{
         this.productId = productId;
     }
 
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     @Override
     public void apply() {
 

@@ -12,6 +12,14 @@ public class OffEditionRequest extends Request{
         this.offId = offId;
     }
 
+    public Off getOff() {
+        return off;
+    }
+
+    public void setOffId(String offId) {
+        this.offId = offId;
+    }
+
     @Override
     public void apply() {
 

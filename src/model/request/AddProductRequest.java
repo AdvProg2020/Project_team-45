@@ -11,6 +11,10 @@ public class AddProductRequest extends Request {
         this.product = product;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
     @Override
     public void apply() {
 

@@ -1,17 +1,22 @@
 package model;
 
+import model.user.Buyer;
 import model.user.Seller;
+
+import java.util.HashMap;
 
 public class SellerInfoForProduct {
     private Seller seller;
     private int price;
     private int stock;
     private Off off;
+    private HashMap<Buyer, Integer> allBuyers;
 
     public SellerInfoForProduct(Seller seller, int price, int stock) {
         this.seller = seller;
         this.price = price;
         this.stock = stock;
+        this.allBuyers = new HashMap<>();
     }
 
     public Seller getSeller() {

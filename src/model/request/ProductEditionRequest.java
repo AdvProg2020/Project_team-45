@@ -12,6 +12,14 @@ public class ProductEditionRequest extends Request {
         this.productId = productId;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
     @Override
     public void apply() {
 

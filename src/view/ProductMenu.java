@@ -3,18 +3,18 @@ package view;
 import model.Product;
 
 public class ProductMenu extends Menu {
-    private model.Product activeProduct;
+    private Product activeProduct;
 
-    public void showProductAttributes() {
+    private void showProductAttributes() {
     }
 
-    public Menu getCommentsMenu() {
+    private Menu getCommentsMenu() {
         return null;
     }
 
     public void showProduct() {
     }
 
-    public void compareWith(Product otherProduct) {
+    private void compareWith(Product otherProduct) {
     }
 }

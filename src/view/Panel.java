@@ -3,7 +3,7 @@ package view;
 import java.util.HashMap;
 
 public abstract class Panel extends UIPage {
-    private HashMap<String, String> fields;
+    protected HashMap<String, String> fields;
 
     public Panel(String name) {
         super(name);
@@ -14,6 +14,6 @@ public abstract class Panel extends UIPage {
 
     }
 
-    protected void getFields() {
+    protected void getFieldsFromUser() {
     }
 }

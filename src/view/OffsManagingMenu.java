@@ -1,7 +1,9 @@
 package view;
 
+import model.Off;
+
 public class OffsManagingMenu extends ManagingMenu {
-    public EditingPanel getOffEditingPanel(String offId) {
+    private EditingPanel getOffEditingPanel(Off off) {
         return null;
     }
 }

@@ -1,6 +1,5 @@
 package view;
 
 public abstract class EditingPanel extends Panel {
-
-    String fields;
+    private String editingFieldName;
 }

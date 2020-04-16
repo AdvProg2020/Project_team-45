@@ -1,27 +1,34 @@
 package view;
 
-import controller.Controller;
+
+import controller.MainController;
 import model.user.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class UIPage {
-    protected static User ActiveUser;
-    protected static Controller controller;
-
+    protected static User activeUser;
+    protected static model.user.AnonymousUser anonymousUser;
+    protected static MainController controller;
     protected String name;
     protected static Menu activeMenu;
+    protected java.util.Scanner scanner;
+
 
     protected UIPage(String name) {
         this.name = name;
     }
 
-    protected static void setActiveUser(User activeUser) {
-        ActiveUser = activeUser;
+    protected static void setActiveMenu(Menu activeMenu) {
+        UIPage.activeMenu = activeMenu;
     }
 
-    public static void setController(Controller controller) {
+    protected static void setActiveUser(User activeUser) {
+        activeUser = activeUser;
+    }
+
+    public static void setController(MainController controller) {
         if (UIPage.controller == null)
             UIPage.controller = controller;
     }

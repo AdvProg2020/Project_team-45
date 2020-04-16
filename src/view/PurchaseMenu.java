@@ -9,7 +9,7 @@ public class PurchaseMenu extends Menu {
         return null;
     }
 
-    public void getPaymentPanel() {
+    public Panel getPaymentPanel() {
     }
 
 }

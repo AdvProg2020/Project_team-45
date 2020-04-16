@@ -1,8 +1,10 @@
 package view;
 
-public class OffsMenu extends Menu {
-    private java.util.ArrayList<model.Off> offsList;
+import model.Product;
 
-    public void showOffs() {
+public class OffsMenu extends ProductSearchMenu {
+    private java.util.ArrayList<Product> inOffProductsList;
+
+    private void showInOffProducts() {
     }
 }

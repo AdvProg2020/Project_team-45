@@ -13,6 +13,7 @@ public class MainController {
     private ProductController productController;
     private ProductFilteringController productFilteringController;
     private ProductSortingController productSortingController;
+    private OffController offController;
     private OffFilteringController offFilteringController;
     private OffSortingController offSortingController;
     private RequestController requestController;
@@ -26,6 +27,7 @@ public class MainController {
         this.productController = new ProductController(this);
         this.productFilteringController = new ProductFilteringController(this);
         this.productSortingController = new ProductSortingController(this);
+        this.offController =  new OffController(this);
         this.offFilteringController = new OffFilteringController(this);
         this.offSortingController = new OffSortingController(this);
         this.requestController = new RequestController(this);

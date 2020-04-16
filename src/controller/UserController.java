@@ -4,22 +4,15 @@ import model.CodedDiscount;
 import model.Product;
 import model.log.BuyLog;
 import model.log.SellLog;
-import model.request.Request;
 import model.user.User;
 
 import java.util.ArrayList;
 
 public class UserController {
     private MainController mainController;
-    private boolean logined;
 
     public UserController(MainController mainController) {
         this.mainController = mainController;
-        this.logined = false;
-    }
-
-    public boolean isLogined() {
-        return logined;
     }
 
     public User createUser() {

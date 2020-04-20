@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="387.0" y="429.0">view.Panel</node>
+    <node x="2061.0" y="924.0">view.UsersManagingMenu</node>
+    <node x="141.0" y="747.0">view.Login_RegisterPanel</node>
+    <node x="2374.6878306878302" y="735.0">view.MainMenu</node>
+    <node x="3203.0" y="957.0">view.RequestsManagingMenu</node>
+    <node x="1569.0" y="924.0">view.OffsMenu</node>
+    <node x="3440.5" y="681.0">view.ProductMenu</node>
+    <node x="2374.375" y="407.0">view.Menu</node>
+    <node x="2666.0" y="945.0">view.OffsManagingMenu</node>
+    <node x="864.0" y="735.0">view.EditingPanel</node>
+    <node x="3404.0" y="934.0">view.CategoriesManagingMenu</node>
+    <node x="335.0" y="747.0">view.CommentingPanel</node>
+    <node x="2912.5" y="682.0">view.ManagingMenu</node>
+    <node x="1615.6666666666665" y="0.0">view.UIPage</node>
+    <node x="2925.0" y="924.0">view.CartManagingMenu</node>
+    <node x="1310.0" y="913.0">view.AdminMenu</node>
+    <node x="3719.0" y="913.0">view.SellerProductsManagingMenu</node>
+    <node x="0.0" y="747.0">view.SearchPanel</node>
+    <node x="1108.0" y="923.0">view.SellerMenu</node>
+    <node x="1720.5" y="670.0">view.ProductSearchMenu</node>
+    <node x="1059.0" y="703.0">view.UserMenu</node>
+    <node x="503.0" y="747.0">view.CreateAdminPanel</node>
+    <node x="3215.5" y="713.0">view.PurchaseMenu</node>
+    <node x="677.0" y="747.0">view.CreateProductPanel</node>
+    <node x="2319.0" y="945.0">view.DiscountCodesManagingMenu</node>
+    <node x="810.0" y="934.0">view.BuyerMenu</node>
+    <node x="1833.0" y="913.0">view.AllProductsSearchingMenu</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="view.UserMenu" target="view.Menu">
+      <point x="0.0" y="-58.5" />
+      <point x="1199.0" y="640.0" />
+      <point x="2394.9583333333335" y="640.0" />
+      <point x="-102.91666666666652" y="101.5" />
+    </edge>
+    <edge source="view.PurchaseMenu" target="view.Menu">
+      <point x="0.0" y="-48.5" />
+      <point x="3318.0" y="640.0" />
+      <point x="2559.625" y="640.0" />
+      <point x="61.75" y="101.5" />
+    </edge>
+    <edge source="view.MainMenu" target="view.Menu">
+      <point x="0.0" y="-26.5" />
+      <point x="2465.1878306878302" y="650.0" />
+      <point x="2477.2916666666665" y="650.0" />
+      <point x="-20.583333333333485" y="101.5" />
+    </edge>
+    <edge source="view.OffsMenu" target="view.ProductSearchMenu">
+      <point x="0.0" y="-47.5" />
+      <point x="1691.0" y="893.0" />
+      <point x="1767.25" y="893.0" />
+      <point x="-46.75" y="91.5" />
+    </edge>
+    <edge source="view.ProductMenu" target="view.Menu">
+      <point x="0.0" y="-80.5" />
+      <point x="3542.0" y="630.0" />
+      <point x="2600.7916666666665" y="630.0" />
+      <point x="102.91666666666652" y="101.5" />
+    </edge>
+    <edge source="view.AllProductsSearchingMenu" target="view.ProductSearchMenu">
+      <point x="0.0" y="-58.5" />
+      <point x="1937.0" y="893.0" />
+      <point x="1860.75" y="893.0" />
+      <point x="46.75" y="91.5" />
+    </edge>
+    <edge source="view.SearchPanel" target="view.Panel">
+      <point x="0.0" y="-14.5" />
+      <point x="60.5" y="630.0" />
+      <point x="404.9166666666665" y="630.0" />
+      <point x="-89.58333333333337" y="79.5" />
+    </edge>
+    <edge source="view.Login_RegisterPanel" target="view.Panel">
+      <point x="0.0" y="-14.5" />
+      <point x="228.0" y="640.0" />
+      <point x="440.75" y="640.0" />
+      <point x="-53.75" y="79.5" />
+    </edge>
+    <edge source="view.RequestsManagingMenu" target="view.ManagingMenu">
+      <point x="0.0" y="-14.5" />
+      <point x="3293.5" y="893.0" />
+      <point x="3094.4285714285716" y="893.0" />
+      <point x="40.42857142857156" y="79.5" />
+    </edge>
+    <edge source="view.CommentingPanel" target="view.Panel">
+      <point x="0.0" y="-14.5" />
+      <point x="409.0" y="650.0" />
+      <point x="476.58333333333326" y="650.0" />
+      <point x="-17.916666666666686" y="79.5" />
+    </edge>
+    <edge source="view.CartManagingMenu" target="view.ManagingMenu">
+      <point x="0.0" y="-47.5" />
+      <point x="0.0" y="79.5" />
+    </edge>
+    <edge source="view.UsersManagingMenu" target="view.ManagingMenu">
+      <point x="0.0" y="-47.5" />
+      <point x="2180.0" y="873.0" />
+      <point x="2932.714285714286" y="873.0" />
+      <point x="-121.28571428571422" y="79.5" />
+    </edge>
+    <edge source="view.SellerMenu" target="view.UserMenu">
+      <point x="0.0" y="-48.5" />
+      <point x="0.0" y="58.5" />
+    </edge>
+    <edge source="view.Panel" target="view.UIPage">
+      <point x="0.0" y="-79.5" />
+      <point x="494.5" y="382.0" />
+      <point x="1672.9166666666665" y="382.0" />
+      <point x="-57.25" y="178.5" />
+    </edge>
+    <edge source="view.EditingPanel" target="view.Panel">
+      <point x="0.0" y="-26.5" />
+      <point x="951.5" y="630.0" />
+      <point x="584.0833333333335" y="630.0" />
+      <point x="89.58333333333337" y="79.5" />
+    </edge>
+    <edge source="view.ProductSearchMenu" target="view.Menu">
+      <point x="0.0" y="-91.5" />
+      <point x="1814.0" y="650.0" />
+      <point x="2436.125" y="650.0" />
+      <point x="-61.75" y="101.5" />
+    </edge>
+    <edge source="view.AdminMenu" target="view.UserMenu">
+      <point x="0.0" y="-58.5" />
+      <point x="1429.5" y="893.0" />
+      <point x="1292.3333333333335" y="893.0" />
+      <point x="93.33333333333348" y="58.5" />
+    </edge>
+    <edge source="view.ManagingMenu" target="view.Menu">
+      <point x="0.0" y="-79.5" />
+      <point x="3054.0" y="650.0" />
+      <point x="2518.4583333333335" y="650.0" />
+      <point x="20.583333333333485" y="101.5" />
+    </edge>
+    <edge source="view.CreateProductPanel" target="view.Panel">
+      <point x="0.0" y="-14.5" />
+      <point x="760.5" y="640.0" />
+      <point x="548.25" y="640.0" />
+      <point x="53.75" y="79.5" />
+    </edge>
+    <edge source="view.CategoriesManagingMenu" target="view.ManagingMenu">
+      <point x="0.0" y="-37.5" />
+      <point x="3551.5" y="883.0" />
+      <point x="3134.8571428571427" y="883.0" />
+      <point x="80.85714285714266" y="79.5" />
+    </edge>
+    <edge source="view.BuyerMenu" target="view.UserMenu">
+      <point x="0.0" y="-37.5" />
+      <point x="949.0" y="893.0" />
+      <point x="1105.6666666666665" y="893.0" />
+      <point x="-93.33333333333348" y="58.5" />
+    </edge>
+    <edge source="view.SellerProductsManagingMenu" target="view.ManagingMenu">
+      <point x="0.0" y="-58.5" />
+      <point x="3855.0" y="873.0" />
+      <point x="3175.285714285714" y="873.0" />
+      <point x="121.28571428571422" y="79.5" />
+    </edge>
+    <edge source="view.CreateAdminPanel" target="view.Panel">
+      <point x="0.0" y="-14.5" />
+      <point x="580.0" y="650.0" />
+      <point x="512.4166666666665" y="650.0" />
+      <point x="17.91666666666663" y="79.5" />
+    </edge>
+    <edge source="view.Menu" target="view.UIPage">
+      <point x="0.0" y="-101.5" />
+      <point x="2497.875" y="382.0" />
+      <point x="1787.4166666666665" y="382.0" />
+      <point x="57.25" y="178.5" />
+    </edge>
+    <edge source="view.DiscountCodesManagingMenu" target="view.ManagingMenu">
+      <point x="0.0" y="-26.5" />
+      <point x="2482.5" y="883.0" />
+      <point x="2973.1428571428573" y="883.0" />
+      <point x="-80.85714285714266" y="79.5" />
+    </edge>
+    <edge source="view.OffsManagingMenu" target="view.ManagingMenu">
+      <point x="0.0" y="-26.5" />
+      <point x="2785.5" y="893.0" />
+      <point x="3013.5714285714284" y="893.0" />
+      <point x="-40.42857142857156" y="79.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.20000000000000004" x="2127.9999999999995" y="592.1666666666665" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

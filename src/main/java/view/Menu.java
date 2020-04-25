@@ -27,17 +27,16 @@ public abstract class Menu extends UIPage {
                     return;
                 } else {
                     nextUIPage.execute();
-                    break;
                 }
-            } else if (!checkExistCommand()) {
+            } else {
                 System.out.println("invalid command!");
             }
         }
         activeMenu = parent;
     }
 
-    //The name of the function must be changed:
-    protected abstract boolean checkExistCommand();
+//    //The name of the function must be changed:
+//    protected abstract boolean checkExistCommand();
 
     protected abstract void showHelp();
 

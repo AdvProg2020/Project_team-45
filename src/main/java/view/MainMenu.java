@@ -4,8 +4,6 @@ import java.util.Map;
 
 public class MainMenu extends Menu {
 
-    //something
-
     public MainMenu() {
         super("main menu", null);
         this.submenus.put("user page", new Login_RegisterPanel());

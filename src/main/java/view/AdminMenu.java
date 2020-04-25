@@ -1,8 +1,8 @@
 package view;
 
 public class AdminMenu extends UserMenu {
-    protected AdminMenu(String name, Menu parent) {
-        super(name, parent);
+    protected AdminMenu(Menu parent) {
+        super("Admin Page", parent);
     }
 
     private Panel getProductsManagingPanel() {

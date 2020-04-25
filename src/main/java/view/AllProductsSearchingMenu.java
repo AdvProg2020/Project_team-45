@@ -5,9 +5,9 @@ import model.ProductFilters;
 
 import java.util.ArrayList;
 
-public abstract class AllProductsSearchingMenu extends ProductSearchMenu {
+public class AllProductsSearchingMenu extends ProductSearchMenu {
     private Category currentCategory;
-    private model.Category activeCategory;
+    private Category activeCategory;
 
     protected void showAllCategories(){
 

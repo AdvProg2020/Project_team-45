@@ -2,6 +2,7 @@ package controller;
 
 import model.Market;
 import model.ProductFilters;
+import model.user.User;
 
 import java.util.HashMap;
 
@@ -18,6 +19,8 @@ public class MainController {
     private OffFilteringController offFilteringController;
     private OffSortingController offSortingController;
     private RequestController requestController;
+
+    private User activeUser;
 
     public MainController() {
         this.market = Market.getInstance();
@@ -62,4 +65,12 @@ public class MainController {
         return null;
     }
 
+    //================================================================================
+    // temporary
+    //================================================================================
+
+
+    public User getActiveUser() {
+        return activeUser;
+    }
 }

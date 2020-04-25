@@ -4,6 +4,6 @@ import model.CodedDiscount;
 
 public class DiscountCodesManagingMenu extends ManagingMenu {
 
-    private EditingPanel getDiscountEditorPanel(CodedDiscount codedDiscount) {
+    private PersonalInfoPanel getDiscountEditorPanel(CodedDiscount codedDiscount) {
     }
 }

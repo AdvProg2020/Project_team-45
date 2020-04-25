@@ -8,7 +8,7 @@ public abstract class UserMenu extends Menu {
     public void showPersonalInfo() {
     }
 
-    protected EditingPanel getUserInfoEditingPanel(String fieldName) {
+    protected PersonalInfoPanel getUserInfoEditingPanel(String fieldName) {
         new Panel("") {
 
         };

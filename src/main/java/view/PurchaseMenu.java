@@ -1,6 +1,11 @@
 package view;
 
 public class PurchaseMenu extends Menu {
+
+    public PurchaseMenu(Menu parent) {
+        super("purchase menu", parent);
+    }
+
     public Panel getReciverInfoPanel() {
         return null;
     }

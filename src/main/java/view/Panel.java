@@ -5,12 +5,12 @@ import java.util.HashMap;
 public abstract class Panel extends UIPage {
     protected HashMap<String, String> fields;
 
-    public Panel(String name) {
+    protected Panel(String name) {
         super(name);
     }
 
     @Override
-    public void execute() {
+    protected void execute() {
 
     }
 
@@ -18,7 +18,7 @@ public abstract class Panel extends UIPage {
     }
 
     @Override
-    public String getType () {
+    protected String getType () {
         return "panel";
     }
 }

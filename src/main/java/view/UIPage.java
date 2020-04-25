@@ -1,16 +1,11 @@
 package view;
 
-
-import controller.MainController;
-
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class UIPage {
-    protected static MainController controller;
     protected String name;
-    protected static Menu activeMenu;
     protected static Scanner scanner;
 
 
@@ -18,18 +13,9 @@ public abstract class UIPage {
         this.name = name;
     }
 
-    //useless{
-    protected static void setActiveMenu(Menu activeMenu) {
-        UIPage.activeMenu = activeMenu;
+    public static void setScanner(Scanner scanner) {
+        UIPage.scanner = scanner;
     }
-    //}
-
-    //Needs thinking{
-    public static void setController(MainController controller) {
-        if (UIPage.controller == null)
-            UIPage.controller = controller;
-    }
-    //}
 
     protected static Matcher getMatcher(String regex, String input) {
         Matcher matcher = Pattern.compile(regex).matcher(input);
@@ -38,12 +24,7 @@ public abstract class UIPage {
         return matcher;
     }
 
-    protected void show() {
-        System.out.println(this.name + " :\n");
-    }
-
     protected abstract void execute();
 
-    public abstract String getType();
-
+    protected abstract String getType();
 }

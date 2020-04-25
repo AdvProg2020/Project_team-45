@@ -7,41 +7,54 @@ public abstract class Menu extends UIPage {
     protected Menu parent;
 
 
-    public Menu(String name, Menu parent) {
+    protected Menu(String name, Menu parent) {
         super(name);
         this.parent = parent;
         this.submenus = new HashMap<String, UIPage>();
-        submenus.put("login", new Login_RegisterPanel());
+        submenus.put("login", Login_RegisterPanel.getInstance());
+        submenus.put("logout", getLogoutPanel());
     }
 
-    protected void show() {
+    private Panel getLogoutPanel() {
+        return new Panel("logoutPane") {
+            @Override
+            public void execute() {
+                //***************//
+            }
+        };
+    }
+
+    private void setParent(Menu parent) {
+        this.parent = parent;
     }
 
     protected void execute() {
+        show();
         String input;
         while (!(input = scanner.nextLine()).equals("back")) {
             UIPage nextUIPage = submenus.get(input);
             if (nextUIPage != null) {
                 if (nextUIPage.getType().equals("menu")) {
-                    activeMenu = (Menu) nextUIPage;
+                    Menu nextMenu = (Menu) nextUIPage;
+                    MenuManagement.setActiveMenu(nextMenu);
+                    nextMenu.setParent(this);
                     return;
-                } else {
-                    nextUIPage.execute();
                 }
+                nextUIPage.execute();
             } else {
                 System.out.println("invalid command!");
             }
         }
-        activeMenu = parent;
+        MenuManagement.setActiveMenu(parent);
     }
 
-//    //The name of the function must be changed:
-//    protected abstract boolean checkExistCommand();
+    protected void show() {
+    }
 
     protected abstract void showHelp();
 
     @Override
-    public String getType() {
+    protected String getType() {
         return "menu";
     }
 }

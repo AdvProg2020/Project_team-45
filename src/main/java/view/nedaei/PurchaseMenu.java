@@ -1,4 +1,7 @@
-package view;
+package view.nedaei;
+
+import view.Menu;
+import view.Panel;
 
 public class PurchaseMenu extends Menu {
 

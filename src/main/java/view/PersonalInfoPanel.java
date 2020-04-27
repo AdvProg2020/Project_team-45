@@ -4,6 +4,8 @@ public class PersonalInfoPanel extends Panel {
     private String editingFieldName;
 
     public PersonalInfoPanel() {
-        super("Personal Info Panel");
+        super("personal info panel");
     }
+
+
 }

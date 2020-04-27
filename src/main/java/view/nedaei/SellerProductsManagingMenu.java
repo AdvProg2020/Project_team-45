@@ -1,6 +1,8 @@
-package view;
+package view.nedaei;
 
 import model.user.Seller;
+import view.ManagingMenu;
+import view.PersonalInfoPanel;
 
 public class SellerProductsManagingMenu extends ManagingMenu {
     private Seller seller;

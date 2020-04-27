@@ -1,4 +1,9 @@
-package view;
+package view.nedaei;
+
+import view.*;
+import view.nedaei.CreateProductPanel;
+import view.nedaei.OffsManagingMenu;
+import view.nedaei.SellerProductsManagingMenu;
 
 public class SellerMenu extends UserMenu {
 

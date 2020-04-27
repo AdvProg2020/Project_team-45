@@ -1,5 +1,7 @@
 package view;
 
+import view.nedaei.MainMenu;
+
 import java.util.Scanner;
 
 public class MenuManagement {

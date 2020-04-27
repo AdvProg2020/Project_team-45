@@ -1,4 +1,6 @@
-package view;
+package view.nedaei;
+
+import view.*;
 
 public class MainMenu extends Menu {
 

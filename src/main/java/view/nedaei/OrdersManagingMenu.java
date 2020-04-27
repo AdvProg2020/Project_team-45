@@ -1,4 +1,7 @@
-package view;
+package view.nedaei;
+
+import view.ManagingMenu;
+import view.Menu;
 
 public class OrdersManagingMenu extends ManagingMenu {
 

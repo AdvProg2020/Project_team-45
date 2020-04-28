@@ -1,9 +1,8 @@
 package view.nedaei;
 
-import view.*;
-import view.nedaei.CreateProductPanel;
-import view.nedaei.OffsManagingMenu;
-import view.nedaei.SellerProductsManagingMenu;
+import view.bagheri.Menu;
+import view.bagheri.Panel;
+import view.hatami.RemoveProductPanel;
 
 public class SellerMenu extends UserMenu {
 

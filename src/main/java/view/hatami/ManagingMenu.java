@@ -1,4 +1,6 @@
-package view;
+package view.hatami;
+
+import view.bagheri.Menu;
 
 import java.util.HashMap;
 

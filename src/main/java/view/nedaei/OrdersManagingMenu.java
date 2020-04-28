@@ -1,7 +1,7 @@
 package view.nedaei;
 
-import view.ManagingMenu;
-import view.Menu;
+import view.hatami.ManagingMenu;
+import view.bagheri.Menu;
 
 public class OrdersManagingMenu extends ManagingMenu {
 

@@ -1,4 +1,4 @@
-package view;
+package view.bagheri;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -23,6 +23,9 @@ public abstract class UIPage {
         if (!matcher.matches())
             return null;
         return matcher;
+    }
+
+    protected void show() {
     }
 
     protected abstract void execute();

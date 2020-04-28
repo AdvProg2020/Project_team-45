@@ -1,6 +1,7 @@
 package view.nedaei;
 
-import view.*;
+import view.bagheri.Menu;
+import view.bagheri.Panel;
 
 public class BuyerMenu extends UserMenu {
     private BuyerMenu instance;

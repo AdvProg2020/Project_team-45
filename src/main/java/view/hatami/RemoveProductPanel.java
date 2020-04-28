@@ -1,4 +1,6 @@
-package view;
+package view.hatami;
+
+import view.bagheri.Panel;
 
 public class RemoveProductPanel extends Panel {
     private String productId;

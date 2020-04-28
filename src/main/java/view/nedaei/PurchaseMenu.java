@@ -1,7 +1,7 @@
 package view.nedaei;
 
-import view.Menu;
-import view.Panel;
+import view.bagheri.Menu;
+import view.bagheri.Panel;
 
 public class PurchaseMenu extends Menu {
 

@@ -1,6 +1,10 @@
 package view.nedaei;
 
-import view.*;
+import view.bagheri.AllProductsSearchingMenu;
+import view.bagheri.Login_RegisterPanel;
+import view.bagheri.Menu;
+import view.bagheri.OffsMenu;
+import view.hatami.AdminMenu;
 
 public class MainMenu extends Menu {
 

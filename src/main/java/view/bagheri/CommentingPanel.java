@@ -1,4 +1,4 @@
-package view;
+package view.bagheri;
 
 import controller.ProductController;
 
@@ -29,7 +29,8 @@ public class CommentingPanel extends Panel {
         }
     }
 
-    private void show() {
+    @Override
+    protected void show() {
         System.out.println("score: " + productController.getAverageScore());
         for (String productComment : productController.getProductComments()) {
             System.out.println(productComment);

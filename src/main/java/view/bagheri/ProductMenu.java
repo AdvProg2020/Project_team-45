@@ -1,7 +1,6 @@
-package view;
+package view.bagheri;
 
 import controller.ProductController;
-import model.Product;
 
 import java.util.HashMap;
 import java.util.Map;

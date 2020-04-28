@@ -1,4 +1,8 @@
-package view;
+package view.hatami;
+
+import view.bagheri.Menu;
+import view.bagheri.Panel;
+import view.nedaei.UserMenu;
 
 public class AdminMenu extends UserMenu {
     protected AdminMenu(Menu parent) {

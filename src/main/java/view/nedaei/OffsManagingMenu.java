@@ -1,8 +1,7 @@
 package view.nedaei;
 
 import model.Off;
-import view.ManagingMenu;
-import view.PersonalInfoPanel;
+import view.hatami.ManagingMenu;
 
 public class OffsManagingMenu extends ManagingMenu {
     private PersonalInfoPanel getOffEditingPanel(Off off) {

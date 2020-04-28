@@ -1,4 +1,4 @@
-package view;
+package view.bagheri;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,9 +56,6 @@ public abstract class Menu extends UIPage {
                 return submenu.getValue();
         }
         return null;
-    }
-
-    protected void show() {
     }
 
     protected abstract void showHelp();

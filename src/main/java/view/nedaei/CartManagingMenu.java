@@ -1,8 +1,7 @@
 package view.nedaei;
 
-import model.Cart;
-import view.ManagingMenu;
-import view.Menu;
+import view.hatami.ManagingMenu;
+import view.bagheri.Menu;
 
 public class CartManagingMenu extends ManagingMenu {
 

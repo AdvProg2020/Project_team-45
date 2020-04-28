@@ -14,9 +14,6 @@ public abstract class Panel extends UIPage {
 
     }
 
-    protected void getFieldsFromUser() {
-    }
-
     @Override
     protected String getType () {
         return "panel";

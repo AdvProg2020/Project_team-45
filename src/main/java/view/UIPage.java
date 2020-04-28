@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public abstract class UIPage {
     protected String name;
     protected static Scanner scanner;
+    protected static Matcher matcher;
 
 
     protected UIPage(String name) {

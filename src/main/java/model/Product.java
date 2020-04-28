@@ -26,7 +26,7 @@ public class Product {
         this.name = name;
         this.company = company;
         this.category = category;
-        this.categoryFeatures = new HashMap<>();
+        this.categoryFeatures = new HashMap<String, String>();
         this.description = description;
     }
 

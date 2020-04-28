@@ -4,9 +4,12 @@ import model.Comment;
 import model.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProductController {
     private MainController mainController;
+    private Product activeProduct;
+
 
     public ProductController(MainController mainController) {
         this.mainController = mainController;
@@ -28,8 +31,24 @@ public class ProductController {
         return null;
     }
 
-    public ArrayList<Comment> getProductComments(Product product) {
+    public HashMap<String, String> getProductAttributes() {
         return null;
+    }
+
+    public HashMap<String, String> getProductAttributesById(String productId) {
+        return null;
+    }
+
+    public int getAverageScore() {
+        return 0;
+    }
+
+    public ArrayList<String> getProductComments() {
+        return null;
+    }
+
+    public void addComment(String title, String content) {
+
     }
 
 }

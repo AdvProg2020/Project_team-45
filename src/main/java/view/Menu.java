@@ -1,6 +1,7 @@
 package view;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Menu extends UIPage {
     protected HashMap<String, UIPage> submenus;
@@ -12,10 +13,10 @@ public abstract class Menu extends UIPage {
         this.parent = parent;
         this.submenus = new HashMap<String, UIPage>();
         submenus.put("login", Login_RegisterPanel.getInstance());
-        submenus.put("logout", getLogoutPanel());
+        submenus.put("logout", createLogoutPanel());
     }
 
-    private Panel getLogoutPanel() {
+    private Panel createLogoutPanel() {
         return new Panel("logoutPane") {
             @Override
             public void execute() {
@@ -32,7 +33,7 @@ public abstract class Menu extends UIPage {
         show();
         String input;
         while (!(input = scanner.nextLine()).equals("back")) {
-            UIPage nextUIPage = submenus.get(input);
+            UIPage nextUIPage = getUIPageByCommand(input);
             if (nextUIPage != null) {
                 if (nextUIPage.getType().equals("menu")) {
                     Menu nextMenu = (Menu) nextUIPage;
@@ -46,6 +47,15 @@ public abstract class Menu extends UIPage {
             }
         }
         MenuManagement.setActiveMenu(parent);
+    }
+
+    private UIPage getUIPageByCommand(String input) {
+        for(Map.Entry<String,UIPage> submenu : submenus.entrySet()) {
+            matcher = getMatcher(submenu.getKey(), input);
+            if(matcher != null)
+                return submenu.getValue();
+        }
+        return null;
     }
 
     protected void show() {

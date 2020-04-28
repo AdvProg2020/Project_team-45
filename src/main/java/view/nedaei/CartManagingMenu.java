@@ -1,12 +1,22 @@
 package view.nedaei;
 
-import model.Cart;
+import controller.Controller;
 import view.ManagingMenu;
-import view.Menu;
+
+import java.util.regex.Matcher;
 
 public class CartManagingMenu extends ManagingMenu {
+    private static CartManagingMenu instance;
 
-    public CartManagingMenu(Menu parent) {
-        super("cart managing page", parent);
+    private CartManagingMenu() {
+        super("cart managing page", null);
     }
+
+    public static CartManagingMenu getInstance() {
+        if (instance == null) {
+            instance = new CartManagingMenu();
+        }
+        return instance;
+    }
+
 }

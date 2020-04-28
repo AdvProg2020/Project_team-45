@@ -48,10 +48,7 @@ public abstract class Menu extends UIPage {
         MenuManagement.setActiveMenu(parent);
     }
 
-    protected void show() {
-    }
-
-    protected abstract void showHelp();
+    protected abstract Panel createShowHelpPanel();
 
     @Override
     protected String getType() {

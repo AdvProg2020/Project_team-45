@@ -1,8 +1,7 @@
-package view.hatami;
+package view;
 
 import model.Category;
-import view.bagheri.Panel;
-import view.nedaei.PersonalInfoPanel;
+import view.nedaei.personalinfopanel.PersonalInfoPanel;
 
 public class CategoriesManagingMenu extends ManagingMenu {
     private PersonalInfoPanel getCategoryEditorPanel(Category category) {

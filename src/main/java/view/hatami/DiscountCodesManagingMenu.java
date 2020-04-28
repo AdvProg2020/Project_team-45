@@ -1,7 +1,7 @@
-package view.hatami;
+package view;
 
 import model.CodedDiscount;
-import view.nedaei.PersonalInfoPanel;
+import view.nedaei.personalinfopanel.PersonalInfoPanel;
 
 public class DiscountCodesManagingMenu extends ManagingMenu {
 

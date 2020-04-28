@@ -1,8 +1,7 @@
 package view.nedaei;
 
-import view.bagheri.Menu;
-import view.bagheri.Panel;
-import view.hatami.RemoveProductPanel;
+import view.*;
+import view.nedaei.personalinfopanel.PersonalInfoPanel;
 
 public class SellerMenu extends UserMenu {
 

@@ -1,7 +1,7 @@
 package view.bagheri;
 
 public class FilteringPanel extends Panel {
-    private static FilteringPanel filteringPanel = new FilteringPanel();
+    private static FilteringPanel instance = new FilteringPanel();
 
 
     private FilteringPanel() {
@@ -9,7 +9,7 @@ public class FilteringPanel extends Panel {
     }
 
     public static FilteringPanel getInstance() {
-        return filteringPanel;
+        return instance;
     }
 
     @Override
@@ -18,11 +18,11 @@ public class FilteringPanel extends Panel {
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
             if (inputCommand.equals("show available filters")) {
 
-            } else if(inputCommand.matches("sort (\\.+)")) {
+            } else if((matcher = getMatcher("filter (\\.+)", inputCommand)) != null) {
 
             } else if(inputCommand.equals("current sort")) {
 
-            } else if(inputCommand.equals("disable filter (\\.+)")) {
+            } else if((matcher = getMatcher("disable filter (\\.+)", inputCommand)) != null) {
 
             } else {
                 System.out.println("invalid command!");

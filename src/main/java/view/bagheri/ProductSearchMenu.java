@@ -7,7 +7,7 @@ public abstract class ProductSearchMenu extends Menu {
     private String activeSort;
 
 
-    public ProductSearchMenu(String name, Menu parent) {
+    protected ProductSearchMenu(String name, Menu parent) {
         super(name, null);
         //        productController = ;
         this.submenus.put("filtering", );

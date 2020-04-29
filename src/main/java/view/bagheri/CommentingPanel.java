@@ -3,7 +3,7 @@ package view.bagheri;
 import controller.ProductController;
 
 public class CommentingPanel extends Panel {
-    private static CommentingPanel commentingPanel = new CommentingPanel();
+    private static CommentingPanel instance = new CommentingPanel();
     private ProductController productController;
 
     private CommentingPanel() {
@@ -12,7 +12,7 @@ public class CommentingPanel extends Panel {
     }
 
     public static CommentingPanel getInstance() {
-        return commentingPanel;
+        return instance;
     }
 
     @Override

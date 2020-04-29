@@ -9,10 +9,10 @@ public abstract class Panel extends UIPage {
         super(name);
     }
 
-    @Override
-    protected void execute() {
-
-    }
+//    @Override
+//    protected void execute() {
+//
+//    }
 
     @Override
     protected String getType () {

@@ -17,20 +17,20 @@ public class MainMenu extends Menu {
         this.submenus.put("offs page", new OffsMenu());
     }
 
-    public void updateSubmenus() {
-        if (!controller.isLoggedIn()) {
-            return;
-        }
-
-        String role = controller.getRole();
-        if (role.equals("admin")) {
-            submenus.put("user page", new AdminMenu(this)); // TODO: hatami
-        } else if (role.equals("buyer")) {
-            submenus.put("user page", BuyerMenu.getInstance());
-        } else {
-            submenus.put("user page", SellerMenu.getInstance());
-        }
-    }
+//    public void updateSubmenus() { // TODO: bagheri
+//        if (!controller.isLoggedIn()) {
+//            return;
+//        }
+//
+//        String role = controller.getRole();
+//        if (role.equals("admin")) {
+//            submenus.put("user page", new AdminMenu(this)); // TODO: hatami
+//        } else if (role.equals("buyer")) {
+//            submenus.put("user page", BuyerMenu.getInstance());
+//        } else {
+//            submenus.put("user page", SellerMenu.getInstance());
+//        }
+//    }
 
 
 }

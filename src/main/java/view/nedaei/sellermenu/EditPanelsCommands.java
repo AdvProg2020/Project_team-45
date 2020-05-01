@@ -1,14 +1,14 @@
-package view.nedaei.sellermenu.editproductpanel;
+package view.nedaei.sellermenu;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public enum EditProductPanelCommands {
+public enum EditPanelsCommands {
     FIELD_AND_VALUE("(?i)(\\w+)\\s*:\\s*(\\w+)");
 
     private Pattern commandPattern;
 
-    EditProductPanelCommands(String commandPatternString) {
+    EditPanelsCommands(String commandPatternString) {
         this.commandPattern = Pattern.compile(commandPatternString);
     }
 

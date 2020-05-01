@@ -4,6 +4,9 @@ import view.bagheri.Panel;
 import view.hatami.RemoveProductPanel;
 import view.nedaei.UserMenu;
 import view.nedaei.personalinfopanel.PersonalInfoPanel;
+import view.nedaei.sellermenu.offsmanagingmenu.OffsManagingMenu;
+import view.nedaei.sellermenu.productsmanagingmenu.CreateProductPanel;
+import view.nedaei.sellermenu.productsmanagingmenu.ProductsManagingMenu;
 
 public class SellerMenu extends UserMenu {
     private static SellerMenu instance;
@@ -13,7 +16,7 @@ public class SellerMenu extends UserMenu {
         this.submenus.put("view personal info", PersonalInfoPanel.getInstance());
         this.submenus.put("view company information", createViewCompanyInfoPanel());
         this.submenus.put("view sales history", createViewSalesHistoryPanel());
-        this.submenus.put("manage products", SellerProductsManagingMenu.getInstance());
+        this.submenus.put("manage products", ProductsManagingMenu.getInstance());
         this.submenus.put("add product", CreateProductPanel.getInstance());
         this.submenus.put("remove product (\\w+)", new RemoveProductPanel()); // TODO: hatami
         this.submenus.put("show categories", createShowCategoriesPanel());

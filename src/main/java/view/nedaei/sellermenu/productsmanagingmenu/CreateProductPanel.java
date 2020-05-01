@@ -1,4 +1,4 @@
-package view.nedaei.sellermenu;
+package view.nedaei.sellermenu.productsmanagingmenu;
 
 import controller.Controller;
 import view.bagheri.Panel;

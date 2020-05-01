@@ -1,14 +1,13 @@
-package view.nedaei.sellermenu;
+package view.nedaei.sellermenu.productsmanagingmenu;
 
 import controller.Controller;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
-import view.nedaei.sellermenu.editproductpanel.EditProductPanel;
 
-public class SellerProductsManagingMenu extends ManagingMenu {
-    private static SellerProductsManagingMenu instance;
+public class ProductsManagingMenu extends ManagingMenu {
+    private static ProductsManagingMenu instance;
 
-    private SellerProductsManagingMenu() {
+    private ProductsManagingMenu() {
         super("seller products managing page", null);
         this.submenus.put("view (\\w+)", createViewProductByIdPanel());
         this.submenus.put("view buyers (\\w+)", createViewBuyersPanel());
@@ -16,9 +15,9 @@ public class SellerProductsManagingMenu extends ManagingMenu {
         this.submenus.put("help", createHelpPanel());
     }
 
-    public static SellerProductsManagingMenu getInstance() {
+    public static ProductsManagingMenu getInstance() {
         if (instance == null) {
-            instance = new SellerProductsManagingMenu();
+            instance = new ProductsManagingMenu();
         }
         return instance;
     }

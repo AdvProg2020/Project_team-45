@@ -7,6 +7,12 @@ public class CartManagingMenu extends ManagingMenu {
 
     private CartManagingMenu() {
         super("cart managing page", null);
+//        this.put();
+//        this.put();
+//        this.put();
+//        this.put();
+//        this.put();
+//        this.put();
     }
 
     public static CartManagingMenu getInstance() {

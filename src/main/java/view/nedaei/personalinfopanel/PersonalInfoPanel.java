@@ -1,7 +1,7 @@
 package view.nedaei.personalinfopanel;
 
 import controller.Controller;
-import view.Panel;
+import view.bagheri.Panel;
 
 import java.util.regex.Matcher;
 

@@ -1,11 +1,20 @@
 package view.nedaei;
 
-import model.Off;
-import view.ManagingMenu;
-import view.nedaei.personalinfopanel.PersonalInfoPanel;
+import view.bagheri.Menu;
+import view.hatami.ManagingMenu;
 
 public class OffsManagingMenu extends ManagingMenu {
-    private PersonalInfoPanel getOffEditingPanel(Off off) {
-        return null;
+    private static OffsManagingMenu instance;
+
+    private OffsManagingMenu() {
+        super("offs managing page", null);
     }
+
+    public static OffsManagingMenu getInstance() {
+        if (instance == null) {
+            instance = new OffsManagingMenu();
+        }
+        return instance;
+    }
+
 }

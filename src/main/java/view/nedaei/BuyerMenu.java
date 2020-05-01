@@ -2,23 +2,24 @@ package view.nedaei;
 
 import controller.Controller;
 import view.*;
+import view.bagheri.Panel;
 import view.nedaei.personalinfopanel.PersonalInfoPanel;
 
 public class BuyerMenu extends UserMenu {
-    private BuyerMenu instance;
+    private static BuyerMenu instance;
 
     private BuyerMenu() {
-        super("buyer page", null);
+        super("buyer page");
         this.submenus.put("view personal info", PersonalInfoPanel.getInstance());
-        this.submenus.put("view cart", new CartManagingMenu());
-        this.submenus.put("purchase", new PurchaseMenu(this));
-        this.submenus.put("view orders", new OrdersManagingMenu(this));
+        this.submenus.put("view cart", CartManagingMenu.getInstance());
+        this.submenus.put("purchase", PurchaseMenu.getInstance());
+        this.submenus.put("view orders", OrdersManagingMenu.getInstance());
         this.submenus.put("view balance", createViewBalancePanel());
         this.submenus.put("view discount codes", createViewDiscountCodesPanel());
-        this.submenus.put("help", createShowHelpPanel());
+//        this.submenus.put("help", createShowHelpPanel());
     }
 
-    public BuyerMenu getInstance() {
+    public static BuyerMenu getInstance() {
         if (instance == null) {
             instance = new BuyerMenu();
         }
@@ -47,20 +48,4 @@ public class BuyerMenu extends UserMenu {
         };
     }
 
-    @Override
-    protected Panel createShowHelpPanel() {
-        return new Panel("show help panel") {
-
-            @Override
-            public void execute() {
-                System.out.println("view personal info\n" +
-                        "view cart\n" +
-                        "purchase\n" +
-                        "view orders\n" +
-                        "view balance\n" +
-                        "view discount codes");
-            }
-
-        };
-    }
 }

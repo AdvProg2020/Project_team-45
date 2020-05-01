@@ -22,13 +22,12 @@ public class MainMenu extends Menu {
 
         String role = controller.getRole();
         if (role.equals("admin")) {
-            submenus.put("user page", new AdminMenu(this));
+            submenus.put("user page", new AdminMenu(this)); // TODO: hatami
         } else if (role.equals("buyer")) {
-            submenus.put("user page", new BuyerMenu(this));
+            submenus.put("user page", BuyerMenu.getInstance());
         } else {
-            submenus.put("user page", new SellerMenu(this));
+            submenus.put("user page", SellerMenu.getInstance());
         }
-        return;
     }
 
 

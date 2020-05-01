@@ -1,7 +1,8 @@
 package view.nedaei;
 
 import controller.Controller;
-import view.ManagingMenu;
+import view.hatami.ManagingMenu;
+
 
 import java.util.regex.Matcher;
 

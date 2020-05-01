@@ -4,20 +4,17 @@ import view.bagheri.Menu;
 import view.bagheri.Panel;
 
 public class PurchaseMenu extends Menu {
+    private static PurchaseMenu instance;
 
-    public PurchaseMenu(Menu parent) {
-        super("purchase menu", parent);
+    private PurchaseMenu() {
+        super("purchase page", null);
     }
 
-    public Panel getReciverInfoPanel() {
-        return null;
-    }
-
-    public Panel getDiscountCodePanel() {
-        return null;
-    }
-
-    public Panel getPaymentPanel() {
+    public static PurchaseMenu getInstance() {
+        if (instance == null) {
+            instance = new PurchaseMenu();
+        }
+        return instance;
     }
 
 }

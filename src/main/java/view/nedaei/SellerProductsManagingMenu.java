@@ -1,15 +1,21 @@
 package view.nedaei;
 
 import model.user.Seller;
-import view.ManagingMenu;
+import view.hatami.ManagingMenu;
 import view.nedaei.personalinfopanel.PersonalInfoPanel;
 
 public class SellerProductsManagingMenu extends ManagingMenu {
-    private Seller seller;
+    private static SellerProductsManagingMenu instance;
 
-    private void viewProductBuyers(String productId) {
+    private SellerProductsManagingMenu() {
+        super("seller products managing page", null);
     }
 
-    private PersonalInfoPanel getProductEditorPanel(String productId) {
+    public static SellerProductsManagingMenu getInstance() {
+        if (instance == null) {
+            instance = new SellerProductsManagingMenu();
+        }
+        return instance;
     }
+
 }

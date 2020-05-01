@@ -1,5 +1,7 @@
 package view.nedaei.buyermenu;
 
+import controller.Controller;
+import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
 
 public class OrdersManagingMenu extends ManagingMenu {
@@ -7,6 +9,9 @@ public class OrdersManagingMenu extends ManagingMenu {
 
     public OrdersManagingMenu() {
         super("order managing panel", null);
+        this.submenus.put("show order (\\w+)", createShowOrderByIdPanel());
+        this.submenus.put("rate (\\w+) ([1-5])", createRateProductByIdPanel());
+        this.submenus.put("help", createHelpPanel());
     }
 
     public static OrdersManagingMenu getInstance() {
@@ -15,4 +20,46 @@ public class OrdersManagingMenu extends ManagingMenu {
         }
         return instance;
     }
+
+    private Panel createShowOrderByIdPanel() {
+        return new Panel("show order by id panel") {
+
+            @Override
+            protected void execute() {
+                System.out.println(Controller.getInstance().getBuyerBuyLogById(matcher.group(1)));
+            }
+        };
+    }
+
+    private Panel createRateProductByIdPanel() {
+        return new Panel("rate product by id panel") {
+
+            @Override
+            protected void execute() {
+                if (!Controller.getInstance().didBuyerBuyProduct(matcher.group(1))) {
+                    System.out.println("is not among your orders");
+                    return;
+                }
+                Controller.getInstance().rateProductById(matcher.group(1), Integer.parseInt(matcher.group(2)));
+            }
+
+        };
+    }
+
+    private Panel createHelpPanel() {
+        return new Panel("help panel") {
+
+            @Override
+            protected void execute() {
+                System.out.println("");
+            }
+
+        };
+    }
+
+    @Override
+    protected void show() {
+        System.out.println(Controller.getInstance().getBuyerBuyLogs());
+    }
+
 }

@@ -12,7 +12,7 @@ public class BuyerMenu extends UserMenu {
         super("buyer page");
         this.submenus.put("view personal info", PersonalInfoPanel.getInstance());
         this.submenus.put("view cart", CartManagingMenu.getInstance());
-        this.submenus.put("purchase", PurchaseMenu.getInstance());
+        this.submenus.put("purchase", PurchasePanel.getInstance());
         this.submenus.put("view orders", OrdersManagingMenu.getInstance());
         this.submenus.put("view balance", createViewBalancePanel());
         this.submenus.put("view discount codes", createViewDiscountCodesPanel());

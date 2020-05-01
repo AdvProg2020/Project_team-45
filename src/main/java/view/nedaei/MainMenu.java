@@ -5,6 +5,8 @@ import view.bagheri.Login_RegisterPanel;
 import view.bagheri.Menu;
 import view.bagheri.OffsMenu;
 import view.hatami.AdminMenu;
+import view.nedaei.buyermenu.BuyerMenu;
+import view.nedaei.sellermenu.SellerMenu;
 
 public class MainMenu extends Menu {
 

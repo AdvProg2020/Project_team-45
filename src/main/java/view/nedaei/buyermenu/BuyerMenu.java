@@ -1,8 +1,8 @@
-package view.nedaei;
+package view.nedaei.buyermenu;
 
 import controller.Controller;
-import view.*;
 import view.bagheri.Panel;
+import view.nedaei.UserMenu;
 import view.nedaei.personalinfopanel.PersonalInfoPanel;
 
 public class BuyerMenu extends UserMenu {
@@ -16,7 +16,7 @@ public class BuyerMenu extends UserMenu {
         this.submenus.put("view orders", OrdersManagingMenu.getInstance());
         this.submenus.put("view balance", createViewBalancePanel());
         this.submenus.put("view discount codes", createViewDiscountCodesPanel());
-//        this.submenus.put("help", createShowHelpPanel());
+        this.submenus.put("help", createHelpPanel());
     }
 
     public static BuyerMenu getInstance() {
@@ -43,6 +43,17 @@ public class BuyerMenu extends UserMenu {
             @Override
             public void execute() {
                 System.out.println(Controller.getInstance().getActiveUser().getListOfCodedDiscounts());
+            }
+
+        };
+    }
+
+    private Panel createHelpPanel() {
+        return new Panel("help panel") {
+
+            @Override
+            protected void execute() {
+                System.out.println("");
             }
 
         };

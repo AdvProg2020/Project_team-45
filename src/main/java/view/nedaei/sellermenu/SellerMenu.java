@@ -1,8 +1,8 @@
-package view.nedaei;
+package view.nedaei.sellermenu;
 
-import view.bagheri.Menu;
 import view.bagheri.Panel;
 import view.hatami.RemoveProductPanel;
+import view.nedaei.UserMenu;
 import view.nedaei.personalinfopanel.PersonalInfoPanel;
 
 public class SellerMenu extends UserMenu {
@@ -15,10 +15,11 @@ public class SellerMenu extends UserMenu {
         this.submenus.put("view sales history", createViewSalesHistoryPanel());
         this.submenus.put("manage products", SellerProductsManagingMenu.getInstance());
         this.submenus.put("add product", CreateProductPanel.getInstance());
-        this.submenus.put("remove product (\\d+)", new RemoveProductPanel()); // TODO: hatami
+        this.submenus.put("remove product (\\w+)", new RemoveProductPanel()); // TODO: hatami
         this.submenus.put("show categories", createShowCategoriesPanel());
         this.submenus.put("view offs", OffsManagingMenu.getInstance());
         this.submenus.put("view balance", createViewBalancePanel());
+        this.submenus.put("help", createHelpPanel())
     }
 
     public static SellerMenu getInstance() {
@@ -72,16 +73,14 @@ public class SellerMenu extends UserMenu {
         };
     }
 
-//    protected void showHelp() {
-//        System.out.println("view personal info\n" +
-//                "view company information\n" +
-//                "view sales history\n" +
-//                "manage products\n" +
-//                "add product\n" +
-//                "remove product [productId]\n" +
-//                "show categories\n" +
-//                "view offs\n" +
-//                "view balance\n");
-//    }
+    private Panel createHelpPanel() {
+        return new Panel("help panel") {
 
+            @Override
+            public void execute() {
+                System.out.println("");
+            }
+
+        };
+    }
 }

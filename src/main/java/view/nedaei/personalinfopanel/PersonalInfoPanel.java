@@ -24,10 +24,10 @@ public class PersonalInfoPanel extends Panel {
         show();
         String input;
         Matcher matcher;
-        while (!(input = scanner.nextLine()).equals("back")) {
+        while (!(input = scanner.nextLine().trim()).equalsIgnoreCase("back")) {
             if ((matcher = PersonalInfoPanelCommands.EDIT.getMatcher(input)).find()) {
-                System.out.print("please enter new value: ");
-                Controller.getInstance().setPersonalInfoField(matcher.group(3), scanner.nextLine().trim());
+                System.out.println("please enter new value: ");
+                Controller.getInstance().setPersonalInfoField(matcher.group(1), scanner.nextLine().trim());
             } else {
                 System.out.println("invalid command!");
             }
@@ -36,7 +36,7 @@ public class PersonalInfoPanel extends Panel {
 
     @Override
     protected void show() {
-        System.out.println(Controller.getInstance().getPersonalInfoDisplay());
+        System.out.println(Controller.getInstance().getPersonalInfo());
     }
 
 }

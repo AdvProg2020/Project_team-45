@@ -1,7 +1,6 @@
-package view.nedaei;
+package view.nedaei.buyermenu;
 
 import view.hatami.ManagingMenu;
-import view.bagheri.Menu;
 
 public class OrdersManagingMenu extends ManagingMenu {
     private static OrdersManagingMenu instance;

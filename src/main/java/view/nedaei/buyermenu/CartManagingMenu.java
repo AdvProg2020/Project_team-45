@@ -1,10 +1,6 @@
-package view.nedaei;
+package view.nedaei.buyermenu;
 
-import controller.Controller;
 import view.hatami.ManagingMenu;
-
-
-import java.util.regex.Matcher;
 
 public class CartManagingMenu extends ManagingMenu {
     private static CartManagingMenu instance;

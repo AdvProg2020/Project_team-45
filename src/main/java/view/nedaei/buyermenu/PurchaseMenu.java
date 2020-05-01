@@ -1,7 +1,6 @@
-package view.nedaei;
+package view.nedaei.buyermenu;
 
 import view.bagheri.Menu;
-import view.bagheri.Panel;
 
 public class PurchaseMenu extends Menu {
     private static PurchaseMenu instance;

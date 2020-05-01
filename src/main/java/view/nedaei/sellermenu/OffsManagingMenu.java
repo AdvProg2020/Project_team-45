@@ -1,6 +1,5 @@
-package view.nedaei;
+package view.nedaei.sellermenu;
 
-import view.bagheri.Menu;
 import view.hatami.ManagingMenu;
 
 public class OffsManagingMenu extends ManagingMenu {
@@ -16,5 +15,7 @@ public class OffsManagingMenu extends ManagingMenu {
         }
         return instance;
     }
+
+
 
 }

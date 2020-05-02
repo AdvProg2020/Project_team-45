@@ -12,4 +12,7 @@ public class Login_RegisterPanel extends Panel {
         return instance;
     }
 
+    public void execute() {
+
+    }
 }

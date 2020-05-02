@@ -1,28 +1,36 @@
 package view.bagheri;
 
-import model.ProductFilters;
 
 public abstract class ProductSearchMenu extends Menu {
-    private ProductFilters activeFilters;
-    private String activeSort;
+
 
 
     protected ProductSearchMenu(String name, Menu parent) {
         super(name, null);
         //        productController = ;
-        this.submenus.put("filtering", );
-        this.submenus.put("sorting", createShowProductAttributesPanel());
+        submenus.put("view categories", creatViewCategoriesPanel());
+        submenus.put("filtering", FilteringPanel.getInstance());
+        submenus.put("sorting", SortingPanel.getInstance());
+        submenus.put("show products", creatShowProductsPanel());
+        submenus.put("show product (\\w+)", ProductMenu.getInstance());
     }
 
-    protected void showAvailableFilters() {
+    protected void showHelp() {
+
     }
 
-    protected void showCurrentFilters() {
+    protected abstract Panel creatViewCategoriesPanel();
+
+    protected Panel creatShowProductsPanel() {
+        return new Panel("showProductPanel") {
+            @Override
+            public void execute() {
+                showProduct();
+            }
+        };
     }
 
-    protected void showAvailableSorts() {
-    }
-
-    protected void showCurrentSort(){
+    protected void showProduct() {
+        //needs to be completed
     }
 }

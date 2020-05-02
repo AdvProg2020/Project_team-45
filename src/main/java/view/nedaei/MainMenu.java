@@ -1,6 +1,6 @@
 package view.nedaei;
 
-import view.bagheri.AllProductsMenu;
+import view.bagheri.CategoryMenu;
 import view.bagheri.Login_RegisterPanel;
 import view.bagheri.Menu;
 import view.bagheri.OffsMenu;
@@ -11,7 +11,7 @@ public class MainMenu extends Menu {
     public MainMenu() {
         super("main menu", null);
         this.submenus.put("user page", new Login_RegisterPanel());
-        this.submenus.put("products page", new AllProductsMenu());
+        this.submenus.put("products page", new CategoryMenu());
         this.submenus.put("offs page", new OffsMenu());
     }
 

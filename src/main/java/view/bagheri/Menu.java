@@ -20,7 +20,7 @@ public abstract class Menu extends UIPage {
         return new Panel("logoutPane") {
             @Override
             public void execute() {
-                //***************//
+                //needs to be completed
             }
         };
     }
@@ -29,7 +29,7 @@ public abstract class Menu extends UIPage {
         this.parent = parent;
     }
 
-    protected void execute() {
+    public void execute() {
         show();
         String input;
         while (!(input = scanner.nextLine()).equals("back")) {

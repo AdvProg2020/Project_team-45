@@ -4,19 +4,13 @@ package view.bagheri;
 public abstract class ProductSearchMenu extends Menu {
 
 
-
-    protected ProductSearchMenu(String name, Menu parent) {
-        super(name, null);
-        //        productController = ;
+    protected ProductSearchMenu(String name) {
+        super(name);
         submenus.put("view categories", creatViewCategoriesPanel());
         submenus.put("filtering", FilteringPanel.getInstance());
         submenus.put("sorting", SortingPanel.getInstance());
         submenus.put("show products", creatShowProductsPanel());
         submenus.put("show product (\\w+)", ProductMenu.getInstance());
-    }
-
-    protected void showHelp() {
-
     }
 
     protected abstract Panel creatViewCategoriesPanel();
@@ -31,6 +25,12 @@ public abstract class ProductSearchMenu extends Menu {
     }
 
     protected void showProduct() {
+        //needs to be completed
+    }
+
+    @Override
+    protected void showHelp() {
+        super.showHelp();
         //needs to be completed
     }
 }

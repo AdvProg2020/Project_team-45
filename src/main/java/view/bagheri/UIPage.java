@@ -25,7 +25,7 @@ public abstract class UIPage {
         return matcher;
     }
 
-    public abstract void execute();
+    protected abstract void execute();
 
     protected void show() {
     }

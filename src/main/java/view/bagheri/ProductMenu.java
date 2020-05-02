@@ -11,8 +11,7 @@ public class ProductMenu extends Menu {
 
 
     private ProductMenu() {
-        super("product page", null);
-//        productController = ;
+        super("product page");
         this.submenus.put("digest", createDigestPanel());
         this.submenus.put("attributes", createShowProductAttributesPanel());
         this.submenus.put("compare (\\w+)", createCompareProductsPanel());
@@ -58,7 +57,9 @@ public class ProductMenu extends Menu {
         };
     }
 
+    @Override
     protected void showHelp() {
-
+        super.showHelp();
+        //needs to be completed
     }
 }

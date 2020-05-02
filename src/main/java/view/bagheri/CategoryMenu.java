@@ -6,7 +6,7 @@ public class CategoryMenu extends ProductSearchMenu {
 
 
     private CategoryMenu() {
-        super("categoryMenu", null);
+        super("categoryMenu");
     }
 
     public static CategoryMenu getInstance() {
@@ -21,5 +21,11 @@ public class CategoryMenu extends ProductSearchMenu {
                 //needs to be completed
             }
         };
+    }
+
+    @Override
+    protected void showHelp() {
+        super.showHelp();
+        //needs to be completed
     }
 }

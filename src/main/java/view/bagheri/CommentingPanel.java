@@ -8,7 +8,6 @@ public class CommentingPanel extends Panel {
 
     private CommentingPanel() {
         super("comment panel");
-//        productController = ;
     }
 
     public static CommentingPanel getInstance() {

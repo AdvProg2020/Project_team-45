@@ -13,7 +13,7 @@ public class SortingPanel extends Panel {
     }
 
     @Override
-    public void execute() {
+    protected void execute() {
         String inputCommand;
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
             if (inputCommand.equals("show available sorts")) {

@@ -7,7 +7,7 @@ public class OffsMenu extends ProductSearchMenu {
 
 
     private OffsMenu() {
-        super("offsMenu", null);
+        super("offsMenu");
     }
 
     public static OffsMenu getInstance() {
@@ -27,5 +27,11 @@ public class OffsMenu extends ProductSearchMenu {
                 //needs to be completed
             }
         };
+    }
+
+    @Override
+    protected void showHelp() {
+        super.showHelp();
+        //needs to be completed
     }
 }

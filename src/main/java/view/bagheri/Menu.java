@@ -8,12 +8,13 @@ public abstract class Menu extends UIPage {
     protected Menu parent;
 
 
-    protected Menu(String name, Menu parent) {
+    protected Menu(String name) {
         super(name);
-        this.parent = parent;
+        this.parent = null;
         this.submenus = new HashMap<String, UIPage>();
         submenus.put("login", Login_RegisterPanel.getInstance());
         submenus.put("logout", createLogoutPanel());
+        submenus.put("help", createHelpPanel());
     }
 
     private Panel createLogoutPanel() {
@@ -25,10 +26,20 @@ public abstract class Menu extends UIPage {
         };
     }
 
+    private Panel createHelpPanel() {
+        return new Panel("help") {
+            @Override
+            protected void execute() {
+                showHelp();
+            }
+        };
+    }
+
     private void setParent(Menu parent) {
         this.parent = parent;
     }
 
+    @Override
     public void execute() {
         show();
         String input;
@@ -58,7 +69,9 @@ public abstract class Menu extends UIPage {
         return null;
     }
 
-    protected abstract void showHelp();
+    protected void showHelp() {
+        //needs to be completed
+    }
 
     @Override
     protected String getType() {

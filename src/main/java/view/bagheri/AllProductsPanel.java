@@ -2,15 +2,14 @@ package view.bagheri;
 
 public class AllProductsPanel extends Panel {
     private static AllProductsPanel instance = new AllProductsPanel();
-//    private ProductController productController;
 
 
     private AllProductsPanel() {
         super("allProductPanel");
-        // controller
     }
 
-    public void execute() {
+    @Override
+    protected void execute() {
         show();
         String inputCommand;
         while (!(inputCommand = scanner.nextLine()).equals("back")) {

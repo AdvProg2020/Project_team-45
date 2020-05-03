@@ -5,7 +5,6 @@ import view.bagheri.Menu;
 import java.util.HashMap;
 
 public abstract class ManagingMenu extends Menu {
-    protected HashMap<String, Object> managingObjects;
 
     public ManagingMenu(String name, Menu parent) {
         super(name, parent);

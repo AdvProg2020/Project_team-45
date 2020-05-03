@@ -30,8 +30,5 @@ public abstract class UIPage {
 
     protected abstract void execute();
 
-    protected void show() {
-    }
-
     protected abstract String getType();
 }

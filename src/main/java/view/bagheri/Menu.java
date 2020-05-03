@@ -58,7 +58,7 @@ public abstract class Menu extends UIPage {
         return null;
     }
 
-    protected abstract void showHelp();
+//    protected abstract void showHelp();
 
     @Override
     protected String getType() {

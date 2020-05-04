@@ -12,7 +12,6 @@ public class OffsManagingMenu extends ManagingMenu {
         this.submenus.put("view (\\w+)", createViewOffByIdPanel());
         this.submenus.put("edit (\\w+)", EditOffPanel.getInstance());
         this.submenus.put("add off", CreateOffPanel.getInstance());
-        this.submenus.put("help", createHelpPanel());
     }
 
     public static OffsManagingMenu getInstance() {
@@ -33,15 +32,8 @@ public class OffsManagingMenu extends ManagingMenu {
         };
     }
 
-    private Panel createHelpPanel() {
-        return new Panel("create help panel") {
-
-            @Override
-            protected void execute() {
-                System.out.println("");
-            }
-
-        };
+    @Override
+    protected void showHelp() {
+        System.out.println("");
     }
-
 }

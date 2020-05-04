@@ -12,7 +12,6 @@ public class ProductsManagingMenu extends ManagingMenu {
         this.submenus.put("view (\\w+)", createViewProductByIdPanel());
         this.submenus.put("view buyers (\\w+)", createViewBuyersPanel());
         this.submenus.put("edit (\\w+)", EditProductPanel.getInstance());
-        this.submenus.put("help", createHelpPanel());
     }
 
     public static ProductsManagingMenu getInstance() {
@@ -46,15 +45,8 @@ public class ProductsManagingMenu extends ManagingMenu {
         };
     }
 
-    private Panel createHelpPanel() {
-        return new Panel("help panel") {
-
-            @Override
-            protected void execute() {
-                System.out.println("");
-            }
-
-        };
+    @Override
+    protected void showHelp() {
+        System.out.println("");
     }
-
 }

@@ -16,7 +16,6 @@ public class CartManagingMenu extends ManagingMenu {
         this.submenus.put("decrease (\\w+)", createDecreaseProductByIdPanel());
         this.submenus.put("show total price", createShowTotalPricePanel());
         this.submenus.put("purchase", PurchasePanel.getInstance());
-        this.submenus.put("help", createHelpPanel());
     }
 
     public static CartManagingMenu getInstance() {
@@ -70,15 +69,9 @@ public class CartManagingMenu extends ManagingMenu {
         };
     }
 
-    private Panel createHelpPanel() {
-        return new Panel("help panel") {
-
-            @Override
-            protected void execute() {
-                System.out.println("");
-            }
-
-        };
+    @Override
+    protected void showHelp() {
+        System.out.println("");
     }
 
     @Override

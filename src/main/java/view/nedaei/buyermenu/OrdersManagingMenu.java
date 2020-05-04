@@ -11,7 +11,6 @@ public class OrdersManagingMenu extends ManagingMenu {
         super("order managing panel", null);
         this.submenus.put("show order (\\w+)", createShowOrderByIdPanel());
         this.submenus.put("rate (\\w+) ([1-5])", createRateProductByIdPanel());
-        this.submenus.put("help", createHelpPanel());
     }
 
     public static OrdersManagingMenu getInstance() {
@@ -46,15 +45,9 @@ public class OrdersManagingMenu extends ManagingMenu {
         };
     }
 
-    private Panel createHelpPanel() {
-        return new Panel("help panel") {
-
-            @Override
-            protected void execute() {
-                System.out.println("");
-            }
-
-        };
+    @Override
+    protected void showHelp() {
+        System.out.println("");
     }
 
     @Override

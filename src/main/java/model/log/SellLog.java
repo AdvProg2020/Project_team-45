@@ -1,8 +1,8 @@
 package model.log;
 
 public class SellLog {
-    private int offAmount;
     private String buyerUsername;
+    private int offAmount;
     private Log log;
 
     public SellLog(int saleAmount, String buyerUsername, Log log) {
@@ -11,12 +11,12 @@ public class SellLog {
         this.log = log;
     }
 
-    public int getOffAmount() {
-        return offAmount;
-    }
-
     public String getBuyerUsername() {
         return buyerUsername;
+    }
+
+    public int getOffAmount() {
+        return offAmount;
     }
 
     public Log getLog() {

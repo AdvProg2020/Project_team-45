@@ -1,5 +1,6 @@
 package view.nedaei.sellermenu;
 
+import controller.UserController;
 import view.bagheri.Panel;
 import view.hatami.RemoveProductPanel;
 import view.nedaei.UserMenu;
@@ -34,7 +35,7 @@ public class SellerMenu extends UserMenu {
 
             @Override
             public void execute() {
-                System.out.println(controller.getActiveUser().getCompany());
+                System.out.println(UserController.getInstance().getCompanyDisplayForSeller());
             }
 
         };
@@ -45,7 +46,7 @@ public class SellerMenu extends UserMenu {
 
             @Override
             public void execute() {
-                System.out.println(controller.getActiveUser().getListOfSellLogs());
+                System.out.println(UserController.getInstance().getSalesHistoryDisplayForSeller());
             }
 
         };

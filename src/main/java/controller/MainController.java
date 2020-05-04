@@ -1,40 +1,23 @@
 package controller;
 
-import model.Market;
 import model.ProductFilters;
 import model.user.User;
 
 import java.util.HashMap;
 
 public class MainController {
-    private Market market;
-    private UserController userController;
-    private CartController cartController;
-    private CodedDiscountController codedDiscountController;
-    private CategoryController categoryController;
-    private ProductController productController;
-    private ProductFilteringController productFilteringController;
-    private ProductSortingController productSortingController;
-    private OffController offController;
-    private OffFilteringController offFilteringController;
-    private OffSortingController offSortingController;
-    private RequestController requestController;
+    private static MainController instance;
+    private boolean loggedIn;
 
-    private User activeUser;
+    private MainController() {
+        this.loggedIn = false;
+    }
 
-    public MainController() {
-        this.market = Market.getInstance();
-        this.userController = new UserController(this);
-        this.cartController = new CartController(this);
-        this.codedDiscountController = new CodedDiscountController(this);
-        this.categoryController = new CategoryController(this);
-        this.productController = new ProductController(this);
-        this.productFilteringController = new ProductFilteringController(this);
-        this.productSortingController = new ProductSortingController(this);
-        this.offController =  new OffController(this);
-        this.offFilteringController = new OffFilteringController(this);
-        this.offSortingController = new OffSortingController(this);
-        this.requestController = new RequestController(this);
+    public static MainController getInstance() {
+        if (instance == null) {
+            instance = new MainController();
+        }
+        return instance;
     }
 
     //================================================================================

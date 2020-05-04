@@ -7,5 +7,7 @@ public abstract class User {
         this.personalInfo = personalInfo;
     }
 
-    public abstract String getRole();
+    public PersonalInfo getPersonalInfo() {
+        return personalInfo;
+    }
 }

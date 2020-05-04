@@ -23,4 +23,5 @@ public class Company {
     public void setOtherInformation(String otherInformation) {
         this.otherInformation = otherInformation;
     }
+
 }

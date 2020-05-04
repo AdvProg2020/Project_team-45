@@ -1,6 +1,6 @@
 package view.nedaei.personalinfopanel;
 
-import controller.Controller;
+import controller.UserController;
 import view.bagheri.Panel;
 
 import java.util.regex.Matcher;
@@ -26,8 +26,8 @@ public class PersonalInfoPanel extends Panel {
         Matcher matcher;
         while (!(input = scanner.nextLine().trim()).equalsIgnoreCase("back")) {
             if ((matcher = PersonalInfoPanelCommands.EDIT.getMatcher(input)).find()) {
-                System.out.println("please enter new value: ");
-                Controller.getInstance().setPersonalInfoField(matcher.group(1), scanner.nextLine().trim());
+                System.out.println("new value:");
+                UserController.getInstance().setPersonalInfoField(matcher.group(1), scanner.nextLine().trim());
             } else {
                 System.out.println("invalid command!");
             }
@@ -36,7 +36,7 @@ public class PersonalInfoPanel extends Panel {
 
     @Override
     protected void show() {
-        System.out.println(Controller.getInstance().getPersonalInfo());
+        System.out.println(UserController.getInstance().getPersonalInfoDisplay());
     }
 
 }

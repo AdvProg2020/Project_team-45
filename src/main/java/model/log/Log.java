@@ -8,11 +8,11 @@ import java.util.Date;
 public class Log {
     private String logId;
     private Date date;
-    private int finalPrice;
     private ArrayList<Product> listOfProducts;
-    private DeliveryStatus deliveryStatus;
+    private int finalPrice;
     private String address;
     private String phoneNumber;
+    private String deliveryStatus;
 
     public Log(String logId, Date date, int finalPrice, String address) {
         this.logId = logId;
@@ -29,16 +29,12 @@ public class Log {
         return date;
     }
 
-    public int getFinalPrice() {
-        return finalPrice;
-    }
-
     public ArrayList<Product> getListOfProducts() {
         return listOfProducts;
     }
 
-    public DeliveryStatus getDeliveryStatus() {
-        return deliveryStatus;
+    public int getFinalPrice() {
+        return finalPrice;
     }
 
     public String getAddress() {
@@ -49,6 +45,10 @@ public class Log {
         return phoneNumber;
     }
 
+    public String getDeliveryStatus() {
+        return deliveryStatus;
+    }
+
     public void sendOrder(){
 
     }
@@ -57,9 +57,9 @@ public class Log {
 
     }
 
-    enum DeliveryStatus{
-        PREPARATION,
-        SENDING,
-        DELIVERED;
-    }
+//    enum DeliveryStatus{
+//        PREPARATION,
+//        SENDING,
+//        DELIVERED;
+//    }
 }

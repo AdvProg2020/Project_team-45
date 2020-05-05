@@ -1,11 +1,17 @@
 package model.request;
 
 public abstract class Request {
+    private static Integer newRequestId = 1;
     protected String requestId;
     protected RequestStatus requestStatus;
 
-    public Request(String requestId) {
-        this.requestId = requestId;
+    public Request() {
+        this.requestId = newRequestId.toString();
+        addNewRequestId();
+    }
+
+    private void addNewRequestId() {
+        newRequestId++;
     }
 
     public String getRequestId() {

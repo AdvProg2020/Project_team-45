@@ -9,8 +9,8 @@ public class Product {
     private String productId;
     private String name;
     private Company company;
-    private ProductStatus productStatus;
-    private ArrayList<SellerInfoForProduct> sellersList;
+    private String productStatus;
+    private HashMap<String, SellerInfoForProduct> sellersList;
     private int minimumPrice;
     private Category category;
     private HashMap<String, String> categoryFeatures;
@@ -30,6 +30,19 @@ public class Product {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return
+    }
+
+    public SellerInfoForProduct getSellerInfoForProductByUsername(String sellerUsername) {
+        return sellersList.get(sellerUsername);
+    }
+
+    public int getMinimumPrice() {
+        return minimumPrice;
+    }
+
     public String getName() {
         return name;
     }
@@ -42,7 +55,7 @@ public class Product {
         return company;
     }
 
-    public ProductStatus getProductStatus() {
+    public String getProductStatus() {
         return productStatus;
     }
 
@@ -142,9 +155,9 @@ public class Product {
 
     }
 
-    enum ProductStatus {
-        UNDER_REVIEW_FOR_CREATE,
-        REVIEW_FOR_EDITING,
-        APPROVED;
-    }
+//    enum ProductStatus {
+//        UNDER_REVIEW_FOR_CREATE,
+//        REVIEW_FOR_EDITING,
+//        APPROVED;
+//    }
 }

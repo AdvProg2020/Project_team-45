@@ -10,13 +10,13 @@ public class Seller extends User {
     private Company company;
     private ArrayList<SellLog> listOfSellLogs;
     private HashMap<Product, SellerInfoForProduct> availableProducts;
-    private ArrayList<Off> listOfOffs;
+    private HashMap<String, Off> listOfOffs;
     private int balance;
 
     public Seller(PersonalInfo personalInfo, Company company) {
         super(personalInfo);
         this.company = company;
-        listOfOffs = new ArrayList<>();
+        listOfOffs = new HashMap<String, Off>();
         availableProducts = new HashMap<>();
         listOfOffs = new ArrayList<>();
     }
@@ -33,11 +33,11 @@ public class Seller extends User {
         return availableProducts;
     }
 
-    public Product getAvailableProductByProductId(String productId) {
+    public Product getAvailableProductById(String productId) {
         return null;
     }
 
-    public ArrayList<Off> getListOfOffs() {
+    public HashMap<String, Off> getListOfOffs() {
         return listOfOffs;
     }
 

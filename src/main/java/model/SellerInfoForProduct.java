@@ -10,13 +10,14 @@ public class SellerInfoForProduct {
     private int price;
     private int stock;
     private Off off;
+    private int sellCount;
     private HashMap<Buyer, Integer> allBuyers;
 
     public SellerInfoForProduct(Seller seller, int price, int stock) {
         this.seller = seller;
         this.price = price;
         this.stock = stock;
-        this.allBuyers = new HashMap<>();
+        this.allBuyers = new HashMap<Buyer, Integer>();
     }
 
     public Seller getSeller() {
@@ -49,5 +50,13 @@ public class SellerInfoForProduct {
 
     public int getFinalPrice() {
         return 0;
+    }
+
+    public int getSellCount() {
+        return sellCount;
+    }
+
+    public HashMap<Buyer, Integer> getAllBuyers() {
+        return allBuyers;
     }
 }

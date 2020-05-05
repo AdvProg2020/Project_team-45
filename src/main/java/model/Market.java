@@ -71,10 +71,6 @@ public class Market {
 
     }
 
-    public Product getProductByProductId(String productId) {
-        return null;
-    }
-
     public CodedDiscount getCodedDiscountByCode(String code) {
         return null;
     }

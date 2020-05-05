@@ -1,6 +1,6 @@
 package view.nedaei.sellermenu.productsmanagingmenu;
 
-import controller.Controller;
+import controller.UserController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
 
@@ -26,7 +26,7 @@ public class ProductsManagingMenu extends ManagingMenu {
 
             @Override
             protected void execute() {
-                String productDisplay = Controller.getInstance().getSellerProductById(matcher.group(1));
+                String productDisplay = UserController.getInstance().getSellerProductDisplayById(matcher.group(1));
                 System.out.println(productDisplay == null? "not found!" : productDisplay);
             }
 
@@ -38,8 +38,7 @@ public class ProductsManagingMenu extends ManagingMenu {
 
             @Override
             protected void execute() {
-                System.out.println(Controller.getInstance().getSellerProductById(matcher.group(1))
-                        .getSellerInfoForProductById(Controller.getInstance().getActiveUserId()).getAllBuyers());
+                System.out.println(UserController.getInstance().getSellerProductAllBuyersDisplayById(matcher.group(1)));
             }
 
         };

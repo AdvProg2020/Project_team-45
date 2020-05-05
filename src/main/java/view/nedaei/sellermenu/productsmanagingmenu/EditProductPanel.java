@@ -1,6 +1,7 @@
 package view.nedaei.sellermenu.productsmanagingmenu;
 
 import controller.Controller;
+import controller.UserController;
 import view.bagheri.Panel;
 import view.nedaei.sellermenu.EditPanelsCommands;
 
@@ -34,14 +35,14 @@ public class EditProductPanel extends Panel {
                 System.out.println("invalid command!");
             }
         }
-        Controller.getInstance().createProductEditionRequest(this.matcher.group(1), fieldsAndValues);
+        UserController.getInstance().createProductEditionRequest(this.matcher.group(1), fieldsAndValues);
     }
 
     @Override
     protected void show() {
         System.out.println("[field to edit] : [field's new value]\n" +
-                "product available fields to edit are:\n"
-                Controller.getInstance().getProductAvailableFieldsToEdit());
+                "product available fields to edit are:\n" +
+                UserController.getInstance().getProductAvailableFieldsToEditDisplay());
     }
 
 }

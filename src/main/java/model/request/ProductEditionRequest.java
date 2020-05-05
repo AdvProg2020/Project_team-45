@@ -1,23 +1,15 @@
 package model.request;
 
-import model.Product;
+import java.util.HashMap;
 
 public class ProductEditionRequest extends Request {
-    private Product product;
     private String productId;
+    private HashMap<String, String> fieldsAndValues;
 
-    public ProductEditionRequest(String requestId, Product product, String productId) {
-        super(requestId);
-        this.product = product;
+    public ProductEditionRequest(String productId, HashMap<String, String> fieldsAndValues) {
+        super();
         this.productId = productId;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
+        this.fieldsAndValues = fieldsAndValues;
     }
 
     @Override

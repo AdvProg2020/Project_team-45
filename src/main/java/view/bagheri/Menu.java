@@ -1,5 +1,7 @@
 package view.bagheri;
 
+import controller.Controller;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,7 +23,11 @@ public abstract class Menu extends UIPage {
         return new Panel("logoutPane") {
             @Override
             public void execute() {
-                //needs to be completed
+                if (Controller.getInstance().isUserLoggedIn) {
+                    System.out.println("");
+                } else {
+                    System.out.println("");
+                }
             }
         };
     }

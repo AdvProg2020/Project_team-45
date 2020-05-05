@@ -1,31 +1,16 @@
 package view.hatami;
 
 import controller.AllUsersController;
-import view.bagheri.Menu;
-import view.bagheri.Panel;
+import controller.Deleter;
 
 public class UsersManagingMenu extends ManagingMenu {
-
-    public UsersManagingMenu(Menu parent) {
-        super("users managing menu", parent);
+    public UsersManagingMenu() {
+        super("users managing menu");
         this.printer = new AllUsersController();
+        Deleter deleter = (Deleter) printer;
         submenus.put("view (\\S+)", createOneItemDisplayPanel("user information", printer));
-        submenus.put("delete user (\\S+)", getDeleteUserPanel());
+        submenus.put("delete user (\\S+)", createItemDeleterPanel("delete user", deleter));
         submenus.put("create manager profile", new CreateAdminPanel());
-    }
-
-
-    private Panel getDeleteUserPanel(){
-        return new Panel("delete user") {
-            @Override
-            protected void execute() {
-                // TODO
-            }
-        };
-    }
-
-    protected void show() {
-
     }
 
     protected void showHelp() {

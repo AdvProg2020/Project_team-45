@@ -1,6 +1,6 @@
 package controller;
 
-public class AllUsersController implements Printer{
+public class AllUsersController implements Deleter {
 
     public String printAllInList() {
         // TODO : hatami
@@ -10,5 +10,9 @@ public class AllUsersController implements Printer{
     public String printDetailedById(String Id) {
         // TODO : hatami
         return null;
+    }
+
+    public void deleteItemById(String Id) {
+        // TODO : hatami
     }
 }

@@ -2,7 +2,6 @@ package view.nedaei.sellermenu;
 
 import controller.UserController;
 import view.bagheri.Panel;
-import view.hatami.RemoveProductPanel;
 import view.nedaei.UserMenu;
 import view.nedaei.sellermenu.offsmanagingmenu.OffsManagingMenu;
 import view.nedaei.sellermenu.productsmanagingmenu.CreateProductPanel;

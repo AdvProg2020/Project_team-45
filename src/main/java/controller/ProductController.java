@@ -1,18 +1,20 @@
 package controller;
 
-import model.Comment;
 import model.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ProductController {
+public class ProductController implements Deleter {
     private MainController mainController;
     private Product activeProduct;
 
 
     public ProductController(MainController mainController) {
         this.mainController = mainController;
+    }
+
+    public ProductController() {
     }
 
 //    public Product createProduct() {
@@ -51,4 +53,17 @@ public class ProductController {
 
     }
 
+    public void deleteItemById(String Id) {
+        // TODO : hatami
+    }
+
+    public String printAllInList() {
+        // TODO : hatami
+        return null;
+    }
+
+    public String printDetailedById(String Id) {
+        // TODO : hatami
+        return null;
+    }
 }

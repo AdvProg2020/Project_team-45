@@ -5,22 +5,19 @@ import view.bagheri.Panel;
 import view.nedaei.UserMenu;
 
 public class AdminMenu extends UserMenu {
-    protected AdminMenu(Menu parent) {
-        super("Admin Page", parent);
-        submenus.put("manage users", new UsersManagingMenu(this));
-        submenus.put("manage all products", getProductsManagingMenu());
+    protected AdminMenu() {
+        super("Admin Page");
+        submenus.put("manage users", new UsersManagingMenu());
+        submenus.put("manage all products", new ProductsManagingMenuForAdmin());
         submenus.put("create discount code", getCreateDiscountCodePanel());
-        submenus.put("view discount code", new DiscountCodesManagingMenu(this));
-        submenus.put("manage requests", new RequestsManagingMenu(this));
-        submenus.put("manage categories", new CategoriesManagingMenu(this));
+        submenus.put("view discount code", new DiscountCodesManagingMenu());
+        submenus.put("manage requests", new RequestsManagingMenu());
+        submenus.put("manage categories", new CategoriesManagingMenu());
     }
 
-    private Menu getProductsManagingMenu() {
-        Menu productsManagingMenu = new Menu("manage products", this) {};
-
-    }
 
     private Panel getCreateDiscountCodePanel() {
+        // TODO : hatami
         return null;
     }
 

@@ -1,7 +1,7 @@
 package view.hatami;
 
 
-import controller.Manager;
+import controller.Deleter;
 import controller.Printer;
 import view.bagheri.Menu;
 import view.bagheri.Panel;
@@ -10,34 +10,64 @@ public abstract class ManagingMenu extends Menu {
 
     protected Printer printer;
 
-    public ManagingMenu(String name, Menu parent) {
-        super(name, parent);
+    protected ManagingMenu(String name) {
+        super(name);
     }
 
-    protected static Panel createAllItemsDisplayPanel(String panelName, final Printer printer) {
-        return new Panel(panelName) {
+    protected static void displayAllItemsInPanel(String panelName, Printer printer) {
+        new Panel(panelName) {
+            private Printer printer;
+
             @Override
-            protected void execute() {
+            public void execute() {
                 System.out.println(printer.printAllInList());
             }
-        };
+
+            public Panel setPrinter(Printer printer) {
+                this.printer = printer;
+                return this;
+            }
+        }.setPrinter(printer).execute();
     }
 
-    protected static Panel createOneItemDisplayPanel(String panelName, final Printer printer) {
+    protected void show() {
+        super.show();
+        displayAllItemsInPanel("all Users:", printer);
+    }
+
+    protected static Panel createOneItemDisplayPanel(String panelName, Printer printer) {
         return new Panel(panelName) {
+            private Printer printer;
+
             @Override
-            protected void execute() {
+            public void execute() {
                 System.out.println(printer.printDetailedById(matcher.group(1)));
             }
-        };
+
+            public Panel setPrinter(Printer printer) {
+                this.printer = printer;
+                return this;
+            }
+        }.setPrinter(printer);
     }
 
-    protected static Panel createItemDeletePanel(String panelName, final Manager manager){
+    protected static Panel createItemDeleterPanel(String panelName, Deleter deleter) {
         return new Panel(panelName) {
-            @Override
-            protected void execute() {
+            private Deleter deleter;
 
+            @Override
+            public void execute() {
+                this.deleter.deleteItemById(matcher.group(1));
             }
-        };
+
+            public Panel setManager(Deleter deleter) {
+                this.deleter = deleter;
+                return this;
+            }
+        }.setManager(deleter);
+    }
+
+    protected static Panel createItemEditorPanel(String panelName, Deleter deleter) {
+
     }
 }

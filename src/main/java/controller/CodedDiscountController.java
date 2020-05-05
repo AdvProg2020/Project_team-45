@@ -2,13 +2,15 @@ package controller;
 
 import model.CodedDiscount;
 
-import java.util.Date;
-
-public class CodedDiscountController {
+public class CodedDiscountController implements Deleter {
     private MainController mainController;
 
     public CodedDiscountController(MainController mainController) {
         this.mainController = mainController;
+    }
+
+    public CodedDiscountController() {
+
     }
 
     public CodedDiscount getCodedDiscountByCode(String discountCode) {
@@ -29,5 +31,19 @@ public class CodedDiscountController {
 
     public boolean isDiscountCodeValid(String code) {
         return false;
+    }
+
+    public void deleteItemById(String Id) {
+        // TODO : hatami
+    }
+
+    public String printAllInList() {
+        // TODO : hatami
+        return null;
+    }
+
+    public String printDetailedById(String Id) {
+        // TODO : hatami
+        return null;
     }
 }

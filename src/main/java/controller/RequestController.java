@@ -2,7 +2,7 @@ package controller;
 
 import model.request.*;
 
-public class RequestController {
+public class RequestController implements Printer{
     private static RequestController instance = new RequestController();
 
     private RequestController() {
@@ -22,4 +22,13 @@ public class RequestController {
         return null;
     }
 
+    public String printAllInList() {
+        // TODO : hatami
+        return null;
+    }
+
+    public String printDetailedById(String Id) {
+        // TODO : hatami
+        return null;
+    }
 }

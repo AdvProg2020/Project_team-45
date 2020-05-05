@@ -25,9 +25,6 @@ public abstract class UIPage {
         return matcher;
     }
 
-    protected void show() {
-    }
-
     protected abstract void execute();
 
     protected abstract String getType();

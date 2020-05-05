@@ -17,6 +17,20 @@ public class PersonalInfo {
         this.password = password;
     }
 
+    public void setField(String field, String newValue) {
+        if (field.equalsIgnoreCase("firstName")) {
+            setFirstName(newValue);
+        } else if (field.equalsIgnoreCase("lastName")) {
+            setLastName(newValue);
+        } else if (field.equalsIgnoreCase("emailAddress")) {
+            setEmailAddress(newValue);
+        } else if (field.equalsIgnoreCase("phoneNumber")) {
+            setPhoneNumber(newValue);
+        } else if (field.equalsIgnoreCase("password")) {
+            setPassword(newValue);
+        } // TODO: else -> throw Exception...
+    }
+
     public String getUsername() {
         return username;
     }
@@ -35,10 +49,6 @@ public class PersonalInfo {
 
     public String getPhoneNumber() {
         return phoneNumber;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setFirstName(String firstName) {

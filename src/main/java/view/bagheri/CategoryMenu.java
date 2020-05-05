@@ -1,22 +1,16 @@
 package view.bagheri;
 
-import model.Product;
 
-public class OffsMenu extends ProductSearchMenu {
-    private static OffsMenu instance = new OffsMenu();
+public class CategoryMenu extends ProductSearchMenu {
+    private static CategoryMenu instance = new CategoryMenu();
 
 
-    private OffsMenu() {
-        super("offsMenu");
+    private CategoryMenu() {
+        super("categoryMenu");
     }
 
-    public static OffsMenu getInstance() {
+    public static CategoryMenu getInstance() {
         return instance;
-    }
-
-    @Override
-    protected void show() {
-        showProduct();
     }
 
     @Override

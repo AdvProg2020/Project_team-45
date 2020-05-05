@@ -1,21 +1,23 @@
-package view.nedaei;
+package view.nedaei.sellermenu;
 
-import view.bagheri.Menu;
+import controller.UserController;
 import view.bagheri.Panel;
 import view.hatami.RemoveProductPanel;
-import view.nedaei.personalinfopanel.PersonalInfoPanel;
+import view.nedaei.UserMenu;
+import view.nedaei.sellermenu.offsmanagingmenu.OffsManagingMenu;
+import view.nedaei.sellermenu.productsmanagingmenu.CreateProductPanel;
+import view.nedaei.sellermenu.productsmanagingmenu.ProductsManagingMenu;
 
 public class SellerMenu extends UserMenu {
     private static SellerMenu instance;
 
     private SellerMenu() {
         super("Seller Page");
-        this.submenus.put("view personal info", PersonalInfoPanel.getInstance());
         this.submenus.put("view company information", createViewCompanyInfoPanel());
         this.submenus.put("view sales history", createViewSalesHistoryPanel());
-        this.submenus.put("manage products", SellerProductsManagingMenu.getInstance());
+        this.submenus.put("manage products", ProductsManagingMenu.getInstance());
         this.submenus.put("add product", CreateProductPanel.getInstance());
-        this.submenus.put("remove product (\\d+)", new RemoveProductPanel()); // TODO: hatami
+        this.submenus.put("remove product (\\w+)", RemoveProductPanel.getInstance()); // TODO: hatami
         this.submenus.put("show categories", createShowCategoriesPanel());
         this.submenus.put("view offs", OffsManagingMenu.getInstance());
         this.submenus.put("view balance", createViewBalancePanel());
@@ -33,7 +35,7 @@ public class SellerMenu extends UserMenu {
 
             @Override
             public void execute() {
-                System.out.println(controller.getActiveUser().getCompany());
+                System.out.println(UserController.getInstance().getCompanyDisplayForSeller());
             }
 
         };
@@ -44,7 +46,7 @@ public class SellerMenu extends UserMenu {
 
             @Override
             public void execute() {
-                System.out.println(controller.getActiveUser().getListOfSellLogs());
+                System.out.println(UserController.getInstance().getSalesHistoryDisplayForSeller());
             }
 
         };
@@ -72,16 +74,8 @@ public class SellerMenu extends UserMenu {
         };
     }
 
-//    protected void showHelp() {
-//        System.out.println("view personal info\n" +
-//                "view company information\n" +
-//                "view sales history\n" +
-//                "manage products\n" +
-//                "add product\n" +
-//                "remove product [productId]\n" +
-//                "show categories\n" +
-//                "view offs\n" +
-//                "view balance\n");
-//    }
-
+    @Override
+    protected void showHelp() {
+        System.out.println("");
+    }
 }

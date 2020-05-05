@@ -20,39 +20,6 @@ public class MainController {
         return instance;
     }
 
-    //================================================================================
-    // methods to get a HashMap<String, Object> containing all Objects of a certain type
-    //================================================================================
-
-    public HashMap<String, Object> getAllUsersList() {
-        return null;
-    }
-
-    public HashMap<String, Object> getAllCategoriesList() {
-        return null;
-    }
-
-    public HashMap<String, Object> getAllProductsList(ProductFilters productFilters) {
-        return null;
-    }
-
-    public HashMap<String, Object> getAllDiscountCodesList() {
-        return null;
-    }
-
-    public HashMap<String, Object> getAllOffsList() {
-        return null;
-    }
-
-    public HashMap<String, Object> getAllRequestsList() {
-        return null;
-    }
-
-    //================================================================================
-    // temporary
-    //================================================================================
-
-
     public User getActiveUser() {
         return activeUser;
     }

@@ -7,7 +7,7 @@ public class ProductsManagingMenuForAdmin extends ManagingMenu{
 
     protected ProductsManagingMenuForAdmin() {
         super("manage products");
-        this.printer = new ProductController();
+        this.printer = ProductController.getInstance();
         submenus.put("remove (//S+)", createItemDeleterPanel("delete product", (Deleter) printer));
     }
 }

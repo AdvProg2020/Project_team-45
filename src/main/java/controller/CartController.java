@@ -7,10 +7,13 @@ import model.user.CartHolder;
 import java.util.ArrayList;
 
 public class CartController {
-    private MainController mainController;
+    private static CartController instance = new CartController();
 
-    public CartController(MainController mainController) {
-        this.mainController = mainController;
+    public static CartController getInstance() {
+        return instance;
+    }
+
+    private CartController() {
     }
 
     public ArrayList<Product> getCartProducts(CartHolder cartHolder) {

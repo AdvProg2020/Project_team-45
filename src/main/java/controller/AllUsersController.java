@@ -2,6 +2,15 @@ package controller;
 
 public class AllUsersController implements Deleter {
 
+    private static AllUsersController instance = new AllUsersController();
+
+    public static AllUsersController getInstance() {
+        return instance;
+    }
+
+    private AllUsersController(){
+    }
+
     public String printAllInList() {
         // TODO : hatami
         return null;

@@ -8,16 +8,21 @@ import java.util.HashMap;
 public class ProductController implements Deleter {
     private MainController mainController;
     private Product activeProduct;
+    private static ProductController instance = new ProductController();
 
 
     public ProductController(MainController mainController) {
         this.mainController = mainController;
     }
 
-    public ProductController() {
+    private ProductController() {
     }
 
-//    public Product createProduct() {
+    public static ProductController getInstance() {
+        return instance;
+    }
+
+    //    public Product createProduct() {
 //        return null;
 //    }
 

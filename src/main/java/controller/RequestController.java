@@ -3,10 +3,13 @@ package controller;
 import model.request.*;
 
 public class RequestController {
-    private MainController mainController;
+    private static RequestController instance = new RequestController();
 
-    public RequestController(MainController mainController) {
-        this.mainController = mainController;
+    private RequestController() {
+    }
+
+    public static RequestController getInstance() {
+        return instance;
     }
 
     public Request createRequestByRequestName(String requestName) {

@@ -2,9 +2,12 @@ package view.hatami;
 
 
 import controller.Deleter;
+import controller.Editor;
 import controller.Printer;
 import view.bagheri.Menu;
 import view.bagheri.Panel;
+
+import java.util.HashMap;
 
 public abstract class ManagingMenu extends Menu {
 
@@ -67,7 +70,21 @@ public abstract class ManagingMenu extends Menu {
         }.setManager(deleter);
     }
 
-    protected static Panel createItemEditorPanel(String panelName, Deleter deleter) {
+    protected static Panel createItemEditorPanel(String panelName, Editor editor) {
+        return new Panel(panelName) {
+            private Editor editor;
+            private HashMap<String, String> availableFields;
 
+            @Override
+            public void execute() {
+                // TODO : hatami
+            }
+
+            public Panel setEditorAndMap(Editor editor) {
+                this.editor = editor;
+                availableFields = editor.getAvailableFields();
+                return this;
+            }
+        }.setEditorAndMap(editor);
     }
 }

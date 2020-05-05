@@ -5,10 +5,14 @@ import model.OffFilters;
 import java.util.ArrayList;
 
 public class OffFilteringController {
-    private MainController mainController;
+    private static OffFilteringController instance = new OffFilteringController();
 
-    public OffFilteringController(MainController mainController) {
-        this.mainController = mainController;
+    private OffFilteringController() {
+
+    }
+
+    public static OffFilteringController getInstance() {
+        return instance;
     }
 
     public ArrayList<String> getAvailableFiltersForOffs() {

@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class UserController {
-    private static UserController instance;
+    private static UserController instance = new UserController();
     private User activeUser;
     // seller:
     private ArrayList<String> productAvailableFieldsToEdit;
@@ -25,9 +25,6 @@ public class UserController {
     }
 
     public static UserController getInstance() {
-        if (instance == null) {
-            instance = new UserController();
-        }
         return instance;
     }
 

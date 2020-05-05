@@ -5,10 +5,13 @@ import model.ProductFilters;
 import java.util.ArrayList;
 
 public class ProductFilteringController {
-    private MainController mainController;
+    private static ProductFilteringController instance = new ProductFilteringController();
 
-    public ProductFilteringController(MainController mainController) {
-        this.mainController = mainController;
+    private ProductFilteringController() {
+    }
+
+    public static ProductFilteringController getInstance() {
+        return instance;
     }
 
     public ArrayList<String> getAvailableFiltersForProducts() {

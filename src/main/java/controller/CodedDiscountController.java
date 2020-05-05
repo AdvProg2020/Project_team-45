@@ -3,14 +3,14 @@ package controller;
 import model.CodedDiscount;
 
 public class CodedDiscountController implements Deleter {
-    private MainController mainController;
+    private static CodedDiscountController instance = new CodedDiscountController();
 
-    public CodedDiscountController(MainController mainController) {
-        this.mainController = mainController;
+    private CodedDiscountController() {
+
     }
 
-    public CodedDiscountController() {
-
+    public static CodedDiscountController getInstance() {
+        return instance;
     }
 
     public CodedDiscount getCodedDiscountByCode(String discountCode) {

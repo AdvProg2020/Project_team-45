@@ -5,10 +5,13 @@ import model.Category;
 import java.util.ArrayList;
 
 public class CategoryController {
-    private MainController mainController;
+    private static CategoryController instance = new CategoryController();
 
-    public CategoryController(MainController mainController) {
-        this.mainController = mainController;
+    private CategoryController() {
+    }
+
+    public static CategoryController getInstance() {
+        return instance;
     }
 
     public void removeCategory(String name) {

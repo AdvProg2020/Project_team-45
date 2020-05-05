@@ -3,10 +3,14 @@ package controller;
 import java.util.ArrayList;
 
 public class ProductSortingController {
-    private MainController mainController;
+    private static ProductSortingController instance = new ProductSortingController();
 
-    public ProductSortingController(MainController mainController) {
-        this.mainController = mainController;
+    private ProductSortingController() {
+
+    }
+
+    public static ProductSortingController getInstance() {
+        return instance;
     }
 
     public ArrayList<String> getAvailableSortsForProducts() {

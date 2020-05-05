@@ -3,10 +3,13 @@ package controller;
 import java.util.ArrayList;
 
 public class OffSortingController {
-    private MainController mainController;
+    private static OffSortingController instance = new OffSortingController();
 
-    public OffSortingController(MainController mainController) {
-        this.mainController = mainController;
+    private OffSortingController() {
+    }
+
+    public static OffSortingController getInstance() {
+        return instance;
     }
 
     public ArrayList<String> getAvailableSortsForOffs() {

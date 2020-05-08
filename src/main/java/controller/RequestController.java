@@ -1,8 +1,9 @@
 package controller;
 
+import controller.managers.Printer;
 import model.request.*;
 
-public class RequestController implements Printer{
+public class RequestController implements Printer {
     private static RequestController instance = new RequestController();
 
     private RequestController() {

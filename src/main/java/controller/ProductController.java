@@ -1,5 +1,6 @@
 package controller;
 
+import controller.managers.Deleter;
 import model.Product;
 
 import java.util.ArrayList;

@@ -1,14 +1,15 @@
 package view.hatami;
 
 import controller.RequestController;
+import controller.managers.Printer;
 import view.bagheri.Panel;
 
 public class RequestsManagingMenu extends ManagingMenu {
 
     public RequestsManagingMenu() {
         super("requests managing menu");
-        this.printer = RequestController.getInstance();
-        submenus.put("details (\\S+)", createOneItemDisplayPanel("request", printer));
+        this.manager = RequestController.getInstance();
+        submenus.put("details (\\S+)", createOneItemDisplayPanel("request", (Printer) manager));
         submenus.put("(accept|decline) (\\S+)", getAcceptDeclinePanel());
     }
 

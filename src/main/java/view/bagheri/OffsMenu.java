@@ -1,9 +1,9 @@
 package view.bagheri;
 
-import model.Product;
+import java.util.ArrayList;
 
 public class OffsMenu extends ProductSearchMenu {
-    private static OffsMenu instance = new OffsMenu();
+    private static final OffsMenu instance = new OffsMenu();
 
 
     private OffsMenu() {
@@ -15,8 +15,9 @@ public class OffsMenu extends ProductSearchMenu {
     }
 
     @Override
-    protected void show() {
-        showProduct();
+    protected boolean check() {
+
+        return true;
     }
 
     @Override
@@ -24,14 +25,32 @@ public class OffsMenu extends ProductSearchMenu {
         return new Panel("viewCategoriesPanel") {
             @Override
             public void execute() {
-                //needs to be completed
+                show();
+            }
+
+            @Override
+            protected void show() {
+                ArrayList<String> submenus = categoryController.getActiveCategoryDiscountedSubmenus();
+                if (submenus.isEmpty()) {
+                    System.out.println("This category has no subcategories");
+                }
+                for (String submenu : submenus) {
+                    System.out.println(submenu);
+                }
             }
         };
     }
 
     @Override
-    protected void showHelp() {
-        super.showHelp();
-        //needs to be completed
+    protected Menu getCategoryMenu() {
+        return OffsMenu.getInstance();
+    }
+
+    @Override
+    protected void showProducts() {
+        ArrayList<String> categoryProducts = categoryController.getActiveCategoryDiscountedProducts();
+        for (String product : categoryProducts) {
+            System.out.println(product);
+        }
     }
 }

@@ -6,12 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProductMenu extends Menu {
-    private static ProductMenu instance = new ProductMenu();
-    private ProductController productController;
+    private static final ProductMenu instance = new ProductMenu();
+    private final ProductController productController;
 
 
     private ProductMenu() {
         super("product page");
+        productController = ProductController.getInstance();
         this.submenus.put("digest", createDigestPanel());
         this.submenus.put("attributes", createShowProductAttributesPanel());
         this.submenus.put("compare (\\w+)", createCompareProductsPanel());

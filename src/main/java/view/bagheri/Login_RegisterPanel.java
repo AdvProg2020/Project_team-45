@@ -1,13 +1,17 @@
 package view.bagheri;
 
 import controller.Controller;
+import controller.UserController;
 
 public class Login_RegisterPanel extends Panel {
-    private static Login_RegisterPanel instance = new Login_RegisterPanel();
-
+    private static final Login_RegisterPanel instance = new Login_RegisterPanel();
+    RegisterPanel registerPanel;
+    UserController userController;
 
     private Login_RegisterPanel() {
         super("Login/Register Panel");
+        registerPanel = RegisterPanel.getInstance();
+        userController = UserController.getInstance();
     }
 
     public static Login_RegisterPanel getInstance() {
@@ -15,9 +19,9 @@ public class Login_RegisterPanel extends Panel {
     }
 
     @Override
-    protected void execute() {
-        if (Controller.getInstance().isUserLoggedIn) {
-            System.out.println("");
+    public void execute() {
+        if (userController.isUserLoggedIn) {
+            System.out.println();
             return;
         }
         String inputCommand;
@@ -25,7 +29,7 @@ public class Login_RegisterPanel extends Panel {
             if ((matcher = getMatcher("login (username)", inputCommand)) != null) {
                 login();
             } else if((matcher = getMatcher("create account (type) (username)", inputCommand)) != null) {
-
+                registerPanel.execute();
             } else {
                 System.out.println("invalid command!");
             }
@@ -33,12 +37,13 @@ public class Login_RegisterPanel extends Panel {
     }
 
     private void login() {
-
-        while (!(inputCommand = scanner.nextLine()).equals("back")) {
-            if (Controller.getInstance().checkPassword(inputCommand)) {
+        userController.setActiveUser();
+        String input;
+        while (!(input = scanner.nextLine()).equals("back")) {
+            if (userController.checkPassword(input)) {
                 System.out.println("invalid command!");
             } else {
-                Controller.getInstance().setActiveUser();
+                userController.setActiveUser();
             }
         }
     }

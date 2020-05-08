@@ -1,19 +1,20 @@
 package model;
 
+import model.category.Category;
 import model.user.Seller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Product {
-    private String productId;
+    private final String productId;
     private String name;
     private Company company;
     private String productStatus;
     private HashMap<String, SellerInfoForProduct> sellersList;
     private int minimumPrice;
     private Category category;
-    private HashMap<String, String> categoryFeatures;
+    private final HashMap<String, String> categoryFeatures;
     private String description;
     private float averageScore;
     private ArrayList<Comment> comments;

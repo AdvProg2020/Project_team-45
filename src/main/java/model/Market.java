@@ -1,5 +1,6 @@
 package model;
 
+import model.category.Category;
 import model.user.User;
 
 import java.util.ArrayList;
@@ -8,10 +9,10 @@ public class Market {
     private static Market marketInstance;
     private static ArrayList<String> availableSortsForProducts;
     private static ArrayList<String> availableSortsForOffs;
-    private ArrayList<User> allUsers;
-    private ArrayList<CodedDiscount> allCodedDiscounts;
-    private ArrayList<Category> allCategories;
-    private ArrayList<Product> allProducts;
+    private final ArrayList<User> allUsers;
+    private final ArrayList<CodedDiscount> allCodedDiscounts;
+    private final ArrayList<Category> allCategories;
+    private final ArrayList<Product> allProducts;
     private boolean hasAdmin;
 
     private Market() {

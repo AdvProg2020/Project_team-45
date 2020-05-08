@@ -1,7 +1,7 @@
 package view.bagheri;
 
 public class SortingPanel extends Panel {
-    private static SortingPanel instance = new SortingPanel();
+    private static final SortingPanel instance = new SortingPanel();
 
 
     private SortingPanel() {
@@ -13,7 +13,7 @@ public class SortingPanel extends Panel {
     }
 
     @Override
-    protected void execute() {
+    public void execute() {
         String inputCommand;
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
             if (inputCommand.equals("show available sorts")) {

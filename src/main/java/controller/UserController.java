@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class UserController {
-    private static UserController instance = new UserController();
+    private static final UserController instance = new UserController();
     private User activeUser;
     // seller:
     private ArrayList<String> productAvailableFieldsToEdit;
@@ -167,4 +167,7 @@ public class UserController {
 //    public void makeCommentRequest(User user, Product product, String title, String content) {
 //    }
 
+    public boolean logout() {
+        return false;
+    }
 }

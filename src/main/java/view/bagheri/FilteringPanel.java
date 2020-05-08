@@ -1,7 +1,7 @@
 package view.bagheri;
 
 public class FilteringPanel extends Panel {
-    private static FilteringPanel instance = new FilteringPanel();
+    private static final FilteringPanel instance = new FilteringPanel();
 
 
     private FilteringPanel() {
@@ -13,7 +13,7 @@ public class FilteringPanel extends Panel {
     }
 
     @Override
-    protected void execute() {
+    public void execute() {
         String inputCommand;
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
             if (inputCommand.equals("show available filters")) {

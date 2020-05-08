@@ -1,12 +1,16 @@
 package view.bagheri;
 
 
-public abstract class ProductSearchMenu extends Menu {
+import controller.CategoryController;
 
+public abstract class ProductSearchMenu extends Menu {
+    protected CategoryController categoryController;
 
     protected ProductSearchMenu(String name) {
         super(name);
+        categoryController = CategoryController.getInstance();
         submenus.put("view categories", creatViewCategoriesPanel());
+        submenus.put("show category (\\.+)", getCategoryMenu());
         submenus.put("filtering", FilteringPanel.getInstance());
         submenus.put("sorting", SortingPanel.getInstance());
         submenus.put("show products", creatShowProductsPanel());
@@ -15,22 +19,32 @@ public abstract class ProductSearchMenu extends Menu {
 
     protected abstract Panel creatViewCategoriesPanel();
 
+    protected abstract Menu getCategoryMenu();
+
     protected Panel creatShowProductsPanel() {
         return new Panel("showProductPanel") {
             @Override
             public void execute() {
-                showProduct();
+                showProducts();
             }
         };
     }
 
-    protected void showProduct() {
-        //needs to be completed
+    @Override
+    protected void show() {
+        showProducts();
     }
+
+    protected abstract void showProducts();
 
     @Override
     protected void showHelp() {
         super.showHelp();
-        //needs to be completed
+        System.out.println("view categories\n" +
+                "show category [category_name]\n" +
+                "filtering\n" +
+                "sorting\n" +
+                "show products\n" +
+                "show product [productId]");
     }
 }

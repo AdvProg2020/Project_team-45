@@ -1,6 +1,6 @@
 package view.bagheri;
 
-import controller.Controller;
+import controller.UserController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,10 +23,11 @@ public abstract class Menu extends UIPage {
         return new Panel("logoutPane") {
             @Override
             public void execute() {
-                if (Controller.getInstance().isUserLoggedIn) {
-                    System.out.println("");
+                UserController userController = UserController.getInstance();
+                if (userController.logout()) {
+                    System.out.println("You logout successfully");
                 } else {
-                    System.out.println("");
+                    System.out.println("You are not logged in");
                 }
             }
         };
@@ -35,7 +36,7 @@ public abstract class Menu extends UIPage {
     private Panel createHelpPanel() {
         return new Panel("help") {
             @Override
-            protected void execute() {
+            public void execute() {
                 showHelp();
             }
         };
@@ -54,9 +55,11 @@ public abstract class Menu extends UIPage {
             if (nextUIPage != null) {
                 if (nextUIPage.getType().equals("menu")) {
                     Menu nextMenu = (Menu) nextUIPage;
-                    MenuManagement.setActiveMenu(nextMenu);
-                    nextMenu.setParent(this);
-                    return;
+                    if (nextMenu.check()) {
+                        MenuManagement.setActiveMenu(nextMenu);
+                        nextMenu.setParent(this);
+                        return;
+                    }
                 }
                 nextUIPage.execute();
             } else {
@@ -75,8 +78,15 @@ public abstract class Menu extends UIPage {
         return null;
     }
 
+    protected boolean check() {
+        return true;
+    }
+
     protected void showHelp() {
-        //needs to be completed
+        System.out.println("login\n" +
+                "logout\n" +
+                "help\n" +
+                "back");
     }
 
     @Override

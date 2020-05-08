@@ -2,8 +2,6 @@ package model.category;
 
 import model.Product;
 
-import java.util.ArrayList;
-
 public abstract class Category {
     private String name;
     private Category parent;

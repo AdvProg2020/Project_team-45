@@ -2,10 +2,12 @@ package model.category;
 
 import model.Product;
 
+import model.Product;
+
 import java.util.ArrayList;
 
 public class ParentCategory extends Category{
-    private ArrayList<Category> subCategory;
+    private final ArrayList<Category> subCategory;
 
 
     public ParentCategory(String name, Category parent) {

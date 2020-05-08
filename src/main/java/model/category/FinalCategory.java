@@ -2,11 +2,13 @@ package model.category;
 
 import model.Product;
 
+import model.Product;
+
 import java.util.ArrayList;
 
 public class FinalCategory extends Category {
     private ArrayList<String> specialFeatures;
-    private ArrayList<Product> productList;
+    private final ArrayList<Product> productList;
 
     public FinalCategory(String name, Category parent, ArrayList<String> specialFeatures) {
         super(name, parent);

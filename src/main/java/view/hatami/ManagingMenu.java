@@ -10,6 +10,7 @@ import java.util.HashMap;
 public abstract class ManagingMenu extends Menu {
 
     protected Manager manager;
+    protected String managingObject;
 
     protected ManagingMenu(String name) {
         super(name);
@@ -33,7 +34,7 @@ public abstract class ManagingMenu extends Menu {
 
     protected void show() {
         super.show();
-        displayAllItemsInPanel("all Users:", (Printer) manager);
+        displayAllItemsInPanel("ALL " + managingObject + ":", (Printer) manager);
     }
 
     protected static Panel createOneItemDisplayPanel(String panelName, Printer printer) {

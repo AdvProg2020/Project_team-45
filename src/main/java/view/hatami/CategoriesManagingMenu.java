@@ -9,6 +9,7 @@ public class CategoriesManagingMenu extends ManagingMenu {
     public CategoriesManagingMenu() {
         super("categories managing menu");
         this.manager = CategoryController.getInstance();
+        this.managingObject = "Categories";
         submenus.put("edit (\\S+)", createItemEditorPanel("edit category", (Editor) manager));
         submenus.put("add (\\S+)", createItemCreatorPanel("add category", (Creator) manager));
         submenus.put("remove (\\S+)", createItemDeleterPanel("delete category", (Deleter) manager));

@@ -2,8 +2,6 @@ package model.category;
 
 import model.Product;
 
-import model.Product;
-
 import java.util.ArrayList;
 
 public class FinalCategory extends Category {

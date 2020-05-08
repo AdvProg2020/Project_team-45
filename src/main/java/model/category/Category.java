@@ -1,7 +1,5 @@
 package model.category;
 
-import model.Product;
-
 public abstract class Category {
     private String name;
     private Category parent;

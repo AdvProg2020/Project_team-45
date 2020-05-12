@@ -1,5 +1,7 @@
 package controller;
 
+import controller.managers.Deleter;
+
 public class AllUsersController implements Deleter {
 
     private static AllUsersController instance = new AllUsersController();

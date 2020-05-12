@@ -1,8 +1,12 @@
 package controller;
 
+import controller.managers.Creator;
+import controller.managers.Deleter;
 import model.CodedDiscount;
 
-public class CodedDiscountController implements Deleter {
+import java.util.HashMap;
+
+public class CodedDiscountController implements Deleter, Creator {
     private static CodedDiscountController instance = new CodedDiscountController();
 
     private CodedDiscountController() {
@@ -17,16 +21,7 @@ public class CodedDiscountController implements Deleter {
         return null;
     }
 
-    public CodedDiscount createCodedDiscount() {
-        return null;
-    }
-
-    public void setFieldOfCodedDiscount(CodedDiscount codedDiscount, String field, String value) {}
-
-    public void editCodedDiscount(String discountCode, CodedDiscount codedDiscount) {
-    }
-
-    public void removeCodedDiscount(String discountCode) {
+    public void setFieldOfCodedDiscount(CodedDiscount codedDiscount, String field, String value) {
     }
 
     public boolean isDiscountCodeValid(String code) {
@@ -43,6 +38,11 @@ public class CodedDiscountController implements Deleter {
     }
 
     public String printDetailedById(String Id) {
+        // TODO : hatami
+        return null;
+    }
+
+    public HashMap<String, String> getNecessaryFields() {
         // TODO : hatami
         return null;
     }

@@ -1,9 +1,7 @@
 package view.hatami;
 
 
-import controller.Deleter;
-import controller.Editor;
-import controller.Printer;
+import controller.managers.*;
 import view.bagheri.Menu;
 import view.bagheri.Panel;
 
@@ -11,7 +9,8 @@ import java.util.HashMap;
 
 public abstract class ManagingMenu extends Menu {
 
-    protected Printer printer;
+    protected Manager manager;
+    protected String managingObject;
 
     protected ManagingMenu(String name) {
         super(name);
@@ -35,7 +34,7 @@ public abstract class ManagingMenu extends Menu {
 
     protected void show() {
         super.show();
-        displayAllItemsInPanel("all Users:", printer);
+        displayAllItemsInPanel("ALL " + managingObject + ":", (Printer) manager);
     }
 
     protected static Panel createOneItemDisplayPanel(String panelName, Printer printer) {
@@ -86,5 +85,23 @@ public abstract class ManagingMenu extends Menu {
                 return this;
             }
         }.setEditorAndMap(editor);
+    }
+
+    protected static Panel createItemCreatorPanel(String panelName, Creator creator) {
+        return new Panel(panelName) {
+            private Creator creator;
+            private HashMap<String, String> fieldsToGet;
+
+            @Override
+            public void execute() {
+                // TODO : hatami
+            }
+
+            public Panel setEditorAndMap(Creator creator) {
+                this.creator = creator;
+                fieldsToGet = creator.getNecessaryFields();
+                return this;
+            }
+        }.setEditorAndMap(creator);
     }
 }

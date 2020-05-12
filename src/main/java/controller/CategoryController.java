@@ -1,11 +1,13 @@
 package controller;
 
+import controller.managers.Creator;
+import controller.managers.Editor;
 import model.category.Category;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CategoryController implements Editor{
+public class CategoryController implements Editor, Creator {
     private static final CategoryController instance = new CategoryController();
     private Category activeCategory;
     private boolean isOffMenu;
@@ -98,5 +100,11 @@ public class CategoryController implements Editor{
         if (activeCategory != null) {
 
         }
+    }
+
+
+    public HashMap<String, String> getNecessaryFields() {
+        // TODO : hatami
+        return null;
     }
 }

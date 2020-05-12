@@ -3,11 +3,12 @@ package view.bagheri;
 import controller.ProductController;
 
 public class CommentingPanel extends Panel {
-    private static CommentingPanel instance = new CommentingPanel();
-    private ProductController productController;
+    private static final CommentingPanel instance = new CommentingPanel();
+    private final ProductController productController;
 
     private CommentingPanel() {
         super("comment panel");
+        productController = ProductController.getInstance();
     }
 
     public static CommentingPanel getInstance() {

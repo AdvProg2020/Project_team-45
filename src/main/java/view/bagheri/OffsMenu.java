@@ -16,8 +16,8 @@ public class OffsMenu extends ProductSearchMenu {
 
     @Override
     protected boolean check() {
-
-        return true;
+        categoryController.changeIsOffMenuToTrue();
+        return super.check();
     }
 
     @Override

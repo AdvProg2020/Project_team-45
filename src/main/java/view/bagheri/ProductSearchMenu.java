@@ -10,7 +10,7 @@ public abstract class ProductSearchMenu extends Menu {
         super(name);
         categoryController = CategoryController.getInstance();
         submenus.put("view categories", creatViewCategoriesPanel());
-        submenus.put("show category (\\.+)", getCategoryMenu());
+        submenus.put("show category (.+)", getCategoryMenu());
         submenus.put("filtering", FilteringPanel.getInstance());
         submenus.put("sorting", SortingPanel.getInstance());
         submenus.put("show products", creatShowProductsPanel());
@@ -28,6 +28,17 @@ public abstract class ProductSearchMenu extends Menu {
                 showProducts();
             }
         };
+    }
+
+    @Override
+    protected boolean check() {
+        if (matcher != null && matcher.group().matches("show category (.+)")) {
+            boolean result = categoryController.setActiveCategoryByName(matcher.group(1));
+            matcher = null;
+            return result;
+        }
+        categoryController.backCategory();
+        return true;
     }
 
     @Override

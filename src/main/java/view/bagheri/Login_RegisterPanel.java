@@ -1,6 +1,5 @@
 package view.bagheri;
 
-import controller.Controller;
 import controller.UserController;
 
 public class Login_RegisterPanel extends Panel {

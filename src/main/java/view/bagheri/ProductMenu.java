@@ -61,6 +61,9 @@ public class ProductMenu extends Menu {
     @Override
     protected void showHelp() {
         super.showHelp();
-        //needs to be completed
+        System.out.println("digest\n" +
+                "attributes\n" +
+                "compare [productId]\n" +
+                "comments");
     }
 }

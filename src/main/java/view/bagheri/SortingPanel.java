@@ -21,7 +21,7 @@ public class SortingPanel extends Panel {
             } else if((matcher = getMatcher("sort (\\.+)", inputCommand)) != null) {
 
             } else if(inputCommand.equals("current sort")) {
-
+                System.out.println();
             } else if(inputCommand.equals("disable sort")) {
 
             } else {

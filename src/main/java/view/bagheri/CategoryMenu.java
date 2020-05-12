@@ -16,8 +16,8 @@ public class CategoryMenu extends ProductSearchMenu {
 
     @Override
     protected boolean check() {
-
-        return true;
+        categoryController.changeIsOffMenuToFalse();
+        return super.check();
     }
 
     @Override
@@ -45,7 +45,6 @@ public class CategoryMenu extends ProductSearchMenu {
     protected Menu getCategoryMenu() {
         return CategoryMenu.getInstance();
     }
-
 
     @Override
     protected void showProducts() {

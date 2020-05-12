@@ -82,11 +82,21 @@ public class CategoryController implements Editor{
         return null;
     }
 
-    public void a () { //name?!
+    public void changeIsOffMenuToTrue() { //name?!
         isOffMenu = true;
     }
 
-    public void b () { //name?!
+    public void changeIsOffMenuToFalse() { //name?!
         isOffMenu = false;
+    }
+
+    public boolean setActiveCategoryByName(String name) {
+        return true;
+    }
+
+    public void backCategory() {
+        if (activeCategory != null) {
+
+        }
     }
 }

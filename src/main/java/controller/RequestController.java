@@ -23,7 +23,7 @@ public class RequestController implements Printer {
         return null;
     }
 
-    public String printAllInList() {
+    public String getAllInListAsString() {
         // TODO : hatami
         return null;
     }

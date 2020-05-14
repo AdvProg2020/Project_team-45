@@ -80,7 +80,7 @@ public class ProductController implements Deleter {
         // TODO : hatami
     }
 
-    public String printAllInList() {
+    public String getAllInListAsString() {
         // TODO : hatami
         return null;
     }

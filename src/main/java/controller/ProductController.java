@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class ProductController implements Deleter {
     private MainController mainController;
     private Product activeProduct;
-    private static ProductController instance = new ProductController();
+    private static final ProductController instance = new ProductController();
 
 
     public ProductController(MainController mainController) {
@@ -39,12 +39,25 @@ public class ProductController implements Deleter {
         return null;
     }
 
+    public HashMap<String, String> getProductDigestInformation() {
+        return null;
+    }
+
     public HashMap<String, String> getProductAttributes() {
         return null;
     }
 
     public HashMap<String, String> getProductAttributesById(String productId) {
         return null;
+    }
+
+    public void addActiveProductToCart() {
+
+    }
+
+    public boolean selectSellerForActiveProduct(String sellerUsername) {
+
+        return false;
     }
 
     public int getAverageScore() {
@@ -57,6 +70,10 @@ public class ProductController implements Deleter {
 
     public void addComment(String title, String content) {
 
+    }
+
+    public boolean isWithInACategory(String productId) {
+        return false;
     }
 
     public void deleteItemById(String Id) {

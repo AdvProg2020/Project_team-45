@@ -27,7 +27,32 @@ public class ProductMenu extends Menu {
         return new Panel("digestPanel") {
             @Override
             public void execute() {
-                //needs to be completed
+                show();
+                String inputCommand;
+                while (!(inputCommand = scanner.nextLine()).equals("back")) {
+                    if (inputCommand.equals("add to cart")) {
+                        productController.addActiveProductToCart();
+                    } else if ((matcher = getMatcher("select seller (\\w+)", inputCommand)) != null) {
+                        selectSeller(matcher.group(1));
+                    } else {
+                        System.out.println("invalid command!");
+                    }
+                }
+            }
+
+            @Override
+            protected void show() {
+                HashMap<String, String> productDigestInformation = productController.getProductDigestInformation();
+                for (Map.Entry<String, String> information : productDigestInformation.entrySet()) {
+                    if (information.getValue() != null)
+                        System.out.println(information.getKey() + ": " + information.getValue());
+                }
+            }
+
+            private void selectSeller(String sellerUsername) {
+                if (!productController.selectSellerForActiveProduct(sellerUsername)) {
+                    System.out.println("This seller does not exist!");
+                }
             }
         };
     }
@@ -49,11 +74,13 @@ public class ProductMenu extends Menu {
         return new Panel("compareProductsPanel") {
             @Override
             public void execute() {
-                productController.getProductAttributes();
-                productController.getProductAttributesById(matcher.group(1));
-
-
-
+                if (productController.isWithInACategory(matcher.group(1))) {
+                    productController.getProductAttributes();
+                    productController.getProductAttributesById(matcher.group(1));
+                    // TODO : bagheri
+                } else {
+                    System.out.println("It is not possible to compare these two products!");
+                }
             }
         };
     }

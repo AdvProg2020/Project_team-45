@@ -5,6 +5,7 @@ import controller.managers.*;
 import view.bagheri.Menu;
 import view.bagheri.Panel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class ManagingMenu extends Menu {
@@ -22,7 +23,15 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
-                System.out.println(printer.printAllInList());
+                String[] list = printer.getAllInListAsString().split("\n");
+                StringBuilder output = new StringBuilder();
+                for (String row : list) {
+                    for (String info : row.split(",")) {
+                        output.append(String.format("%-15s", info));
+                    }
+                    output.append("\n");
+                }
+                System.out.println(output);
             }
 
             public Panel setPrinter(Printer printer) {
@@ -43,7 +52,14 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
-                System.out.println(printer.printDetailedById(matcher.group(1)));
+                String[] info = printer.printDetailedById(matcher.group(1)).split(",");
+                StringBuilder output = new StringBuilder();
+                for (int count = 0; count < info.length; count++) {
+                    output.append(String.format("%-20s", info[count]));
+                    if (count % 3 == 2)
+                        output.append("\n");
+                }
+                System.out.println(output);
             }
 
             public Panel setPrinter(Printer printer) {

@@ -57,4 +57,12 @@ public class PersonalInfo {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return  "username:" + username +
+                ", firstName:" + firstName +
+                ", lastName:" + lastName +
+                ", emailAddress:" + emailAddress +
+                ", phoneNumber:" + phoneNumber;
+    }
 }

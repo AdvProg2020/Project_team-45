@@ -49,7 +49,7 @@ public class CategoryController implements Editor, Creator {
         // TODO : hatami
     }
 
-    public String printAllInList() {
+    public String getAllInListAsString() {
         // TODO : hatami
         return null;
     }

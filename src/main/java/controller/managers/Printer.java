@@ -1,6 +1,6 @@
 package controller.managers;
 
 public interface Printer extends Manager{
-    String printAllInList();
+    String getAllInListAsString();
     String printDetailedById(String Id);
 }

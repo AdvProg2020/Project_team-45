@@ -4,6 +4,7 @@ import model.category.Category;
 import model.user.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Market {
     private static Market marketInstance;
@@ -57,6 +58,10 @@ public class Market {
     }
 
     public User getUserByUsername(String username) {
+        for (User user : allUsers) {
+            if (user.getPersonalInfo().getUsername().equals(username))
+                return user;
+        }
         return null;
     }
 

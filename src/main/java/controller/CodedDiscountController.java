@@ -32,7 +32,7 @@ public class CodedDiscountController implements Deleter, Creator {
         // TODO : hatami
     }
 
-    public String printAllInList() {
+    public String getAllInListAsString() {
         // TODO : hatami
         return null;
     }

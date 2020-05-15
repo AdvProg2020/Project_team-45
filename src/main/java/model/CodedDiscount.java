@@ -47,4 +47,13 @@ public class CodedDiscount {
         this.endDate = endDate;
     }
 
+    @Override
+    public CodedDiscount clone() {
+        try {
+            return (CodedDiscount) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

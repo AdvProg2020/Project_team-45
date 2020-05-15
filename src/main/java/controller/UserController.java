@@ -67,15 +67,15 @@ public class UserController {
     }
 
     private String getSellLogDisplay(SellLog sellLog) {
-        return "log id = '" + sellLog.getLog().getLogId() + "'\n" +
-                "date = " + sellLog.getLog().getDate() + "\n" +
+        return "log id = '" + sellLog.getMainLog().getLogId() + "'\n" +
+                "date = " + sellLog.getMainLog().getDate() + "\n" +
                 "buyerUsername = '" + sellLog.getBuyerUsername() + "'\n" +
-                "listOfProducts = '" + sellLog.getLog().getListOfProducts() + "'\n" +
+                "listOfProducts = '" + sellLog.getMainLog().getSellingProducts() + "'\n" +
                 "offAmount = '" + sellLog.getOffAmount() + "'\n" +
-                "finalPrice = '" + sellLog.getLog().getFinalPrice() + "'\n" +
-                "address = '" + sellLog.getLog().getAddress() + "'\n" +
-                "phoneNumber = '" + sellLog.getLog().getPhoneNumber() + "'\n" +
-                "deliveryStatus = '" + sellLog.getLog().getDeliveryStatus() + "'";
+                "finalPrice = '" + sellLog.getMainLog().getFinalPrice() + "'\n" +
+                "address = '" + sellLog.getMainLog().getAddress() + "'\n" +
+                "phoneNumber = '" + sellLog.getMainLog().getPhoneNumber() + "'\n" +
+                "deliveryStatus = '" + sellLog.getMainLog().getDeliveryStatus() + "'";
     }
 
     public String getSalesHistoryDisplayForSeller() {

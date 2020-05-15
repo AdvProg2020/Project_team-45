@@ -1,6 +1,7 @@
 package model;
 
 import model.category.Category;
+import model.log.Log;
 import model.user.User;
 
 import java.util.ArrayList;
@@ -15,9 +16,17 @@ public class Market {
     private final ArrayList<Category> allCategories;
     private final ArrayList<Category> mainCategories;
     private final ArrayList<Product> allProducts;
+    private final ArrayList<Log> allLogs;
+    private final HashMap<String, Off> allOffs;
     private boolean hasAdmin;
 
     private Market() {
+        allUsers = new ArrayList<>();
+        allCategories = new ArrayList<>();
+        allCodedDiscounts = new ArrayList<>();
+        allProducts = new ArrayList<>();
+        allLogs = new ArrayList<>();
+        allOffs = new ArrayList<>();
         allUsers = new ArrayList<User>();
         allCodedDiscounts = new ArrayList<CodedDiscount>();
         allCategories = new ArrayList<Category>();
@@ -49,6 +58,14 @@ public class Market {
 
     public ArrayList<User> getAllUsers() {
         return allUsers;
+    }
+
+    public ArrayList<Off> getAllOffs() {
+        return allOffs;
+    }
+
+    public ArrayList<Log> getAllLogs() {
+        return allLogs;
     }
 
     public ArrayList<Category> getAllCategories() {
@@ -131,13 +148,15 @@ public class Market {
         return null;
     }
 
-    public void deleteUserByUsername(String username) {
-
+    public void removeUserFromAllUsers(User user) {
+        allUsers.remove(user);
     }
 
     public void removeProductByProductId(String productId) {
 
     }
+
+
 
     public void removeCodedDiscountByCode(String discountCode) {
 
@@ -149,6 +168,10 @@ public class Market {
 
     public void removeCategoryByName(String name) {
 
+    }
+
+    public void removeOffById(String offId) {
+        allOffs.remove(offId);
     }
 }
 

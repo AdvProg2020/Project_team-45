@@ -1,6 +1,9 @@
 package model.user;
 
-import model.*;
+import model.Company;
+import model.Off;
+import model.Product;
+import model.ProductSellInfo;
 import model.log.SellLog;
 
 import java.util.ArrayList;
@@ -9,7 +12,7 @@ import java.util.HashMap;
 public class Seller extends User {
     private Company company;
     private ArrayList<SellLog> listOfSellLogs;
-    private HashMap<Product, SellerInfoForProduct> availableProducts;
+    private HashMap<Product, ProductSellInfo> availableProducts;
     private HashMap<String, Off> listOfOffs;
     private int balance;
 
@@ -29,7 +32,7 @@ public class Seller extends User {
         return listOfSellLogs;
     }
 
-    public HashMap<Product, SellerInfoForProduct> getAvailableProducts() {
+    public HashMap<Product, ProductSellInfo> getAvailableProducts() {
         return availableProducts;
     }
 
@@ -45,7 +48,7 @@ public class Seller extends User {
         return balance;
     }
 
-    public void addProduct(Product product, SellerInfoForProduct sellerInfoForProduct) {
+    public void addProduct(Product product, ProductSellInfo productSellInfo) {
 
     }
 

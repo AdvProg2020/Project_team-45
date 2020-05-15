@@ -18,11 +18,11 @@ public class Cart {
         return products;
     }
 
-    public void addProduct(Product product, SellerInfoForProduct sellerInfoForProduct) {
+    public void addProduct(Product product, ProductSellInfo productSellInfo) {
 
     }
 
-    public void removeProduct(Product product, SellerInfoForProduct sellerInfoForProduct) {
+    public void removeProduct(Product product, ProductSellInfo productSellInfo) {
 
     }
 
@@ -37,12 +37,12 @@ public class Cart {
 
 class productInfo {
     private Product product;
-    private SellerInfoForProduct sellerInfoForProduct;
+    private ProductSellInfo productSellInfo;
     private int amount;
 
-    public productInfo(Product product, SellerInfoForProduct sellerInfoForProduct) {
+    public productInfo(Product product, ProductSellInfo productSellInfo) {
         this.product = product;
-        this.sellerInfoForProduct = sellerInfoForProduct;
+        this.productSellInfo = productSellInfo;
         this.amount = 1;
     }
 
@@ -50,8 +50,8 @@ class productInfo {
         return product;
     }
 
-    public SellerInfoForProduct getSellerInfoForProduct() {
-        return sellerInfoForProduct;
+    public ProductSellInfo getProductSellInfo() {
+        return productSellInfo;
     }
 
     public int getAmount() {

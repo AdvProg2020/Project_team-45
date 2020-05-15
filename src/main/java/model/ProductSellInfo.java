@@ -5,15 +5,17 @@ import model.user.Seller;
 
 import java.util.HashMap;
 
-public class SellerInfoForProduct {
-    private final Seller seller;
+public class ProductSellInfo {
+    private Seller seller;
+    private Product product;
     private int price;
     private int stock;
     private Off off;
     private int sellCount;
     private final HashMap<Buyer, Integer> allBuyers;
 
-    public SellerInfoForProduct(Seller seller, int price, int stock) {
+    public ProductSellInfo(Product product, Seller seller, int price, int stock) {
+        this.product = product;
         this.seller = seller;
         this.price = price;
         this.stock = stock;
@@ -62,5 +64,15 @@ public class SellerInfoForProduct {
 
     public boolean isInOff() {
         return off != null;
+    }
+
+    @Override
+    public ProductSellInfo clone() {
+        try {
+            return (ProductSellInfo) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

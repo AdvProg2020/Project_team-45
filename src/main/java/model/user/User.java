@@ -13,4 +13,9 @@ public abstract class User {
     public PersonalInfo getPersonalInfo() {
         return personalInfo;
     }
+
+    public boolean equals(User otherUser) {
+        return this.personalInfo.getUsername().equals(otherUser.getPersonalInfo().getUsername());
+    }
+
 }

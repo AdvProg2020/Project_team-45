@@ -12,7 +12,7 @@ public class Product {
     private String name;
     private Company company;
     private String productStatus;
-    private HashMap<String, SellerInfoForProduct> sellersList;
+    private HashMap<Seller, ProductSellInfo> sellersList;
     private int minimumPrice;
     private Category category;
     private final HashMap<String, String> categoryFeatures;
@@ -32,13 +32,10 @@ public class Product {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return
-    }
 
-    public SellerInfoForProduct getSellerInfoForProductByUsername(String sellerUsername) {
+    public ProductSellInfo getSellerInfoForProductByUsername(String sellerUsername) {
         return sellersList.get(sellerUsername);
+        // minimum price should be updated
     }
 
     public int getMinimumPrice() {
@@ -61,8 +58,8 @@ public class Product {
         return productStatus;
     }
 
-    public ArrayList<SellerInfoForProduct> getSellersList() {
-        return sellersList;
+    public ArrayList<ProductSellInfo> getSellersList() {
+        return (ArrayList<ProductSellInfo>) sellersList.values();
     }
 
     public Category getCategory() {
@@ -109,7 +106,7 @@ public class Product {
         this.description = description;
     }
 
-    public void addSeller(SellerInfoForProduct sellerInfoForProduct) {
+    public void addSeller(ProductSellInfo productSellInfo) {
 
     }
 
@@ -125,8 +122,8 @@ public class Product {
 
     }
 
-    public boolean removeSeller(Seller seller) {
-        return false;
+    public void removeSeller(Seller seller) {
+        sellersList.remove(seller);
     }
 
     public boolean removeCategoryFeatures(String feature, String measure) {

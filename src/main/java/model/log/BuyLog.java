@@ -1,26 +1,14 @@
 package model.log;
 
 public class BuyLog {
-    private int codedDiscountAmount;
-    private String sellerUsername;
-    private Log log;
+    private Log mainLog;
 
-    public BuyLog(int codedDiscountAmount, String sellerUsername, Log log) {
-        this.codedDiscountAmount = codedDiscountAmount;
-        this.sellerUsername = sellerUsername;
-        this.log = log;
+    public BuyLog(Log log) {
+        this.mainLog = log;
     }
 
-    public int getCodedDiscountAmount() {
-        return codedDiscountAmount;
-    }
-
-    public String getSellerUsername() {
-        return sellerUsername;
-    }
-
-    public Log getLog() {
-        return log;
+    public Log getMainLog() {
+        return mainLog;
     }
 
     //    public BuyLog(String logId, Date date, int finalPrice, String address, String sellerUsername) {

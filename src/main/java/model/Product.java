@@ -31,10 +31,6 @@ public class Product {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return
-    }
 
     public ProductSellInfo getSellerInfoForProductByUsername(String sellerUsername) {
         return sellersList.get(sellerUsername);
@@ -61,7 +57,7 @@ public class Product {
     }
 
     public ArrayList<ProductSellInfo> getSellersList() {
-        return sellersList;
+        return (ArrayList<ProductSellInfo>) sellersList.values();
     }
 
     public Category getCategory() {

@@ -1,6 +1,7 @@
 package model;
 
 import model.category.Category;
+import model.log.Log;
 import model.user.User;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class Market {
     private final ArrayList<CodedDiscount> allCodedDiscounts;
     private final ArrayList<Category> allCategories;
     private final ArrayList<Product> allProducts;
+    private final ArrayList<Log> allLogs;
     private boolean hasAdmin;
 
     private Market() {
@@ -20,6 +22,7 @@ public class Market {
         allCategories = new ArrayList<>();
         allCodedDiscounts = new ArrayList<>();
         allProducts = new ArrayList<>();
+        allLogs = new ArrayList<>();
     }
 
     public static Market getInstance() {
@@ -100,8 +103,8 @@ public class Market {
         return null;
     }
 
-    public void removeUserFromAllUsers(String username) {
-        allUsers.remove(getUserByUsername(username));
+    public void removeUserFromAllUsers(User user) {
+        allUsers.remove(user);
     }
 
     public void removeProductByProductId(String productId) {

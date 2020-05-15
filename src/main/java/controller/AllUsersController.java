@@ -2,6 +2,9 @@ package controller;
 
 import controller.managers.Deleter;
 import model.Market;
+import model.user.Admin;
+import model.user.Buyer;
+import model.user.Seller;
 import model.user.User;
 
 import java.util.ArrayList;
@@ -51,22 +54,26 @@ public class AllUsersController implements Deleter {
         if (user.equals(activeUser))
             throw new Exception("cannot delete yourself!");
         if (user.getRole().equals("buyer"))
-            deleteBuyer(Id);
+            deleteBuyer((Buyer) user);
         else if (user.getRole().equals("seller"))
-            deleteSeller(Id);
+            deleteSeller((Seller) user);
         else if (user.getRole().equals("admin"))
-            deleteAdmin(Id);
+            deleteAdmin((Admin) user);
     }
 
-    private void deleteAdmin(String username) {
-        market.removeUserFromAllUsers(username);
+    private void deleteAdmin(Admin admin) {
+        market.removeUserFromAllUsers(admin);
     }
 
-    private void deleteSeller(String username) {
-        ProductController.
+    private void deleteSeller(Seller seller) {
+        removeFromProducts(seller);
     }
 
-    private void deleteBuyer(String username) {
-        market.removeUserFromAllUsers(username);
+    private void removeFromProducts(Seller seller) {
+        seller.
+    }
+
+    private void deleteBuyer(Buyer buyer) {
+        market.removeUserFromAllUsers(buyer);
     }
 }

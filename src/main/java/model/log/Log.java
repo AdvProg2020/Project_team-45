@@ -77,6 +77,14 @@ public class Log {
         return 0;
     }
 
+    public String getBuyerUsername() {
+        return buyer.getPersonalInfo().getUsername();
+    }
+
+    public int getAppliedDiscountPercentage() {
+        return appliedDiscount.getPercentage();
+    }
+
     public void sendOrder(){
 
     }

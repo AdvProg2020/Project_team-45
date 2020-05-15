@@ -5,15 +5,15 @@ import java.util.ArrayList;
 
 public class Off {
     private String offId;
-    private ArrayList<Product> productList;
+    private ArrayList<Product> productsList;
     private OffStatus offStatus;
-    private LocalDateTime starTime;
+    private LocalDateTime startTime;
     private LocalDateTime endTime;
     private int discountAmount;
 
-    public Off(String offId, ArrayList<Product> productList, OffStatus offStatus, LocalDateTime endTime, int discountAmount) {
+    public Off(String offId, ArrayList<Product> productsList, OffStatus offStatus, LocalDateTime endTime, int discountAmount) {
         this.offId = offId;
-        this.productList = productList;
+        this.productsList = productsList;
         this.offStatus = offStatus;
         this.endTime = endTime;
         this.discountAmount = discountAmount;
@@ -23,16 +23,16 @@ public class Off {
         return offId;
     }
 
-    public ArrayList<Product> getProductList() {
-        return productList;
+    public ArrayList<Product> getProductsList() {
+        return productsList;
     }
 
     public OffStatus getOffStatus() {
         return offStatus;
     }
 
-    public LocalDateTime getStarTime() {
-        return starTime;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
     public LocalDateTime getEndTime() {
@@ -47,8 +47,8 @@ public class Off {
         this.endTime = endTime;
     }
 
-    public void setStarTime(LocalDateTime starTime) {
-        this.starTime = starTime;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
     public void setDiscountAmount(int discountAmount) {

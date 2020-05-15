@@ -1,11 +1,10 @@
 package controller;
 
 import model.Company;
+import model.Off;
 import model.Product;
 import model.log.SellLog;
-import model.request.AddProductRequest;
-import model.request.ProductEditionRequest;
-import model.request.RemoveProductRequest;
+import model.request.*;
 import model.user.Admin;
 import model.user.PersonalInfo;
 import model.user.Seller;
@@ -23,16 +22,25 @@ public class UserController {
     private ArrayList<String> productAvailableFieldsToEdit;
     private ArrayList<String> existingProductFieldsToCreate;
     private ArrayList<String> newProductFieldsToCreate;
+    private ArrayList<String> offAvailableFieldsToEdit;
+    private ArrayList<String> offFieldsToCreate;
 
     private UserController() {
-        this.productAvailableFieldsToEdit = new ArrayList<String>();
+        this.productAvailableFieldsToEdit = new ArrayList<>();
         this.productAvailableFieldsToEdit.addAll(Arrays.asList("price", "stock", "offId"));
 
-        this.existingProductFieldsToCreate = new ArrayList<String>();
+        this.existingProductFieldsToCreate = new ArrayList<>();
         this.existingProductFieldsToCreate.addAll(Arrays.asList("productId", "price", "stock", "offId('-' for none)"));
-        this.newProductFieldsToCreate = new ArrayList<String>();
+        this.newProductFieldsToCreate = new ArrayList<>();
         this.newProductFieldsToCreate.addAll(Arrays.asList("name", "category", "description", "price", "stock"
                 , "offId ('-' for none)"));
+
+        this.offAvailableFieldsToEdit = new ArrayList<>();
+        this.offAvailableFieldsToEdit.addAll(Arrays.asList("startTime", "endTime", "discountAmount"));
+
+        this.offFieldsToCreate = new ArrayList<>();
+        this.offFieldsToCreate.addAll(Arrays.asList("productsList(separated by ',')", "startTime", "endTime"
+                , "discountAmount"));
     }
 
     public static UserController getInstance() {
@@ -80,9 +88,9 @@ public class UserController {
     private String getSellLogDisplay(SellLog sellLog) {
         return "log id = '" + sellLog.getMainLog().getLogId() + "'\n" +
                 "date = " + sellLog.getMainLog().getDate() + "\n" +
-                "buyerUsername = '" + sellLog.getBuyerUsername() + "'\n" +
+                "buyerUsername = '" + sellLog.getMainLog().getBuyerUsername() + "'\n" +
                 "listOfProducts = '" + sellLog.getMainLog().getSellingProducts() + "'\n" +
-                "offAmount = '" + sellLog.getOffAmount() + "'\n" +
+                "appliedDiscount = '" + sellLog.getMainLog().getAppliedDiscountPercentage() + "%'\n" +
                 "finalPrice = '" + sellLog.getMainLog().getFinalPrice() + "'\n" +
                 "address = '" + sellLog.getMainLog().getAddress() + "'\n" +
                 "phoneNumber = '" + sellLog.getMainLog().getPhoneNumber() + "'\n" +
@@ -99,14 +107,14 @@ public class UserController {
         return result.toString();
     }
 
-    public Product getAvailableProductById(String productId) {
+    private Product getSellerAvailableProductById(String productId) {
         return ((Seller) activeUser).getAvailableProductById(productId);
     }
 
     // products managing menu
 
     public String getSellerProductDisplayById(String productId) {
-        Product product = getAvailableProductById(productId);
+        Product product = getSellerAvailableProductById(productId);
         if (product == null) {
             return null;
         }
@@ -123,7 +131,7 @@ public class UserController {
     }
 
     public String getSellerProductAllBuyersDisplayById(String productId) {
-        Product product = getAvailableProductById(productId);
+        Product product = getSellerAvailableProductById(productId);
         if (product == null) {
             return null;
         }
@@ -132,7 +140,7 @@ public class UserController {
 
     public boolean isProductFieldAvailableToEdit(String productId, String field) {
         return (productAvailableFieldsToEdit.contains(field)
-                || getAvailableProductById(productId).getCategoryFeatures().keySet().contains(field));
+                || getSellerAvailableProductById(productId).getCategoryFeatures().keySet().contains(field));
     }
 
     public void createProductEditionRequest(String productId, HashMap<String, String> fieldsAndValues) {
@@ -160,10 +168,47 @@ public class UserController {
     // remove product panel
 
     public void createRemoveProductRequest(String productId) {
-        if (getAvailableProductById(productId) == null) {
+        if (getSellerAvailableProductById(productId) == null) {
             return;
         }
         Admin.getListOfRequests().add(new RemoveProductRequest(productId));
+    }
+
+    // offs managing menu
+
+    private Off getAvailableOffById(String offId) {
+        return ((Seller)activeUser).getOffByOffId(offId);
+    }
+
+    public String getSellerOffDisplayById(String offId) {
+        Off off = getAvailableOffById(offId);
+        if (off == null) {
+            return null;
+        }
+        return "productList = " + off.getProductsList() + "\n" +
+                "starTime = " + off.getStartTime() + "\n" +
+                "endTime = " + off.getEndTime() + "\n" +
+                "discountAmount = " + off.getDiscountAmount();
+    }
+
+    public void createOffEditionRequest(String offId, HashMap<String, String> fieldsAndValues) {
+        Off off = getAvailableOffById(offId);
+        if (off == null) {
+            return;
+        }
+        Admin.getListOfRequests().add(new OffEditionRequest(offId, fieldsAndValues));
+    }
+
+    public ArrayList<String> getOffAvailableFieldsToEdit() {
+        return offAvailableFieldsToEdit;
+    }
+
+    public ArrayList<String> getOffFieldsToCreate() {
+        return offFieldsToCreate;
+    }
+
+    public void createAddOffRequest(HashMap<String, String> fieldsAndValues) {
+        Admin.getListOfRequests().add(new AddOffRequest(fieldsAndValues));
     }
 
     // view balance panel

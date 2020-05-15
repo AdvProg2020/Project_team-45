@@ -21,7 +21,7 @@ public class Seller extends User {
         this.company = company;
         listOfOffs = new HashMap<String, Off>();
         availableProducts = new HashMap<>();
-        listOfOffs = new ArrayList<>();
+        listOfOffs = new HashMap<>();
     }
 
     public Company getCompany() {
@@ -48,19 +48,15 @@ public class Seller extends User {
         return balance;
     }
 
+    public Off getOffByOffId(String offId) {
+        return null;
+    }
+
     public void addProduct(Product product, ProductSellInfo productSellInfo) {
 
     }
 
     public void removeProductByProductId(String productId) {
-
-    }
-
-    public Off getOffByOffId(String offId) {
-        return null;
-    }
-
-    public void addOff(Off off) {
 
     }
 

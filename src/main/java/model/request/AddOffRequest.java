@@ -1,17 +1,11 @@
 package model.request;
 
-import model.Off;
+import java.util.HashMap;
 
 public class AddOffRequest extends Request{
-    private Off off;
 
-    public AddOffRequest(String requestId, Off off) {
-        super(requestId);
-        this.off = off;
-    }
-
-    public Off getOff() {
-        return off;
+    public AddOffRequest(HashMap<String, String> fieldsAndValues) {
+        super(fieldsAndValues);
     }
 
     @Override

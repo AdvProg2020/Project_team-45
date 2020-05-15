@@ -1,6 +1,6 @@
 package view.nedaei.sellermenu.offsmanagingmenu;
 
-import controller.Controller;
+import controller.UserController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
 
@@ -8,7 +8,7 @@ public class OffsManagingMenu extends ManagingMenu {
     private static OffsManagingMenu instance;
 
     private OffsManagingMenu() {
-        super("offs managing page", null);
+        super("offs managing page");
         this.submenus.put("view (\\w+)", createViewOffByIdPanel());
         this.submenus.put("edit (\\w+)", EditOffPanel.getInstance());
         this.submenus.put("add off", CreateOffPanel.getInstance());
@@ -25,8 +25,9 @@ public class OffsManagingMenu extends ManagingMenu {
         return new Panel("view off by id panel") {
 
             @Override
-            protected void execute() {
-                System.out.println(Controller.getInstance().getSellerOffById(matcher.group(1)));
+            public void execute() {
+                String offDisplay = UserController.getInstance().getSellerOffDisplayById(matcher.group(1));
+                System.out.println(offDisplay == null? "id not found!" : offDisplay);
             }
 
         };

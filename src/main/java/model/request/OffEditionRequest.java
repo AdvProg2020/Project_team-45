@@ -1,24 +1,15 @@
 package model.request;
 
-import model.Off;
+import java.util.HashMap;
 
 public class OffEditionRequest extends Request{
-    private Off off;
     private String offId;
 
-    public OffEditionRequest(String requestId, Off off, String offId) {
-        super(requestId);
-        this.off = off;
+    public OffEditionRequest(String offId, HashMap<String, String> fieldsAndValues) {
+        super(fieldsAndValues);
         this.offId = offId;
     }
 
-    public Off getOff() {
-        return off;
-    }
-
-    public void setOffId(String offId) {
-        this.offId = offId;
-    }
 
     @Override
     public void apply() {

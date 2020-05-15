@@ -1,13 +1,17 @@
 package model.request;
 
+import java.util.HashMap;
+
 public abstract class Request {
     private static Integer newRequestId = 1;
     protected String requestId;
     protected RequestStatus requestStatus;
+    private HashMap<String, String> fieldsAndValues;
 
-    public Request() {
+    public Request(HashMap<String, String> fieldsAndValues) {
         this.requestId = newRequestId.toString();
         newRequestId++;
+        this.fieldsAndValues = fieldsAndValues;
     }
 
     public String getRequestId() {

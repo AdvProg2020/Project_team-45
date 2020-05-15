@@ -5,6 +5,7 @@ import model.user.Seller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Product {
     private final String productId;
@@ -154,6 +155,15 @@ public class Product {
 
     public void updateAverageScoreAfterEditingRate(int oldRate, int newRate) {
 
+    }
+
+
+    public boolean isInOff() {
+        for (Map.Entry<String, SellerInfoForProduct> sellerInfo : sellersList.entrySet()) {
+            if (sellerInfo.getValue().isInOff())
+                return true;
+        }
+        return false;
     }
 
 //    enum ProductStatus {

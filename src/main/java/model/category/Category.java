@@ -1,5 +1,9 @@
 package model.category;
 
+import model.Product;
+
+import java.util.ArrayList;
+
 public abstract class Category {
     private String name;
     private Category parent;
@@ -25,4 +29,12 @@ public abstract class Category {
     public void setParent(Category parent) {
         this.parent = parent;
     }
+
+    public abstract ArrayList<Product> getProductsList();
+
+    public abstract ArrayList<Product> getDiscountedProductsList();
+
+    public abstract boolean isDiscounted();
+
+    public abstract String getType();
 }

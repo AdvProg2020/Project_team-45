@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class AllProductsMenu extends Menu {
     private static final AllProductsMenu instance = new AllProductsMenu();
     private final CategoryController categoryController;
-    ArrayList<String> mainCategories;
 
 
     private AllProductsMenu() {
@@ -16,7 +15,6 @@ public class AllProductsMenu extends Menu {
         submenus.put("view main categories", createViewMainCategoryPanel());
         submenus.put("view subcategories (.+)", createViewSubcategories());
         submenus.put("show category (.+)", CategoryMenu.getInstance());
-        mainCategories = categoryController.getMainCategories();
     }
 
     public static AllProductsMenu getInstance() {
@@ -53,6 +51,7 @@ public class AllProductsMenu extends Menu {
 
     @Override
     protected void show() {
+        ArrayList<String> mainCategories = categoryController.getMainCategories();
         for (String mainCategory : mainCategories) {
             System.out.println(mainCategory);
         }

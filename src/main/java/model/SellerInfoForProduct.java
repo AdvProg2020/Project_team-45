@@ -6,12 +6,12 @@ import model.user.Seller;
 import java.util.HashMap;
 
 public class SellerInfoForProduct {
-    private Seller seller;
+    private final Seller seller;
     private int price;
     private int stock;
     private Off off;
     private int sellCount;
-    private HashMap<Buyer, Integer> allBuyers;
+    private final HashMap<Buyer, Integer> allBuyers;
 
     public SellerInfoForProduct(Seller seller, int price, int stock) {
         this.seller = seller;
@@ -58,5 +58,9 @@ public class SellerInfoForProduct {
 
     public HashMap<Buyer, Integer> getAllBuyers() {
         return allBuyers;
+    }
+
+    public boolean isInOff() {
+        return off != null;
     }
 }

@@ -6,19 +6,20 @@ import java.util.ArrayList;
 
 public class FinalCategory extends Category {
     private ArrayList<String> specialFeatures;
-    private final ArrayList<Product> productList;
+    private final ArrayList<Product> productsList;
 
     public FinalCategory(String name, Category parent, ArrayList<String> specialFeatures) {
         super(name, parent);
-        this.productList = new ArrayList<Product>();
+        this.productsList = new ArrayList<Product>();
     }
 
     public ArrayList<String> getSpecialFeatures() {
         return specialFeatures;
     }
 
-    public ArrayList<Product> getProductList() {
-        return productList;
+    @Override
+    public ArrayList<Product> getProductsList() {
+        return productsList;
     }
 
     public void addSpecialFeature(String newSpecialFeature) {
@@ -35,5 +36,31 @@ public class FinalCategory extends Category {
 
     public boolean removeProduct(Product removeProduct) {
         return false;
+    }
+
+    @Override
+    public ArrayList<Product> getDiscountedProductsList() {
+        ArrayList<Product> discountedProductsList = new ArrayList<Product>();
+        for (Product product : productsList) {
+            if (product.isInOff()) {
+                discountedProductsList.add(product);
+            }
+        }
+        return discountedProductsList;
+    }
+
+    @Override
+    public boolean isDiscounted() {
+        for (Product product : productsList) {
+            if (product.isInOff()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getType() {
+        return "FinalCategory";
     }
 }

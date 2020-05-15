@@ -30,7 +30,7 @@ public class OffsMenu extends ProductSearchMenu {
 
             @Override
             protected void show() {
-                ArrayList<String> submenus = categoryController.getActiveCategoryDiscountedSubmenus();
+                ArrayList<String> submenus = categoryController.getActiveCategoryDiscountedSubcategories();
                 if (submenus.isEmpty()) {
                     System.out.println("This category has no subcategories");
                 }

@@ -53,7 +53,7 @@ public abstract class Menu extends UIPage {
         while (!(input = scanner.nextLine()).equals("back")) {
             UIPage nextUIPage = getUIPageByCommand(input);
             if (nextUIPage != null) {
-                if (nextUIPage.getType().equals("menu")) {
+                if (nextUIPage.getType().equals("Menu")) {
                     Menu nextMenu = (Menu) nextUIPage;
                     if (nextMenu.check()) {
                         MenuManagement.setActiveMenu(nextMenu);
@@ -91,6 +91,6 @@ public abstract class Menu extends UIPage {
 
     @Override
     protected String getType() {
-        return "menu";
+        return "Menu";
     }
 }

@@ -2,17 +2,23 @@ package controller;
 
 import controller.managers.Creator;
 import controller.managers.Editor;
+import model.Market;
+import model.Product;
 import model.category.Category;
+import model.category.ParentCategory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CategoryController implements Editor, Creator {
     private static final CategoryController instance = new CategoryController();
+    private final Market market;
     private Category activeCategory;
     private boolean isOffMenu;
 
     private CategoryController() {
+        market = Market.getInstance();
+        activeCategory = null;
     }
 
     public static CategoryController getInstance() {
@@ -26,7 +32,8 @@ public class CategoryController implements Editor, Creator {
         return null;
     }
 
-    public void editCategory(String name, Category category) {}
+    public void editCategory(String name, Category category) {
+    }
 
     public Category createCategory(String name) {
         return null;
@@ -38,7 +45,8 @@ public class CategoryController implements Editor, Creator {
     public void removeFeatureFromCategory(Category category, String feature) {
     }
 
-    public void setParentOfCategory(Category category, String parentName) {}
+    public void setParentOfCategory(Category category, String parentName) {
+    }
 
     public HashMap<String, String> getAvailableFields() {
         // TODO : hatami
@@ -61,27 +69,70 @@ public class CategoryController implements Editor, Creator {
 
 
     public ArrayList<String> getMainCategories() {
-        return null;
+        ArrayList<String> mainCategoriesName = new ArrayList<String>();
+        ArrayList<Category> mainCategories = market.getMainCategories();
+        for (Category mainCategory : mainCategories) {
+            mainCategoriesName.add(mainCategory.getName());
+        }
+        return mainCategoriesName;
     }
 
-    public ArrayList<String> getSubcategoriesByNameCategory(String nameCategory) {
-        return null;
+    public ArrayList<String> getSubcategoriesByNameCategory(String categoryName) {
+        ArrayList<String> subcategoriesName = new ArrayList<String>();
+        Category mainCategory = market.getMainCategoryByName(categoryName);
+        if (mainCategory == null) {
+            return null;
+        }
+        if (mainCategory.getType().equals("ParentCategory")) {
+            ArrayList<Category> subcategories = ((ParentCategory) mainCategory).getSubcategories();
+            for (Category subcategory : subcategories) {
+                subcategoriesName.add(subcategory.getName());
+            }
+        }
+        return subcategoriesName;
     }
 
     public ArrayList<String> getActiveCategoryProducts() {
-        return null;
+        ArrayList<String> output = new ArrayList<String>();
+        ArrayList<Product> activeCategoryProducts = activeCategory.getProductsList();
+
+        return output;
     }
 
     public ArrayList<String> getActiveCategoryDiscountedProducts() {
-        return null;
+        ArrayList<String> output = new ArrayList<String>();
+        ArrayList<Product> activeCategoryProducts;
+        if (activeCategory == null) {
+            activeCategoryProducts = market.getAllDiscountedProductsList();
+        } else {
+            activeCategoryProducts = activeCategory.getDiscountedProductsList();
+        }
+
+        return output;
     }
 
-    public ArrayList<String> getActiveCategorySubmenus() {
-        return null;
+    public ArrayList<String> getActiveCategorySubcategories() {
+        ArrayList<String> subcategoriesName = new ArrayList<String>();
+        if (activeCategory.getType().equals("ParentCategory")) {
+            ArrayList<Category> subcategories = ((ParentCategory) activeCategory).getSubcategories();
+            for (Category subcategory : subcategories) {
+                subcategoriesName.add(subcategory.getName());
+            }
+        }
+        return subcategoriesName;
     }
 
-    public ArrayList<String> getActiveCategoryDiscountedSubmenus() {
-        return null;
+    public ArrayList<String> getActiveCategoryDiscountedSubcategories() {
+        ArrayList<String> subcategoriesName = new ArrayList<String>();
+        if (activeCategory.getType().equals("ParentCategory")) {
+            ArrayList<Category> subcategories = ((ParentCategory) activeCategory).getSubcategories();
+            for (Category subcategory : subcategories) {
+                if(subcategory.isDiscounted()) {
+                    subcategoriesName.add(subcategory.getName());
+                }
+            }
+        }
+        return subcategoriesName;
     }
 
     public void changeIsOffMenuToTrue() { //name?!
@@ -93,12 +144,17 @@ public class CategoryController implements Editor, Creator {
     }
 
     public boolean setActiveCategoryByName(String name) {
-        return true;
+        Category category = market.getCategoryByName(name);
+        if (category != null && (category.getParent() == activeCategory || (activeCategory == null && category.getParent().getParent() == null))) {
+            activeCategory = category;
+            return true;
+        }
+        return false;
     }
 
     public void backCategory() {
         if (activeCategory != null) {
-
+            activeCategory = activeCategory.getParent();
         }
     }
 

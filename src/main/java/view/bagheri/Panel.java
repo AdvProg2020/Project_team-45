@@ -14,6 +14,6 @@ public abstract class Panel extends UIPage {
 
     @Override
     protected String getType () {
-        return "panel";
+        return "Panel";
     }
 }

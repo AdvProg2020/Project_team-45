@@ -13,14 +13,16 @@ public class Market {
     private final ArrayList<User> allUsers;
     private final ArrayList<CodedDiscount> allCodedDiscounts;
     private final ArrayList<Category> allCategories;
+    private final ArrayList<Category> mainCategories;
     private final ArrayList<Product> allProducts;
     private boolean hasAdmin;
 
     private Market() {
-        allUsers = new ArrayList<>();
-        allCategories = new ArrayList<>();
-        allCodedDiscounts = new ArrayList<>();
-        allProducts = new ArrayList<>();
+        allUsers = new ArrayList<User>();
+        allCodedDiscounts = new ArrayList<CodedDiscount>();
+        allCategories = new ArrayList<Category>();
+        mainCategories = new ArrayList<Category>();
+        allProducts = new ArrayList<Product>();
     }
 
     public static Market getInstance() {
@@ -53,8 +55,21 @@ public class Market {
         return allCategories;
     }
 
+    public ArrayList<Category> getMainCategories() {
+        return mainCategories;
+    }
+
     public ArrayList<CodedDiscount> getAllCodedDiscounts() {
         return allCodedDiscounts;
+    }
+
+    public Category getMainCategoryByName(String name) {
+        for (Category mainCategory : mainCategories) {
+            if (mainCategory.getName().equals(name)) {
+                return mainCategory;
+            }
+        }
+        return null;
     }
 
     public User getUserByUsername(String username) {
@@ -81,7 +96,22 @@ public class Market {
         return null;
     }
 
+    public ArrayList<Product> getAllDiscountedProductsList() {
+        ArrayList<Product> allDiscountedProductsList = new ArrayList<Product>();
+        for (Product product : allProducts) {
+            if (product.isInOff()) {
+                allDiscountedProductsList.add(product);
+            }
+        }
+        return allDiscountedProductsList;
+    }
+
     public Category getCategoryByName(String name) {
+        for (Category category : allCategories) {
+            if (category.getName().equals(name)) {
+                return category;
+            }
+        }
         return null;
     }
 

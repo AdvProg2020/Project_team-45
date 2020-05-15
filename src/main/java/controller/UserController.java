@@ -3,7 +3,9 @@ package controller;
 import model.Company;
 import model.Product;
 import model.log.SellLog;
+import model.request.AddProductRequest;
 import model.request.ProductEditionRequest;
+import model.request.RemoveProductRequest;
 import model.user.Admin;
 import model.user.PersonalInfo;
 import model.user.Seller;
@@ -16,12 +18,21 @@ import java.util.HashMap;
 public class UserController {
     private static final UserController instance = new UserController();
     private User activeUser;
+
     // seller:
     private ArrayList<String> productAvailableFieldsToEdit;
+    private ArrayList<String> existingProductFieldsToCreate;
+    private ArrayList<String> newProductFieldsToCreate;
 
     private UserController() {
-        String[] temp = {"price", "stock", "off"}; // off can be changed by entering new off id
-        this.productAvailableFieldsToEdit.addAll(Arrays.asList(temp));
+        this.productAvailableFieldsToEdit = new ArrayList<String>();
+        this.productAvailableFieldsToEdit.addAll(Arrays.asList("price", "stock", "offId"));
+
+        this.existingProductFieldsToCreate = new ArrayList<String>();
+        this.existingProductFieldsToCreate.addAll(Arrays.asList("productId", "price", "stock", "offId('-' for none)"));
+        this.newProductFieldsToCreate = new ArrayList<String>();
+        this.newProductFieldsToCreate.addAll(Arrays.asList("name", "category", "description", "price", "stock"
+                , "offId ('-' for none)"));
     }
 
     public static UserController getInstance() {
@@ -88,16 +99,19 @@ public class UserController {
         return result.toString();
     }
 
-    // 2.1. products managing menu
+    public Product getAvailableProductById(String productId) {
+        return ((Seller) activeUser).getAvailableProductById(productId);
+    }
+
+    // products managing menu
 
     public String getSellerProductDisplayById(String productId) {
-        Product product = ((Seller) activeUser).getAvailableProductById(productId);
-        if (product == null) {  // TODO: throw exception
+        Product product = getAvailableProductById(productId);
+        if (product == null) {
             return null;
         }
         return "productId = '" + product.getProductId() + "'\n" +
                 "name = '" + product.getName() + "'\n" +
-                "company = " + product.getCompany().getName() + "\n" +
                 "productStatus = " + product.getProductStatus() + "\n" +
                 "minimumPrice = " + product.getMinimumPrice() + "\n" +
                 "category = " + product.getCategory().getName() + "\n" +
@@ -108,64 +122,60 @@ public class UserController {
                         .getSellCount();
     }
 
-    public String getSellerProductAllBuyersDisplayById(String productId) { // TODO: throw exception
-        return "" + ((Seller) activeUser).getAvailableProductById(productId)
-                .getSellerInfoForProductByUsername(activeUser.getPersonalInfo().getUsername()).getAllBuyers();
+    public String getSellerProductAllBuyersDisplayById(String productId) {
+        Product product = getAvailableProductById(productId);
+        if (product == null) {
+            return null;
+        }
+        return "" + product.getSellerInfoForProductByUsername(activeUser.getPersonalInfo().getUsername()).getAllBuyers();
+    }
+
+    public boolean isProductFieldAvailableToEdit(String productId, String field) {
+        return (productAvailableFieldsToEdit.contains(field)
+                || getAvailableProductById(productId).getCategoryFeatures().keySet().contains(field));
     }
 
     public void createProductEditionRequest(String productId, HashMap<String, String> fieldsAndValues) {
-        Admin.getListOfRequests().add(new ProductEditionRequest(productId, fieldsAndValues)); // TODO: throw exception
+        Admin.getListOfRequests().add(new ProductEditionRequest(productId, fieldsAndValues));
     }
 
     public String getProductAvailableFieldsToEditDisplay() {
         return "" + productAvailableFieldsToEdit;
     }
 
+    // add product panel
+
+    public ArrayList<String> getExistingProductFieldsToCreate() {
+        return existingProductFieldsToCreate;
+    }
+
+    public ArrayList<String> getNewProductFieldsToCreate() {
+        return newProductFieldsToCreate;
+    }
+
+    public void createAddProductRequest(HashMap<String, String> fieldsAndValues) {
+        Admin.getListOfRequests().add(new AddProductRequest(fieldsAndValues));
+    }
+
+    // remove product panel
+
+    public void createRemoveProductRequest(String productId) {
+        if (getAvailableProductById(productId) == null) {
+            return;
+        }
+        Admin.getListOfRequests().add(new RemoveProductRequest(productId));
+    }
+
+    // view balance panel
+
+    public int getSellerBalance() {
+        return ((Seller)activeUser).getBalance();
+    }
+
     //================================================================================
-    // buyer menu operations
+    // 3. buyer menu operations
     //================================================================================
 
-//    public User createUser() {
-//        return null;
-//    }
-//
-//    public void setFieldOfUserOrDownCast(User user, String field, String value) {}
-//
-//    public User loginUserByUsernameAndPassword(String username, String password) {
-//        return null;
-//    }
-//
-//    public User getUserByUsername(String username) {
-//        return null;
-//    }
-//
-//    public void deleteUserByUsername(String username) {
-//    }
-//
-//    public void acceptOrDeclineRequest(String requestId, String statusToSet) {
-//    }
-//
-//    public ArrayList<SellLog> getSellerSalesHistory(User user) {
-//        return null;
-//    }
-//
-//    public Product getSellerProductById(String productId) {
-//        return null;
-//    }
-//
-//    public ArrayList<BuyLog> getBuyerOrders(User user) {
-//        return null;
-//    }
-//
-//    public ArrayList<CodedDiscount> getBuyerCodedDiscounts(User user) {
-//        return null;
-//    }
-//
-//    public void rateProduct(User user, Product product, int rate) {
-//    }
-//
-//    public void makeCommentRequest(User user, Product product, String title, String content) {
-//    }
 
     public boolean logout() {
         return false;

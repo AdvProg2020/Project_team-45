@@ -1,10 +1,11 @@
 package view.nedaei.sellermenu;
 
+import controller.CategoryController;
 import controller.UserController;
 import view.bagheri.Panel;
 import view.nedaei.UserMenu;
 import view.nedaei.sellermenu.offsmanagingmenu.OffsManagingMenu;
-import view.nedaei.sellermenu.productsmanagingmenu.CreateProductPanel;
+import view.nedaei.sellermenu.productsmanagingmenu.AddProductPanel;
 import view.nedaei.sellermenu.productsmanagingmenu.ProductsManagingMenu;
 
 public class SellerMenu extends UserMenu {
@@ -15,8 +16,8 @@ public class SellerMenu extends UserMenu {
         this.submenus.put("view company information", createViewCompanyInfoPanel());
         this.submenus.put("view sales history", createViewSalesHistoryPanel());
         this.submenus.put("manage products", ProductsManagingMenu.getInstance());
-        this.submenus.put("add product", CreateProductPanel.getInstance());
-        this.submenus.put("remove product (\\w+)", RemoveProductPanel.getInstance()); // TODO: hatami
+        this.submenus.put("add product", AddProductPanel.getInstance());
+        this.submenus.put("remove product (\\w+)", createRemoveProductPanel());
         this.submenus.put("show categories", createShowCategoriesPanel());
         this.submenus.put("view offs", OffsManagingMenu.getInstance());
         this.submenus.put("view balance", createViewBalancePanel());
@@ -51,12 +52,23 @@ public class SellerMenu extends UserMenu {
         };
     }
 
+    private Panel createRemoveProductPanel() {
+        return new Panel("remove product panel") {
+
+            @Override
+            public void execute() {
+                UserController.getInstance().createRemoveProductRequest(matcher.group(1));
+            }
+
+        };
+    }
+
     private Panel createShowCategoriesPanel() {
         return new Panel("show categories panel") {
 
             @Override
             public void execute() {
-                System.out.println(controller.getAllCategoriesList());
+                System.out.println(CategoryController.getInstance().getMainCategories());
             }
 
         };
@@ -67,7 +79,7 @@ public class SellerMenu extends UserMenu {
 
             @Override
             public void execute() {
-                System.out.println(controller.getActiveUser().getBalance());
+                System.out.println(UserController.getInstance().getSellerBalance());
             }
 
         };
@@ -77,4 +89,5 @@ public class SellerMenu extends UserMenu {
     protected void showHelp() {
         System.out.println("");
     }
+
 }

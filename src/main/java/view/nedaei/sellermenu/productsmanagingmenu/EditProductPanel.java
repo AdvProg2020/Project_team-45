@@ -1,6 +1,5 @@
 package view.nedaei.sellermenu.productsmanagingmenu;
 
-import controller.Controller;
 import controller.UserController;
 import view.bagheri.Panel;
 import view.nedaei.sellermenu.EditPanelsCommands;
@@ -23,14 +22,23 @@ public class EditProductPanel extends Panel {
     }
 
     @Override
-    protected void execute() {
+    public void execute() {
+        if (UserController.getInstance().getAvailableProductById(this.matcher.group(1)) == null) {
+            System.out.println("id not found!");
+            return;
+        }
         show();
         String input;
         Matcher matcher;
         HashMap<String, String> fieldsAndValues = new HashMap<String, String>();
         while (!(input = scanner.nextLine().trim()).equalsIgnoreCase("done")) {
             if ((matcher = EditPanelsCommands.FIELD_AND_VALUE.getMatcher(input)).find()) {
-                fieldsAndValues.put(matcher.group(1), matcher.group(2));
+                if (UserController.getInstance().isProductFieldAvailableToEdit(this.matcher.group(1)
+                        , matcher.group(1))) {
+                    fieldsAndValues.put(matcher.group(1), matcher.group(2));
+                } else {
+                    System.out.println("invalid field to edit!");
+                }
             } else {
                 System.out.println("invalid command!");
             }

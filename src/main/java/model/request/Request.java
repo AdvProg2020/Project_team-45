@@ -7,10 +7,6 @@ public abstract class Request {
 
     public Request() {
         this.requestId = newRequestId.toString();
-        addNewRequestId();
-    }
-
-    private void addNewRequestId() {
         newRequestId++;
     }
 

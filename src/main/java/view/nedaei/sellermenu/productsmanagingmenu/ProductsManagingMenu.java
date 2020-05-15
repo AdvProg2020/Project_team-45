@@ -8,7 +8,7 @@ public class ProductsManagingMenu extends ManagingMenu {
     private static ProductsManagingMenu instance;
 
     private ProductsManagingMenu() {
-        super("seller products managing page", null);
+        super("seller products managing page");
         this.submenus.put("view (\\w+)", createViewProductByIdPanel());
         this.submenus.put("view buyers (\\w+)", createViewBuyersPanel());
         this.submenus.put("edit (\\w+)", EditProductPanel.getInstance());
@@ -25,9 +25,9 @@ public class ProductsManagingMenu extends ManagingMenu {
         return new Panel("view product by id panel") {
 
             @Override
-            protected void execute() {
+            public void execute() {
                 String productDisplay = UserController.getInstance().getSellerProductDisplayById(matcher.group(1));
-                System.out.println(productDisplay == null? "not found!" : productDisplay);
+                System.out.println(productDisplay == null? "id not found!" : productDisplay);
             }
 
         };
@@ -37,8 +37,10 @@ public class ProductsManagingMenu extends ManagingMenu {
         return new Panel("view buyers panel") {
 
             @Override
-            protected void execute() {
-                System.out.println(UserController.getInstance().getSellerProductAllBuyersDisplayById(matcher.group(1)));
+            public void execute() {
+                String productAllBuyersDisplay = UserController.getInstance()
+                        .getSellerProductAllBuyersDisplayById(matcher.group(1));
+                System.out.println(productAllBuyersDisplay == null? "id not found!" : productAllBuyersDisplay);
             }
 
         };

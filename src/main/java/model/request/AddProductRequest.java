@@ -3,16 +3,14 @@ package model.request;
 import model.Off;
 import model.Product;
 
+import java.util.HashMap;
+
 public class AddProductRequest extends Request {
-    private Product product;
+    private HashMap<String, String> fieldsAndValues;
 
-    public AddProductRequest(String requestId, Product product) {
-        super(requestId);
-        this.product = product;
-    }
-
-    public Product getProduct() {
-        return product;
+    public AddProductRequest(HashMap<String, String> fieldsAndValues) {
+        super();
+        this.fieldsAndValues = fieldsAndValues;
     }
 
     @Override

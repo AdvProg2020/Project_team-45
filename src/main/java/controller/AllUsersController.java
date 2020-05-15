@@ -2,6 +2,7 @@ package controller;
 
 import controller.managers.Deleter;
 import model.Market;
+import model.Product;
 import model.user.Admin;
 import model.user.Buyer;
 import model.user.Seller;
@@ -53,27 +54,42 @@ public class AllUsersController implements Deleter {
         User user = market.getUserByUsername(Id);
         if (user.equals(activeUser))
             throw new Exception("cannot delete yourself!");
-        if (user.getRole().equals("buyer"))
-            deleteBuyer((Buyer) user);
-        else if (user.getRole().equals("seller"))
-            deleteSeller((Seller) user);
-        else if (user.getRole().equals("admin"))
-            deleteAdmin((Admin) user);
+        switch (user.getRole()) {
+            case "buyer":
+                deleteBuyer((Buyer) user);
+                break;
+            case "seller":
+                deleteSeller((Seller) user);
+                break;
+            case "admin":
+                deleteAdmin((Admin) user);
+                break;
+            default:
+                market.removeUserFromAllUsers(user);
+        }
+
     }
 
     private void deleteAdmin(Admin admin) {
-        market.removeUserFromAllUsers(admin);
     }
 
     private void deleteSeller(Seller seller) {
-        removeFromProducts(seller);
+        removeSellerFromProducts(seller);
+        removeSellerFromOffs(seller);
     }
 
-    private void removeFromProducts(Seller seller) {
-        seller.
+    private void removeSellerFromOffs(Seller seller) {
+        for (String offId : seller.getListOfOffs().keySet()) {
+            market.removeOffById(offId);
+        }
+    }
+
+    private void removeSellerFromProducts(Seller seller) {
+        for (Product product : seller.getAvailableProducts().keySet()) {
+            product.removeSeller(seller);
+        }
     }
 
     private void deleteBuyer(Buyer buyer) {
-        market.removeUserFromAllUsers(buyer);
     }
 }

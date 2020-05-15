@@ -11,7 +11,7 @@ public class Product {
     private String name;
     private Company company;
     private String productStatus;
-    private HashMap<String, ProductSellInfo> sellersList;
+    private HashMap<Seller, ProductSellInfo> sellersList;
     private int minimumPrice;
     private Category category;
     private final HashMap<String, String> categoryFeatures;
@@ -34,6 +34,7 @@ public class Product {
 
     public ProductSellInfo getSellerInfoForProductByUsername(String sellerUsername) {
         return sellersList.get(sellerUsername);
+        // minimum price should be updated
     }
 
     public int getMinimumPrice() {
@@ -120,8 +121,8 @@ public class Product {
 
     }
 
-    public boolean removeSeller(Seller seller) {
-        return false;
+    public void removeSeller(Seller seller) {
+        sellersList.remove(seller);
     }
 
     public boolean removeCategoryFeatures(String feature, String measure) {

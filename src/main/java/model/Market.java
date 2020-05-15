@@ -4,7 +4,6 @@ import model.category.Category;
 import model.user.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Market {
     private static Market marketInstance;
@@ -101,8 +100,8 @@ public class Market {
         return null;
     }
 
-    public void deleteUserByUsername(String username) {
-
+    public void removeUserFromAllUsers(String username) {
+        allUsers.remove(getUserByUsername(username));
     }
 
     public void removeProductByProductId(String productId) {

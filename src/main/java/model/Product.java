@@ -11,7 +11,7 @@ public class Product {
     private String name;
     private Company company;
     private String productStatus;
-    private HashMap<String, SellerInfoForProduct> sellersList;
+    private HashMap<String, ProductSellInfo> sellersList;
     private int minimumPrice;
     private Category category;
     private final HashMap<String, String> categoryFeatures;
@@ -36,7 +36,7 @@ public class Product {
         return
     }
 
-    public SellerInfoForProduct getSellerInfoForProductByUsername(String sellerUsername) {
+    public ProductSellInfo getSellerInfoForProductByUsername(String sellerUsername) {
         return sellersList.get(sellerUsername);
     }
 
@@ -60,7 +60,7 @@ public class Product {
         return productStatus;
     }
 
-    public ArrayList<SellerInfoForProduct> getSellersList() {
+    public ArrayList<ProductSellInfo> getSellersList() {
         return sellersList;
     }
 
@@ -108,7 +108,7 @@ public class Product {
         this.description = description;
     }
 
-    public void addSeller(SellerInfoForProduct sellerInfoForProduct) {
+    public void addSeller(ProductSellInfo productSellInfo) {
 
     }
 

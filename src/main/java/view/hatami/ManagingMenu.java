@@ -5,7 +5,6 @@ import controller.managers.*;
 import view.bagheri.Menu;
 import view.bagheri.Panel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class ManagingMenu extends Menu {
@@ -52,14 +51,18 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
-                String[] info = printer.printDetailedById(matcher.group(1)).split(",");
-                StringBuilder output = new StringBuilder();
-                for (int count = 0; count < info.length; count++) {
-                    output.append(String.format("%-20s", info[count]));
-                    if (count % 3 == 2)
-                        output.append("\n");
+                try {
+                    String[] info = printer.printDetailedById(matcher.group(1)).split(",");
+                    StringBuilder output = new StringBuilder();
+                    for (int count = 0; count < info.length; count++) {
+                        output.append(String.format("%-20s", info[count]));
+                        if (count % 3 == 2)
+                            output.append("\n");
+                    }
+                    System.out.println(output);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
-                System.out.println(output);
             }
 
             public Panel setPrinter(Printer printer) {
@@ -75,7 +78,12 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
-                this.deleter.deleteItemById(matcher.group(1));
+                try {
+                    this.deleter.deleteItemById(matcher.group(1));
+                    System.out.println(matcher.group(1) + " deleted successfully!");
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
 
             public Panel setManager(Deleter deleter) {

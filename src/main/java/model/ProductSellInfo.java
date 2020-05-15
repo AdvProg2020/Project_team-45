@@ -5,15 +5,17 @@ import model.user.Seller;
 
 import java.util.HashMap;
 
-public class SellerInfoForProduct {
+public class ProductSellInfo {
     private Seller seller;
+    private Product product;
     private int price;
     private int stock;
     private Off off;
     private int sellCount;
     private HashMap<Buyer, Integer> allBuyers;
 
-    public SellerInfoForProduct(Seller seller, int price, int stock) {
+    public ProductSellInfo(Product product, Seller seller, int price, int stock) {
+        this.product = product;
         this.seller = seller;
         this.price = price;
         this.stock = stock;
@@ -58,5 +60,15 @@ public class SellerInfoForProduct {
 
     public HashMap<Buyer, Integer> getAllBuyers() {
         return allBuyers;
+    }
+
+    @Override
+    public ProductSellInfo clone() {
+        try {
+            return (ProductSellInfo) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

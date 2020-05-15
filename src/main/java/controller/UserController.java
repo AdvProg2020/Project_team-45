@@ -70,7 +70,7 @@ public class UserController {
         return "log id = '" + sellLog.getLog().getLogId() + "'\n" +
                 "date = " + sellLog.getLog().getDate() + "\n" +
                 "buyerUsername = '" + sellLog.getBuyerUsername() + "'\n" +
-                "listOfProducts = '" + sellLog.getLog().getListOfProducts() + "'\n" +
+                "listOfProducts = '" + sellLog.getLog().getSellingProducts() + "'\n" +
                 "offAmount = '" + sellLog.getOffAmount() + "'\n" +
                 "finalPrice = '" + sellLog.getLog().getFinalPrice() + "'\n" +
                 "address = '" + sellLog.getLog().getAddress() + "'\n" +

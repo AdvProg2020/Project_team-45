@@ -1,24 +1,37 @@
 package model.log;
 
-import model.Product;
+import model.CodedDiscount;
+import model.ProductSellInfo;
+import model.user.Buyer;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Log {
-    private String logId;
-    private Date date;
-    private ArrayList<Product> listOfProducts;
+    private final String logId;
+    private final Date date;
+    private final Buyer buyer;
+    private ArrayList<ProductSellInfo> sellingProducts;
+    private CodedDiscount appliedDiscount;
+    private int buyerFee;
     private int finalPrice;
-    private String address;
-    private String phoneNumber;
+    private final String address;
+    private final String phoneNumber;
     private String deliveryStatus;
 
-    public Log(String logId, Date date, int finalPrice, String address) {
+    public Log(String logId,Date date, ArrayList<ProductSellInfo> sellingProducts, Buyer buyer, CodedDiscount appliedDiscount, String address, String phoneNumber) {
         this.logId = logId;
         this.date = date;
-        this.finalPrice = finalPrice;
+        this.sellingProducts = new ArrayList<ProductSellInfo>();
+        for (ProductSellInfo productSellInfo : sellingProducts) {
+            this.sellingProducts.add(productSellInfo.clone());
+        }
+        this.buyer = buyer;
+        this.appliedDiscount = appliedDiscount.clone();
+        this.finalPrice = calculateFinalPrice();
+        this.buyerFee = calculateBuyerFee();
         this.address = address;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getLogId() {
@@ -29,8 +42,8 @@ public class Log {
         return date;
     }
 
-    public ArrayList<Product> getListOfProducts() {
-        return listOfProducts;
+    public ArrayList<ProductSellInfo> getSellingProducts() {
+        return sellingProducts;
     }
 
     public int getFinalPrice() {
@@ -47,6 +60,21 @@ public class Log {
 
     public String getDeliveryStatus() {
         return deliveryStatus;
+    }
+
+    @Override
+    protected Log clone() throws CloneNotSupportedException {
+        return (Log) super.clone();
+    }
+
+    public int calculateFinalPrice(){
+        // TODO
+        return 0;
+    }
+
+    private int calculateBuyerFee() {
+        // TODO
+        return 0;
     }
 
     public void sendOrder(){

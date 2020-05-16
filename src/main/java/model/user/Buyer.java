@@ -11,7 +11,7 @@ public class Buyer extends User implements CartHolder {
     private ArrayList<CodedDiscount> listOfCodedDiscounts;
     private int balance;
     private ArrayList<BuyLog> listOfBuyLogs;
-    private HashMap<Product, Rate> purchasedProducts;
+    private HashMap<String, Rate> purchasedProducts; // productIds and rates
 
     public Buyer(PersonalInfo personalInfo) {
         super(personalInfo);
@@ -42,15 +42,24 @@ public class Buyer extends User implements CartHolder {
         return null;
     }
 
+    public boolean didBuyProduct(String productId) {
+        for (String id : purchasedProducts.keySet()) {
+            if (id.equals(productId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public HashMap<String, Rate> getPurchasedProducts() {
+        return purchasedProducts;
+    }
+
     public boolean canBuy() {
         return false;
     }
 
     public void purchase() {
-    }
-
-    public BuyLog getOrderByOrderId(String orderId) {
-        return null;
     }
 
     public void rateProduct(Product product, Rate rate) {

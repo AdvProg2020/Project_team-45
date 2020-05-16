@@ -271,13 +271,11 @@ public class UserController {
     }
 
     public boolean canPurchase() {
-        Buyer buyer = (Buyer)activeUser;
-        return buyer.getCart().getTotalPrice() <= buyer.getBalance();
+        return ((Buyer)activeUser).getCart().getTotalPrice() <= ((Buyer)activeUser).getBalance();
     }
 
     public void purchase() {
-        Buyer buyer = (Buyer)activeUser;
-        // TODO: nedaei
+
     }
 
     // orders managing menu
@@ -287,7 +285,53 @@ public class UserController {
         if (buyLog == null) {
             return null;
         }
-        return
+        return "date = " + buyLog.getMainLog().getDate() + "\n" +
+                "buyerUsername = '" + buyLog.getMainLog().getBuyerUsername() + '\'' + "\n" +
+                "sellingProducts = " + buyLog.getMainLog().getSellingProducts() + "\n" +
+                "appliedDiscount = " + buyLog.getMainLog().getAppliedDiscountPercentage() + "\n" +
+                "finalPrice = " + buyLog.getMainLog().getFinalPrice() + "\n" +
+                "address = '" + buyLog.getMainLog().getAddress() + '\'' + "\n" +
+                "phoneNumber = '" + buyLog.getMainLog().getPhoneNumber() + '\'' + "\n" +
+                "deliveryStatus = '" + buyLog.getMainLog().getDeliveryStatus() + '\'';
+    }
+
+    public boolean didBuyerBuyProduct(String productId) {
+        return ((Buyer)activeUser).didBuyProduct(productId);
+    }
+
+    public void rateProductById(String productId, int score) {
+        Rate rate = new Rate(((Buyer)activeUser), score, productId);
+        ((Buyer)activeUser).getPurchasedProducts().put(productId, rate);
+        Market.getInstance().getProductById(productId).addRate(rate);
+    }
+
+    public ArrayList<String> getBuyerBuyLogs() {
+        Buyer buyer = ((Buyer)activeUser);
+        ArrayList<String> result = new ArrayList<>();
+        for (BuyLog buyLog : buyer.getListOfBuyLogs()) {
+            result.add(buyLog.getMainLog().getLogId() + buyLog.getMainLog().getDate() + buyLog.getMainLog().getFinalPrice());
+        }
+        return result;
+    }
+
+    // view balance panel
+
+    public int getBuyerBalance() {
+        return ((Buyer)activeUser).getBalance();
+    }
+
+    // view discount codes panel
+
+    public ArrayList<String> getBuyerCodedDiscountsDisplay() {
+        ArrayList<String> result = new ArrayList<>();
+        Buyer buyer = ((Buyer)activeUser);
+        for (CodedDiscount codedDiscount : buyer.getListOfCodedDiscounts()) {
+            result.add("code = '" + codedDiscount.getCode() + '\'' +
+                    " startDate = " + codedDiscount.getStartDate() +
+                    " endDate = " + codedDiscount.getEndDate() +
+                    " percentage = " + codedDiscount.getPercentage());
+        }
+        return result;
     }
 
     public boolean logout() {

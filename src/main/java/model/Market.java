@@ -26,12 +26,12 @@ public class Market {
         allCodedDiscounts = new ArrayList<>();
         allProducts = new ArrayList<>();
         allLogs = new ArrayList<>();
-        allOffs = new ArrayList<>();
-        allUsers = new ArrayList<User>();
-        allCodedDiscounts = new ArrayList<CodedDiscount>();
-        allCategories = new ArrayList<Category>();
-        mainCategories = new ArrayList<Category>();
-        allProducts = new ArrayList<Product>();
+        allOffs = new HashMap<>();
+        allUsers = new ArrayList<>();
+        allCodedDiscounts = new ArrayList<>();
+        allCategories = new ArrayList<>();
+        mainCategories = new ArrayList<>();
+        allProducts = new ArrayList<>();
     }
 
     public static Market getInstance() {
@@ -125,6 +125,15 @@ public class Market {
 
     public boolean isDiscountCodeValid(String discountCode) {
         return false;
+    }
+
+    public Product getProductById(String productId) {
+        for (Product product : allProducts) {
+            if (product.getProductId().equals(productId)) {
+                return product;
+            }
+        }
+        return null;
     }
 
     public Category getCategoryByName(String name) {

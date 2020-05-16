@@ -1,6 +1,7 @@
 package view.nedaei.buyermenu;
 
 import controller.Controller;
+import controller.UserController;
 import view.bagheri.Panel;
 import view.nedaei.UserMenu;
 
@@ -28,7 +29,7 @@ public class BuyerMenu extends UserMenu {
 
             @Override
             public void execute() {
-                System.out.println(Controller.getInstance().getActiveUser().getBalance());
+                System.out.println(UserController.getInstance().getBuyerBalance());
             }
 
         };
@@ -39,7 +40,7 @@ public class BuyerMenu extends UserMenu {
 
             @Override
             public void execute() {
-                System.out.println(Controller.getInstance().getActiveUser().getListOfCodedDiscounts());
+                System.out.println(UserController.getInstance().getBuyerCodedDiscountsDisplay());
             }
 
         };

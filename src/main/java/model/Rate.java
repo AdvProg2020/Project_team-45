@@ -5,20 +5,20 @@ import model.user.Buyer;
 public class Rate {
     private Buyer buyer;
     private int score;
-    private Product product;
+    private String productId;
 
-    public Rate(Buyer user, int score, Product product) {
+    public Rate(Buyer user, int score, String productId) {
         this.buyer = user;
         this.score = score;
-        this.product = product;
+        this.productId = productId;
     }
 
     public int getScore() {
         return score;
     }
 
-    public Product getProduct() {
-        return product;
+    public String getProductId() {
+        return productId;
     }
 
     public void setScore(int score) {

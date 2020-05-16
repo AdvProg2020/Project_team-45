@@ -36,12 +36,12 @@ public class OrdersManagingMenu extends ManagingMenu {
         return new Panel("rate product by id panel") {
 
             @Override
-            protected void execute() {
-                if (!Controller.getInstance().didBuyerBuyProduct(matcher.group(1))) {
+            public void execute() {
+                if (!UserController.getInstance().didBuyerBuyProduct(matcher.group(1))) {
                     System.out.println("is not among your orders");
                     return;
                 }
-                Controller.getInstance().rateProductById(matcher.group(1), Integer.parseInt(matcher.group(2)));
+                UserController.getInstance().rateProductById(matcher.group(1), Integer.parseInt(matcher.group(2)));
             }
 
         };
@@ -54,7 +54,7 @@ public class OrdersManagingMenu extends ManagingMenu {
 
     @Override
     protected void show() {
-        System.out.println(Controller.getInstance().getBuyerBuyLogs());
+        System.out.println(UserController.getInstance().getBuyerBuyLogs());
     }
 
 }

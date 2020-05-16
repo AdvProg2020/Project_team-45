@@ -1,12 +1,14 @@
 package controller;
 
 import controller.managers.Deleter;
+import model.Market;
 import model.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProductController implements Deleter {
+    private Market market;
     private MainController mainController;
     private Product activeProduct;
     private static final ProductController instance = new ProductController();
@@ -14,6 +16,7 @@ public class ProductController implements Deleter {
 
     public ProductController(MainController mainController) {
         this.mainController = mainController;
+        this.market = Market.getInstance();
     }
 
     private ProductController() {
@@ -77,16 +80,22 @@ public class ProductController implements Deleter {
     }
 
     public void deleteItemById(String Id) {
-        // TODO : hatami
+        Product product = market.getProductById(Id);
     }
 
     public String getAllInListAsString() {
-        // TODO : hatami
-        return null;
+        ArrayList<Product> allProducts = market.getAllProducts();
+        StringBuilder output = new StringBuilder();
+        output.append("product Id,product name\n");
+        for (Product product : allProducts) {
+            String productInfo = product.getProductId() + "," + product.getName() + "\n";
+            output.append(productInfo);
+        }
+        return output.toString();
     }
 
     public String printDetailedById(String Id) {
-        // TODO : hatami
+        // not involved yet //
         return null;
     }
 }

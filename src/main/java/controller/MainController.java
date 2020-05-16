@@ -1,13 +1,11 @@
 package controller;
 
-import model.ProductFilters;
 import model.user.User;
-
-import java.util.HashMap;
 
 public class MainController {
     private static MainController instance;
     private boolean loggedIn;
+    static User activeUser;
 
     private MainController() {
         this.loggedIn = false;

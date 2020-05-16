@@ -30,15 +30,20 @@ public class AllUsersController implements Deleter {
         StringBuilder buyersString = new StringBuilder();
         StringBuilder sellersString = new StringBuilder();
         for (User user : allUsers) {
-            if (user.equals(activeUser))
+            if (user.equals(MainController.activeUser))
                 continue;
             String userInfo = user.getPersonalInfo().getUsername() + "," + user.getRole() + "\n";
-            if (user.getRole().equals("admin"))
-                adminsString.append(userInfo);
-            else if (user.getRole().equals("buyer"))
-                buyersString.append(userInfo);
-            else if (user.getRole().equals("seller"))
-                sellersString.append(userInfo);
+            switch (user.getRole()) {
+                case "admin":
+                    adminsString.append(userInfo);
+                    break;
+                case "buyer":
+                    buyersString.append(userInfo);
+                    break;
+                case "seller":
+                    sellersString.append(userInfo);
+                    break;
+            }
         }
         return "username,role\n" + adminsString + sellersString + buyersString;
     }
@@ -52,7 +57,7 @@ public class AllUsersController implements Deleter {
 
     public void deleteItemById(String Id) throws Exception {
         User user = market.getUserByUsername(Id);
-        if (user.equals(activeUser))
+        if (user.equals(MainController.activeUser))
             throw new Exception("cannot delete yourself!");
         switch (user.getRole()) {
             case "buyer":
@@ -73,6 +78,9 @@ public class AllUsersController implements Deleter {
     private void deleteAdmin(Admin admin) {
     }
 
+    private void deleteBuyer(Buyer buyer) {
+    }
+
     private void deleteSeller(Seller seller) {
         removeSellerFromProducts(seller);
         removeSellerFromOffs(seller);
@@ -88,8 +96,5 @@ public class AllUsersController implements Deleter {
         for (Product product : seller.getAvailableProducts().keySet()) {
             product.removeSeller(seller);
         }
-    }
-
-    private void deleteBuyer(Buyer buyer) {
     }
 }

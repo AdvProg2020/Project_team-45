@@ -5,7 +5,6 @@ import model.log.Log;
 import model.user.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Market {
     private static Market marketInstance;
@@ -17,21 +16,17 @@ public class Market {
     private final ArrayList<Category> mainCategories;
     private final ArrayList<Product> allProducts;
     private final ArrayList<Log> allLogs;
-    private final HashMap<String, Off> allOffs;
+    private final ArrayList<Off> allOffs;
     private boolean hasAdmin;
 
     private Market() {
-        allUsers = new ArrayList<>();
-        allCategories = new ArrayList<>();
-        allCodedDiscounts = new ArrayList<>();
-        allProducts = new ArrayList<>();
-        allLogs = new ArrayList<>();
-        allOffs = new HashMap<>();
-        allUsers = new ArrayList<>();
-        allCodedDiscounts = new ArrayList<>();
-        allCategories = new ArrayList<>();
-        mainCategories = new ArrayList<>();
-        allProducts = new ArrayList<>();
+        allLogs = new ArrayList<Log>();
+        allOffs = new ArrayList<Off>();
+        allUsers = new ArrayList<User>();
+        allCodedDiscounts = new ArrayList<CodedDiscount>();
+        allCategories = new ArrayList<Category>();
+        mainCategories = new ArrayList<Category>();
+        allProducts = new ArrayList<Product>();
     }
 
     public static Market getInstance() {
@@ -184,7 +179,16 @@ public class Market {
     }
 
     public void removeOffById(String offId) {
-        allOffs.remove(offId);
+        allOffs.removeIf(off -> off.getOffId().equals(offId));
+    }
+
+
+    public Product getProductById(String Id) {
+        for (Product product : allProducts) {
+            if (product.getProductId().equals(Id))
+                return product;
+        }
+        return null;
     }
 }
 

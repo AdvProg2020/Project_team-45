@@ -71,9 +71,13 @@ public class Off {
 
     }
 
+    public boolean equals(Off off) {
+        return off.offId.equals(this.offId);
+    }
+
     enum OffStatus {
         UNDER_REVIEW_FOR_CREATE,
         REVIEW_FOR_EDITING,
-        APPROVED;
+        APPROVED
     }
 }

@@ -1,6 +1,6 @@
 package model;
 
-import model.category.Category;
+import model.category.FinalCategory;
 import model.user.Seller;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class Product {
     private String productStatus;
     private HashMap<Seller, ProductSellInfo> sellersList;
     private int minimumPrice;
-    private Category category;
+    private FinalCategory category;
     private final HashMap<String, String> categoryFeatures;
     private String description;
     private float averageScore;
@@ -23,7 +23,7 @@ public class Product {
     private int sellCount;
     private int seen;
 
-    public Product(String productId, String name, Company company, Category category, String description) {
+    public Product(String productId, String name, Company company, FinalCategory category, String description) {
         this.productId = productId;
         this.name = name;
         this.company = company;
@@ -62,7 +62,7 @@ public class Product {
         return (ArrayList<ProductSellInfo>) sellersList.values();
     }
 
-    public Category getCategory() {
+    public FinalCategory getCategory() {
         return category;
     }
 
@@ -98,7 +98,7 @@ public class Product {
         this.company = company;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(FinalCategory category) {
         this.category = category;
     }
 
@@ -156,7 +156,7 @@ public class Product {
 
 
     public boolean isInOff() {
-        for (Map.Entry<String, SellerInfoForProduct> sellerInfo : sellersList.entrySet()) {
+        for (Map.Entry<Seller, ProductSellInfo> sellerInfo : sellersList.entrySet()) {
             if (sellerInfo.getValue().isInOff())
                 return true;
         }

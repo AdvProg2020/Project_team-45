@@ -32,9 +32,9 @@ public abstract class Category {
 
     public abstract ArrayList<Product> getProductsList();
 
-    public abstract ArrayList<Product> getDiscountedProductsList();
+    public abstract ArrayList<Product> getInOffProductsList();
 
-    public abstract boolean isDiscounted();
+    public abstract boolean hasInOffProduct();
 
     public abstract String getType();
 }

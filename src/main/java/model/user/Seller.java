@@ -64,4 +64,8 @@ public class Seller extends User {
     public String getRole() {
         return "Seller";
     }
+
+    public void removeProductFromSellerList(Product product) {
+        availableProducts.remove(product);
+    }
 }

@@ -75,4 +75,10 @@ public class ProductSellInfo {
             return null;
         }
     }
+
+    public void removeProduct() {
+        seller.removeProductFromSellerList(product);
+        if (isInOff())
+            off.removeProduct(product);
+    }
 }

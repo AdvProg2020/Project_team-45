@@ -105,7 +105,7 @@ public class CategoryController implements Editor, Creator {
         if (activeCategory == null) {
             activeCategoryProducts = market.getAllDiscountedProductsList();
         } else {
-            activeCategoryProducts = activeCategory.getDiscountedProductsList();
+            activeCategoryProducts = activeCategory.getInOffProductsList();
         }
 
         return output;
@@ -127,7 +127,7 @@ public class CategoryController implements Editor, Creator {
         if (activeCategory.getType().equals("ParentCategory")) {
             ArrayList<Category> subcategories = ((ParentCategory) activeCategory).getSubcategories();
             for (Category subcategory : subcategories) {
-                if(subcategory.isDiscounted()) {
+                if(subcategory.hasInOffProduct()) {
                     subcategoriesName.add(subcategory.getName());
                 }
             }

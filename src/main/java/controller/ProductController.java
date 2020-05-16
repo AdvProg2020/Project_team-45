@@ -3,6 +3,7 @@ package controller;
 import controller.managers.Deleter;
 import model.Market;
 import model.Product;
+import model.ProductSellInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,8 @@ public class ProductController implements Deleter {
 //        return null;
 //    }
 
-    public void setFieldOfProduct(Product product, String field, String value) {}
+    public void setFieldOfProduct(Product product, String field, String value) {
+    }
 
     public void deleteProductById(String productId) {
     }
@@ -79,8 +81,23 @@ public class ProductController implements Deleter {
         return false;
     }
 
-    public void deleteItemById(String Id) {
+    public void deleteItemById(String Id) throws Exception {
         Product product = market.getProductById(Id);
+        if (product == null)
+            throw new Exception("wrong Id");
+        removeProductFromSellersList(product);
+        removeProductFromCategory(product);
+        market.removeProductFromAllProductsList(product);
+    }
+
+    private void removeProductFromCategory(Product product) {
+        product.getCategory().removeProduct(product);
+    }
+
+    private void removeProductFromSellersList(Product product) {
+        for (ProductSellInfo sellInfo : product.getSellersList()) {
+            sellInfo.removeProduct();
+        }
     }
 
     public String getAllInListAsString() {

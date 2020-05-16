@@ -59,8 +59,8 @@ public class Off {
 
     }
 
-    public boolean removeProduct(Product product) {
-        return false;
+    public void removeProduct(Product product) {
+        productsList.remove(product);
     }
 
     public void requestForEdition() {

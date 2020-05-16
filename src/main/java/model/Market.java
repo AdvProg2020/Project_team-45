@@ -131,6 +131,8 @@ public class Market {
         return null;
     }
 
+
+
     public Category getCategoryByName(String name) {
         for (Category category : allCategories) {
             if (category.getName().equals(name)) {
@@ -182,13 +184,8 @@ public class Market {
         allOffs.removeIf(off -> off.getOffId().equals(offId));
     }
 
-
-    public Product getProductById(String Id) {
-        for (Product product : allProducts) {
-            if (product.getProductId().equals(Id))
-                return product;
-        }
-        return null;
+    public void removeProductFromAllProductsList(Product product) {
+        allProducts.remove(product);
     }
 }
 

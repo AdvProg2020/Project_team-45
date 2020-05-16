@@ -35,18 +35,18 @@ public class ParentCategory extends Category{
     }
 
     @Override
-    public ArrayList<Product> getDiscountedProductsList() {
+    public ArrayList<Product> getInOffProductsList() {
         ArrayList<Product> discountedProductsList = new ArrayList<Product>();
         for (Category subcategory : subcategories) {
-            discountedProductsList.addAll(subcategory.getDiscountedProductsList());
+            discountedProductsList.addAll(subcategory.getInOffProductsList());
         }
         return discountedProductsList;
     }
 
     @Override
-    public boolean isDiscounted() {
+    public boolean hasInOffProduct() {
         for (Category subcategory : subcategories) {
-            if (subcategory.isDiscounted()) {
+            if (subcategory.hasInOffProduct()) {
                 return true;
             }
         }

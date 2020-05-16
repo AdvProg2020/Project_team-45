@@ -30,16 +30,15 @@ public class FinalCategory extends Category {
 
     }
 
-    public boolean removeSpecialFeature(String specialFeature) {
-        return false;
+    public void removeSpecialFeature(String specialFeature) {
     }
 
-    public boolean removeProduct(Product removeProduct) {
-        return false;
+    public void removeProduct(Product product) {
+        productsList.remove(product);
     }
 
     @Override
-    public ArrayList<Product> getDiscountedProductsList() {
+    public ArrayList<Product> getInOffProductsList() {
         ArrayList<Product> discountedProductsList = new ArrayList<Product>();
         for (Product product : productsList) {
             if (product.isInOff()) {
@@ -50,7 +49,7 @@ public class FinalCategory extends Category {
     }
 
     @Override
-    public boolean isDiscounted() {
+    public boolean hasInOffProduct() {
         for (Product product : productsList) {
             if (product.isInOff()) {
                 return true;

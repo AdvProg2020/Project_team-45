@@ -13,21 +13,24 @@ import java.util.HashMap;
 
 public class UserController {
     private static final UserController instance = new UserController();
+    private final Market market;
     private User activeUser;
     private boolean loggedIn;
 
     // seller:
-    private ArrayList<String> productAvailableFieldsToEdit;
-    private ArrayList<String> existingProductFieldsToCreate;
-    private ArrayList<String> newProductFieldsToCreate;
-    private ArrayList<String> offAvailableFieldsToEdit;
-    private ArrayList<String> offFieldsToCreate;
+    private final ArrayList<String> productAvailableFieldsToEdit;
+    private final ArrayList<String> existingProductFieldsToCreate;
+    private final ArrayList<String> newProductFieldsToCreate;
+    private final ArrayList<String> offAvailableFieldsToEdit;
+    private final ArrayList<String> offFieldsToCreate;
 
     // buyer:
-    private ArrayList<String> buyLogInformationToReceive;
+    private final ArrayList<String> buyLogInformationToReceive;
     private Log log;
 
     private UserController() {
+        this.market = Market.getInstance();
+
         this.productAvailableFieldsToEdit = new ArrayList<>();
         this.productAvailableFieldsToEdit.addAll(Arrays.asList("price", "stock", "offId"));
 
@@ -108,7 +111,7 @@ public class UserController {
         for (SellLog sellLog : listOfSellLogs) {
             result.append(getSellLogDisplay(sellLog) + "\n");
         }
-        result.replace(result.length()-1, result.length(), "");
+        result.replace(result.length() - 1, result.length(), "");
         return result.toString();
     }
 
@@ -132,7 +135,7 @@ public class UserController {
                 "description = '" + product.getDescription() + "'\n" +
                 "averageScore = " + product.getAverageScore() + "\n" +
                 "sellCount = " + product.getSellerInfoForProductByUsername(activeUser.getPersonalInfo().getUsername())
-                        .getSellCount();
+                .getSellCount();
     }
 
     public String getSellerProductAllBuyersDisplayById(String productId) {
@@ -145,7 +148,7 @@ public class UserController {
 
     public boolean isProductFieldAvailableToEdit(String productId, String field) {
         return (productAvailableFieldsToEdit.contains(field)
-                || getSellerAvailableProductById(productId).getCategoryFeatures().keySet().contains(field));
+                || getSellerAvailableProductById(productId).getCategoryFeatures().containsKey(field));
     }
 
     public void createProductEditionRequest(String productId, HashMap<String, String> fieldsAndValues) {
@@ -182,7 +185,7 @@ public class UserController {
     // offs managing menu
 
     private Off getAvailableOffById(String offId) {
-        return ((Seller)activeUser).getOffByOffId(offId);
+        return ((Seller) activeUser).getOffByOffId(offId);
     }
 
     public String getSellerOffDisplayById(String offId) {
@@ -219,7 +222,7 @@ public class UserController {
     // view balance panel
 
     public int getSellerBalance() {
-        return ((Seller)activeUser).getBalance();
+        return ((Seller) activeUser).getBalance();
     }
 
     //================================================================================
@@ -229,21 +232,21 @@ public class UserController {
     // cart managing menu
 
     public HashMap<String, Integer> getCartProductsList() {
-        return  ((Buyer)activeUser).getCart().getProductsDisplay();
+        return ((Buyer) activeUser).getCart().getProductsDisplay();
     }
 
     public void increaseCartProductById(String productId) {
-        Cart cart = ((Buyer)activeUser).getCart();
+        Cart cart = ((Buyer) activeUser).getCart();
         cart.changeProductAmountById(productId, 1);
     }
 
     public void decreaseCartProductById(String productId) {
-        Cart cart = ((Buyer)activeUser).getCart();
+        Cart cart = ((Buyer) activeUser).getCart();
         cart.changeProductAmountById(productId, -1);
     }
 
     public int getCartTotalPrice() {
-        return ((Buyer)activeUser).getCart().getTotalPrice();
+        return ((Buyer) activeUser).getCart().getTotalPrice();
     }
 
     // purchase panel
@@ -257,7 +260,7 @@ public class UserController {
     }
 
     public void createNewLog(HashMap<String, String> fieldsAndValues) {
-        ArrayList<ProductSellInfo> sellingProducts = ((Buyer)activeUser).getCart().getProductSellInfos();
+        ArrayList<ProductSellInfo> sellingProducts = ((Buyer) activeUser).getCart().getProductSellInfos();
         log = new Log(sellingProducts, activeUser.getPersonalInfo().getUsername()
                 , fieldsAndValues.get("address"), fieldsAndValues.get("phoneNumber"));
     }
@@ -271,7 +274,7 @@ public class UserController {
     }
 
     public boolean canPurchase() {
-        return ((Buyer)activeUser).getCart().getTotalPrice() <= ((Buyer)activeUser).getBalance();
+        return ((Buyer) activeUser).getCart().getTotalPrice() <= ((Buyer) activeUser).getBalance();
     }
 
     public void purchase() {
@@ -281,7 +284,7 @@ public class UserController {
     // orders managing menu
 
     public String getBuyerBuyLogDisplayById(String logId) {
-        BuyLog buyLog = ((Buyer)activeUser).getBuyLogById(logId);
+        BuyLog buyLog = ((Buyer) activeUser).getBuyLogById(logId);
         if (buyLog == null) {
             return null;
         }
@@ -296,17 +299,17 @@ public class UserController {
     }
 
     public boolean didBuyerBuyProduct(String productId) {
-        return ((Buyer)activeUser).didBuyProduct(productId);
+        return ((Buyer) activeUser).didBuyProduct(productId);
     }
 
     public void rateProductById(String productId, int score) {
-        Rate rate = new Rate(((Buyer)activeUser), score, productId);
-        ((Buyer)activeUser).getPurchasedProducts().put(productId, rate);
+        Rate rate = new Rate(((Buyer) activeUser), score, productId);
+        ((Buyer) activeUser).getPurchasedProducts().put(productId, rate);
         Market.getInstance().getProductById(productId).addRate(rate);
     }
 
     public ArrayList<String> getBuyerBuyLogs() {
-        Buyer buyer = ((Buyer)activeUser);
+        Buyer buyer = ((Buyer) activeUser);
         ArrayList<String> result = new ArrayList<>();
         for (BuyLog buyLog : buyer.getListOfBuyLogs()) {
             result.add(buyLog.getMainLog().getLogId() + buyLog.getMainLog().getDate() + buyLog.getMainLog().getFinalPrice());
@@ -317,14 +320,14 @@ public class UserController {
     // view balance panel
 
     public int getBuyerBalance() {
-        return ((Buyer)activeUser).getBalance();
+        return ((Buyer) activeUser).getBalance();
     }
 
     // view discount codes panel
 
     public ArrayList<String> getBuyerCodedDiscountsDisplay() {
         ArrayList<String> result = new ArrayList<>();
-        Buyer buyer = ((Buyer)activeUser);
+        Buyer buyer = ((Buyer) activeUser);
         for (CodedDiscount codedDiscount : buyer.getListOfCodedDiscounts()) {
             result.add("code = '" + codedDiscount.getCode() + '\'' +
                     " startDate = " + codedDiscount.getStartDate() +
@@ -334,7 +337,25 @@ public class UserController {
         return result;
     }
 
+
+    public boolean setActiveUserByUsername(String username) {
+        activeUser = market.getUserByUsername(username);
+        return activeUser != null;
+    }
+
+    public boolean login(String password) {
+        if (activeUser.checkPassword(password)) {
+            loggedIn = true;
+            return true;
+        }
+        return false;
+    }
+
     public boolean logout() {
+        if (loggedIn) {
+            loggedIn = false;
+            activeUser = null;
+        }
         return false;
     }
 }

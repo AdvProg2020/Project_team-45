@@ -95,7 +95,9 @@ public class CategoryController implements Editor, Creator {
     public ArrayList<String> getActiveCategoryProducts() {
         ArrayList<String> output = new ArrayList<String>();
         ArrayList<Product> activeCategoryProducts = activeCategory.getProductsList();
-
+        for (Product product : activeCategoryProducts) {
+            // TODO
+        }
         return output;
     }
 
@@ -107,7 +109,9 @@ public class CategoryController implements Editor, Creator {
         } else {
             activeCategoryProducts = activeCategory.getInOffProductsList();
         }
-
+        for (Product product : activeCategoryProducts) {
+            // TODO
+        }
         return output;
     }
 

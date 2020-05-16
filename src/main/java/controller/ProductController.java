@@ -2,17 +2,19 @@ package controller;
 
 import controller.managers.Deleter;
 import model.Market;
+import model.Comment;
 import model.Product;
 import model.ProductSellInfo;
+import model.user.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProductController implements Deleter {
+    private static final ProductController instance = new ProductController();
     private Market market;
     private MainController mainController;
     private Product activeProduct;
-    private static final ProductController instance = new ProductController();
 
 
     public ProductController(MainController mainController) {
@@ -74,7 +76,10 @@ public class ProductController implements Deleter {
     }
 
     public void addComment(String title, String content) {
-
+        User user = null;
+        boolean didUserBuy = false;
+        Comment newComment = new Comment(user, activeProduct, title, content, didUserBuy);
+        activeProduct.addComment(newComment);
     }
 
     public boolean isWithInACategory(String productId) {

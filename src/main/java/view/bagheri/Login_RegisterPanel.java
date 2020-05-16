@@ -19,14 +19,15 @@ public class Login_RegisterPanel extends Panel {
 
     @Override
     public void execute() {
-        if (userController.isUserLoggedIn) {
-            System.out.println();
+        if (userController.isLoggedIn()) {
+            System.out.println("You have already logged in");
             return;
         }
         String inputCommand;
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
             if ((matcher = getMatcher("login (username)", inputCommand)) != null) {
-                login();
+                if(login())
+                    return;
             } else if((matcher = getMatcher("create account (type) (username)", inputCommand)) != null) {
                 registerPanel.execute();
             } else {
@@ -35,15 +36,20 @@ public class Login_RegisterPanel extends Panel {
         }
     }
 
-    private void login() {
-        userController.setActiveUser();
+    private boolean login() {
+        if (!userController.setActiveUserByUsername(matcher.group(1))) {
+            System.out.println("The username is invalid!");
+            return false;
+        }
         String input;
+        System.out.println("Please enter your password.");
         while (!(input = scanner.nextLine()).equals("back")) {
-            if (userController.checkPassword(input)) {
-                System.out.println("invalid command!");
+            if (userController.login(input)) {
+                return true;
             } else {
-                userController.setActiveUser();
+                System.out.println("The password is invalid!");
             }
         }
+        return false;
     }
 }

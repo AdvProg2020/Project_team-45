@@ -1,14 +1,17 @@
 package view.bagheri;
 
 import controller.ProductController;
+import controller.UserController;
 
 public class CommentingPanel extends Panel {
     private static final CommentingPanel instance = new CommentingPanel();
     private final ProductController productController;
+    private final UserController userController;
 
     private CommentingPanel() {
         super("comment panel");
         productController = ProductController.getInstance();
+        userController = UserController.getInstance();
     }
 
     public static CommentingPanel getInstance() {
@@ -21,8 +24,11 @@ public class CommentingPanel extends Panel {
         String inputCommand;
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
             if (inputCommand.equals("Add comment")) {
-                addComment();
-                break;
+                if (userController.isLoggedIn()) {
+                    addComment();
+                } else {
+                    System.out.println("You are not logged in");
+                }
             } else {
                 System.out.println("invalid command!");
             }

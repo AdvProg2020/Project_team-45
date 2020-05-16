@@ -1,16 +1,18 @@
 package model.log;
 
 import model.CodedDiscount;
+import model.Market;
 import model.ProductSellInfo;
-import model.user.Buyer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Log {
+    private static Integer newLogId = 1;
     private final String logId;
     private final Date date;
-    private final Buyer buyer;
+    private final String buyerUsername;
     private ArrayList<ProductSellInfo> sellingProducts;
     private CodedDiscount appliedDiscount;
     private int buyerFee;
@@ -19,15 +21,15 @@ public class Log {
     private final String phoneNumber;
     private String deliveryStatus;
 
-    public Log(String logId,Date date, ArrayList<ProductSellInfo> sellingProducts, Buyer buyer, CodedDiscount appliedDiscount, String address, String phoneNumber) {
-        this.logId = logId;
-        this.date = date;
-        this.sellingProducts = new ArrayList<ProductSellInfo>();
+    public Log(ArrayList<ProductSellInfo> sellingProducts, String buyerUsername, String address, String phoneNumber) {
+        this.logId = newLogId.toString();
+        newLogId++;
+        this.date = Calendar.getInstance().getTime();
+        this.sellingProducts = new ArrayList<>();
         for (ProductSellInfo productSellInfo : sellingProducts) {
             this.sellingProducts.add(productSellInfo.clone());
         }
-        this.buyer = buyer;
-        this.appliedDiscount = appliedDiscount.clone();
+        this.buyerUsername = buyerUsername;
         this.finalPrice = calculateFinalPrice();
         this.buyerFee = calculateBuyerFee();
         this.address = address;
@@ -78,11 +80,15 @@ public class Log {
     }
 
     public String getBuyerUsername() {
-        return buyer.getPersonalInfo().getUsername();
+        return buyerUsername;
     }
 
     public int getAppliedDiscountPercentage() {
         return appliedDiscount.getPercentage();
+    }
+
+    public void setAppliedDiscount(CodedDiscount appliedDiscount) {
+        this.appliedDiscount = appliedDiscount;
     }
 
     public void sendOrder(){

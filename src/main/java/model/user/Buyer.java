@@ -34,6 +34,14 @@ public class Buyer extends User implements CartHolder {
         return listOfBuyLogs;
     }
 
+    public BuyLog getBuyLogById(String logId) {
+        for (BuyLog buyLog : listOfBuyLogs) {
+            if (buyLog.getMainLog().getLogId().equals(logId))
+                return buyLog;
+        }
+        return null;
+    }
+
     public boolean canBuy() {
         return false;
     }

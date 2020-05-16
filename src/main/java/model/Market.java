@@ -123,6 +123,10 @@ public class Market {
         return allDiscountedProductsList;
     }
 
+    public boolean isDiscountCodeValid(String discountCode) {
+        return false;
+    }
+
     public Category getCategoryByName(String name) {
         for (Category category : allCategories) {
             if (category.getName().equals(name)) {

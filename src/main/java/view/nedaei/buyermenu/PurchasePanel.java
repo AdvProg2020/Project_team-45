@@ -1,6 +1,7 @@
 package view.nedaei.buyermenu;
 
 import controller.Controller;
+import controller.UserController;
 import view.bagheri.Login_RegisterPanel;
 import view.bagheri.Panel;
 
@@ -22,8 +23,8 @@ public class PurchasePanel extends Panel {
     }
 
     @Override
-    protected void execute() {
-        if (!Controller.getInstance().isLoggedIn()) {
+    public void execute() {
+        if (!UserController.getInstance().isLoggedIn()) {
             Login_RegisterPanel.getInstance().execute();
         }
         runReceiverInformationPanel();
@@ -36,13 +37,14 @@ public class PurchasePanel extends Panel {
 
             @Override
             public void execute() {
-                ArrayList<String> buyLogInformationToReceive = Controller.getInstance().getBuyLogInformationToReceive());
-                HashMap<String, String> fieldsAndValues = new HashMap<String, String>();
+                ArrayList<String> buyLogInformationToReceive = UserController.getInstance()
+                        .getBuyLogInformationToReceive();
+                HashMap<String, String> fieldsAndValues = new HashMap<>();
                 for (String field : buyLogInformationToReceive) {
                     System.out.println(field + ":");
                     fieldsAndValues.put(field, scanner.nextLine().trim());
                 }
-                Controller.getInstance().createBuyLog(fieldsAndValues);
+                UserController.getInstance().createNewLog(fieldsAndValues);
             }
 
         }.execute();
@@ -58,8 +60,8 @@ public class PurchasePanel extends Panel {
                 while (!(input = scanner.nextLine().trim()).equalsIgnoreCase("no")) {
                     if (input.equalsIgnoreCase("yes")) {
                         System.out.println("discount code:");
-                        if (Controller.getInstance().isDiscountCodeValid(input = scanner.nextLine().trim())) {
-                            Controller.getInstance().applyDiscountCode(input);
+                        if (UserController.getInstance().isDiscountCodeValid(input = scanner.nextLine().trim())) {
+                            UserController.getInstance().applyDiscountCode(input);
                         } else {
                             System.out.println("invalid discount code!");
                         }
@@ -77,12 +79,12 @@ public class PurchasePanel extends Panel {
         new Panel("payment panel") {
 
             @Override
-            protected void execute() {
-                if (!Controller.getInstance().canPurchase()) {
+            public void execute() {
+                if (!UserController.getInstance().canPurchase()) {
                     System.out.println("you do not have enough balance!");
                     return;
                 }
-                Controller.getInstance().purchase();
+                UserController.getInstance().purchase();
             }
 
         }.execute();

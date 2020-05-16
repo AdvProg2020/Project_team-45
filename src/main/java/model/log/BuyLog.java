@@ -15,4 +15,5 @@ public class BuyLog {
 //        super(logId, date, finalPrice, address);
 //        this.sellerUsername = sellerUsername;
 //    }
+
 }

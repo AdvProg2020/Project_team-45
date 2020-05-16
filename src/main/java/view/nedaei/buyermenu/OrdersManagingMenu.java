@@ -1,6 +1,7 @@
 package view.nedaei.buyermenu;
 
 import controller.Controller;
+import controller.UserController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
 
@@ -8,7 +9,7 @@ public class OrdersManagingMenu extends ManagingMenu {
     private static OrdersManagingMenu instance;
 
     public OrdersManagingMenu() {
-        super("order managing panel", null);
+        super("order managing panel");
         this.submenus.put("show order (\\w+)", createShowOrderByIdPanel());
         this.submenus.put("rate (\\w+) ([1-5])", createRateProductByIdPanel());
     }
@@ -24,8 +25,9 @@ public class OrdersManagingMenu extends ManagingMenu {
         return new Panel("show order by id panel") {
 
             @Override
-            protected void execute() {
-                System.out.println(Controller.getInstance().getBuyerBuyLogById(matcher.group(1)));
+            public void execute() {
+                String buyLogDisplay = UserController.getInstance().getBuyerBuyLogDisplayById(matcher.group(1));
+                System.out.println(buyLogDisplay == null? "id not found!" : buyLogDisplay);
             }
         };
     }

@@ -1,6 +1,7 @@
 package view.nedaei.buyermenu;
 
 import controller.Controller;
+import controller.UserController;
 import view.bagheri.Panel;
 import view.bagheri.ProductMenu;
 import view.hatami.ManagingMenu;
@@ -9,9 +10,9 @@ public class CartManagingMenu extends ManagingMenu {
     private static CartManagingMenu instance;
 
     private CartManagingMenu() {
-        super("cart managing page", null);
+        super("cart managing page");
         this.submenus.put("show products", createShowProductsPanel());
-        this.submenus.put("view (\\w+)", ProductMenu.getInstance()); // bagheri should use the id in matcher
+        this.submenus.put("view (\\w+)", ProductMenu.getInstance());
         this.submenus.put("increase (\\w+)", createIncreaseProductByIdPanel());
         this.submenus.put("decrease (\\w+)", createDecreaseProductByIdPanel());
         this.submenus.put("show total price", createShowTotalPricePanel());
@@ -29,8 +30,8 @@ public class CartManagingMenu extends ManagingMenu {
         return new Panel("show products panel") {
 
             @Override
-            protected void execute() {
-                System.out.println(Controller.getInstance().getCartProductsList());
+            public void execute() {
+                System.out.println(UserController.getInstance().getCartProductsList());
             }
 
         };
@@ -40,8 +41,8 @@ public class CartManagingMenu extends ManagingMenu {
         return new Panel("increase product by id panel") {
 
             @Override
-            protected void execute() {
-                Controller.getInstance().increaseCartProductById(matcher.group(1));
+            public void execute() {
+                UserController.getInstance().increaseCartProductById(matcher.group(1));
             }
 
         };
@@ -51,8 +52,8 @@ public class CartManagingMenu extends ManagingMenu {
         return new Panel("decrease product by id panel") {
 
             @Override
-            protected void execute() {
-                Controller.getInstance().decreaseCartProductById(matcher.group(1));
+            public void execute() {
+                UserController.getInstance().decreaseCartProductById(matcher.group(1));
             }
 
         };
@@ -62,8 +63,8 @@ public class CartManagingMenu extends ManagingMenu {
         return new Panel("show total price panel") {
 
             @Override
-            protected void execute() {
-                System.out.println(Controller.getInstance().getCartTotalPrice());
+            public void execute() {
+                System.out.println(UserController.getInstance().getCartTotalPrice());
             }
 
         };
@@ -74,8 +75,9 @@ public class CartManagingMenu extends ManagingMenu {
         System.out.println("");
     }
 
-    @Override
-    protected void show() {
-        System.out.println(Controller.getInstance().getCartProductsList());
-    }
+//    @Override
+//    protected void show() {
+//        System.out.println(UserController.getInstance().getCartProductsList());
+//    }
+
 }

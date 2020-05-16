@@ -1,14 +1,11 @@
 package controller;
 
-import model.Company;
-import model.Off;
-import model.Product;
+import model.*;
+import model.log.BuyLog;
+import model.log.Log;
 import model.log.SellLog;
 import model.request.*;
-import model.user.Admin;
-import model.user.PersonalInfo;
-import model.user.Seller;
-import model.user.User;
+import model.user.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +14,7 @@ import java.util.HashMap;
 public class UserController {
     private static final UserController instance = new UserController();
     private User activeUser;
+    private boolean loggedIn;
 
     // seller:
     private ArrayList<String> productAvailableFieldsToEdit;
@@ -24,6 +22,10 @@ public class UserController {
     private ArrayList<String> newProductFieldsToCreate;
     private ArrayList<String> offAvailableFieldsToEdit;
     private ArrayList<String> offFieldsToCreate;
+
+    // buyer:
+    private ArrayList<String> buyLogInformationToReceive;
+    private Log log;
 
     private UserController() {
         this.productAvailableFieldsToEdit = new ArrayList<>();
@@ -41,6 +43,9 @@ public class UserController {
         this.offFieldsToCreate = new ArrayList<>();
         this.offFieldsToCreate.addAll(Arrays.asList("productsList(separated by ',')", "startTime", "endTime"
                 , "discountAmount"));
+
+        this.buyLogInformationToReceive = new ArrayList<>();
+        this.buyLogInformationToReceive.addAll(Arrays.asList("address", "phoneNumber"));
     }
 
     public static UserController getInstance() {
@@ -221,6 +226,69 @@ public class UserController {
     // 3. buyer menu operations
     //================================================================================
 
+    // cart managing menu
+
+    public HashMap<String, Integer> getCartProductsList() {
+        return  ((Buyer)activeUser).getCart().getProductsDisplay();
+    }
+
+    public void increaseCartProductById(String productId) {
+        Cart cart = ((Buyer)activeUser).getCart();
+        cart.changeProductAmountById(productId, 1);
+    }
+
+    public void decreaseCartProductById(String productId) {
+        Cart cart = ((Buyer)activeUser).getCart();
+        cart.changeProductAmountById(productId, -1);
+    }
+
+    public int getCartTotalPrice() {
+        return ((Buyer)activeUser).getCart().getTotalPrice();
+    }
+
+    // purchase panel
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public ArrayList<String> getBuyLogInformationToReceive() {
+        return buyLogInformationToReceive;
+    }
+
+    public void createNewLog(HashMap<String, String> fieldsAndValues) {
+        ArrayList<ProductSellInfo> sellingProducts = ((Buyer)activeUser).getCart().getProductSellInfos();
+        log = new Log(sellingProducts, activeUser.getPersonalInfo().getUsername()
+                , fieldsAndValues.get("address"), fieldsAndValues.get("phoneNumber"));
+    }
+
+    public boolean isDiscountCodeValid(String discountCode) {
+        return Market.getInstance().isDiscountCodeValid(discountCode);
+    }
+
+    public void applyDiscountCode(String discountCode) {
+        log.setAppliedDiscount(Market.getInstance().getCodedDiscountByCode(discountCode));
+    }
+
+    public boolean canPurchase() {
+        Buyer buyer = (Buyer)activeUser;
+        return buyer.getCart().getTotalPrice() <= buyer.getBalance();
+    }
+
+    public void purchase() {
+        Buyer buyer = (Buyer)activeUser;
+        // TODO: nedaei
+    }
+
+    // orders managing menu
+
+    public String getBuyerBuyLogDisplayById(String logId) {
+        BuyLog buyLog = ((Buyer)activeUser).getBuyLogById(logId);
+        if (buyLog == null) {
+            return null;
+        }
+        return
+    }
 
     public boolean logout() {
         return false;

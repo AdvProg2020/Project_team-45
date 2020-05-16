@@ -118,14 +118,19 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
-                // TODO : hatami
+                for (String fieldName : fieldsToGet.keySet()) {
+                    System.out.println(fieldName+":");
+                    fieldsToGet.replace(fieldName, scanner.nextLine());
+                    // TODO : validating input
+                }
+                creator.createItem(fieldsToGet);
             }
 
-            public Panel setEditorAndMap(Creator creator) {
+            public Panel setCreatorAndMap(Creator creator) {
                 this.creator = creator;
                 fieldsToGet = creator.getNecessaryFields();
                 return this;
             }
-        }.setEditorAndMap(creator);
+        }.setCreatorAndMap(creator);
     }
 }

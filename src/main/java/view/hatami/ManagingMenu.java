@@ -101,18 +101,10 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
-                HashMap<String, String> filledFields = new HashMap<>();
+                HashMap<String, String> changedFields = new HashMap<>();
                 InputValidator validator;
                 String input = null;
-                for (String fieldName : availableFields.keySet()) {
-                    validator = availableFields.get(fieldName);
-                    while (!validator.checkInput(input)) {
-                        System.out.println(fieldName + ":" + validator.getFormatToShow());
-                        input = scanner.nextLine();
-                    }
-                    filledFields.put(fieldName, input);
-                }
-                editor.editItem(filledFields);
+                // TODO : hatami
             }
 
             public Panel setEditorAndMap(Editor editor) {

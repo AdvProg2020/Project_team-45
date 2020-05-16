@@ -48,7 +48,7 @@ public class CategoryController implements Editor, Creator {
     public void setParentOfCategory(Category category, String parentName) {
     }
 
-    public HashMap<String, String> getAvailableFields() {
+    public HashMap<String, String> getAvailableFieldsToEdit() {
         // TODO : hatami
         return null;
     }
@@ -163,8 +163,18 @@ public class CategoryController implements Editor, Creator {
     }
 
 
-    public HashMap<String, String> getNecessaryFields() {
+    public ArrayList<String> getNecessaryFieldsToCreate() {
         // TODO : hatami
         return null;
+    }
+
+    @Override
+    public void createItem(HashMap<String, String> filledFeatures) {
+        //TODO : hatami
+    }
+
+    @Override
+    public Category getItemById(String Id) {
+        return market.getCategoryByName(Id);
     }
 }

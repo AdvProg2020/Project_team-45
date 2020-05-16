@@ -14,7 +14,7 @@ public class AdminController implements Creator {
     private AdminController() {
     }
 
-    public HashMap<String, String> getNecessaryFields() {
+    public HashMap<String, String> getNecessaryFieldsToCreate() {
         // TODO : hatami
         return null;
     }

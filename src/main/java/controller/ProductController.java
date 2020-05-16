@@ -1,8 +1,8 @@
 package controller;
 
 import controller.managers.Deleter;
-import model.Market;
 import model.Comment;
+import model.Market;
 import model.Product;
 import model.ProductSellInfo;
 import model.user.User;
@@ -87,7 +87,7 @@ public class ProductController implements Deleter {
     }
 
     public void deleteItemById(String Id) throws Exception {
-        Product product = market.getProductById(Id);
+        Product product = getItemById(Id);
         if (product == null)
             throw new Exception("wrong Id");
         removeProductFromSellersList(product);
@@ -119,5 +119,10 @@ public class ProductController implements Deleter {
     public String printDetailedById(String Id) {
         // not involved yet //
         return null;
+    }
+
+    @Override
+    public Product getItemById(String Id) {
+        return  market.getProductById(Id);
     }
 }

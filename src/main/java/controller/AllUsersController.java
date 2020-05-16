@@ -48,16 +48,16 @@ public class AllUsersController implements Deleter {
         return "username,role\n" + adminsString + sellersString + buyersString;
     }
 
-    public String printDetailedById(String Id) throws Exception {
-        User user = market.getUserByUsername(Id);
+    public String printDetailedById(String Id) {
+        User user = getItemById(Id);
         if (user == null)
-            throw new Exception("user doesn't exist");
+            return null;
         return user.getPersonalInfo().toString();
     }
 
     public void deleteItemById(String Id) throws Exception {
-        User user = market.getUserByUsername(Id);
-        if (user.equals(MainController.activeUser))
+        User user = getItemById(Id);
+        if (user.equals(UserController.getActiveUser()))
             throw new Exception("cannot delete yourself!");
         switch (user.getRole()) {
             case "buyer":
@@ -96,5 +96,10 @@ public class AllUsersController implements Deleter {
         for (Product product : seller.getAvailableProducts().keySet()) {
             product.removeSeller(seller);
         }
+    }
+
+    @Override
+    public User getItemById(String Id) {
+        return market.getUserByUsername(Id);
     }
 }

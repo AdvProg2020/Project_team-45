@@ -1,10 +1,12 @@
 package controller.managers;
 
-import controller.managers.Deleter;
+import controller.InputValidator;
 
 import java.util.HashMap;
 
 public interface Editor extends Deleter {
-    HashMap<String, String> getAvailableFields();
+    HashMap<String, InputValidator> getAvailableFieldsToEdit();
+
+    void editItem(HashMap<String, String> filledFields);
     // TODO : hatami
 }

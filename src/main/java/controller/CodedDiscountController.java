@@ -4,6 +4,7 @@ import controller.managers.Creator;
 import controller.managers.Deleter;
 import model.CodedDiscount;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CodedDiscountController implements Deleter, Creator {
@@ -42,8 +43,18 @@ public class CodedDiscountController implements Deleter, Creator {
         return null;
     }
 
-    public HashMap<String, String> getNecessaryFields() {
-        // TODO : hatami
+    @Override
+    public ArrayList<String> getNecessaryFieldsToCreate() {
+        return null;
+    }
+
+    @Override
+    public void createItem(HashMap<String, String> filledFeatures) {
+
+    }
+
+    @Override
+    public Object getItemById(String Id) {
         return null;
     }
 }

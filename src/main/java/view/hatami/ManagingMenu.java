@@ -1,6 +1,7 @@
 package view.hatami;
 
 
+import controller.InputValidator;
 import controller.managers.*;
 import view.bagheri.Menu;
 import view.bagheri.Panel;
@@ -96,16 +97,27 @@ public abstract class ManagingMenu extends Menu {
     protected static Panel createItemEditorPanel(String panelName, Editor editor) {
         return new Panel(panelName) {
             private Editor editor;
-            private HashMap<String, String> availableFields;
+            private HashMap<String, InputValidator> availableFields;
 
             @Override
             public void execute() {
-                // TODO : hatami
+                HashMap<String, String> filledFields = new HashMap<>();
+                InputValidator validator;
+                String input = null;
+                for (String fieldName : availableFields.keySet()) {
+                    validator = availableFields.get(fieldName);
+                    while (!validator.checkInput(input)) {
+                        System.out.println(fieldName + ":" + validator.getFormatToShow());
+                        input = scanner.nextLine();
+                    }
+                    filledFields.put(fieldName, input);
+                }
+                editor.editItem(filledFields);
             }
 
             public Panel setEditorAndMap(Editor editor) {
                 this.editor = editor;
-                availableFields = editor.getAvailableFields();
+                availableFields = editor.getAvailableFieldsToEdit();
                 return this;
             }
         }.setEditorAndMap(editor);
@@ -114,21 +126,27 @@ public abstract class ManagingMenu extends Menu {
     protected static Panel createItemCreatorPanel(String panelName, Creator creator) {
         return new Panel(panelName) {
             private Creator creator;
-            private HashMap<String, String> fieldsToGet;
+            private HashMap<String, InputValidator> fieldsToGet;
 
             @Override
             public void execute() {
+                HashMap<String, String> filledFields = new HashMap<>();
+                InputValidator validator;
+                String input = null;
                 for (String fieldName : fieldsToGet.keySet()) {
-                    System.out.println(fieldName+":");
-                    fieldsToGet.replace(fieldName, scanner.nextLine());
-                    // TODO : validating input
+                    validator = fieldsToGet.get(fieldName);
+                    while (!validator.checkInput(input)) {
+                        System.out.println(fieldName + ":" + validator.getFormatToShow());
+                        input = scanner.nextLine();
+                    }
+                    filledFields.put(fieldName, input);
                 }
-                creator.createItem(fieldsToGet);
+                creator.createItem(filledFields);
             }
 
             public Panel setCreatorAndMap(Creator creator) {
                 this.creator = creator;
-                fieldsToGet = creator.getNecessaryFields();
+                fieldsToGet = creator.getNecessaryFieldsToCreate();
                 return this;
             }
         }.setCreatorAndMap(creator);

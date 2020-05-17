@@ -1,19 +1,20 @@
-package controller;
+package controller.userControllers;
 
+import controller.InputValidator;
+import controller.managers.Creator;
 import model.Company;
 import model.Market;
 import model.Off;
 import model.Product;
 import model.log.SellLog;
 import model.request.*;
-import model.user.Admin;
 import model.user.Seller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class SellerController {
+public class SellerController extends UserController implements Creator {
     private static final SellerController instance = new SellerController();
     private final Market market;
 
@@ -191,5 +192,25 @@ public class SellerController {
 
     public int getSellerBalance() {
         return ((Seller) UserController.getActiveUser()).getBalance();
+    }
+
+    @Override
+    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+        return null;
+    }
+
+    @Override
+    public HashMap<String, InputValidator> getOptionalFieldsToCreate() {
+        return null;
+    }
+
+    @Override
+    public void createItem(HashMap<String, String> filledFeatures) {
+
+    }
+
+    @Override
+    public Object getItemById(String Id) {
+        return null;
     }
 }

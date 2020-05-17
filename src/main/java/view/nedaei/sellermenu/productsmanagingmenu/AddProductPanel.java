@@ -1,7 +1,7 @@
 package view.nedaei.sellermenu.productsmanagingmenu;
 
-import controller.SellerController;
-import controller.UserController;
+import controller.userControllers.SellerController;
+import controller.userControllers.UserController;
 import model.user.Seller;
 import view.bagheri.Panel;
 

@@ -1,7 +1,8 @@
-package controller;
+package controller.userControllers;
 
-import model.*;
-import model.user.*;
+import model.Market;
+import model.user.PersonalInfo;
+import model.user.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,11 +56,7 @@ public class UserController {
 
     public String getPersonalInfoDisplay() {
         PersonalInfo personalInfo = activeUser.getPersonalInfo();
-        return "username = '" + personalInfo.getUsername() + "'\n" +
-                "firstName = '" + personalInfo.getFirstName() + "'\n" +
-                "lastName = '" + personalInfo.getLastName() + "'\n" +
-                "emailAddress = '" + personalInfo.getEmailAddress() + "'\n" +
-                "phoneNumber = '" + personalInfo.getPhoneNumber() + "'";
+        return personalInfo.toString();
     }
 
     ///
@@ -76,6 +73,8 @@ public class UserController {
         }
         return false;
     }
+
+
 
     public boolean logout() {
         if (loggedIn) {

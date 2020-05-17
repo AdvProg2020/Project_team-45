@@ -1,8 +1,8 @@
 package view.nedaei.sellermenu.offsmanagingmenu;
 
-import controller.SellerController;
-import controller.UserController;
+import controller.userControllers.SellerController;
 import view.bagheri.Panel;
+import view.bagheri.UIPage;
 import view.nedaei.sellermenu.EditPanelsCommands;
 
 import java.util.HashMap;
@@ -36,7 +36,7 @@ public class EditOffPanel extends Panel {
                 System.out.println("invalid command!");
             }
         }
-        SellerController.getInstance().createOffEditionRequest(this.matcher.group(1), fieldsAndValues);
+        SellerController.getInstance().createOffEditionRequest(UIPage.matcher.group(1), fieldsAndValues);
     }
 
     @Override

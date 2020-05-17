@@ -1,6 +1,7 @@
 package view.bagheri;
 
-import controller.UserController;
+import controller.userControllers.UserController;
+import view.hatami.RegisterPanel;
 
 public class Login_RegisterPanel extends Panel {
     private static final Login_RegisterPanel instance = new Login_RegisterPanel();
@@ -19,16 +20,16 @@ public class Login_RegisterPanel extends Panel {
 
     @Override
     public void execute() {
-        if (userController.isLoggedIn()) {
+        if (UserController.isLoggedIn()) {
             System.out.println("You have already logged in");
             return;
         }
         String inputCommand;
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
-            if ((matcher = getMatcher("login (username)", inputCommand)) != null) {
+            if ((matcher = getMatcher("login (\\S+)", inputCommand)) != null) {
                 if(login())
                     return;
-            } else if((matcher = getMatcher("create account (type) (username)", inputCommand)) != null) {
+            } else if((matcher = getMatcher("create account (buyer|seller) (\\S+)", inputCommand)) != null) {
                 registerPanel.execute();
             } else {
                 System.out.println("invalid command!");

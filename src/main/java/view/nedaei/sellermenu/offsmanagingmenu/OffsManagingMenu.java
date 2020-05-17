@@ -1,7 +1,6 @@
 package view.nedaei.sellermenu.offsmanagingmenu;
 
-import controller.SellerController;
-import controller.UserController;
+import controller.userControllers.SellerController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
 
@@ -36,6 +35,6 @@ public class OffsManagingMenu extends ManagingMenu {
 
     @Override
     protected void showHelp() {
-        System.out.println("");
+        System.out.println();
     }
 }

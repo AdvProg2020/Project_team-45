@@ -1,7 +1,7 @@
 package view.bagheri;
 
 import controller.ProductController;
-import controller.UserController;
+import controller.userControllers.UserController;
 
 public class CommentingPanel extends Panel {
     private static final CommentingPanel instance = new CommentingPanel();
@@ -24,7 +24,7 @@ public class CommentingPanel extends Panel {
         String inputCommand;
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
             if (inputCommand.equals("Add comment")) {
-                if (userController.isLoggedIn()) {
+                if (UserController.isLoggedIn()) {
                     addComment();
                 } else {
                     System.out.println("You are not logged in");

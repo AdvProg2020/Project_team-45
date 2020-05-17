@@ -1,5 +1,7 @@
-package controller;
+package controller.userControllers;
 
+import controller.InputValidator;
+import controller.managers.Creator;
 import model.*;
 import model.log.BuyLog;
 import model.log.Log;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class BuyerController {
+public class BuyerController extends UserController implements Creator {
     private static final BuyerController instance = new BuyerController();
     private final Market market;
 
@@ -132,4 +134,23 @@ public class BuyerController {
         return result;
     }
 
+    @Override
+    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+        return null;
+    }
+
+    @Override
+    public HashMap<String, InputValidator> getOptionalFieldsToCreate() {
+        return null;
+    }
+
+    @Override
+    public void createItem(HashMap<String, String> filledFeatures) {
+
+    }
+
+    @Override
+    public Object getItemById(String Id) {
+        return null;
+    }
 }

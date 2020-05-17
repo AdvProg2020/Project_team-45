@@ -25,7 +25,8 @@ public class PersonalInfoPanel extends Panel {
         String input;
         Matcher matcher;
         while (!(input = scanner.nextLine().trim()).equalsIgnoreCase("back")) {
-            if ((matcher = PersonalInfoPanelCommands.EDIT.getMatcher(input)).find()) {
+            if ((matcher = PersonalInfoPanelCommands.EDIT.getMatcher(input)).find() &&
+                    UserController.getPersonalInfoFieldsToEdit().contains(matcher.group(1))) {
                 System.out.println("new value:");
                 UserController.getInstance().setPersonalInfoField(matcher.group(1), scanner.nextLine().trim());
             } else {

@@ -2,7 +2,6 @@ package view.nedaei.sellermenu;
 
 import controller.CategoryController;
 import controller.SellerController;
-import controller.UserController;
 import view.bagheri.Panel;
 import view.nedaei.UserMenu;
 import view.nedaei.sellermenu.offsmanagingmenu.OffsManagingMenu;

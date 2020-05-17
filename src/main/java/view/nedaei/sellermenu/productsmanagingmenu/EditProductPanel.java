@@ -1,7 +1,6 @@
 package view.nedaei.sellermenu.productsmanagingmenu;
 
 import controller.SellerController;
-import controller.UserController;
 import view.bagheri.Panel;
 import view.nedaei.sellermenu.EditPanelsCommands;
 
@@ -31,7 +30,7 @@ public class EditProductPanel extends Panel {
         show();
         String input;
         Matcher matcher;
-        HashMap<String, String> fieldsAndValues = new HashMap<String, String>();
+        HashMap<String, String> fieldsAndValues = new HashMap<>();
         while (!(input = scanner.nextLine().trim()).equalsIgnoreCase("done")) {
             if ((matcher = EditPanelsCommands.FIELD_AND_VALUE.getMatcher(input)).find()) {
                 if (SellerController.getInstance().isProductFieldAvailableToEdit(this.matcher.group(1)
@@ -50,6 +49,7 @@ public class EditProductPanel extends Panel {
     @Override
     protected void show() {
         System.out.println("[field to edit] : [field's new value]\n" +
+                "'done' when done!\n" +
                 "product available fields to edit are:\n" +
                 SellerController.getInstance().getProductAvailableFieldsToEditDisplay());
     }

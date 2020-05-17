@@ -8,7 +8,8 @@ public class PersonalInfo {
     private String phoneNumber;
     private String password;
 
-    public PersonalInfo(String username, String firstName, String lastName, String emailAddress, String phoneNumber, String password) {
+    public PersonalInfo(String username, String firstName, String lastName, String emailAddress, String phoneNumber,
+                        String password) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

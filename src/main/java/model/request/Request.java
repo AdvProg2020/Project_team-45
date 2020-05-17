@@ -6,7 +6,7 @@ public abstract class Request {
     private static Integer newRequestId = 1;
     protected String requestId;
     protected RequestStatus requestStatus;
-    private HashMap<String, String> fieldsAndValues;
+    protected HashMap<String, String> fieldsAndValues;
 
     public Request(HashMap<String, String> fieldsAndValues) {
         this.requestId = newRequestId.toString();

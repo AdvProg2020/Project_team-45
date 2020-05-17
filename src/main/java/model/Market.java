@@ -142,11 +142,18 @@ public class Market {
         return null;
     }
 
-
+    public Off getOffById(String offId) {
+        for (Off off : allOffs) {
+            if (off.getOffId().equals(offId)) {
+                return off;
+            }
+        }
+        return null;
+    }
 
     public Category getCategoryByName(String name) {
         for (Category category : allCategories) {
-            if (category.getName().equals(name)) {
+            if (category.getName().equalsIgnoreCase(name)) {
                 return category;
             }
         }
@@ -174,7 +181,11 @@ public class Market {
     }
 
     public void removeProductByProductId(String productId) {
-
+        for (Product product : allProducts) {
+            if (product.getProductId().equalsIgnoreCase(productId)) {
+                allProducts.remove(product);
+            }
+        }
     }
 
 

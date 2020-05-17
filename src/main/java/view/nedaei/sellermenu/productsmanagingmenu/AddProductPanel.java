@@ -2,6 +2,7 @@ package view.nedaei.sellermenu.productsmanagingmenu;
 
 import controller.SellerController;
 import controller.UserController;
+import model.user.Seller;
 import view.bagheri.Panel;
 
 import java.util.ArrayList;
@@ -36,7 +37,8 @@ public class AddProductPanel extends Panel {
             System.out.println(productField + ":");
             fieldsAndValues.put(productField, scanner.nextLine().trim());
         }
-        SellerController.getInstance().createAddProductRequest(fieldsAndValues);
+        SellerController.getInstance().createAddProductRequest(mode, ((Seller)UserController.getActiveUser())
+                , fieldsAndValues);
     }
 
     @Override

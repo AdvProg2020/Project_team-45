@@ -14,12 +14,10 @@ public class ProductSellInfo {
     private int sellCount;
     private final HashMap<Buyer, Integer> allBuyers;
 
-    public ProductSellInfo(Product product, Seller seller, int price, int stock) {
+    public ProductSellInfo(Product product, Seller seller) {
         this.product = product;
         this.seller = seller;
-        this.price = price;
-        this.stock = stock;
-        this.allBuyers = new HashMap<Buyer, Integer>();
+        this.allBuyers = new HashMap<>();
     }
 
     public Seller getSeller() {

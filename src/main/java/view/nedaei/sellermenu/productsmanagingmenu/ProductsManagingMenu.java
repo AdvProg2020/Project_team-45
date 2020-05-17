@@ -1,7 +1,6 @@
 package view.nedaei.sellermenu.productsmanagingmenu;
 
 import controller.SellerController;
-import controller.UserController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
 

@@ -27,7 +27,7 @@ public class FinalCategory extends Category {
     }
 
     public void addProduct(Product newProduct) {
-
+        productsList.add(newProduct);
     }
 
     public void removeSpecialFeature(String specialFeature) {

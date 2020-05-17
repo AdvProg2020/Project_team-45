@@ -3,14 +3,21 @@ package controller;
 import model.*;
 import model.user.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class UserController {
     private static final UserController instance = new UserController();
     private final Market market;
     private static User activeUser;
     private static boolean loggedIn;
+    private static ArrayList<String> personalInfoFieldsToEdit;
 
     private UserController() {
         this.market = Market.getInstance();
+        personalInfoFieldsToEdit = new ArrayList<>();
+        personalInfoFieldsToEdit.addAll(Arrays.asList("firstName", "lastName", "emailAddress", "phoneNumber"
+                , "password"));
     }
 
     public static UserController getInstance() {
@@ -23,6 +30,10 @@ public class UserController {
 
     public static boolean isLoggedIn() {
         return loggedIn;
+    }
+
+    public static ArrayList<String> getPersonalInfoFieldsToEdit() {
+        return personalInfoFieldsToEdit;
     }
 
     // personal info panel

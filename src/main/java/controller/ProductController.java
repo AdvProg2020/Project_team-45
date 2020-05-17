@@ -94,7 +94,7 @@ public class ProductController implements Deleter {
     }
 
     private void removeProductFromSellersList(Product product) {
-        for (ProductSellInfo sellInfo : product.getSellersList()) {
+        for (ProductSellInfo sellInfo : product.getSellInfosList()) {
             sellInfo.removeProduct();
         }
     }

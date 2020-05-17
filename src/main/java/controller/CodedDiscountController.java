@@ -5,10 +5,12 @@ import controller.managers.Deleter;
 import model.CodedDiscount;
 import model.Market;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CodedDiscountController implements Deleter, Creator {
     private static CodedDiscountController instance = new CodedDiscountController();
+    private Market market = Market.getInstance();
 
     private CodedDiscountController() {
 
@@ -34,8 +36,13 @@ public class CodedDiscountController implements Deleter, Creator {
     }
 
     public String getAllInListAsString() {
-        // TODO : hatami
-        return null;
+        ArrayList<CodedDiscount> allCodedDiscounts = market.getAllCodedDiscounts();
+        StringBuilder listString = new StringBuilder("code,owner,percentage\n");
+        for (CodedDiscount codedDiscount : allCodedDiscounts) {
+            String info = codedDiscount.getCode() + "," + codedDiscount.getOwner().getPersonalInfo().getUsername() + "," + codedDiscount.getPercentage() + "\n";
+            listString.append(info);
+        }
+        return listString.toString();
     }
 
     public String printDetailedById(String Id) {
@@ -48,6 +55,11 @@ public class CodedDiscountController implements Deleter, Creator {
         HashMap<String, InputValidator> fields = new HashMap<>();
         // TODO
         return fields;
+    }
+
+    @Override
+    public HashMap<String, InputValidator> getOptionalFieldsToCreate() {
+        return null;
     }
 
     @Override

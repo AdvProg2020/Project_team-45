@@ -18,4 +18,9 @@ public class SellerRegisterRequest extends Request {
     public void apply() {
 
     }
+
+    @Override
+    public String getType() {
+        return "seller register";
+    }
 }

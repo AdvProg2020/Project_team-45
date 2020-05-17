@@ -16,4 +16,9 @@ public class CommentRequest extends Request {
 
     @Override
     public void apply() {}
+
+    @Override
+    public String getType() {
+        return "new comment";
+    }
 }

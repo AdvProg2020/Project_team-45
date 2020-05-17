@@ -2,6 +2,7 @@ package model;
 
 import model.category.Category;
 import model.log.Log;
+import model.request.Request;
 import model.user.User;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Market {
     private final ArrayList<Product> allProducts;
     private final ArrayList<Log> allLogs;
     private final ArrayList<Off> allOffs;
+    private final ArrayList<Request> allRequests;
     private boolean hasAdmin;
 
     private Market() {
@@ -27,6 +29,7 @@ public class Market {
         allCategories = new ArrayList<Category>();
         mainCategories = new ArrayList<Category>();
         allProducts = new ArrayList<Product>();
+        allRequests = new ArrayList<>();
     }
 
     public static Market getInstance() {
@@ -61,6 +64,10 @@ public class Market {
 
     public ArrayList<Log> getAllLogs() {
         return allLogs;
+    }
+
+    public ArrayList<Request> getAllRequests() {
+        return allRequests;
     }
 
     public ArrayList<Category> getAllCategories() {

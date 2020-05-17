@@ -15,4 +15,9 @@ public class OffEditionRequest extends Request{
     public void apply() {
 
     }
+
+    @Override
+    public String getType() {
+        return "edit off";
+    }
 }

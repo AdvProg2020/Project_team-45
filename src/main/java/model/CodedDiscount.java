@@ -1,5 +1,7 @@
 package model;
 
+import model.user.Buyer;
+
 import java.util.Date;
 
 public class CodedDiscount {
@@ -7,12 +9,14 @@ public class CodedDiscount {
     private Date startDate;
     private Date endDate;
     private int percentage;
+    private Buyer owner;
 
-    public CodedDiscount(String code, Date startDate, Date endDate, int percentage) {
+    public CodedDiscount(String code, Date startDate, Date endDate, int percentage, Buyer owner) {
         this.code = code;
         this.startDate = startDate;
         this.endDate = endDate;
         this.percentage = percentage;
+        this.owner = owner;
     }
 
     public int getPercentage() {
@@ -45,6 +49,10 @@ public class CodedDiscount {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Buyer getOwner() {
+        return owner;
     }
 
     @Override

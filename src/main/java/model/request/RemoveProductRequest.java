@@ -12,4 +12,9 @@ public class RemoveProductRequest extends Request{
     public void apply() {
 
     }
+
+    @Override
+    public String getType() {
+        return "remove product";
+    }
 }

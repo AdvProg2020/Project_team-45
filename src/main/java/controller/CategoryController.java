@@ -48,9 +48,14 @@ public class CategoryController implements Editor, Creator {
     public void setParentOfCategory(Category category, String parentName) {
     }
 
-    public HashMap<String, String> getAvailableFieldsToEdit() {
+    public HashMap<String, InputValidator> getAvailableFieldsToEdit() {
         // TODO : hatami
         return null;
+    }
+
+    @Override
+    public void editItem(HashMap<String, String> changedFields) {
+
     }
 
     public void deleteItemById(String Id) {
@@ -58,8 +63,13 @@ public class CategoryController implements Editor, Creator {
     }
 
     public String getAllInListAsString() {
-        // TODO : hatami
-        return null;
+        ArrayList<Category> allCategories = market.getAllCategories();
+        StringBuilder listString = new StringBuilder("name,parent\n");
+        for (Category category : allCategories) {
+            String categoryInfo = category.getName() + "," + category.getParent().getName() + "\n";
+            listString.append(categoryInfo);
+        }
+        return listString.toString();
     }
 
     public String printDetailedById(String Id) {
@@ -163,8 +173,13 @@ public class CategoryController implements Editor, Creator {
     }
 
 
-    public ArrayList<String> getNecessaryFieldsToCreate() {
+    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
         // TODO : hatami
+        return null;
+    }
+
+    @Override
+    public HashMap<String, InputValidator> getOptionalFieldsToCreate() {
         return null;
     }
 

@@ -30,7 +30,7 @@ public class AllUsersController implements Deleter {
         StringBuilder buyersString = new StringBuilder();
         StringBuilder sellersString = new StringBuilder();
         for (User user : allUsers) {
-            if (user.equals(UserController.getInstance().getActiveUser()))
+            if (user.equals(UserController.getActiveUser()))
                 continue;
             String userInfo = user.getPersonalInfo().getUsername() + "," + user.getRole() + "\n";
             switch (user.getRole()) {

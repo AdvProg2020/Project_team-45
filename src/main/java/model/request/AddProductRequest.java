@@ -12,4 +12,9 @@ public class AddProductRequest extends Request {
     public void apply() {
 
     }
+
+    @Override
+    public String getType() {
+        return "add product";
+    }
 }

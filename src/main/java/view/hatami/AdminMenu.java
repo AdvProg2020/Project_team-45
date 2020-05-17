@@ -1,7 +1,6 @@
 package view.hatami;
 
 import controller.CodedDiscountController;
-import view.bagheri.Panel;
 import view.nedaei.UserMenu;
 
 public class AdminMenu extends UserMenu {

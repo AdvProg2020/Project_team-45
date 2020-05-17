@@ -12,4 +12,9 @@ public class AddOffRequest extends Request{
     public void apply() {
 
     }
+
+    @Override
+    public String getType() {
+        return "add off";
+    }
 }

@@ -28,6 +28,8 @@ public abstract class Request {
 
     public abstract void apply();
 
+    public abstract String getType();
+
     enum RequestStatus{
         WAITING_FOR_CONFIRMATION,
         ACCEPTED,

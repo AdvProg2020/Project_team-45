@@ -47,7 +47,7 @@ public class SortingPanel extends Panel {
     }
 
     private void sorting(String sort) {
-        if (!sortingController.setSort(sort)) {
+        if (!sortingController.setActiveSort(sort)) {
             System.out.println("There is no sort with this name!");
         }
     }

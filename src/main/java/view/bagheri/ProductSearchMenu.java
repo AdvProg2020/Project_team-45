@@ -3,6 +3,7 @@ package view.bagheri;
 
 import controller.CategoryController;
 import controller.FilteringController;
+import controller.SortingController;
 
 public abstract class ProductSearchMenu extends Menu {
     protected CategoryController categoryController;
@@ -35,6 +36,7 @@ public abstract class ProductSearchMenu extends Menu {
     public void execute() {
         super.execute();
         FilteringController.getInstance().clearFilters();
+        SortingController.getInstance().disableCurrentSort();
     }
 
     @Override

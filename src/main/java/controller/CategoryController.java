@@ -126,10 +126,10 @@ public class CategoryController implements Editor, Creator {
     }
 
     public ArrayList<String> getActiveCategoryProducts() {
-        ArrayList<String> output = new ArrayList<String>();
+        ArrayList<String> output = new ArrayList<>();
         ArrayList<Product> activeCategoryProducts = activeCategory.getProductsList();
         activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
-        sortingProducts(activeCategoryProducts);
+        SortingController.getInstance().sortingProducts(activeCategoryProducts);
         for (Product product : activeCategoryProducts) {
             // TODO bagheri
         }
@@ -137,7 +137,7 @@ public class CategoryController implements Editor, Creator {
     }
 
     public ArrayList<String> getActiveCategoryDiscountedProducts() {
-        ArrayList<String> output = new ArrayList<String>();
+        ArrayList<String> output = new ArrayList<>();
         ArrayList<Product> activeCategoryProducts;
         if (activeCategory == null) {
             activeCategoryProducts = market.getAllDiscountedProductsList();
@@ -145,7 +145,7 @@ public class CategoryController implements Editor, Creator {
             activeCategoryProducts = activeCategory.getInOffProductsList();
         }
         activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
-        sortingProducts(activeCategoryProducts);
+        SortingController.getInstance().sortingProducts(activeCategoryProducts);
         for (Product product : activeCategoryProducts) {
             // TODO bagheri
         }
@@ -197,10 +197,6 @@ public class CategoryController implements Editor, Creator {
         if (activeCategory != null) {
             activeCategory = activeCategory.getParent();
         }
-    }
-
-    private void sortingProducts(ArrayList<Product> ProductList) {
-        // TODO : bagheri
     }
 
 

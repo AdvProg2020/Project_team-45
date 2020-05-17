@@ -2,19 +2,22 @@ package model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Off {
+    private static Integer newOffId = 1;
     private String offId;
     private ArrayList<Product> productsList;
     private OffStatus offStatus;
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
+    private Date startTime;
+    private Date endTime;
     private int discountAmount;
 
-    public Off(String offId, ArrayList<Product> productsList, OffStatus offStatus, LocalDateTime endTime, int discountAmount) {
-        this.offId = offId;
+    public Off(ArrayList<Product> productsList,Date startTime, Date endTime, int discountAmount) {
+        this.offId = newOffId.toString();
+        newOffId++;
         this.productsList = productsList;
-        this.offStatus = offStatus;
+        this.startTime = startTime;
         this.endTime = endTime;
         this.discountAmount = discountAmount;
     }
@@ -31,11 +34,11 @@ public class Off {
         return offStatus;
     }
 
-    public LocalDateTime getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
@@ -43,11 +46,11 @@ public class Off {
         return discountAmount;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 

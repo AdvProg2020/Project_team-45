@@ -27,9 +27,10 @@ public class EditOffPanel extends Panel {
         show();
         String input;
         Matcher matcher;
-        HashMap<String, String> fieldsAndValues = new HashMap<String, String>();
+        HashMap<String, String> fieldsAndValues = new HashMap<>();
         while (!(input = scanner.nextLine().trim()).equalsIgnoreCase("done")) {
-            if ((matcher = EditPanelsCommands.FIELD_AND_VALUE.getMatcher(input)).find()) {
+            if ((matcher = EditPanelsCommands.FIELD_AND_VALUE.getMatcher(input)).find() &&
+                    SellerController.getInstance().getOffAvailableFieldsToEdit().contains(matcher.group(1))) {
                 fieldsAndValues.put(matcher.group(1), matcher.group(2));
             } else {
                 System.out.println("invalid command!");
@@ -40,8 +41,9 @@ public class EditOffPanel extends Panel {
 
     @Override
     protected void show() {
-        System.out.println("[field to edit] : [field's new value]\n" +
-                        "off available fields to edit are:\n" +
+        System.out.println("[field to edit] : [field's new value] (dates should be in dd/M/yyyy format)\n" +
+                "'done' when done!\n" +
+                "off available fields to edit are:\n" +
                 SellerController.getInstance().getOffAvailableFieldsToEdit());
     }
 

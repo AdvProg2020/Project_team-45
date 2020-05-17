@@ -1,8 +1,7 @@
 package view.nedaei.sellermenu;
 
 import controller.CategoryController;
-import controller.SellerController;
-import controller.UserController;
+import controller.userControllers.SellerController;
 import view.bagheri.Panel;
 import view.nedaei.UserMenu;
 import view.nedaei.sellermenu.offsmanagingmenu.OffsManagingMenu;
@@ -88,7 +87,7 @@ public class SellerMenu extends UserMenu {
 
     @Override
     protected void showHelp() {
-        System.out.println("");
+        System.out.println();
     }
 
 }

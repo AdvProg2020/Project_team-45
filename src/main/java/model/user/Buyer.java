@@ -1,6 +1,9 @@
 package model.user;
 
-import model.*;
+import model.Cart;
+import model.CodedDiscount;
+import model.Product;
+import model.Rate;
 import model.log.BuyLog;
 
 import java.util.ArrayList;
@@ -25,6 +28,8 @@ public class Buyer extends User implements CartHolder {
     public ArrayList<CodedDiscount> getListOfCodedDiscounts() {
         return listOfCodedDiscounts;
     }
+
+
 
     public int getBalance() {
         return balance;
@@ -68,5 +73,9 @@ public class Buyer extends User implements CartHolder {
     @Override
     public String getRole() {
         return "buyer";
+    }
+
+    public void removeCodedDiscountFromList(CodedDiscount removingCodedDiscount) {
+        listOfCodedDiscounts.remove(removingCodedDiscount);
     }
 }

@@ -1,8 +1,8 @@
 package view.nedaei.sellermenu.productsmanagingmenu;
 
-import controller.SellerController;
-import controller.UserController;
+import controller.userControllers.SellerController;
 import view.bagheri.Panel;
+import view.bagheri.UIPage;
 import view.nedaei.sellermenu.EditPanelsCommands;
 
 import java.util.HashMap;
@@ -24,17 +24,17 @@ public class EditProductPanel extends Panel {
 
     @Override
     public void execute() {
-        if (SellerController.getInstance().getSellerAvailableProductById(this.matcher.group(1)) == null) {
+        if (SellerController.getInstance().getSellerAvailableProductById(matcher.group(1)) == null) {
             System.out.println("id not found!");
             return;
         }
         show();
         String input;
         Matcher matcher;
-        HashMap<String, String> fieldsAndValues = new HashMap<String, String>();
+        HashMap<String, String> fieldsAndValues = new HashMap<>();
         while (!(input = scanner.nextLine().trim()).equalsIgnoreCase("done")) {
             if ((matcher = EditPanelsCommands.FIELD_AND_VALUE.getMatcher(input)).find()) {
-                if (SellerController.getInstance().isProductFieldAvailableToEdit(this.matcher.group(1)
+                if (SellerController.getInstance().isProductFieldAvailableToEdit(UIPage.matcher.group(1)
                         , matcher.group(1))) {
                     fieldsAndValues.put(matcher.group(1), matcher.group(2));
                 } else {
@@ -44,12 +44,13 @@ public class EditProductPanel extends Panel {
                 System.out.println("invalid command!");
             }
         }
-        SellerController.getInstance().createProductEditionRequest(this.matcher.group(1), fieldsAndValues);
+        SellerController.getInstance().createProductEditionRequest(UIPage.matcher.group(1), fieldsAndValues);
     }
 
     @Override
     protected void show() {
         System.out.println("[field to edit] : [field's new value]\n" +
+                "'done' when done!\n" +
                 "product available fields to edit are:\n" +
                 SellerController.getInstance().getProductAvailableFieldsToEditDisplay());
     }

@@ -16,6 +16,7 @@ public class CategoryController implements Editor, Creator {
     private final Market market;
     private Category activeCategory;
     private boolean isOffMenu;
+    private ProductController productController = ProductController.getInstance();
 
     private CategoryController() {
         market = Market.getInstance();
@@ -32,6 +33,19 @@ public class CategoryController implements Editor, Creator {
 
     public void removeCategory(String name) {
     }
+    public void removeCategory(Category removingCategory) {
+        if (removingCategory.getType().equals("ParentCategory"))
+            for (Category subcategory : ((ParentCategory) removingCategory).getSubcategories()) {
+                removeCategory(subcategory);
+            }
+        else for (Product product : new ArrayList<Product>(removingCategory.getProductsList())) {
+            productController.removeProduct(product);
+        }
+        market.removeCategoryFromList(removingCategory);
+        if (removingCategory.isMain())
+            market.getMainCategories().remove(removingCategory);
+        else
+            removingCategory.getParent().removeSubcategoryFromList(removingCategory);
 
     public Category getCategoryByName(String name) {
         return null;
@@ -63,8 +77,12 @@ public class CategoryController implements Editor, Creator {
 
     }
 
-    public void deleteItemById(String Id) {
-        // TODO : hatami
+    public boolean deleteItemById(String Id) {
+        Category removingCategory = getItemById(Id);
+        if (removingCategory == null)
+            return false;
+        removeCategory(removingCategory);
+        return true;
     }
 
     public String getAllInListAsString() {
@@ -77,8 +95,8 @@ public class CategoryController implements Editor, Creator {
         return listString.toString();
     }
 
-    public String printDetailedById(String Id) {
-        // TODO : hatami
+    public String getDetailStringById(String Id) {
+        // not involved yet //
         return null;
     }
 
@@ -150,7 +168,7 @@ public class CategoryController implements Editor, Creator {
         if (activeCategory.getType().equals("ParentCategory")) {
             ArrayList<Category> subcategories = ((ParentCategory) activeCategory).getSubcategories();
             for (Category subcategory : subcategories) {
-                if(subcategory.hasInOffProduct()) {
+                if (subcategory.hasInOffProduct()) {
                     subcategoriesName.add(subcategory.getName());
                 }
             }

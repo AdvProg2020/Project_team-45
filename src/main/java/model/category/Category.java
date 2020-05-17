@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public abstract class Category {
     private String name;
-    private Category parent;
+    private ParentCategory parent;
 
 
-    public Category(String name, Category parent) {
+    public Category(String name, ParentCategory parent) {
         this.name = name;
         this.parent = parent;
     }
@@ -18,7 +18,7 @@ public abstract class Category {
         return name;
     }
 
-    public Category getParent() {
+    public ParentCategory getParent() {
         return parent;
     }
 
@@ -26,7 +26,7 @@ public abstract class Category {
         this.name = name;
     }
 
-    public void setParent(Category parent) {
+    public void setParent(ParentCategory parent) {
         this.parent = parent;
     }
 
@@ -37,4 +37,8 @@ public abstract class Category {
     public abstract boolean hasInOffProduct();
 
     public abstract String getType();
+
+    public boolean isMain(){
+        return parent == null;
+    }
 }

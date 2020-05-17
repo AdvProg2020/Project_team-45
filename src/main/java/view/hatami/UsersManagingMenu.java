@@ -1,9 +1,9 @@
 package view.hatami;
 
-import controller.AllUsersController;
-import controller.AdminController;
 import controller.managers.Deleter;
 import controller.managers.Printer;
+import controller.userControllers.AdminController;
+import controller.userControllers.AllUsersController;
 
 public class UsersManagingMenu extends ManagingMenu {
     public UsersManagingMenu() {

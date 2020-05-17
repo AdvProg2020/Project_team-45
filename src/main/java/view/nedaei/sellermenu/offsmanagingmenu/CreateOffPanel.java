@@ -1,7 +1,6 @@
 package view.nedaei.sellermenu.offsmanagingmenu;
 
-import controller.SellerController;
-import controller.UserController;
+import controller.userControllers.SellerController;
 import view.bagheri.Panel;
 
 import java.util.ArrayList;

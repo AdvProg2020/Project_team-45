@@ -6,9 +6,9 @@ public abstract class Request {
     private static Integer newRequestId = 1;
     protected String requestId;
     protected RequestStatus requestStatus;
-    private final HashMap<String, Object> fieldsAndValues;
+    protected HashMap<String, String> fieldsAndValues;
 
-    public Request(HashMap<String, Object> fieldsAndValues) {
+    public Request(HashMap<String, String> fieldsAndValues) {
         this.requestId = newRequestId.toString();
         newRequestId++;
         this.fieldsAndValues = fieldsAndValues;
@@ -36,5 +36,9 @@ public abstract class Request {
         DECLINED,
     }
 
-
+    @Override
+    public String toString() {
+        return  "requestId:" + requestId +
+                ", requestStatus:" + requestStatus;
+    }
 }

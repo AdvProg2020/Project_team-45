@@ -1,5 +1,7 @@
 package model.user;
 
+import java.util.HashMap;
+
 public class PersonalInfo {
     private String username;
     private String firstName;
@@ -8,13 +10,23 @@ public class PersonalInfo {
     private String phoneNumber;
     private String password;
 
-    public PersonalInfo(String username, String firstName, String lastName, String emailAddress, String phoneNumber, String password) {
+    public PersonalInfo(String username, String firstName, String lastName, String emailAddress, String phoneNumber,
+                        String password) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
         this.password = password;
+    }
+
+    public PersonalInfo(HashMap<String, String> information){
+        this.username = information.get("username");
+        this.firstName = information.get("first name");
+        this.lastName = information.get("last name");
+        this.emailAddress = information.get("email address");
+        this.phoneNumber = information.get("phone number");
+        this.password = information.get("password");
     }
 
     public String getUsername() {

@@ -1,16 +1,26 @@
-package controller;
+package controller.userControllers;
 
-import model.*;
-import model.user.*;
+import controller.InputValidator;
+import model.Market;
+import model.user.PersonalInfo;
+import model.user.User;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class UserController {
     private static final UserController instance = new UserController();
-    private final Market market;
+    protected final Market market;
     private static User activeUser;
     private static boolean loggedIn;
+    private static ArrayList<String> personalInfoFieldsToEdit;
 
-    private UserController() {
+    protected UserController() {
         this.market = Market.getInstance();
+        personalInfoFieldsToEdit = new ArrayList<>();
+        personalInfoFieldsToEdit.addAll(Arrays.asList("firstName", "lastName", "emailAddress", "phoneNumber"
+                , "password"));
     }
 
     public static UserController getInstance() {
@@ -23,6 +33,10 @@ public class UserController {
 
     public static boolean isLoggedIn() {
         return loggedIn;
+    }
+
+    public static ArrayList<String> getPersonalInfoFieldsToEdit() {
+        return personalInfoFieldsToEdit;
     }
 
     // personal info panel
@@ -44,11 +58,7 @@ public class UserController {
 
     public String getPersonalInfoDisplay() {
         PersonalInfo personalInfo = activeUser.getPersonalInfo();
-        return "username = '" + personalInfo.getUsername() + "'\n" +
-                "firstName = '" + personalInfo.getFirstName() + "'\n" +
-                "lastName = '" + personalInfo.getLastName() + "'\n" +
-                "emailAddress = '" + personalInfo.getEmailAddress() + "'\n" +
-                "phoneNumber = '" + personalInfo.getPhoneNumber() + "'";
+        return personalInfo.toString();
     }
 
     ///
@@ -66,11 +76,23 @@ public class UserController {
         return false;
     }
 
+
+
     public boolean logout() {
         if (loggedIn) {
             loggedIn = false;
             activeUser = null;
         }
         return false;
+    }
+
+    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+        HashMap<String, InputValidator> necessaryFields = new HashMap<>();
+        necessaryFields.put("password", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("first name", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("last name", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("email address", InputValidator.getEmailAddressValidator());
+        necessaryFields.put("phone number", InputValidator.getSimpleNumberValidator());
+        return necessaryFields;
     }
 }

@@ -31,8 +31,17 @@ public class CodedDiscountController implements Deleter, Creator {
         return false;
     }
 
-    public void deleteItemById(String Id) {
-        // TODO : hatami
+    public boolean deleteItemById(String Id) {
+        CodedDiscount removingCodedDiscount = getItemById(Id);
+        if (removingCodedDiscount == null)
+            return false;
+        removeCodedDiscount(removingCodedDiscount);
+        return true;
+    }
+
+    private void removeCodedDiscount(CodedDiscount removingCodedDiscount) {
+        removingCodedDiscount.getOwner().removeCodedDiscountFromList(removingCodedDiscount);
+        market.removeCodedDiscountFromList(removingCodedDiscount);
     }
 
     public String getAllInListAsString() {
@@ -45,9 +54,11 @@ public class CodedDiscountController implements Deleter, Creator {
         return listString.toString();
     }
 
-    public String printDetailedById(String Id) {
-        // TODO : hatami
-        return null;
+    public String getDetailStringById(String Id) {
+        CodedDiscount showingCodedDiscount = getItemById(Id);
+        if (showingCodedDiscount == null)
+            return null;
+        return showingCodedDiscount.toString();
     }
 
     @Override
@@ -68,7 +79,7 @@ public class CodedDiscountController implements Deleter, Creator {
     }
 
     @Override
-    public Object getItemById(String Id) {
+    public CodedDiscount getItemById(String Id) {
         return Market.getInstance().getCodedDiscountByCode(Id);
     }
 }

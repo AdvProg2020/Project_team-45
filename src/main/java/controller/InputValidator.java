@@ -20,4 +20,15 @@ public class InputValidator {
             return false;
         return validPattern.matcher(input).matches();
     }
+
+    public static InputValidator getSimpleTextValidator(){
+        return new InputValidator("\\w+", "alphanumeric, non space characters");
+    }
+    public static InputValidator getEmailAddressValidator(){
+        return new InputValidator("\\w+@\\w+.\\w+", "Email Address");
+    }
+    public static InputValidator getSimpleNumberValidator(){
+        return new InputValidator("\\d{5,12}", "5-12 numbers");
+    }
+
 }

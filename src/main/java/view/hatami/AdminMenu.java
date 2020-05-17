@@ -4,8 +4,8 @@ import controller.CodedDiscountController;
 import view.nedaei.UserMenu;
 
 public class AdminMenu extends UserMenu {
-
-    protected AdminMenu() {
+    private static AdminMenu instance = new AdminMenu();
+    private AdminMenu() {
         super("Admin Page");
         submenus.put("manage users", new UsersManagingMenu());
         submenus.put("manage all products", new ProductsManagingMenuForAdmin());
@@ -13,6 +13,10 @@ public class AdminMenu extends UserMenu {
         submenus.put("view discount code", new DiscountCodesManagingMenu());
         submenus.put("manage requests", new RequestsManagingMenu());
         submenus.put("manage categories", new CategoriesManagingMenu());
+    }
+
+    public static AdminMenu getInstance() {
+        return instance;
     }
 
     protected void showHelp() {

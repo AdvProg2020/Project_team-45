@@ -1,6 +1,6 @@
 package view.nedaei;
 
-import controller.UserController;
+import controller.userControllers.UserController;
 import view.bagheri.CategoryMenu;
 import view.bagheri.Login_RegisterPanel;
 import view.bagheri.Menu;
@@ -28,7 +28,7 @@ public class MainMenu extends Menu {
 
     @Override
     protected void showHelp() {
-        System.out.println("");
+        System.out.println();
     }
 
     public void updateSubmenus() { // TODO: bagheri

@@ -32,9 +32,6 @@ public class ProductController implements Deleter {
     public void setFieldOfProduct(Product product, String field, String value) {
     }
 
-    public void deleteProductById(String productId) {
-    }
-
     public void getProductBuyers(Product product) {
     }
 
@@ -96,10 +93,15 @@ public class ProductController implements Deleter {
         return false;
     }
 
-    public void deleteItemById(String Id) throws Exception {
+    public boolean deleteItemById(String Id) {
         Product product = getItemById(Id);
         if (product == null)
-            throw new Exception("wrong Id");
+            return false;
+        removeProduct(getItemById(Id));
+        return true;
+    }
+
+    public void removeProduct(Product product) {
         removeProductFromSellersList(product);
         removeProductFromCategory(product);
         market.removeProductFromAllProductsList(product);
@@ -110,7 +112,7 @@ public class ProductController implements Deleter {
     }
 
     private void removeProductFromSellersList(Product product) {
-        for (ProductSellInfo sellInfo : product.getSellersList()) {
+        for (ProductSellInfo sellInfo : product.getSellInfosList()) {
             sellInfo.removeProduct();
         }
     }
@@ -126,7 +128,7 @@ public class ProductController implements Deleter {
         return output.toString();
     }
 
-    public String printDetailedById(String Id) {
+    public String getDetailStringById(String Id) {
         // not involved yet //
         return null;
     }

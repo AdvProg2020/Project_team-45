@@ -21,8 +21,11 @@ public class ParentCategory extends Category{
 
     }
 
-    public boolean removeSubcategory(Category subcategory) {
-        return false;
+    public boolean removeSubcategoryFromList(Category subcategory) {
+        if (!subcategories.contains(subcategory))
+            return false;
+        subcategories.remove(subcategory);
+        return true;
     }
 
     @Override

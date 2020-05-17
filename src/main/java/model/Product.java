@@ -8,12 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Product {
+    private static Integer newProductId = 1;
     private final String productId;
     private String name;
     private Company company;
     private String productStatus;
     private HashMap<Seller, ProductSellInfo> sellersList;
-    private int minimumPrice;
+    private int minimumPrice;   // minimum price should be updated
     private FinalCategory category;
     private final HashMap<String, String> categoryFeatures;
     private String description;
@@ -23,19 +24,23 @@ public class Product {
     private int sellCount;
     private int seen;
 
-    public Product(String productId, String name, Company company, FinalCategory category, String description) {
-        this.productId = productId;
+    public Product(String name, FinalCategory category, String description) {
+        this.productId = newProductId.toString();
+        newProductId++;
         this.name = name;
-        this.company = company;
         this.category = category;
-        this.categoryFeatures = new HashMap<String, String>();
+        this.categoryFeatures = new HashMap<>();
         this.description = description;
     }
 
 
     public ProductSellInfo getSellerInfoForProductByUsername(String sellerUsername) {
-        return sellersList.get(sellerUsername);
-        // minimum price should be updated
+        for (Seller seller : sellersList.keySet()) {
+            if (seller.getPersonalInfo().getUsername().equals(sellerUsername)) {
+                return sellersList.get(seller);
+            }
+        }
+        return null;
     }
 
     public int getMinimumPrice() {
@@ -58,8 +63,12 @@ public class Product {
         return productStatus;
     }
 
-    public ArrayList<ProductSellInfo> getSellersList() {
+    public ArrayList<ProductSellInfo> getSellInfosList() {
         return (ArrayList<ProductSellInfo>) sellersList.values();
+    }
+
+    public HashMap<Seller, ProductSellInfo> getSellersList() {
+        return sellersList;
     }
 
     public FinalCategory getCategory() {

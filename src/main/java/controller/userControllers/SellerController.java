@@ -1,21 +1,22 @@
-package controller;
+package controller.userControllers;
 
+import controller.InputValidator;
+import controller.managers.Creator;
 import model.Company;
 import model.Market;
 import model.Off;
 import model.Product;
 import model.log.SellLog;
 import model.request.*;
-import model.user.Admin;
+import model.user.PersonalInfo;
 import model.user.Seller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-public class SellerController {
+public class SellerController extends UserController implements Creator {
     private static final SellerController instance = new SellerController();
-    private final Market market;
 
     private final ArrayList<String> productAvailableFieldsToEdit;
     private final ArrayList<String> existingProductFieldsToCreate;
@@ -24,22 +25,21 @@ public class SellerController {
     private final ArrayList<String> offFieldsToCreate;
 
     private SellerController() {
-        this.market = Market.getInstance();
-
+        super();
         this.productAvailableFieldsToEdit = new ArrayList<>();
         this.productAvailableFieldsToEdit.addAll(Arrays.asList("price", "stock", "offId"));
 
         this.existingProductFieldsToCreate = new ArrayList<>();
         this.existingProductFieldsToCreate.addAll(Arrays.asList("productId", "price", "stock", "offId('-' for none)"));
         this.newProductFieldsToCreate = new ArrayList<>();
-        this.newProductFieldsToCreate.addAll(Arrays.asList("name", "category", "description", "price", "stock"
-                , "offId ('-' for none)"));
+        this.newProductFieldsToCreate.addAll(Arrays.asList("name", "categoryName", "description", "price", "stock"
+                , "offId('-' for none)"));
 
         this.offAvailableFieldsToEdit = new ArrayList<>();
         this.offAvailableFieldsToEdit.addAll(Arrays.asList("startTime", "endTime", "discountAmount"));
 
         this.offFieldsToCreate = new ArrayList<>();
-        this.offFieldsToCreate.addAll(Arrays.asList("productsList(separated by ',')", "startTime", "endTime"
+        this.offFieldsToCreate.addAll(Arrays.asList("productIds(separated by ',')", "startTime", "endTime"
                 , "discountAmount"));
     }
 
@@ -58,7 +58,7 @@ public class SellerController {
     // view sales history panel
 
     private String getSellLogDisplay(SellLog sellLog) {
-        return "log id = '" + sellLog.getMainLog().getLogId() + "'\n" +
+        return "logId = '" + sellLog.getMainLog().getLogId() + "'\n" +
                 "date = " + sellLog.getMainLog().getDate() + "\n" +
                 "buyerUsername = '" + sellLog.getMainLog().getBuyerUsername() + "'\n" +
                 "listOfProducts = '" + sellLog.getMainLog().getSellingProducts() + "'\n" +
@@ -79,11 +79,11 @@ public class SellerController {
         return result.toString();
     }
 
+    // products managing menu
+
     public Product getSellerAvailableProductById(String productId) {
         return ((Seller) UserController.getActiveUser()).getAvailableProductById(productId);
     }
-
-    // products managing menu
 
     public String getSellerProductDisplayById(String productId) {
         Product product = getSellerAvailableProductById(productId);
@@ -117,7 +117,8 @@ public class SellerController {
     }
 
     public void createProductEditionRequest(String productId, HashMap<String, String> fieldsAndValues) {
-        Admin.getListOfRequests().add(new ProductEditionRequest(productId, fieldsAndValues));
+        Market.getInstance().getAllRequests().add(new ProductEditionRequest(productId, ((Seller)UserController.getActiveUser())
+                , fieldsAndValues));
     }
 
     public String getProductAvailableFieldsToEditDisplay() {
@@ -134,8 +135,8 @@ public class SellerController {
         return newProductFieldsToCreate;
     }
 
-    public void createAddProductRequest(HashMap<String, String> fieldsAndValues) {
-        Admin.getListOfRequests().add(new AddProductRequest(fieldsAndValues));
+    public void createAddProductRequest(String mode, Seller seller, HashMap<String, String> fieldsAndValues) {
+        Market.getInstance().getAllRequests().add(new AddProductRequest(mode, seller, fieldsAndValues));
     }
 
     // remove product panel
@@ -144,7 +145,8 @@ public class SellerController {
         if (getSellerAvailableProductById(productId) == null) {
             return;
         }
-        Admin.getListOfRequests().add(new RemoveProductRequest(productId));
+        Market.getInstance().getAllRequests()
+                .add(new RemoveProductRequest(((Seller)UserController.getActiveUser()), productId));
     }
 
     // offs managing menu
@@ -159,9 +161,13 @@ public class SellerController {
             return null;
         }
         return "productList = " + off.getProductsList() + "\n" +
-                "starTime = " + off.getStartTime() + "\n" +
+                "startTime = " + off.getStartTime() + "\n" +
                 "endTime = " + off.getEndTime() + "\n" +
                 "discountAmount = " + off.getDiscountAmount();
+    }
+
+    public ArrayList<String> getOffAvailableFieldsToEdit() {
+        return offAvailableFieldsToEdit;
     }
 
     public void createOffEditionRequest(String offId, HashMap<String, String> fieldsAndValues) {
@@ -169,11 +175,8 @@ public class SellerController {
         if (off == null) {
             return;
         }
-        Admin.getListOfRequests().add(new OffEditionRequest(offId, fieldsAndValues));
-    }
-
-    public ArrayList<String> getOffAvailableFieldsToEdit() {
-        return offAvailableFieldsToEdit;
+        Market.getInstance().getAllRequests().add(new OffEditionRequest(((Seller)UserController.getActiveUser()), offId
+                , fieldsAndValues));
     }
 
     public ArrayList<String> getOffFieldsToCreate() {
@@ -181,12 +184,36 @@ public class SellerController {
     }
 
     public void createAddOffRequest(HashMap<String, String> fieldsAndValues) {
-        Admin.getListOfRequests().add(new AddOffRequest(fieldsAndValues));
+        Market.getInstance().getAllRequests().add(new AddOffRequest(((Seller)UserController.getActiveUser()), fieldsAndValues));
     }
 
     // view balance panel
 
     public int getSellerBalance() {
         return ((Seller) UserController.getActiveUser()).getBalance();
+    }
+
+    @Override
+    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+        HashMap<String, InputValidator> necessaryFields = super.getNecessaryFieldsToCreate();
+        necessaryFields.put("company name", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("company info", InputValidator.getSimpleTextValidator());
+        return necessaryFields;
+    }
+
+    @Override
+    public HashMap<String, InputValidator> getOptionalFieldsToCreate() {
+        return null;
+    }
+
+    @Override
+    public void createItem(HashMap<String, String> filledFeatures) {
+        Seller newSeller = new Seller(new PersonalInfo(filledFeatures), new Company(filledFeatures));
+        market.addUserToList(newSeller);
+    }
+
+    @Override
+    public Seller getItemById(String Id) {
+        return (Seller) market.getUserByUsername(Id);
     }
 }

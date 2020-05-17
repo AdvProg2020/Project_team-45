@@ -1,7 +1,7 @@
 package view.nedaei.buyermenu;
 
-import controller.BuyerController;
-import controller.UserController;
+import controller.userControllers.BuyerController;
+import controller.userControllers.UserController;
 import view.bagheri.Login_RegisterPanel;
 import view.bagheri.Panel;
 
@@ -24,7 +24,7 @@ public class PurchasePanel extends Panel {
 
     @Override
     public void execute() {
-        if (!UserController.getInstance().isLoggedIn()) {
+        if (!UserController.isLoggedIn()) {
             Login_RegisterPanel.getInstance().execute();
         }
         runReceiverInformationPanel();

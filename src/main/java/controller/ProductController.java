@@ -5,6 +5,8 @@ import model.Comment;
 import model.Market;
 import model.Product;
 import model.ProductSellInfo;
+import model.request.CommentRequest;
+import model.user.Buyer;
 import model.user.User;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ import java.util.HashMap;
 
 public class ProductController implements Deleter {
     private static final ProductController instance = new ProductController();
-    private Market market;
+    private final Market market;
     private Product activeProduct;
 
     private ProductController() {
@@ -61,8 +63,8 @@ public class ProductController implements Deleter {
         return false;
     }
 
-    public int getAverageScore() {
-        return 0;
+    public float getAverageScore() {
+        return activeProduct.getAverageScore();
     }
 
     public ArrayList<String> getProductComments() {
@@ -70,10 +72,24 @@ public class ProductController implements Deleter {
     }
 
     public void addComment(String title, String content) {
-        User user = null;
+        User user = activeUser;
         boolean didUserBuy = false;
+        if (user.getRole().equals("Buyer") && ((Buyer) user).didBuyProduct(activeProduct.getProductId())) {
+            didUserBuy = true;
+        }
+
+        //Method 1:
+        HashMap<String, Object> fieldsAndValues = new HashMap<>();
+        fieldsAndValues.put("user", user);
+        fieldsAndValues.put("product", activeProduct);
+        fieldsAndValues.put("title", title);
+        fieldsAndValues.put("content", content);
+        fieldsAndValues.put("didUserBuy", didUserBuy);
+        market.addRequest(new CommentRequest(fieldsAndValues));
+
+        //Method 2:
         Comment newComment = new Comment(user, activeProduct, title, content, didUserBuy);
-        activeProduct.addComment(newComment);
+        market.addRequest(new CommentRequest(newComment));
     }
 
     public boolean isWithInACategory(String productId) {

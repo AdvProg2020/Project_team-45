@@ -1,5 +1,6 @@
 package controller;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import controller.managers.Creator;
 import controller.managers.Editor;
 import model.Market;
@@ -23,6 +24,10 @@ public class CategoryController implements Editor, Creator {
 
     public static CategoryController getInstance() {
         return instance;
+    }
+
+    public Category getActiveCategory() {
+        return activeCategory;
     }
 
     public void removeCategory(String name) {
@@ -105,8 +110,10 @@ public class CategoryController implements Editor, Creator {
     public ArrayList<String> getActiveCategoryProducts() {
         ArrayList<String> output = new ArrayList<String>();
         ArrayList<Product> activeCategoryProducts = activeCategory.getProductsList();
+        activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
+        sortingProducts(activeCategoryProducts);
         for (Product product : activeCategoryProducts) {
-            // TODO
+            // TODO bagheri
         }
         return output;
     }
@@ -119,8 +126,10 @@ public class CategoryController implements Editor, Creator {
         } else {
             activeCategoryProducts = activeCategory.getInOffProductsList();
         }
+        activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
+        sortingProducts(activeCategoryProducts);
         for (Product product : activeCategoryProducts) {
-            // TODO
+            // TODO bagheri
         }
         return output;
     }
@@ -170,6 +179,10 @@ public class CategoryController implements Editor, Creator {
         if (activeCategory != null) {
             activeCategory = activeCategory.getParent();
         }
+    }
+
+    private void sortingProducts(ArrayList<Product> ProductList) {
+        // TODO : bagheri
     }
 
 

@@ -17,4 +17,7 @@ public abstract class User {
         return this.personalInfo.getUsername().equals(otherUser.getPersonalInfo().getUsername());
     }
 
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
+    }
 }

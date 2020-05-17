@@ -3,6 +3,8 @@ package view.bagheri;
 import controller.FilteringController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FilteringPanel extends Panel {
     private static final FilteringPanel instance = new FilteringPanel();
@@ -24,10 +26,12 @@ public class FilteringPanel extends Panel {
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
             if (inputCommand.equals("show available filters")) {
                 showAvailableFilters();
-            } else if((matcher = getMatcher("filter (.+)", inputCommand)) != null) {
-                addFilter(matcher.group(1));
+            } else if((matcher = getMatcher("filter (.+): (.+)", inputCommand)) != null) {
+                addFilter(matcher.group(1), matcher.group(2));
             } else if(inputCommand.equals("current filters")) {
                showCurrentFilters();
+            } else if((matcher = getMatcher("disable filter (.+): (.+)", inputCommand)) != null) {
+                removeFilter(matcher.group(1), matcher.group(2));
             } else if((matcher = getMatcher("disable filter (.+)", inputCommand)) != null) {
                 removeFilter(matcher.group(1));
             } else {
@@ -46,20 +50,24 @@ public class FilteringPanel extends Panel {
         }
     }
 
-    private void addFilter(String filter) {
-        if (!filteringController.addFilter(filter)) {
+    private void addFilter(String type, String value) {
+        if (!filteringController.addFilter(type, value)) {
             System.out.println("There is no filter with this name!");
         }
     }
 
     private void showCurrentFilters() {
-        ArrayList<String> currentFilters = filteringController.getCurrentFilters();
+        HashMap<String, String> currentFilters = filteringController.getCurrentFilters();
         if (currentFilters.isEmpty()) {
             System.out.println("No filter selected.");
         }
-        for (String currentFilter : currentFilters) {
-            System.out.println(currentFilter);
+        for (Map.Entry<String, String> currentFilter : currentFilters.entrySet()) {
+            System.out.println(currentFilter.getKey() + ": " + currentFilter.getValue());
         }
+    }
+
+    private void removeFilter(String type, String value) {
+        removeFilter(type, value);
     }
 
     private void removeFilter(String filter) {

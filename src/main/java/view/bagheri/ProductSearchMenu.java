@@ -2,6 +2,7 @@ package view.bagheri;
 
 
 import controller.CategoryController;
+import controller.FilteringController;
 
 public abstract class ProductSearchMenu extends Menu {
     protected CategoryController categoryController;
@@ -28,6 +29,12 @@ public abstract class ProductSearchMenu extends Menu {
                 showProducts();
             }
         };
+    }
+
+    @Override
+    public void execute() {
+        super.execute();
+        FilteringController.getInstance().clearFilters();
     }
 
     @Override

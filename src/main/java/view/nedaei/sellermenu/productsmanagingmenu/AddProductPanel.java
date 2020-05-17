@@ -1,5 +1,6 @@
 package view.nedaei.sellermenu.productsmanagingmenu;
 
+import controller.SellerController;
 import controller.UserController;
 import view.bagheri.Panel;
 
@@ -26,16 +27,16 @@ public class AddProductPanel extends Panel {
         show();
         ArrayList<String> productFields;
         if (mode.equals("existing")) {
-            productFields = UserController.getInstance().getExistingProductFieldsToCreate();
+            productFields = SellerController.getInstance().getExistingProductFieldsToCreate();
         } else {
-            productFields = UserController.getInstance().getNewProductFieldsToCreate();
+            productFields = SellerController.getInstance().getNewProductFieldsToCreate();
         }
         HashMap<String, String> fieldsAndValues = new HashMap<>();
         for (String productField : productFields) {
             System.out.println(productField + ":");
             fieldsAndValues.put(productField, scanner.nextLine().trim());
         }
-        UserController.getInstance().createAddProductRequest(fieldsAndValues);
+        SellerController.getInstance().createAddProductRequest(fieldsAndValues);
     }
 
     @Override

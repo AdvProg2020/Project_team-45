@@ -1,5 +1,6 @@
 package view.nedaei.sellermenu.offsmanagingmenu;
 
+import controller.SellerController;
 import controller.UserController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
@@ -26,7 +27,7 @@ public class OffsManagingMenu extends ManagingMenu {
 
             @Override
             public void execute() {
-                String offDisplay = UserController.getInstance().getSellerOffDisplayById(matcher.group(1));
+                String offDisplay = SellerController.getInstance().getSellerOffDisplayById(matcher.group(1));
                 System.out.println(offDisplay == null? "id not found!" : offDisplay);
             }
 

@@ -5,6 +5,7 @@ import view.bagheri.Panel;
 import view.nedaei.UserMenu;
 
 public class AdminMenu extends UserMenu {
+
     protected AdminMenu() {
         super("Admin Page");
         submenus.put("manage users", new UsersManagingMenu());

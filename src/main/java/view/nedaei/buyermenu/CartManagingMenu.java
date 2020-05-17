@@ -1,6 +1,6 @@
 package view.nedaei.buyermenu;
 
-import controller.Controller;
+import controller.BuyerController;
 import controller.UserController;
 import view.bagheri.Panel;
 import view.bagheri.ProductMenu;
@@ -31,7 +31,7 @@ public class CartManagingMenu extends ManagingMenu {
 
             @Override
             public void execute() {
-                System.out.println(UserController.getInstance().getCartProductsList());
+                System.out.println(BuyerController.getInstance().getCartProductsList());
             }
 
         };
@@ -42,7 +42,7 @@ public class CartManagingMenu extends ManagingMenu {
 
             @Override
             public void execute() {
-                UserController.getInstance().increaseCartProductById(matcher.group(1));
+                BuyerController.getInstance().increaseCartProductById(matcher.group(1));
             }
 
         };
@@ -53,7 +53,7 @@ public class CartManagingMenu extends ManagingMenu {
 
             @Override
             public void execute() {
-                UserController.getInstance().decreaseCartProductById(matcher.group(1));
+                BuyerController.getInstance().decreaseCartProductById(matcher.group(1));
             }
 
         };
@@ -64,7 +64,7 @@ public class CartManagingMenu extends ManagingMenu {
 
             @Override
             public void execute() {
-                System.out.println(UserController.getInstance().getCartTotalPrice());
+                System.out.println(BuyerController.getInstance().getCartTotalPrice());
             }
 
         };

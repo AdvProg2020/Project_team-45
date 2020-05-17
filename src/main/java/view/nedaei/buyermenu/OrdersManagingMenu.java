@@ -1,6 +1,6 @@
 package view.nedaei.buyermenu;
 
-import controller.Controller;
+import controller.BuyerController;
 import controller.UserController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
@@ -26,7 +26,7 @@ public class OrdersManagingMenu extends ManagingMenu {
 
             @Override
             public void execute() {
-                String buyLogDisplay = UserController.getInstance().getBuyerBuyLogDisplayById(matcher.group(1));
+                String buyLogDisplay = BuyerController.getInstance().getBuyerBuyLogDisplayById(matcher.group(1));
                 System.out.println(buyLogDisplay == null? "id not found!" : buyLogDisplay);
             }
         };
@@ -37,11 +37,11 @@ public class OrdersManagingMenu extends ManagingMenu {
 
             @Override
             public void execute() {
-                if (!UserController.getInstance().didBuyerBuyProduct(matcher.group(1))) {
+                if (!BuyerController.getInstance().didBuyerBuyProduct(matcher.group(1))) {
                     System.out.println("is not among your orders");
                     return;
                 }
-                UserController.getInstance().rateProductById(matcher.group(1), Integer.parseInt(matcher.group(2)));
+                BuyerController.getInstance().rateProductById(matcher.group(1), Integer.parseInt(matcher.group(2)));
             }
 
         };
@@ -54,7 +54,7 @@ public class OrdersManagingMenu extends ManagingMenu {
 
     @Override
     protected void show() {
-        System.out.println(UserController.getInstance().getBuyerBuyLogs());
+        System.out.println(BuyerController.getInstance().getBuyerBuyLogs());
     }
 
 }

@@ -1,6 +1,6 @@
 package view.nedaei.buyermenu;
 
-import controller.Controller;
+import controller.BuyerController;
 import controller.UserController;
 import view.bagheri.Login_RegisterPanel;
 import view.bagheri.Panel;
@@ -37,14 +37,14 @@ public class PurchasePanel extends Panel {
 
             @Override
             public void execute() {
-                ArrayList<String> buyLogInformationToReceive = UserController.getInstance()
+                ArrayList<String> buyLogInformationToReceive = BuyerController.getInstance()
                         .getBuyLogInformationToReceive();
                 HashMap<String, String> fieldsAndValues = new HashMap<>();
                 for (String field : buyLogInformationToReceive) {
                     System.out.println(field + ":");
                     fieldsAndValues.put(field, scanner.nextLine().trim());
                 }
-                UserController.getInstance().createNewLog(fieldsAndValues);
+                BuyerController.getInstance().createNewLog(fieldsAndValues);
             }
 
         }.execute();
@@ -60,8 +60,8 @@ public class PurchasePanel extends Panel {
                 while (!(input = scanner.nextLine().trim()).equalsIgnoreCase("no")) {
                     if (input.equalsIgnoreCase("yes")) {
                         System.out.println("discount code:");
-                        if (UserController.getInstance().isDiscountCodeValid(input = scanner.nextLine().trim())) {
-                            UserController.getInstance().applyDiscountCode(input);
+                        if (BuyerController.getInstance().isDiscountCodeValid(input = scanner.nextLine().trim())) {
+                            BuyerController.getInstance().applyDiscountCode(input);
                         } else {
                             System.out.println("invalid discount code!");
                         }
@@ -80,11 +80,11 @@ public class PurchasePanel extends Panel {
 
             @Override
             public void execute() {
-                if (!UserController.getInstance().canPurchase()) {
+                if (!BuyerController.getInstance().canPurchase()) {
                     System.out.println("you do not have enough balance!");
                     return;
                 }
-                UserController.getInstance().purchase();
+                BuyerController.getInstance().purchase();
             }
 
         }.execute();

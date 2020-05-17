@@ -67,6 +67,6 @@ public class Buyer extends User implements CartHolder {
 
     @Override
     public String getRole() {
-        return "Buyer";
+        return "buyer";
     }
 }

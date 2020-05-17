@@ -13,16 +13,10 @@ import java.util.HashMap;
 public class ProductController implements Deleter {
     private static final ProductController instance = new ProductController();
     private Market market;
-    private MainController mainController;
     private Product activeProduct;
 
-
-    public ProductController(MainController mainController) {
-        this.mainController = mainController;
-        this.market = Market.getInstance();
-    }
-
     private ProductController() {
+        this.market = Market.getInstance();
     }
 
     public static ProductController getInstance() {

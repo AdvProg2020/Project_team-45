@@ -62,7 +62,7 @@ public class Seller extends User {
 
     @Override
     public String getRole() {
-        return "Seller";
+        return "seller";
     }
 
     public void removeProductFromSellerList(Product product) {

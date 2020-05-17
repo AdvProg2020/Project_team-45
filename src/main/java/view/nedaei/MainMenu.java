@@ -1,9 +1,13 @@
 package view.nedaei;
 
+import controller.UserController;
 import view.bagheri.CategoryMenu;
 import view.bagheri.Login_RegisterPanel;
 import view.bagheri.Menu;
 import view.bagheri.OffsMenu;
+import view.hatami.AdminMenu;
+import view.nedaei.buyermenu.BuyerMenu;
+import view.nedaei.sellermenu.SellerMenu;
 
 public class MainMenu extends Menu {
     private static MainMenu instance;
@@ -27,20 +31,20 @@ public class MainMenu extends Menu {
         System.out.println("");
     }
 
-    //    public void updateSubmenus() { // TODO: bagheri
-//        if (!controller.isLoggedIn()) {
-//            return;
-//        }
-//
-//        String role = controller.getRole();
-//        if (role.equals("admin")) {
-//            submenus.put("user page", new AdminMenu(this)); // TODO: hatami
-//        } else if (role.equals("buyer")) {
-//            submenus.put("user page", BuyerMenu.getInstance());
-//        } else {
-//            submenus.put("user page", SellerMenu.getInstance());
-//        }
-//    }
+    public void updateSubmenus() { // TODO: bagheri
+        if (!UserController.isLoggedIn()) {
+            submenus.put("user page", Login_RegisterPanel.getInstance());
+            return;
+        }
 
+        String role = UserController.getActiveUser().getRole();
+        if (role.equals("admin")) {
+            submenus.put("user page", AdminMenu.getInstance()); // TODO: hatami
+        } else if (role.equals("buyer")) {
+            submenus.put("user page", BuyerMenu.getInstance());
+        } else {
+            submenus.put("user page", SellerMenu.getInstance());
+        }
+    }
 
 }

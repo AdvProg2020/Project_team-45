@@ -2,7 +2,6 @@ package model.user;
 
 public abstract class User {
     protected PersonalInfo personalInfo;
-    protected String role;
 
     public abstract String getRole();
 

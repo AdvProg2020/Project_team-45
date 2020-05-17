@@ -1,5 +1,6 @@
 package view.nedaei.sellermenu.offsmanagingmenu;
 
+import controller.SellerController;
 import controller.UserController;
 import view.bagheri.Panel;
 
@@ -22,13 +23,13 @@ public class CreateOffPanel extends Panel {
 
     @Override
     public void execute() {
-        ArrayList<String> productFields = UserController.getInstance().getOffFieldsToCreate();
+        ArrayList<String> productFields = SellerController.getInstance().getOffFieldsToCreate();
         HashMap<String, String> fieldsAndValues = new HashMap<>();
         for (String productField : productFields) {
             System.out.println(productField + ":");
             fieldsAndValues.put(productField, scanner.nextLine().trim());
         }
-        UserController.getInstance().createAddOffRequest(fieldsAndValues);
+        SellerController.getInstance().createAddOffRequest(fieldsAndValues);
     }
 
 }

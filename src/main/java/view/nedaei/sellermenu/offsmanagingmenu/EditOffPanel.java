@@ -1,6 +1,6 @@
 package view.nedaei.sellermenu.offsmanagingmenu;
 
-import controller.Controller;
+import controller.SellerController;
 import controller.UserController;
 import view.bagheri.Panel;
 import view.nedaei.sellermenu.EditPanelsCommands;
@@ -35,14 +35,14 @@ public class EditOffPanel extends Panel {
                 System.out.println("invalid command!");
             }
         }
-        UserController.getInstance().createOffEditionRequest(this.matcher.group(1), fieldsAndValues);
+        SellerController.getInstance().createOffEditionRequest(this.matcher.group(1), fieldsAndValues);
     }
 
     @Override
     protected void show() {
         System.out.println("[field to edit] : [field's new value]\n" +
                         "off available fields to edit are:\n" +
-                UserController.getInstance().getOffAvailableFieldsToEdit());
+                SellerController.getInstance().getOffAvailableFieldsToEdit());
     }
 
 }

@@ -13,7 +13,7 @@ public class Seller extends User {
     private Company company;
     private ArrayList<SellLog> listOfSellLogs;
     private HashMap<Product, ProductSellInfo> availableProducts;
-    private HashMap<String, Off> listOfOffs;
+    private HashMap<String, Off> listOfOffs; // offIds and offs
     private int balance;
 
     public Seller(PersonalInfo personalInfo, Company company) {
@@ -54,7 +54,7 @@ public class Seller extends User {
     }
 
     public Off getOffByOffId(String offId) {
-        return null;
+        return listOfOffs.get(offId);
     }
 
     public void addProduct(Product product, ProductSellInfo productSellInfo) {

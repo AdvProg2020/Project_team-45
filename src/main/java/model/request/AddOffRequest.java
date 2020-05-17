@@ -17,4 +17,5 @@ public class AddOffRequest extends Request{
     public String getType() {
         return "add off";
     }
+
 }

@@ -64,4 +64,13 @@ public class CodedDiscount {
             return null;
         }
     }
+
+    @Override
+    public String toString() {
+        return  "code:" + code +
+                ", startDate:" + startDate +
+                ", endDate:" + endDate +
+                ", percentage:" + percentage +
+                ", owner:" + owner.getPersonalInfo().getUsername();
+    }
 }

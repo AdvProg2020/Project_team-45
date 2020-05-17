@@ -55,7 +55,7 @@ public abstract class ManagingMenu extends Menu {
             @Override
             public void execute() {
                 try {
-                    String[] info = printer.printDetailedById(matcher.group(1)).split(",");
+                    String[] info = printer.getDetailStringById(matcher.group(1)).split(",");
                     StringBuilder output = new StringBuilder();
                     for (int count = 0; count < info.length; count++) {
                         output.append(String.format("%-20s", info[count]));
@@ -82,8 +82,10 @@ public abstract class ManagingMenu extends Menu {
             @Override
             public void execute() {
                 try {
-                    this.deleter.deleteItemById(matcher.group(1));
-                    System.out.println(matcher.group(1) + " deleted successfully!");
+                    if (this.deleter.deleteItemById(matcher.group(1)))
+                        System.out.println(matcher.group(1) + " deleted successfully!");
+                    else
+                        System.out.println("wrong Id");
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }

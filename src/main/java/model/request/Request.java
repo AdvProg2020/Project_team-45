@@ -36,5 +36,9 @@ public abstract class Request {
         DECLINED,
     }
 
-
+    @Override
+    public String toString() {
+        return  "requestId:" + requestId +
+                ", requestStatus:" + requestStatus;
+    }
 }

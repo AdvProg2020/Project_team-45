@@ -48,31 +48,37 @@ public class AllUsersController implements Deleter {
         return "username,role\n" + adminsString + sellersString + buyersString;
     }
 
-    public String printDetailedById(String Id) {
-        User user = getItemById(Id);
-        if (user == null)
+    public String getDetailStringById(String Id) {
+        User showingUser = getItemById(Id);
+        if (showingUser == null)
             return null;
-        return user.getPersonalInfo().toString();
+        return showingUser.getPersonalInfo().toString();
     }
 
-    public void deleteItemById(String Id) throws Exception {
-        User user = getItemById(Id);
-        if (user.equals(UserController.getActiveUser()))
+    public boolean deleteItemById(String Id) throws Exception {
+        User removingUser = getItemById(Id);
+        if (removingUser == null)
+            return false;
+        removeUser(removingUser);
+        return true;
+    }
+
+    private void removeUser(User removingUser) throws Exception {
+        if (removingUser.equals(UserController.getActiveUser()))
             throw new Exception("cannot delete yourself!");
-        switch (user.getRole()) {
+        switch (removingUser.getRole()) {
             case "buyer":
-                deleteBuyer((Buyer) user);
+                deleteBuyer((Buyer) removingUser);
                 break;
             case "seller":
-                deleteSeller((Seller) user);
+                deleteSeller((Seller) removingUser);
                 break;
             case "admin":
-                deleteAdmin((Admin) user);
+                deleteAdmin((Admin) removingUser);
                 break;
             default:
-                market.removeUserFromAllUsers(user);
+                market.removeUserFromAllUsers(removingUser);
         }
-
     }
 
     private void deleteAdmin(Admin admin) {

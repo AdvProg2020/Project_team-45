@@ -37,13 +37,12 @@ public class RequestController implements Printer {
         return listString.toString();
     }
 
-    public String printDetailedById(String Id) {
+    public String getDetailStringById(String Id) {
         // TODO : hatami
-        return null;
     }
 
     @Override
-    public Object getItemById(String Id) {
-        return null;
+    public Request getItemById(String Id) {
+        return market.getRequestById(Id);
     }
 }

@@ -190,16 +190,16 @@ public class Market {
 
 
 
-    public void removeCodedDiscountByCode(String discountCode) {
-
+    public void removeCodedDiscountFromList(CodedDiscount codedDiscount) {
+        allCodedDiscounts.remove(codedDiscount);
     }
 
     public void addCategory(Category category) {
 
     }
 
-    public void removeCategoryByName(String name) {
-
+    public void removeCategoryFromList(Category category) {
+        allCategories.remove(category);
     }
 
     public void removeOffById(String offId) {
@@ -208,6 +208,14 @@ public class Market {
 
     public void removeProductFromAllProductsList(Product product) {
         allProducts.remove(product);
+    }
+
+    public Request getRequestById(String id) {
+        for (Request request : allRequests) {
+            if (request.getRequestId().equals(id))
+                return request;
+        }
+                return null;
     }
 }
 

@@ -7,6 +7,8 @@ import view.bagheri.Menu;
 import view.bagheri.Panel;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public abstract class ManagingMenu extends Menu {
 
@@ -98,13 +100,53 @@ public abstract class ManagingMenu extends Menu {
         return new Panel(panelName) {
             private Editor editor;
             private HashMap<String, InputValidator> availableFields;
+            private Pattern validEditPattern = Pattern.compile("^edit (//S+) to (//S+)$");
 
             @Override
             public void execute() {
                 HashMap<String, String> changedFields = new HashMap<>();
                 InputValidator validator;
-                String input = null;
-                // TODO : hatami
+                String input;
+                show();
+                while (true) {
+                    input = scanner.nextLine();
+                    Matcher inputMatcher = validEditPattern.matcher(input);
+                    input = input.trim().toLowerCase();
+                    if (!inputMatcher.matches()) {
+                        if (input.equals("help"))
+                            showHelp();
+                        else if (input.equals("done"))
+                            break;
+                        else
+                            System.out.println("invalid command");
+                    } else {
+                        if (!availableFields.containsKey(inputMatcher.group(1)))
+                            System.out.println("invalid field name");
+                        else {
+                            validator = availableFields.get(matcher.group(1));
+                            if (validator.checkInput(matcher.group(2)))
+                                changedFields.put(matcher.group(1), matcher.group(2));
+                            else
+                                System.out.println("invalid format");
+                        }
+                    }
+                }
+                editor.editItem(changedFields);
+            }
+
+            @Override
+            protected void show() {
+                super.show();
+                System.out.println("write 'help' to see available fields to edit\n" +
+                        "write 'done' to exit editing panel\n" +
+                        "to edit a field write 'edit [fields name] to [new value]'");
+            }
+
+            private void showHelp(){
+                System.out.println("available fields:");
+                for (String fieldName : availableFields.keySet()) {
+                    System.out.println(fieldName + "(" + availableFields.get(fieldName).getFormatToShow() + ")");
+                }
             }
 
             public Panel setEditorAndMap(Editor editor) {
@@ -118,27 +160,50 @@ public abstract class ManagingMenu extends Menu {
     protected static Panel createItemCreatorPanel(String panelName, Creator creator) {
         return new Panel(panelName) {
             private Creator creator;
-            private HashMap<String, InputValidator> fieldsToGet;
+            private HashMap<String, InputValidator> necessaryFieldsToGet;
+            private HashMap<String, InputValidator> optionalFieldsToGet;
+
 
             @Override
             public void execute() {
                 HashMap<String, String> filledFields = new HashMap<>();
                 InputValidator validator;
-                String input = null;
-                for (String fieldName : fieldsToGet.keySet()) {
-                    validator = fieldsToGet.get(fieldName);
-                    while (!validator.checkInput(input)) {
-                        System.out.println(fieldName + ":" + validator.getFormatToShow());
+                String input;
+                for (String fieldName : necessaryFieldsToGet.keySet()) {
+                    validator = necessaryFieldsToGet.get(fieldName);
+                    while (true) {
+                        System.out.println(fieldName + ": (" + validator.getFormatToShow() + ")");
                         input = scanner.nextLine();
+                        if (!validator.checkInput(input))
+                            System.out.println("invalid format");
+                        else
+                            break;
                     }
                     filledFields.put(fieldName, input);
+                }
+
+                for (String fieldName : optionalFieldsToGet.keySet()) {
+                    validator = optionalFieldsToGet.get(fieldName);
+                    while (true) {
+                        System.out.println(fieldName + ": (" + validator.getFormatToShow() + ")" + "(optional, type skip to skip)");
+                        input = scanner.nextLine();
+                        if (input.equals("skip"))
+                            break;
+                        else if (!validator.checkInput(input))
+                            System.out.println("invalid format");
+                        else {
+                            filledFields.put(fieldName, input);
+                            break;
+                        }
+                    }
                 }
                 creator.createItem(filledFields);
             }
 
             public Panel setCreatorAndMap(Creator creator) {
                 this.creator = creator;
-                fieldsToGet = creator.getNecessaryFieldsToCreate();
+                necessaryFieldsToGet = creator.getNecessaryFieldsToCreate();
+                optionalFieldsToGet = creator.getOptionalFieldsToCreate();
                 return this;
             }
         }.setCreatorAndMap(creator);

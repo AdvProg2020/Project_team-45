@@ -3,8 +3,8 @@ package controller;
 import controller.managers.Creator;
 import controller.managers.Deleter;
 import model.CodedDiscount;
+import model.Market;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CodedDiscountController implements Deleter, Creator {
@@ -44,17 +44,19 @@ public class CodedDiscountController implements Deleter, Creator {
     }
 
     @Override
-    public ArrayList<String> getNecessaryFieldsToCreate() {
-        return null;
+    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+        HashMap<String, InputValidator> fields = new HashMap<>();
+        // TODO
+        return fields;
     }
 
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
-
+        // TODO : hatami
     }
 
     @Override
     public Object getItemById(String Id) {
-        return null;
+        return Market.getInstance().getCodedDiscountByCode(Id);
     }
 }

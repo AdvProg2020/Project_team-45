@@ -105,6 +105,10 @@ public class Market {
     }
 
     public CodedDiscount getCodedDiscountByCode(String code) {
+        for (CodedDiscount codedDiscount : allCodedDiscounts) {
+            if (codedDiscount.getCode().equals(code))
+                return codedDiscount;
+        }
         return null;
     }
 

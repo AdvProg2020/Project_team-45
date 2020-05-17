@@ -107,8 +107,8 @@ public class Market {
         hasAdmin = true;
     }
 
-    public void addUser(User user) {
-
+    public void addUserToList(User user) {
+        allUsers.add(user);
     }
 
     public CodedDiscount getCodedDiscountByCode(String code) {

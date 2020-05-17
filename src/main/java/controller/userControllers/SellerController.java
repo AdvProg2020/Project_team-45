@@ -8,6 +8,7 @@ import model.Off;
 import model.Product;
 import model.log.SellLog;
 import model.request.*;
+import model.user.PersonalInfo;
 import model.user.Seller;
 
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.HashMap;
 
 public class SellerController extends UserController implements Creator {
     private static final SellerController instance = new SellerController();
-    private final Market market;
 
     private final ArrayList<String> productAvailableFieldsToEdit;
     private final ArrayList<String> existingProductFieldsToCreate;
@@ -25,8 +25,7 @@ public class SellerController extends UserController implements Creator {
     private final ArrayList<String> offFieldsToCreate;
 
     private SellerController() {
-        this.market = Market.getInstance();
-
+        super();
         this.productAvailableFieldsToEdit = new ArrayList<>();
         this.productAvailableFieldsToEdit.addAll(Arrays.asList("price", "stock", "offId"));
 
@@ -196,7 +195,10 @@ public class SellerController extends UserController implements Creator {
 
     @Override
     public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        return null;
+        HashMap<String, InputValidator> necessaryFields = super.getNecessaryFieldsToCreate();
+        necessaryFields.put("company name", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("company info", InputValidator.getSimpleTextValidator());
+        return necessaryFields;
     }
 
     @Override
@@ -206,11 +208,12 @@ public class SellerController extends UserController implements Creator {
 
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
-
+        Seller newSeller = new Seller(new PersonalInfo(filledFeatures), new Company(filledFeatures));
+        market.addUserToList(newSeller);
     }
 
     @Override
-    public Object getItemById(String Id) {
-        return null;
+    public Seller getItemById(String Id) {
+        return (Seller) market.getUserByUsername(Id);
     }
 }

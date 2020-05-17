@@ -2,10 +2,14 @@ package controller.userControllers;
 
 import controller.InputValidator;
 import controller.managers.Creator;
-import model.*;
+import model.Cart;
+import model.CodedDiscount;
+import model.ProductSellInfo;
+import model.Rate;
 import model.log.BuyLog;
 import model.log.Log;
 import model.user.Buyer;
+import model.user.PersonalInfo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,14 +17,12 @@ import java.util.HashMap;
 
 public class BuyerController extends UserController implements Creator {
     private static final BuyerController instance = new BuyerController();
-    private final Market market;
 
     private final ArrayList<String> buyLogInformationToReceive;
     private Log log;
 
     private BuyerController() {
-        market = Market.getInstance();
-
+        super();
         this.buyLogInformationToReceive = new ArrayList<>();
         this.buyLogInformationToReceive.addAll(Arrays.asList("address", "phoneNumber"));
     }
@@ -136,7 +138,7 @@ public class BuyerController extends UserController implements Creator {
 
     @Override
     public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        return null;
+        return super.getNecessaryFieldsToCreate();
     }
 
     @Override
@@ -146,11 +148,12 @@ public class BuyerController extends UserController implements Creator {
 
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
-
+        Buyer newBuyer = new Buyer(new PersonalInfo(filledFeatures));
+        market.addUserToList(newBuyer);
     }
 
     @Override
-    public Object getItemById(String Id) {
-        return null;
+    public Buyer getItemById(String Id) {
+        return (Buyer) market.getUserByUsername(Id);
     }
 }

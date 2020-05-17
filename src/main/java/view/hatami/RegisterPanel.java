@@ -9,6 +9,7 @@ public class RegisterPanel extends Panel {
     private static final RegisterPanel instance = new RegisterPanel();
     private Panel buyerRegisterPanel = ManagingMenu.createItemCreatorPanel("create buyer", BuyerController.getInstance());
     private Panel sellerRegisterPanel = ManagingMenu.createItemCreatorPanel("create seller", BuyerController.getInstance());
+    private static String lastRegisterUsername;
 
     private RegisterPanel() {
         super("Register Panel");
@@ -25,10 +26,15 @@ public class RegisterPanel extends Panel {
             System.out.println("username already exists");
             return;
         }
+        lastRegisterUsername = username;
         if (role.equals("buyer"))
             buyerRegisterPanel.execute();
         else if (role.equals("seller"))
             sellerRegisterPanel.execute();
+    }
+
+    public static String getLastRegisterUsername() {
+        return lastRegisterUsername;
     }
 
     public boolean usernameExists(String username){

@@ -183,19 +183,20 @@ public abstract class ManagingMenu extends Menu {
                     }
                     filledFields.put(fieldName, input);
                 }
-
-                for (String fieldName : optionalFieldsToGet.keySet()) {
-                    validator = optionalFieldsToGet.get(fieldName);
-                    while (true) {
-                        System.out.println(fieldName + ": (" + validator.getFormatToShow() + ")" + "(optional, type skip to skip)");
-                        input = scanner.nextLine();
-                        if (input.equals("skip"))
-                            break;
-                        else if (!validator.checkInput(input))
-                            System.out.println("invalid format");
-                        else {
-                            filledFields.put(fieldName, input);
-                            break;
+                if (optionalFieldsToGet != null) {
+                    for (String fieldName : optionalFieldsToGet.keySet()) {
+                        validator = optionalFieldsToGet.get(fieldName);
+                        while (true) {
+                            System.out.println(fieldName + ": (" + validator.getFormatToShow() + ")" + "(optional, type skip to skip)");
+                            input = scanner.nextLine();
+                            if (input.equals("skip"))
+                                break;
+                            else if (!validator.checkInput(input))
+                                System.out.println("invalid format");
+                            else {
+                                filledFields.put(fieldName, input);
+                                break;
+                            }
                         }
                     }
                 }

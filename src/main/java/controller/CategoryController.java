@@ -16,7 +16,7 @@ public class CategoryController implements Editor, Creator {
     private final Market market;
     private Category activeCategory;
     private boolean isOffMenu;
-    private ProductController productController = ProductController.getInstance();
+    private final ProductController productController = ProductController.getInstance();
 
     private CategoryController() {
         market = Market.getInstance();
@@ -46,6 +46,7 @@ public class CategoryController implements Editor, Creator {
             market.getMainCategories().remove(removingCategory);
         else
             removingCategory.getParent().removeSubcategoryFromList(removingCategory);
+    }
 
     public Category getCategoryByName(String name) {
         return null;

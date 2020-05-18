@@ -2,8 +2,6 @@ package model.request;
 
 import model.Comment;
 
-import java.util.HashMap;
-
 public class CommentRequest extends Request {
     private final Comment comment;
 
@@ -12,13 +10,10 @@ public class CommentRequest extends Request {
         this.comment = comment;
     }
 
-    public Comment getComment() {
-        return comment;
-    }
-
     @Override
     public void apply() {
-
+        comment.approveComment();
+        comment.getProduct().addApprovedComment(comment);
     }
 
     @Override
@@ -27,8 +22,13 @@ public class CommentRequest extends Request {
     }
 
     @Override
+    public void decline() {
+        comment.declineComment();
+        super.decline();
+    }
+
+    @Override
     public String toString() {
-        return super.toString() +
-                "comment:" + comment;
+        return super.toString() + '\n' + "comment:" + comment;
     }
 }

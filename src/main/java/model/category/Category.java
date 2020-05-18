@@ -20,6 +20,7 @@ public abstract class Category {
         this.setName(filledFeatures.get("name"));
         if (!filledFeatures.get("parent category").equals("NULL"))
             this.setParent((ParentCategory) CategoryController.getInstance().getItemById(filledFeatures.get("parent category")));
+        else parent = null;
     }
 
 
@@ -81,7 +82,7 @@ public abstract class Category {
 
     public abstract String getType();
 
-    public boolean isMain(){
+    public boolean isMain() {
         return parent == null;
     }
 

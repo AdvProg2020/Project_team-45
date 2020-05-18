@@ -78,8 +78,11 @@ public class CategoryController implements Editor, Creator {
     public String getAllInListAsString() {
         ArrayList<Category> allCategories = market.getAllCategories();
         StringBuilder listString = new StringBuilder("name,parent\n");
+        String categoryInfo;
         for (Category category : allCategories) {
-            String categoryInfo = category.getName() + "," + category.getParent().getName() + "\n";
+            if (category.isMain())
+                 categoryInfo = category.getName() + "," + "IS MAIN" + "\n";
+            else categoryInfo = category.getName() + "," + category.getParent().getName() + "\n";
             listString.append(categoryInfo);
         }
         return listString.toString();
@@ -208,7 +211,7 @@ public class CategoryController implements Editor, Creator {
 
     public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
         LinkedHashMap<String, InputValidator> necessaryFields = new LinkedHashMap<>();
-        necessaryFields.put("parent category", new InputValidator("\\w+", "an existing category name ('NULL' for nothing)", CategoryController.getInstance()));
+        necessaryFields.put("parent category", InputValidator.getCategoryParentValidator());
         necessaryFields.put("is final?", new InputValidator("yes|no", "yes or no"));
         return necessaryFields;
     }
@@ -225,7 +228,9 @@ public class CategoryController implements Editor, Creator {
             ArrayList<String> categorySpecialFeatures = CategoriesManagingMenu.getCategoryFeatures();
             createdCategory = new FinalCategory(filledFeatures, categorySpecialFeatures);
         } else createdCategory = new ParentCategory(filledFeatures);
-        createdCategory.getParent().addSubcategory(createdCategory);
+        if (createdCategory.isMain())
+            market.addMainCategoryToList(createdCategory);
+        else createdCategory.getParent().addSubcategory(createdCategory);
         market.addCategoryToList(createdCategory);
     }
 

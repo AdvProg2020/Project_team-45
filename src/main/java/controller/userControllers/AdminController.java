@@ -22,8 +22,10 @@ public class AdminController extends UserController implements Creator {
 
     public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
 
-        LinkedHashMap<String, InputValidator> necessaryFieldsToCreate = super.getNecessaryFieldsToCreate();
+        LinkedHashMap<String, InputValidator> necessaryFieldsToCreate = new LinkedHashMap<>();
         necessaryFieldsToCreate.put("username", InputValidator.getSimpleTextValidator());
+        necessaryFieldsToCreate.putAll(super.getNecessaryFieldsToCreate());
+
         return necessaryFieldsToCreate;
     }
 

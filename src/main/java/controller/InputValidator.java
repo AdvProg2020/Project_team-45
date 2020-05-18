@@ -12,15 +12,17 @@ public class InputValidator {
     private Pattern validPattern;
     private String formatToShow;
     private Manager existenceChecker;
+    private String nullable;
 
     public InputValidator(String validRegex, String formatToShow) {
         this.validPattern = Pattern.compile(validRegex);
         this.formatToShow = formatToShow;
     }
 
-    public InputValidator(String validRegex, String formatToShow, Manager existenceChecker) {
+    public InputValidator(String validRegex, String formatToShow, Manager existenceChecker, String nullable) {
         this(validRegex, formatToShow);
         this.existenceChecker = existenceChecker;
+        this.nullable = nullable;
     }
 
     public String getFormatToShow() {
@@ -30,6 +32,8 @@ public class InputValidator {
     public boolean checkInput(String input) {
         if (input == null)
             return false;
+        if (nullable != null && nullable.equals("nullable") && input.equals("NULL"))
+            return true;
         if (existenceChecker != null && existenceChecker.getItemById(input) == null)
             return false;
         return validPattern.matcher(input).matches();
@@ -51,10 +55,13 @@ public class InputValidator {
         return new InputValidator("[0][1-9]|[1-9][0-9]", "1-99 digit");
     }
     public static InputValidator getExistingBuyerValidator(){
-        return new InputValidator("\\w+", "existing username", BuyerController.getInstance());
+        return new InputValidator("\\w+", "existing username", BuyerController.getInstance(), "no");
     }
     public static InputValidator getCategoryFeaturesValidator(){
         return new InputValidator("[\\w|\\s]+", "type any feature name in a line(alphanumeric characters or space) - 'done' to finish");
+    }
+    public static InputValidator getCategoryParentValidator(){
+        return new InputValidator("\\w+", "an existing category name ('NULL' for nothing)", CategoryController.getInstance(), "nullable");
     }
 
     public static Date convertStringToDate(String dateString){

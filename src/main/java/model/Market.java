@@ -195,6 +195,9 @@ public class Market {
     public void addCategoryToList(Category category) {
         allCategories.add(category);
     }
+    public void addMainCategoryToList(Category category) {
+        mainCategories.add(category);
+    }
 
     public void removeCategoryFromList(Category category) {
         allCategories.remove(category);

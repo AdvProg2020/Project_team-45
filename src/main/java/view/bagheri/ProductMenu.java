@@ -33,7 +33,7 @@ public class ProductMenu extends Menu {
                     if (inputCommand.equals("add to cart")) {
                         productController.addActiveProductToCart();
                     } else if ((matcher = getMatcher("select seller (\\w+)", inputCommand)) != null) {
-                        selectSeller(matcher.group(1));
+                         selectSeller(matcher.group(1));
                     } else {
                         System.out.println("invalid command!");
                     }

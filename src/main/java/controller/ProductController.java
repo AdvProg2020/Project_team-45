@@ -18,7 +18,7 @@ public class ProductController implements Deleter {
     private static final ProductController instance = new ProductController();
     private final Market market;
     private Product activeProduct;
-    private Seller activeSellerForActiveCategory;
+    private ProductSellInfo activeProductSellInfo;
 
     private ProductController() {
         this.market = Market.getInstance();
@@ -38,7 +38,7 @@ public class ProductController implements Deleter {
             if (product.getProductId().equals(productId)) {
                 activeProduct = product;
                 activeProduct.increaseSeen();
-                activeSellerForActiveCategory = activeProduct.getDefaultSeller();
+                activeProductSellInfo = activeProduct.getDefaultSellInfo();
                 return true;
             }
         }
@@ -64,12 +64,15 @@ public class ProductController implements Deleter {
     }
 
     public void addActiveProductToCart() {
-        // TODO bagheri
+        CartController.getInstance().addProductToCart(activeProduct, activeProductSellInfo);
     }
 
     public boolean selectSellerForActiveProduct(String sellerUsername) {
-        // TODO bagheri
-        return false;
+        ProductSellInfo sellInfo = activeProduct.getSellerInfoForProductByUsername(sellerUsername);
+        if (sellInfo == null)
+            return false;
+        activeProductSellInfo = sellInfo;
+        return true;
     }
 
     public float getAverageScore() {

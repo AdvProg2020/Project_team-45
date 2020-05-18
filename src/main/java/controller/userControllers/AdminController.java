@@ -34,7 +34,6 @@ public class AdminController extends UserController implements Creator {
 
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
-        filledFeatures.put("username", filledFeatures.get("username"));
         Admin newAdmin = new Admin(new PersonalInfo(filledFeatures));
         market.addUserToList(newAdmin);
     }

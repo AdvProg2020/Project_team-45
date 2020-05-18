@@ -5,6 +5,7 @@ import model.Product;
 import model.ProductSellInfo;
 import model.user.Buyer;
 import model.user.CartHolder;
+import model.user.Seller;
 
 import java.util.ArrayList;
 
@@ -22,13 +23,9 @@ public class CartController {
         return null;
     }
 
-    public void addProductToCart(Product product, String sellerUsername) {
+    public void addProductToCart(Product product, ProductSellInfo productSellInfo) {
         BuyerController.getInstance().updateBuyer();
         CartHolder buyer = BuyerController.getInstance().getBuyer();
-        ProductSellInfo productSellInfo = product.getSellerInfoForProductByUsername(sellerUsername);
-        if (productSellInfo == null) {
-            return;
-        }
         buyer.getCart().addProduct(product, productSellInfo);
     }
 

@@ -3,19 +3,28 @@ package view.bagheri;
 import view.nedaei.MainMenu;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class MenuManagement {
-    private static Menu activeMenu;
+    private static final Stack<Menu> activeMenus = new Stack<>();
 
-    public static void setActiveMenu(Menu activeMenu) {
-        MenuManagement.activeMenu = activeMenu;
+    public static void next(Menu activeMenu) {
+        activeMenus.push(activeMenu);
+    }
+
+    public static void back() {
+        if (activeMenus.size()==1) {
+            System.out.println();
+        } else {
+            activeMenus.pop();
+        }
     }
 
     public static void run() {
         UIPage.setScanner(new Scanner(System.in));
-        activeMenu = MainMenu.getInstance;
+        activeMenus.push(MainMenu.getInstance());
         while (true) {
-            activeMenu.execute();
+            activeMenus.peek().execute();
         }
     }
 }

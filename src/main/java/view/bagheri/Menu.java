@@ -13,7 +13,7 @@ public abstract class Menu extends UIPage {
     protected Menu(String name) {
         super(name);
         this.parent = null;
-        this.submenus = new HashMap<String, UIPage>();
+        this.submenus = new HashMap<>();
         submenus.put("login", Login_RegisterPanel.getInstance());
         submenus.put("logout", createLogoutPanel());
         submenus.put("help", createHelpPanel());
@@ -42,10 +42,6 @@ public abstract class Menu extends UIPage {
         };
     }
 
-    private void setParent(Menu parent) {
-        this.parent = parent;
-    }
-
     @Override
     public void execute() {
         show();
@@ -56,8 +52,7 @@ public abstract class Menu extends UIPage {
                 if (nextUIPage.getType().equals("Menu")) {
                     Menu nextMenu = (Menu) nextUIPage;
                     if (nextMenu.check()) {
-                        MenuManagement.setActiveMenu(nextMenu);
-                        nextMenu.setParent(this);
+                        MenuManagement.next(nextMenu);
                         return;
                     }
                 }
@@ -66,7 +61,7 @@ public abstract class Menu extends UIPage {
                 System.out.println("invalid command!");
             }
         }
-        MenuManagement.setActiveMenu(parent);
+        MenuManagement.back();
     }
 
     private UIPage getUIPageByCommand(String input) {

@@ -79,4 +79,8 @@ public class AddOffRequest extends Request{
         return "add off";
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "seller:" + seller.getPersonalInfo().getUsername();
+    }
 }

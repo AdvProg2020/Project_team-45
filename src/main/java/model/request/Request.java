@@ -49,7 +49,7 @@ public abstract class Request {
 
     @Override
     public String toString() {
-        return  "requestId:" + requestId +
+        return  "request type:" + getType() + "requestId:" + requestId +
                 ", requestStatus:" + requestStatus;
     }
 }

@@ -37,4 +37,11 @@ public class ProductEditionRequest extends Request {
     public String getType() {
         return "edit product";
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "productId:'" + productId +
+                ", seller:" + seller.getPersonalInfo().getUsername();
+    }
 }

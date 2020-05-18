@@ -23,4 +23,10 @@ public class SellerRegisterRequest extends Request {
     public String getType() {
         return "seller register";
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "seller:" + seller.getPersonalInfo().getUsername();
+    }
 }

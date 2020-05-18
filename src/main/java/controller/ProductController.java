@@ -1,6 +1,7 @@
 package controller;
 
 import controller.managers.Deleter;
+import controller.userControllers.UserController;
 import model.Comment;
 import model.Market;
 import model.Product;
@@ -81,29 +82,31 @@ public class ProductController implements Deleter {
     }
 
     public ArrayList<String> getProductComments() {
-        // TODO bagheri
-        return null;
+        ArrayList<String> productComments = new ArrayList<>();
+        for (Comment comment : activeProduct.getApprovedComments()) {
+            productComments.add(comment.toString());
+        }
+        return productComments;
     }
 
     public void addComment(String title, String content) {
-        // TODO bagheri
-        User user = activeUser;
+        User activeUser = UserController.getActiveUser();
         boolean didUserBuy = false;
-        if (user.getRole().equals("Buyer") && ((Buyer) user).didBuyProduct(activeProduct.getProductId())) {
+        if (activeUser.getRole().equals("Buyer") && ((Buyer) activeUser).didBuyProduct(activeProduct.getProductId())) {
             didUserBuy = true;
         }
 
-        //Method 1:
-        HashMap<String, Object> fieldsAndValues = new HashMap<>();
-        fieldsAndValues.put("user", user);
-        fieldsAndValues.put("product", activeProduct);
-        fieldsAndValues.put("title", title);
-        fieldsAndValues.put("content", content);
-        fieldsAndValues.put("didUserBuy", didUserBuy);
-        market.addRequest(new CommentRequest(fieldsAndValues));
+//        //Method 1:
+//        HashMap<String, Object> fieldsAndValues = new HashMap<>();
+//        fieldsAndValues.put("user", user);
+//        fieldsAndValues.put("product", activeProduct);
+//        fieldsAndValues.put("title", title);
+//        fieldsAndValues.put("content", content);
+//        fieldsAndValues.put("didUserBuy", didUserBuy);
+//        market.addRequest(new CommentRequest(fieldsAndValues));
 
         //Method 2:
-        Comment newComment = new Comment(user, activeProduct, title, content, didUserBuy);
+        Comment newComment = new Comment(activeUser, activeProduct, title, content, didUserBuy);
         market.addRequest(new CommentRequest(newComment));
     }
 

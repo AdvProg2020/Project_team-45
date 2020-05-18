@@ -13,7 +13,7 @@ public class Product {
     private final String productId;
     private String name;
     private Company company;
-    private Date productionDate;
+    private final Date productionDate;
     private String productStatus;
     private HashMap<Seller, ProductSellInfo> sellersList;
     private int minimumPrice;   // minimum price should be updated
@@ -92,6 +92,11 @@ public class Product {
     }
 
     public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public ArrayList<Comment> getApprovedComments() {
+        //TODO : bagheri
         return comments;
     }
 

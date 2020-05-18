@@ -3,12 +3,12 @@ package model;
 import model.user.User;
 
 public class Comment {
-    private User user;
-    private Product product;
-    private String title;
-    private String content;
+    private final User user;
+    private final Product product;
+    private final String title;
+    private final String content;
     private CommentStatus commentStatus;
-    private boolean didUserBuy;
+    private final boolean didUserBuy;
 
     public Comment(User user, Product product, String title, String content, boolean didUserBuy) {
         this.user = user;
@@ -49,6 +49,11 @@ public class Comment {
     enum CommentStatus {
         WAITING_FOR_APPROVAL,
         APPROVED,
-        NOT_APPROVED_BY_ADMIN;
+        NOT_APPROVED_BY_ADMIN
+    }
+
+    @Override
+    public String toString() {
+        return "title: " + title + '\n' + "content: " + content;
     }
 }

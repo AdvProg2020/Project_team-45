@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class CommentRequest extends Request {
     private Comment comment;
 
-    public CommentRequest(HashMap<String, Object> fieldsAndValues) {
+    public CommentRequest(HashMap<String, String> fieldsAndValues) {
         super(fieldsAndValues);
     }
 

@@ -6,12 +6,10 @@ import controller.userControllers.UserController;
 public class CommentingPanel extends Panel {
     private static final CommentingPanel instance = new CommentingPanel();
     private final ProductController productController;
-    private final UserController userController;
 
     private CommentingPanel() {
         super("comment panel");
         productController = ProductController.getInstance();
-        userController = UserController.getInstance();
     }
 
     public static CommentingPanel getInstance() {

@@ -21,8 +21,9 @@ public class Product {
     private final HashMap<String, String> categoryFeatures;
     private String description;
     private float averageScore;
-    private ArrayList<Comment> comments;
-    private ArrayList<Rate> rates;
+    private final ArrayList<Comment> allComments;
+    private final ArrayList<Comment> approvedComments;
+    private final ArrayList<Rate> rates;
     private int sellCount;
     private int seen;
 
@@ -35,6 +36,9 @@ public class Product {
         this.category = category;
         this.categoryFeatures = new HashMap<>();
         this.description = description;
+        this.allComments = new ArrayList<>();
+        this.approvedComments = new ArrayList<>();
+        this.rates = new ArrayList<>();
     }
 
 
@@ -91,13 +95,12 @@ public class Product {
         return averageScore;
     }
 
-    public ArrayList<Comment> getComments() {
-        return comments;
+    public ArrayList<Comment> getAllComments() {
+        return allComments;
     }
 
     public ArrayList<Comment> getApprovedComments() {
-        //TODO : bagheri
-        return comments;
+        return approvedComments;
     }
 
     public int getSellCount() {
@@ -137,7 +140,11 @@ public class Product {
     }
 
     public void addComment(Comment newComment) {
+        allComments.add(newComment);
+    }
 
+    public void addApprovedComment(Comment newComment) {
+        approvedComments.add(newComment);
     }
 
     public void addRate(Rate rate) {

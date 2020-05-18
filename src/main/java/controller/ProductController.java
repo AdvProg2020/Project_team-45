@@ -76,7 +76,7 @@ public class ProductController implements Deleter {
     public ArrayList<String> getProductComments() {
         ArrayList<String> productComments = new ArrayList<>();
         for (Comment comment : activeProduct.getApprovedComments()) {
-            productComments.add(comment.toString());
+            productComments.add(comment.showComment());
         }
         return productComments;
     }
@@ -88,6 +88,7 @@ public class ProductController implements Deleter {
             didUserBuy = true;
         }
         Comment newComment = new Comment(activeUser, activeProduct, title, content, didUserBuy);
+        activeProduct.addComment(newComment);
         market.addRequest(new CommentRequest(newComment));
     }
 

@@ -3,6 +3,7 @@ package model;
 import model.user.User;
 
 public class Comment {
+    ;
     private final User user;
     private final Product product;
     private final String title;
@@ -16,10 +17,15 @@ public class Comment {
         this.title = title;
         this.content = content;
         this.didUserBuy = didUserBuy;
+        this.commentStatus = CommentStatus.WAITING_FOR_APPROVAL;
     }
 
     public User getUser() {
         return user;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 
     public String getTitle() {
@@ -39,11 +45,11 @@ public class Comment {
     }
 
     public void approveComment () {
-
+        this.commentStatus = CommentStatus.APPROVED;
     }
 
     public void declineComment () {
-
+        this.commentStatus = CommentStatus.NOT_APPROVED_BY_ADMIN;
     }
 
     enum CommentStatus {
@@ -52,8 +58,17 @@ public class Comment {
         NOT_APPROVED_BY_ADMIN
     }
 
+    public String showComment() {
+        return "title: " + title + '\n' + "content: " + content;
+    }
+
     @Override
     public String toString() {
-        return "title: " + title + '\n' + "content: " + content;
+        return "user=" + user + '\n' +
+                "product: " + product + '\n' +
+                "title: " + title + '\n' +
+                "content: " + content + '\n' +
+                "commentStatus: " + commentStatus + '\n' +
+                "didUserBuy: " + didUserBuy;
     }
 }

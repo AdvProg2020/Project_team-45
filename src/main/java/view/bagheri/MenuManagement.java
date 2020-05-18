@@ -2,7 +2,7 @@ package view.bagheri;
 
 import controller.userControllers.AdminController;
 import model.Market;
-import view.hatami.ManagingMenu;
+import view.hatami.UsersManagingMenu;
 import view.nedaei.MainMenu;
 
 import java.util.Scanner;
@@ -50,7 +50,7 @@ public abstract class MenuManagement {
             @Override
             public void execute() {
                 System.out.println("creating first admin");
-                ManagingMenu.createItemCreatorPanel("create first admin", AdminController.getInstance()).execute();
+                UsersManagingMenu.createItemCreatorPanel("create admin", AdminController.getInstance()).execute();
             }
         }.execute();
     }

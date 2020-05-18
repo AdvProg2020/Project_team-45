@@ -7,6 +7,7 @@ import model.Market;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class CodedDiscountController implements Editor, Creator {
     private static CodedDiscountController instance = new CodedDiscountController();
@@ -55,8 +56,8 @@ public class CodedDiscountController implements Editor, Creator {
     }
 
     @Override
-    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        HashMap<String, InputValidator> necessaryFields = new HashMap<>();
+    public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+        LinkedHashMap<String, InputValidator> necessaryFields = new LinkedHashMap<>();
         necessaryFields.put("code", InputValidator.getSimpleTextValidator());
         necessaryFields.put("start date", InputValidator.getDateValidator());
         necessaryFields.put("end date", InputValidator.getDateValidator());
@@ -66,7 +67,7 @@ public class CodedDiscountController implements Editor, Creator {
     }
 
     @Override
-    public HashMap<String, InputValidator> getOptionalFieldsToCreate() {
+    public LinkedHashMap<String, InputValidator> getOptionalFieldsToCreate() {
         return null;
     }
 
@@ -83,8 +84,8 @@ public class CodedDiscountController implements Editor, Creator {
     }
 
     @Override
-    public HashMap<String, InputValidator> getAvailableFieldsToEdit() {
-        HashMap<String, InputValidator> availableFieldsToEdit = new HashMap<>();
+    public LinkedHashMap<String, InputValidator> getAvailableFieldsToEdit() {
+        LinkedHashMap<String, InputValidator> availableFieldsToEdit = new LinkedHashMap<>();
         availableFieldsToEdit.put("start date", InputValidator.getDateValidator());
         availableFieldsToEdit.put("end date", InputValidator.getDateValidator());
         availableFieldsToEdit.put("percentage", InputValidator.getPercentageValidator());

@@ -10,6 +10,7 @@ import model.category.ParentCategory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class CategoryController implements Editor, Creator {
     private static final CategoryController instance = new CategoryController();
@@ -49,8 +50,8 @@ public class CategoryController implements Editor, Creator {
     public void setParentOfCategory(Category category, String parentName) {
     }
 
-    public HashMap<String, InputValidator> getAvailableFieldsToEdit() {
-        HashMap<String, InputValidator> availableFieldsToEdit = new HashMap<>();
+    public LinkedHashMap<String, InputValidator> getAvailableFieldsToEdit() {
+        LinkedHashMap<String, InputValidator> availableFieldsToEdit = new LinkedHashMap<>();
         availableFieldsToEdit.put("new features", InputValidator.getCategoryFeaturesValidator());
         availableFieldsToEdit.put("removing features", InputValidator.getCategoryFeaturesValidator());
         availableFieldsToEdit.put("name", InputValidator.getSimpleTextValidator());
@@ -210,17 +211,17 @@ public class CategoryController implements Editor, Creator {
         return null;
     }
 
-    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        HashMap<String, InputValidator> necessaryFields = new HashMap<>();
+    public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+        LinkedHashMap<String, InputValidator> necessaryFields = new LinkedHashMap<>();
         necessaryFields.put("name", InputValidator.getSimpleTextValidator());
         necessaryFields.put("features", InputValidator.getCategoryFeaturesValidator());
-        necessaryFields.put("parent category", new InputValidator("\\w+", "an existing category name", CategoryController.getInstance()));
+        necessaryFields.put("parent category", new InputValidator("\\w+", "an existing category name ('NULL' for nothing)", CategoryController.getInstance()));
         necessaryFields.put("is final?", new InputValidator("yes|no", "yes or no"));
         return necessaryFields;
     }
 
     @Override
-    public HashMap<String, InputValidator> getOptionalFieldsToCreate() {
+    public LinkedHashMap<String, InputValidator> getOptionalFieldsToCreate() {
         return null;
     }
 

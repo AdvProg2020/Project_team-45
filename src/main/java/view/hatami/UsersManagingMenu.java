@@ -19,4 +19,3 @@ public class UsersManagingMenu extends ManagingMenu {
         super.showHelp();
     }
 }
-

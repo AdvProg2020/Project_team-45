@@ -18,7 +18,8 @@ public abstract class Category {
 
     public Category(HashMap<String, String> filledFeatures) {
         this.setName(filledFeatures.get("name"));
-        this.setParent((ParentCategory) CategoryController.getInstance().getItemById(filledFeatures.get("parent category")));
+        if (!filledFeatures.get("parent category").equals("NULL"))
+            this.setParent((ParentCategory) CategoryController.getInstance().getItemById(filledFeatures.get("parent category")));
     }
 
     public String getName() {

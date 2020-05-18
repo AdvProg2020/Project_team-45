@@ -85,6 +85,11 @@ public abstract class Menu extends UIPage {
         return null;
     }
 
+    @Override
+    protected void show() {
+        System.out.println(name);
+    }
+
     protected boolean check() {
         return true;
     }

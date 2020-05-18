@@ -11,7 +11,8 @@ public abstract class Request {
     protected HashMap<String, String> fieldsAndValues;
 
     public Request() {
-
+        this.requestId = newRequestId.toString();
+        newRequestId++;
     }
 
     public Request(HashMap<String, String> fieldsAndValues) {

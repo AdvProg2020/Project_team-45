@@ -1,6 +1,7 @@
 package controller;
 
 import controller.managers.Manager;
+import controller.userControllers.AllUsersController;
 import controller.userControllers.BuyerController;
 
 import java.text.ParseException;
@@ -32,8 +33,12 @@ public class InputValidator {
     public boolean checkInput(String input) {
         if (input == null)
             return false;
-        if (nullable != null && nullable.equals("nullable") && input.equals("NULL"))
-            return true;
+        if (nullable != null) {
+            if (nullable.equals("nullable") && input.equals("NULL"))
+                return true;
+            else if (nullable.equals("just null"))
+                return existenceChecker.getItemById(input) == null;
+        }
         if (existenceChecker != null && existenceChecker.getItemById(input) == null)
             return false;
         return validPattern.matcher(input).matches();
@@ -56,6 +61,9 @@ public class InputValidator {
     }
     public static InputValidator getExistingBuyerValidator(){
         return new InputValidator("\\w+", "existing username", BuyerController.getInstance(), "no");
+    }
+    public static InputValidator getUsernameIsNewValidator(){
+        return new InputValidator("\\w+", "not existing username", AllUsersController.getInstance(), "just null");
     }
     public static InputValidator getCategoryFeaturesValidator(){
         return new InputValidator("[\\w|\\s]+", "type any feature name in a line(alphanumeric characters or space) - 'done' to finish");

@@ -29,11 +29,12 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
+                System.out.println(name);
                 String[] list = printer.getAllInListAsString().split("\n");
                 StringBuilder output = new StringBuilder();
                 for (String row : list) {
                     for (String info : row.split(",")) {
-                        output.append(String.format("%-15s", info));
+                        output.append(String.format("%-20s", info));
                     }
                     output.append("\n");
                 }
@@ -59,6 +60,10 @@ public abstract class ManagingMenu extends Menu {
             @Override
             public void execute() {
                 try {
+                    if (printer.getDetailStringById(matcher.group(1)) == null){
+                        System.out.println("wrong Id");
+                        return;
+                    }
                     String[] info = printer.getDetailStringById(matcher.group(1)).split(",");
                     StringBuilder output = new StringBuilder();
                     for (int count = 0; count < info.length; count++) {

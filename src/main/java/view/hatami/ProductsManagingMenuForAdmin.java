@@ -1,7 +1,7 @@
 package view.hatami;
 
-import controller.managers.Deleter;
 import controller.ProductController;
+import controller.managers.Deleter;
 
 public class ProductsManagingMenuForAdmin extends ManagingMenu{
 
@@ -9,6 +9,6 @@ public class ProductsManagingMenuForAdmin extends ManagingMenu{
         super("manage products");
         this.manager = ProductController.getInstance();
         this.managingObject = "Products";
-        submenus.put("remove (//S+)", createItemDeleterPanel("delete product", (Deleter) manager));
+        submenus.put("remove (\\S+)", createItemDeleterPanel("delete product", (Deleter) manager));
     }
 }

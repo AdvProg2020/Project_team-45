@@ -67,6 +67,10 @@ public class Product {
         return company;
     }
 
+    public Date getProductionDate() {
+        return productionDate;
+    }
+
     public String getProductStatus() {
         return productStatus;
     }

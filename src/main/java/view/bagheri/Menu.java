@@ -1,6 +1,7 @@
 package view.bagheri;
 
 import controller.userControllers.UserController;
+import view.nedaei.MainMenu;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,7 @@ public abstract class Menu extends UIPage {
             public void execute() {
                 UserController userController = UserController.getInstance();
                 if (userController.logout()) {
+                    MainMenu.getInstance().updateSubmenus();
                     System.out.println("You logout successfully");
                 } else {
                     System.out.println("You are not logged in");

@@ -230,5 +230,9 @@ public class Market {
     public void addDiscountToList(CodedDiscount creatingDiscount) {
         allCodedDiscounts.add(creatingDiscount);
     }
+
+    public void addRequest(Request request) {
+        this.allRequests.add(request);
+    }
 }
 

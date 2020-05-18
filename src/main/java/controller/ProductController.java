@@ -95,17 +95,6 @@ public class ProductController implements Deleter {
         if (activeUser.getRole().equals("Buyer") && ((Buyer) activeUser).didBuyProduct(activeProduct.getProductId())) {
             didUserBuy = true;
         }
-
-//        //Method 1:
-//        HashMap<String, Object> fieldsAndValues = new HashMap<>();
-//        fieldsAndValues.put("user", user);
-//        fieldsAndValues.put("product", activeProduct);
-//        fieldsAndValues.put("title", title);
-//        fieldsAndValues.put("content", content);
-//        fieldsAndValues.put("didUserBuy", didUserBuy);
-//        market.addRequest(new CommentRequest(fieldsAndValues));
-
-        //Method 2:
         Comment newComment = new Comment(activeUser, activeProduct, title, content, didUserBuy);
         market.addRequest(new CommentRequest(newComment));
     }

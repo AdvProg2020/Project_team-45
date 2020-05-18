@@ -5,10 +5,11 @@ import model.Comment;
 import java.util.HashMap;
 
 public class CommentRequest extends Request {
-    private Comment comment;
+    private final Comment comment;
 
-    public CommentRequest(HashMap<String, String> fieldsAndValues) {
-        super(fieldsAndValues);
+    public CommentRequest(Comment comment) {
+        super();
+        this.comment = comment;
     }
 
     public Comment getComment() {
@@ -16,7 +17,9 @@ public class CommentRequest extends Request {
     }
 
     @Override
-    public void apply() {}
+    public void apply() {
+
+    }
 
     @Override
     public String getType() {

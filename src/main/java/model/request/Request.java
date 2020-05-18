@@ -10,6 +10,10 @@ public abstract class Request {
     protected RequestStatus requestStatus;
     protected HashMap<String, String> fieldsAndValues;
 
+    public Request() {
+
+    }
+
     public Request(HashMap<String, String> fieldsAndValues) {
         this.requestId = newRequestId.toString();
         newRequestId++;

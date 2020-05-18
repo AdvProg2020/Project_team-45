@@ -2,6 +2,7 @@ package view.bagheri;
 
 import controller.userControllers.UserController;
 import view.hatami.RegisterPanel;
+import view.nedaei.MainMenu;
 
 public class Login_RegisterPanel extends Panel {
     private static final Login_RegisterPanel instance = new Login_RegisterPanel();
@@ -46,6 +47,7 @@ public class Login_RegisterPanel extends Panel {
         System.out.println("Please enter your password.");
         while (!(input = scanner.nextLine()).equals("back")) {
             if (userController.login(input)) {
+                MainMenu.getInstance().updateSubmenus();
                 return true;
             } else {
                 System.out.println("The password is invalid!");

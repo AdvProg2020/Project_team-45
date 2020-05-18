@@ -1,6 +1,7 @@
 package view.hatami;
 
 import controller.userControllers.BuyerController;
+import controller.userControllers.SellerController;
 import model.Market;
 import view.bagheri.Panel;
 
@@ -8,7 +9,7 @@ import view.bagheri.Panel;
 public class RegisterPanel extends Panel {
     private static final RegisterPanel instance = new RegisterPanel();
     private Panel buyerRegisterPanel = ManagingMenu.createItemCreatorPanel("create buyer", BuyerController.getInstance());
-    private Panel sellerRegisterPanel = ManagingMenu.createItemCreatorPanel("create seller", BuyerController.getInstance());
+    private Panel sellerRegisterPanel = ManagingMenu.createItemCreatorPanel("create seller", SellerController.getInstance());
     private static String lastRegisterUsername;
 
     private RegisterPanel() {

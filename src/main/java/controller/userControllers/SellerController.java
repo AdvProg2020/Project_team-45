@@ -78,7 +78,9 @@ public class SellerController extends UserController implements Creator {
         for (SellLog sellLog : listOfSellLogs) {
             result.append(getSellLogDisplay(sellLog) + "\n");
         }
-        result.replace(result.length() - 1, result.length(), "");
+        if (result.length() > 0) {
+            result.replace(result.length() - 1, result.length(), "");
+        }
         return result.toString();
     }
 

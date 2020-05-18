@@ -1,6 +1,7 @@
 package view.nedaei.buyermenu;
 
 import controller.userControllers.BuyerController;
+import controller.userControllers.UserController;
 import view.bagheri.Panel;
 import view.bagheri.ProductMenu;
 import view.hatami.ManagingMenu;
@@ -23,11 +24,6 @@ public class CartManagingMenu extends ManagingMenu {
             instance = new CartManagingMenu();
         }
         return instance;
-    }
-
-    @Override
-    protected void show() {
-        System.out.println(name);
     }
 
     private Panel createShowProductsPanel() {
@@ -80,9 +76,13 @@ public class CartManagingMenu extends ManagingMenu {
         System.out.println();
     }
 
-//    @Override
-//    protected void show() {
-//        System.out.println(UserController.getInstance().getCartProductsList());
-//    }
+    @Override
+    protected void show() {
+        System.out.println(BuyerController.getInstance().getCartProductsList());
+    }
 
+    @Override
+    protected boolean check() {
+        return !UserController.isLoggedIn() || UserController.getActiveUser().getRole().equals("buyer");
+    }
 }

@@ -80,7 +80,10 @@ public class Log {
     }
 
     private int calculateBuyerFee() {
-        return finalPrice*(100-appliedDiscount.getPercentage());
+        if (appliedDiscount == null) {
+            return finalPrice;
+        }
+        return (int) (finalPrice * (100 - appliedDiscount.getPercentage()) / 100.0);
     }
 
     public String getBuyerUsername() {

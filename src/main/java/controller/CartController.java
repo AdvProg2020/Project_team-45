@@ -1,6 +1,8 @@
 package controller;
 
+import controller.userControllers.BuyerController;
 import model.Product;
+import model.ProductSellInfo;
 import model.user.Buyer;
 import model.user.CartHolder;
 
@@ -20,7 +22,14 @@ public class CartController {
         return null;
     }
 
-    public void addProductToCart(CartHolder cartHolder, Product product, String sellerUsername) {
+    public void addProductToCart(Product product, String sellerUsername) {
+        BuyerController.getInstance().updateBuyer();
+        CartHolder buyer = BuyerController.getInstance().getBuyer();
+        ProductSellInfo productSellInfo = product.getSellerInfoForProductByUsername(sellerUsername);
+        if (productSellInfo == null) {
+            return;
+        }
+        buyer.getCart().addProduct(product, productSellInfo);
     }
 
     public Product getCartProductById(CartHolder cartHolder, String productId) {

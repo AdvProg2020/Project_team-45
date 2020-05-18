@@ -223,7 +223,20 @@ public class Product {
         return attributes;
     }
 
-//    enum ProductStatus {
+    public ArrayList<String> getOffsInfo() {
+        ArrayList<String> offsInfo = new ArrayList<>();
+
+        return offsInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "productId: " + productId + '\n' +
+                "name: " + name + '\n' +
+                "price: " + minimumPrice;
+    }
+
+    //    enum ProductStatus {
 //        UNDER_REVIEW_FOR_CREATE,
 //        REVIEW_FOR_EDITING,
 //        APPROVED;

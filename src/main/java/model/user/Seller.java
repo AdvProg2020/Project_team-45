@@ -19,7 +19,8 @@ public class Seller extends User {
     public Seller(PersonalInfo personalInfo, Company company) {
         super(personalInfo);
         this.company = company;
-        listOfOffs = new HashMap<String, Off>();
+        this.listOfSellLogs = new ArrayList<>();
+        listOfOffs = new HashMap<>();
         availableProducts = new HashMap<>();
         listOfOffs = new HashMap<>();
     }

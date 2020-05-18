@@ -5,7 +5,9 @@ import controller.managers.Editor;
 import model.Market;
 import model.Product;
 import model.category.Category;
+import model.category.FinalCategory;
 import model.category.ParentCategory;
+import view.hatami.ManagingMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,13 +70,18 @@ public class CategoryController implements Editor, Creator {
     }
 
     public HashMap<String, InputValidator> getAvailableFieldsToEdit() {
-        // TODO : hatami
-        return null;
+        HashMap<String, InputValidator> availableFieldsToEdit = new HashMap<>();
+        availableFieldsToEdit.put("new features", InputValidator.getCategoryFeaturesValidator());
+        availableFieldsToEdit.put("removing features", InputValidator.getCategoryFeaturesValidator());
+        availableFieldsToEdit.put("name", InputValidator.getSimpleTextValidator());
+        return availableFieldsToEdit;
     }
 
     @Override
     public void editItem(HashMap<String, String> changedFields) {
-
+        if (changedFields.containsKey("name")){
+            ManagingMenu
+        }
     }
 
     public boolean deleteItemById(String Id) {
@@ -201,8 +208,12 @@ public class CategoryController implements Editor, Creator {
 
 
     public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        // TODO : hatami
-        return null;
+        HashMap<String, InputValidator> necessaryFields = new HashMap<>();
+        necessaryFields.put("name", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("features", InputValidator.getCategoryFeaturesValidator());
+        necessaryFields.put("parent category" ,new InputValidator("\\w+","an existing category name", CategoryController.getInstance()));
+        necessaryFields.put("is final?" ,new InputValidator("yes|no", "yes or no"));
+        return necessaryFields;
     }
 
     @Override
@@ -212,7 +223,13 @@ public class CategoryController implements Editor, Creator {
 
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
-        //TODO : hatami
+        Category createdCategory;
+        if (filledFeatures.get("is final?").equals("yes")) {
+             createdCategory = new FinalCategory(filledFeatures);
+        }
+        else createdCategory = new ParentCategory(filledFeatures);
+        createdCategory.getParent().addSubcategory(createdCategory);
+        market.addCategoryToList(createdCategory);
     }
 
     @Override

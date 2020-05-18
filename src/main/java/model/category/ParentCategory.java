@@ -3,14 +3,21 @@ package model.category;
 import model.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ParentCategory extends Category{
     private final ArrayList<Category> subcategories;
 
 
-    public ParentCategory(String name, Category parent) {
+    public ParentCategory(String name, ParentCategory parent) {
         super(name, parent);
         this.subcategories = new ArrayList<Category>();
+    }
+
+    public ParentCategory(HashMap<String, String> filledFeatures) {
+        super(filledFeatures);
+        this.subcategories = new ArrayList<Category>();
+
     }
 
     public ArrayList<Category> getSubcategories() {

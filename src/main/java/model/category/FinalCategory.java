@@ -3,14 +3,22 @@ package model.category;
 import model.Product;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class FinalCategory extends Category {
     private ArrayList<String> specialFeatures;
     private final ArrayList<Product> productsList;
 
-    public FinalCategory(String name, Category parent, ArrayList<String> specialFeatures) {
+    public FinalCategory(String name, ParentCategory parent, ArrayList<String> specialFeatures) {
         super(name, parent);
         this.productsList = new ArrayList<Product>();
+    }
+
+    public FinalCategory(HashMap<String, String> filledFeatures) {
+        super(filledFeatures);
+        this.productsList = new ArrayList<>();
+        this.specialFeatures = (ArrayList<String>) Arrays.asList(filledFeatures.get("features").split("-"));
     }
 
     public ArrayList<String> getSpecialFeatures() {

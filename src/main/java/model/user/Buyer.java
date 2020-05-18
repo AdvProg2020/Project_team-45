@@ -78,4 +78,8 @@ public class Buyer extends User implements CartHolder {
     public void removeCodedDiscountFromList(CodedDiscount removingCodedDiscount) {
         listOfCodedDiscounts.remove(removingCodedDiscount);
     }
+
+    public void addCodedDiscount(CodedDiscount addingDiscount) {
+        listOfCodedDiscounts.add(addingDiscount);
+    }
 }

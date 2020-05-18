@@ -10,6 +10,8 @@ import model.log.BuyLog;
 import model.log.Log;
 import model.user.Buyer;
 import model.user.PersonalInfo;
+import model.user.User;
+import view.hatami.RegisterPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -148,12 +150,16 @@ public class BuyerController extends UserController implements Creator {
 
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
+        filledFeatures.put("username", RegisterPanel.getLastRegisterUsername());
         Buyer newBuyer = new Buyer(new PersonalInfo(filledFeatures));
         market.addUserToList(newBuyer);
     }
 
     @Override
     public Buyer getItemById(String Id) {
+        User user = market.getUserByUsername(Id);
+        if (user == null || !user.getRole().equals("buyer"))
+            return null;
         return (Buyer) market.getUserByUsername(Id);
     }
 }

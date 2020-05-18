@@ -1,8 +1,10 @@
 package model.category;
 
+import controller.CategoryController;
 import model.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class Category {
     private String name;
@@ -12,6 +14,14 @@ public abstract class Category {
     public Category(String name, ParentCategory parent) {
         this.name = name;
         this.parent = parent;
+    }
+
+    public Category(HashMap<String, String> filledFeatures) {
+        this.setName(filledFeatures.get("name"));
+        this.setParent((ParentCategory) CategoryController.getInstance().getItemById(filledFeatures.get("parent category")));
+    }
+
+    public Category() {
     }
 
     public String getName() {

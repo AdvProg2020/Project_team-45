@@ -2,6 +2,8 @@ package view.hatami;
 
 import controller.RequestController;
 import controller.managers.Printer;
+import model.Market;
+import model.request.Request;
 import view.bagheri.Panel;
 
 public class RequestsManagingMenu extends ManagingMenu {
@@ -18,7 +20,15 @@ public class RequestsManagingMenu extends ManagingMenu {
         return new Panel("modify request") {
             @Override
             public void execute() {
-                // TODO : hatami
+                Request modifyingRequest = Market.getInstance().getRequestById(matcher.group(2));
+                if (modifyingRequest == null) {
+                    System.out.println("wrong id");
+                    return;
+                }
+                if (matcher.group(1).equals("accept"))
+                    modifyingRequest.accept();
+                else
+                    modifyingRequest.decline();
             }
         };
     }

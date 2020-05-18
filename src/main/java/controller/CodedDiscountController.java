@@ -1,14 +1,14 @@
 package controller;
 
 import controller.managers.Creator;
-import controller.managers.Deleter;
+import controller.managers.Editor;
 import model.CodedDiscount;
 import model.Market;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CodedDiscountController implements Deleter, Creator {
+public class CodedDiscountController implements Editor, Creator {
     private static CodedDiscountController instance = new CodedDiscountController();
     private Market market = Market.getInstance();
 
@@ -63,9 +63,13 @@ public class CodedDiscountController implements Deleter, Creator {
 
     @Override
     public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        HashMap<String, InputValidator> fields = new HashMap<>();
-        // TODO
-        return fields;
+        HashMap<String, InputValidator> necessaryFields = new HashMap<>();
+        necessaryFields.put("code", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("start date", InputValidator.getDateValidator());
+        necessaryFields.put("end date", InputValidator.getDateValidator());
+        necessaryFields.put("percentage", InputValidator.getPercentageValidator());
+        necessaryFields.put("owner username", InputValidator.getExistingBuyerValidator());
+        return necessaryFields;
     }
 
     @Override
@@ -75,11 +79,23 @@ public class CodedDiscountController implements Deleter, Creator {
 
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
-        // TODO : hatami
+        CodedDiscount creatingDiscount = new CodedDiscount(filledFeatures);
+        creatingDiscount.getOwner().addCodedDiscount(creatingDiscount);
+        market.addDiscountToList(creatingDiscount);
     }
 
     @Override
     public CodedDiscount getItemById(String Id) {
         return Market.getInstance().getCodedDiscountByCode(Id);
+    }
+
+    @Override
+    public HashMap<String, InputValidator> getAvailableFieldsToEdit() {
+        return null;
+    }
+
+    @Override
+    public void editItem(HashMap<String, String> changedFields) {
+
     }
 }

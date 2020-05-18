@@ -22,4 +22,10 @@ public class CommentRequest extends Request {
     public String getType() {
         return "new comment";
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "comment:" + comment;
+    }
 }

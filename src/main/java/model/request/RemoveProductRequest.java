@@ -31,4 +31,11 @@ public class RemoveProductRequest extends Request{
     public String getType() {
         return "remove product";
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "productId:" + productId +
+                ", seller:" + seller.getPersonalInfo().getUsername();
+    }
 }

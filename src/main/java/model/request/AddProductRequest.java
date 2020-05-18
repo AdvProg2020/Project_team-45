@@ -60,4 +60,11 @@ public class AddProductRequest extends Request {
         return "add product";
     }
 
+    @Override
+    public String toString() {
+        return super.toString() +
+                "seller:" + seller +
+                ", mode:" + mode +
+                ", product:" + product.getName();
+    }
 }

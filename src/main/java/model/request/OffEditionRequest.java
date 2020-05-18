@@ -48,4 +48,11 @@ public class OffEditionRequest extends Request{
     public String getType() {
         return "edit off";
     }
+
+    @Override
+    public String toString() {
+        return super.toString()+
+                "seller:" + seller.getPersonalInfo().getUsername() +
+                ", offId:" + offId;
+    }
 }

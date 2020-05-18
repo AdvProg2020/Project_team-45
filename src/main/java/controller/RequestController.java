@@ -38,7 +38,10 @@ public class RequestController implements Printer {
     }
 
     public String getDetailStringById(String Id) {
-        // TODO : hatami
+        Request showingRequest = getItemById(Id);
+        if (showingRequest == null)
+            return null;
+        return showingRequest.toString();
     }
 
     @Override

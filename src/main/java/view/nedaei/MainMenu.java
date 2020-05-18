@@ -1,10 +1,7 @@
 package view.nedaei;
 
 import controller.userControllers.UserController;
-import view.bagheri.CategoryMenu;
-import view.bagheri.Login_RegisterPanel;
-import view.bagheri.Menu;
-import view.bagheri.OffsMenu;
+import view.bagheri.*;
 import view.hatami.AdminMenu;
 import view.nedaei.buyermenu.BuyerMenu;
 import view.nedaei.sellermenu.SellerMenu;
@@ -15,7 +12,7 @@ public class MainMenu extends Menu {
     private MainMenu() {
         super("main menu");
         this.submenus.put("user page", Login_RegisterPanel.getInstance());
-        this.submenus.put("products page", CategoryMenu.getInstance());
+        this.submenus.put("products page", AllProductsMenu.getInstance());
         this.submenus.put("offs page", OffsMenu.getInstance());
     }
 

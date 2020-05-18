@@ -4,6 +4,7 @@ import model.category.FinalCategory;
 import model.user.Seller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ public class Product {
     private final String productId;
     private String name;
     private Company company;
+    private Date productionDate;
     private String productStatus;
     private HashMap<Seller, ProductSellInfo> sellersList;
     private int minimumPrice;   // minimum price should be updated
@@ -24,10 +26,12 @@ public class Product {
     private int sellCount;
     private int seen;
 
+
     public Product(String name, FinalCategory category, String description) {
         this.productId = newProductId.toString();
         newProductId++;
         this.name = name;
+        this.productionDate = new Date();
         this.category = category;
         this.categoryFeatures = new HashMap<>();
         this.description = description;

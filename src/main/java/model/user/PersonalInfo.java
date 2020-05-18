@@ -49,6 +49,10 @@ public class PersonalInfo {
         return phoneNumber;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }

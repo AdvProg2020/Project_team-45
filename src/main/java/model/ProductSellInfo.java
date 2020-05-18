@@ -3,6 +3,7 @@ package model;
 import model.user.Buyer;
 import model.user.Seller;
 
+import java.util.Date;
 import java.util.HashMap;
 
 public class ProductSellInfo {
@@ -49,7 +50,14 @@ public class ProductSellInfo {
     }
 
     public int getFinalPrice() {
-        return 0;
+        if (off == null) {
+            return price;
+        }
+        Date currentDate = new Date();
+        if (off.getStartTime().compareTo(currentDate) <= 0 && off.getEndTime().compareTo(currentDate) >= 0) {
+            return (int) (price * (100 - off.getDiscountAmount()) / 100.0);
+        }
+        return price;
     }
 
     public int getSellCount() {
@@ -62,6 +70,14 @@ public class ProductSellInfo {
 
     public boolean isInOff() {
         return off != null;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void addSellCount() {
+        sellCount++;
     }
 
     @Override

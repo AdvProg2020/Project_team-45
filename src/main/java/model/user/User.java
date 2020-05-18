@@ -18,6 +18,6 @@ public abstract class User {
     }
 
     public boolean checkPassword(String password) {
-        return this.password.equals(password);
+        return this.getPersonalInfo().getPassword().equals(password);
     }
 }

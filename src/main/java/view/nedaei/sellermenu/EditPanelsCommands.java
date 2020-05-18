@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum EditPanelsCommands {
-    FIELD_AND_VALUE("(?i)(\\w+)\\s*:\\s*(\\w+)");
+    FIELD_AND_VALUE("(\\w+)\\s*:\\s*(\\w+)");
 
     private Pattern commandPattern;
 

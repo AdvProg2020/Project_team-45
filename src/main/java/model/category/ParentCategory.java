@@ -67,4 +67,12 @@ public class ParentCategory extends Category{
     public String getType() {
         return "ParentCategory";
     }
+
+    @Override
+    public void addFeatures(String newFeatures) {
+    }
+
+    @Override
+    public void removeFeatures(String removing_features) {
+    }
 }

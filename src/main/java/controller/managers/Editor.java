@@ -6,5 +6,5 @@ import java.util.HashMap;
 
 public interface Editor extends Deleter {
     HashMap<String, InputValidator> getAvailableFieldsToEdit();
-    void editItem(HashMap<String, String> changedFields);
+    void editItem(Object editingObject, HashMap<String, String> changedFields);
 }

@@ -54,7 +54,7 @@ public class InputValidator {
         return new InputValidator("\\w+", "existing username", BuyerController.getInstance());
     }
     public static InputValidator getCategoryFeaturesValidator(){
-        return new InputValidator("([\\w| ]+-)+", "separate features names with '-'"))
+        return new InputValidator("([\\w| ]+-)+", "separate features names with '-'");
     }
 
     public static Date convertStringToDate(String dateString){

@@ -91,11 +91,26 @@ public class CodedDiscountController implements Editor, Creator {
 
     @Override
     public HashMap<String, InputValidator> getAvailableFieldsToEdit() {
-        return null;
+        HashMap<String, InputValidator> availableFieldsToEdit = new HashMap<>();
+        availableFieldsToEdit.put("start date", InputValidator.getDateValidator());
+        availableFieldsToEdit.put("end date", InputValidator.getDateValidator());
+        availableFieldsToEdit.put("percentage", InputValidator.getPercentageValidator());
+        return availableFieldsToEdit;
     }
 
     @Override
-    public void editItem(HashMap<String, String> changedFields) {
-
+    public void editItem(Object editingObject, HashMap<String, String> changedFields) {
+        CodedDiscount editingCodedDiscount = (CodedDiscount) editingObject;
+        if (changedFields.containsKey("start date")){
+            editingCodedDiscount.setStartDate(InputValidator.convertStringToDate(changedFields.get("start date")));
+        }
+        if (changedFields.containsKey("end date")){
+            editingCodedDiscount.setEndDate(InputValidator.convertStringToDate(changedFields.get("end date")));
+        }
+        if (changedFields.containsKey("percentage")){
+            editingCodedDiscount.setPercentage(Integer.parseInt(changedFields.get("percentage")));
+        }
     }
+
+
 }

@@ -3,10 +3,10 @@ package model.request;
 import model.user.Seller;
 
 public class SellerRegisterRequest extends Request {
-    private Seller seller;
+    private final Seller seller;
 
     public SellerRegisterRequest(String requestId, Seller seller) {
-        super(requestId);
+        super();
         this.seller = seller;
     }
 

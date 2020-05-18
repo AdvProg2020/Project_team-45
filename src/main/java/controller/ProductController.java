@@ -8,6 +8,7 @@ import model.Product;
 import model.ProductSellInfo;
 import model.request.CommentRequest;
 import model.user.Buyer;
+import model.user.Seller;
 import model.user.User;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class ProductController implements Deleter {
     private static final ProductController instance = new ProductController();
     private final Market market;
     private Product activeProduct;
+    private Seller activeSellerForActiveCategory;
 
     private ProductController() {
         this.market = Market.getInstance();
@@ -36,6 +38,7 @@ public class ProductController implements Deleter {
             if (product.getProductId().equals(productId)) {
                 activeProduct = product;
                 activeProduct.increaseSeen();
+                activeSellerForActiveCategory = activeProduct.getDefaultSeller();
                 return true;
             }
         }

@@ -121,7 +121,7 @@ public class CategoryController implements Editor, Creator {
         activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
         SortingController.getInstance().sortingProducts(activeCategoryProducts);
         for (Product product : activeCategoryProducts) {
-            // TODO bagheri
+            output.add(product.toString());
         }
         return output;
     }
@@ -137,7 +137,7 @@ public class CategoryController implements Editor, Creator {
         activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
         SortingController.getInstance().sortingProducts(activeCategoryProducts);
         for (Product product : activeCategoryProducts) {
-            // TODO bagheri
+            output.addAll(product.getOffsInfo());
         }
         return output;
     }

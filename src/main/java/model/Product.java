@@ -16,6 +16,7 @@ public class Product {
     private final Date productionDate;
     private String productStatus;
     private HashMap<Seller, ProductSellInfo> sellersList;
+    private Seller defaultSeller;
     private int minimumPrice;   // minimum price should be updated
     private FinalCategory category;
     private final HashMap<String, String> categoryFeatures;
@@ -67,6 +68,10 @@ public class Product {
         return company;
     }
 
+    public Date getProductionDate() {
+        return productionDate;
+    }
+
     public String getProductStatus() {
         return productStatus;
     }
@@ -77,6 +82,10 @@ public class Product {
 
     public HashMap<Seller, ProductSellInfo> getSellersList() {
         return sellersList;
+    }
+
+    public Seller getDefaultSeller() {
+        return defaultSeller;
     }
 
     public FinalCategory getCategory() {
@@ -219,7 +228,20 @@ public class Product {
         return attributes;
     }
 
-//    enum ProductStatus {
+    public ArrayList<String> getOffsInfo() {
+        ArrayList<String> offsInfo = new ArrayList<>();
+        // TODO bagheri
+        return offsInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "productId: " + productId + '\n' +
+                "name: " + name + '\n' +
+                "price: " + minimumPrice;
+    }
+
+    //    enum ProductStatus {
 //        UNDER_REVIEW_FOR_CREATE,
 //        REVIEW_FOR_EDITING,
 //        APPROVED;

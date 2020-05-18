@@ -70,4 +70,18 @@ public class FinalCategory extends Category {
     public String getType() {
         return "FinalCategory";
     }
+
+    @Override
+    public void addFeatures(String newFeaturesString) {
+        ArrayList<String> newFeatures = (ArrayList<String>) Arrays.asList(newFeaturesString.split("-"));
+        this.specialFeatures.addAll(newFeatures);
+    }
+
+    @Override
+    public void removeFeatures(String removingFeaturesString) {
+        ArrayList<String> removingFeatures = (ArrayList<String>) Arrays.asList(removingFeaturesString.split("-"));
+        for (String removingFeature : removingFeatures) {
+            specialFeatures.remove(removingFeature);
+        }
+    }
 }

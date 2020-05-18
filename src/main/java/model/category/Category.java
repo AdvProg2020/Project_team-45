@@ -51,4 +51,8 @@ public abstract class Category {
     public boolean isMain(){
         return parent == null;
     }
+
+    public abstract void addFeatures(String newFeaturesString);
+
+    public abstract void removeFeatures(String removingFeaturesString);
 }

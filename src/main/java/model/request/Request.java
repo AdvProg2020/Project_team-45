@@ -1,5 +1,7 @@
 package model.request;
 
+import model.Market;
+
 import java.util.HashMap;
 
 public abstract class Request {
@@ -31,11 +33,12 @@ public abstract class Request {
     public abstract String getType();
 
     public void accept(){
-        // TODO : nedaea
+        apply();
+        Market.getInstance().removeRequestById(requestId);
     }
 
     public void decline() {
-        // TODO : nedaea
+        Market.getInstance().removeRequestById(requestId);
     }
 
     enum RequestStatus{

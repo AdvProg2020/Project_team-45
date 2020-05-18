@@ -107,7 +107,11 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
-                editingObject = editor.getItemById(ma)
+                editingObject = editor.getItemById(matcher.group(1));
+                if (editingObject == null){
+                    System.out.println("wrong id");
+                    return;
+                }
                 HashMap<String, String> changedFields = new HashMap<>();
                 InputValidator validator;
                 String input;
@@ -135,7 +139,7 @@ public abstract class ManagingMenu extends Menu {
                         }
                     }
                 }
-                editor.editItem(changedFields);
+                editor.editItem(editingObject, changedFields);
             }
 
             @Override

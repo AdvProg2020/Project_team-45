@@ -1,11 +1,9 @@
 package model.log;
 
 import model.CodedDiscount;
-import model.Market;
 import model.ProductSellInfo;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Log {

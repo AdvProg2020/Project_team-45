@@ -7,7 +7,6 @@ import model.Product;
 import model.category.Category;
 import model.category.FinalCategory;
 import model.category.ParentCategory;
-import view.hatami.ManagingMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,9 +78,16 @@ public class CategoryController implements Editor, Creator {
     }
 
     @Override
-    public void editItem(HashMap<String, String> changedFields) {
+    public void editItem(Object editingObject, HashMap<String, String> changedFields) {
+        Category editingCategory = (Category) editingObject;
         if (changedFields.containsKey("name")) {
-            ManagingMenu
+            editingCategory.setName(changedFields.get("name"));
+        }
+        if (changedFields.containsKey("new features")) {
+            editingCategory.addFeatures(changedFields.get("new features"));
+        }
+        if (changedFields.containsKey("removing features")) {
+            editingCategory.removeFeatures(changedFields.get("removing features"));
         }
     }
 

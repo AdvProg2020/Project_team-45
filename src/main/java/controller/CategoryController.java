@@ -7,6 +7,7 @@ import model.Product;
 import model.category.Category;
 import model.category.FinalCategory;
 import model.category.ParentCategory;
+import model.user.Seller;
 
 import java.util.ArrayList;
 import java.util.HashMap;

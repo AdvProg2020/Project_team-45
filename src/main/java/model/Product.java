@@ -16,6 +16,7 @@ public class Product {
     private final Date productionDate;
     private String productStatus;
     private HashMap<Seller, ProductSellInfo> sellersList;
+    private Seller defaultSeller;
     private int minimumPrice;   // minimum price should be updated
     private FinalCategory category;
     private final HashMap<String, String> categoryFeatures;
@@ -81,6 +82,10 @@ public class Product {
 
     public HashMap<Seller, ProductSellInfo> getSellersList() {
         return sellersList;
+    }
+
+    public Seller getDefaultSeller() {
+        return defaultSeller;
     }
 
     public FinalCategory getCategory() {
@@ -225,7 +230,7 @@ public class Product {
 
     public ArrayList<String> getOffsInfo() {
         ArrayList<String> offsInfo = new ArrayList<>();
-
+        // TODO bagheri
         return offsInfo;
     }
 

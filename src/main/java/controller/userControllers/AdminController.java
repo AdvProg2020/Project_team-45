@@ -20,11 +20,15 @@ public class AdminController extends UserController implements Creator {
     }
 
     public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-
-        HashMap<String, InputValidator> necessaryFieldsToCreate = new HashMap<>();
-        necessaryFieldsToCreate.put("username", InputValidator.getSimpleTextValidator());
-        necessaryFieldsToCreate.putAll(super.getNecessaryFieldsToCreate());
-        return necessaryFieldsToCreate;
+        HashMap<String, InputValidator> necessaryFields = new HashMap<>();
+        // TODO : hatami
+        necessaryFields.put("username", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("password", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("first name", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("last name", InputValidator.getSimpleTextValidator());
+        necessaryFields.put("email address", InputValidator.getEmailAddressValidator());
+        necessaryFields.put("phone number", InputValidator.getSimpleNumberValidator());
+        return necessaryFields;
     }
 
     @Override

@@ -5,7 +5,6 @@ import controller.managers.Creator;
 import model.user.Admin;
 import model.user.PersonalInfo;
 import model.user.User;
-import view.hatami.RegisterPanel;
 
 import java.util.HashMap;
 
@@ -21,7 +20,11 @@ public class AdminController extends UserController implements Creator {
     }
 
     public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        return super.getNecessaryFieldsToCreate();
+
+        HashMap<String, InputValidator> necessaryFieldsToCreate = new HashMap<>();
+        necessaryFieldsToCreate.put("username", InputValidator.getSimpleTextValidator());
+        necessaryFieldsToCreate.putAll(super.getNecessaryFieldsToCreate());
+        return necessaryFieldsToCreate;
     }
 
     @Override
@@ -31,7 +34,7 @@ public class AdminController extends UserController implements Creator {
 
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
-        filledFeatures.put("username", RegisterPanel.getLastRegisterUsername());
+        filledFeatures.put("username", filledFeatures.get("username"));
         Admin newAdmin = new Admin(new PersonalInfo(filledFeatures));
         market.addUserToList(newAdmin);
     }

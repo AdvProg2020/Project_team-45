@@ -82,9 +82,11 @@ public class AllUsersController implements Deleter {
     }
 
     private void deleteAdmin(Admin admin) {
+        // no action needed yet //
     }
 
     private void deleteBuyer(Buyer buyer) {
+        // no action needed yet //
     }
 
     private void deleteSeller(Seller seller) {

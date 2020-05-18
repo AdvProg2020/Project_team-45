@@ -33,6 +33,10 @@ public class RegisterPanel extends Panel {
             sellerRegisterPanel.execute();
     }
 
+    public static void setLastRegisterUsername(String lastRegisterUsername) {
+        RegisterPanel.lastRegisterUsername = lastRegisterUsername;
+    }
+
     public static String getLastRegisterUsername() {
         return lastRegisterUsername;
     }

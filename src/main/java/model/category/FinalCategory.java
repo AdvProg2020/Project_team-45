@@ -10,11 +10,6 @@ public class FinalCategory extends Category {
     private ArrayList<String> specialFeatures;
     private final ArrayList<Product> productsList;
 
-    public FinalCategory(String name, ParentCategory parent, ArrayList<String> specialFeatures) {
-        super(name, parent);
-        this.productsList = new ArrayList<Product>();
-    }
-
     public FinalCategory(HashMap<String, String> filledFeatures) {
         super(filledFeatures);
         this.productsList = new ArrayList<>();
@@ -28,10 +23,6 @@ public class FinalCategory extends Category {
     @Override
     public ArrayList<Product> getProductsList() {
         return productsList;
-    }
-
-    public void addSpecialFeature(String newSpecialFeature) {
-
     }
 
     public void addProduct(Product newProduct) {

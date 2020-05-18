@@ -21,9 +21,6 @@ public abstract class Category {
         this.setParent((ParentCategory) CategoryController.getInstance().getItemById(filledFeatures.get("parent category")));
     }
 
-    public Category() {
-    }
-
     public String getName() {
         return name;
     }

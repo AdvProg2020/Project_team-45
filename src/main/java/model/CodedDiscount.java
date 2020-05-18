@@ -14,14 +14,6 @@ public class CodedDiscount {
     private int percentage;
     private Buyer owner;
 
-    public CodedDiscount(String code, Date startDate, Date endDate, int percentage, Buyer owner) {
-        this.code = code;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.percentage = percentage;
-        this.owner = owner;
-    }
-
     public CodedDiscount(HashMap<String, String> filledFeatures) {
         this.code = filledFeatures.get("code");
         this.startDate = InputValidator.convertStringToDate(filledFeatures.get("start date"));

@@ -21,12 +21,6 @@ public class RequestController implements Printer {
         return null;
     }
 
-    public void setFieldOfRequest(Request request, String field, String value) {}
-
-    public Request getRequestById(String requestId) {
-        return null;
-    }
-
     public String getAllInListAsString() {
         ArrayList<Request> allRequests = market.getAllRequests();
         StringBuilder listString = new StringBuilder("Id,action,status\n");

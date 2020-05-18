@@ -19,6 +19,10 @@ public abstract class ManagingMenu extends Menu {
         super(name);
     }
 
+    public ManagingMenu() {
+
+    }
+
     protected static void displayAllItemsInPanel(String panelName, Printer printer) {
         new Panel(panelName) {
             private Printer printer;
@@ -107,7 +111,6 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
-                editingObject = editor.getItemById(matcher.group(1));
                 if (editingObject == null){
                     System.out.println("wrong id");
                     return;
@@ -157,12 +160,13 @@ public abstract class ManagingMenu extends Menu {
                 }
             }
 
-            public Panel setEditorAndMap(Editor editor) {
+            public Panel setUp(Editor editor) {
                 this.editor = editor;
                 availableFields = editor.getAvailableFieldsToEdit();
+                editingObject = editor.getItemById(matcher.group(1));
                 return this;
             }
-        }.setEditorAndMap(editor);
+        }.setUp(editor);
     }
 
     protected static Panel createItemCreatorPanel(String panelName, Creator creator) {

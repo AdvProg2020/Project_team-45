@@ -21,6 +21,10 @@ public abstract class Menu extends UIPage {
         submenus.put("exit", createExitPanel());
     }
 
+    public Menu() {
+        super("");
+    }
+
     private Panel createLogoutPanel() {
         return new Panel("logoutPane") {
             @Override

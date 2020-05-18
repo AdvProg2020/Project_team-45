@@ -58,6 +58,10 @@ public class Log {
         return phoneNumber;
     }
 
+    public int getBuyerFee() {
+        return buyerFee;
+    }
+
     public String getDeliveryStatus() {
         return deliveryStatus;
     }
@@ -70,14 +74,13 @@ public class Log {
     public int calculateFinalPrice(){
         int result = 0;
         for (ProductSellInfo sellInfo : sellingProducts) {
-            sellInfo.getFinalPrice();
+            result += sellInfo.getFinalPrice();
         }
-        return 0;
+        return result;
     }
 
     private int calculateBuyerFee() {
-        // TODO
-        return 0;
+        return finalPrice*(100-appliedDiscount.getPercentage());
     }
 
     public String getBuyerUsername() {

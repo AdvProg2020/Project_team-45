@@ -8,7 +8,6 @@ import model.ProductSellInfo;
 import model.Rate;
 import model.log.BuyLog;
 import model.log.Log;
-import model.user.AnonymousUser;
 import model.user.Buyer;
 import model.user.CartHolder;
 import model.user.PersonalInfo;

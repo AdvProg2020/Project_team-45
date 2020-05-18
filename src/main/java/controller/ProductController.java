@@ -6,7 +6,6 @@ import model.Comment;
 import model.Market;
 import model.Product;
 import model.ProductSellInfo;
-import model.category.Category;
 import model.request.CommentRequest;
 import model.user.Buyer;
 import model.user.User;
@@ -43,14 +42,7 @@ public class ProductController implements Deleter {
         return false;
     }
 
-    public void setFieldOfProduct(Product product, String field, String value) {
-    }
-
     public void getProductBuyers(Product product) {
-    }
-
-    public Product getProductByProductId(String productId) {
-        return null;
     }
 
     public HashMap<String, String> getProductDigestInformation() {

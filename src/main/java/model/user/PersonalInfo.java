@@ -10,16 +10,6 @@ public class PersonalInfo {
     private String phoneNumber;
     private String password;
 
-    public PersonalInfo(String username, String firstName, String lastName, String emailAddress, String phoneNumber,
-                        String password) {
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-    }
-
     public PersonalInfo(HashMap<String, String> information){
         this.username = information.get("username");
         this.firstName = information.get("first name");

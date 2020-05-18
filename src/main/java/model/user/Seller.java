@@ -69,6 +69,10 @@ public class Seller extends User {
         }
     }
 
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
     @Override
     public String getRole() {
         return "seller";

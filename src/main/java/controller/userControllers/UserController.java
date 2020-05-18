@@ -2,6 +2,7 @@ package controller.userControllers;
 
 import controller.InputValidator;
 import model.Market;
+import model.user.AnonymousUser;
 import model.user.PersonalInfo;
 import model.user.User;
 
@@ -13,6 +14,7 @@ public class UserController {
     private static final UserController instance = new UserController();
     protected final Market market;
     private static User activeUser;
+    private static AnonymousUser anonymousUser = new AnonymousUser();
     private static boolean loggedIn;
     private static ArrayList<String> personalInfoFieldsToEdit;
 
@@ -29,6 +31,10 @@ public class UserController {
 
     public static User getActiveUser() {
         return activeUser;
+    }
+
+    public static AnonymousUser getAnonymousUser() {
+        return anonymousUser;
     }
 
     public static boolean isLoggedIn() {
@@ -71,6 +77,7 @@ public class UserController {
     public boolean login(String password) {
         if (activeUser.checkPassword(password)) {
             loggedIn = true;
+            anonymousUser = new AnonymousUser();
             return true;
         }
         return false;

@@ -29,6 +29,15 @@ public class Cart {
         return null;
     }
 
+    public int getProductAmountById(String productId) {
+        for (ProductInfo productInfo : products) {
+            if (productInfo.getProduct().getProductId().equals(productId)) {
+                return productInfo.getAmount();
+            }
+        }
+        return 0;
+    }
+
     public void changeProductAmountById(String productId, int amountChange) {
         ProductInfo productInfo = getProductById(productId);
         if (productInfo == null) {

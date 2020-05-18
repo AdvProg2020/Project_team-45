@@ -33,6 +33,14 @@ public class SellLog {
         return mainLog;
     }
 
+    public ArrayList<ProductSellInfo> getSoldProducts() {
+        return soldProducts;
+    }
+
+    public int getIncome() {
+        return income;
+    }
+
     //    public SellLog(String logId, Date date, int finalPrice, String address, String buyerUsername) {
 //        super(logId, date, finalPrice, address);
 //        this.buyerUsername = buyerUsername;

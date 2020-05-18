@@ -115,6 +115,10 @@ public class Product {
         this.description = description;
     }
 
+    public void addSellCount() {
+        sellCount++;
+    }
+
     public void addSeller(ProductSellInfo productSellInfo) {
 
     }
@@ -128,7 +132,7 @@ public class Product {
     }
 
     public void addRate(Rate rate) {
-
+        rates.add(rate);
     }
 
     public void removeSeller(Seller seller) {

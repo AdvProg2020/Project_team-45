@@ -28,6 +28,7 @@ public class MainMenu extends Menu {
 
     @Override
     protected void showHelp() {
+        super.showHelp();
         System.out.println();
     }
 

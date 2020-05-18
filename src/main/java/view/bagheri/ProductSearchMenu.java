@@ -54,6 +54,7 @@ public abstract class ProductSearchMenu extends Menu {
 
     @Override
     protected void show() {
+        super.show();
         showProducts();
     }
 

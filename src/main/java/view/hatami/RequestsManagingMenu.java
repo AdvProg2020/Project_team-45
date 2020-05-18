@@ -34,6 +34,6 @@ public class RequestsManagingMenu extends ManagingMenu {
     }
 
     protected void showHelp() {
-
+        super.showHelp();
     }
 }

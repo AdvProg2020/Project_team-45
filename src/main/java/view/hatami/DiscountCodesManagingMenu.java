@@ -14,6 +14,6 @@ public class DiscountCodesManagingMenu extends ManagingMenu {
     }
 
     protected void showHelp() {
-
+        super.showHelp();
     }
 }

@@ -22,6 +22,11 @@ public abstract class Category {
             this.setParent((ParentCategory) CategoryController.getInstance().getItemById(filledFeatures.get("parent category")));
     }
 
+
+    public static Category getEmptyCategory() {
+        return new ParentCategory(new HashMap<>());
+    }
+
     public String getName() {
         return name;
     }

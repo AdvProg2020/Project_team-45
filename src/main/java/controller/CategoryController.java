@@ -64,7 +64,6 @@ public class CategoryController implements Editor, Creator {
             editingCategory.setName(changedFields.get("name"));
         }
         if (editingCategory.getType().equals("FinalCategory")) {
-            CategoriesManagingMenu.getCategoryFeatures();
         }
     }
 
@@ -209,10 +208,8 @@ public class CategoryController implements Editor, Creator {
 
     public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
         LinkedHashMap<String, InputValidator> necessaryFields = new LinkedHashMap<>();
-        necessaryFields.put("name", InputValidator.getSimpleTextValidator());
         necessaryFields.put("parent category", new InputValidator("\\w+", "an existing category name ('NULL' for nothing)", CategoryController.getInstance()));
         necessaryFields.put("is final?", new InputValidator("yes|no", "yes or no"));
-        necessaryFields.put("features", InputValidator.getCategoryFeaturesValidator());
         return necessaryFields;
     }
 
@@ -234,6 +231,8 @@ public class CategoryController implements Editor, Creator {
 
     @Override
     public Category getItemById(String Id) {
+        if (Id.equals("NULL"))
+            return Category.getEmptyCategory();
         return market.getCategoryByName(Id);
     }
 }

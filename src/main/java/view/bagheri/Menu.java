@@ -17,6 +17,7 @@ public abstract class Menu extends UIPage {
         submenus.put("login", Login_RegisterPanel.getInstance());
         submenus.put("logout", createLogoutPanel());
         submenus.put("help", createHelpPanel());
+        submenus.put("exit", createExitPanel());
     }
 
     private Panel createLogoutPanel() {
@@ -38,6 +39,15 @@ public abstract class Menu extends UIPage {
             @Override
             public void execute() {
                 showHelp();
+            }
+        };
+    }
+
+    private Panel createExitPanel() {
+        return new Panel("exit") {
+            @Override
+            public void execute() {
+                MenuManagement.exit();
             }
         };
     }

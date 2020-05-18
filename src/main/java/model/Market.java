@@ -210,6 +210,15 @@ public class Market {
         allProducts.remove(product);
     }
 
+    public void removeRequestById(String requestId) {
+        for (Request request : allRequests) {
+            if (request.getRequestId().equals(requestId)) {
+                allRequests.remove(request);
+                return;
+            }
+        }
+    }
+
     public Request getRequestById(String id) {
         for (Request request : allRequests) {
             if (request.getRequestId().equals(id))

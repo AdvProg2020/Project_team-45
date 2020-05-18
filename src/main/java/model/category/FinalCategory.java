@@ -10,10 +10,10 @@ public class FinalCategory extends Category {
     private ArrayList<String> specialFeatures;
     private final ArrayList<Product> productsList;
 
-    public FinalCategory(HashMap<String, String> filledFeatures) {
+    public FinalCategory(HashMap<String, String> filledFeatures, ArrayList<String> categorySpecialFeatures) {
         super(filledFeatures);
         this.productsList = new ArrayList<>();
-        this.specialFeatures = (ArrayList<String>) Arrays.asList(filledFeatures.get("features").split("-"));
+        this.specialFeatures = categorySpecialFeatures;
     }
 
     public ArrayList<String> getSpecialFeatures() {

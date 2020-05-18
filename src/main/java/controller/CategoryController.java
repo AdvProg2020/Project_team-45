@@ -7,6 +7,7 @@ import model.Product;
 import model.category.Category;
 import model.category.FinalCategory;
 import model.category.ParentCategory;
+import view.hatami.CategoriesManagingMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,8 +53,6 @@ public class CategoryController implements Editor, Creator {
 
     public LinkedHashMap<String, InputValidator> getAvailableFieldsToEdit() {
         LinkedHashMap<String, InputValidator> availableFieldsToEdit = new LinkedHashMap<>();
-        availableFieldsToEdit.put("new features", InputValidator.getCategoryFeaturesValidator());
-        availableFieldsToEdit.put("removing features", InputValidator.getCategoryFeaturesValidator());
         availableFieldsToEdit.put("name", InputValidator.getSimpleTextValidator());
         return availableFieldsToEdit;
     }
@@ -64,11 +63,8 @@ public class CategoryController implements Editor, Creator {
         if (changedFields.containsKey("name")) {
             editingCategory.setName(changedFields.get("name"));
         }
-        if (changedFields.containsKey("new features")) {
-            editingCategory.addFeatures(changedFields.get("new features"));
-        }
-        if (changedFields.containsKey("removing features")) {
-            editingCategory.removeFeatures(changedFields.get("removing features"));
+        if (editingCategory.getType().equals("FinalCategory")) {
+            CategoriesManagingMenu.getCategoryFeatures();
         }
     }
 
@@ -214,9 +210,9 @@ public class CategoryController implements Editor, Creator {
     public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
         LinkedHashMap<String, InputValidator> necessaryFields = new LinkedHashMap<>();
         necessaryFields.put("name", InputValidator.getSimpleTextValidator());
-        necessaryFields.put("features", InputValidator.getCategoryFeaturesValidator());
         necessaryFields.put("parent category", new InputValidator("\\w+", "an existing category name ('NULL' for nothing)", CategoryController.getInstance()));
         necessaryFields.put("is final?", new InputValidator("yes|no", "yes or no"));
+        necessaryFields.put("features", InputValidator.getCategoryFeaturesValidator());
         return necessaryFields;
     }
 
@@ -229,7 +225,8 @@ public class CategoryController implements Editor, Creator {
     public void createItem(HashMap<String, String> filledFeatures) {
         Category createdCategory;
         if (filledFeatures.get("is final?").equals("yes")) {
-            createdCategory = new FinalCategory(filledFeatures);
+            ArrayList<String> categorySpecialFeatures = CategoriesManagingMenu.getCategoryFeatures();
+            createdCategory = new FinalCategory(filledFeatures, categorySpecialFeatures);
         } else createdCategory = new ParentCategory(filledFeatures);
         createdCategory.getParent().addSubcategory(createdCategory);
         market.addCategoryToList(createdCategory);

@@ -1,9 +1,13 @@
 package view.hatami;
 
 import controller.CategoryController;
+import controller.InputValidator;
 import controller.managers.Creator;
 import controller.managers.Deleter;
 import controller.managers.Editor;
+import view.bagheri.Panel;
+
+import java.util.ArrayList;
 
 public class CategoriesManagingMenu extends ManagingMenu {
     public CategoriesManagingMenu() {
@@ -15,4 +19,28 @@ public class CategoriesManagingMenu extends ManagingMenu {
         submenus.put("remove (\\S+)", createItemDeleterPanel("delete category", (Deleter) manager));
     }
 
+    public static ArrayList<String> getCategoryFeatures(){
+        return new Panel("get category features"){
+
+            private InputValidator validator = InputValidator.getCategoryFeaturesValidator();
+            private  ArrayList<String> categoryFeatures;
+            @Override
+            public void execute() {
+                categoryFeatures = new ArrayList<>();
+                System.out.println(validator.getFormatToShow());
+                String feature;
+                while (!(feature = scanner.nextLine()).equals("done")){
+                    if (validator.checkInput(feature))
+                        categoryFeatures.add(feature);
+                    else
+                        System.out.println("invalid input");
+                }
+            }
+
+            public ArrayList<String> getCategoryFeatures() {
+                execute();
+                return categoryFeatures;
+            }
+        }.getCategoryFeatures();
+    }
 }

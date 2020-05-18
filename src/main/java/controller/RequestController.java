@@ -41,7 +41,7 @@ public class RequestController implements Printer {
         Request showingRequest = getItemById(Id);
         if (showingRequest == null)
             return null;
-        return "type:"showingRequest.toString();
+        return showingRequest.toString();
     }
 
     @Override

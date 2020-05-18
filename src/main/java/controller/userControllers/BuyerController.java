@@ -36,7 +36,11 @@ public class BuyerController extends UserController implements Creator {
         return instance;
     }
 
-    private void updateBuyer() {
+    public CartHolder getBuyer() {
+        return buyer;
+    }
+
+    public void updateBuyer() {
         if (UserController.isLoggedIn()) {
             buyer = ((Buyer) UserController.getActiveUser());
         } else {

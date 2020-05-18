@@ -26,10 +26,10 @@ public class Login_RegisterPanel extends Panel {
         }
         String inputCommand;
         while (!(inputCommand = scanner.nextLine()).equals("back")) {
-            if ((matcher = getMatcher("login (\\S+)", inputCommand)) != null) {
+            if ((matcher = getMatcher("login (\\w+)", inputCommand)) != null) {
                 if(login())
                     return;
-            } else if((matcher = getMatcher("create account (buyer|seller) (\\S+)", inputCommand)) != null) {
+            } else if((matcher = getMatcher("create account (buyer|seller) (\\w+)", inputCommand)) != null) {
                 registerPanel.execute();
             } else {
                 System.out.println("invalid command!");

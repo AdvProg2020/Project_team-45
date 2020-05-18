@@ -167,7 +167,7 @@ public class CategoryController implements Editor, Creator {
     }
 
     public ArrayList<String> getActiveCategorySubcategories() {
-        ArrayList<String> subcategoriesName = new ArrayList<String>();
+        ArrayList<String> subcategoriesName = new ArrayList<>();
         if (activeCategory.getType().equals("ParentCategory")) {
             ArrayList<Category> subcategories = ((ParentCategory) activeCategory).getSubcategories();
             for (Category subcategory : subcategories) {
@@ -178,7 +178,7 @@ public class CategoryController implements Editor, Creator {
     }
 
     public ArrayList<String> getActiveCategoryDiscountedSubcategories() {
-        ArrayList<String> subcategoriesName = new ArrayList<String>();
+        ArrayList<String> subcategoriesName = new ArrayList<>();
         if (activeCategory.getType().equals("ParentCategory")) {
             ArrayList<Category> subcategories = ((ParentCategory) activeCategory).getSubcategories();
             for (Category subcategory : subcategories) {
@@ -205,6 +205,7 @@ public class CategoryController implements Editor, Creator {
             return true;
         }
         return false;
+        // TODO bagheri
     }
 
     public void backCategory() {
@@ -213,6 +214,21 @@ public class CategoryController implements Editor, Creator {
         }
     }
 
+    public ArrayList<Product> getActiveCategoryProductsList() {
+        if (!isOffMenu)
+            return activeCategory.getProductsList();
+        if (activeCategory == null)
+            return market.getAllDiscountedProductsList();
+        return activeCategory.getInOffProductsList();
+    }
+
+    public Product getActiveCategoryProduct(String productId) {
+        for (Product product : activeCategory.getProductsList()) {
+            if (product.getProductId().equals(productId))
+                return product;
+        }
+        return null;
+    }
 
     public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
         HashMap<String, InputValidator> necessaryFields = new HashMap<>();

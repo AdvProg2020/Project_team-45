@@ -168,7 +168,7 @@ public class Product {
     }
 
     public void updateAverageScoreAfterEditingRate(int oldRate, int newRate) {
-
+        this.averageScore += (newRate - oldRate) / rates.size();
     }
 
 
@@ -178,6 +178,33 @@ public class Product {
                 return true;
         }
         return false;
+    }
+
+
+    private HashMap<String, String> getGeneralFeatures() {
+        HashMap<String, String> generalFeatures = new HashMap<>();
+        generalFeatures.put("name", this.name);
+        generalFeatures.put("description", this.description);
+        generalFeatures.put("price", String.valueOf(this.minimumPrice));
+        generalFeatures.put("averageScore", String.valueOf(averageScore));
+        return generalFeatures;
+    }
+
+    public HashMap<String, String> getDigestInformation() {
+        HashMap<String, String> digestInformation = new HashMap<>();
+        digestInformation.putAll(getGeneralFeatures());
+        digestInformation.put("category", this.category.getName());
+        for (Seller seller : sellersList.keySet()) {
+            digestInformation.put("seller", seller.getUsername());
+        }
+        return digestInformation;
+    }
+
+    public HashMap<String,String> getAttributes(){
+        HashMap<String, String> attributes = new HashMap<>();
+        attributes.putAll(getGeneralFeatures());
+        attributes.putAll(categoryFeatures);
+        return attributes;
     }
 
 //    enum ProductStatus {

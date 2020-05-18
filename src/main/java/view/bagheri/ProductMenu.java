@@ -74,15 +74,23 @@ public class ProductMenu extends Menu {
         return new Panel("compareProductsPanel") {
             @Override
             public void execute() {
-                if (productController.isWithInACategory(matcher.group(1))) {
-                    productController.getProductAttributes();
-                    productController.getProductAttributesById(matcher.group(1));
-                    // TODO : bagheri
-                } else {
+                HashMap<String, String> secondProductAttributes = productController.getProductAttributesById(matcher.group(1));
+                if (secondProductAttributes == null) {
                     System.out.println("It is not possible to compare these two products!");
+                } else {
+                    HashMap<String, String> firstProductAttributes = productController.getProductAttributes();
+                    // TODO : bagheri
                 }
             }
         };
+    }
+
+    @Override
+    protected boolean check() {
+        if (productController.setActiveProductBYProductId(matcher.group(1)))
+            return true;
+        System.out.println("There is no product with this Id in this category!");
+        return false;
     }
 
     @Override

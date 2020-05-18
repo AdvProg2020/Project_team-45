@@ -24,7 +24,7 @@ public class Log {
     public Log(ArrayList<ProductSellInfo> sellingProducts, String buyerUsername, String address, String phoneNumber) {
         this.logId = newLogId.toString();
         newLogId++;
-        this.date = Calendar.getInstance().getTime();
+        this.date = new Date();
         this.sellingProducts = new ArrayList<>();
         for (ProductSellInfo productSellInfo : sellingProducts) {
             this.sellingProducts.add(productSellInfo.clone());
@@ -70,7 +70,10 @@ public class Log {
     }
 
     public int calculateFinalPrice(){
-        // TODO
+        int result = 0;
+        for (ProductSellInfo sellInfo : sellingProducts) {
+            sellInfo.getFinalPrice();
+        }
         return 0;
     }
 

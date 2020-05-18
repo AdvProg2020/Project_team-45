@@ -24,8 +24,11 @@ public class PurchasePanel extends Panel {
 
     @Override
     public void execute() {
-        if (!UserController.isLoggedIn()) {
+        if (!(UserController.isLoggedIn() && UserController.getActiveUser().getRole().equals("buyer"))) {
             Login_RegisterPanel.getInstance().execute();
+            if (!(UserController.isLoggedIn() && UserController.getActiveUser().getRole().equals("buyer"))) {
+                return;
+            }
         }
         runReceiverInformationPanel();
         runDiscountCodePanel();

@@ -101,11 +101,13 @@ public abstract class ManagingMenu extends Menu {
     protected static Panel createItemEditorPanel(String panelName, Editor editor) {
         return new Panel(panelName) {
             private Editor editor;
+            private Object editingObject;
             private HashMap<String, InputValidator> availableFields;
             private Pattern validEditPattern = Pattern.compile("^edit (//S+) to (//S+)$");
 
             @Override
             public void execute() {
+                editingObject = editor.getItemById(ma)
                 HashMap<String, String> changedFields = new HashMap<>();
                 InputValidator validator;
                 String input;
@@ -144,7 +146,7 @@ public abstract class ManagingMenu extends Menu {
                         "to edit a field write 'edit [fields name] to [new value]'");
             }
 
-            private void showHelp(){
+            private void showHelp() {
                 System.out.println("available fields:");
                 for (String fieldName : availableFields.keySet()) {
                     System.out.println(fieldName + "(" + availableFields.get(fieldName).getFormatToShow() + ")");
@@ -201,6 +203,7 @@ public abstract class ManagingMenu extends Menu {
                     }
                 }
                 creator.createItem(filledFields);
+                System.out.println("created");
             }
 
             public Panel setCreatorAndMap(Creator creator) {

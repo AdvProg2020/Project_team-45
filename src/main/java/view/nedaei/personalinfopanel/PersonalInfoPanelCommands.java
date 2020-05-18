@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 enum PersonalInfoPanelCommands {
-    EDIT("(?i)edit\\s+(\\w+)");
+    EDIT("edit\\s+(\\w+)");
 
     private Pattern commandPattern;
 

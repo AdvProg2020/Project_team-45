@@ -194,8 +194,8 @@ public class Market {
         allCodedDiscounts.remove(codedDiscount);
     }
 
-    public void addCategory(Category category) {
-
+    public void addCategoryToList(Category category) {
+        allCategories.add(category);
     }
 
     public void removeCategoryFromList(Category category) {
@@ -216,6 +216,10 @@ public class Market {
                 return request;
         }
                 return null;
+    }
+
+    public void addDiscountToList(CodedDiscount creatingDiscount) {
+        allCodedDiscounts.add(creatingDiscount);
     }
 }
 

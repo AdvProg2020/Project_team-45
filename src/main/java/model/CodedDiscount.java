@@ -1,8 +1,11 @@
 package model;
 
+import controller.InputValidator;
+import controller.userControllers.BuyerController;
 import model.user.Buyer;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class CodedDiscount {
     private String code;
@@ -17,6 +20,14 @@ public class CodedDiscount {
         this.endDate = endDate;
         this.percentage = percentage;
         this.owner = owner;
+    }
+
+    public CodedDiscount(HashMap<String, String> filledFeatures) {
+        this.code = filledFeatures.get("code");
+        this.startDate = InputValidator.convertStringToDate(filledFeatures.get("start date"));
+        this.endDate = InputValidator.convertStringToDate(filledFeatures.get("end date"));
+        this.percentage = Integer.parseInt(filledFeatures.get("percentage"));
+        this.owner = BuyerController.getInstance().getItemById(filledFeatures.get("owner username"));
     }
 
     public int getPercentage() {

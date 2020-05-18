@@ -8,8 +8,12 @@ import model.ProductSellInfo;
 import model.Rate;
 import model.log.BuyLog;
 import model.log.Log;
+import model.user.AnonymousUser;
 import model.user.Buyer;
+import model.user.CartHolder;
 import model.user.PersonalInfo;
+import model.user.User;
+import view.hatami.RegisterPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +24,7 @@ public class BuyerController extends UserController implements Creator {
 
     private final ArrayList<String> buyLogInformationToReceive;
     private Log log;
+    private CartHolder buyer;
 
     private BuyerController() {
         super();
@@ -31,24 +36,36 @@ public class BuyerController extends UserController implements Creator {
         return instance;
     }
 
+    private void updateBuyer() {
+        if (UserController.isLoggedIn()) {
+            buyer = ((Buyer) UserController.getActiveUser());
+        } else {
+            buyer = UserController.getAnonymousUser();
+        }
+    }
+
     // cart managing menu
 
     public HashMap<String, Integer> getCartProductsList() {
-        return ((Buyer) UserController.getActiveUser()).getCart().getProductsDisplay();
+        updateBuyer();
+        return buyer.getCart().getProductsDisplay();
     }
 
     public void increaseCartProductById(String productId) {
-        Cart cart = ((Buyer) UserController.getActiveUser()).getCart();
+        updateBuyer();
+        Cart cart = buyer.getCart();
         cart.changeProductAmountById(productId, 1);
     }
 
     public void decreaseCartProductById(String productId) {
-        Cart cart = ((Buyer) UserController.getActiveUser()).getCart();
+        updateBuyer();
+        Cart cart = buyer.getCart();
         cart.changeProductAmountById(productId, -1);
     }
 
     public int getCartTotalPrice() {
-        return ((Buyer) UserController.getActiveUser()).getCart().getTotalPrice();
+        updateBuyer();
+        return buyer.getCart().getTotalPrice();
     }
 
     // purchase panel
@@ -64,11 +81,13 @@ public class BuyerController extends UserController implements Creator {
     }
 
     public boolean isDiscountCodeValid(String discountCode) {
-        return market.isDiscountCodeValid(discountCode);
+        return ((Buyer) UserController.getActiveUser()).isDiscountCodeValid(discountCode);
     }
 
     public void applyDiscountCode(String discountCode) {
-        log.setAppliedDiscount(market.getCodedDiscountByCode(discountCode));
+        CodedDiscount discount = ((Buyer) UserController.getActiveUser()).getDiscountByCode(discountCode);
+        log.setAppliedDiscount(discount);
+        ((Buyer) UserController.getActiveUser()).removeCodedDiscountFromList(discount);
     }
 
     public boolean canPurchase() {
@@ -77,7 +96,7 @@ public class BuyerController extends UserController implements Creator {
     }
 
     public void purchase() {
-        ...
+        ((Buyer) UserController.getActiveUser()).purchase(log);
     }
 
     // orders managing menu
@@ -103,15 +122,18 @@ public class BuyerController extends UserController implements Creator {
 
     public void rateProductById(String productId, int score) {
         Rate rate = new Rate(((Buyer) UserController.getActiveUser()), score, productId);
+        if (!((Buyer) UserController.getActiveUser()).getPurchasedProducts().containsKey(productId)) {
+            market.getProductById(productId).addRate(rate);
+        }
         ((Buyer) UserController.getActiveUser()).getPurchasedProducts().put(productId, rate);
-        market.getProductById(productId).addRate(rate);
     }
 
     public ArrayList<String> getBuyerBuyLogs() {
         Buyer buyer = ((Buyer) UserController.getActiveUser());
         ArrayList<String> result = new ArrayList<>();
         for (BuyLog buyLog : buyer.getListOfBuyLogs()) {
-            result.add(buyLog.getMainLog().getLogId() + buyLog.getMainLog().getDate() + buyLog.getMainLog().getFinalPrice());
+            result.add(buyLog.getMainLog().getLogId() + " " + buyLog.getMainLog().getDate() + " " +
+                    buyLog.getMainLog().getFinalPrice());
         }
         return result;
     }
@@ -148,12 +170,16 @@ public class BuyerController extends UserController implements Creator {
 
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
+        filledFeatures.put("username", RegisterPanel.getLastRegisterUsername());
         Buyer newBuyer = new Buyer(new PersonalInfo(filledFeatures));
         market.addUserToList(newBuyer);
     }
 
     @Override
     public Buyer getItemById(String Id) {
+        User user = market.getUserByUsername(Id);
+        if (user == null || !user.getRole().equals("buyer"))
+            return null;
         return (Buyer) market.getUserByUsername(Id);
     }
 }

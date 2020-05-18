@@ -30,6 +30,14 @@ public abstract class Request {
 
     public abstract String getType();
 
+    public void accept(){
+        // TODO : nedaea
+    }
+
+    public void decline() {
+        // TODO : nedaea
+    }
+
     enum RequestStatus{
         WAITING_FOR_CONFIRMATION,
         ACCEPTED,

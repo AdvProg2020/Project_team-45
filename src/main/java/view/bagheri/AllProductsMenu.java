@@ -51,6 +51,7 @@ public class AllProductsMenu extends Menu {
 
     @Override
     protected void show() {
+        super.show();
         ArrayList<String> mainCategories = categoryController.getMainCategories();
         for (String mainCategory : mainCategories) {
             System.out.println(mainCategory);

@@ -71,6 +71,7 @@ public class CartManagingMenu extends ManagingMenu {
 
     @Override
     protected void showHelp() {
+        super.showHelp();
         System.out.println();
     }
 

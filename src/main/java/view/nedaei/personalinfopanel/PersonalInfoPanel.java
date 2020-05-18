@@ -37,6 +37,7 @@ public class PersonalInfoPanel extends Panel {
 
     @Override
     protected void show() {
+        super.show();
         System.out.println(UserController.getInstance().getPersonalInfoDisplay());
     }
 

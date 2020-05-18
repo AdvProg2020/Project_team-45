@@ -48,6 +48,7 @@ public class ProductsManagingMenu extends ManagingMenu {
 
     @Override
     protected void showHelp() {
+        super.showHelp();
         System.out.println();
     }
 }

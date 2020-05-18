@@ -47,6 +47,7 @@ public class BuyerMenu extends UserMenu {
 
     @Override
     protected void showHelp() {
+        super.showHelp();
         System.out.println();
     }
 }

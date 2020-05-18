@@ -16,7 +16,7 @@ public class UsersManagingMenu extends ManagingMenu {
     }
 
     protected void showHelp() {
-
+        super.showHelp();
     }
 }
 

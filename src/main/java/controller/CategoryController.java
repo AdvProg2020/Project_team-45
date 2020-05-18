@@ -7,6 +7,7 @@ import model.Product;
 import model.category.Category;
 import model.category.FinalCategory;
 import model.category.ParentCategory;
+import view.bagheri.UIPage;
 import view.hatami.CategoriesManagingMenu;
 
 import java.util.ArrayList;
@@ -224,6 +225,7 @@ public class CategoryController implements Editor, Creator {
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
         Category createdCategory;
+        filledFeatures.put("name", UIPage.getMatcher().group(1));
         if (filledFeatures.get("is final?").equals("yes")) {
             ArrayList<String> categorySpecialFeatures = CategoriesManagingMenu.getCategoryFeatures();
             createdCategory = new FinalCategory(filledFeatures, categorySpecialFeatures);

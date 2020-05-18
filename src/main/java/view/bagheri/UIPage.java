@@ -30,5 +30,9 @@ public abstract class UIPage {
     protected void show() {
     }
 
+    public static Matcher getMatcher() {
+        return matcher;
+    }
+
     protected abstract String getType();
 }

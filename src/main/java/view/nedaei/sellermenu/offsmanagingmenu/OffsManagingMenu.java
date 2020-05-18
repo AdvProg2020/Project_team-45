@@ -1,5 +1,6 @@
 package view.nedaei.sellermenu.offsmanagingmenu;
 
+import controller.OffController;
 import controller.userControllers.SellerController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
@@ -9,6 +10,7 @@ public class OffsManagingMenu extends ManagingMenu {
 
     private OffsManagingMenu() {
         super("offs managing page");
+        this.manager = OffController.getInstance();
         this.submenus.put("view (\\w+)", createViewOffByIdPanel());
         this.submenus.put("edit (\\w+)", EditOffPanel.getInstance());
         this.submenus.put("add off", CreateOffPanel.getInstance());
@@ -38,4 +40,6 @@ public class OffsManagingMenu extends ManagingMenu {
         super.showHelp();
         System.out.println();
     }
+
+
 }

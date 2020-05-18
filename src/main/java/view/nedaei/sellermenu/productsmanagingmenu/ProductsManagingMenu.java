@@ -1,5 +1,6 @@
 package view.nedaei.sellermenu.productsmanagingmenu;
 
+import controller.SellerProductsController;
 import controller.userControllers.SellerController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
@@ -9,6 +10,7 @@ public class ProductsManagingMenu extends ManagingMenu {
 
     private ProductsManagingMenu() {
         super("seller products managing page");
+        this.manager = SellerProductsController.getInstance();
         this.submenus.put("view (\\w+)", createViewProductByIdPanel());
         this.submenus.put("view buyers (\\w+)", createViewBuyersPanel());
         this.submenus.put("edit (\\w+)", EditProductPanel.getInstance());

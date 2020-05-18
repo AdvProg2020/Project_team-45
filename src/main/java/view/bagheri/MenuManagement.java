@@ -8,7 +8,7 @@ import view.nedaei.MainMenu;
 import java.util.Scanner;
 import java.util.Stack;
 
-public abstract class MenuManagement extends ManagingMenu{
+public abstract class MenuManagement {
     private static final Stack<Menu> activeMenus = new Stack<>();
     private static boolean isExit;
 

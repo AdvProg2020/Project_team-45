@@ -46,6 +46,7 @@ public class OrdersManagingMenu extends ManagingMenu {
         };
     }
 
+
     @Override
     protected void showHelp() {
         super.showHelp();
@@ -54,7 +55,7 @@ public class OrdersManagingMenu extends ManagingMenu {
 
     @Override
     protected void show() {
-        super.show();
+        System.out.println(name);
         System.out.println(BuyerController.getInstance().getBuyerBuyLogs());
     }
 

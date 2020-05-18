@@ -25,6 +25,11 @@ public class CartManagingMenu extends ManagingMenu {
         return instance;
     }
 
+    @Override
+    protected void show() {
+        System.out.println(name);
+    }
+
     private Panel createShowProductsPanel() {
         return new Panel("show products panel") {
 

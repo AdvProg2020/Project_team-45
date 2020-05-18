@@ -169,7 +169,7 @@ public abstract class ManagingMenu extends Menu {
         }.setUp(editor);
     }
 
-    protected static Panel createItemCreatorPanel(String panelName, Creator creator) {
+    public static Panel createItemCreatorPanel(String panelName, Creator creator) {
         return new Panel(panelName) {
             private Creator creator;
             private HashMap<String, InputValidator> necessaryFieldsToGet;

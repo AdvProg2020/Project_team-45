@@ -7,6 +7,7 @@ import java.util.Stack;
 
 public class MenuManagement {
     private static final Stack<Menu> activeMenus = new Stack<>();
+    private static boolean isExit;
 
     public static void next(Menu activeMenu) {
         activeMenus.push(activeMenu);
@@ -20,10 +21,14 @@ public class MenuManagement {
         }
     }
 
+    public static void exit() {
+        isExit = true;
+    }
+
     public static void run() {
         UIPage.setScanner(new Scanner(System.in));
         activeMenus.push(MainMenu.getInstance());
-        while (true) {
+        while (!isExit) {
             activeMenus.peek().execute();
         }
     }

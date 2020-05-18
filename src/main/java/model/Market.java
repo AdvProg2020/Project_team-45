@@ -184,7 +184,9 @@ public class Market {
         allProducts.removeIf(product -> product.getProductId().equalsIgnoreCase(productId));
     }
 
-
+    public void setHasAdmin() {
+        this.hasAdmin = true;
+    }
 
     public void removeCodedDiscountFromList(CodedDiscount codedDiscount) {
         allCodedDiscounts.remove(codedDiscount);

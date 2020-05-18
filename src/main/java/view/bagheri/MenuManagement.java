@@ -1,7 +1,9 @@
 package view.bagheri;
 
 import controller.userControllers.AdminController;
+import model.Market;
 import view.hatami.ManagingMenu;
+import view.hatami.RegisterPanel;
 import view.nedaei.MainMenu;
 
 import java.util.Scanner;
@@ -33,7 +35,10 @@ public abstract class MenuManagement extends ManagingMenu{
 
     public static void run() {
         UIPage.setScanner(new Scanner(System.in));
-        runStartingPanel();
+        if (!Market.getInstance().doesHaveAdmin()) {
+            runStartingPanel();
+            Market.getInstance().setHasAdmin();
+        }
         activeMenus.push(MainMenu.getInstance());
         while (!isExit) {
             activeMenus.peek().execute();
@@ -46,7 +51,10 @@ public abstract class MenuManagement extends ManagingMenu{
             @Override
             public void execute() {
                 System.out.println("creating first admin");
-                ManagingMenu.createItemCreatorPanel("create first admin", AdminController.getInstance());
+                System.out.println("username");
+                String input = scanner.nextLine();
+                RegisterPanel.setLastRegisterUsername(input);
+                ManagingMenu.createItemCreatorPanel("create first admin", AdminController.getInstance()).execute();
             }
         }.execute();
     }

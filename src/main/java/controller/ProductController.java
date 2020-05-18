@@ -5,6 +5,7 @@ import model.Comment;
 import model.Market;
 import model.Product;
 import model.ProductSellInfo;
+import model.category.Category;
 import model.request.CommentRequest;
 import model.user.Buyer;
 import model.user.User;
@@ -29,6 +30,18 @@ public class ProductController implements Deleter {
 //        return null;
 //    }
 
+    public boolean setActiveProductBYProductId(String productId) {
+        ArrayList<Product> productsList = CategoryController.getInstance().getActiveCategoryProductsList();
+        for (Product product : productsList) {
+            if (product.getProductId().equals(productId)) {
+                activeProduct = product;
+                activeProduct.increaseSeen();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void setFieldOfProduct(Product product, String field, String value) {
     }
 
@@ -40,23 +53,26 @@ public class ProductController implements Deleter {
     }
 
     public HashMap<String, String> getProductDigestInformation() {
-        return null;
+        return activeProduct.getDigestInformation();
     }
 
     public HashMap<String, String> getProductAttributes() {
-        return null;
+        return activeProduct.getAttributes();
     }
 
     public HashMap<String, String> getProductAttributesById(String productId) {
-        return null;
+        Product product = CategoryController.getInstance().getActiveCategoryProduct(productId);
+        if (product == null)
+            return null;
+        return product.getAttributes();
     }
 
     public void addActiveProductToCart() {
-
+        // TODO bagheri
     }
 
     public boolean selectSellerForActiveProduct(String sellerUsername) {
-
+        // TODO bagheri
         return false;
     }
 
@@ -65,10 +81,12 @@ public class ProductController implements Deleter {
     }
 
     public ArrayList<String> getProductComments() {
+        // TODO bagheri
         return null;
     }
 
     public void addComment(String title, String content) {
+        // TODO bagheri
         User user = activeUser;
         boolean didUserBuy = false;
         if (user.getRole().equals("Buyer") && ((Buyer) user).didBuyProduct(activeProduct.getProductId())) {
@@ -87,10 +105,6 @@ public class ProductController implements Deleter {
         //Method 2:
         Comment newComment = new Comment(user, activeProduct, title, content, didUserBuy);
         market.addRequest(new CommentRequest(newComment));
-    }
-
-    public boolean isWithInACategory(String productId) {
-        return false;
     }
 
     public boolean deleteItemById(String Id) {
@@ -135,6 +149,6 @@ public class ProductController implements Deleter {
 
     @Override
     public Product getItemById(String Id) {
-        return  market.getProductById(Id);
+        return market.getProductById(Id);
     }
 }

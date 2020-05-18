@@ -34,6 +34,7 @@ public class CategoryController implements Editor, Creator {
 
     public void removeCategory(String name) {
     }
+
     public void removeCategory(Category removingCategory) {
         if (removingCategory.getType().equals("ParentCategory"))
             for (Category subcategory : ((ParentCategory) removingCategory).getSubcategories()) {
@@ -79,7 +80,7 @@ public class CategoryController implements Editor, Creator {
 
     @Override
     public void editItem(HashMap<String, String> changedFields) {
-        if (changedFields.containsKey("name")){
+        if (changedFields.containsKey("name")) {
             ManagingMenu
         }
     }
@@ -160,7 +161,7 @@ public class CategoryController implements Editor, Creator {
     }
 
     public ArrayList<String> getActiveCategorySubcategories() {
-        ArrayList<String> subcategoriesName = new ArrayList<String>();
+        ArrayList<String> subcategoriesName = new ArrayList<>();
         if (activeCategory.getType().equals("ParentCategory")) {
             ArrayList<Category> subcategories = ((ParentCategory) activeCategory).getSubcategories();
             for (Category subcategory : subcategories) {
@@ -171,7 +172,7 @@ public class CategoryController implements Editor, Creator {
     }
 
     public ArrayList<String> getActiveCategoryDiscountedSubcategories() {
-        ArrayList<String> subcategoriesName = new ArrayList<String>();
+        ArrayList<String> subcategoriesName = new ArrayList<>();
         if (activeCategory.getType().equals("ParentCategory")) {
             ArrayList<Category> subcategories = ((ParentCategory) activeCategory).getSubcategories();
             for (Category subcategory : subcategories) {
@@ -198,6 +199,7 @@ public class CategoryController implements Editor, Creator {
             return true;
         }
         return false;
+        // TODO bagheri
     }
 
     public void backCategory() {
@@ -206,13 +208,28 @@ public class CategoryController implements Editor, Creator {
         }
     }
 
+    public ArrayList<Product> getActiveCategoryProductsList() {
+        if (!isOffMenu)
+            return activeCategory.getProductsList();
+        if (activeCategory == null)
+            return market.getAllDiscountedProductsList();
+        return activeCategory.getInOffProductsList();
+    }
+
+    public Product getActiveCategoryProduct(String productId) {
+        for (Product product : activeCategory.getProductsList()) {
+            if (product.getProductId().equals(productId))
+                return product;
+        }
+        return null;
+    }
 
     public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
         HashMap<String, InputValidator> necessaryFields = new HashMap<>();
         necessaryFields.put("name", InputValidator.getSimpleTextValidator());
         necessaryFields.put("features", InputValidator.getCategoryFeaturesValidator());
-        necessaryFields.put("parent category" ,new InputValidator("\\w+","an existing category name", CategoryController.getInstance()));
-        necessaryFields.put("is final?" ,new InputValidator("yes|no", "yes or no"));
+        necessaryFields.put("parent category", new InputValidator("\\w+", "an existing category name", CategoryController.getInstance()));
+        necessaryFields.put("is final?", new InputValidator("yes|no", "yes or no"));
         return necessaryFields;
     }
 
@@ -225,9 +242,8 @@ public class CategoryController implements Editor, Creator {
     public void createItem(HashMap<String, String> filledFeatures) {
         Category createdCategory;
         if (filledFeatures.get("is final?").equals("yes")) {
-             createdCategory = new FinalCategory(filledFeatures);
-        }
-        else createdCategory = new ParentCategory(filledFeatures);
+            createdCategory = new FinalCategory(filledFeatures);
+        } else createdCategory = new ParentCategory(filledFeatures);
         createdCategory.getParent().addSubcategory(createdCategory);
         market.addCategoryToList(createdCategory);
     }

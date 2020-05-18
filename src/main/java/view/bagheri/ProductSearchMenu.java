@@ -42,7 +42,9 @@ public abstract class ProductSearchMenu extends Menu {
     @Override
     protected boolean check() {
         if (matcher != null && matcher.group().matches("show category (.+)")) {
-            boolean result = categoryController.setActiveCategoryByName(matcher.group(1));
+            boolean result;
+            if (!(result = categoryController.setActiveCategoryByName(matcher.group(1))))
+                System.out.println("There is no category with this name!");
             matcher = null;
             return result;
         }

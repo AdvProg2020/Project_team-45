@@ -11,7 +11,6 @@ public class ParentCategory extends Category{
     public ParentCategory(HashMap<String, String> filledFeatures) {
         super(filledFeatures);
         this.subcategories = new ArrayList<Category>();
-
     }
 
     public ArrayList<Category> getSubcategories() {

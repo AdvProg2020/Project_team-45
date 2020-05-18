@@ -24,7 +24,37 @@ public abstract class Category {
 
 
     public static Category getEmptyCategory() {
-        return new ParentCategory(new HashMap<>());
+        return new Category("empty", null) {
+            @Override
+            public ArrayList<Product> getProductsList() {
+                return null;
+            }
+
+            @Override
+            public ArrayList<Product> getInOffProductsList() {
+                return null;
+            }
+
+            @Override
+            public boolean hasInOffProduct() {
+                return false;
+            }
+
+            @Override
+            public String getType() {
+                return null;
+            }
+
+            @Override
+            public void addFeatures(String newFeaturesString) {
+
+            }
+
+            @Override
+            public void removeFeatures(String removingFeaturesString) {
+
+            }
+        };
     }
 
     public String getName() {

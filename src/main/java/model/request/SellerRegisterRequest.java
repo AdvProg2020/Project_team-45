@@ -1,11 +1,12 @@
 package model.request;
 
+import model.Market;
 import model.user.Seller;
 
 public class SellerRegisterRequest extends Request {
     private final Seller seller;
 
-    public SellerRegisterRequest(String requestId, Seller seller) {
+    public SellerRegisterRequest(Seller seller) {
         super();
         this.seller = seller;
     }
@@ -16,7 +17,7 @@ public class SellerRegisterRequest extends Request {
 
     @Override
     public void apply() {
-
+        Market.getInstance().addUserToList(seller);
     }
 
     @Override

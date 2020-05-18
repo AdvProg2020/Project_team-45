@@ -215,7 +215,8 @@ public class SellerController extends UserController implements Creator {
     public void createItem(HashMap<String, String> filledFeatures) {
         filledFeatures.put("username", RegisterPanel.getLastRegisterUsername());
         Seller newSeller = new Seller(new PersonalInfo(filledFeatures), new Company(filledFeatures));
-        market.addUserToList(newSeller);
+        SellerRegisterRequest registerRequest  = new SellerRegisterRequest(newSeller);
+        market.addRequest(registerRequest);
     }
 
     @Override

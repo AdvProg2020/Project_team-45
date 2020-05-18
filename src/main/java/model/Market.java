@@ -22,13 +22,13 @@ public class Market {
     private boolean hasAdmin;
 
     private Market() {
-        allLogs = new ArrayList<Log>();
-        allOffs = new ArrayList<Off>();
-        allUsers = new ArrayList<User>();
-        allCodedDiscounts = new ArrayList<CodedDiscount>();
-        allCategories = new ArrayList<Category>();
-        mainCategories = new ArrayList<Category>();
-        allProducts = new ArrayList<Product>();
+        allLogs = new ArrayList<>();
+        allOffs = new ArrayList<>();
+        allUsers = new ArrayList<>();
+        allCodedDiscounts = new ArrayList<>();
+        allCategories = new ArrayList<>();
+        mainCategories = new ArrayList<>();
+        allProducts = new ArrayList<>();
         allRequests = new ArrayList<>();
     }
 

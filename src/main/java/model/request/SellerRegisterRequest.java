@@ -6,7 +6,7 @@ public class SellerRegisterRequest extends Request {
     private Seller seller;
 
     public SellerRegisterRequest(String requestId, Seller seller) {
-        super(requestId);
+        super();
         this.seller = seller;
     }
 

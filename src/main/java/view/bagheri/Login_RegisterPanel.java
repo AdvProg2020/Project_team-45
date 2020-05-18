@@ -21,6 +21,8 @@ public class Login_RegisterPanel extends Panel {
 
     @Override
     public void execute() {
+        System.out.println(name);
+
         if (UserController.isLoggedIn()) {
             System.out.println("You have already logged in");
             return;

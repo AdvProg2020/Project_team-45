@@ -15,7 +15,7 @@ public class MainMenu extends Menu {
     private MainMenu() {
         super("main menu");
         this.submenus.put("user page", Login_RegisterPanel.getInstance());
-        this.submenus.put("products page", AllProductsMenu.getInstance());
+        this.submenus.put("products", AllProductsMenu.getInstance());
         this.submenus.put("offs page", OffsMenu.getInstance());
     }
 

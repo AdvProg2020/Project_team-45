@@ -89,6 +89,7 @@ public class UserController {
         if (loggedIn) {
             loggedIn = false;
             activeUser = null;
+            return true;
         }
         return false;
     }

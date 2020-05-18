@@ -181,11 +181,7 @@ public class Market {
     }
 
     public void removeProductByProductId(String productId) {
-        for (Product product : allProducts) {
-            if (product.getProductId().equalsIgnoreCase(productId)) {
-                allProducts.remove(product);
-            }
-        }
+        allProducts.removeIf(product -> product.getProductId().equalsIgnoreCase(productId));
     }
 
 

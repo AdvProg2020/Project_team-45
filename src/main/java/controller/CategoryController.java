@@ -31,9 +31,6 @@ public class CategoryController implements Editor, Creator {
         return activeCategory;
     }
 
-    public void removeCategory(String name) {
-    }
-
     public void removeCategory(Category removingCategory) {
         if (removingCategory.getType().equals("ParentCategory"))
             for (Category subcategory : ((ParentCategory) removingCategory).getSubcategories()) {
@@ -47,23 +44,6 @@ public class CategoryController implements Editor, Creator {
             market.getMainCategories().remove(removingCategory);
         else
             removingCategory.getParent().removeSubcategoryFromList(removingCategory);
-    }
-
-    public Category getCategoryByName(String name) {
-        return null;
-    }
-
-    public void editCategory(String name, Category category) {
-    }
-
-    public Category createCategory(String name) {
-        return null;
-    }
-
-    public void addFeatureToCategory(Category category, String feature) {
-    }
-
-    public void removeFeatureFromCategory(Category category, String feature) {
     }
 
     public void setParentOfCategory(Category category, String parentName) {

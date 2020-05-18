@@ -8,12 +8,6 @@ import java.util.HashMap;
 public class ParentCategory extends Category{
     private final ArrayList<Category> subcategories;
 
-
-    public ParentCategory(String name, ParentCategory parent) {
-        super(name, parent);
-        this.subcategories = new ArrayList<Category>();
-    }
-
     public ParentCategory(HashMap<String, String> filledFeatures) {
         super(filledFeatures);
         this.subcategories = new ArrayList<Category>();
@@ -24,15 +18,10 @@ public class ParentCategory extends Category{
         return subcategories;
     }
 
-    public void addSubcategory(Category newCategory) {
-
-    }
-
-    public boolean removeSubcategoryFromList(Category subcategory) {
+    public void removeSubcategoryFromList(Category subcategory) {
         if (!subcategories.contains(subcategory))
-            return false;
+            return;
         subcategories.remove(subcategory);
-        return true;
     }
 
     @Override
@@ -74,5 +63,9 @@ public class ParentCategory extends Category{
 
     @Override
     public void removeFeatures(String removing_features) {
+    }
+
+    public void addSubcategory(Category createdCategory) {
+        this.subcategories.add(createdCategory);
     }
 }

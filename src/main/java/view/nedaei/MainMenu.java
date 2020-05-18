@@ -1,7 +1,10 @@
 package view.nedaei;
 
 import controller.userControllers.UserController;
-import view.bagheri.*;
+import view.bagheri.AllProductsMenu;
+import view.bagheri.Login_RegisterPanel;
+import view.bagheri.Menu;
+import view.bagheri.OffsMenu;
 import view.hatami.AdminMenu;
 import view.nedaei.buyermenu.BuyerMenu;
 import view.nedaei.sellermenu.SellerMenu;
@@ -36,7 +39,7 @@ public class MainMenu extends Menu {
 
         String role = UserController.getActiveUser().getRole();
         if (role.equals("admin")) {
-            submenus.put("user page", AdminMenu.getInstance()); // TODO: hatami
+            submenus.put("user page", AdminMenu.getInstance());
         } else if (role.equals("buyer")) {
             submenus.put("user page", BuyerMenu.getInstance());
         } else {

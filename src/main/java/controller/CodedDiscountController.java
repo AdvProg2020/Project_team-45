@@ -20,13 +20,6 @@ public class CodedDiscountController implements Editor, Creator {
         return instance;
     }
 
-    public CodedDiscount getCodedDiscountByCode(String discountCode) {
-        return null;
-    }
-
-    public void setFieldOfCodedDiscount(CodedDiscount codedDiscount, String field, String value) {
-    }
-
     public boolean isDiscountCodeValid(String code) {
         return false;
     }

@@ -17,6 +17,7 @@ import view.hatami.RegisterPanel;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class BuyerController extends UserController implements Creator {
     private static final BuyerController instance = new BuyerController();
@@ -158,12 +159,12 @@ public class BuyerController extends UserController implements Creator {
     }
 
     @Override
-    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+    public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
         return super.getNecessaryFieldsToCreate();
     }
 
     @Override
-    public HashMap<String, InputValidator> getOptionalFieldsToCreate() {
+    public LinkedHashMap<String, InputValidator> getOptionalFieldsToCreate() {
         return null;
     }
 

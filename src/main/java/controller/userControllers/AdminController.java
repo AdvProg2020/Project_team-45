@@ -7,6 +7,7 @@ import model.user.PersonalInfo;
 import model.user.User;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class AdminController extends UserController implements Creator {
     private static AdminController instance = new AdminController();
@@ -19,20 +20,15 @@ public class AdminController extends UserController implements Creator {
         super();
     }
 
-    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        HashMap<String, InputValidator> necessaryFields = new HashMap<>();
-        // TODO : hatami
-        necessaryFields.put("username", InputValidator.getSimpleTextValidator());
-        necessaryFields.put("password", InputValidator.getSimpleTextValidator());
-        necessaryFields.put("first name", InputValidator.getSimpleTextValidator());
-        necessaryFields.put("last name", InputValidator.getSimpleTextValidator());
-        necessaryFields.put("email address", InputValidator.getEmailAddressValidator());
-        necessaryFields.put("phone number", InputValidator.getSimpleNumberValidator());
-        return necessaryFields;
+    public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+
+        LinkedHashMap<String, InputValidator> necessaryFieldsToCreate = super.getNecessaryFieldsToCreate();
+        necessaryFieldsToCreate.put("username", InputValidator.getSimpleTextValidator());
+        return necessaryFieldsToCreate;
     }
 
     @Override
-    public HashMap<String, InputValidator> getOptionalFieldsToCreate() {
+    public LinkedHashMap<String, InputValidator> getOptionalFieldsToCreate() {
         return null;
     }
 

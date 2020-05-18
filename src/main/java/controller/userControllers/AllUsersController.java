@@ -76,9 +76,8 @@ public class AllUsersController implements Deleter {
             case "admin":
                 deleteAdmin((Admin) removingUser);
                 break;
-            default:
-                market.removeUserFromAllUsers(removingUser);
         }
+        market.removeUserFromAllUsers(removingUser);
     }
 
     private void deleteAdmin(Admin admin) {

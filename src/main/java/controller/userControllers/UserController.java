@@ -8,7 +8,7 @@ import model.user.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class UserController {
     private static final UserController instance = new UserController();
@@ -94,8 +94,8 @@ public class UserController {
         return false;
     }
 
-    public HashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        HashMap<String, InputValidator> necessaryFields = new HashMap<>();
+    public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
+        LinkedHashMap<String, InputValidator> necessaryFields = new LinkedHashMap<>();
         necessaryFields.put("password", InputValidator.getSimpleTextValidator());
         necessaryFields.put("first name", InputValidator.getSimpleTextValidator());
         necessaryFields.put("last name", InputValidator.getSimpleTextValidator());

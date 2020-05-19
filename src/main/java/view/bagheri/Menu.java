@@ -61,6 +61,7 @@ public abstract class Menu extends UIPage {
 
     @Override
     public void execute() {
+        checkLogin();
         show();
         String input;
         while (!(input = scanner.nextLine()).equals("back")) {
@@ -74,7 +75,10 @@ public abstract class Menu extends UIPage {
                     }
                 }
                 nextUIPage.execute();
-            } else {
+            } else if("exit") {
+
+            }
+            else {
                 System.out.println("invalid command!");
             }
         }

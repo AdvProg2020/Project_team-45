@@ -41,8 +41,8 @@ public abstract class ProductSearchMenu extends Menu {
 
     @Override
     protected void back() {
-        super.back();
         categoryController.backCategory();
+        super.back();
     }
 
     @Override

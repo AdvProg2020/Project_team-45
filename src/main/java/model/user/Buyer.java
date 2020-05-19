@@ -20,6 +20,9 @@ public class Buyer extends User implements CartHolder {
         super(personalInfo);
         this.cart = new Cart();
         this.balance = 100;
+        this.listOfCodedDiscounts = new ArrayList<>();
+        this.listOfBuyLogs = new ArrayList<>();
+        this.purchasedProducts = new HashMap<>();
     }
 
     public Cart getCart() {
@@ -86,6 +89,7 @@ public class Buyer extends User implements CartHolder {
 
     public void purchase(Log log) {
         for (ProductSellInfo sellInfo : getCart().getProductSellInfos()) {
+            purchasedProducts.put(sellInfo.getProduct().getProductId(), null);
             sellInfo.getProduct().addSellCount();
             sellInfo.addSellCount();
             sellInfo.getAllBuyers().put(this, getCart().getProductAmountById(sellInfo.getProduct().getProductId()));

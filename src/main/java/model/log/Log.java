@@ -23,11 +23,7 @@ public class Log {
         this.logId = newLogId.toString();
         newLogId++;
         this.date = new Date();
-        this.sellingProducts = new ArrayList<>();
-        for (ProductSellInfo productSellInfo : sellingProducts) {
-            System.out.println("" + sellingProducts + productSellInfo);
-            this.sellingProducts.add(productSellInfo.clone());
-        }
+        this.sellingProducts = sellingProducts;
         this.buyerUsername = buyerUsername;
         this.finalPrice = calculateFinalPrice();
         this.buyerFee = calculateBuyerFee();
@@ -48,6 +44,7 @@ public class Log {
     }
 
     public int getFinalPrice() {
+        calculateFinalPrice();
         return finalPrice;
     }
 
@@ -92,6 +89,9 @@ public class Log {
     }
 
     public int getAppliedDiscountPercentage() {
+        if (appliedDiscount == null) {
+            return 0;
+        }
         return appliedDiscount.getPercentage();
     }
 

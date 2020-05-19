@@ -126,9 +126,7 @@ public class BuyerController extends UserController implements Creator {
 
     public void rateProductById(String productId, int score) {
         Rate rate = new Rate(((Buyer) UserController.getActiveUser()), score, productId);
-        if (!((Buyer) UserController.getActiveUser()).getPurchasedProducts().containsKey(productId)) {
-            market.getProductById(productId).addRate(rate);
-        }
+        market.getProductById(productId).addRate(rate);
         ((Buyer) UserController.getActiveUser()).getPurchasedProducts().put(productId, rate);
     }
 
@@ -136,8 +134,8 @@ public class BuyerController extends UserController implements Creator {
         Buyer buyer = ((Buyer) UserController.getActiveUser());
         ArrayList<String> result = new ArrayList<>();
         for (BuyLog buyLog : buyer.getListOfBuyLogs()) {
-            result.add(buyLog.getMainLog().getLogId() + " " + buyLog.getMainLog().getDate() + " " +
-                    buyLog.getMainLog().getFinalPrice());
+            result.add("logId: " + buyLog.getMainLog().getLogId() + " date: " + buyLog.getMainLog().getDate() +
+                    " finalPrice: " + buyLog.getMainLog().getFinalPrice());
         }
         return result;
     }

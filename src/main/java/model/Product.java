@@ -1,6 +1,7 @@
 package model;
 
 import model.category.FinalCategory;
+import model.user.Buyer;
 import model.user.Seller;
 
 import java.util.ArrayList;
@@ -89,7 +90,6 @@ public class Product {
 
     public ProductSellInfo getDefaultSellInfo() {
         updateMinimumPriceAndDefaultSellInfo();
-        System.out.println(defaultSellInfo);
         return defaultSellInfo;
     }
 
@@ -179,6 +179,7 @@ public class Product {
 
     public void addRate(Rate rate) {
         rates.add(rate);
+        updateAverageScoreAfterNewRate(rate.getScore());
     }
 
     public void removeSeller(Seller seller) {

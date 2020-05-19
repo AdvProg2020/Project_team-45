@@ -89,7 +89,7 @@ public class InputValidator {
             }
         };    }
     public static InputValidator getPriceValidator() {
-        return new InputValidator("[1-9][0-9]+", "natural number");
+        return new InputValidator("[1-9][0-9]*", "natural number");
     }
     public static InputValidator getExistingProductValidator() {
         return new InputValidator("\\w[\\w|\\s]+", "existing product Id", ProductController.getInstance(), "no");

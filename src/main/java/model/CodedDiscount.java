@@ -12,7 +12,7 @@ public class CodedDiscount {
     private Date startDate;
     private Date endDate;
     private int percentage;
-    private Buyer owner;
+    private final Buyer owner;
 
     public CodedDiscount(HashMap<String, String> filledFeatures) {
         this.code = filledFeatures.get("code");
@@ -20,6 +20,14 @@ public class CodedDiscount {
         this.endDate = InputValidator.convertStringToDate(filledFeatures.get("end date"));
         this.percentage = Integer.parseInt(filledFeatures.get("percentage"));
         this.owner = BuyerController.getInstance().getItemById(filledFeatures.get("owner username"));
+    }
+
+    public CodedDiscount(CodedDiscount toClone) {
+        this.code = toClone.code;
+        this.startDate = toClone.startDate;
+        this.endDate = toClone.endDate;
+        this.percentage = toClone.percentage;
+        this.owner = toClone.owner;
     }
 
     public int getPercentage() {
@@ -60,12 +68,7 @@ public class CodedDiscount {
 
     @Override
     public CodedDiscount clone() {
-        try {
-            return (CodedDiscount) super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new CodedDiscount(this);
     }
 
     @Override

@@ -19,10 +19,6 @@ public abstract class ManagingMenu extends Menu {
         super(name);
     }
 
-    public ManagingMenu() {
-
-    }
-
     protected static void displayAllItemsInPanel(String panelName, Printer printer) {
         new Panel(panelName) {
             private Printer printer;

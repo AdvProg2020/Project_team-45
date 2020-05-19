@@ -26,12 +26,12 @@ public class AddProductRequest extends Request {
             product = Market.getInstance().getProductById(fieldsAndValues.get("productId"));
         } else if (mode.equalsIgnoreCase("new")){
             Category category = Market.getInstance().getCategoryByName(fieldsAndValues.get("categoryName"));
-            if (!category.getType().equalsIgnoreCase("FinalCategory")) {
+            if (category == null || !category.getType().equalsIgnoreCase("FinalCategory")) {
                 return;
             }
             product = new Product(fieldsAndValues.get("name"), ((FinalCategory)category)
                     , fieldsAndValues.get("description"));
-            product.getSellersList().put(seller, new ProductSellInfo(product, seller));
+            product.addSeller(new ProductSellInfo(product, seller));
             ((FinalCategory)category).addProduct(product);
             Market.getInstance().getAllProducts().add(product);
         }

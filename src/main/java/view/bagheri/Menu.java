@@ -2,6 +2,7 @@ package view.bagheri;
 
 import controller.userControllers.UserController;
 import view.nedaei.MainMenu;
+import view.nedaei.buyermenu.CartManagingMenu;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ public abstract class Menu extends UIPage {
         this.submenus = new HashMap<>();
         submenus.put("login", Login_RegisterPanel.getInstance());
         submenus.put("logout", createLogoutPanel());
+        submenus.put("view cart", CartManagingMenu.getInstance());
         submenus.put("help", createHelpPanel());
         submenus.put("exit", createExitPanel());
     }
@@ -101,6 +103,7 @@ public abstract class Menu extends UIPage {
     protected void showHelp() {
         System.out.println("login\n" +
                 "logout\n" +
+                "view cart\n" +
                 "help\n" +
                 "back");
     }

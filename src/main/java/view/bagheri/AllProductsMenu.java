@@ -65,4 +65,10 @@ public class AllProductsMenu extends Menu {
                 "view subcategories [main_category_name]\n" +
                 "show category [category_name]");
     }
+
+    @Override
+    public void execute() {
+        categoryController.clearActiveCategory();
+        super.execute();
+    }
 }

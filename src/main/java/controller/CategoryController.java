@@ -185,12 +185,17 @@ public class CategoryController implements Editor, Creator {
 
     public boolean setActiveCategoryByName(String name) {
         Category category = market.getCategoryByName(name);
-        if (category != null && (category.getParent() == activeCategory || (activeCategory == null && category.getParent().getParent() == null))) {
+        if (category != null && (category.getParent() == activeCategory
+                || (activeCategory == null && category.getParent().getParent() == null))) {
             activeCategory = category;
             return true;
         }
         return false;
         // TODO bagheri
+    }
+
+    public void clearActiveCategory() {
+        activeCategory = null;
     }
 
     public void backCategory() {

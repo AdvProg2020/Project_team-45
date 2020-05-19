@@ -39,6 +39,7 @@ public class Product {
         this.description = description;
         this.allComments = new ArrayList<>();
         this.approvedComments = new ArrayList<>();
+        this.sellersList = new HashMap<>();
         this.rates = new ArrayList<>();
     }
 
@@ -53,6 +54,7 @@ public class Product {
     }
 
     public int getMinimumPrice() {
+        updateMinimumPriceAndDefaultSellInfo();
         return minimumPrice;
     }
 
@@ -77,7 +79,8 @@ public class Product {
     }
 
     public ArrayList<ProductSellInfo> getSellInfosList() {
-        return (ArrayList<ProductSellInfo>) sellersList.values();
+        ArrayList<ProductSellInfo> result = new ArrayList<>(sellersList.values());
+        return result;
     }
 
     public HashMap<Seller, ProductSellInfo> getSellersList() {
@@ -85,6 +88,8 @@ public class Product {
     }
 
     public ProductSellInfo getDefaultSellInfo() {
+        updateMinimumPriceAndDefaultSellInfo();
+        System.out.println(defaultSellInfo);
         return defaultSellInfo;
     }
 
@@ -141,7 +146,23 @@ public class Product {
     }
 
     public void addSeller(ProductSellInfo productSellInfo) {
+        sellersList.put(productSellInfo.getSeller(), productSellInfo);
+    }
 
+    private void updateMinimumPriceAndDefaultSellInfo() {
+        if (sellersList.size() == 0) {
+            return;
+        }
+        ProductSellInfo sellInfo = ((ProductSellInfo) sellersList.values().toArray()[0]);
+        int price = sellInfo.getFinalPrice();
+        for (ProductSellInfo productSellInfo : sellersList.values()) {
+            if (productSellInfo.getFinalPrice() < price) {
+                sellInfo = productSellInfo;
+                price = sellInfo.getFinalPrice();
+            }
+        }
+        defaultSellInfo = sellInfo;
+        minimumPrice = price;
     }
 
     public boolean addCategoryFeatures(String feature, String measure) {
@@ -184,12 +205,12 @@ public class Product {
 
     }
 
-    public void updateAverageScoreAfterNewRate() {
+    public void updateAverageScoreAfterNewRate(int newRate) {
 
     }
 
     public void updateAverageScoreAfterEditingRate(int oldRate, int newRate) {
-        this.averageScore += (newRate - oldRate) / rates.size();
+        this.averageScore += ((float)(newRate - oldRate)) / rates.size();
     }
 
 

@@ -7,6 +7,7 @@ import controller.SortingController;
 
 public abstract class ProductSearchMenu extends Menu {
     protected CategoryController categoryController;
+    protected boolean didBack;
 
     protected ProductSearchMenu(String name) {
         super(name);
@@ -17,6 +18,7 @@ public abstract class ProductSearchMenu extends Menu {
         submenus.put("sorting", SortingPanel.getInstance());
         submenus.put("show products", creatShowProductsPanel());
         submenus.put("show product (\\w+)", ProductMenu.getInstance());
+        didBack = true;
     }
 
     protected abstract Panel creatViewCategoriesPanel();
@@ -34,22 +36,22 @@ public abstract class ProductSearchMenu extends Menu {
 
     @Override
     public void execute() {
+        if (didBack)
+            categoryController.backCategory();
         super.execute();
+        didBack = true;
         FilteringController.getInstance().clearFilters();
         SortingController.getInstance().disableCurrentSort();
     }
 
     @Override
     protected boolean check() {
-        if (matcher != null && matcher.group().matches("show category (.+)")) {
-            boolean result;
-            if (!(result = categoryController.setActiveCategoryByName(matcher.group(1))))
-                System.out.println("There is no category with this name!");
-            matcher = null;
-            return result;
+        if (categoryController.setActiveCategoryByName(matcher.group(1))) {
+            didBack = false;
+            return true;
         }
-        categoryController.backCategory();
-        return true;
+        System.out.println("There is no category with this name!");
+        return false;
     }
 
     @Override

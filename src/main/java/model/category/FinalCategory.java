@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class FinalCategory extends Category {
-    private ArrayList<String> specialFeatures;
+    private final ArrayList<String> specialFeatures;
     private final ArrayList<Product> productsList;
 
     public FinalCategory(HashMap<String, String> filledFeatures, ArrayList<String> categorySpecialFeatures) {
@@ -60,6 +60,11 @@ public class FinalCategory extends Category {
     @Override
     public String getType() {
         return "FinalCategory";
+    }
+
+    @Override
+    public boolean isFinal() {
+        return true;
     }
 
     @Override

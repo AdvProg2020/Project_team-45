@@ -12,9 +12,9 @@ import java.util.ArrayList;
 
 public class AllUsersController implements Deleter {
 
-    private Market market;
+    private final Market market;
 
-    private static AllUsersController instance = new AllUsersController();
+    private static final AllUsersController instance = new AllUsersController();
 
     public static AllUsersController getInstance() {
         return instance;
@@ -61,6 +61,11 @@ public class AllUsersController implements Deleter {
             return false;
         removeUser(removingUser);
         return true;
+    }
+
+    @Override
+    public boolean justRequests() {
+        return false;
     }
 
     private void removeUser(User removingUser) throws Exception {

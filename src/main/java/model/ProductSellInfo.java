@@ -7,8 +7,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class ProductSellInfo {
-    private Seller seller;
-    private Product product;
+    private final Seller seller;
+    private final Product product;
     private int price;
     private int stock;
     private Off off;
@@ -94,5 +94,15 @@ public class ProductSellInfo {
         seller.removeProductFromSellerList(product);
         if (isInOff())
             off.removeProduct(product);
+    }
+
+    @Override
+    public String toString() {
+        return  "seller:" + seller.getUsername() +
+                ", product:" + product.getName() +
+                ", price:" + price +
+                ", stock:" + stock +
+                ", off:" + off +
+                ", sellCount:" + sellCount;
     }
 }

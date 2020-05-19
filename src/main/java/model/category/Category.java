@@ -23,41 +23,6 @@ public abstract class Category {
         else parent = null;
     }
 
-
-    public static Category getEmptyCategory() {
-        return new Category("empty", null) {
-            @Override
-            public ArrayList<Product> getProductsList() {
-                return null;
-            }
-
-            @Override
-            public ArrayList<Product> getInOffProductsList() {
-                return null;
-            }
-
-            @Override
-            public boolean hasInOffProduct() {
-                return false;
-            }
-
-            @Override
-            public String getType() {
-                return null;
-            }
-
-            @Override
-            public void addFeatures(String newFeaturesString) {
-
-            }
-
-            @Override
-            public void removeFeatures(String removingFeaturesString) {
-
-            }
-        };
-    }
-
     public String getName() {
         return name;
     }
@@ -74,6 +39,7 @@ public abstract class Category {
         this.parent = parent;
     }
 
+
     public abstract ArrayList<Product> getProductsList();
 
     public abstract ArrayList<Product> getInOffProductsList();
@@ -85,6 +51,8 @@ public abstract class Category {
     public boolean isMain() {
         return parent == null;
     }
+
+    public abstract boolean isFinal();
 
     public abstract void addFeatures(String newFeaturesString);
 

@@ -8,7 +8,6 @@ import model.Product;
 import model.ProductSellInfo;
 import model.request.CommentRequest;
 import model.user.Buyer;
-import model.user.Seller;
 import model.user.User;
 
 import java.util.ArrayList;
@@ -104,6 +103,11 @@ public class ProductController implements Deleter {
             return false;
         removeProduct(getItemById(Id));
         return true;
+    }
+
+    @Override
+    public boolean justRequests() {
+        return false;
     }
 
     public void removeProduct(Product product) {

@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Seller extends User {
-    private Company company;
-    private ArrayList<SellLog> listOfSellLogs;
-    private HashMap<Product, ProductSellInfo> availableProducts;
+    private final Company company;
+    private final ArrayList<SellLog> listOfSellLogs;
+    private final HashMap<Product, ProductSellInfo> availableProducts;
     private HashMap<String, Off> listOfOffs; // offIds and offs
     private int balance;
 
@@ -41,6 +41,15 @@ public class Seller extends User {
         for (Product product : availableProducts.keySet()) {
             if (product.getProductId().equals(productId)) {
                 return product;
+            }
+        }
+        return null;
+    }
+
+    public ProductSellInfo getAvailableProductSellInfoById(String productId) {
+        for (Product product : availableProducts.keySet()) {
+            if (product.getProductId().equals(productId)) {
+                return availableProducts.get(product);
             }
         }
         return null;

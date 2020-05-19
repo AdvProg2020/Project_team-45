@@ -57,6 +57,11 @@ public class ParentCategory extends Category{
     }
 
     @Override
+    public boolean isFinal() {
+        return false;
+    }
+
+    @Override
     public void addFeatures(String newFeatures) {
     }
 

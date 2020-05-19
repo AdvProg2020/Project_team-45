@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class CodedDiscountController implements Editor, Creator {
-    private static CodedDiscountController instance = new CodedDiscountController();
-    private Market market = Market.getInstance();
+    private static final CodedDiscountController instance = new CodedDiscountController();
+    private final Market market = Market.getInstance();
 
     private CodedDiscountController() {
 
@@ -31,6 +31,11 @@ public class CodedDiscountController implements Editor, Creator {
             return false;
         removeCodedDiscount(removingCodedDiscount);
         return true;
+    }
+
+    @Override
+    public boolean justRequests() {
+        return false;
     }
 
     private void removeCodedDiscount(CodedDiscount removingCodedDiscount) {

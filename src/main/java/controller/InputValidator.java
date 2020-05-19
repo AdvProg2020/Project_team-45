@@ -3,6 +3,7 @@ package controller;
 import controller.managers.Manager;
 import controller.userControllers.AllUsersController;
 import controller.userControllers.BuyerController;
+import model.category.Category;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,9 +11,9 @@ import java.util.Date;
 import java.util.regex.Pattern;
 
 public class InputValidator {
-    private Pattern validPattern;
-    private String formatToShow;
-    private Manager existenceChecker;
+    private final Pattern validPattern;
+    private final String formatToShow;
+    protected Manager existenceChecker;
     private String nullable;
 
     public InputValidator(String validRegex, String formatToShow) {
@@ -54,7 +55,7 @@ public class InputValidator {
         return new InputValidator("\\d{5,12}", "5-12 numbers");
     }
     public static InputValidator getDateValidator(){
-        return new InputValidator("([0][1-9]|[1-2][0-9]|[3][01])/([0][1-9]|[1][012])/19[5-9][0-9]|20\\d\\d", "DD/MM/YYYY");
+        return new InputValidator("([0][1-9]|[1-2][0-9]|[3][01])/([0][1-9]|[1][012])/(19[5-9][0-9])|(20\\d\\d)", "DD/MM/YYYY");
     }
     public static InputValidator getPercentageValidator(){
         return new InputValidator("[0][1-9]|[1-9][0-9]", "1-99 digit");
@@ -69,7 +70,29 @@ public class InputValidator {
         return new InputValidator("[\\w|\\s]+", "type any feature name in a line(alphanumeric characters or space) - 'done' to finish");
     }
     public static InputValidator getCategoryParentValidator(){
-        return new InputValidator("\\w+", "an existing category name ('NULL' for nothing)", CategoryController.getInstance(), "nullable");
+        return new InputValidator("\\w+", "an existing parent category name ('NULL' for nothing)", CategoryController.getInstance(), "nullable"){
+            @Override
+            public boolean checkInput(String input) {
+                if (!super.checkInput(input))
+                    return false;
+                return input.equals("NULL") || ((Category) existenceChecker.getItemById(input)).getType().equals("ParentCategory");
+            }
+        };
+    }
+    public static InputValidator getFinalCategoryValidator() {
+        return new InputValidator("\\w+", "an existing final category name ('NULL' for nothing)", CategoryController.getInstance(), "nullable"){
+            @Override
+            public boolean checkInput(String input) {
+                if (!super.checkInput(input))
+                    return false;
+                return ((Category) existenceChecker.getItemById(input)).getType().equals("FinalCategory");
+            }
+        };    }
+    public static InputValidator getPriceValidator() {
+        return new InputValidator("[1-9][0-9]+", "natural number");
+    }
+    public static InputValidator getExistingProductValidator() {
+        return new InputValidator("\\w[\\w|\\s]+", "existing product Id", ProductController.getInstance(), "no");
     }
 
     public static Date convertStringToDate(String dateString){

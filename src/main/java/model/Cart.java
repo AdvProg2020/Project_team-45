@@ -62,6 +62,14 @@ public class Cart {
         return result;
     }
 
+    public ArrayList<Product> getCartProducts() {
+        ArrayList<Product> result = new ArrayList<>();
+        for (ProductInfo productInfo : products) {
+            result.add(productInfo.getProduct());
+        }
+        return result;
+    }
+
     public void addProduct(Product product, ProductSellInfo productSellInfo) {
         products.add(new ProductInfo(product, productSellInfo));
     }

@@ -47,7 +47,7 @@ public class CategoriesManagingMenu extends ManagingMenu {
 
     @Override
     public void execute() {
-        if (!UserController.isBuyerLoggedIn()) {
+        if (!UserController.isAdminLoggedIn()) {
             back();
             return;
         }

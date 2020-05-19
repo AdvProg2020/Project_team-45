@@ -54,6 +54,7 @@ public class Product {
     }
 
     public int getMinimumPrice() {
+        updateMinimumPriceAndDefaultSellInfo();
         return minimumPrice;
     }
 
@@ -86,6 +87,8 @@ public class Product {
     }
 
     public ProductSellInfo getDefaultSellInfo() {
+        updateMinimumPriceAndDefaultSellInfo();
+        System.out.println(defaultSellInfo);
         return defaultSellInfo;
     }
 
@@ -142,7 +145,23 @@ public class Product {
     }
 
     public void addSeller(ProductSellInfo productSellInfo) {
+        sellersList.put(productSellInfo.getSeller(), productSellInfo);
+    }
 
+    private void updateMinimumPriceAndDefaultSellInfo() {
+        if (sellersList.size() == 0) {
+            return;
+        }
+        ProductSellInfo sellInfo = ((ProductSellInfo) sellersList.values().toArray()[0]);
+        int price = sellInfo.getFinalPrice();
+        for (ProductSellInfo productSellInfo : sellersList.values()) {
+            if (productSellInfo.getFinalPrice() < price) {
+                sellInfo = productSellInfo;
+                price = sellInfo.getFinalPrice();
+            }
+        }
+        defaultSellInfo = sellInfo;
+        minimumPrice = price;
     }
 
     public boolean addCategoryFeatures(String feature, String measure) {

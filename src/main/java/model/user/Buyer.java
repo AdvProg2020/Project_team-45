@@ -19,6 +19,7 @@ public class Buyer extends User implements CartHolder {
     public Buyer(PersonalInfo personalInfo) {
         super(personalInfo);
         this.cart = new Cart();
+        this.balance = 100;
     }
 
     public Cart getCart() {

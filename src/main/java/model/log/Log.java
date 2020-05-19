@@ -25,6 +25,7 @@ public class Log {
         this.date = new Date();
         this.sellingProducts = new ArrayList<>();
         for (ProductSellInfo productSellInfo : sellingProducts) {
+            System.out.println("" + sellingProducts + productSellInfo);
             this.sellingProducts.add(productSellInfo.clone());
         }
         this.buyerUsername = buyerUsername;

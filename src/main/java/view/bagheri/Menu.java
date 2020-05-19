@@ -19,7 +19,6 @@ public abstract class Menu extends UIPage {
         submenus.put("logout", createLogoutPanel());
         submenus.put("view cart", CartManagingMenu.getInstance());
         submenus.put("help", createHelpPanel());
-        submenus.put("exit", createExitPanel());
     }
 
     public Menu() {
@@ -50,15 +49,6 @@ public abstract class Menu extends UIPage {
         };
     }
 
-    private Panel createExitPanel() {
-        return new Panel("exit") {
-            @Override
-            public void execute() {
-                MenuManagement.exit();
-            }
-        };
-    }
-
     @Override
     public void execute() {
 //        checkLogin();
@@ -75,8 +65,9 @@ public abstract class Menu extends UIPage {
                     }
                 }
                 nextUIPage.execute();
-//            } else if("exit") {
-
+            } else if(input.equals("exit")) {
+                MenuManagement.exit();
+                return;
             }
             else {
                 System.out.println("invalid command!");
@@ -112,7 +103,8 @@ public abstract class Menu extends UIPage {
                 "logout\n" +
                 "view cart\n" +
                 "help\n" +
-                "back");
+                "back\n" +
+                "exit");
     }
 
     @Override

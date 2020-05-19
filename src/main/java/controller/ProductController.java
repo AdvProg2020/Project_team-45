@@ -34,30 +34,24 @@ public class ProductController implements Deleter {
 
     public boolean setActiveProductBYProductIdForCategory(String productId) {
         ArrayList<Product> productsList = CategoryController.getInstance().getActiveCategoryProductsList();
-        for (Product product : productsList) {
-            if (product.getProductId().equals(productId)) {
-                setActiveProduct(product);
-                return true;
-            }
-        }
-        return false;
+        return setActiveProductByListAndId(productsList, productId);
     }
 
     public boolean setActiveProductBYProductIdForCart(String productId) {
         ArrayList<Product> productsList = BuyerController.getInstance().getBuyer().getCart().getCartProducts();
+        return setActiveProductByListAndId(productsList, productId);
+    }
+
+    private boolean setActiveProductByListAndId(ArrayList<Product> productsList, String productId) {
         for (Product product : productsList) {
             if (product.getProductId().equals(productId)) {
-                setActiveProduct(product);
+                activeProduct = product;
+                activeProduct.increaseSeen();
+                activeProductSellInfo = activeProduct.getDefaultSellInfo();
                 return true;
             }
         }
         return false;
-    }
-
-    private void setActiveProduct(Product product) {
-        activeProduct = product;
-        activeProduct.increaseSeen();
-        activeProductSellInfo = activeProduct.getDefaultSellInfo();
     }
 
     public void getProductBuyers(Product product) {

@@ -1,0 +1,115 @@
+#creating first admin (a)
+
+a
+a
+a
+a
+a@a.a
+phone number: (5-12 numbers)
+11111
+
+#creating seller (s)
+
+login
+create account seller s
+s
+s
+s
+s@s.s
+11111
+s
+s
+
+#accept seller register request
+
+login a
+a
+user page
+manage requests
+accept 1
+back
+back
+logout
+
+#creating buyer (b)
+
+login
+create account buyer b
+b
+b
+b
+b@b.b
+11111
+
+#add category c
+
+login
+login a
+a
+user page
+manage categories
+add c
+NULL
+yes
+f
+done
+back
+manage categories
+back
+back
+logout
+
+#creating add product (p) request
+
+login
+login s
+s
+user page
+add product
+2
+p
+c
+sth
+10
+10
+-
+back
+logout
+
+#accepting the request
+
+login
+login a
+a
+user page
+manage requests
+accept 2
+back
+manage requests
+back
+manage all products
+back
+back
+logout
+
+#add product p to b's cart
+
+login
+login b
+b
+user page
+back
+products
+show category c
+show product 1
+digest
+add to cart
+back
+back
+back
+back
+
+#check b's cart
+
+user page
+view cart

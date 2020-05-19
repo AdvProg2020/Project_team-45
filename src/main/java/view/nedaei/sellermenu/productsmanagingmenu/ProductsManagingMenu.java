@@ -3,6 +3,7 @@ package view.nedaei.sellermenu.productsmanagingmenu;
 import controller.SellerProductsController;
 import controller.managers.Printer;
 import controller.userControllers.SellerController;
+import controller.userControllers.UserController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
 
@@ -48,6 +49,15 @@ public class ProductsManagingMenu extends ManagingMenu {
             }
 
         };
+    }
+
+    @Override
+    public void execute() {
+        if (!UserController.isSellerLoggedIn()) {
+            back();
+            return;
+        }
+        super.execute();
     }
 
     @Override

@@ -3,6 +3,7 @@ package view.hatami;
 import controller.CodedDiscountController;
 import controller.managers.Editor;
 import controller.managers.Printer;
+import controller.userControllers.UserController;
 
 public class DiscountCodesManagingMenu extends ManagingMenu {
     public DiscountCodesManagingMenu() {
@@ -13,6 +14,16 @@ public class DiscountCodesManagingMenu extends ManagingMenu {
         submenus.put("edit discount code (\\S+)", createItemEditorPanel("edit discount code", (Editor) manager));
     }
 
+    @Override
+    public void execute() {
+        if (!UserController.isAdminLoggedIn()) {
+            back();
+            return;
+        }
+        super.execute();
+    }
+
+    @Override
     protected void showHelp() {
         super.showHelp();
     }

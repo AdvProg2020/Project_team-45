@@ -5,6 +5,7 @@ import controller.InputValidator;
 import controller.managers.Creator;
 import controller.managers.Deleter;
 import controller.managers.Editor;
+import controller.userControllers.UserController;
 import view.bagheri.Panel;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class CategoriesManagingMenu extends ManagingMenu {
     public static ArrayList<String> getCategoryFeatures(){
         return new Panel("get category features"){
 
-            private InputValidator validator = InputValidator.getCategoryFeaturesValidator();
+            private final InputValidator validator = InputValidator.getCategoryFeaturesValidator();
             private  ArrayList<String> categoryFeatures;
             @Override
             public void execute() {
@@ -42,5 +43,14 @@ public class CategoriesManagingMenu extends ManagingMenu {
                 return categoryFeatures;
             }
         }.getCategoryFeatures();
+    }
+
+    @Override
+    public void execute() {
+        if (!UserController.isBuyerLoggedIn()) {
+            back();
+            return;
+        }
+        super.execute();
     }
 }

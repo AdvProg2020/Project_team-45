@@ -4,6 +4,7 @@ import controller.managers.Deleter;
 import controller.managers.Printer;
 import controller.userControllers.AdminController;
 import controller.userControllers.AllUsersController;
+import controller.userControllers.UserController;
 
 public class UsersManagingMenu extends ManagingMenu {
     public UsersManagingMenu() {
@@ -15,6 +16,16 @@ public class UsersManagingMenu extends ManagingMenu {
         submenus.put("create manager profile", createItemCreatorPanel("create admin", AdminController.getInstance()));
     }
 
+    @Override
+    public void execute() {
+        if (!UserController.isAdminLoggedIn()) {
+            back();
+            return;
+        }
+        super.execute();
+    }
+
+    @Override
     protected void showHelp() {
         super.showHelp();
     }

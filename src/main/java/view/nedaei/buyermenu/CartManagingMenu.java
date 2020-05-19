@@ -7,7 +7,7 @@ import view.bagheri.ProductMenu;
 import view.hatami.ManagingMenu;
 
 public class CartManagingMenu extends ManagingMenu {
-    private static CartManagingMenu instance = new CartManagingMenu();
+    private static final CartManagingMenu instance = new CartManagingMenu();
 
     private CartManagingMenu() {
         super("cart managing page");
@@ -71,6 +71,15 @@ public class CartManagingMenu extends ManagingMenu {
     protected void showHelp() {
         super.showHelp();
         System.out.println();
+    }
+
+    @Override
+    public void execute() {
+        if (!UserController.isBuyerLoggedIn()) {
+            back();
+            return;
+        }
+        super.execute();
     }
 
     @Override

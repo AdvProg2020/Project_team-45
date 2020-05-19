@@ -2,6 +2,7 @@ package view.hatami;
 
 import controller.RequestController;
 import controller.managers.Printer;
+import controller.userControllers.UserController;
 import model.Market;
 import model.request.Request;
 import view.bagheri.Panel;
@@ -33,6 +34,16 @@ public class RequestsManagingMenu extends ManagingMenu {
         };
     }
 
+    @Override
+    public void execute() {
+        if (!UserController.isAdminLoggedIn()) {
+            back();
+            return;
+        }
+        super.execute();
+    }
+
+    @Override
     protected void showHelp() {
         super.showHelp();
     }

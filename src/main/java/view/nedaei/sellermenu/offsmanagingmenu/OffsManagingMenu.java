@@ -2,6 +2,7 @@ package view.nedaei.sellermenu.offsmanagingmenu;
 
 import controller.OffController;
 import controller.userControllers.SellerController;
+import controller.userControllers.UserController;
 import view.bagheri.Panel;
 import view.hatami.ManagingMenu;
 
@@ -33,6 +34,15 @@ public class OffsManagingMenu extends ManagingMenu {
             }
 
         };
+    }
+
+    @Override
+    public void execute() {
+        if (!UserController.isSellerLoggedIn()) {
+            back();
+            return;
+        }
+        super.execute();
     }
 
     @Override

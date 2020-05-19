@@ -13,6 +13,7 @@ import model.user.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class ProductController implements Deleter {
     private static final ProductController instance = new ProductController();
@@ -57,15 +58,15 @@ public class ProductController implements Deleter {
     public void getProductBuyers(Product product) {
     }
 
-    public HashMap<String, String> getProductDigestInformation() {
+    public LinkedHashMap<String, String> getProductDigestInformation() {
         return activeProduct.getDigestInformation();
     }
 
-    public HashMap<String, String> getProductAttributes() {
+    public LinkedHashMap<String, String> getProductAttributes() {
         return activeProduct.getAttributes();
     }
 
-    public HashMap<String, String> getProductAttributesById(String productId) {
+    public LinkedHashMap<String, String> getProductAttributesById(String productId) {
         Product product = CategoryController.getInstance().getActiveCategoryProduct(productId);
         if (product == null)
             return null;

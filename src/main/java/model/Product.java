@@ -4,10 +4,7 @@ import model.category.FinalCategory;
 import model.user.Buyer;
 import model.user.Seller;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Product {
     private static Integer newProductId = 1;
@@ -20,7 +17,7 @@ public class Product {
     private ProductSellInfo defaultSellInfo;
     private int minimumPrice;   // minimum price should be updated
     private FinalCategory category;
-    private final HashMap<String, String> categoryFeatures;
+    private final LinkedHashMap<String, String> categoryFeatures;
     private String description;
     private float averageScore;
     private final ArrayList<Comment> allComments;
@@ -36,7 +33,7 @@ public class Product {
         this.name = name;
         this.productionDate = new Date();
         this.category = category;
-        this.categoryFeatures = new HashMap<>();
+        this.categoryFeatures = new LinkedHashMap<>();
         this.description = description;
         this.allComments = new ArrayList<>();
         this.approvedComments = new ArrayList<>();
@@ -97,7 +94,7 @@ public class Product {
         return category;
     }
 
-    public HashMap<String, String> getCategoryFeatures() {
+    public LinkedHashMap<String, String> getCategoryFeatures() {
         return categoryFeatures;
     }
 
@@ -225,8 +222,8 @@ public class Product {
     }
 
 
-    private HashMap<String, String> getGeneralFeatures() {
-        HashMap<String, String> generalFeatures = new HashMap<>();
+    private LinkedHashMap<String, String> getGeneralFeatures() {
+        LinkedHashMap<String, String> generalFeatures = new LinkedHashMap<>();
         generalFeatures.put("name", this.name);
         generalFeatures.put("description", this.description);
         generalFeatures.put("price", String.valueOf(this.minimumPrice));
@@ -234,8 +231,8 @@ public class Product {
         return generalFeatures;
     }
 
-    public HashMap<String, String> getDigestInformation() {
-        HashMap<String, String> digestInformation = new HashMap<>();
+    public LinkedHashMap<String, String> getDigestInformation() {
+        LinkedHashMap<String, String> digestInformation = new LinkedHashMap<>();
         digestInformation.putAll(getGeneralFeatures());
         digestInformation.put("category", this.category.getName());
         for (Seller seller : sellersList.keySet()) {
@@ -244,8 +241,8 @@ public class Product {
         return digestInformation;
     }
 
-    public HashMap<String,String> getAttributes(){
-        HashMap<String, String> attributes = new HashMap<>();
+    public LinkedHashMap<String,String> getAttributes(){
+        LinkedHashMap<String, String> attributes = new LinkedHashMap<>();
         attributes.putAll(getGeneralFeatures());
         attributes.putAll(categoryFeatures);
         return attributes;

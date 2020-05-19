@@ -7,6 +7,7 @@ import model.category.FinalCategory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class FilteringController {
     private static final FilteringController instance = new FilteringController();
@@ -37,7 +38,7 @@ public class FilteringController {
         return availableFilters;
     }
 
-    public HashMap<String, String> getCurrentFilters() {
+    public LinkedHashMap<String, String> getCurrentFilters() {
         return productFilters.getCurrentFilters();
     }
 

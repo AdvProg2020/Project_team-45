@@ -2,7 +2,7 @@ package view.bagheri;
 
 import controller.ProductController;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ProductMenu extends Menu {
@@ -42,7 +42,7 @@ public class ProductMenu extends Menu {
 
             @Override
             protected void show() {
-                HashMap<String, String> productDigestInformation = productController.getProductDigestInformation();
+                LinkedHashMap<String, String> productDigestInformation = productController.getProductDigestInformation();
                 for (Map.Entry<String, String> information : productDigestInformation.entrySet()) {
                     if (information.getValue() != null)
                         System.out.println(information.getKey() + ": " + information.getValue());
@@ -61,7 +61,7 @@ public class ProductMenu extends Menu {
         return new Panel("showProductAttributesPanel") {
             @Override
             public void execute() {
-                HashMap<String, String> productAttributes = productController.getProductAttributes();
+                LinkedHashMap<String, String> productAttributes = productController.getProductAttributes();
                 for (Map.Entry<String, String> attribute : productAttributes.entrySet()) {
                     if (attribute.getValue() != null)
                         System.out.println(attribute.getKey() + ": " + attribute.getValue());
@@ -74,11 +74,11 @@ public class ProductMenu extends Menu {
         return new Panel("compareProductsPanel") {
             @Override
             public void execute() {
-                HashMap<String, String> secondProductAttributes = productController.getProductAttributesById(matcher.group(1));
+                LinkedHashMap<String, String> secondProductAttributes = productController.getProductAttributesById(matcher.group(1));
                 if (secondProductAttributes == null) {
                     System.out.println("It is not possible to compare these two products!");
                 } else {
-                    HashMap<String, String> firstProductAttributes = productController.getProductAttributes();
+                    LinkedHashMap<String, String> firstProductAttributes = productController.getProductAttributes();
                     // TODO : bagheri
                 }
             }

@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ProductFilters {
@@ -68,8 +69,8 @@ public class ProductFilters {
 //        return minimumSeen;
 //    }
 
-    public HashMap<String, String> getCurrentFilters() {
-        HashMap<String, String> currentFilters = new HashMap<>();
+    public LinkedHashMap<String, String> getCurrentFilters() {
+        LinkedHashMap<String, String> currentFilters = new LinkedHashMap<>();
         for (String companyName : companyNameList) {
             currentFilters.put("companyName", companyName);
         }
@@ -161,7 +162,7 @@ public class ProductFilters {
         if (minimumSeen != 0 && product.getSeen() < minimumSeen)
             return false;
         if (!featuresAndAmounts.isEmpty()) {
-            HashMap<String, String> productFeatures = product.getCategoryFeatures();
+            LinkedHashMap<String, String> productFeatures = product.getCategoryFeatures();
             for (Map.Entry<String, ArrayList<String>> featureAndAmounts : featuresAndAmounts.entrySet()) {
                 String productFeatureValue = productFeatures.get(featureAndAmounts.getKey());
                 if (!featureAndAmounts.getValue().contains(productFeatureValue))

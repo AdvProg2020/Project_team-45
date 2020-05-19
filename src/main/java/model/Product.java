@@ -39,6 +39,7 @@ public class Product {
         this.description = description;
         this.allComments = new ArrayList<>();
         this.approvedComments = new ArrayList<>();
+        this.sellersList = new HashMap<>();
         this.rates = new ArrayList<>();
     }
 
@@ -184,12 +185,12 @@ public class Product {
 
     }
 
-    public void updateAverageScoreAfterNewRate() {
+    public void updateAverageScoreAfterNewRate(int newRate) {
 
     }
 
     public void updateAverageScoreAfterEditingRate(int oldRate, int newRate) {
-        this.averageScore += (newRate - oldRate) / rates.size();
+        this.averageScore += ((float)(newRate - oldRate)) / rates.size();
     }
 
 

@@ -90,6 +90,7 @@ public class SellerMenu extends UserMenu {
     public void execute() {
         if (!UserController.isSellerLoggedIn()) {
             back();
+            return;
         }
         super.execute();
     }

@@ -24,6 +24,7 @@ public class AdminMenu extends UserMenu {
     public void execute() {
         if (!UserController.isAdminLoggedIn()) {
             back();
+            return;
         }
         super.execute();
     }

@@ -49,6 +49,7 @@ public class BuyerMenu extends UserMenu {
     public void execute() {
         if (!UserController.isBuyerLoggedIn()) {
             back();
+            return;
         }
         super.execute();
     }

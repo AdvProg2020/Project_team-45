@@ -10,34 +10,19 @@ import java.util.Map;
 public abstract class Menu extends UIPage {
     protected HashMap<String, UIPage> submenus;
     protected Menu parent;
+    protected boolean needBeLogin;
 
     protected Menu(String name) {
         super(name);
         this.parent = null;
         this.submenus = new HashMap<>();
         submenus.put("login", Login_RegisterPanel.getInstance());
-        submenus.put("logout", createLogoutPanel());
         submenus.put("view cart", CartManagingMenu.getInstance());
         submenus.put("help", createHelpPanel());
     }
 
     public Menu() {
         super("");
-    }
-
-    private Panel createLogoutPanel() {
-        return new Panel("logoutPane") {
-            @Override
-            public void execute() {
-                UserController userController = UserController.getInstance();
-                if (userController.logout()) {
-                    MainMenu.getInstance().updateSubmenus();
-                    System.out.println("You logout successfully");
-                } else {
-                    System.out.println("You are not logged in");
-                }
-            }
-        };
     }
 
     private Panel createHelpPanel() {
@@ -51,7 +36,6 @@ public abstract class Menu extends UIPage {
 
     @Override
     public void execute() {
-//        checkLogin();
         show();
         String input;
         while (!(input = scanner.nextLine()).equals("back")) {
@@ -65,7 +49,11 @@ public abstract class Menu extends UIPage {
                     }
                 }
                 nextUIPage.execute();
-            } else if(input.equals("exit")) {
+            } else if (input.equals("logout")) {
+                if (logout() && needBeLogin)
+                    return;
+            }
+            else if(input.equals("exit")) {
                 MenuManagement.exit();
                 return;
             }
@@ -87,6 +75,17 @@ public abstract class Menu extends UIPage {
 
     protected void back() {
         MenuManagement.back();
+    }
+
+    private boolean logout() {
+        UserController userController = UserController.getInstance();
+        if (userController.logout()) {
+            MainMenu.getInstance().updateSubmenus();
+            System.out.println("You logout successfully");
+            return true;
+        }
+        System.out.println("You are not logged in");
+        return false;
     }
 
     @Override

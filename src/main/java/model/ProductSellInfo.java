@@ -82,12 +82,7 @@ public class ProductSellInfo {
 
     @Override
     public ProductSellInfo clone() {
-        try {
-            return (ProductSellInfo) super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new ProductSellInfo(this.product, this.seller);
     }
 
     public void removeProduct() {

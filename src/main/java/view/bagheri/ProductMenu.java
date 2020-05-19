@@ -87,8 +87,11 @@ public class ProductMenu extends Menu {
 
     @Override
     protected boolean check() {
-        if (productController.setActiveProductBYProductId(matcher.group(1)))
+        if (matcher.group().startsWith("view") && productController.setActiveProductBYProductIdForCart(matcher.group(1))) {
             return true;
+        } else if (productController.setActiveProductBYProductIdForCategory(matcher.group(1))) {
+            return true;
+        }
         System.out.println("There is no product with this Id in this category!");
         return false;
     }

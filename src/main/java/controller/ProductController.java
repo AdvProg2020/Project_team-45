@@ -1,6 +1,7 @@
 package controller;
 
 import controller.managers.Deleter;
+import controller.userControllers.BuyerController;
 import controller.userControllers.UserController;
 import model.Comment;
 import model.Market;
@@ -31,17 +32,32 @@ public class ProductController implements Deleter {
 //        return null;
 //    }
 
-    public boolean setActiveProductBYProductId(String productId) {
+    public boolean setActiveProductBYProductIdForCategory(String productId) {
         ArrayList<Product> productsList = CategoryController.getInstance().getActiveCategoryProductsList();
         for (Product product : productsList) {
             if (product.getProductId().equals(productId)) {
-                activeProduct = product;
-                activeProduct.increaseSeen();
-                activeProductSellInfo = activeProduct.getDefaultSellInfo();
+                setActiveProduct(product);
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean setActiveProductBYProductIdForCart(String productId) {
+        ArrayList<Product> productsList = BuyerController.getInstance().getBuyer().getCart().getCartProducts();
+        for (Product product : productsList) {
+            if (product.getProductId().equals(productId)) {
+                setActiveProduct(product);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void setActiveProduct(Product product) {
+        activeProduct = product;
+        activeProduct.increaseSeen();
+        activeProductSellInfo = activeProduct.getDefaultSellInfo();
     }
 
     public void getProductBuyers(Product product) {

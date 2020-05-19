@@ -55,7 +55,7 @@ public class InputValidator {
         return new InputValidator("\\d{5,12}", "5-12 numbers");
     }
     public static InputValidator getDateValidator(){
-        return new InputValidator("([0][1-9]|[1-2][0-9]|[3][01])/([0][1-9]|[1][012])/(19[5-9][0-9])|(20\\d\\d)", "DD/MM/YYYY");
+        return new InputValidator("((0[1-9])|([12]\\d)|(3\\d))\\/((0[1-9])|(1[012]))\\/(((19)|(20))\\d\\d)", "DD/MM/YYYY");
     }
     public static InputValidator getPercentageValidator(){
         return new InputValidator("[0][1-9]|[1-9][0-9]", "1-99 digit");

@@ -119,12 +119,17 @@ public abstract class ManagingMenu extends Menu {
                     System.out.println("wrong id");
                     return;
                 }
+                System.out.println("type 'CANCEL' to terminate this panel");
                 HashMap<String, String> changedFields = new HashMap<>();
                 InputValidator validator;
                 String input;
                 show();
                 while (true) {
                     input = scanner.nextLine();
+                    if (input.equals("CANCEL")){
+                        System.out.println("cancelled");
+                        return;
+                    }
                     Matcher inputMatcher = validEditPattern.matcher(input);
                     input = input.trim().toLowerCase();
                     if (!inputMatcher.matches()) {
@@ -184,12 +189,17 @@ public abstract class ManagingMenu extends Menu {
             public void execute() {
                 HashMap<String, String> filledFields = new HashMap<>();
                 InputValidator validator;
+                System.out.println("type 'CANCEL' to terminate this panel");
                 String input;
                 for (String fieldName : necessaryFieldsToGet.keySet()) {
                     validator = necessaryFieldsToGet.get(fieldName);
                     while (true) {
                         System.out.println(fieldName + ": (" + validator.getFormatToShow() + ")");
                         input = scanner.nextLine();
+                        if (input.equals("CANCEL")){
+                            System.out.println("cancelled");
+                            return;
+                        }
                         if (!validator.checkInput(input))
                             System.out.println("invalid format");
                         else

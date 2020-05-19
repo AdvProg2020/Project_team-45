@@ -34,7 +34,7 @@ public abstract class MenuManagement {
 
     public static void run() {
         UIPage.setScanner(new Scanner(System.in));
-        if (!Market.getInstance().doesHaveAdmin()) {
+        while (Market.getInstance().getAllUsers().isEmpty()) {
             runStartingPanel();
             Market.getInstance().setHasAdmin();
         }

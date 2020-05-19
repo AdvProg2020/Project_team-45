@@ -115,6 +115,7 @@ public abstract class ManagingMenu extends Menu {
 
             @Override
             public void execute() {
+                editingObject = editor.getItemById(matcher.group(1));
                 if (editingObject == null){
                     System.out.println("wrong id");
                     return;
@@ -172,7 +173,7 @@ public abstract class ManagingMenu extends Menu {
             public Panel setUp(Editor editor) {
                 this.editor = editor;
                 availableFields = editor.getAvailableFieldsToEdit();
-                editingObject = editor.getItemById(matcher.group(1));
+
                 return this;
             }
         }.setUp(editor);

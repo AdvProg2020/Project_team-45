@@ -11,7 +11,7 @@ public class AdminMenu extends UserMenu {
         submenus.put("manage users", new UsersManagingMenu());
         submenus.put("manage all products", new ProductsManagingMenuForAdmin());
         submenus.put("create discount code", ManagingMenu.createItemCreatorPanel("create discount code", CodedDiscountController.getInstance()));
-        submenus.put("view discount code", new DiscountCodesManagingMenu());
+        submenus.put("view discount codes", new DiscountCodesManagingMenu());
         submenus.put("manage requests", new RequestsManagingMenu());
         submenus.put("manage categories", new CategoriesManagingMenu());
     }

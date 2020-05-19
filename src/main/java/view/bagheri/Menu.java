@@ -21,10 +21,6 @@ public abstract class Menu extends UIPage {
         submenus.put("help", createHelpPanel());
     }
 
-    public Menu() {
-        super("");
-    }
-
     private Panel createHelpPanel() {
         return new Panel("help") {
             @Override

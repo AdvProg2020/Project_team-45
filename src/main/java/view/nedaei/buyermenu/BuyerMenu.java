@@ -1,6 +1,7 @@
 package view.nedaei.buyermenu;
 
 import controller.userControllers.BuyerController;
+import controller.userControllers.UserController;
 import view.bagheri.Panel;
 import view.nedaei.UserMenu;
 
@@ -42,6 +43,14 @@ public class BuyerMenu extends UserMenu {
             }
 
         };
+    }
+
+    @Override
+    public void execute() {
+        if (!UserController.isBuyerLoggedIn()) {
+            back();
+        }
+        super.execute();
     }
 
     @Override

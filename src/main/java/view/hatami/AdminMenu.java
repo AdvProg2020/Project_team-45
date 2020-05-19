@@ -1,6 +1,7 @@
 package view.hatami;
 
 import controller.CodedDiscountController;
+import controller.userControllers.UserController;
 import view.nedaei.UserMenu;
 
 public class AdminMenu extends UserMenu {
@@ -19,6 +20,15 @@ public class AdminMenu extends UserMenu {
         return instance;
     }
 
+    @Override
+    public void execute() {
+        if (!UserController.isAdminLoggedIn()) {
+            back();
+        }
+        super.execute();
+    }
+
+    @Override
     protected void showHelp() {
         super.showHelp();
     }

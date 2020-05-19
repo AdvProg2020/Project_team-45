@@ -17,10 +17,7 @@ public abstract class ManagingMenu extends Menu {
 
     protected ManagingMenu(String name) {
         super(name);
-    }
-
-    public ManagingMenu() {
-
+        needBeLogin = true;
     }
 
     protected static void displayAllItemsInPanel(String panelName, Printer printer) {

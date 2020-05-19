@@ -41,6 +41,18 @@ public class UserController {
         return loggedIn;
     }
 
+    public static boolean isBuyerLoggedIn() {
+        return loggedIn && activeUser.getRole().equals("buyer");
+    }
+
+    public static boolean isSellerLoggedIn() {
+        return loggedIn && activeUser.getRole().equals("seller");
+    }
+
+    public static boolean isAdminLoggedIn() {
+        return loggedIn && activeUser.getRole().equals("admin");
+    }
+
     public static ArrayList<String> getPersonalInfoFieldsToEdit() {
         return personalInfoFieldsToEdit;
     }

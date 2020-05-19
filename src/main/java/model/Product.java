@@ -79,7 +79,8 @@ public class Product {
     }
 
     public ArrayList<ProductSellInfo> getSellInfosList() {
-        return (ArrayList<ProductSellInfo>) sellersList.values();
+        ArrayList<ProductSellInfo> result = new ArrayList<>(sellersList.values());
+        return result;
     }
 
     public HashMap<Seller, ProductSellInfo> getSellersList() {

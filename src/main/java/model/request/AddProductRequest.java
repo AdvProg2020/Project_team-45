@@ -1,7 +1,6 @@
 package model.request;
 
 import model.Market;
-import model.Off;
 import model.Product;
 import model.ProductSellInfo;
 import model.category.Category;
@@ -11,8 +10,8 @@ import model.user.Seller;
 import java.util.HashMap;
 
 public class AddProductRequest extends Request {
-    private Seller seller;
-    private String mode;
+    private final Seller seller;
+    private final String mode;
     private Product product;
 
     public AddProductRequest(String mode, Seller seller, HashMap<String, String> fieldsAndValues) {
@@ -25,9 +24,6 @@ public class AddProductRequest extends Request {
     public void apply() {
         if (mode.equalsIgnoreCase("existing")) {
             product = Market.getInstance().getProductById(fieldsAndValues.get("productId"));
-            if (product == null) {
-                return;
-            }
         } else if (mode.equalsIgnoreCase("new")){
             Category category = Market.getInstance().getCategoryByName(fieldsAndValues.get("categoryName"));
             if (category == null || !category.getType().equalsIgnoreCase("FinalCategory")) {
@@ -45,13 +41,7 @@ public class AddProductRequest extends Request {
             productSellInfo.setPrice(Integer.parseInt(fieldsAndValues.get("price")));
         } if (fieldsAndValues.containsKey("stock")) {
             productSellInfo.setStock(Integer.parseInt(fieldsAndValues.get("stock")));
-        } if (fieldsAndValues.containsKey("offId('-' for none)")) {
-            Off off = Market.getInstance().getOffById(fieldsAndValues.get("offId"));
-            if (off != null) {
-                productSellInfo.setOff(off);
-            }
         }
-
         seller.getAvailableProducts().put(product, productSellInfo);
     }
 

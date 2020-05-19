@@ -92,7 +92,9 @@ public abstract class ManagingMenu extends Menu {
             public void execute() {
                 try {
                     if (this.deleter.deleteItemById(matcher.group(1)))
-                        System.out.println(matcher.group(1) + " deleted successfully!");
+                        if (deleter.justRequests())
+                            System.out.println("deleting request sent");
+                        else System.out.println(matcher.group(1) + " deleted successfully!");
                     else
                         System.out.println("wrong Id");
                 } catch (Exception e) {
@@ -112,7 +114,7 @@ public abstract class ManagingMenu extends Menu {
             private Editor editor;
             private Object editingObject;
             private HashMap<String, InputValidator> availableFields;
-            private Pattern validEditPattern = Pattern.compile("^edit (//S+) to (//S+)$");
+            private final Pattern validEditPattern = Pattern.compile("^edit (//S+) to (//S+)$");
 
             @Override
             public void execute() {

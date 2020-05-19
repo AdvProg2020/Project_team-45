@@ -22,8 +22,8 @@ public class SellerController extends UserController implements Creator {
     private static final SellerController instance = new SellerController();
 
     private final ArrayList<String> productAvailableFieldsToEdit;
-    private final ArrayList<String> existingProductFieldsToCreate;
-    private final ArrayList<String> newProductFieldsToCreate;
+    private final LinkedHashMap<String, InputValidator> existingProductFieldsToCreate;
+    private final LinkedHashMap<String, InputValidator> newProductFieldsToCreate;
     private final ArrayList<String> offAvailableFieldsToEdit;
     private final ArrayList<String> offFieldsToCreate;
 
@@ -31,19 +31,31 @@ public class SellerController extends UserController implements Creator {
         super();
         this.productAvailableFieldsToEdit = new ArrayList<>();
         this.productAvailableFieldsToEdit.addAll(Arrays.asList("price", "stock", "offId"));
-
-        this.existingProductFieldsToCreate = new ArrayList<>();
-        this.existingProductFieldsToCreate.addAll(Arrays.asList("productId", "price", "stock", "offId('-' for none)"));
-        this.newProductFieldsToCreate = new ArrayList<>();
-        this.newProductFieldsToCreate.addAll(Arrays.asList("name", "categoryName", "description", "price", "stock"
-                , "offId('-' for none)"));
-
+        this.existingProductFieldsToCreate = makeExistingFieldsToCreate();
+        this.newProductFieldsToCreate = makeNewProductFieldsToCreate();
         this.offAvailableFieldsToEdit = new ArrayList<>();
         this.offAvailableFieldsToEdit.addAll(Arrays.asList("startTime", "endTime", "discountAmount"));
 
         this.offFieldsToCreate = new ArrayList<>();
         this.offFieldsToCreate.addAll(Arrays.asList("productIds(separated by ',')", "startTime", "endTime"
                 , "discountAmount"));
+    }
+
+    private LinkedHashMap<String, InputValidator> makeNewProductFieldsToCreate() {
+        LinkedHashMap<String, InputValidator> fields = new LinkedHashMap<>();
+        fields.put("name", InputValidator.getSimpleTextValidator());
+        fields.put("categoryName", InputValidator.getFinalCategoryValidator());
+        fields.put("description", InputValidator.getSimpleTextValidator());
+        fields.put("price", InputValidator.getPriceValidator());
+        fields.put("stock", InputValidator.getPriceValidator());
+        return fields;
+    }
+
+    private LinkedHashMap<String, InputValidator> makeExistingFieldsToCreate() {
+        LinkedHashMap<String, InputValidator> fields = new LinkedHashMap<>();
+        fields.put("price", InputValidator.getPriceValidator());
+        fields.put("stock", InputValidator.getPriceValidator());
+        return fields;
     }
 
     public static SellerController getInstance() {
@@ -132,11 +144,11 @@ public class SellerController extends UserController implements Creator {
 
     // add product panel
 
-    public ArrayList<String> getExistingProductFieldsToCreate() {
+    public LinkedHashMap<String, InputValidator> getExistingProductFieldsToCreate() {
         return existingProductFieldsToCreate;
     }
 
-    public ArrayList<String> getNewProductFieldsToCreate() {
+    public LinkedHashMap<String, InputValidator> getNewProductFieldsToCreate() {
         return newProductFieldsToCreate;
     }
 

@@ -76,14 +76,19 @@ public class CategoryController implements Editor, Creator {
         return true;
     }
 
+    @Override
+    public boolean justRequests() {
+        return false;
+    }
+
     public String getAllInListAsString() {
         ArrayList<Category> allCategories = market.getAllCategories();
-        StringBuilder listString = new StringBuilder("name,parent\n");
+        StringBuilder listString = new StringBuilder("name,parent,is final?\n");
         String categoryInfo;
         for (Category category : allCategories) {
             if (category.isMain())
-                 categoryInfo = category.getName() + "," + "IS MAIN" + "\n";
-            else categoryInfo = category.getName() + "," + category.getParent().getName() + "\n";
+                 categoryInfo = category.getName() + "," + "IS MAIN" + "," + category.isFinal() + "\n";
+            else categoryInfo = category.getName() + "," + category.getParent().getName() + "," + category.isFinal() + "\n";
             listString.append(categoryInfo);
         }
         return listString.toString();
@@ -243,8 +248,6 @@ public class CategoryController implements Editor, Creator {
 
     @Override
     public Category getItemById(String Id) {
-        if (Id.equals("NULL"))
-            return Category.getEmptyCategory();
         return market.getCategoryByName(Id);
     }
 }

@@ -7,7 +7,7 @@ import view.bagheri.ProductMenu;
 import view.hatami.ManagingMenu;
 
 public class CartManagingMenu extends ManagingMenu {
-    private static CartManagingMenu instance;
+    private static CartManagingMenu instance = new CartManagingMenu();
 
     private CartManagingMenu() {
         super("cart managing page");
@@ -20,9 +20,6 @@ public class CartManagingMenu extends ManagingMenu {
     }
 
     public static CartManagingMenu getInstance() {
-        if (instance == null) {
-            instance = new CartManagingMenu();
-        }
         return instance;
     }
 

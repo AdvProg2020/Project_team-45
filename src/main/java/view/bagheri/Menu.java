@@ -47,7 +47,7 @@ public abstract class Menu extends UIPage {
                 nextUIPage.execute();
             } else if (input.equals("logout")) {
                 if (logout() && needBeLogin)
-                    return;
+                    break;
             }
             else if(input.equals("exit")) {
                 MenuManagement.exit();

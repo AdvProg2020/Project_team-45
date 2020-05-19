@@ -15,7 +15,7 @@ public class Product {
     private Company company;
     private final Date productionDate;
     private String productStatus;
-    private HashMap<Seller, ProductSellInfo> sellersList;
+    private final HashMap<Seller, ProductSellInfo> sellersList;
     private ProductSellInfo defaultSellInfo;
     private int minimumPrice;   // minimum price should be updated
     private FinalCategory category;
@@ -205,7 +205,8 @@ public class Product {
     }
 
     public void updateAverageScoreAfterNewRate(int newRate) {
-
+        int ratesSize = rates.size();
+        this.averageScore = (this.averageScore * ratesSize + newRate) / ratesSize;
     }
 
     public void updateAverageScoreAfterEditingRate(int oldRate, int newRate) {

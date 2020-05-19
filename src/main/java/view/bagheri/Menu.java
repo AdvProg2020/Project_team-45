@@ -11,7 +11,6 @@ public abstract class Menu extends UIPage {
     protected HashMap<String, UIPage> submenus;
     protected Menu parent;
 
-
     protected Menu(String name) {
         super(name);
         this.parent = null;
@@ -79,7 +78,7 @@ public abstract class Menu extends UIPage {
                 System.out.println("invalid command!");
             }
         }
-        MenuManagement.back();
+        back();
     }
 
     private UIPage getUIPageByCommand(String input) {
@@ -89,6 +88,10 @@ public abstract class Menu extends UIPage {
                 return submenu.getValue();
         }
         return null;
+    }
+
+    protected void back() {
+        MenuManagement.back();
     }
 
     @Override

@@ -111,7 +111,7 @@ public abstract class ManagingMenu extends Menu {
             private Editor editor;
             private Object editingObject;
             private HashMap<String, InputValidator> availableFields;
-            private final Pattern validEditPattern = Pattern.compile("^edit (//S+) to (//S+)$");
+            private final Pattern validEditPattern = Pattern.compile("^edit (.+) to (\\S+)$");
 
             @Override
             public void execute() {
@@ -144,9 +144,9 @@ public abstract class ManagingMenu extends Menu {
                         if (!availableFields.containsKey(inputMatcher.group(1)))
                             System.out.println("invalid field name");
                         else {
-                            validator = availableFields.get(matcher.group(1));
-                            if (validator.checkInput(matcher.group(2)))
-                                changedFields.put(matcher.group(1), matcher.group(2));
+                            validator = availableFields.get(inputMatcher.group(1));
+                            if (validator.checkInput(inputMatcher.group(2)))
+                                changedFields.put(inputMatcher.group(1), inputMatcher.group(2));
                             else
                                 System.out.println("invalid format");
                         }

@@ -1,7 +1,10 @@
 package model.log;
 
+import controller.userControllers.BuyerController;
 import model.CodedDiscount;
+import model.Market;
 import model.ProductSellInfo;
+import model.user.Buyer;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,8 +28,8 @@ public class Log {
         this.date = new Date();
         this.sellingProducts = sellingProducts;
         this.buyerUsername = buyerUsername;
-        this.finalPrice = calculateFinalPrice();
-        this.buyerFee = calculateBuyerFee();
+        this.finalPrice = getFinalPrice();
+        this.buyerFee = getFinalPrice();
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
@@ -44,7 +47,7 @@ public class Log {
     }
 
     public int getFinalPrice() {
-        calculateFinalPrice();
+        //calculateFinalPrice();
         return finalPrice;
     }
 
@@ -69,19 +72,15 @@ public class Log {
         return (Log) super.clone();
     }
 
-    public int calculateFinalPrice(){
+    public void calculateFinalPrice(){
         int result = 0;
         for (ProductSellInfo sellInfo : sellingProducts) {
-            result += sellInfo.getFinalPrice();
+            System.out.println("########################" + ((Buyer) BuyerController.getInstance().getBuyer()).getCart().getCartProducts());
+            result += sellInfo.getFinalPrice() * BuyerController.getInstance().getBuyer().getCart()
+                    .getProductAmountById(sellInfo.getProduct().getProductId());
         }
-        return result;
-    }
-
-    private int calculateBuyerFee() {
-        if (appliedDiscount == null) {
-            return finalPrice;
-        }
-        return (int) (finalPrice * (100 - appliedDiscount.getPercentage()) / 100.0);
+        result = (100 - getAppliedDiscountPercentage()) * result / 100;
+        finalPrice = result;
     }
 
     public String getBuyerUsername() {
@@ -97,6 +96,8 @@ public class Log {
 
     public void setAppliedDiscount(CodedDiscount appliedDiscount) {
         this.appliedDiscount = appliedDiscount;
+        calculateFinalPrice();
+        finalPrice = getFinalPrice();
     }
 
     public void sendOrder(){

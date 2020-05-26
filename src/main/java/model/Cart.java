@@ -35,6 +35,7 @@ public class Cart {
                 return productInfo.getAmount();
             }
         }
+        //System.out.println(products.size());
         return 0;
     }
 
@@ -49,6 +50,7 @@ public class Cart {
     public int getTotalPrice() {
         int result = 0;
         for (ProductInfo productInfo : products) {
+
             result += productInfo.getProductSellInfo().getFinalPrice() * productInfo.getAmount();
         }
         return result;
@@ -72,6 +74,7 @@ public class Cart {
 
     public void addProduct(Product product, ProductSellInfo productSellInfo) {
         products.add(new ProductInfo(product, productSellInfo));
+        //System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^" + products.size());
     }
 
     public void removeProduct(Product product, ProductSellInfo productSellInfo) {

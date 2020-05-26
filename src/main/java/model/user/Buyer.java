@@ -100,7 +100,8 @@ public class Buyer extends User implements CartHolder {
         }
         BuyLog buyLog = new BuyLog(log);
         listOfBuyLogs.add(buyLog);
-        setBalance(getBalance() - getCart().getTotalPrice());
+        //int finalPrice = getCart().getTotalPrice() * (100 - log.getAppliedDiscountPercentage()) / 100;
+        setBalance(getBalance() - log.getFinalPrice());
         cart = new Cart();
     }
 

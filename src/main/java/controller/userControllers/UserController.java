@@ -95,8 +95,6 @@ public class UserController {
         return false;
     }
 
-
-
     public boolean logout() {
         if (loggedIn) {
             loggedIn = false;

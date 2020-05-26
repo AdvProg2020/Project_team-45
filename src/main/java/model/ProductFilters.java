@@ -7,20 +7,20 @@ import java.util.Map;
 
 public class ProductFilters {
     private static final ProductFilters instance = new ProductFilters();
+    private String productName;
     private final ArrayList<String> companyNameList;
     private final ArrayList<String> sellerUsernameList;
-    private final ArrayList<String> categoryName;
     private final HashMap<String, ArrayList<String>> featuresAndAmounts;
     private int minimumPrice;
     private int maximumPrice;
     private int minimumAverageScore;
     private int minimumSellCount;
     private int minimumSeen;
+    private boolean isAvailable;
 
     private ProductFilters() {
         companyNameList = new ArrayList<>();
         sellerUsernameList = new ArrayList<>();
-        categoryName = new ArrayList<>();
         featuresAndAmounts = new HashMap<>();
         minimumPrice = 0;
         maximumPrice = 0;
@@ -33,46 +33,16 @@ public class ProductFilters {
         return instance;
     }
 
-//    public ArrayList<String> getCompanyName() {
-//        return companyName;
-//    }
-//
-//    public ArrayList<String> getSellerUsername() {
-//        return sellerUsername;
-//    }
-//
-//    public ArrayList<String> getCategoryName() {
-//        return categoryName;
-//    }
-//
-//    public HashMap<String, String> getFeaturesAndAmounts() {
-//        return featuresAndAmounts;
-//    }
-//
-//    public int getMinimumPrice() {
-//        return minimumPrice;
-//    }
-//
-//    public int getMaximumPrice() {
-//        return maximumPrice;
-//    }
-//
-//    public int getMinimumAverageScore() {
-//        return minimumAverageScore;
-//    }
-//
-//    public int getMinimumSellCount() {
-//        return minimumSellCount;
-//    }
-//
-//    public int getMinimumSeen() {
-//        return minimumSeen;
-//    }
-
     public LinkedHashMap<String, String> getCurrentFilters() {
         LinkedHashMap<String, String> currentFilters = new LinkedHashMap<>();
+        if (productName != null) {
+            currentFilters.put("productName", productName);
+        }
         for (String companyName : companyNameList) {
             currentFilters.put("companyName", companyName);
+        }
+        for (String sellerUsername : sellerUsernameList) {
+            currentFilters.put("sellerUsername", sellerUsername);
         }
         if (minimumPrice != 0)
             currentFilters.put("minimumPrice", String.valueOf(minimumPrice));
@@ -84,6 +54,9 @@ public class ProductFilters {
             currentFilters.put("minimumSellCount", String.valueOf(minimumSellCount));
         if (minimumSeen != 0)
             currentFilters.put("minimumSeen", String.valueOf(minimumSeen));
+        if (isAvailable) {
+            currentFilters.put("availability", "available");
+        }
         for (Map.Entry<String, ArrayList<String>> featureAndAmounts : featuresAndAmounts.entrySet()) {
             String feature = featureAndAmounts.getKey();
             for (String featureValue : featureAndAmounts.getValue()) {
@@ -91,6 +64,10 @@ public class ProductFilters {
             }
         }
         return currentFilters;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public void addCompanyName(String companyName) {
@@ -103,6 +80,18 @@ public class ProductFilters {
 
     public void clearCompanyNameList() {
         companyNameList.clear();
+    }
+
+    public void addSellerUsername(String username) {
+        sellerUsernameList.add(username);
+    }
+
+    public boolean removeSellerUsername(String username) {
+        return sellerUsernameList.remove(username);
+    }
+
+    public void clearSellerUsernameList() {
+        sellerUsernameList.clear();
     }
 
     public void setMinimumPrice(int minimumPrice) {
@@ -123,6 +112,14 @@ public class ProductFilters {
 
     public void setMinimumSeen(int minimumSeen) {
         this.minimumSeen = minimumSeen;
+    }
+
+    public void changeIsAvailable(){
+        isAvailable = !isAvailable;
+    }
+
+    public void setIsAvailable(boolean input) {
+        isAvailable = input;
     }
 
     public void addFeatureAndAmount(String feature, String amount) {
@@ -149,8 +146,14 @@ public class ProductFilters {
     }
 
     public boolean checkProductMatchFilter(Product product) {
+        if (product.getName().equals(this.productName)) {
+            return false;
+        }
         if (!companyNameList.isEmpty() && !companyNameList.contains(product.getCompany().getName()))
             return false;
+        if (!sellerUsernameList.isEmpty() && !checkExistSellerForProduct(product)) {
+            return false;
+        }
         if (minimumPrice != 0 && product.getMinimumPrice() < minimumSeen)
             return false;
         if (maximumPrice != 0 && product.getMinimumPrice() < maximumPrice)
@@ -161,6 +164,9 @@ public class ProductFilters {
             return false;
         if (minimumSeen != 0 && product.getSeen() < minimumSeen)
             return false;
+        if (isAvailable && !product.isAvailable()) {
+            return false;
+        }
         if (!featuresAndAmounts.isEmpty()) {
             LinkedHashMap<String, String> productFeatures = product.getCategoryFeatures();
             for (Map.Entry<String, ArrayList<String>> featureAndAmounts : featuresAndAmounts.entrySet()) {
@@ -172,15 +178,25 @@ public class ProductFilters {
         return true;
     }
 
+    private boolean checkExistSellerForProduct(Product product) {
+        for (String sellerUsername : sellerUsernameList) {
+            if (product.getSellerInfoForProductByUsername(sellerUsername) != null) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void clear() {
-        companyNameList.clear();
-        sellerUsernameList.clear();
-        categoryName.clear();
-        featuresAndAmounts.clear();
-        minimumPrice = 0;
-        maximumPrice = 0;
-        minimumAverageScore = 0;
-        minimumSellCount = 0;
-        minimumSeen = 0;
+        this.productName = null;
+        this.companyNameList.clear();
+        this.sellerUsernameList.clear();
+        this.featuresAndAmounts.clear();
+        this.minimumPrice = 0;
+        this.maximumPrice = 0;
+        this.minimumAverageScore = 0;
+        this.minimumSellCount = 0;
+        this.minimumSeen = 0;
+        this.isAvailable = false;
     }
 }

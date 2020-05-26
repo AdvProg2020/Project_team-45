@@ -168,10 +168,6 @@ public class Market {
         return null;
     }
 
-    public ArrayList<Off> filterOffs(OffFilters offFilters) {
-        return null;
-    }
-
     public ArrayList<Off> sortOffs(String attribute) {
         return null;
     }

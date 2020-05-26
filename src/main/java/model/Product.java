@@ -77,8 +77,7 @@ public class Product {
     }
 
     public ArrayList<ProductSellInfo> getSellInfosList() {
-        ArrayList<ProductSellInfo> result = new ArrayList<>(sellersList.values());
-        return result;
+        return new ArrayList<>(sellersList.values());
     }
 
     public HashMap<Seller, ProductSellInfo> getSellersList() {
@@ -212,6 +211,13 @@ public class Product {
         this.averageScore += ((float)(newRate - oldRate)) / rates.size();
     }
 
+    public boolean isAvailable() {
+        for (Map.Entry<Seller, ProductSellInfo> sellerInfo : sellersList.entrySet()) {
+            if (sellerInfo.getValue().getStock() != 0)
+                return true;
+        }
+        return false;
+    }
 
     public boolean isInOff() {
         for (Map.Entry<Seller, ProductSellInfo> sellerInfo : sellersList.entrySet()) {
@@ -220,7 +226,6 @@ public class Product {
         }
         return false;
     }
-
 
     private LinkedHashMap<String, String> getGeneralFeatures() {
         LinkedHashMap<String, String> generalFeatures = new LinkedHashMap<>();

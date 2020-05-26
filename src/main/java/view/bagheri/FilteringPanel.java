@@ -67,7 +67,7 @@ public class FilteringPanel extends Panel {
     }
 
     private void removeFilter(String type, String value) {
-        removeFilter(type, value);
+        filteringController.removeFilter(type, value);
     }
 
     private void removeFilter(String filter) {

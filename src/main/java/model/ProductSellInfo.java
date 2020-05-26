@@ -57,6 +57,7 @@ public class ProductSellInfo {
         if (off.getStartTime().compareTo(currentDate) <= 0 && off.getEndTime().compareTo(currentDate) >= 0) {
             return (int) (price * (100 - off.getDiscountAmount()) / 100.0);
         }
+
         return price;
     }
 

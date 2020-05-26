@@ -50,7 +50,7 @@ public class Cart {
     public int getTotalPrice() {
         int result = 0;
         for (ProductInfo productInfo : products) {
-
+            //System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$" + productInfo.getProductSellInfo().getOff().getOffId());
             result += productInfo.getProductSellInfo().getFinalPrice() * productInfo.getAmount();
         }
         return result;

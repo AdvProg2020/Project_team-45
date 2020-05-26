@@ -12,6 +12,7 @@ public class OffsManagingMenu extends ManagingMenu {
     private OffsManagingMenu() {
         super("offs managing page");
         this.manager = OffController.getInstance();
+        managingObject = "offs";
         this.submenus.put("view (\\w+)", createViewOffByIdPanel());
         this.submenus.put("edit (\\w+)", EditOffPanel.getInstance());
         this.submenus.put("add off", CreateOffPanel.getInstance());
@@ -39,6 +40,7 @@ public class OffsManagingMenu extends ManagingMenu {
     @Override
     public void execute() {
         if (!UserController.isSellerLoggedIn()) {
+            //System.out.println("##########################");
             back();
             return;
         }

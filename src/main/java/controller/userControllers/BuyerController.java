@@ -12,7 +12,7 @@ import model.user.Buyer;
 import model.user.CartHolder;
 import model.user.PersonalInfo;
 import model.user.User;
-import view.hatami.RegisterPanel;
+import view.RegisterPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

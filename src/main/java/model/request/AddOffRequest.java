@@ -34,6 +34,15 @@ public class AddOffRequest extends Request{
 
         Off off = new Off(products, startTime, endTime, discountAmount);
         seller.getListOfOffs().put(off.getOffId(), off);
+        ArrayList<String> productIds = new ArrayList<>();
+        productIds.addAll(Arrays.asList(fieldsAndValues.get("productIds(separated by ',')").split("\\s*,\\s*")));
+        for (String productId : productIds) {
+            Product product = seller.getAvailableProductById(productId);
+            if (product != null) {
+                product.getSellerInfoForProductByUsername(seller.getUsername()).setOff(off);
+            }
+        }
+
         Market.getInstance().getAllOffs().add(off);
     }
 
@@ -54,7 +63,7 @@ public class AddOffRequest extends Request{
 
     private Date extractStartTime() {
         Date startTime;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             startTime = simpleDateFormat.parse(fieldsAndValues.get("startTime"));
         } catch (ParseException parseException) {
@@ -65,9 +74,9 @@ public class AddOffRequest extends Request{
 
     private Date extractEndTime() {
         Date endTime;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
-            endTime = simpleDateFormat.parse(fieldsAndValues.get("startTime"));
+            endTime = simpleDateFormat.parse(fieldsAndValues.get("endTime"));
         } catch (ParseException parseException) {
             return new Date();
         }

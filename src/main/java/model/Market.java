@@ -9,16 +9,14 @@ import java.util.ArrayList;
 
 public class Market {
     private static Market marketInstance;
-    private static ArrayList<String> availableSortsForProducts;
-    private static ArrayList<String> availableSortsForOffs;
-    private final ArrayList<User> allUsers;
+    private final ArrayList<User> allUsers;                 // configure type by Id
     private final ArrayList<CodedDiscount> allCodedDiscounts;
-    private final ArrayList<Category> allCategories;
-    private final ArrayList<Category> mainCategories;
+    private final ArrayList<Category> allCategories;        // configure type by Id
+    private final ArrayList<Category> mainCategories;       // be made from allCategories
     private final ArrayList<Product> allProducts;
     private final ArrayList<Log> allLogs;
     private final ArrayList<Off> allOffs;
-    private final ArrayList<Request> allRequests;
+    private final ArrayList<Request> allRequests;           // configure type by Id
     private boolean hasAdmin;
 
     private Market() {
@@ -36,14 +34,6 @@ public class Market {
         if (marketInstance == null)
             marketInstance = new Market();
         return marketInstance;
-    }
-
-    public static ArrayList<String> getAvailableSortsForProducts() {
-        return availableSortsForProducts;
-    }
-
-    public static ArrayList<String> getAvailableSortsForOffs() {
-        return availableSortsForOffs;
     }
 
     public ArrayList<Product> getAllProducts() {
@@ -230,6 +220,15 @@ public class Market {
 
     public void addRequest(Request request) {
         this.allRequests.add(request);
+    }
+
+    public User getUserById(String id) {
+        for (User user : allUsers) {
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+        return null;
     }
 }
 

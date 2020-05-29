@@ -1,12 +1,21 @@
 package model.user;
 
-public abstract class User {
+import model.Savable;
+
+public abstract class User implements Savable {
+    protected static int newUserId = 1;
+    protected String id;
     protected PersonalInfo personalInfo;
 
     public abstract String getRole();
 
     public User(PersonalInfo personalInfo) {
+        this.id = getRole() + newUserId;
         this.personalInfo = personalInfo;
+    }
+
+    public User(String id) {
+        this.id = id;
     }
 
     public PersonalInfo getPersonalInfo() {
@@ -23,5 +32,9 @@ public abstract class User {
 
     public boolean checkPassword(String password) {
         return this.getPersonalInfo().getPassword().equals(password);
+    }
+
+    public String getId() {
+        return id;
     }
 }

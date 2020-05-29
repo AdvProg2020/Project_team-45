@@ -3,16 +3,17 @@ package model;
 import controller.InputValidator;
 import controller.userControllers.BuyerController;
 import model.user.Buyer;
+import sun.net.util.IPAddressUtil;
 
 import java.util.Date;
 import java.util.HashMap;
 
-public class CodedDiscount {
+public class CodedDiscount implements Savable{
     private String code;
     private Date startDate;
     private Date endDate;
     private int percentage;
-    private final Buyer owner;
+    private Buyer owner;
 
     public CodedDiscount(HashMap<String, String> filledFeatures) {
         this.code = filledFeatures.get("code");
@@ -78,5 +79,23 @@ public class CodedDiscount {
                 ", endDate:" + endDate +
                 ", percentage:" + percentage +
                 ", owner:" + owner.getPersonalInfo().getUsername();
+    }
+
+    @Override
+    public HashMap convertToHashMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("startDate", startDate);
+        result.put("endDate", endDate);
+        result.put("percentage", percentage);
+        result.put("owner", owner.getId());
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap theMap) {
+        startDate = (Date) theMap.get("startDate");
+        endDate = (Date) theMap.get("endDate");
+        percentage = (int) theMap.get("percentage");
+        owner = (Buyer) Market.getInstance().getUserById((String) theMap.get("owner"));
     }
 }

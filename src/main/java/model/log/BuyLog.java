@@ -1,7 +1,14 @@
 package model.log;
 
-public class BuyLog {
+import model.Savable;
+
+import java.util.HashMap;
+
+public class BuyLog implements Savable {
     private Log mainLog;
+
+    public BuyLog() {
+    }
 
     public BuyLog(Log log) {
         this.mainLog = log;
@@ -11,9 +18,14 @@ public class BuyLog {
         return mainLog;
     }
 
-    //    public BuyLog(String logId, Date date, int finalPrice, String address, String sellerUsername) {
-//        super(logId, date, finalPrice, address);
-//        this.sellerUsername = sellerUsername;
-//    }
 
+    @Override
+    public HashMap convertToHashMap() {
+        return null;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap theMap) {
+
+    }
 }

@@ -1,8 +1,10 @@
 package model.user;
 
+import model.Savable;
+
 import java.util.HashMap;
 
-public class PersonalInfo {
+public class PersonalInfo implements Savable {
     private String username;
     private String firstName;
     private String lastName;
@@ -70,5 +72,27 @@ public class PersonalInfo {
                 ", lastName:" + lastName +
                 ", emailAddress:" + emailAddress +
                 ", phoneNumber:" + phoneNumber;
+    }
+
+    @Override
+    public HashMap convertToHashMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("username", username);
+        result.put("firstName", firstName);
+        result.put("lastName", lastName);
+        result.put("emailAddress", emailAddress);
+        result.put("phoneNumber", phoneNumber);
+        result.put("password",  password);
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap theMap) {
+        username = (String) theMap.get("username");
+        firstName = (String) theMap.get("firstName");
+        lastName = (String) theMap.get("lastName");
+        emailAddress = (String) theMap.get("emailAddress");
+        phoneNumber = (String) theMap.get("phoneNumber");
+        password = (String) theMap.get("password");
     }
 }

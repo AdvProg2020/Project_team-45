@@ -33,7 +33,8 @@ public class OffController implements Printer {
     @Override
     public String getAllInListAsString() {
         Seller activeSeller = (Seller) UserController.getActiveUser();
-        ArrayList<Off> sellerOffs = (ArrayList<Off>) activeSeller.getListOfOffs().values();
+        ArrayList<Off> sellerOffs = new ArrayList<>();
+        sellerOffs.addAll(activeSeller.getListOfOffs().values());
         StringBuilder offsListString = new StringBuilder("Id,discount amount\n");
         for (Off off : sellerOffs) {
             offsListString.append(off.getOffId() + "," + off.getDiscountAmount() + "\n");

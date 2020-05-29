@@ -1,12 +1,19 @@
 package model.user;
 
 public abstract class User {
+    protected static int newUserId = 1;
+    protected String id;
     protected PersonalInfo personalInfo;
 
     public abstract String getRole();
 
     public User(PersonalInfo personalInfo) {
+        this.id = getRole() + newUserId;
         this.personalInfo = personalInfo;
+    }
+
+    public User(String id) {
+        this.id = id;
     }
 
     public PersonalInfo getPersonalInfo() {

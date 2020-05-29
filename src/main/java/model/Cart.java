@@ -85,37 +85,38 @@ public class Cart {
 
     }
 
-}
+    class ProductInfo {
+        private Product product;
+        private ProductSellInfo productSellInfo;
+        private int amount;
 
-class ProductInfo {
-    private Product product;
-    private ProductSellInfo productSellInfo;
-    private int amount;
+        public ProductInfo(Product product, ProductSellInfo productSellInfo) {
+            this.product = product;
+            this.productSellInfo = productSellInfo;
+            this.amount = 1;
+        }
 
-    public ProductInfo(Product product, ProductSellInfo productSellInfo) {
-        this.product = product;
-        this.productSellInfo = productSellInfo;
-        this.amount = 1;
-    }
+        public Product getProduct() {
+            return product;
+        }
 
-    public Product getProduct() {
-        return product;
-    }
+        public ProductSellInfo getProductSellInfo() {
+            return productSellInfo;
+        }
 
-    public ProductSellInfo getProductSellInfo() {
-        return productSellInfo;
-    }
+        public int getAmount() {
+            return amount;
+        }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void changeAmount(int amountChange) {
-        amount += amountChange;
-        if (amount < 0) {
-            amount = 0;
+        public void changeAmount(int amountChange) {
+            amount += amountChange;
+            if (amount < 0) {
+                amount = 0;
+            }
         }
     }
+
 }
+
 
 

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Buyer extends User implements CartHolder {
+public class Buyer extends User implements CartHolder, Savable {
     private Cart cart;
     private ArrayList<CodedDiscount> listOfCodedDiscounts;
     private int balance;
@@ -124,5 +124,14 @@ public class Buyer extends User implements CartHolder {
 
     public void addCodedDiscount(CodedDiscount addingDiscount) {
         listOfCodedDiscounts.add(addingDiscount);
+    }
+
+    @Override
+    public HashMap<String, Object> ConvertToHashMap() {
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+
     }
 }

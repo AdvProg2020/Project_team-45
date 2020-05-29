@@ -75,7 +75,7 @@ public class PersonalInfo implements Savable {
     }
 
     @Override
-    public HashMap<String, Object> ConvertToHashMap() {
+    public HashMap convertToHashMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("username", username);
         result.put("firstName", firstName);
@@ -87,7 +87,7 @@ public class PersonalInfo implements Savable {
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+    public void setFieldsFromHashMap(HashMap theMap) {
         username = (String) theMap.get("username");
         firstName = (String) theMap.get("firstName");
         lastName = (String) theMap.get("lastName");

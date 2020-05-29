@@ -2,10 +2,15 @@ package model;
 
 import model.user.Buyer;
 
-public class Rate {
-    private final Buyer buyer;
+import java.util.HashMap;
+
+public class Rate implements Savable{
+    private Buyer buyer;
     private int score;
-    private final String productId;
+    private String productId;
+
+    public Rate() {
+    }
 
     public Rate(Buyer user, int score, String productId) {
         this.buyer = user;
@@ -23,5 +28,15 @@ public class Rate {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    @Override
+    public HashMap convertToHashMap() {
+        return null;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap theMap) {
+
     }
 }

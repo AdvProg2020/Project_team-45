@@ -20,14 +20,14 @@ public class Admin extends User implements Savable {
     }
 
     @Override
-    public HashMap<String, Object> ConvertToHashMap() {
+    public HashMap<String, Object> convertToHashMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("personalInfo", personalInfo.ConvertToHashMap());
+        result.put("personalInfo", personalInfo.convertToHashMap());
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
-        personalInfo.setFieldsFromHashMap((HashMap<String, Object>) theMap.get("personalInfo"));
+    public void setFieldsFromHashMap(HashMap theMap) {
+        personalInfo.setFieldsFromHashMap((HashMap) theMap.get("personalInfo"));
     }
 }

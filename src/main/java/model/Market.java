@@ -225,5 +225,14 @@ public class Market {
     public void addRequest(Request request) {
         this.allRequests.add(request);
     }
+
+    public User getUserById(String id) {
+        for (User user : allUsers) {
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }
 

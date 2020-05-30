@@ -1,4 +1,4 @@
-package view;
+package view.userMenus.adminMenus;
 
 import controller.CategoryController;
 import controller.InputValidator;
@@ -6,6 +6,8 @@ import controller.managers.Creator;
 import controller.managers.Deleter;
 import controller.managers.Editor;
 import controller.userControllers.UserController;
+import view.ManagingMenu;
+import view.Panel;
 
 import java.util.ArrayList;
 

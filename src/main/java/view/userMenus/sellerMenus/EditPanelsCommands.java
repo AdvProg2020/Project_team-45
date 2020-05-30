@@ -1,4 +1,4 @@
-package view.sellermenu;
+package view.userMenus.sellerMenus;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

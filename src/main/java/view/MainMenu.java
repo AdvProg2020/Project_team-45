@@ -1,8 +1,9 @@
 package view;
 
 import controller.userControllers.UserController;
-import view.buyermenu.BuyerMenu;
-import view.sellermenu.SellerMenu;
+import view.userMenus.adminMenus.AdminMenu;
+import view.userMenus.buyerMenus.BuyerMenu;
+import view.userMenus.sellerMenus.SellerMenu;
 
 public class MainMenu extends Menu {
     private static MainMenu instance;

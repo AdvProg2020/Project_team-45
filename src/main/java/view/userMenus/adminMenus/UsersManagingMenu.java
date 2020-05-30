@@ -1,10 +1,11 @@
-package view;
+package view.userMenus.adminMenus;
 
 import controller.managers.Deleter;
 import controller.managers.Printer;
 import controller.userControllers.AdminController;
 import controller.userControllers.AllUsersController;
 import controller.userControllers.UserController;
+import view.ManagingMenu;
 
 public class UsersManagingMenu extends ManagingMenu {
     public UsersManagingMenu() {

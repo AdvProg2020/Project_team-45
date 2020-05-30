@@ -1,4 +1,4 @@
-package view.sellermenu.productsmanagingmenu;
+package view.userMenus.sellerMenus.productsmanagingmenu;
 
 import controller.SellerProductsController;
 import controller.managers.Printer;

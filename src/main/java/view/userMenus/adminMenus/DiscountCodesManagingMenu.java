@@ -1,9 +1,10 @@
-package view;
+package view.userMenus.adminMenus;
 
 import controller.CodedDiscountController;
 import controller.managers.Editor;
 import controller.managers.Printer;
 import controller.userControllers.UserController;
+import view.ManagingMenu;
 
 public class DiscountCodesManagingMenu extends ManagingMenu {
     public DiscountCodesManagingMenu() {

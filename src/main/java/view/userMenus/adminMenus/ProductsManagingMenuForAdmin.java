@@ -1,10 +1,11 @@
-package view;
+package view.userMenus.adminMenus;
 
 import controller.ProductController;
 import controller.managers.Deleter;
 import controller.userControllers.UserController;
+import view.ManagingMenu;
 
-public class ProductsManagingMenuForAdmin extends ManagingMenu{
+public class ProductsManagingMenuForAdmin extends ManagingMenu {
 
     protected ProductsManagingMenuForAdmin() {
         super("manage products");

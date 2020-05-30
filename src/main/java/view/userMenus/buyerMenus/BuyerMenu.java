@@ -1,4 +1,4 @@
-package view.buyermenu;
+package view.userMenus.buyerMenus;
 
 import controller.userControllers.BuyerController;
 import controller.userControllers.UserController;

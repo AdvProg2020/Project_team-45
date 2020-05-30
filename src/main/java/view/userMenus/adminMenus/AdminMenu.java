@@ -1,7 +1,9 @@
-package view;
+package view.userMenus.adminMenus;
 
 import controller.CodedDiscountController;
 import controller.userControllers.UserController;
+import view.ManagingMenu;
+import view.UserMenu;
 
 public class AdminMenu extends UserMenu {
     private static final AdminMenu instance = new AdminMenu();

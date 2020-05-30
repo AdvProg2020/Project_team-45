@@ -1,13 +1,13 @@
-package view.sellermenu;
+package view.userMenus.sellerMenus;
 
 import controller.CategoryController;
 import controller.userControllers.SellerController;
 import controller.userControllers.UserController;
 import view.Panel;
 import view.UserMenu;
-import view.sellermenu.offsmanagingmenu.OffsManagingMenu;
-import view.sellermenu.productsmanagingmenu.AddProductPanel;
-import view.sellermenu.productsmanagingmenu.ProductsManagingMenu;
+import view.userMenus.sellerMenus.offsmanagingmenu.OffsManagingMenu;
+import view.userMenus.sellerMenus.productsmanagingmenu.AddProductPanel;
+import view.userMenus.sellerMenus.productsmanagingmenu.ProductsManagingMenu;
 
 public class SellerMenu extends UserMenu {
     private static SellerMenu instance;

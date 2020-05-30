@@ -1,9 +1,9 @@
-package view.sellermenu.productsmanagingmenu;
+package view.userMenus.sellerMenus.productsmanagingmenu;
 
 import controller.userControllers.SellerController;
 import view.Panel;
 import view.UIPage;
-import view.sellermenu.EditPanelsCommands;
+import view.userMenus.sellerMenus.EditPanelsCommands;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;

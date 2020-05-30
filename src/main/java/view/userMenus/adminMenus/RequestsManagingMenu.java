@@ -1,10 +1,12 @@
-package view;
+package view.userMenus.adminMenus;
 
 import controller.RequestController;
 import controller.managers.Printer;
 import controller.userControllers.UserController;
 import model.Market;
 import model.request.Request;
+import view.ManagingMenu;
+import view.Panel;
 
 public class RequestsManagingMenu extends ManagingMenu {
 

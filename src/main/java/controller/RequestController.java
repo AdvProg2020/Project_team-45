@@ -7,8 +7,8 @@ import model.request.Request;
 import java.util.ArrayList;
 
 public class RequestController implements Printer {
-    private static RequestController instance = new RequestController();
-    private Market market = Market.getInstance();
+    private static final RequestController instance = new RequestController();
+    private final Market market = Market.getInstance();
 
     private RequestController() {
     }

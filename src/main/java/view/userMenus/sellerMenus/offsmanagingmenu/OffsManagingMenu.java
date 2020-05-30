@@ -1,4 +1,4 @@
-package view.sellermenu.offsmanagingmenu;
+package view.userMenus.sellerMenus.offsmanagingmenu;
 
 import controller.OffController;
 import controller.userControllers.SellerController;

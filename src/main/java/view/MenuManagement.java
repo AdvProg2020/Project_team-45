@@ -34,7 +34,6 @@ public abstract class MenuManagement {
         UIPage.setScanner(new Scanner(System.in));
         while (Market.getInstance().getAllUsers().isEmpty()) {
             runStartingPanel();
-            Market.getInstance().setHasAdmin();
         }
         activeMenus.push(MainMenu.getInstance());
         while (!isExit) {

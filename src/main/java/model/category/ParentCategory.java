@@ -10,7 +10,7 @@ public class ParentCategory extends Category{
 
     public ParentCategory(HashMap<String, String> filledFeatures) {
         super(filledFeatures);
-        this.subcategories = new ArrayList<Category>();
+        this.subcategories = new ArrayList<>();
     }
 
     public ArrayList<Category> getSubcategories() {

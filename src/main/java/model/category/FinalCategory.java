@@ -38,7 +38,7 @@ public class FinalCategory extends Category {
 
     @Override
     public ArrayList<Product> getInOffProductsList() {
-        ArrayList<Product> discountedProductsList = new ArrayList<Product>();
+        ArrayList<Product> discountedProductsList = new ArrayList<>();
         for (Product product : productsList) {
             if (product.isInOff()) {
                 discountedProductsList.add(product);

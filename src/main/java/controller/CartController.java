@@ -1,16 +1,15 @@
 package controller;
 
 import controller.userControllers.BuyerController;
-import model.Product;
-import model.ProductSellInfo;
+import model.product.Product;
+import model.product.ProductSellInfo;
 import model.user.Buyer;
 import model.user.CartHolder;
-import model.user.Seller;
 
 import java.util.ArrayList;
 
 public class CartController {
-    private static CartController instance = new CartController();
+    private static final CartController instance = new CartController();
 
     public static CartController getInstance() {
         return instance;

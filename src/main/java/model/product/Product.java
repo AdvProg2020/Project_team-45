@@ -1,7 +1,10 @@
-package model;
+package model.product;
 
+import model.Comment;
+import model.Company;
+import model.Market;
+import model.Savable;
 import model.category.FinalCategory;
-import model.user.Buyer;
 import model.user.Seller;
 
 import java.util.*;

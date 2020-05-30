@@ -1,5 +1,6 @@
-package model;
+package model.product;
 
+import model.Off;
 import model.user.Buyer;
 import model.user.Seller;
 

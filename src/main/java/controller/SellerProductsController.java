@@ -4,7 +4,7 @@ import controller.managers.Creator;
 import controller.managers.Editor;
 import controller.userControllers.UserController;
 import model.Market;
-import model.ProductSellInfo;
+import model.product.ProductSellInfo;
 import model.request.RemoveProductRequest;
 import model.user.Seller;
 

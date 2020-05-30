@@ -3,10 +3,10 @@ package controller;
 import controller.managers.Creator;
 import controller.managers.Editor;
 import model.Market;
-import model.Product;
 import model.category.Category;
 import model.category.FinalCategory;
 import model.category.ParentCategory;
+import model.product.Product;
 import view.UIPage;
 import view.userMenus.adminMenus.CategoriesManagingMenu;
 

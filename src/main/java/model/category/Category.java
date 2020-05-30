@@ -1,7 +1,7 @@
 package model.category;
 
 import controller.CategoryController;
-import model.Product;
+import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;

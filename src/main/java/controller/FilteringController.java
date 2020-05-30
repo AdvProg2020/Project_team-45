@@ -1,9 +1,9 @@
 package controller;
 
-import model.Product;
-import model.ProductFilters;
 import model.category.Category;
 import model.category.FinalCategory;
+import model.product.Product;
+import model.product.ProductFilters;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

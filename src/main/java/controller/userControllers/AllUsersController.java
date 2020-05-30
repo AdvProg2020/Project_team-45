@@ -2,7 +2,7 @@ package controller.userControllers;
 
 import controller.managers.Deleter;
 import model.Market;
-import model.Product;
+import model.product.Product;
 import model.user.Admin;
 import model.user.Buyer;
 import model.user.Seller;

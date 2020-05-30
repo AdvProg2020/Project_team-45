@@ -1,14 +1,14 @@
 package model.request;
 
 import model.Market;
-import model.Product;
+import model.product.Product;
 import model.user.Seller;
 
 import java.util.HashMap;
 
 public class RemoveProductRequest extends Request{
-    private String productId;
-    private Seller seller;
+    private final String productId;
+    private final Seller seller;
 
     public RemoveProductRequest(Seller seller, String productId) {
         super(new HashMap<>());

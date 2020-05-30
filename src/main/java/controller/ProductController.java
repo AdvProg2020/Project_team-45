@@ -5,14 +5,13 @@ import controller.userControllers.BuyerController;
 import controller.userControllers.UserController;
 import model.Comment;
 import model.Market;
-import model.Product;
-import model.ProductSellInfo;
+import model.product.Product;
+import model.product.ProductSellInfo;
 import model.request.CommentRequest;
 import model.user.Buyer;
 import model.user.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class ProductController implements Deleter {

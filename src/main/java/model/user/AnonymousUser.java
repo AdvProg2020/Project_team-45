@@ -1,9 +1,7 @@
 package model.user;
 
-import model.Cart;
-
 public class AnonymousUser implements CartHolder {
-    private Cart cart;
+    private final Cart cart;
 
     public AnonymousUser() {
         this.cart = new Cart();

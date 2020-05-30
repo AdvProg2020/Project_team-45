@@ -2,16 +2,12 @@ package controller.userControllers;
 
 import controller.InputValidator;
 import controller.managers.Creator;
-import model.Cart;
 import model.CodedDiscount;
-import model.ProductSellInfo;
-import model.Rate;
 import model.log.BuyLog;
 import model.log.Log;
-import model.user.Buyer;
-import model.user.CartHolder;
-import model.user.PersonalInfo;
-import model.user.User;
+import model.product.ProductSellInfo;
+import model.product.Rate;
+import model.user.*;
 import view.RegisterPanel;
 
 import java.util.ArrayList;

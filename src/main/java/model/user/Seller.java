@@ -2,9 +2,9 @@ package model.user;
 
 import model.Company;
 import model.Off;
-import model.Product;
-import model.ProductSellInfo;
 import model.log.SellLog;
+import model.product.Product;
+import model.product.ProductSellInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,10 +1,10 @@
 package model.request;
 
 import model.Market;
-import model.Product;
-import model.ProductSellInfo;
 import model.category.Category;
 import model.category.FinalCategory;
+import model.product.Product;
+import model.product.ProductSellInfo;
 import model.user.Seller;
 
 import java.util.HashMap;

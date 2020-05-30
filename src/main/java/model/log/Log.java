@@ -2,9 +2,7 @@ package model.log;
 
 import controller.userControllers.BuyerController;
 import model.CodedDiscount;
-import model.Market;
-import model.ProductSellInfo;
-import model.user.Buyer;
+import model.product.ProductSellInfo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,9 +12,9 @@ public class Log {
     private final String logId;
     private final Date date;
     private final String buyerUsername;
-    private ArrayList<ProductSellInfo> sellingProducts;
+    private final ArrayList<ProductSellInfo> sellingProducts;
     private CodedDiscount appliedDiscount;
-    private int buyerFee;
+    private final int buyerFee;
     private int finalPrice;
     private final String address;
     private final String phoneNumber;

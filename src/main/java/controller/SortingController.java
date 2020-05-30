@@ -1,6 +1,6 @@
 package controller;
 
-import model.Product;
+import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.Comparator;

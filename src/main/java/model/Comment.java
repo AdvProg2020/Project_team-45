@@ -1,5 +1,6 @@
 package model;
 
+import model.product.Product;
 import model.user.User;
 
 public class Comment {

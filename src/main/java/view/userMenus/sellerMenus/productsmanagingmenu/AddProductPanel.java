@@ -1,4 +1,4 @@
-package view.sellermenu.productsmanagingmenu;
+package view.userMenus.sellerMenus.productsmanagingmenu;
 
 import controller.InputValidator;
 import controller.userControllers.SellerController;

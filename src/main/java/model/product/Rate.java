@@ -1,10 +1,11 @@
-package model;
+package model.product;
 
+import model.Savable;
 import model.user.Buyer;
 
 import java.util.HashMap;
 
-public class Rate implements Savable{
+public class Rate implements Savable {
     private Buyer buyer;
     private int score;
     private String productId;

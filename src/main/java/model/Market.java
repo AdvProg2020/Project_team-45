@@ -2,6 +2,7 @@ package model;
 
 import model.category.Category;
 import model.log.Log;
+import model.product.Product;
 import model.request.Request;
 import model.user.User;
 

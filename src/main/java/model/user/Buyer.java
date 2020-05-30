@@ -1,9 +1,14 @@
 package model.user;
 
-import model.*;
+import model.CodedDiscount;
+import model.Market;
+import model.Savable;
 import model.log.BuyLog;
 import model.log.Log;
 import model.log.SellLog;
+import model.product.Product;
+import model.product.ProductSellInfo;
+import model.product.Rate;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,10 +86,7 @@ public class Buyer extends User implements CartHolder, Savable {
             return false;
         }
         Date currentDate = new Date();
-        if (discount.getStartDate().compareTo(currentDate) <= 0 && discount.getEndDate().compareTo(currentDate) >= 0) {
-            return true;
-        }
-        return false;
+        return discount.getStartDate().compareTo(currentDate) <= 0 && discount.getEndDate().compareTo(currentDate) >= 0;
     }
 
     public void purchase(Log log) {

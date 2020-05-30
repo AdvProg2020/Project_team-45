@@ -1,6 +1,6 @@
 package model.category;
 
-import model.Product;
+import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,13 +1,14 @@
 package model;
 
-import java.time.LocalDateTime;
+import model.product.Product;
+
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Off {
     private static Integer newOffId = 1;
-    private String offId;
-    private ArrayList<Product> productsList;
+    private final String offId;
+    private final ArrayList<Product> productsList;
     private OffStatus offStatus;
     private Date startTime;
     private Date endTime;

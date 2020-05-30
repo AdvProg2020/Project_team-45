@@ -1,11 +1,14 @@
-package model;
+package model.user;
+
+import model.product.Product;
+import model.product.ProductSellInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class Cart {
-    private ArrayList<ProductInfo> products;
+    private final ArrayList<ProductInfo> products;
 
     public Cart() {
         products = new ArrayList<>();
@@ -86,8 +89,8 @@ public class Cart {
     }
 
     class ProductInfo {
-        private Product product;
-        private ProductSellInfo productSellInfo;
+        private final Product product;
+        private final ProductSellInfo productSellInfo;
         private int amount;
 
         public ProductInfo(Product product, ProductSellInfo productSellInfo) {

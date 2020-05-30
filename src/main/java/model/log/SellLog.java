@@ -1,13 +1,13 @@
 package model.log;
 
-import model.ProductSellInfo;
+import model.product.ProductSellInfo;
 import model.user.Seller;
 
 import java.util.ArrayList;
 
 public class SellLog {
-    private Log mainLog;
-    private Seller seller;
+    private final Log mainLog;
+    private final Seller seller;
     private ArrayList<ProductSellInfo> soldProducts;
     private int income;
 

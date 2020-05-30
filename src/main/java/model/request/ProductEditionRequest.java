@@ -2,14 +2,14 @@ package model.request;
 
 import model.Market;
 import model.Off;
-import model.ProductSellInfo;
+import model.product.ProductSellInfo;
 import model.user.Seller;
 
 import java.util.HashMap;
 
 public class ProductEditionRequest extends Request {
-    private String productId;
-    private Seller seller;
+    private final String productId;
+    private final Seller seller;
 
     public ProductEditionRequest(String productId, Seller seller, HashMap<String, String> fieldsAndValues) {
         super(fieldsAndValues);

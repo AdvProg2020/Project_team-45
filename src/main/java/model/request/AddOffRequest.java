@@ -2,7 +2,7 @@ package model.request;
 
 import model.Market;
 import model.Off;
-import model.Product;
+import model.product.Product;
 import model.user.Seller;
 
 import java.text.ParseException;
@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class AddOffRequest extends Request{
-    private Seller seller;
+    private final Seller seller;
 
     public AddOffRequest(Seller seller, HashMap<String, String> fieldsAndValues) {
         super(fieldsAndValues);

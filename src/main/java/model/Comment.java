@@ -44,6 +44,10 @@ public class Comment {
         return didUserBuy;
     }
 
+    public boolean isApprovedComment() {
+        return commentStatus.equals(CommentStatus.APPROVED);
+    }
+
     public void approveComment () {
         this.commentStatus = CommentStatus.APPROVED;
     }

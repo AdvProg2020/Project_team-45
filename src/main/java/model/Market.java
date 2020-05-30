@@ -17,7 +17,6 @@ public class Market {
     private final ArrayList<Log> allLogs;
     private final ArrayList<Off> allOffs;
     private final ArrayList<Request> allRequests;           // configure type by Id
-    private boolean hasAdmin;
 
     private Market() {
         allLogs = new ArrayList<>();
@@ -38,10 +37,6 @@ public class Market {
 
     public ArrayList<Product> getAllProducts() {
         return allProducts;
-    }
-
-    public boolean doesHaveAdmin() {
-        return hasAdmin;
     }
 
     public ArrayList<User> getAllUsers() {
@@ -87,14 +82,6 @@ public class Market {
                 return user;
         }
         return null;
-    }
-
-    public boolean getHasAdmin() {
-        return hasAdmin;
-    }
-
-    public void changeHasAdmin() {
-        hasAdmin = true;
     }
 
     public void addUserToList(User user) {
@@ -150,28 +137,12 @@ public class Market {
         return null;
     }
 
-    public ArrayList<Product> filterProducts(ProductFilters productFilters) {
-        return null;
-    }
-
-    public ArrayList<Product> sortProducts(String attribute) {
-        return null;
-    }
-
-    public ArrayList<Off> sortOffs(String attribute) {
-        return null;
-    }
-
     public void removeUserFromAllUsers(User user) {
         allUsers.remove(user);
     }
 
     public void removeProductByProductId(String productId) {
         allProducts.removeIf(product -> product.getProductId().equalsIgnoreCase(productId));
-    }
-
-    public void setHasAdmin() {
-        this.hasAdmin = true;
     }
 
     public void removeCodedDiscountFromList(CodedDiscount codedDiscount) {
@@ -181,6 +152,7 @@ public class Market {
     public void addCategoryToList(Category category) {
         allCategories.add(category);
     }
+
     public void addMainCategoryToList(Category category) {
         mainCategories.add(category);
     }

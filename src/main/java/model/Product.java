@@ -6,21 +6,21 @@ import model.user.Seller;
 
 import java.util.*;
 
-public class Product {
+public class Product implements Savable {
     private static Integer newProductId = 1;
     private final String productId;
     private String name;
     private Company company;
-    private final Date productionDate;
+    private Date productionDate;
     private String productStatus;
     private final HashMap<Seller, ProductSellInfo> sellersList;
     private ProductSellInfo defaultSellInfo;
     private int minimumPrice;   // minimum price should be updated
     private FinalCategory category;
-    private final LinkedHashMap<String, String> categoryFeatures;
+    private LinkedHashMap<String, String> categoryFeatures;
     private String description;
     private float averageScore;
-    private final ArrayList<Comment> allComments;
+    private ArrayList<Comment> allComments;
     private final ArrayList<Comment> approvedComments;
     private final ArrayList<Rate> rates;
     private int sellCount;
@@ -41,6 +41,14 @@ public class Product {
         this.rates = new ArrayList<>();
     }
 
+    public Product(String productId) {
+        this.productId = productId;
+        this.categoryFeatures = new LinkedHashMap<>();
+        this.allComments = new ArrayList<>();
+        this.approvedComments = new ArrayList<>();
+        this.sellersList = new HashMap<>();
+        this.rates = new ArrayList<>();
+    }
 
     public ProductSellInfo getSellerInfoForProductByUsername(String sellerUsername) {
         for (Seller seller : sellersList.keySet()) {
@@ -264,6 +272,64 @@ public class Product {
         return "productId: " + productId + '\n' +
                 "name: " + name + '\n' +
                 "price: " + minimumPrice;
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("name", name);
+        result.put("company", company.getName());
+        result.put("productionDate", productionDate);
+        result.put("productStatus", productStatus);
+        ArrayList<String> sellers = new ArrayList<>();
+        for (Seller sellInfo : sellersList.keySet()) {
+            sellers.add(sellInfo.getId());
+        }
+        result.put("sellersList", sellers);
+        result.put("defaultSellInfo", defaultSellInfo.getId);
+        result.put("minimumPrice", minimumPrice);
+        result.put("category", category.getId);
+        result.put("categoryFeatures", categoryFeatures);
+        result.put("description", description);
+        result.put("averageScore", averageScore);
+        result.put("allComments", allComments);
+        ArrayList<String> ratesId = new ArrayList<>();
+        for (Rate rate : rates) {
+            ratesId.add(rateId);
+        }
+        result.put("rates", ratesId);
+        result.put("sellCount", sellCount);
+        result.put("seen", seen);
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        Market market = Market.getInstance();
+        name = (String) theMap.get("name");
+        company = market.getCompanyByName((String) theMap.get("company"));
+        productionDate = (Date) theMap.get("productionDate");
+        productStatus = (String) theMap.get("productStatus");
+        for (String sellInfoId : ((ArrayList<String>) theMap.get("sellersList"))) {
+            ProductSellInfo productSellInfo = market.getProductSellInfoById(sellInfoId);
+            sellersList.put(productSellInfo.getSeller(), productSellInfo);
+        }
+        defaultSellInfo = market.getSellInfoById((String) theMap.get("defaultSellInfo"));
+        minimumPrice = (int) theMap.get("minimumPrice");
+        category = (FinalCategory) market.getCategoryById((String) theMap.get("category"));
+        categoryFeatures = (LinkedHashMap<String, String>) theMap.get("categoryFeatures");
+        description = (String) theMap.get("description");
+        averageScore = (float) theMap.get("averageScore");
+        allComments = (ArrayList<Comment>) theMap.get("allComments");
+        for (Comment comment : allComments) {
+            if (comment.isApprovedComment())
+                approvedComments.add(comment);
+        }
+        for (String rateId : ((ArrayList<String>) theMap.get("rates"))) {
+            rates.add(market.getRateById(rateId));
+        }
+        sellCount = (int) theMap.get("sellCount");
+        seen = (int) theMap.get("seen");
     }
 
     //    enum ProductStatus {

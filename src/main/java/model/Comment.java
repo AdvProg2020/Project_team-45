@@ -61,12 +61,6 @@ public class Comment implements Savable {
         this.commentStatus = CommentStatus.NOT_APPROVED_BY_ADMIN;
     }
 
-    enum CommentStatus {
-        WAITING_FOR_APPROVAL,
-        APPROVED,
-        NOT_APPROVED_BY_ADMIN
-    }
-
     public String showComment() {
         return "title: " + title + '\n' + "content: " + content;
     }
@@ -102,5 +96,11 @@ public class Comment implements Savable {
         content = (String) theMap.get("content");
         commentStatus = (CommentStatus) theMap.get("commentStatus");
         didUserBuy = (boolean) theMap.get("didUserBuy");
+    }
+
+    enum CommentStatus {
+        WAITING_FOR_APPROVAL,
+        APPROVED,
+        NOT_APPROVED_BY_ADMIN
     }
 }

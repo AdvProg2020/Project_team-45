@@ -4,8 +4,9 @@ import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
-public class Off implements IdRecognized{
+public class Off implements Savable, IdRecognized {
     private static Integer newOffId = 1;
     private final String id;
     private final ArrayList<Product> productsList;
@@ -14,7 +15,7 @@ public class Off implements IdRecognized{
     private Date endTime;
     private int discountAmount;
 
-    public Off(ArrayList<Product> productsList,Date startTime, Date endTime, int discountAmount) {
+    public Off(ArrayList<Product> productsList, Date startTime, Date endTime, int discountAmount) {
         this.id = newOffId.toString();
         newOffId++;
         this.productsList = productsList;
@@ -78,6 +79,33 @@ public class Off implements IdRecognized{
 
     public boolean equals(Off off) {
         return off.id.equals(this.id);
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        ArrayList<String> productsId = new ArrayList<>();
+        for (Product product : productsList) {
+            productsId.add(product.getId());
+        }
+        result.put("productsList", productsId);
+        result.put("offStatus", offStatus);
+        result.put("startTime", startTime);
+        result.put("endTime", endTime);
+        result.put("discountAmount", discountAmount);
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        Market market = Market.getInstance();
+        for (String productId : ((ArrayList<String>) theMap.get("productsList"))) {
+            productsList.add(market.getProductById(productId));
+        }
+        offStatus = (OffStatus) theMap.get("offStatus");
+        startTime = (Date) theMap.get("startTime");
+        endTime = (Date) theMap.get("endTime");
+        discountAmount = (int) theMap.get("discountAmount");
     }
 
     enum OffStatus {

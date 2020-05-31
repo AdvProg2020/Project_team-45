@@ -6,8 +6,9 @@ public class Company {
     private String name;
     private String otherInformation;
 
-    public Company(String name) {
+    public Company(String name, String otherInformation) {
         this.name = name;
+        this.otherInformation = otherInformation;
     }
 
     public Company(HashMap<String, String> filledFeatures) {
@@ -30,5 +31,4 @@ public class Company {
     public void setOtherInformation(String otherInformation) {
         this.otherInformation = otherInformation;
     }
-
 }

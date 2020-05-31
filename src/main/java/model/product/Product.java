@@ -20,7 +20,7 @@ public class Product implements Savable, IdRecognized {
     private LinkedHashMap<String, String> categoryFeatures;
     private String description;
     private float averageScore;
-    private ArrayList<Comment> allComments;
+    private final ArrayList<Comment> allComments;
     private final ArrayList<Comment> approvedComments;
     private final ArrayList<Rate> rates;
     private int sellCount;
@@ -287,16 +287,20 @@ public class Product implements Savable, IdRecognized {
             sellers.add(sellInfo.getId());
         }
         result.put("sellersList", sellers);
-        result.put("defaultSellInfo", defaultSellInfo.getId);
+        result.put("defaultSellInfo", defaultSellInfo.getId());
         result.put("minimumPrice", minimumPrice);
-        result.put("category", category.getId);
+        result.put("category", category.getId());
         result.put("categoryFeatures", categoryFeatures);
         result.put("description", description);
         result.put("averageScore", averageScore);
-        result.put("allComments", allComments);
+        ArrayList<HashMap<String, Object>> commentsMap = new ArrayList<>();
+        for (Comment comment: allComments) {
+            commentsMap.add(comment.convertToHashMap());
+        }
+        result.put("allComments", commentsMap);
         ArrayList<String> ratesId = new ArrayList<>();
         for (Rate rate : rates) {
-            ratesId.add(rateId);
+            ratesId.add(rate.getId());
         }
         result.put("rates", ratesId);
         result.put("sellCount", sellCount);
@@ -321,8 +325,10 @@ public class Product implements Savable, IdRecognized {
         categoryFeatures = (LinkedHashMap<String, String>) theMap.get("categoryFeatures");
         description = (String) theMap.get("description");
         averageScore = (float) theMap.get("averageScore");
-        allComments = (ArrayList<Comment>) theMap.get("allComments");
-        for (Comment comment : allComments) {
+        for (HashMap<String, Object> commentMap : (ArrayList<HashMap<String, Object>>) theMap.get("allComments")) {
+            Comment comment = new Comment();
+            comment.setFieldsFromHashMap(commentMap);
+            allComments.add(comment);
             if (comment.isApprovedComment())
                 approvedComments.add(comment);
         }

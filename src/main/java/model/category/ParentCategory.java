@@ -1,15 +1,26 @@
 package model.category;
 
+import model.Market;
 import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ParentCategory extends Category{
+public class ParentCategory extends Category {
     private final ArrayList<Category> subcategories;
+
+    public ParentCategory(String name, ParentCategory parent) {
+        super(name, parent);
+        this.subcategories = new ArrayList<>();
+    }
 
     public ParentCategory(HashMap<String, String> filledFeatures) {
         super(filledFeatures);
+        this.subcategories = new ArrayList<>();
+    }
+
+    public ParentCategory(String categoryId) {
+        super(categoryId);
         this.subcategories = new ArrayList<>();
     }
 
@@ -25,7 +36,7 @@ public class ParentCategory extends Category{
 
     @Override
     public ArrayList<Product> getProductsList() {
-        ArrayList<Product> allProducts = new ArrayList<Product>();
+        ArrayList<Product> allProducts = new ArrayList<>();
         for (Category subcategory : subcategories) {
             allProducts.addAll(subcategory.getProductsList());
         }
@@ -34,7 +45,7 @@ public class ParentCategory extends Category{
 
     @Override
     public ArrayList<Product> getInOffProductsList() {
-        ArrayList<Product> discountedProductsList = new ArrayList<Product>();
+        ArrayList<Product> discountedProductsList = new ArrayList<>();
         for (Category subcategory : subcategories) {
             discountedProductsList.addAll(subcategory.getInOffProductsList());
         }
@@ -61,15 +72,27 @@ public class ParentCategory extends Category{
         return false;
     }
 
-    @Override
-    public void addFeatures(String newFeatures) {
-    }
-
-    @Override
-    public void removeFeatures(String removing_features) {
-    }
-
     public void addSubcategory(Category createdCategory) {
         this.subcategories.add(createdCategory);
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = super.convertToHashMap();
+        ArrayList<String> subcategoriesId = new ArrayList<>();
+        for (Category subcategory : subcategories) {
+            subcategoriesId.add(subcategory.getId());
+        }
+        result.put("subcategories", subcategoriesId);
+        return null;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        Market market = Market.getInstance();
+        super.setFieldsFromHashMap(theMap);
+        for (String subcategoryId : ((ArrayList<String>) theMap.get("subcategories"))) {
+            subcategories.add(market.getCategoryById(subcategoryId));
+        }
     }
 }

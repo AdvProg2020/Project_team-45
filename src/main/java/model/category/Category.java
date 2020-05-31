@@ -1,13 +1,15 @@
 package model.category;
 
 import controller.CategoryController;
+import javafx.scene.Parent;
 import model.IdRecognized;
+import model.Savable;
 import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Category implements IdRecognized {
+public abstract class Category implements Savable,IdRecognized {
     private String name;
     private ParentCategory parent;
     private String id;
@@ -23,6 +25,10 @@ public abstract class Category implements IdRecognized {
         if (!filledFeatures.get("parent category").equals("NULL"))
             this.setParent((ParentCategory) CategoryController.getInstance().getItemById(filledFeatures.get("parent category")));
         else parent = null;
+    }
+
+    public Category(String categoryId) {
+
     }
 
     public String getName() {
@@ -56,11 +62,19 @@ public abstract class Category implements IdRecognized {
 
     public abstract boolean isFinal();
 
-    public abstract void addFeatures(String newFeaturesString);
-
-    public abstract void removeFeatures(String removingFeaturesString);
-
     public String getId() {
         return id;
+    }
+
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("name", name);
+        result.put("parent", parent);
+        return result;
+    }
+
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        name = (String) theMap.get("name");
+        parent = (ParentCategory) theMap.get("parent");
     }
 }

@@ -5,13 +5,15 @@ import model.log.Log;
 import model.product.Product;
 import model.product.ProductSellInfo;
 import model.request.Request;
+import model.user.Seller;
 import model.user.User;
 
 import java.util.ArrayList;
 
 public class Market {
     private static Market marketInstance;
-    private final ArrayList<User> allUsers;                 // configure type by Id
+    private final ArrayList<User> allUsers;// configure type by Id
+    private final ArrayList<Seller> requestedSellers;
     private final ArrayList<CodedDiscount> allCodedDiscounts;
     private final ArrayList<Category> allCategories;        // configure type by Id
     private final ArrayList<Category> mainCategories;       // be made from allCategories
@@ -31,6 +33,7 @@ public class Market {
         allProducts = new ArrayList<>();
         allRequests = new ArrayList<>();
         allProductSellInfos = new ArrayList<>();
+        requestedSellers = new ArrayList<>();
     }
 
     public static Market getInstance() {
@@ -223,6 +226,22 @@ public class Market {
         for (Log log : allLogs) {
             if (log.getId().equals(id))
                 return log;
+        }
+        return null;
+    }
+
+    public void addRequestedSeller(Seller newSeller) {
+        requestedSellers.add(newSeller);
+    }
+
+    public void removeRequestedSeller(Seller seller) {
+        requestedSellers.remove(seller);
+    }
+
+    public Seller getRequestedSellerById(String sellerId) {
+        for (Seller requestedSeller : requestedSellers) {
+            if (requestedSeller.getId().equals(sellerId))
+                return requestedSeller;
         }
         return null;
     }

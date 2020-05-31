@@ -7,8 +7,8 @@ import model.user.Seller;
 import java.util.HashMap;
 
 public class RemoveProductRequest extends Request{
-    private final String productId;
-    private final Seller seller;
+    private String productId;
+    private Seller seller;
 
     public RemoveProductRequest(Seller seller, String productId) {
         super(new HashMap<>());
@@ -37,5 +37,20 @@ public class RemoveProductRequest extends Request{
         return super.toString() +
                 "productId:" + productId +
                 ", seller:" + seller.getPersonalInfo().getUsername();
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = super.convertToHashMap();
+        result.put("seller", seller.getId());
+        result.put("productId", productId);
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        super.setFieldsFromHashMap(theMap);
+        seller = (Seller) Market.getInstance().getUserById((String) theMap.get("seller"));
+        productId = (String) theMap.get("productId");
     }
 }

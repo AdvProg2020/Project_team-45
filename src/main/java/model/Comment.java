@@ -3,14 +3,16 @@ package model;
 import model.product.Product;
 import model.user.User;
 
-public class Comment {
+import java.util.HashMap;
+
+public class Comment implements Savable{
     ;
-    private final User user;
-    private final Product product;
-    private final String title;
-    private final String content;
+    private User user;
+    private Product product;
+    private String title;
+    private String content;
     private CommentStatus commentStatus;
-    private final boolean didUserBuy;
+    private boolean didUserBuy;
 
     public Comment(User user, Product product, String title, String content, boolean didUserBuy) {
         this.user = user;
@@ -19,6 +21,10 @@ public class Comment {
         this.content = content;
         this.didUserBuy = didUserBuy;
         this.commentStatus = CommentStatus.WAITING_FOR_APPROVAL;
+    }
+
+    public Comment() {
+
     }
 
     public User getUser() {
@@ -55,6 +61,16 @@ public class Comment {
 
     public void declineComment () {
         this.commentStatus = CommentStatus.NOT_APPROVED_BY_ADMIN;
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        return null;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+
     }
 
     enum CommentStatus {

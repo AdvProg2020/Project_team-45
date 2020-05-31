@@ -2,10 +2,11 @@ package model.request;
 
 import model.IdRecognized;
 import model.Market;
+import model.Savable;
 
 import java.util.HashMap;
 
-public abstract class Request implements IdRecognized {
+public abstract class Request implements IdRecognized, Savable {
     private static Integer newRequestId = 1;
     protected String id;
     protected RequestStatus requestStatus;
@@ -58,5 +59,21 @@ public abstract class Request implements IdRecognized {
     public String toString() {
         return  "request type:" + getType() + "requestId:" + id +
                 ", requestStatus:" + requestStatus;
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("id", id);
+        result.put("requestStatus", requestStatus);
+        result.put("fieldsAndValues", fieldsAndValues);
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        id = (String) theMap.get("id");
+        requestStatus = (RequestStatus) theMap.get("requestStatus");
+        fieldsAndValues = (HashMap<String, String>) theMap.get("fieldsAndValues");
     }
 }

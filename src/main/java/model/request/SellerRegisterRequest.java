@@ -3,8 +3,10 @@ package model.request;
 import model.Market;
 import model.user.Seller;
 
+import java.util.HashMap;
+
 public class SellerRegisterRequest extends Request {
-    private final Seller seller;
+    private Seller seller;
 
     public SellerRegisterRequest(Seller seller) {
         super();
@@ -18,6 +20,7 @@ public class SellerRegisterRequest extends Request {
     @Override
     public void apply() {
         Market.getInstance().addUserToList(seller);
+        Market.getInstance().removeRequestedSeller(seller);
     }
 
     @Override
@@ -29,5 +32,18 @@ public class SellerRegisterRequest extends Request {
     public String toString() {
         return super.toString() +
                 "seller:" + seller.getPersonalInfo().getUsername();
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = super.convertToHashMap();
+        result.put("seller", seller.getId());
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        super.setFieldsFromHashMap(theMap);
+        seller = Market.getInstance().getRequestedSellerById((String) theMap.get("seller"));
     }
 }

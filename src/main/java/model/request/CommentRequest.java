@@ -2,8 +2,10 @@ package model.request;
 
 import model.Comment;
 
+import java.util.HashMap;
+
 public class CommentRequest extends Request {
-    private final Comment comment;
+    private Comment comment;
 
     public CommentRequest(Comment comment) {
         super();
@@ -30,5 +32,19 @@ public class CommentRequest extends Request {
     @Override
     public String toString() {
         return super.toString() + '\n' + "comment:" + comment;
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = super.convertToHashMap();
+        result.put("comment", comment.convertToHashMap());
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        super.setFieldsFromHashMap(theMap);
+        comment = new Comment();
+        comment.setFieldsFromHashMap((HashMap<String, Object>) theMap.get("comment"));
     }
 }

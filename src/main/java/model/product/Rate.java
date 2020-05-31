@@ -31,13 +31,14 @@ public class Rate implements Savable {
         this.score = score;
     }
 
+
     @Override
-    public HashMap convertToHashMap() {
+    public HashMap<String, Object> convertToHashMap() {
         return null;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap theMap) {
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
 
     }
 }

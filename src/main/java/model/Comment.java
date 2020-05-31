@@ -5,8 +5,7 @@ import model.user.User;
 
 import java.util.HashMap;
 
-public class Comment implements Savable{
-    ;
+public class Comment implements Savable {
     private User user;
     private Product product;
     private String title;
@@ -24,7 +23,6 @@ public class Comment implements Savable{
     }
 
     public Comment() {
-
     }
 
     public User getUser() {
@@ -55,22 +53,12 @@ public class Comment implements Savable{
         return commentStatus.equals(CommentStatus.APPROVED);
     }
 
-    public void approveComment () {
+    public void approveComment() {
         this.commentStatus = CommentStatus.APPROVED;
     }
 
-    public void declineComment () {
+    public void declineComment() {
         this.commentStatus = CommentStatus.NOT_APPROVED_BY_ADMIN;
-    }
-
-    @Override
-    public HashMap<String, Object> convertToHashMap() {
-        return null;
-    }
-
-    @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
-
     }
 
     enum CommentStatus {
@@ -91,5 +79,28 @@ public class Comment implements Savable{
                 "content: " + content + '\n' +
                 "commentStatus: " + commentStatus + '\n' +
                 "didUserBuy: " + didUserBuy;
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("user", user.getId());
+        result.put("product", product.getId());
+        result.put("title", title);
+        result.put("content", content);
+        result.put("commentStatus", commentStatus);
+        result.put("didUserBuy", didUserBuy);
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        Market market = Market.getInstance();
+        user = market.getUserById((String) theMap.get("user"));
+        product = market.getProductById((String) theMap.get("product"));
+        title = (String) theMap.get("title");
+        content = (String) theMap.get("content");
+        commentStatus = (CommentStatus) theMap.get("commentStatus");
+        didUserBuy = (boolean) theMap.get("didUserBuy");
     }
 }

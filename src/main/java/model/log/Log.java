@@ -3,6 +3,7 @@ package model.log;
 import controller.userControllers.BuyerController;
 import model.CodedDiscount;
 import model.IdRecognized;
+import model.Market;
 import model.Savable;
 import model.product.ProductSellInfo;
 
@@ -12,16 +13,17 @@ import java.util.HashMap;
 
 public class Log implements Savable, IdRecognized {
     private static Integer newLogId = 1;
-    private final String id;
-    private final Date date;
-    private final String buyerUsername;
-    private final ArrayList<ProductSellInfo> sellingProducts;
+    private String id;
+    private Date date;
+    private String buyerUsername; // hatam : change to buyer :|
+    private ArrayList<ProductSellInfo> sellingProducts;
     private CodedDiscount appliedDiscount;
-    private final int buyerFee;
+    private int buyerFee;
     private int finalPrice;
-    private final String address;
-    private final String phoneNumber;
+    private String address;
+    private String phoneNumber;
     private String deliveryStatus;
+
 
     public Log(ArrayList<ProductSellInfo> sellingProducts, String buyerUsername, String address, String phoneNumber) {
         this.id = newLogId.toString();
@@ -113,12 +115,43 @@ public class Log implements Savable, IdRecognized {
 
     @Override
     public HashMap<String, Object> convertToHashMap() {
-        return null;
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("id", id);
+        result.put("date", date);
+        result.put("buyerUsername", buyerUsername);
+        result.put("finalPrice", finalPrice);
+        result.put("buyerFee", buyerFee);
+        result.put("appliedDiscount", appliedDiscount.getId());
+        result.put("address", address);
+        result.put("phoneNumber", phoneNumber);
+        result.put("deliveryStatus", deliveryStatus);
+
+        ArrayList<String> sellInfos = new ArrayList<>();
+        for (ProductSellInfo sellingProduct : sellingProducts) {
+            sellInfos.add(sellingProduct.getId());
+        }
+        result.put("sellingProducts", sellInfos);
+        return result;
     }
+
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        id = (String) theMap.get("id");
+        date = (Date) theMap.get("date");
+        buyerUsername = (String) theMap.get("buyerUsername");
+        finalPrice = Integer.parseInt((String) theMap.get("finalPrice"));
+        buyerFee = Integer.parseInt((String) theMap.get("buyerFee"));
+        appliedDiscount = Market.getInstance().getCodedDiscountByCode((String) theMap.get("appliedDiscount"));
+        address = (String) theMap.get("address");
+        phoneNumber = (String) theMap.get("phoneNumber");
+        deliveryStatus = (String) theMap.get("deliveryStatus");
 
+        ArrayList<String> sellInfoIds = (ArrayList<String>) theMap.get("sellingProducts");
+        sellingProducts = new ArrayList<>();
+        for (String sellInfoId : sellInfoIds) {
+            sellingProducts.add(Market.getInstance().getSellInfoById(sellInfoId));
+        }
     }
 
 //    enum DeliveryStatus{

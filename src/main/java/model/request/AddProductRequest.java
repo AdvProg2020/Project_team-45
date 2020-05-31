@@ -31,7 +31,9 @@ public class AddProductRequest extends Request {
             }
             product = new Product(fieldsAndValues.get("name"), ((FinalCategory)category)
                     , fieldsAndValues.get("description"));
-            product.addSeller(new ProductSellInfo(product, seller));
+            ProductSellInfo sellInfo = new ProductSellInfo(product, seller);
+            product.addSeller(sellInfo);
+            Market.getInstance().addSellInfoToList(sellInfo);
             ((FinalCategory)category).addProduct(product);
             Market.getInstance().getAllProducts().add(product);
         }

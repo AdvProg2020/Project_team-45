@@ -3,6 +3,7 @@ package model;
 import model.category.Category;
 import model.log.Log;
 import model.product.Product;
+import model.product.ProductSellInfo;
 import model.request.Request;
 import model.user.User;
 
@@ -18,6 +19,7 @@ public class Market {
     private final ArrayList<Log> allLogs;
     private final ArrayList<Off> allOffs;
     private final ArrayList<Request> allRequests;           // configure type by Id
+    private final ArrayList<ProductSellInfo> allProductSellInfos; // add news to it
 
     private Market() {
         allLogs = new ArrayList<>();
@@ -28,6 +30,7 @@ public class Market {
         mainCategories = new ArrayList<>();
         allProducts = new ArrayList<>();
         allRequests = new ArrayList<>();
+        allProductSellInfos = new ArrayList<>();
     }
 
     public static Market getInstance() {
@@ -200,6 +203,26 @@ public class Market {
             if (user.getId().equals(id)) {
                 return user;
             }
+        }
+        return null;
+    }
+
+    public void addSellInfoToList(ProductSellInfo sellInfo) {
+        allProductSellInfos.add(sellInfo);
+    }
+
+    public ProductSellInfo getSellInfoById(String id) {
+        for (ProductSellInfo productSellInfo : allProductSellInfos) {
+            if (productSellInfo.getId().equals(id))
+                return productSellInfo;
+        }
+        return null;
+    }
+
+    public Log getLogById(String id) {
+        for (Log log : allLogs) {
+            if (log.getId().equals(id))
+                return log;
         }
         return null;
     }

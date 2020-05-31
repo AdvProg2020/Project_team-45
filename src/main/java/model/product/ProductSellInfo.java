@@ -1,5 +1,6 @@
 package model.product;
 
+import model.IdRecognized;
 import model.Off;
 import model.user.Buyer;
 import model.user.Seller;
@@ -7,7 +8,8 @@ import model.user.Seller;
 import java.util.Date;
 import java.util.HashMap;
 
-public class ProductSellInfo {
+public class ProductSellInfo implements IdRecognized {
+    private String id;
     private final Seller seller;
     private final Product product;
     private int price;
@@ -60,6 +62,10 @@ public class ProductSellInfo {
         }
 
         return price;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public int getSellCount() {

@@ -13,7 +13,6 @@ public class CodedDiscount implements Savable, IdRecognized{
     private Date endDate;
     private int percentage;
     private Buyer owner;
-    private String id;
 
     public CodedDiscount(HashMap<String, String> filledFeatures) {
         this.code = filledFeatures.get("code");
@@ -84,6 +83,7 @@ public class CodedDiscount implements Savable, IdRecognized{
     @Override
     public HashMap<String, Object> convertToHashMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("code", code);
         result.put("startDate", startDate);
         result.put("endDate", endDate);
         result.put("percentage", percentage);
@@ -101,6 +101,6 @@ public class CodedDiscount implements Savable, IdRecognized{
 
     @Override
     public String getId() {
-        return this.id;
+        return this.code;
     }
 }

@@ -25,7 +25,7 @@ public class RequestController implements Printer {
         ArrayList<Request> allRequests = market.getAllRequests();
         StringBuilder listString = new StringBuilder("Id,action,status\n");
         for (Request request : allRequests) {
-            String info = request.getRequestId() + "," + request.getType() + "," + request.getRequestStatus() + "\n";
+            String info = request.getId() + "," + request.getType() + "," + request.getRequestStatus() + "\n";
             listString.append(info);
         }
         return listString.toString();

@@ -26,7 +26,7 @@ public class SellerProductsController implements Creator, Editor {
         Seller activeSeller = (Seller) UserController.getActiveUser();
         StringBuilder listString = new StringBuilder("product name,price,category\n");
         for (ProductSellInfo productSellInfo : activeSeller.getAvailableProducts().values()) {
-            listString.append(productSellInfo.getProduct().getProductId() + "," + productSellInfo.getPrice() + "," + productSellInfo.getProduct().getCategory().getName());
+            listString.append(productSellInfo.getProduct().getId() + "," + productSellInfo.getPrice() + "," + productSellInfo.getProduct().getCategory().getName());
         }
         return listString.toString();
     }
@@ -73,7 +73,7 @@ public class SellerProductsController implements Creator, Editor {
         ProductSellInfo productSellInfo = getItemById(Id);
         if (productSellInfo == null)
             return false;
-        RemoveProductRequest removeProductRequest = new RemoveProductRequest(getActiveSeller(), productSellInfo.getProduct().getProductId());
+        RemoveProductRequest removeProductRequest = new RemoveProductRequest(getActiveSeller(), productSellInfo.getProduct().getId());
         Market.getInstance().addRequest(removeProductRequest);
         return true;
     }

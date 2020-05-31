@@ -18,14 +18,14 @@ public class Cart {
         HashMap<String, Integer> productsAndAmounts = new HashMap<>();
         for (ProductInfo productInfo : products) {
             productsAndAmounts.put("productName = " + productInfo.getProduct().getName() + ", productId = " +
-                            productInfo.getProduct().getProductId() + ", amount = ", productInfo.getAmount());
+                            productInfo.getProduct().getId() + ", amount = ", productInfo.getAmount());
         }
         return productsAndAmounts;
     }
 
     private ProductInfo getProductById(String productId) {
         for (ProductInfo productInfo : products) {
-            if (productInfo.getProduct().getProductId().equals(productId)) {
+            if (productInfo.getProduct().getId().equals(productId)) {
                 return productInfo;
             }
         }
@@ -34,7 +34,7 @@ public class Cart {
 
     public int getProductAmountById(String productId) {
         for (ProductInfo productInfo : products) {
-            if (productInfo.getProduct().getProductId().equals(productId)) {
+            if (productInfo.getProduct().getId().equals(productId)) {
                 return productInfo.getAmount();
             }
         }

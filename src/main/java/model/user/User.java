@@ -1,10 +1,11 @@
 package model.user;
 
+import model.IdRecognized;
 import model.Savable;
 
-public abstract class User implements Savable {
+public abstract class User implements Savable, IdRecognized {
     protected static int newUserId = 1;
-    protected String id;
+    protected String id; // hatam : ham username ham Id?
     protected PersonalInfo personalInfo;
 
     public abstract String getRole();

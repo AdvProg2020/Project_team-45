@@ -1,14 +1,16 @@
 package model.category;
 
 import controller.CategoryController;
+import model.IdRecognized;
 import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Category {
+public abstract class Category implements IdRecognized {
     private String name;
     private ParentCategory parent;
+    private String id;
 
 
     public Category(String name, ParentCategory parent) {
@@ -57,4 +59,8 @@ public abstract class Category {
     public abstract void addFeatures(String newFeaturesString);
 
     public abstract void removeFeatures(String removingFeaturesString);
+
+    public String getId() {
+        return id;
+    }
 }

@@ -9,7 +9,7 @@ import model.user.Seller;
 import java.util.ArrayList;
 
 public class OffController implements Printer {
-    private static OffController instance = new OffController();
+    private static final OffController instance = new OffController();
 
     private OffController() {
 
@@ -37,7 +37,7 @@ public class OffController implements Printer {
         sellerOffs.addAll(activeSeller.getListOfOffs().values());
         StringBuilder offsListString = new StringBuilder("Id,discount amount\n");
         for (Off off : sellerOffs) {
-            offsListString.append(off.getOffId() + "," + off.getDiscountAmount() + "\n");
+            offsListString.append(off.getId() + "," + off.getDiscountAmount() + "\n");
         }
         return offsListString.toString();
     }

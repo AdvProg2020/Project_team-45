@@ -2,14 +2,17 @@ package model.log;
 
 import controller.userControllers.BuyerController;
 import model.CodedDiscount;
+import model.IdRecognized;
+import model.Savable;
 import model.product.ProductSellInfo;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
-public class Log {
+public class Log implements Savable, IdRecognized {
     private static Integer newLogId = 1;
-    private final String logId;
+    private final String id;
     private final Date date;
     private final String buyerUsername;
     private final ArrayList<ProductSellInfo> sellingProducts;
@@ -21,7 +24,7 @@ public class Log {
     private String deliveryStatus;
 
     public Log(ArrayList<ProductSellInfo> sellingProducts, String buyerUsername, String address, String phoneNumber) {
-        this.logId = newLogId.toString();
+        this.id = newLogId.toString();
         newLogId++;
         this.date = new Date();
         this.sellingProducts = sellingProducts;
@@ -32,8 +35,9 @@ public class Log {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getLogId() {
-        return logId;
+    @Override
+    public String getId() {
+        return id;
     }
 
     public Date getDate() {
@@ -75,7 +79,7 @@ public class Log {
         for (ProductSellInfo sellInfo : sellingProducts) {
             //System.out.println("########################" + ((Buyer) BuyerController.getInstance().getBuyer()).getCart().getCartProducts());
             result += sellInfo.getFinalPrice() * BuyerController.getInstance().getBuyer().getCart()
-                    .getProductAmountById(sellInfo.getProduct().getProductId());
+                    .getProductAmountById(sellInfo.getProduct().getId());
         }
         result = (100 - getAppliedDiscountPercentage()) * result / 100;
         //System.out.println("####################" + result);
@@ -104,6 +108,16 @@ public class Log {
     }
 
     public void deliverOrder(){
+
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        return null;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
 
     }
 

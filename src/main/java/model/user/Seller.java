@@ -39,7 +39,7 @@ public class Seller extends User {
 
     public Product getAvailableProductById(String productId) {
         for (Product product : availableProducts.keySet()) {
-            if (product.getProductId().equals(productId)) {
+            if (product.getId().equals(productId)) {
                 return product;
             }
         }
@@ -48,7 +48,7 @@ public class Seller extends User {
 
     public ProductSellInfo getAvailableProductSellInfoById(String productId) {
         for (Product product : availableProducts.keySet()) {
-            if (product.getProductId().equals(productId)) {
+            if (product.getId().equals(productId)) {
                 return availableProducts.get(product);
             }
         }
@@ -73,7 +73,7 @@ public class Seller extends User {
 
     public void removeProductByProductId(String productId) {
         for (Product product : availableProducts.keySet()) {
-            if (product.getProductId().equalsIgnoreCase(productId)) {
+            if (product.getId().equalsIgnoreCase(productId)) {
                 availableProducts.remove(product);
             }
         }

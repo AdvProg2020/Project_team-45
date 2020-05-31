@@ -1,17 +1,14 @@
 package model.product;
 
-import model.Comment;
-import model.Company;
-import model.Market;
-import model.Savable;
+import model.*;
 import model.category.FinalCategory;
 import model.user.Seller;
 
 import java.util.*;
 
-public class Product implements Savable {
+public class Product implements Savable, IdRecognized {
     private static Integer newProductId = 1;
-    private final String productId;
+    private final String id;
     private String name;
     private Company company;
     private Date productionDate;
@@ -31,7 +28,7 @@ public class Product implements Savable {
 
 
     public Product(String name, FinalCategory category, String description) {
-        this.productId = newProductId.toString();
+        this.id = newProductId.toString();
         newProductId++;
         this.name = name;
         this.productionDate = new Date();
@@ -45,7 +42,7 @@ public class Product implements Savable {
     }
 
     public Product(String productId) {
-        this.productId = productId;
+        this.id = productId;
         this.categoryFeatures = new LinkedHashMap<>();
         this.allComments = new ArrayList<>();
         this.approvedComments = new ArrayList<>();
@@ -71,8 +68,9 @@ public class Product implements Savable {
         return name;
     }
 
-    public String getProductId() {
-        return productId;
+    @Override
+    public String getId() {
+        return id;
     }
 
     public Company getCompany() {
@@ -272,7 +270,7 @@ public class Product implements Savable {
 
     @Override
     public String toString() {
-        return "productId: " + productId + '\n' +
+        return "productId: " + id + '\n' +
                 "name: " + name + '\n' +
                 "price: " + minimumPrice;
     }

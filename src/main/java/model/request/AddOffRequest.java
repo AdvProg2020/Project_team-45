@@ -33,7 +33,7 @@ public class AddOffRequest extends Request{
         }
 
         Off off = new Off(products, startTime, endTime, discountAmount);
-        seller.getListOfOffs().put(off.getOffId(), off);
+        seller.getListOfOffs().put(off.getId(), off);
         ArrayList<String> productIds = new ArrayList<>();
         productIds.addAll(Arrays.asList(fieldsAndValues.get("productIds(separated by ',')").split("\\s*,\\s*")));
         for (String productId : productIds) {

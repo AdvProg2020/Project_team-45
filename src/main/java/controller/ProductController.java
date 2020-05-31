@@ -44,7 +44,7 @@ public class ProductController implements Deleter {
 
     private boolean setActiveProductByListAndId(ArrayList<Product> productsList, String productId) {
         for (Product product : productsList) {
-            if (product.getProductId().equals(productId)) {
+            if (product.getId().equals(productId)) {
                 activeProduct = product;
                 activeProduct.increaseSeen();
                 activeProductSellInfo = activeProduct.getDefaultSellInfo();
@@ -99,7 +99,7 @@ public class ProductController implements Deleter {
     public void addComment(String title, String content) {
         User activeUser = UserController.getActiveUser();
         boolean didUserBuy = false;
-        if (activeUser.getRole().equals("Buyer") && ((Buyer) activeUser).didBuyProduct(activeProduct.getProductId())) {
+        if (activeUser.getRole().equals("Buyer") && ((Buyer) activeUser).didBuyProduct(activeProduct.getId())) {
             didUserBuy = true;
         }
         Comment newComment = new Comment(activeUser, activeProduct, title, content, didUserBuy);
@@ -141,7 +141,7 @@ public class ProductController implements Deleter {
         StringBuilder output = new StringBuilder();
         output.append("product Id,product name\n");
         for (Product product : allProducts) {
-            String productInfo = product.getProductId() + "," + product.getName() + "\n";
+            String productInfo = product.getId() + "," + product.getName() + "\n";
             output.append(productInfo);
         }
         return output.toString();

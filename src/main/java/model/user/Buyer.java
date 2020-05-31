@@ -52,7 +52,7 @@ public class Buyer extends User implements CartHolder, Savable {
 
     public BuyLog getBuyLogById(String logId) {
         for (BuyLog buyLog : listOfBuyLogs) {
-            if (buyLog.getMainLog().getLogId().equals(logId))
+            if (buyLog.getMainLog().getId().equals(logId))
                 return buyLog;
         }
         return null;
@@ -91,10 +91,10 @@ public class Buyer extends User implements CartHolder, Savable {
 
     public void purchase(Log log) {
         for (ProductSellInfo sellInfo : getCart().getProductSellInfos()) {
-            purchasedProducts.put(sellInfo.getProduct().getProductId(), null);
+            purchasedProducts.put(sellInfo.getProduct().getId(), null);
             sellInfo.getProduct().addSellCount();
             sellInfo.addSellCount();
-            sellInfo.getAllBuyers().put(this, getCart().getProductAmountById(sellInfo.getProduct().getProductId()));
+            sellInfo.getAllBuyers().put(this, getCart().getProductAmountById(sellInfo.getProduct().getId()));
             Seller seller = sellInfo.getSeller();
             SellLog sellLog = new SellLog(log, seller);
             seller.getListOfSellLogs().add(sellLog);

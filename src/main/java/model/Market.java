@@ -113,7 +113,7 @@ public class Market {
 
     public Product getProductById(String productId) {
         for (Product product : allProducts) {
-            if (product.getProductId().equals(productId)) {
+            if (product.getId().equals(productId)) {
                 return product;
             }
         }
@@ -122,7 +122,7 @@ public class Market {
 
     public Off getOffById(String offId) {
         for (Off off : allOffs) {
-            if (off.getOffId().equals(offId)) {
+            if (off.getId().equals(offId)) {
                 return off;
             }
         }
@@ -143,7 +143,7 @@ public class Market {
     }
 
     public void removeProductByProductId(String productId) {
-        allProducts.removeIf(product -> product.getProductId().equalsIgnoreCase(productId));
+        allProducts.removeIf(product -> product.getId().equalsIgnoreCase(productId));
     }
 
     public void removeCodedDiscountFromList(CodedDiscount codedDiscount) {
@@ -163,7 +163,7 @@ public class Market {
     }
 
     public void removeOffById(String offId) {
-        allOffs.removeIf(off -> off.getOffId().equals(offId));
+        allOffs.removeIf(off -> off.getId().equals(offId));
     }
 
     public void removeProductFromAllProductsList(Product product) {
@@ -172,7 +172,7 @@ public class Market {
 
     public void removeRequestById(String requestId) {
         for (Request request : allRequests) {
-            if (request.getRequestId().equals(requestId)) {
+            if (request.getId().equals(requestId)) {
                 allRequests.remove(request);
                 return;
             }
@@ -181,7 +181,7 @@ public class Market {
 
     public Request getRequestById(String id) {
         for (Request request : allRequests) {
-            if (request.getRequestId().equals(id))
+            if (request.getId().equals(id))
                 return request;
         }
                 return null;

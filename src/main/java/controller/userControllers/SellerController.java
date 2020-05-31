@@ -73,7 +73,7 @@ public class SellerController extends UserController implements Creator {
     // view sales history panel
 
     private String getSellLogDisplay(SellLog sellLog) {
-        return "logId = '" + sellLog.getMainLog().getLogId() + "'\n" +
+        return "logId = '" + sellLog.getMainLog().getId() + "'\n" +
                 "date = " + sellLog.getMainLog().getDate() + "\n" +
                 "buyerUsername = '" + sellLog.getMainLog().getBuyerUsername() + "'\n" +
                 "listOfProducts = '" + sellLog.getMainLog().getSellingProducts() + "'\n" +
@@ -107,7 +107,7 @@ public class SellerController extends UserController implements Creator {
         if (product == null) {
             return null;
         }
-        return "productId = '" + product.getProductId() + "'\n" +
+        return "productId = '" + product.getId() + "'\n" +
                 "name = '" + product.getName() + "'\n" +
                 "productStatus = " + product.getProductStatus() + "\n" +
                 "minimumPrice = " + product.getMinimumPrice() + "\n" +

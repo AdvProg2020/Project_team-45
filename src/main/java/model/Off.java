@@ -5,9 +5,9 @@ import model.product.Product;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Off {
+public class Off implements IdRecognized{
     private static Integer newOffId = 1;
-    private final String offId;
+    private final String id;
     private final ArrayList<Product> productsList;
     private OffStatus offStatus;
     private Date startTime;
@@ -15,7 +15,7 @@ public class Off {
     private int discountAmount;
 
     public Off(ArrayList<Product> productsList,Date startTime, Date endTime, int discountAmount) {
-        this.offId = newOffId.toString();
+        this.id = newOffId.toString();
         newOffId++;
         this.productsList = productsList;
         this.startTime = startTime;
@@ -23,8 +23,9 @@ public class Off {
         this.discountAmount = discountAmount;
     }
 
-    public String getOffId() {
-        return offId;
+    @Override
+    public String getId() {
+        return id;
     }
 
     public ArrayList<Product> getProductsList() {
@@ -76,7 +77,7 @@ public class Off {
     }
 
     public boolean equals(Off off) {
-        return off.offId.equals(this.offId);
+        return off.id.equals(this.id);
     }
 
     enum OffStatus {

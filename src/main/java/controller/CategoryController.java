@@ -214,7 +214,7 @@ public class CategoryController implements Editor, Creator {
 
     public Product getActiveCategoryProduct(String productId) {
         for (Product product : activeCategory.getProductsList()) {
-            if (product.getProductId().equals(productId))
+            if (product.getId().equals(productId))
                 return product;
         }
         return null;

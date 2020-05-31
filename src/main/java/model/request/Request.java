@@ -1,28 +1,30 @@
 package model.request;
 
+import model.IdRecognized;
 import model.Market;
 
 import java.util.HashMap;
 
-public abstract class Request {
+public abstract class Request implements IdRecognized {
     private static Integer newRequestId = 1;
-    protected String requestId;
+    protected String id;
     protected RequestStatus requestStatus;
     protected HashMap<String, String> fieldsAndValues;
 
     public Request() {
-        this.requestId = newRequestId.toString();
+        this.id = newRequestId.toString();
         newRequestId++;
     }
 
     public Request(HashMap<String, String> fieldsAndValues) {
-        this.requestId = newRequestId.toString();
+        this.id = newRequestId.toString();
         newRequestId++;
         this.fieldsAndValues = fieldsAndValues;
     }
 
-    public String getRequestId() {
-        return requestId;
+    @Override
+    public String getId() {
+        return id;
     }
 
     public RequestStatus getRequestStatus() {
@@ -39,11 +41,11 @@ public abstract class Request {
 
     public void accept(){
         apply();
-        Market.getInstance().removeRequestById(requestId);
+        Market.getInstance().removeRequestById(id);
     }
 
     public void decline() {
-        Market.getInstance().removeRequestById(requestId);
+        Market.getInstance().removeRequestById(id);
     }
 
     enum RequestStatus{
@@ -54,7 +56,7 @@ public abstract class Request {
 
     @Override
     public String toString() {
-        return  "request type:" + getType() + "requestId:" + requestId +
+        return  "request type:" + getType() + "requestId:" + id +
                 ", requestStatus:" + requestStatus;
     }
 }

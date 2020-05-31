@@ -131,7 +131,7 @@ public class BuyerController extends UserController implements Creator {
         Buyer buyer = ((Buyer) UserController.getActiveUser());
         ArrayList<String> result = new ArrayList<>();
         for (BuyLog buyLog : buyer.getListOfBuyLogs()) {
-            result.add("logId: " + buyLog.getMainLog().getLogId() + " date: " + buyLog.getMainLog().getDate() +
+            result.add("logId: " + buyLog.getMainLog().getId() + " date: " + buyLog.getMainLog().getDate() +
                     " finalPrice: " + buyLog.getMainLog().getFinalPrice());
         }
         return result;

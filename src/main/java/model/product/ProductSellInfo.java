@@ -1,17 +1,19 @@
 package model.product;
 
-import model.IdRecognized;
+import model.Market;
 import model.Off;
+import model.Savable;
 import model.user.Buyer;
 import model.user.Seller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
-public class ProductSellInfo implements IdRecognized {
+public class ProductSellInfo implements Savable {
     private String id;
-    private final Seller seller;
-    private final Product product;
+    private Seller seller;
+    private Product product;
     private int price;
     private int stock;
     private Off off;
@@ -101,11 +103,40 @@ public class ProductSellInfo implements IdRecognized {
 
     @Override
     public String toString() {
-        return  "seller:" + seller.getUsername() +
+        return "seller:" + seller.getUsername() +
                 ", product:" + product.getName() +
                 ", price:" + price +
                 ", stock:" + stock +
                 ", off:" + off +
                 ", sellCount:" + sellCount;
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("seller", seller.getId());
+        result.put("product", product.getId());
+        result.put("price", price);
+        result.put("stock", stock);
+        result.put("off", off.getId());
+        HashMap<String, Integer> buyersId = new HashMap<>();
+        for (Map.Entry<Buyer, Integer> buyer : allBuyers.entrySet()) {
+            buyersId.put(buyer.getKey().getId(), buyer.getValue());
+        }
+        result.put("allBuyers", buyersId);
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        Market market = Market.getInstance();
+        seller = (Seller) (market.getUserById((String) theMap.get("seller")));
+        product = market.getProductById((String) theMap.get("product"));
+        price = (int) theMap.get("price");
+        stock = (int) theMap.get("stock");
+        off = market.getOffById((String) theMap.get("off"));
+        for (Map.Entry<String, Integer> buyerId : ((HashMap<String, Integer>) theMap.get("allBuyers")).entrySet()) {
+            allBuyers.put((Buyer) market.getUserById(buyerId.getKey()), buyerId.getValue());
+        }
     }
 }

@@ -28,7 +28,7 @@ public abstract class Category implements Savable,IdRecognized {
     }
 
     public Category(String categoryId) {
-
+        this.id = categoryId;
     }
 
     public String getName() {
@@ -66,6 +66,7 @@ public abstract class Category implements Savable,IdRecognized {
         return id;
     }
 
+    @Override
     public HashMap<String, Object> convertToHashMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("name", name);
@@ -73,6 +74,7 @@ public abstract class Category implements Savable,IdRecognized {
         return result;
     }
 
+    @Override
     public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
         name = (String) theMap.get("name");
         parent = (ParentCategory) theMap.get("parent");

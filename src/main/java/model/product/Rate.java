@@ -1,5 +1,6 @@
 package model.product;
 
+import model.Market;
 import model.Savable;
 import model.user.Buyer;
 
@@ -34,11 +35,17 @@ public class Rate implements Savable {
 
     @Override
     public HashMap<String, Object> convertToHashMap() {
-        return null;
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("buyer", buyer.getId());
+        result.put("score", score);
+        result.put("productId", productId);
+        return result;
     }
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
-
+        buyer = (Buyer) Market.getInstance().getUserById((String) theMap.get("buyer"));
+        score = (int) theMap.get("productId");
+        productId = (String) theMap.get("productId");
     }
 }

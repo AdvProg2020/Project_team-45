@@ -1,5 +1,6 @@
 package model.request;
 
+import model.Market;
 import model.Off;
 import model.user.Seller;
 
@@ -54,5 +55,20 @@ public class OffEditionRequest extends Request{
         return super.toString()+
                 "seller:" + seller.getPersonalInfo().getUsername() +
                 ", offId:" + offId;
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = super.convertToHashMap();
+        result.put("seller", seller.getId());
+        result.put("offId", offId);
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        super.setFieldsFromHashMap(theMap);
+        seller = (Seller) Market.getInstance().getUserById((String) theMap.get("seller"));
+        offId = (String) theMap.get("offId");
     }
 }

@@ -13,7 +13,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class AddOffRequest extends Request{
-    private final Seller seller;
+    private Seller seller;
 
     public AddOffRequest(Seller seller, HashMap<String, String> fieldsAndValues) {
         super(fieldsAndValues);
@@ -91,5 +91,19 @@ public class AddOffRequest extends Request{
     @Override
     public String toString() {
         return super.toString() + "seller:" + seller.getPersonalInfo().getUsername();
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = super.convertToHashMap();
+        result.put("seller", seller.getId());
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        super.setFieldsFromHashMap(theMap);
+        seller = (Seller) Market.getInstance().getUserById((String) theMap.get("seller"));
+
     }
 }

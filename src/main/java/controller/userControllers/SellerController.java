@@ -229,6 +229,7 @@ public class SellerController extends UserController implements Creator {
         Seller newSeller = new Seller(new PersonalInfo(filledFeatures), new Company(filledFeatures));
         SellerRegisterRequest registerRequest  = new SellerRegisterRequest(newSeller);
         market.addRequest(registerRequest);
+        market.addRequestedSeller(newSeller);
     }
 
     @Override

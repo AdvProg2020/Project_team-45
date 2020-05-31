@@ -10,8 +10,8 @@ import model.user.Seller;
 import java.util.HashMap;
 
 public class AddProductRequest extends Request {
-    private final Seller seller;
-    private final String mode;
+    private Seller seller;
+    private String mode;
     private Product product;
 
     public AddProductRequest(String mode, Seller seller, HashMap<String, String> fieldsAndValues) {
@@ -58,5 +58,22 @@ public class AddProductRequest extends Request {
                 "seller:" + seller +
                 ", mode:" + mode +
                 ", product:" + product.getName();
+    }
+
+    @Override
+    public HashMap<String, Object> convertToHashMap() {
+        HashMap<String, Object> result = super.convertToHashMap();
+        result.put("seller", seller.getId());
+        result.put("mode", mode);
+        result.put("product", product.getId());
+        return result;
+    }
+
+    @Override
+    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+        super.setFieldsFromHashMap(theMap);
+        seller = (Seller) Market.getInstance().getUserById((String) theMap.get("seller"));
+        mode = (String) theMap.get("mode");
+        product = Market.getInstance().getProductById((String) theMap.get("product"));
     }
 }

@@ -154,7 +154,7 @@ public class Log implements Savable, IdRecognized {
         ArrayList<String> sellInfoIds = (ArrayList<String>) theMap.get("sellingProducts");
         sellingProducts = new ArrayList<>();
         for (String sellInfoId : sellInfoIds) {
-            sellingProducts.add(Market.getInstance().getSellInfoById(sellInfoId));
+            sellingProducts.add(Market.getInstance().getProductSellInfoById(sellInfoId));
         }
     }
 

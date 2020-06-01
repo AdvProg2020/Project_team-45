@@ -27,16 +27,16 @@ public class Market {
     private ArrayList<Company> allCompanies;
 
     private Market() {
-        allLogs = new ArrayList<>();
-        allOffs = new ArrayList<>();
         allUsers = new ArrayList<>();
+        requestedSellers = new ArrayList<>();
         allCodedDiscounts = new ArrayList<>();
         allCategories = new ArrayList<>();
         mainCategories = new ArrayList<>();
         allProducts = new ArrayList<>();
+        allLogs = new ArrayList<>();
+        allOffs = new ArrayList<>();
         allRequests = new ArrayList<>();
         allProductSellInfos = new ArrayList<>();
-        requestedSellers = new ArrayList<>();
         allRates = new ArrayList<>();
         allCompanies = new ArrayList<>();
     }
@@ -47,24 +47,16 @@ public class Market {
         return marketInstance;
     }
 
-    public ArrayList<Product> getAllProducts() {
-        return allProducts;
-    }
-
     public ArrayList<User> getAllUsers() {
         return allUsers;
     }
 
-    public ArrayList<Off> getAllOffs() {
-        return allOffs;
+    public ArrayList<Seller> getRequestedSellers() {
+        return requestedSellers;
     }
 
-    public ArrayList<Log> getAllLogs() {
-        return allLogs;
-    }
-
-    public ArrayList<Request> getAllRequests() {
-        return allRequests;
+    public ArrayList<CodedDiscount> getAllCodedDiscounts() {
+        return allCodedDiscounts;
     }
 
     public ArrayList<Category> getAllCategories() {
@@ -75,37 +67,32 @@ public class Market {
         return mainCategories;
     }
 
-    public ArrayList<CodedDiscount> getAllCodedDiscounts() {
-        return allCodedDiscounts;
+    public ArrayList<Product> getAllProducts() {
+        return allProducts;
     }
 
-    public Category getMainCategoryByName(String name) {
-        for (Category mainCategory : mainCategories) {
-            if (mainCategory.getName().equals(name)) {
-                return mainCategory;
-            }
-        }
-        return null;
+    public ArrayList<Log> getAllLogs() {
+        return allLogs;
     }
 
-    public User getUserByUsername(String username) {
-        for (User user : allUsers) {
-            if (user.getPersonalInfo().getUsername().equals(username))
-                return user;
-        }
-        return null;
+    public ArrayList<Off> getAllOffs() {
+        return allOffs;
     }
 
-    public void addUserToList(User user) {
-        allUsers.add(user);
+    public ArrayList<Request> getAllRequests() {
+        return allRequests;
     }
 
-    public CodedDiscount getCodedDiscountByCode(String code) {
-        for (CodedDiscount codedDiscount : allCodedDiscounts) {
-            if (codedDiscount.getCode().equals(code))
-                return codedDiscount;
-        }
-        return null;
+    public ArrayList<ProductSellInfo> getAllProductSellInfos() {
+        return allProductSellInfos;
+    }
+
+    public ArrayList<Rate> getAllRates() {
+        return allRates;
+    }
+
+    public ArrayList<Company> getAllCompanies() {
+        return allCompanies;
     }
 
     public ArrayList<Product> getAllDiscountedProductsList() {
@@ -118,8 +105,30 @@ public class Market {
         return allDiscountedProductsList;
     }
 
-    public boolean isDiscountCodeValid(String discountCode) {
-        return false;
+    public User getUserById(String id) {
+        for (User user : allUsers) {
+            if (user.getId().equals(id)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public Seller getRequestedSellerById(String sellerId) {
+        for (Seller requestedSeller : requestedSellers) {
+            if (requestedSeller.getId().equals(sellerId))
+                return requestedSeller;
+        }
+        return null;
+    }
+
+    public Category getCategoryById(String categoryId) {
+        for (Category category : allCategories) {
+            if (category.getId().equals(categoryId)) {
+                return category;
+            }
+        }
+        return null;
     }
 
     public Product getProductById(String productId) {
@@ -127,6 +136,14 @@ public class Market {
             if (product.getId().equals(productId)) {
                 return product;
             }
+        }
+        return null;
+    }
+
+    public Log getLogById(String id) {
+        for (Log log : allLogs) {
+            if (log.getId().equals(id))
+                return log;
         }
         return null;
     }
@@ -140,113 +157,18 @@ public class Market {
         return null;
     }
 
-    public Category getCategoryByName(String name) {
-        for (Category category : allCategories) {
-            if (category.getName().equalsIgnoreCase(name)) {
-                return category;
-            }
-        }
-        return null;
-    }
-
-    public void removeUserFromAllUsers(User user) {
-        allUsers.remove(user);
-    }
-
-    public void removeProductByProductId(String productId) {
-        allProducts.removeIf(product -> product.getId().equalsIgnoreCase(productId));
-    }
-
-    public void removeCodedDiscountFromList(CodedDiscount codedDiscount) {
-        allCodedDiscounts.remove(codedDiscount);
-    }
-
-    public void addCategoryToList(Category category) {
-        allCategories.add(category);
-    }
-
-    public void addMainCategoryToList(Category category) {
-        mainCategories.add(category);
-    }
-
-    public void removeCategoryFromList(Category category) {
-        allCategories.remove(category);
-    }
-
-    public void removeOffById(String offId) {
-        allOffs.removeIf(off -> off.getId().equals(offId));
-    }
-
-    public void removeProductFromAllProductsList(Product product) {
-        allProducts.remove(product);
-    }
-
-    public void removeRequestById(String requestId) {
-        for (Request request : allRequests) {
-            if (request.getId().equals(requestId)) {
-                allRequests.remove(request);
-                return;
-            }
-        }
-    }
-
     public Request getRequestById(String id) {
         for (Request request : allRequests) {
             if (request.getId().equals(id))
                 return request;
         }
-                return null;
-    }
-
-    public void addDiscountToList(CodedDiscount creatingDiscount) {
-        allCodedDiscounts.add(creatingDiscount);
-    }
-
-    public void addRequest(Request request) {
-        this.allRequests.add(request);
-    }
-
-    public User getUserById(String id) {
-        for (User user : allUsers) {
-            if (user.getId().equals(id)) {
-                return user;
-            }
-        }
         return null;
     }
 
-    public void addSellInfoToList(ProductSellInfo sellInfo) {
-        allProductSellInfos.add(sellInfo);
-    }
-
-    public ProductSellInfo getSellInfoById(String id) {
+    public ProductSellInfo getProductSellInfoById(String id) {
         for (ProductSellInfo productSellInfo : allProductSellInfos) {
             if (productSellInfo.getId().equals(id))
                 return productSellInfo;
-        }
-        return null;
-    }
-
-    public Log getLogById(String id) {
-        for (Log log : allLogs) {
-            if (log.getId().equals(id))
-                return log;
-        }
-        return null;
-    }
-
-    public void addRequestedSeller(Seller newSeller) {
-        requestedSellers.add(newSeller);
-    }
-
-    public void removeRequestedSeller(Seller seller) {
-        requestedSellers.remove(seller);
-    }
-
-    public Seller getRequestedSellerById(String sellerId) {
-        for (Seller requestedSeller : requestedSellers) {
-            if (requestedSeller.getId().equals(sellerId))
-                return requestedSeller;
         }
         return null;
     }
@@ -269,20 +191,107 @@ public class Market {
         return null;
     }
 
-    public ArrayList<Seller> getRequestedSellers() {
-        return requestedSellers;
+    public User getUserByUsername(String username) {
+        for (User user : allUsers) {
+            if (user.getPersonalInfo().getUsername().equals(username))
+                return user;
+        }
+        return null;
     }
 
-    public ArrayList<ProductSellInfo> getAllProductSellInfos() {
-        return allProductSellInfos;
+    public CodedDiscount getCodedDiscountByCode(String code) {
+        for (CodedDiscount codedDiscount : allCodedDiscounts) {
+            if (codedDiscount.getCode().equals(code))
+                return codedDiscount;
+        }
+        return null;
     }
 
-    public ArrayList<Rate> getAllRates() {
-        return allRates;
+    public Category getCategoryByName(String name) {
+        for (Category category : allCategories) {
+            if (category.getName().equalsIgnoreCase(name)) {
+                return category;
+            }
+        }
+        return null;
     }
 
-    public ArrayList<Company> getAllCompanies() {
-        return allCompanies;
+    public Category getMainCategoryByName(String name) {
+        for (Category mainCategory : mainCategories) {
+            if (mainCategory.getName().equals(name)) {
+                return mainCategory;
+            }
+        }
+        return null;
+    }
+
+    public void addUserToList(User user) {
+        allUsers.add(user);
+    }
+
+    public void addRequestedSeller(Seller newSeller) {
+        requestedSellers.add(newSeller);
+    }
+
+    public void addCodedDiscountToList(CodedDiscount creatingDiscount) {
+        allCodedDiscounts.add(creatingDiscount);
+    }
+
+    public void addCategoryToList(Category category) {
+        allCategories.add(category);
+    }
+
+    public void addMainCategoryToList(Category category) {
+        mainCategories.add(category);
+    }
+
+    public void addRequest(Request request) {
+        this.allRequests.add(request);
+    }
+
+    public void addSellInfoToList(ProductSellInfo sellInfo) {
+        allProductSellInfos.add(sellInfo);
+    }
+
+    public void removeUserFromAllUsers(User user) {
+        allUsers.remove(user);
+    }
+
+    public void removeRequestedSellerFromList(Seller seller) {
+        requestedSellers.remove(seller);
+    }
+
+    public void removeCodedDiscountFromList(CodedDiscount codedDiscount) {
+        allCodedDiscounts.remove(codedDiscount);
+    }
+
+    public void removeCategoryFromList(Category category) {
+        allCategories.remove(category);
+    }
+
+    public void removeProductFromAllList(Product product) {
+        allProducts.remove(product);
+    }
+
+    public void removeProductByProductId(String productId) {
+        allProducts.removeIf(product -> product.getId().equalsIgnoreCase(productId));
+    }
+
+    public void removeOffById(String offId) {
+        allOffs.removeIf(off -> off.getId().equals(offId));
+    }
+
+    public void removeRequestById(String requestId) {
+        for (Request request : allRequests) {
+            if (request.getId().equals(requestId)) {
+                allRequests.remove(request);
+                return;
+            }
+        }
+    }
+
+    public boolean isDiscountCodeValid(String discountCode) {
+        return false;
     }
 
     public void setAllUsers(ArrayList<User> allUsers) {

@@ -1,6 +1,5 @@
 package model.user;
 
-import com.sun.applet2.AppletParameters;
 import model.Company;
 import model.Market;
 import model.Off;
@@ -140,7 +139,7 @@ public class Seller extends User {
         HashMap<String, String> products = (HashMap<String, String>) theMap.get("availableProducts");
         for (String productId : products.keySet()) {
             availableProducts.put(Market.getInstance().getProductById(productId),
-                    Market.getInstance().getSellInfoById(products.get(productId)));
+                    Market.getInstance().getProductSellInfoById(products.get(productId)));
         }
 
         listOfOffs = new HashMap<>();

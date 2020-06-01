@@ -80,7 +80,7 @@ public class CodedDiscountController implements Editor, Creator {
     public void createItem(HashMap<String, String> filledFeatures) {
         CodedDiscount creatingDiscount = new CodedDiscount(filledFeatures);
         creatingDiscount.getOwner().addCodedDiscount(creatingDiscount);
-        market.addDiscountToList(creatingDiscount);
+        market.addCodedDiscountToList(creatingDiscount);
     }
 
     @Override

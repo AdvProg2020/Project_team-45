@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Category implements Savable,IdRecognized {
+    private String id;
     private String name;
     private ParentCategory parent;
-    private String id;
 
 
     public Category(String name, ParentCategory parent) {
@@ -29,6 +29,10 @@ public abstract class Category implements Savable,IdRecognized {
 
     public Category(String categoryId) {
         this.id = categoryId;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -61,10 +65,6 @@ public abstract class Category implements Savable,IdRecognized {
     }
 
     public abstract boolean isFinal();
-
-    public String getId() {
-        return id;
-    }
 
     @Override
     public HashMap<String, Object> convertToHashMap() {

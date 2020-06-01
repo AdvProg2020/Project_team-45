@@ -319,7 +319,7 @@ public class Product implements Savable, IdRecognized {
             ProductSellInfo productSellInfo = market.getProductSellInfoById(sellInfoId);
             sellersList.put(productSellInfo.getSeller(), productSellInfo);
         }
-        defaultSellInfo = market.getSellInfoById((String) theMap.get("defaultSellInfo"));
+        defaultSellInfo = market.getProductSellInfoById((String) theMap.get("defaultSellInfo"));
         minimumPrice = (int) theMap.get("minimumPrice");
         category = (FinalCategory) market.getCategoryById((String) theMap.get("category"));
         categoryFeatures = (LinkedHashMap<String, String>) theMap.get("categoryFeatures");

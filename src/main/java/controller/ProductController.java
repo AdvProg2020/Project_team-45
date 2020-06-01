@@ -123,7 +123,7 @@ public class ProductController implements Deleter {
     public void removeProduct(Product product) {
         removeProductFromSellersList(product);
         removeProductFromCategory(product);
-        market.removeProductFromAllProductsList(product);
+        market.removeProductFromAllList(product);
     }
 
     private void removeProductFromCategory(Product product) {

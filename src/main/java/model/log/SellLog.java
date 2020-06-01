@@ -71,7 +71,7 @@ public class SellLog implements Savable {
         ArrayList<String> soldIds = (ArrayList<String>) theMap.get("soldProducts");
         soldProducts = new ArrayList<>();
         for (String soldId : soldIds) {
-            soldProducts.add(Market.getInstance().getSellInfoById(soldId));
+            soldProducts.add(Market.getInstance().getProductSellInfoById(soldId));
         }
     }
 

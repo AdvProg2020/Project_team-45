@@ -4,6 +4,7 @@ import model.category.Category;
 import model.log.Log;
 import model.product.Product;
 import model.product.ProductSellInfo;
+import model.product.Rate;
 import model.request.Request;
 import model.user.Seller;
 import model.user.User;
@@ -22,6 +23,9 @@ public class Market {
     private final ArrayList<Off> allOffs;
     private final ArrayList<Request> allRequests;           // configure type by Id
     private final ArrayList<ProductSellInfo> allProductSellInfos; // add news to it
+    private final ArrayList<Rate> allRates;
+    private final ArrayList<Company> allCompanies;
+    private IdKeeper idKeeper;
 
     private Market() {
         allLogs = new ArrayList<>();
@@ -34,6 +38,9 @@ public class Market {
         allRequests = new ArrayList<>();
         allProductSellInfos = new ArrayList<>();
         requestedSellers = new ArrayList<>();
+        allRates = new ArrayList<>();
+        allCompanies = new ArrayList<>();
+        idKeeper = IdKeeper.getInstance();
     }
 
     public static Market getInstance() {
@@ -244,6 +251,40 @@ public class Market {
                 return requestedSeller;
         }
         return null;
+    }
+
+    public Rate getRateById(String id) {
+        for (Rate rate : allRates) {
+            if (rate.getId().equals(id)) {
+                return rate;
+            }
+        }
+        return null;
+    }
+
+    public Company getCompanyByName(String name) {
+        for (Company company : allCompanies) {
+            if (company.getName().equals(name)) {
+                return company;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Seller> getRequestedSellers() {
+        return requestedSellers;
+    }
+
+    public ArrayList<ProductSellInfo> getAllProductSellInfos() {
+        return allProductSellInfos;
+    }
+
+    public ArrayList<Rate> getAllRates() {
+        return allRates;
+    }
+
+    public ArrayList<Company> getAllCompanies() {
+        return allCompanies;
     }
 }
 

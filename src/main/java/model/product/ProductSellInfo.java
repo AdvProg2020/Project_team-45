@@ -1,5 +1,6 @@
 package model.product;
 
+import model.IdRecognized;
 import model.Market;
 import model.Off;
 import model.Savable;
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductSellInfo implements Savable {
+public class ProductSellInfo implements Savable, IdRecognized {
     private String id;
     private Seller seller;
     private Product product;
@@ -66,6 +67,7 @@ public class ProductSellInfo implements Savable {
         return price;
     }
 
+    @Override
     public String getId() {
         return id;
     }

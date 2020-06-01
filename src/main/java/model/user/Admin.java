@@ -22,12 +22,12 @@ public class Admin extends User implements Savable {
     @Override
     public HashMap<String, Object> convertToHashMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("personalInfo", personalInfo.convertToHashMap());
+        result.put("personalInfo", personalInfo);
         return result;
     }
 
     @Override
     public void setFieldsFromHashMap(HashMap theMap) {
-        personalInfo.setFieldsFromHashMap((HashMap) theMap.get("personalInfo"));
+        personalInfo = (PersonalInfo) theMap.get("personalInfo");
     }
 }

@@ -1,12 +1,15 @@
 package model.product;
 
+import model.IdRecognized;
 import model.Market;
 import model.Savable;
 import model.user.Buyer;
 
 import java.util.HashMap;
 
-public class Rate implements Savable {
+public class Rate implements Savable, IdRecognized {
+    private static int newRateId = 1;
+    private String id;
     private Buyer buyer;
     private int score;
     private String productId;
@@ -15,6 +18,8 @@ public class Rate implements Savable {
     }
 
     public Rate(Buyer user, int score, String productId) {
+        this.id = "rate" + newRateId;
+        newRateId++;
         this.buyer = user;
         this.score = score;
         this.productId = productId;
@@ -47,5 +52,10 @@ public class Rate implements Savable {
         buyer = (Buyer) Market.getInstance().getUserById((String) theMap.get("buyer"));
         score = (int) theMap.get("productId");
         productId = (String) theMap.get("productId");
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 }

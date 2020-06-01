@@ -21,6 +21,10 @@ public class SellLog implements Savable {
         findMyProductsAndIncome();
     }
 
+    public SellLog() {
+
+    }
+
     private void findMyProductsAndIncome() {
         this.soldProducts = new ArrayList<ProductSellInfo>();
         this.income = 0;
@@ -70,10 +74,5 @@ public class SellLog implements Savable {
             soldProducts.add(Market.getInstance().getSellInfoById(soldId));
         }
     }
-
-    //    public SellLog(String logId, Date date, int finalPrice, String address, String buyerUsername) {
-//        super(logId, date, finalPrice, address);
-//        this.buyerUsername = buyerUsername;
-//    }
 
 }

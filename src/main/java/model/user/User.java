@@ -12,6 +12,7 @@ public abstract class User implements Savable, IdRecognized {
 
     public User(PersonalInfo personalInfo) {
         this.id = getRole() + newUserId;
+        newUserId++;
         this.personalInfo = personalInfo;
     }
 

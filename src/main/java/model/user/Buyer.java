@@ -102,7 +102,6 @@ public class Buyer extends User implements CartHolder, Savable {
         }
         BuyLog buyLog = new BuyLog(log);
         listOfBuyLogs.add(buyLog);
-        //System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" + getCart().getTotalPrice());
         log.calculateFinalPrice();
         setBalance(getBalance() - log.getFinalPrice());
         cart = new Cart();
@@ -131,6 +130,7 @@ public class Buyer extends User implements CartHolder, Savable {
     @Override
     public HashMap convertToHashMap() {
         HashMap<String, Object> result = new HashMap<>();
+        result.put("personalInfo", personalInfo);
         ArrayList<String> codedDiscounts = new ArrayList<>();
         for (CodedDiscount discount : listOfCodedDiscounts) {
             codedDiscounts.add(discount.getCode());
@@ -145,9 +145,9 @@ public class Buyer extends User implements CartHolder, Savable {
         }
         result.put("listOfBuyLogs", buyLogs);
 
-        HashMap<String, HashMap> products = new HashMap<>();
-        for (String productId : purchasedProducts.keySet()) {   // we must change this part if allRates is stored in market
-            products.put(productId, purchasedProducts.get(productId).convertToHashMap());
+        HashMap<String, String> products = new HashMap<>();
+        for (String productId : purchasedProducts.keySet()) {
+            products.put(productId, purchasedProducts.get(productId).getId());
         }
         result.put("purchasedProducts", products);
 
@@ -156,6 +156,7 @@ public class Buyer extends User implements CartHolder, Savable {
 
     @Override
     public void setFieldsFromHashMap(HashMap theMap) {
+        personalInfo = (PersonalInfo) theMap.get("personalInfo");
         ArrayList<String> codedDiscounts = (ArrayList<String>) theMap.get("listOfCodedDiscounts");
         listOfCodedDiscounts = new ArrayList<>();
         for (String code : codedDiscounts) {
@@ -172,12 +173,10 @@ public class Buyer extends User implements CartHolder, Savable {
             listOfBuyLogs.add(buyLog);
         }
 
-        HashMap<String, HashMap> products = (HashMap<String, HashMap>) theMap.get("purchasedProducts");
+        HashMap<String, String> products = (HashMap<String, String>) theMap.get("purchasedProducts");
         purchasedProducts = new HashMap<>();
-        for (String productId : products.keySet()) {   // we must change this part if allRates is stored in market
-            Rate rate = new Rate();
-            rate.setFieldsFromHashMap(products.get(productId));
-            purchasedProducts.put(productId, rate);
+        for (String productId : products.keySet()) {
+            purchasedProducts.put(productId, Market.getInstance().getRateById(products.get(productId)));
         }
     }
 }

@@ -173,81 +173,94 @@ public class MarketCopier { // copies and rebuilds market
     }
 
     public void buildMarketWithHashMaps() {
-
+        buildUsersWithHashMaps();
+        buildRequestedSellersWithHashMaps();
+        buildDiscountsWithHashMaps();
+        buildCategoriesWithHashMaps();
+        buildMainCategoriesWithHashMaps();
+        buildProductsWithHashMaps();
+        buildLogsWithHashMaps();
+        buildOffsWithHashMaps();
+        buildRequestsWithHashMaps();
+        buildProductSellInfosWithHashMaps();
+        buildRatesWithHashMaps();
     }
 
-    private <Type extends Savable> ArrayList<Type> buildArrayListOfObjects(Class<Type> typeClass, HashMap<String, HashMap> hashMap) {
-        ArrayList<Type> objects = new ArrayList<>();
-        Constructor<Type> typeConstructor = null;
-        try {
-            typeConstructor = typeClass.getConstructor(String.class);
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+    private void buildUsersWithHashMaps() {
+        for (String id : allUsers.keySet()) {
+            User user = Market.getInstance().getUserById(id);
+            user.setFieldsFromHashMap(allUsers.get(id));
         }
-        for (String id : set) {
-            Type type = null;
-            try {
-                type = typeConstructor.newInstance(id);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            objects.add(type);
-        }
-        return objects;
     }
 
-    private ArrayList<User> buildArrayListOfUsers(HashMap<String, HashMap> hashMap) {
-        ArrayList<User> objects = new ArrayList<>();
-        for (String id : set) {
-            User user = null;
-            if (id.startsWith("admin")) {
-                user = new Admin(id);
-            } else if (id.startsWith("buyer")) {
-                user = new Buyer(id);
-            } else if (id.startsWith("seller")) {
-                user = new Seller(id);
-            }
-            objects.add(user);
+    private void buildRequestedSellersWithHashMaps() {
+        for (String id : allRequests.keySet()) {
+            Seller seller = Market.getInstance().getRequestedSellerById(id);
+            seller.setFieldsFromHashMap(allRequests.get(id));
         }
-        return objects;
     }
 
-    private ArrayList<Category> buildArrayListOfCategories(HashMap<String, HashMap> hashMap) {
-        ArrayList<Category> objects = new ArrayList<>();
-        for (String id : set) {
-            Category category = null;
-            if (id.startsWith("parent")) {
-                category = new ParentCategory(id);
-            } else if (id.startsWith("final")) {
-                category = new FinalCategory(id);
-            }
-            objects.add(category);
+    private void buildDiscountsWithHashMaps() {
+        for (String id : allCodedDiscounts.keySet()) {
+            CodedDiscount discount = Market.getInstance().getCodedDiscountById(id);
+            discount.setFieldsFromHashMap(allCodedDiscounts.get(id));
         }
-        return objects;
     }
 
-    private ArrayList<Request> buildArrayListOfRequests(HashMap<String, HashMap> hashMap) {
-        ArrayList<Request> objects = new ArrayList<>();
-        for (String id : set) {
-            Request request = null;
-            if (id.startsWith("add off")) {
-                request = new AddOffRequest(id);
-            } else if (id.startsWith("add product")) {
-                request = new AddProductRequest(id);
-            } else if (id.startsWith("new comment")) {
-                request = new CommentRequest(id);
-            } else if (id.startsWith("edit off")) {
-                request = new OffEditionRequest(id);
-            } else if (id.startsWith("edit product")) {
-                request = new ProductEditionRequest(id);
-            } else if (id.startsWith("remove product")) {
-                request = new RemoveProductRequest(id);
-            } else if (id.startsWith("seller register")) {
-                request = new SellerRegisterRequest(id);
-            }
-            objects.add(request);
+    private void buildCategoriesWithHashMaps() {
+        for (String id : allCategories.keySet()) {
+            Category category = Market.getInstance().getCategoryById(id);
+            category.setFieldsFromHashMap(allCategories.get(id));
         }
-        return objects;
+    }
+
+    private void buildMainCategoriesWithHashMaps() {
+        for (String id : mainCategories.keySet()) {
+            Category category = Market.getInstance().getMainCategoryById(id);
+            category.setFieldsFromHashMap(mainCategories.get(id));
+        }
+    }
+
+    private void buildProductsWithHashMaps() {
+        for (String id : allProducts.keySet()) {
+            Product product = Market.getInstance().getProductById(id);
+            product.setFieldsFromHashMap(allProducts.get(id));
+        }
+    }
+
+    private void buildLogsWithHashMaps() {
+        for (String id : allLogs.keySet()) {
+            Log log = Market.getInstance().getLogById(id);
+            log.setFieldsFromHashMap(allLogs.get(id));
+        }
+    }
+
+    private void buildOffsWithHashMaps() {
+        for (String id : allOffs.keySet()) {
+            Off off = Market.getInstance().getOffById(id);
+            off.setFieldsFromHashMap(allOffs.get(id));
+        }
+    }
+
+    private void buildRequestsWithHashMaps() {
+        for (String id : allRequests.keySet()) {
+            Request request = Market.getInstance().getRequestById(id);
+            request.setFieldsFromHashMap(allRequests.get(id));
+        }
+    }
+
+    private void buildProductSellInfosWithHashMaps() {
+        for (String id : allProductSellInfos.keySet()) {
+            ProductSellInfo sellInfo = Market.getInstance().getProductSellInfoById(id);
+            sellInfo.setFieldsFromHashMap(allProductSellInfos.get(id));
+        }
+    }
+
+    private void buildRatesWithHashMaps() {
+        for (String id : allRates.keySet()) {
+            Rate rate = Market.getInstance().getRateById(id);
+            rate.setFieldsFromHashMap(allRates.get(id));
+        }
     }
 
 }

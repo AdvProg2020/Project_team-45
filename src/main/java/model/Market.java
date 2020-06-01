@@ -341,5 +341,24 @@ public class Market {
     public void setAllCompanies(ArrayList<Company> allCompanies) {
         this.allCompanies = allCompanies;
     }
+
+    public CodedDiscount getCodedDiscountById(String id) {
+        for (CodedDiscount discount : allCodedDiscounts) {
+            if (discount.getId().equals(id)) {
+                return discount;
+            }
+        }
+        return null;
+    }
+
+    public Category getMainCategoryById(String id) {
+        for (Category mainCategory : mainCategories) {
+            if (mainCategory.getId().equals(id)) {
+                return mainCategory;
+            }
+        }
+        return null;
+    }
+
 }
 

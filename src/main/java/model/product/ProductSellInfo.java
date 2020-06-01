@@ -1,10 +1,7 @@
 package model.product;
 
 import com.sun.applet2.AppletParameters;
-import model.IdRecognized;
-import model.Market;
-import model.Off;
-import model.Savable;
+import model.*;
 import model.user.Buyer;
 import model.user.Seller;
 
@@ -12,8 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductSellInfo implements Savable, IdRecognized {
-    private String id;
+public class ProductSellInfo extends IdRecognized implements Savable {
     private Seller seller;
     private Product product;
     private int price;
@@ -23,6 +19,7 @@ public class ProductSellInfo implements Savable, IdRecognized {
     private final HashMap<Buyer, Integer> allBuyers;
 
     public ProductSellInfo(Product product, Seller seller) {
+        this.id = "" + IdKeeper.getInstance().getProductSellInfosNewId();
         this.product = product;
         this.seller = seller;
         this.allBuyers = new HashMap<>();

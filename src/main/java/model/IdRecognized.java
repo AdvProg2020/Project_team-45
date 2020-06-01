@@ -1,5 +1,9 @@
 package model;
 
-public interface IdRecognized {
-    String getId();
+public abstract class IdRecognized {
+    protected String id;
+
+    public String getId() {
+        return id;
+    }
 }

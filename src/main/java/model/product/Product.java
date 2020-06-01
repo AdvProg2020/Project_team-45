@@ -6,9 +6,7 @@ import model.user.Seller;
 
 import java.util.*;
 
-public class Product implements Savable, IdRecognized {
-    private static Integer newProductId = 1;
-    private final String id;
+public class Product extends IdRecognized implements Savable {
     private String name;
     private Company company;
     private Date productionDate;
@@ -28,8 +26,7 @@ public class Product implements Savable, IdRecognized {
 
 
     public Product(String name, FinalCategory category, String description) {
-        this.id = newProductId.toString();
-        newProductId++;
+        this.id = "" + IdKeeper.getInstance().getProductsNewId();
         this.name = name;
         this.productionDate = new Date();
         this.category = category;

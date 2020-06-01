@@ -1,17 +1,22 @@
 package model;
 
 import model.category.Category;
+import model.category.FinalCategory;
+import model.category.ParentCategory;
 import model.log.Log;
 import model.product.Product;
 import model.product.ProductSellInfo;
 import model.product.Rate;
-import model.request.Request;
+import model.request.*;
+import model.user.Admin;
+import model.user.Buyer;
 import model.user.Seller;
 import model.user.User;
 
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class MarketCopier { // copies and rebuilds market
     private static MarketCopier instance = new MarketCopier();
@@ -67,7 +72,6 @@ public class MarketCopier { // copies and rebuilds market
         requestedSellers = buildIdToObjectHashMapHashMap(market.getRequestedSellers());
         allRates = buildIdToObjectHashMapHashMap(market.getAllRates());
         allCompanies = market.getAllCompanies();
-        idKeeper.updateIds();
     }
 
     private <Type extends IdRecognized & Savable> HashMap<String, HashMap> buildIdToObjectHashMapHashMap(ArrayList<Type> objects) {
@@ -78,20 +82,98 @@ public class MarketCopier { // copies and rebuilds market
         return result;
     }
 
-    public void buildMarket() {
-        market.setAllLogs(buildArrayListOfObjects(Log.class, allLogs));
-        market.setAllOffs(buildArrayListOfObjects(Off.class, allOffs));
-        market.setAllUsers(buildArrayListOfObjects(User.class, allUsers));
-        market.setAllCodedDiscounts(buildArrayListOfObjects(CodedDiscount.class, allCodedDiscounts));
-        market.setAllCategories(buildArrayListOfObjects(Category.class, allCategories));
-        market.setMainCategories(buildArrayListOfObjects(Category.class, mainCategories));
-        market.setAllProducts(buildArrayListOfObjects(Product.class, allProducts));
-        market.setAllRequests(buildArrayListOfObjects(Request.class, allRequests));
-        market.setAllProductSellInfos(buildArrayListOfObjects(ProductSellInfo.class, allProductSellInfos));
-        market.setRequestedSellers(buildArrayListOfObjects(Seller.class, requestedSellers));
-        market.setAllRates(buildArrayListOfObjects(Rate.class, allRates));
+    public void buildMarketWithIds() {
+        market.setAllLogs(buildArrayListOfPrimaryObjects(Log.class, allLogs.keySet()));
+        market.setAllOffs(buildArrayListOfPrimaryObjects(Off.class, allOffs.keySet()));
+        market.setAllUsers(buildArrayListOfPrimaryUsers(allUsers.keySet()));
+        market.setAllCodedDiscounts(buildArrayListOfPrimaryObjects(CodedDiscount.class, allCodedDiscounts.keySet()));
+        market.setAllCategories(buildArrayListOfPrimaryCategories(allCategories.keySet()));
+        market.setMainCategories(buildArrayListOfPrimaryCategories(mainCategories.keySet()));
+        market.setAllProducts(buildArrayListOfPrimaryObjects(Product.class, allProducts.keySet()));
+        market.setAllRequests(buildArrayListOfPrimaryRequests(allRequests.keySet()));
+        market.setAllProductSellInfos(buildArrayListOfPrimaryObjects(ProductSellInfo.class, allProductSellInfos.keySet()));
+        market.setRequestedSellers(buildArrayListOfPrimaryObjects(Seller.class, requestedSellers.keySet()));
+        market.setAllRates(buildArrayListOfPrimaryObjects(Rate.class, allRates.keySet()));
         market.setAllCompanies(allCompanies);
         IdKeeper.setInstance(idKeeper);
+    }
+
+    private <Type extends Savable> ArrayList<Type> buildArrayListOfPrimaryObjects(Class<Type> typeClass, Set<String> set) {
+        ArrayList<Type> objects = new ArrayList<>();
+        Constructor<Type> typeConstructor = null;
+        try {
+            typeConstructor = typeClass.getConstructor(String.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        for (String id : set) {
+            Type type = null;
+            try {
+                type = typeConstructor.newInstance(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            objects.add(type);
+        }
+        return objects;
+    }
+
+    private ArrayList<User> buildArrayListOfPrimaryUsers(Set<String> set) {
+        ArrayList<User> objects = new ArrayList<>();
+        for (String id : set) {
+            User user = null;
+            if (id.startsWith("admin")) {
+                user = new Admin(id);
+            } else if (id.startsWith("buyer")) {
+                user = new Buyer(id);
+            } else if (id.startsWith("seller")) {
+                user = new Seller(id);
+            }
+            objects.add(user);
+        }
+        return objects;
+    }
+
+    private ArrayList<Category> buildArrayListOfPrimaryCategories(Set<String> set) {
+        ArrayList<Category> objects = new ArrayList<>();
+        for (String id : set) {
+            Category category = null;
+            if (id.startsWith("parent")) {
+                category = new ParentCategory(id);
+            } else if (id.startsWith("final")) {
+                category = new FinalCategory(id);
+            }
+            objects.add(category);
+        }
+        return objects;
+    }
+
+    private ArrayList<Request> buildArrayListOfPrimaryRequests(Set<String> set) {
+        ArrayList<Request> objects = new ArrayList<>();
+        for (String id : set) {
+            Request request = null;
+            if (id.startsWith("add off")) {
+                request = new AddOffRequest(id);
+            } else if (id.startsWith("add product")) {
+                request = new AddProductRequest(id);
+            } else if (id.startsWith("new comment")) {
+                request = new CommentRequest(id);
+            } else if (id.startsWith("edit off")) {
+                request = new OffEditionRequest(id);
+            } else if (id.startsWith("edit product")) {
+                request = new ProductEditionRequest(id);
+            } else if (id.startsWith("remove product")) {
+                request = new RemoveProductRequest(id);
+            } else if (id.startsWith("seller register")) {
+                request = new SellerRegisterRequest(id);
+            }
+            objects.add(request);
+        }
+        return objects;
+    }
+
+    public void buildMarketWithHashMaps() {
+
     }
 
     private <Type extends Savable> ArrayList<Type> buildArrayListOfObjects(Class<Type> typeClass, HashMap<String, HashMap> hashMap) {
@@ -102,15 +184,68 @@ public class MarketCopier { // copies and rebuilds market
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-        for (String id : hashMap.keySet()) {
+        for (String id : set) {
             Type type = null;
             try {
                 type = typeConstructor.newInstance(id);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            type.setFieldsFromHashMap(hashMap.get(id));
             objects.add(type);
+        }
+        return objects;
+    }
+
+    private ArrayList<User> buildArrayListOfUsers(HashMap<String, HashMap> hashMap) {
+        ArrayList<User> objects = new ArrayList<>();
+        for (String id : set) {
+            User user = null;
+            if (id.startsWith("admin")) {
+                user = new Admin(id);
+            } else if (id.startsWith("buyer")) {
+                user = new Buyer(id);
+            } else if (id.startsWith("seller")) {
+                user = new Seller(id);
+            }
+            objects.add(user);
+        }
+        return objects;
+    }
+
+    private ArrayList<Category> buildArrayListOfCategories(HashMap<String, HashMap> hashMap) {
+        ArrayList<Category> objects = new ArrayList<>();
+        for (String id : set) {
+            Category category = null;
+            if (id.startsWith("parent")) {
+                category = new ParentCategory(id);
+            } else if (id.startsWith("final")) {
+                category = new FinalCategory(id);
+            }
+            objects.add(category);
+        }
+        return objects;
+    }
+
+    private ArrayList<Request> buildArrayListOfRequests(HashMap<String, HashMap> hashMap) {
+        ArrayList<Request> objects = new ArrayList<>();
+        for (String id : set) {
+            Request request = null;
+            if (id.startsWith("add off")) {
+                request = new AddOffRequest(id);
+            } else if (id.startsWith("add product")) {
+                request = new AddProductRequest(id);
+            } else if (id.startsWith("new comment")) {
+                request = new CommentRequest(id);
+            } else if (id.startsWith("edit off")) {
+                request = new OffEditionRequest(id);
+            } else if (id.startsWith("edit product")) {
+                request = new ProductEditionRequest(id);
+            } else if (id.startsWith("remove product")) {
+                request = new RemoveProductRequest(id);
+            } else if (id.startsWith("seller register")) {
+                request = new SellerRegisterRequest(id);
+            }
+            objects.add(request);
         }
         return objects;
     }

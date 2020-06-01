@@ -13,6 +13,10 @@ public class SellerRegisterRequest extends Request {
         this.seller = seller;
     }
 
+    public SellerRegisterRequest(String id) {
+        super(id);
+    }
+
     public Seller getSeller() {
         return seller;
     }

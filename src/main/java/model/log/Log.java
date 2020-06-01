@@ -1,19 +1,14 @@
 package model.log;
 
 import controller.userControllers.BuyerController;
-import model.CodedDiscount;
-import model.IdRecognized;
-import model.Market;
-import model.Savable;
+import model.*;
 import model.product.ProductSellInfo;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Log implements Savable, IdRecognized {
-    private static Integer newLogId = 1;
-    private String id;
+public class Log extends IdRecognized implements Savable {
     private Date date;
     private String buyerUsername; // hatam : change to buyer :|
     private ArrayList<ProductSellInfo> sellingProducts;
@@ -26,8 +21,7 @@ public class Log implements Savable, IdRecognized {
 
 
     public Log(ArrayList<ProductSellInfo> sellingProducts, String buyerUsername, String address, String phoneNumber) {
-        this.id = newLogId.toString();
-        newLogId++;
+        this.id = "" + IdKeeper.getInstance().getLogsNewId();
         this.date = new Date();
         this.sellingProducts = sellingProducts;
         this.buyerUsername = buyerUsername;

@@ -20,6 +20,10 @@ public class AddProductRequest extends Request {
         this.mode = mode;
     }
 
+    public AddProductRequest(String id) {
+        super(id);
+    }
+
     @Override
     public void apply() {
         if (mode.equalsIgnoreCase("existing")) {

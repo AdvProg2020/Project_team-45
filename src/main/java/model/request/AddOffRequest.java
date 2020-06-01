@@ -20,6 +20,10 @@ public class AddOffRequest extends Request{
         this.seller = seller;
     }
 
+    public AddOffRequest(String id) {
+        super(id);
+    }
+
     @Override
     public void apply() {
         ArrayList<Product> products = extractProducts();

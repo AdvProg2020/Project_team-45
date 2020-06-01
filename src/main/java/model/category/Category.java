@@ -2,6 +2,7 @@ package model.category;
 
 import controller.CategoryController;
 import javafx.scene.Parent;
+import model.IdKeeper;
 import model.IdRecognized;
 import model.Savable;
 import model.product.Product;
@@ -9,18 +10,19 @@ import model.product.Product;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public abstract class Category implements Savable,IdRecognized {
-    private String id;
+public abstract class Category extends IdRecognized implements Savable {
     private String name;
     private ParentCategory parent;
 
 
     public Category(String name, ParentCategory parent) {
+        this.id = getType() + IdKeeper.getInstance().getCategoriesNewId();
         this.name = name;
         this.parent = parent;
     }
 
     public Category(HashMap<String, String> filledFeatures) {
+        this.id = getType() + IdKeeper.getInstance().getCategoriesNewId();
         this.setName(filledFeatures.get("name"));
         if (!filledFeatures.get("parent category").equals("NULL"))
             this.setParent((ParentCategory) CategoryController.getInstance().getItemById(filledFeatures.get("parent category")));
@@ -31,6 +33,7 @@ public abstract class Category implements Savable,IdRecognized {
         this.id = categoryId;
     }
 
+    @Override
     public String getId() {
         return id;
     }

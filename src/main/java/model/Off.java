@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Off implements Savable, IdRecognized {
-    private static Integer newOffId = 1;
-    private final String id;
+public class Off extends IdRecognized implements Savable {
     private final ArrayList<Product> productsList;
     private OffStatus offStatus;
     private Date startTime;
@@ -16,8 +14,7 @@ public class Off implements Savable, IdRecognized {
     private int discountAmount;
 
     public Off(ArrayList<Product> productsList, Date startTime, Date endTime, int discountAmount) {
-        this.id = newOffId.toString();
-        newOffId++;
+        this.id = "" + IdKeeper.getInstance().getOffsNewId();
         this.productsList = productsList;
         this.startTime = startTime;
         this.endTime = endTime;

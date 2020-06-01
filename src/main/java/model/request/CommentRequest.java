@@ -12,6 +12,10 @@ public class CommentRequest extends Request {
         this.comment = comment;
     }
 
+    public CommentRequest(String id) {
+        super(id);
+    }
+
     @Override
     public void apply() {
         comment.approveComment();

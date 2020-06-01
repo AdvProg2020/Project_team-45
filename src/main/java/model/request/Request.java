@@ -1,25 +1,22 @@
 package model.request;
 
+import model.IdKeeper;
 import model.IdRecognized;
 import model.Market;
 import model.Savable;
 
 import java.util.HashMap;
 
-public abstract class Request implements IdRecognized, Savable {
-    private static Integer newRequestId = 1;
-    protected String id;
+public abstract class Request extends IdRecognized implements Savable {
     protected RequestStatus requestStatus;
     protected HashMap<String, String> fieldsAndValues;
 
     public Request() {
-        this.id = newRequestId.toString();
-        newRequestId++;
+        this.id = getType() + IdKeeper.getInstance().getRequestsNewId();
     }
 
     public Request(HashMap<String, String> fieldsAndValues) {
-        this.id = newRequestId.toString();
-        newRequestId++;
+        this.id = getType() + IdKeeper.getInstance().getRequestsNewId();
         this.fieldsAndValues = fieldsAndValues;
     }
 

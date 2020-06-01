@@ -7,7 +7,7 @@ import model.user.Buyer;
 import java.util.Date;
 import java.util.HashMap;
 
-public class CodedDiscount implements Savable, IdRecognized{
+public class CodedDiscount extends IdRecognized implements Savable {
     private String code;
     private Date startDate;
     private Date endDate;
@@ -15,6 +15,7 @@ public class CodedDiscount implements Savable, IdRecognized{
     private Buyer owner;
 
     public CodedDiscount(HashMap<String, String> filledFeatures) {
+        this.id = "" + IdKeeper.getInstance().getCodedDiscountsNewId();
         this.code = filledFeatures.get("code");
         this.startDate = InputValidator.convertStringToDate(filledFeatures.get("start date"));
         this.endDate = InputValidator.convertStringToDate(filledFeatures.get("end date"));
@@ -23,6 +24,7 @@ public class CodedDiscount implements Savable, IdRecognized{
     }
 
     public CodedDiscount(CodedDiscount toClone) {
+        this.id = toClone.id;
         this.code = toClone.code;
         this.startDate = toClone.startDate;
         this.endDate = toClone.endDate;
@@ -30,8 +32,8 @@ public class CodedDiscount implements Savable, IdRecognized{
         this.owner = toClone.owner;
     }
 
-    public CodedDiscount(String code) {
-        this.code = code;
+    public CodedDiscount(String id) {
+        this.id = id;
     }
 
     public int getPercentage() {
@@ -105,6 +107,6 @@ public class CodedDiscount implements Savable, IdRecognized{
 
     @Override
     public String getId() {
-        return this.code;
+        return id;
     }
 }

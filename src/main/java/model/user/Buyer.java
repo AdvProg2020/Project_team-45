@@ -30,6 +30,11 @@ public class Buyer extends User implements CartHolder, Savable {
         this.purchasedProducts = new HashMap<>();
     }
 
+    public Buyer(String id) {
+        super(id);
+        this.cart = new Cart();
+    }
+
     public Cart getCart() {
         return cart;
     }

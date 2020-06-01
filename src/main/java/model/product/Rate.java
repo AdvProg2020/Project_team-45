@@ -1,5 +1,6 @@
 package model.product;
 
+import model.IdKeeper;
 import model.IdRecognized;
 import model.Market;
 import model.Savable;
@@ -7,16 +8,13 @@ import model.user.Buyer;
 
 import java.util.HashMap;
 
-public class Rate implements Savable, IdRecognized {
-    private static int newRateId = 1;
-    private String id;
+public class Rate extends IdRecognized implements Savable {
     private Buyer buyer;
     private int score;
     private String productId;
 
     public Rate(Buyer user, int score, String productId) {
-        this.id = "rate" + newRateId;
-        newRateId++;
+        this.id = "" + IdKeeper.getInstance().getRatesNewId();
         this.buyer = user;
         this.score = score;
         this.productId = productId;

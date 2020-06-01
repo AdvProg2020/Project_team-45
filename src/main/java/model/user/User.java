@@ -1,18 +1,16 @@
 package model.user;
 
+import model.IdKeeper;
 import model.IdRecognized;
 import model.Savable;
 
-public abstract class User implements Savable, IdRecognized {
-    protected static int newUserId = 1;
-    protected String id; // hatam : ham username ham Id?
+public abstract class User extends IdRecognized implements Savable {
     protected PersonalInfo personalInfo;
 
     public abstract String getRole();
 
     public User(PersonalInfo personalInfo) {
-        this.id = getRole() + newUserId;
-        newUserId++;
+        this.id = getRole() + IdKeeper.getInstance().getUsersNewId();
         this.personalInfo = personalInfo;
     }
 

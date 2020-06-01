@@ -18,6 +18,9 @@ public class OffEditionRequest extends Request{
         this.offId = offId;
     }
 
+    public OffEditionRequest(String id) {
+        super(id);
+    }
 
     @Override
     public void apply() {

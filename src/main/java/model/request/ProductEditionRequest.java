@@ -17,6 +17,10 @@ public class ProductEditionRequest extends Request {
         this.seller = seller;
     }
 
+    public ProductEditionRequest(String id) {
+        super(id);
+    }
+
     @Override
     public void apply() {
         ProductSellInfo productSellInfo = seller.getAvailableProductById(productId)

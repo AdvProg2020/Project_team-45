@@ -30,6 +30,10 @@ public class CodedDiscount implements Savable, IdRecognized{
         this.owner = toClone.owner;
     }
 
+    public CodedDiscount(String code) {
+        this.code = code;
+    }
+
     public int getPercentage() {
         return percentage;
     }

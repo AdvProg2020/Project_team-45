@@ -24,6 +24,11 @@ public class Off implements Savable, IdRecognized {
         this.discountAmount = discountAmount;
     }
 
+    public Off(String id) {
+        productsList = new ArrayList<>();
+        this.id = id;
+    }
+
     @Override
     public String getId() {
         return id;

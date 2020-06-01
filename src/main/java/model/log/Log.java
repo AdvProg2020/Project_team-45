@@ -37,6 +37,10 @@ public class Log implements Savable, IdRecognized {
         this.phoneNumber = phoneNumber;
     }
 
+    public Log(String id) {
+        this.id = id;
+    }
+
     @Override
     public String getId() {
         return id;

@@ -27,6 +27,10 @@ public class Seller extends User {
         listOfOffs = new HashMap<>();
     }
 
+    public Seller(String id) {
+        super(id);
+    }
+
     public Company getCompany() {
         return company;
     }

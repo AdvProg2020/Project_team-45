@@ -14,15 +14,16 @@ public class Rate implements Savable, IdRecognized {
     private int score;
     private String productId;
 
-    public Rate() {
-    }
-
     public Rate(Buyer user, int score, String productId) {
         this.id = "rate" + newRateId;
         newRateId++;
         this.buyer = user;
         this.score = score;
         this.productId = productId;
+    }
+
+    public Rate(String id) {
+        this.id = id;
     }
 
     public int getScore() {

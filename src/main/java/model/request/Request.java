@@ -23,6 +23,10 @@ public abstract class Request implements IdRecognized, Savable {
         this.fieldsAndValues = fieldsAndValues;
     }
 
+    public Request(String id) {
+        this.id = id;
+    }
+
     @Override
     public String getId() {
         return id;

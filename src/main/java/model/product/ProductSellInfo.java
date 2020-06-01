@@ -1,5 +1,6 @@
 package model.product;
 
+import com.sun.applet2.AppletParameters;
 import model.IdRecognized;
 import model.Market;
 import model.Off;
@@ -25,6 +26,11 @@ public class ProductSellInfo implements Savable, IdRecognized {
         this.product = product;
         this.seller = seller;
         this.allBuyers = new HashMap<>();
+    }
+
+    public ProductSellInfo(String id) {
+        allBuyers = new HashMap<>();
+        this.id = id;
     }
 
     public Seller getSeller() {

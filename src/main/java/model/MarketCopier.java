@@ -9,23 +9,25 @@ import model.request.Request;
 import model.user.Seller;
 import model.user.User;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MarketCopier { // copies and rebuilds market
     private static MarketCopier instance = new MarketCopier();
-    private HashMap<String, User> allUsers;// configure type by Id
-    private HashMap<String, Seller> requestedSellers;
-    private HashMap<String, CodedDiscount> allCodedDiscounts;
-    private HashMap<String, Category> allCategories;        // configure type by Id
-    private HashMap<String, Category> mainCategories;       // be made from allCategories
-    private HashMap<String, Product> allProducts;
-    private HashMap<String, Log> allLogs;
-    private HashMap<String, Off> allOffs;
-    private HashMap<String, Request> allRequests;           // configure type by Id
-    private HashMap<String, ProductSellInfo> allProductSellInfos; // add news to it
-    private HashMap<String, Rate> allRates;
-    private HashMap<String, Company> allCompanies;
+    private static Market market = Market.getInstance();
+    private HashMap<String, HashMap> allUsers;// configure type by Id
+    private HashMap<String, HashMap> requestedSellers;
+    private HashMap<String, HashMap> allCodedDiscounts;
+    private HashMap<String, HashMap> allCategories;        // configure type by Id
+    private HashMap<String, HashMap> mainCategories;       // be made from allCategories
+    private HashMap<String, HashMap> allProducts;
+    private HashMap<String, HashMap> allLogs;
+    private HashMap<String, HashMap> allOffs;
+    private HashMap<String, HashMap> allRequests;           // configure type by Id
+    private HashMap<String, HashMap> allProductSellInfos; // add news to it
+    private HashMap<String, HashMap> allRates;
+    private ArrayList<Company> allCompanies;
     private IdKeeper idKeeper;
 
     private MarketCopier() {
@@ -40,7 +42,7 @@ public class MarketCopier { // copies and rebuilds market
         allProductSellInfos = new HashMap<>();
         requestedSellers = new HashMap<>();
         allRates = new HashMap<>();
-        allCompanies = new HashMap<>();
+        allCompanies = new ArrayList<>();
         idKeeper = IdKeeper.getInstance();
     }
 
@@ -53,32 +55,64 @@ public class MarketCopier { // copies and rebuilds market
     }
 
     private void copyMarket() {
-        Market market = Market.getInstance();
-        allLogs = createIdToIdRecognizedHashmap(market.getAllLogs());
-        allOffs = createIdToIdRecognizedHashmap(market.getAllOffs());
-        allUsers = createIdToIdRecognizedHashmap(market.getAllUsers());
-        allCodedDiscounts = createIdToIdRecognizedHashmap(market.getAllCodedDiscounts());
-        allCategories = createIdToIdRecognizedHashmap(market.getAllCategories());
-        mainCategories = createIdToIdRecognizedHashmap(market.getMainCategories());
-        allProducts = createIdToIdRecognizedHashmap(market.getAllProducts());
-        allRequests = createIdToIdRecognizedHashmap(market.getAllRequests());
-        allProductSellInfos = createIdToIdRecognizedHashmap(market.getAllProductSellInfos());
-        requestedSellers = createIdToIdRecognizedHashmap(market.getRequestedSellers());
-        allRates = createIdToIdRecognizedHashmap(market.getAllRates());
-        allCompanies = createIdToIdRecognizedHashmap(market.getAllCompanies());
+        allLogs = buildIdToObjectHashMapHashMap(market.getAllLogs());
+        allOffs = buildIdToObjectHashMapHashMap(market.getAllOffs());
+        allUsers = buildIdToObjectHashMapHashMap(market.getAllUsers());
+        allCodedDiscounts = buildIdToObjectHashMapHashMap(market.getAllCodedDiscounts());
+        allCategories = buildIdToObjectHashMapHashMap(market.getAllCategories());
+        mainCategories = buildIdToObjectHashMapHashMap(market.getMainCategories());
+        allProducts = buildIdToObjectHashMapHashMap(market.getAllProducts());
+        allRequests = buildIdToObjectHashMapHashMap(market.getAllRequests());
+        allProductSellInfos = buildIdToObjectHashMapHashMap(market.getAllProductSellInfos());
+        requestedSellers = buildIdToObjectHashMapHashMap(market.getRequestedSellers());
+        allRates = buildIdToObjectHashMapHashMap(market.getAllRates());
+        allCompanies = market.getAllCompanies();
         idKeeper.updateIds();
     }
 
-    private <Type extends IdRecognized> HashMap<String, Type> createIdToIdRecognizedHashmap(ArrayList<Type> idRecognizedObjects) {
-        HashMap<String, Type> result = new HashMap<>();
-        for (Type idRecognized : idRecognizedObjects) {
-            result.put(idRecognized.getId(), idRecognized);
+    private <Type extends IdRecognized & Savable> HashMap<String, HashMap> buildIdToObjectHashMapHashMap(ArrayList<Type> objects) {
+        HashMap<String, HashMap> result = new HashMap<>();
+        for (Type object : objects) {
+            result.put(object.getId(), object.convertToHashMap());
         }
         return result;
     }
 
     public void buildMarket() {
+        market.setAllLogs(buildArrayListOfObjects(Log.class, allLogs));
+        market.setAllOffs(buildArrayListOfObjects(Off.class, allOffs));
+        market.setAllUsers(buildArrayListOfObjects(User.class, allUsers));
+        market.setAllCodedDiscounts(buildArrayListOfObjects(CodedDiscount.class, allCodedDiscounts));
+        market.setAllCategories(buildArrayListOfObjects(Category.class, allCategories));
+        market.setMainCategories(buildArrayListOfObjects(Category.class, mainCategories));
+        market.setAllProducts(buildArrayListOfObjects(Product.class, allProducts));
+        market.setAllRequests(buildArrayListOfObjects(Request.class, allRequests));
+        market.setAllProductSellInfos(buildArrayListOfObjects(ProductSellInfo.class, allProductSellInfos));
+        market.setRequestedSellers(buildArrayListOfObjects(Seller.class, requestedSellers));
+        market.setAllRates(buildArrayListOfObjects(Rate.class, allRates));
+        market.setAllCompanies(allCompanies);
+        IdKeeper.setInstance(idKeeper);
+    }
 
+    private <Type extends Savable> ArrayList<Type> buildArrayListOfObjects(Class<Type> typeClass, HashMap<String, HashMap> hashMap) {
+        ArrayList<Type> objects = new ArrayList<>();
+        Constructor<Type> typeConstructor = null;
+        try {
+            typeConstructor = typeClass.getConstructor(String.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        for (String id : hashMap.keySet()) {
+            Type type = null;
+            try {
+                type = typeConstructor.newInstance(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            type.setFieldsFromHashMap(hashMap.get(id));
+            objects.add(type);
+        }
+        return objects;
     }
 
 }

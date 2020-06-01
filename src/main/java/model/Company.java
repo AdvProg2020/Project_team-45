@@ -2,7 +2,7 @@ package model;
 
 import java.util.HashMap;
 
-public class Company implements IdRecognized{
+public class Company{
     private String name;
     private String otherInformation;
 
@@ -32,8 +32,4 @@ public class Company implements IdRecognized{
         this.otherInformation = otherInformation;
     }
 
-    @Override
-    public String getId() {
-        return name;
-    }
 }

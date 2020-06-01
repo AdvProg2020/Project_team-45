@@ -13,19 +13,18 @@ import java.util.ArrayList;
 
 public class Market {
     private static Market marketInstance;
-    private final ArrayList<User> allUsers;// configure type by Id
-    private final ArrayList<Seller> requestedSellers;
-    private final ArrayList<CodedDiscount> allCodedDiscounts;
-    private final ArrayList<Category> allCategories;        // configure type by Id
-    private final ArrayList<Category> mainCategories;       // be made from allCategories
-    private final ArrayList<Product> allProducts;
-    private final ArrayList<Log> allLogs;
-    private final ArrayList<Off> allOffs;
-    private final ArrayList<Request> allRequests;           // configure type by Id
-    private final ArrayList<ProductSellInfo> allProductSellInfos; // add news to it
-    private final ArrayList<Rate> allRates;
-    private final ArrayList<Company> allCompanies;
-    private IdKeeper idKeeper;
+    private ArrayList<User> allUsers;// configure type by Id
+    private ArrayList<Seller> requestedSellers;
+    private ArrayList<CodedDiscount> allCodedDiscounts;
+    private ArrayList<Category> allCategories;        // configure type by Id
+    private ArrayList<Category> mainCategories;       // be made from allCategories
+    private ArrayList<Product> allProducts;
+    private ArrayList<Log> allLogs;
+    private ArrayList<Off> allOffs;
+    private ArrayList<Request> allRequests;           // configure type by Id
+    private ArrayList<ProductSellInfo> allProductSellInfos; // add news to it
+    private ArrayList<Rate> allRates;
+    private ArrayList<Company> allCompanies;
 
     private Market() {
         allLogs = new ArrayList<>();
@@ -40,7 +39,6 @@ public class Market {
         requestedSellers = new ArrayList<>();
         allRates = new ArrayList<>();
         allCompanies = new ArrayList<>();
-        idKeeper = IdKeeper.getInstance();
     }
 
     public static Market getInstance() {
@@ -285,6 +283,54 @@ public class Market {
 
     public ArrayList<Company> getAllCompanies() {
         return allCompanies;
+    }
+
+    public void setAllUsers(ArrayList<User> allUsers) {
+        this.allUsers = allUsers;
+    }
+
+    public void setRequestedSellers(ArrayList<Seller> requestedSellers) {
+        this.requestedSellers = requestedSellers;
+    }
+
+    public void setAllCodedDiscounts(ArrayList<CodedDiscount> allCodedDiscounts) {
+        this.allCodedDiscounts = allCodedDiscounts;
+    }
+
+    public void setAllCategories(ArrayList<Category> allCategories) {
+        this.allCategories = allCategories;
+    }
+
+    public void setMainCategories(ArrayList<Category> mainCategories) {
+        this.mainCategories = mainCategories;
+    }
+
+    public void setAllProducts(ArrayList<Product> allProducts) {
+        this.allProducts = allProducts;
+    }
+
+    public void setAllLogs(ArrayList<Log> allLogs) {
+        this.allLogs = allLogs;
+    }
+
+    public void setAllOffs(ArrayList<Off> allOffs) {
+        this.allOffs = allOffs;
+    }
+
+    public void setAllRequests(ArrayList<Request> allRequests) {
+        this.allRequests = allRequests;
+    }
+
+    public void setAllProductSellInfos(ArrayList<ProductSellInfo> allProductSellInfos) {
+        this.allProductSellInfos = allProductSellInfos;
+    }
+
+    public void setAllRates(ArrayList<Rate> allRates) {
+        this.allRates = allRates;
+    }
+
+    public void setAllCompanies(ArrayList<Company> allCompanies) {
+        this.allCompanies = allCompanies;
     }
 }
 

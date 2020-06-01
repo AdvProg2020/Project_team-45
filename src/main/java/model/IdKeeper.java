@@ -11,6 +11,10 @@ public class IdKeeper {
         return instance;
     }
 
+    public static void setInstance(IdKeeper instance) {
+        IdKeeper.instance = instance;
+    }
+
     public void updateIds() {
 
     }

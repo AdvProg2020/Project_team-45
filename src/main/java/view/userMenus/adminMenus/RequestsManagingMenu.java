@@ -14,8 +14,8 @@ public class RequestsManagingMenu extends ManagingMenu {
         super("requests managing menu");
         this.manager = RequestController.getInstance();
         this.managingObject = "Requests";
-        submenus.put("details (\\S+)", createOneItemDisplayPanel("request", (Printer) manager));
-        submenus.put("(accept|decline) (\\S+)", getAcceptDeclinePanel());
+        submenus.put("details (.+)", createOneItemDisplayPanel("request", (Printer) manager));
+        submenus.put("(accept|decline) (.+)", getAcceptDeclinePanel());
     }
 
     private Panel getAcceptDeclinePanel(){

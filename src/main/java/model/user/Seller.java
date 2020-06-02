@@ -138,7 +138,7 @@ public class Seller extends User {
 //        }
 
         availableProducts = new HashMap<>();
-        HashMap<String, String> products = (new Gson()).fromJson(theMap.get("availableProducts"), new TypeToken<ArrayList<String>>(){}.getType());
+        HashMap<String, String> products = (new Gson()).fromJson(theMap.get("availableProducts"), new TypeToken<HashMap<String, String>>(){}.getType());
         for (String productId : products.keySet()) {
             availableProducts.put(Market.getInstance().getProductById(productId),
                     Market.getInstance().getProductSellInfoById(products.get(productId)));

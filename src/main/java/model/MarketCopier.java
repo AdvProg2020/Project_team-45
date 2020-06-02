@@ -22,14 +22,14 @@ public class MarketCopier { // copies and rebuilds market
     private static MarketCopier instance = new MarketCopier();
     private static Market market = Market.getInstance();
     private HashMap<String, HashMap<String, String>> allUsers;// configure type by Id
-    private HashMap<String, HashMap> requestedSellers;
+    private HashMap<String, HashMap<String, String>> requestedSellers;
     private HashMap<String, HashMap> allCodedDiscounts;
     private HashMap<String, HashMap<String, String>> allCategories;        // configure type by Id
     private HashMap<String, HashMap> mainCategories;       // be made from allCategories
     private HashMap<String, HashMap> allProducts;
     private HashMap<String, HashMap> allLogs;
     private HashMap<String, HashMap> allOffs;
-    private HashMap<String, HashMap> allRequests;           // configure type by Id
+    private HashMap<String, HashMap<String, String>> allRequests;           // configure type by Id
     private HashMap<String, HashMap> allProductSellInfos; // add news to it
     private HashMap<String, HashMap> allRates;
     private ArrayList<Company> allCompanies;
@@ -67,9 +67,9 @@ public class MarketCopier { // copies and rebuilds market
         allCategories = buildIdToObjectHashMapHashMap(market.getAllCategories());
 //        mainCategories = buildIdToObjectHashMapHashMap(market.getMainCategories());
 //        allProducts = buildIdToObjectHashMapHashMap(market.getAllProducts());
-//        allRequests = buildIdToObjectHashMapHashMap(market.getAllRequests());
+        allRequests = buildIdToObjectHashMapHashMap(market.getAllRequests());
 //        allProductSellInfos = buildIdToObjectHashMapHashMap(market.getAllProductSellInfos());
-//        requestedSellers = buildIdToObjectHashMapHashMap(market.getRequestedSellers());
+        requestedSellers = buildIdToObjectHashMapHashMap(market.getRequestedSellers());
 //        allRates = buildIdToObjectHashMapHashMap(market.getAllRates());
 //        allCompanies = market.getAllCompanies();
     }
@@ -90,9 +90,9 @@ public class MarketCopier { // copies and rebuilds market
         market.setAllCategories(buildArrayListOfPrimaryCategories(allCategories.keySet()));
 //        market.setMainCategories(buildArrayListOfPrimaryCategories(mainCategories.keySet()));
 //        market.setAllProducts(buildArrayListOfPrimaryObjects(Product.class, allProducts.keySet()));
-//        market.setAllRequests(buildArrayListOfPrimaryRequests(allRequests.keySet()));
+        market.setAllRequests(buildArrayListOfPrimaryRequests(allRequests.keySet()));
 //        market.setAllProductSellInfos(buildArrayListOfPrimaryObjects(ProductSellInfo.class, allProductSellInfos.keySet()));
-//        market.setRequestedSellers(buildArrayListOfPrimaryObjects(Seller.class, requestedSellers.keySet()));
+        market.setRequestedSellers(buildArrayListOfPrimaryObjects(Seller.class, requestedSellers.keySet()));
 //        market.setAllRates(buildArrayListOfPrimaryObjects(Rate.class, allRates.keySet()));
 //        market.setAllCompanies(allCompanies);
 //        IdKeeper.setInstance(idKeeper);
@@ -174,14 +174,14 @@ public class MarketCopier { // copies and rebuilds market
 
     public void buildMarketWithHashMaps() {
         buildUsersWithHashMaps();
-//        buildRequestedSellersWithHashMaps();
+        buildRequestedSellersWithHashMaps();
 //        buildDiscountsWithHashMaps();
         buildCategoriesWithHashMaps();
 //        buildMainCategoriesWithHashMaps();
 //        buildProductsWithHashMaps();
 //        buildLogsWithHashMaps();
 //        buildOffsWithHashMaps();
-//        buildRequestsWithHashMaps();
+        buildRequestsWithHashMaps();
 //        buildProductSellInfosWithHashMaps();
 //        buildRatesWithHashMaps();
     }
@@ -245,7 +245,7 @@ public class MarketCopier { // copies and rebuilds market
     private void buildRequestsWithHashMaps() {
         for (String id : allRequests.keySet()) {
             Request request = Market.getInstance().getRequestById(id);
-//            request.setFieldsFromHashMap(allRequests.get(id));
+            request.setFieldsFromHashMap(allRequests.get(id));
         }
     }
 

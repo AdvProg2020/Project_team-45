@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.product.Product;
 
 import java.util.ArrayList;
@@ -90,24 +92,25 @@ public class Off extends IdRecognized implements Savable {
         for (Product product : productsList) {
             productsId.add(product.getId());
         }
-//        result.put("productsList", productsId);
-//        result.put("offStatus", offStatus);
-//        result.put("startTime", startTime);
-//        result.put("endTime", endTime);
-//        result.put("discountAmount", discountAmount);
+        result.put("productsList", (new Gson()).toJson(productsId));
+        result.put("offStatus", (new Gson()).toJson(offStatus));
+        result.put("startTime", (new Gson()).toJson(startTime));
+        result.put("endTime", (new Gson()).toJson(endTime));
+        result.put("discountAmount", "" + discountAmount);
         return result;
     }
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         Market market = Market.getInstance();
-//        for (String productId : ((ArrayList<String>) theMap.get("productsList"))) {
-//            productsList.add(market.getProductById(productId));
-//        }
-//        offStatus = (OffStatus) theMap.get("offStatus");
-//        startTime = (Date) theMap.get("startTime");
-//        endTime = (Date) theMap.get("endTime");
-//        discountAmount = (int) theMap.get("discountAmount");
+        ArrayList<String> productsId = (new Gson()).fromJson(theMap.get("productsList"), new TypeToken<ArrayList<String>>(){}.getType());
+        for (String productId : productsId) {
+            productsList.add(market.getProductById(productId));
+        }
+        offStatus = (new Gson()).fromJson(theMap.get("offStatus"), OffStatus.class);
+        startTime = (new Gson()).fromJson(theMap.get("startTime"), Date.class);
+        endTime = (new Gson()).fromJson(theMap.get("endTime"), Date.class);
+        discountAmount = Integer.parseInt(theMap.get("discountAmount"));
     }
 
     enum OffStatus {

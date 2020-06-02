@@ -1,5 +1,7 @@
 package model.product;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.*;
 import model.category.FinalCategory;
 import model.user.Seller;
@@ -15,7 +17,7 @@ public class Product extends IdRecognized implements Savable {
     private ProductSellInfo defaultSellInfo;
     private int minimumPrice;   // minimum price should be updated
     private FinalCategory category;
-    private final LinkedHashMap<String, String> categoryFeatures;
+    private LinkedHashMap<String, String> categoryFeatures;
     private String description;
     private float averageScore;
     private final ArrayList<Comment> allComments;
@@ -214,7 +216,7 @@ public class Product extends IdRecognized implements Savable {
     }
 
     public void updateAverageScoreAfterEditingRate(int oldRate, int newRate) {
-        this.averageScore += ((float)(newRate - oldRate)) / rates.size();
+        this.averageScore += ((float) (newRate - oldRate)) / rates.size();
     }
 
     public boolean isAvailable() {
@@ -252,7 +254,7 @@ public class Product extends IdRecognized implements Savable {
         return digestInformation;
     }
 
-    public LinkedHashMap<String,String> getAttributes(){
+    public LinkedHashMap<String, String> getAttributes() {
         LinkedHashMap<String, String> attributes = new LinkedHashMap<>();
         attributes.putAll(getGeneralFeatures());
         attributes.putAll(categoryFeatures);
@@ -275,65 +277,68 @@ public class Product extends IdRecognized implements Savable {
     @Override
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = new HashMap<>();
-//        result.put("name", name);
-//        result.put("company", company.getName());
-//        result.put("productionDate", productionDate);
-//        result.put("productStatus", productStatus);
-//        ArrayList<String> sellers = new ArrayList<>();
-//        for (Seller sellInfo : sellersList.keySet()) {
-//            sellers.add(sellInfo.getId());
-//        }
-//        result.put("sellersList", sellers);
-//        result.put("defaultSellInfo", defaultSellInfo.getId());
-//        result.put("minimumPrice", minimumPrice);
-//        result.put("category", category.getId());
-//        result.put("categoryFeatures", categoryFeatures);
-//        result.put("description", description);
-//        result.put("averageScore", averageScore);
-//        ArrayList<HashMap<String, Object>> commentsMap = new ArrayList<>();
-//        for (Comment comment: allComments) {
-//            commentsMap.add(comment.convertToHashMap());
-//        }
-//        result.put("allComments", commentsMap);
-//        ArrayList<String> ratesId = new ArrayList<>();
-//        for (Rate rate : rates) {
-//            ratesId.add(rate.getId());
-//        }
-//        result.put("rates", ratesId);
-//        result.put("sellCount", sellCount);
-//        result.put("seen", seen);
+        result.put("name", name);
+        result.put("company", company.getName());
+        result.put("productionDate", (new Gson()).toJson(productionDate));
+        result.put("productStatus", productStatus);
+        ArrayList<String> sellers = new ArrayList<>();
+        for (Seller sellInfo : sellersList.keySet()) {
+            sellers.add(sellInfo.getId());
+        }
+        result.put("sellersList", (new Gson()).toJson(sellers));
+        result.put("defaultSellInfo", defaultSellInfo.getId());
+        result.put("minimumPrice", "" + minimumPrice);
+        result.put("category", category.getId());
+        result.put("categoryFeatures", "" + categoryFeatures);
+        result.put("description", description);
+        result.put("averageScore", "" + averageScore);
+        ArrayList<HashMap<String, String>> commentsMap = new ArrayList<>();
+        for (Comment comment : allComments) {
+            commentsMap.add(comment.convertToHashMap());
+        }
+        result.put("allComments", (new Gson()).toJson(commentsMap));
+        ArrayList<String> ratesId = new ArrayList<>();
+        for (Rate rate : rates) {
+            ratesId.add(rate.getId());
+        }
+        result.put("rates", (new Gson()).toJson(ratesId));
+        result.put("sellCount", "" + sellCount);
+        result.put("seen", "" + seen);
         return result;
     }
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
-//        Market market = Market.getInstance();
-//        name = (String) theMap.get("name");
-//        company = market.getCompanyByName((String) theMap.get("company"));
-//        productionDate = (Date) theMap.get("productionDate");
-//        productStatus = (String) theMap.get("productStatus");
-//        for (String sellInfoId : ((ArrayList<String>) theMap.get("sellersList"))) {
-//            ProductSellInfo productSellInfo = market.getProductSellInfoById(sellInfoId);
-//            sellersList.put(productSellInfo.getSeller(), productSellInfo);
-//        }
-//        defaultSellInfo = market.getProductSellInfoById((String) theMap.get("defaultSellInfo"));
-//        minimumPrice = (int) theMap.get("minimumPrice");
-//        category = (FinalCategory) market.getCategoryById((String) theMap.get("category"));
-//        categoryFeatures = (LinkedHashMap<String, String>) theMap.get("categoryFeatures");
-//        description = (String) theMap.get("description");
-//        averageScore = (float) theMap.get("averageScore");
-//        for (HashMap<String, Object> commentMap : (ArrayList<HashMap<String, Object>>) theMap.get("allComments")) {
-//            Comment comment = new Comment();
-//            comment.setFieldsFromHashMap(commentMap);
-//            allComments.add(comment);
-//            if (comment.isApprovedComment())
-//                approvedComments.add(comment);
-//        }
-//        for (String rateId : ((ArrayList<String>) theMap.get("rates"))) {
-//            rates.add(market.getRateById(rateId));
-//        }
-//        sellCount = (int) theMap.get("sellCount");
-//        seen = (int) theMap.get("seen");
+        Market market = Market.getInstance();
+        name = theMap.get("name");
+        company = market.getCompanyByName(theMap.get("company"));
+        productionDate = (new Gson()).fromJson(theMap.get("productionDate"), Date.class) ;
+        productStatus = theMap.get("productStatus");
+        ArrayList<String> sellInfosId = (new Gson()).fromJson(theMap.get("sellersList"), new TypeToken<ArrayList<String>>(){}.getType());
+        for (String sellInfoId : sellInfosId) {
+            ProductSellInfo productSellInfo = market.getProductSellInfoById(sellInfoId);
+            sellersList.put(productSellInfo.getSeller(), productSellInfo);
+        }
+        defaultSellInfo = market.getProductSellInfoById(theMap.get("defaultSellInfo"));
+        minimumPrice = Integer.parseInt(theMap.get("minimumPrice"));
+        category = (FinalCategory) market.getCategoryById(theMap.get("category"));
+        categoryFeatures = (new Gson()).fromJson(theMap.get("categoryFeatures"), new TypeToken<LinkedHashMap<String, String>>(){}.getType());
+        description = theMap.get("description");
+        averageScore = Float.parseFloat(theMap.get("averageScore"));
+        ArrayList<HashMap<String, String>> allCommentMap = (new Gson()).fromJson(theMap.get("allComments"), new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
+        for (HashMap<String, String> commentMap : allCommentMap) {
+            Comment comment = new Comment();
+            comment.setFieldsFromHashMap(commentMap);
+            allComments.add(comment);
+            if (comment.isApprovedComment())
+                approvedComments.add(comment);
+        }
+        ArrayList<String> ratesId = (new Gson()).fromJson(theMap.get("rates"), new TypeToken<ArrayList<String>>(){}.getType());
+        for (String rateId : ratesId) {
+            rates.add(market.getRateById(rateId));
+        }
+        sellCount = Integer.parseInt(theMap.get("sellCount"));
+        seen = Integer.parseInt(theMap.get("seen"));
     }
 
     //    enum ProductStatus {

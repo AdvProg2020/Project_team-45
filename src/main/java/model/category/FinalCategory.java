@@ -101,7 +101,7 @@ public class FinalCategory extends Category {
 
     @Override
     public HashMap<String, String> convertToHashMap(int i) {
-        HashMap<String, String> result = super.convertToHashMap();
+        HashMap<String, String> result = super.convertToHashMap(i);
         result.put("specialFeatures", (new Gson()).toJson(specialFeatures));
         ArrayList<String> productsId = new ArrayList<>();
         for (Product product : productsList) {
@@ -114,7 +114,7 @@ public class FinalCategory extends Category {
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap , int i) {
         Market market = Market.getInstance();
-        super.setFieldsFromHashMap(theMap);
+        super.setFieldsFromHashMap(theMap, i);
         specialFeatures.addAll((new Gson()).fromJson(theMap.get("specialFeatures"), new TypeToken<ArrayList<String>>(){}.getType()));
         ArrayList<String> productsId = (new Gson()).fromJson(theMap.get("productsList"), new TypeToken<ArrayList<String>>(){}.getType());
         for (String productId : productsId) {

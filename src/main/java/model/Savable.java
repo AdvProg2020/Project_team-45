@@ -3,7 +3,10 @@ package model;
 import java.util.HashMap;
 
 public interface Savable {
-    HashMap<String, Object> convertToHashMap();
-    void setFieldsFromHashMap(HashMap<String, Object> theMap);
+    default HashMap<String, String> convertToHashMap() {
+        return new HashMap<>();
+    }
+    default void setFieldsFromHashMap(HashMap<String, String> theMap) {
 
+    }
 }

@@ -273,7 +273,7 @@ public class Product extends IdRecognized implements Savable {
     }
 
     @Override
-    public HashMap<String, String> convertToHashMap() {
+    public HashMap<String, String> convertToHashMap(int i) {
         HashMap<String, String> result = new HashMap<>();
 //        result.put("name", name);
 //        result.put("company", company.getName());
@@ -306,7 +306,7 @@ public class Product extends IdRecognized implements Savable {
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap, int i) {
 //        Market market = Market.getInstance();
 //        name = (String) theMap.get("name");
 //        company = market.getCompanyByName((String) theMap.get("company"));

@@ -18,19 +18,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class MarketCopier { // copies and rebuilds market
+public class MarketCopier {
     private static MarketCopier instance = new MarketCopier();
     private static Market market = Market.getInstance();
-    private HashMap<String, HashMap<String, String>> allUsers;// configure type by Id
+    private HashMap<String, HashMap<String, String>> allUsers;
     private HashMap<String, HashMap<String, String>> requestedSellers;
     private HashMap<String, HashMap> allCodedDiscounts;
-    private HashMap<String, HashMap<String, String>> allCategories;        // configure type by Id
-    private HashMap<String, HashMap> mainCategories;       // be made from allCategories
+    private HashMap<String, HashMap<String, String>> allCategories;
+    private HashMap<String, HashMap> mainCategories;
     private HashMap<String, HashMap> allProducts;
     private HashMap<String, HashMap> allLogs;
     private HashMap<String, HashMap> allOffs;
-    private HashMap<String, HashMap<String, String>> allRequests;           // configure type by Id
-    private HashMap<String, HashMap> allProductSellInfos; // add news to it
+    private HashMap<String, HashMap<String, String>> allRequests;
+    private HashMap<String, HashMap> allProductSellInfos;
     private HashMap<String, HashMap> allRates;
     private ArrayList<Company> allCompanies;
     private IdKeeper idKeeper;
@@ -194,9 +194,9 @@ public class MarketCopier { // copies and rebuilds market
     }
 
     private void buildRequestedSellersWithHashMaps() {
-        for (String id : allRequests.keySet()) {
+        for (String id : requestedSellers.keySet()) {
             Seller seller = Market.getInstance().getRequestedSellerById(id);
-            seller.setFieldsFromHashMap(allRequests.get(id));
+            seller.setFieldsFromHashMap(requestedSellers.get(id));
         }
     }
 

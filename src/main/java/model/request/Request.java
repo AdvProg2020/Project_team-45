@@ -1,5 +1,7 @@
 package model.request;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.IdKeeper;
 import model.IdRecognized;
 import model.Market;
@@ -50,12 +52,6 @@ public abstract class Request extends IdRecognized implements Savable {
         Market.getInstance().removeRequestById(id);
     }
 
-    enum RequestStatus{
-        WAITING_FOR_CONFIRMATION,
-        ACCEPTED,
-        DECLINED,
-    }
-
     @Override
     public String toString() {
         return  "request type:" + getType() + "requestId:" + id +
@@ -66,15 +62,22 @@ public abstract class Request extends IdRecognized implements Savable {
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = new HashMap<>();
         result.put("id", id);
-//        result.put("requestStatus", requestStatus);
-//        result.put("fieldsAndValues", fieldsAndValues);
+        result.put("requestStatus", (new Gson()).toJson(requestStatus));
+        result.put("fieldsAndValues", (new Gson()).toJson(fieldsAndValues));
         return result;
     }
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         id = theMap.get("id");
-//        requestStatus = (RequestStatus) theMap.get("requestStatus");
-//        fieldsAndValues = (HashMap<String, String>) theMap.get("fieldsAndValues");
+        requestStatus = (new Gson()).fromJson(theMap.get("requestStatus"), RequestStatus.class);
+
+        fieldsAndValues = (new Gson()).fromJson(theMap.get("fieldsAndValues"), new TypeToken<HashMap<String, String>>(){}.getType());
+    }
+
+    enum RequestStatus{
+        WAITING_FOR_CONFIRMATION,
+        ACCEPTED,
+        DECLINED,
     }
 }

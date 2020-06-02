@@ -1,5 +1,6 @@
 package model;
 
+import com.google.gson.Gson;
 import model.product.Product;
 import model.user.User;
 
@@ -82,8 +83,8 @@ public class Comment implements Savable {
         result.put("product", product.getId());
         result.put("title", title);
         result.put("content", content);
-//        result.put("commentStatus", commentStatus);
-//        result.put("didUserBuy", didUserBuy);
+        result.put("commentStatus", (new Gson()).toJson(commentStatus));
+        result.put("didUserBuy", "" + didUserBuy);
         return result;
     }
 
@@ -94,8 +95,8 @@ public class Comment implements Savable {
         product = market.getProductById(theMap.get("product"));
         title = theMap.get("title");
         content = theMap.get("content");
-//        commentStatus = (CommentStatus) theMap.get("commentStatus");
-//        didUserBuy = (boolean) theMap.get("didUserBuy");
+        commentStatus = (new Gson()).fromJson(theMap.get("commentStatus"), CommentStatus.class);
+        didUserBuy = Boolean.parseBoolean(theMap.get("didUserBuy"));
     }
 
     enum CommentStatus {

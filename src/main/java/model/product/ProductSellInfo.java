@@ -1,10 +1,13 @@
 package model.product;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.applet2.AppletParameters;
 import model.*;
 import model.user.Buyer;
 import model.user.Seller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -119,29 +122,30 @@ public class ProductSellInfo extends IdRecognized implements Savable {
     @Override
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = new HashMap<>();
-//        result.put("seller", seller.getId());
-//        result.put("product", product.getId());
-//        result.put("price", price);
-//        result.put("stock", stock);
-//        result.put("off", off.getId());
-//        HashMap<String, Integer> buyersId = new HashMap<>();
-//        for (Map.Entry<Buyer, Integer> buyer : allBuyers.entrySet()) {
-//            buyersId.put(buyer.getKey().getId(), buyer.getValue());
-//        }
-//        result.put("allBuyers", buyersId);
+        result.put("seller", seller.getId());
+        result.put("product", product.getId());
+        result.put("price", "" + price);
+        result.put("stock", "" + stock);
+        result.put("off", off.getId());
+        HashMap<String, Integer> buyersId = new HashMap<>();
+        for (Map.Entry<Buyer, Integer> buyer : allBuyers.entrySet()) {
+            buyersId.put(buyer.getKey().getId(), buyer.getValue());
+        }
+        result.put("allBuyers", (new Gson()).toJson(buyersId));
         return result;
     }
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
-//        Market market = Market.getInstance();
-//        seller = (Seller) (market.getUserById((String) theMap.get("seller")));
-//        product = market.getProductById((String) theMap.get("product"));
-//        price = (int) theMap.get("price");
-//        stock = (int) theMap.get("stock");
-//        off = market.getOffById((String) theMap.get("off"));
-//        for (Map.Entry<String, Integer> buyerId : ((HashMap<String, Integer>) theMap.get("allBuyers")).entrySet()) {
-//            allBuyers.put((Buyer) market.getUserById(buyerId.getKey()), buyerId.getValue());
-//        }
+        Market market = Market.getInstance();
+        seller = (Seller) (market.getUserById(theMap.get("seller")));
+        product = market.getProductById(theMap.get("product"));
+        price = Integer.parseInt(theMap.get("price"));
+        stock = Integer.parseInt(theMap.get("stock"));
+        off = market.getOffById(theMap.get("off"));
+        HashMap<String, Integer> buyersId = (new Gson()).fromJson(theMap.get("allBuyers"), new TypeToken<HashMap<String, Integer>>(){}.getType());
+        for (Map.Entry<String, Integer> buyerId : buyersId.entrySet()) {
+            allBuyers.put((Buyer) market.getUserById(buyerId.getKey()), buyerId.getValue());
+        }
     }
 }

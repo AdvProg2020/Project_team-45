@@ -1,5 +1,7 @@
 package model.user;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.Company;
 import model.Market;
 import model.Off;
@@ -98,56 +100,56 @@ public class Seller extends User {
     }
 
     @Override
-    public HashMap convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("personalInfo", personalInfo);
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
+        result.put("personalInfo", (new Gson()).toJson(personalInfo));
         result.put("company", company.getName());
 
         ArrayList<HashMap> sellLogs = new ArrayList<>();
         for (SellLog sellLog : listOfSellLogs) {
             sellLogs.add(sellLog.convertToHashMap());
         }
-        result.put("listOfSellLogs", sellLogs);
+        result.put("listOfSellLogs", (new Gson()).toJson(sellLogs));
 
         HashMap<String, String> products = new HashMap<>();
         for (Product product : availableProducts.keySet()) {
             products.put(product.getId(), availableProducts.get(product).getId());
         }
-        result.put("availableProducts", products);
+        result.put("availableProducts", (new Gson()).toJson(products));
 
         ArrayList<String> offs = new ArrayList<>(listOfOffs.keySet());
-        result.put("listOfOffs", offs);
+        result.put("listOfOffs", (new Gson()).toJson(offs));
 
-        result.put("balance", balance);
+        result.put("balance", "" + balance);
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap theMap) {
-        personalInfo = (PersonalInfo) theMap.get("personalInfo");
-        company = Market.getInstance().getCompanyByName((String) theMap.get("company"));
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+        personalInfo = (new Gson()).fromJson(theMap.get("personalInfo"), PersonalInfo.class);
+        company = Market.getInstance().getCompanyByName(theMap.get("company"));
 
         listOfSellLogs = new ArrayList<>();
-        ArrayList<HashMap> sellLogs = (ArrayList<HashMap>) theMap.get("listOfSellLogs");
-        for (HashMap hashMap : sellLogs) {
-            SellLog sellLog = new SellLog();
-            sellLog.setFieldsFromHashMap(hashMap);
-            listOfSellLogs.add(sellLog);
-        }
+//        ArrayList<HashMap> sellLogs = (new Gson()).fromJson(theMap.get("listOfSellLogs"), new TypeToken<ArrayList<String>>(){}.getType());
+//        for (HashMap hashMap : sellLogs) {
+//            SellLog sellLog = new SellLog();
+//            sellLog.setFieldsFromHashMap(hashMap);
+//            listOfSellLogs.add(sellLog);
+//        }
 
         availableProducts = new HashMap<>();
-        HashMap<String, String> products = (HashMap<String, String>) theMap.get("availableProducts");
+        HashMap<String, String> products = (new Gson()).fromJson(theMap.get("availableProducts"), new TypeToken<ArrayList<String>>(){}.getType());
         for (String productId : products.keySet()) {
             availableProducts.put(Market.getInstance().getProductById(productId),
                     Market.getInstance().getProductSellInfoById(products.get(productId)));
         }
 
         listOfOffs = new HashMap<>();
-        ArrayList<String> offs = (ArrayList<String>) theMap.get("listOfOffs");
+        ArrayList<String> offs = (new Gson()).fromJson(theMap.get("listOfOffs"), new TypeToken<ArrayList<String>>(){}.getType());
         for (String offId : offs) {
             listOfOffs.put(offId, Market.getInstance().getOffById(offId));
         }
 
-        balance = (int) theMap.get("balance");
+        balance = Integer.parseInt(theMap.get("balance"));
     }
 }

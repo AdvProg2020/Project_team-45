@@ -1,5 +1,7 @@
 package model.user;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.CodedDiscount;
 import model.Market;
 import model.Savable;
@@ -133,44 +135,44 @@ public class Buyer extends User implements CartHolder, Savable {
     }
 
     @Override
-    public HashMap convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("personalInfo", personalInfo);
-        ArrayList<String> codedDiscounts = new ArrayList<>();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
+        result.put("personalInfo", (new Gson()).toJson(personalInfo));
+        ArrayList<String> discounts = new ArrayList<>();
         for (CodedDiscount discount : listOfCodedDiscounts) {
-            codedDiscounts.add(discount.getCode());
+            discounts.add(discount.getId());
         }
-        result.put("listOfCodedDiscounts", codedDiscounts);
+        result.put("listOfCodedDiscounts", (new Gson()).toJson(discounts));
 
-        result.put("balance", balance);
+        result.put("balance", "" + balance);
 
         ArrayList<HashMap> buyLogs = new ArrayList<>();
         for (BuyLog buyLog : listOfBuyLogs) {
             buyLogs.add(buyLog.convertToHashMap());
         }
-        result.put("listOfBuyLogs", buyLogs);
+        result.put("listOfBuyLogs", (new Gson()).toJson(buyLogs));
 
         HashMap<String, String> products = new HashMap<>();
         for (String productId : purchasedProducts.keySet()) {
             products.put(productId, purchasedProducts.get(productId).getId());
         }
-        result.put("purchasedProducts", products);
+        result.put("purchasedProducts", (new Gson()).toJson(products));
 
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap theMap) {
-        personalInfo = (PersonalInfo) theMap.get("personalInfo");
-        ArrayList<String> codedDiscounts = (ArrayList<String>) theMap.get("listOfCodedDiscounts");
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+        personalInfo = (new Gson()).fromJson(theMap.get("personalInfo"), PersonalInfo.class);
+        ArrayList<String> codedDiscounts = (new Gson()).fromJson(theMap.get("listOfCodedDiscounts"), new TypeToken<ArrayList<String>>(){}.getType());
         listOfCodedDiscounts = new ArrayList<>();
-        for (String code : codedDiscounts) {
-            listOfCodedDiscounts.add(Market.getInstance().getCodedDiscountByCode(code));
+        for (String id : codedDiscounts) {
+            listOfCodedDiscounts.add(Market.getInstance().getCodedDiscountById(id));
         }
 
-        balance = (int) theMap.get("balance");
+        balance = Integer.parseInt((new Gson()).fromJson(theMap.get("balance"), String.class));
 
-        ArrayList<HashMap> buyLogs = (ArrayList<HashMap>) theMap.get("listOfBuyLogs");
+        ArrayList<HashMap> buyLogs = (new Gson()).fromJson(theMap.get("listOfBuyLogs"), new TypeToken<ArrayList<String>>(){}.getType());
         listOfBuyLogs = new ArrayList<>();
         for (HashMap hashMap : buyLogs) {
             BuyLog buyLog = new BuyLog();
@@ -178,7 +180,7 @@ public class Buyer extends User implements CartHolder, Savable {
             listOfBuyLogs.add(buyLog);
         }
 
-        HashMap<String, String> products = (HashMap<String, String>) theMap.get("purchasedProducts");
+        HashMap<String, String> products = (new Gson()).fromJson(theMap.get("purchasedProducts"), new TypeToken<HashMap<String, String>>(){}.getType());
         purchasedProducts = new HashMap<>();
         for (String productId : products.keySet()) {
             purchasedProducts.put(productId, Market.getInstance().getRateById(products.get(productId)));

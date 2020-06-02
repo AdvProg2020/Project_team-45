@@ -4,6 +4,7 @@ import controller.CategoryController;
 import javafx.scene.Parent;
 import model.IdKeeper;
 import model.IdRecognized;
+import model.Market;
 import model.Savable;
 import model.product.Product;
 
@@ -70,16 +71,25 @@ public abstract class Category extends IdRecognized implements Savable {
     public abstract boolean isFinal();
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
+    public HashMap<String, String> convertToHashMap(int i) {
+        HashMap<String, String> result = new HashMap<>();
         result.put("name", name);
-        result.put("parent", parent);
+        if (parent == null) {
+            result.put("parent", null);
+        } else {
+            result.put("parent", parent.getId());
+        }
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
-        name = (String) theMap.get("name");
-        parent = (ParentCategory) theMap.get("parent");
+    public void setFieldsFromHashMap(HashMap<String, String> theMap, int i) {
+        name = theMap.get("name");
+        String parentId = theMap.get("parent");
+        if (parentId == null) {
+            parent = null;
+        } else {
+            parent = (ParentCategory) Market.getInstance().getCategoryById(parentId);
+        }
     }
 }

@@ -1,5 +1,7 @@
 package model.category;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.Market;
 import model.product.Product;
 
@@ -77,21 +79,22 @@ public class ParentCategory extends Category {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = super.convertToHashMap();
+    public HashMap<String, String> convertToHashMap(int i) {
+        HashMap<String, String> result = super.convertToHashMap();
         ArrayList<String> subcategoriesId = new ArrayList<>();
         for (Category subcategory : subcategories) {
             subcategoriesId.add(subcategory.getId());
         }
-        result.put("subcategories", subcategoriesId);
-        return null;
+        result.put("subcategories", (new Gson()).toJson(subcategoriesId));
+        return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap, int i) {
         Market market = Market.getInstance();
         super.setFieldsFromHashMap(theMap);
-        for (String subcategoryId : ((ArrayList<String>) theMap.get("subcategories"))) {
+        ArrayList<String> subcategoriesId = (new Gson()).fromJson(theMap.get("subcategories"), new TypeToken<ArrayList<String>>(){}.getType());
+        for (String subcategoryId : subcategoriesId) {
             subcategories.add(market.getCategoryById(subcategoryId));
         }
     }

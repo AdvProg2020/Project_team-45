@@ -1,5 +1,7 @@
 package model.category;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.Market;
 import model.product.Product;
 
@@ -98,23 +100,24 @@ public class FinalCategory extends Category {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = super.convertToHashMap();
-        result.put("specialFeatures", specialFeatures);
+    public HashMap<String, String> convertToHashMap(int i) {
+        HashMap<String, String> result = super.convertToHashMap();
+        result.put("specialFeatures", (new Gson()).toJson(specialFeatures));
         ArrayList<String> productsId = new ArrayList<>();
         for (Product product : productsList) {
             productsId.add(product.getId());
         }
-        result.put("productsList", productsId);
+        result.put("productsList", (new Gson()).toJson(productsId));
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap , int i) {
         Market market = Market.getInstance();
         super.setFieldsFromHashMap(theMap);
-        specialFeatures.addAll((ArrayList<String>) theMap.get("specialFeatures"));
-        for (String productId : ((ArrayList<String>) theMap.get("productsList"))) {
+        specialFeatures.addAll((new Gson()).fromJson(theMap.get("specialFeatures"), new TypeToken<ArrayList<String>>(){}.getType()));
+        ArrayList<String> productsId = (new Gson()).fromJson(theMap.get("productsList"), new TypeToken<ArrayList<String>>(){}.getType());
+        for (String productId : productsId) {
             productsList.add(market.getProductById(productId));
         }
     }

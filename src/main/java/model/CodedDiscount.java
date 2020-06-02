@@ -1,5 +1,6 @@
 package model;
 
+import com.google.gson.Gson;
 import controller.InputValidator;
 import controller.userControllers.BuyerController;
 import model.user.Buyer;
@@ -90,18 +91,18 @@ public class CodedDiscount extends IdRecognized implements Savable {
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = new HashMap<>();
         result.put("code", code);
-//        result.put("startDate", startDate);
-//        result.put("endDate", endDate);
-//        result.put("percentage", percentage);
+        result.put("startDate", (new Gson()).toJson(startDate));
+        result.put("endDate", (new Gson()).toJson(endDate));
+        result.put("percentage", "" + percentage);
         result.put("owner", owner.getId());
         return result;
     }
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
-//        startDate = (Date) theMap.get("startDate");
-//        endDate = (Date) theMap.get("endDate");
-//        percentage = (int) theMap.get("percentage");
+        startDate = (new Gson()).fromJson(theMap.get("startDate"), Date.class);
+        endDate = (new Gson()).fromJson(theMap.get("endDate"), Date.class);
+        percentage = Integer.parseInt(theMap.get("percentage"));
         owner = (Buyer) Market.getInstance().getUserById(theMap.get("owner"));
     }
 

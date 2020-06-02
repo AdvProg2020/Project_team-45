@@ -117,31 +117,31 @@ public class ProductSellInfo extends IdRecognized implements Savable {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("seller", seller.getId());
-        result.put("product", product.getId());
-        result.put("price", price);
-        result.put("stock", stock);
-        result.put("off", off.getId());
-        HashMap<String, Integer> buyersId = new HashMap<>();
-        for (Map.Entry<Buyer, Integer> buyer : allBuyers.entrySet()) {
-            buyersId.put(buyer.getKey().getId(), buyer.getValue());
-        }
-        result.put("allBuyers", buyersId);
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
+//        result.put("seller", seller.getId());
+//        result.put("product", product.getId());
+//        result.put("price", price);
+//        result.put("stock", stock);
+//        result.put("off", off.getId());
+//        HashMap<String, Integer> buyersId = new HashMap<>();
+//        for (Map.Entry<Buyer, Integer> buyer : allBuyers.entrySet()) {
+//            buyersId.put(buyer.getKey().getId(), buyer.getValue());
+//        }
+//        result.put("allBuyers", buyersId);
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
-        Market market = Market.getInstance();
-        seller = (Seller) (market.getUserById((String) theMap.get("seller")));
-        product = market.getProductById((String) theMap.get("product"));
-        price = (int) theMap.get("price");
-        stock = (int) theMap.get("stock");
-        off = market.getOffById((String) theMap.get("off"));
-        for (Map.Entry<String, Integer> buyerId : ((HashMap<String, Integer>) theMap.get("allBuyers")).entrySet()) {
-            allBuyers.put((Buyer) market.getUserById(buyerId.getKey()), buyerId.getValue());
-        }
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+//        Market market = Market.getInstance();
+//        seller = (Seller) (market.getUserById((String) theMap.get("seller")));
+//        product = market.getProductById((String) theMap.get("product"));
+//        price = (int) theMap.get("price");
+//        stock = (int) theMap.get("stock");
+//        off = market.getOffById((String) theMap.get("off"));
+//        for (Map.Entry<String, Integer> buyerId : ((HashMap<String, Integer>) theMap.get("allBuyers")).entrySet()) {
+//            allBuyers.put((Buyer) market.getUserById(buyerId.getKey()), buyerId.getValue());
+//        }
     }
 }

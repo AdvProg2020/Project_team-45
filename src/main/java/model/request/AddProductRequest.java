@@ -65,8 +65,8 @@ public class AddProductRequest extends Request {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = super.convertToHashMap();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = super.convertToHashMap();
         result.put("seller", seller.getId());
         result.put("mode", mode);
         result.put("product", product.getId());
@@ -74,10 +74,10 @@ public class AddProductRequest extends Request {
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         super.setFieldsFromHashMap(theMap);
-        seller = (Seller) Market.getInstance().getUserById((String) theMap.get("seller"));
-        mode = (String) theMap.get("mode");
-        product = Market.getInstance().getProductById((String) theMap.get("product"));
+        seller = (Seller) Market.getInstance().getUserById(theMap.get("seller"));
+        mode = theMap.get("mode");
+        product = Market.getInstance().getProductById(theMap.get("product"));
     }
 }

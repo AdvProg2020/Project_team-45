@@ -79,8 +79,8 @@ public class ParentCategory extends Category {
     }
 
     @Override
-    public HashMap<String, String> convertToHashMap(int i) {
-        HashMap<String, String> result = super.convertToHashMap(i);
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = super.convertToHashMap();
         ArrayList<String> subcategoriesId = new ArrayList<>();
         for (Category subcategory : subcategories) {
             subcategoriesId.add(subcategory.getId());
@@ -90,9 +90,9 @@ public class ParentCategory extends Category {
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, String> theMap, int i) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         Market market = Market.getInstance();
-        super.setFieldsFromHashMap(theMap, i);
+        super.setFieldsFromHashMap(theMap);
         ArrayList<String> subcategoriesId = (new Gson()).fromJson(theMap.get("subcategories"), new TypeToken<ArrayList<String>>(){}.getType());
         for (String subcategoryId : subcategoriesId) {
             subcategories.add(market.getCategoryById(subcategoryId));

@@ -49,30 +49,30 @@ public class SellLog implements Savable {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
         result.put("mainLog", mainLog.getId());
         result.put("seller", seller.getId());
-        result.put("income", income);
+//        result.put("income", income);
         ArrayList<String> soldIds = new ArrayList<>();
         for (ProductSellInfo soldProduct : soldProducts) {
             soldIds.add(soldProduct.getId());
         }
-        result.put("soldProducts", soldIds);
+//        result.put("soldProducts", soldIds);
 
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
-        mainLog = Market.getInstance().getLogById((String) theMap.get("mainLog"));
-        seller = (Seller) Market.getInstance().getUserById((String) theMap.get("seller"));
-        income = Integer.parseInt((String) theMap.get("income"));
-        ArrayList<String> soldIds = (ArrayList<String>) theMap.get("soldProducts");
-        soldProducts = new ArrayList<>();
-        for (String soldId : soldIds) {
-            soldProducts.add(Market.getInstance().getProductSellInfoById(soldId));
-        }
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+        mainLog = Market.getInstance().getLogById(theMap.get("mainLog"));
+        seller = (Seller) Market.getInstance().getUserById(theMap.get("seller"));
+        income = Integer.parseInt(theMap.get("income"));
+//        ArrayList<String> soldIds = (ArrayList<String>) theMap.get("soldProducts");
+//        soldProducts = new ArrayList<>();
+//        for (String soldId : soldIds) {
+//            soldProducts.add(Market.getInstance().getProductSellInfoById(soldId));
+//        }
     }
 
 }

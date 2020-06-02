@@ -39,15 +39,15 @@ public class SellerRegisterRequest extends Request {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = super.convertToHashMap();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = super.convertToHashMap();
         result.put("seller", seller.getId());
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         super.setFieldsFromHashMap(theMap);
-        seller = Market.getInstance().getRequestedSellerById((String) theMap.get("seller"));
+        seller = Market.getInstance().getRequestedSellerById(theMap.get("seller"));
     }
 }

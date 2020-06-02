@@ -76,26 +76,26 @@ public class Comment implements Savable {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
         result.put("user", user.getId());
         result.put("product", product.getId());
         result.put("title", title);
         result.put("content", content);
-        result.put("commentStatus", commentStatus);
-        result.put("didUserBuy", didUserBuy);
+//        result.put("commentStatus", commentStatus);
+//        result.put("didUserBuy", didUserBuy);
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         Market market = Market.getInstance();
-        user = market.getUserById((String) theMap.get("user"));
-        product = market.getProductById((String) theMap.get("product"));
-        title = (String) theMap.get("title");
-        content = (String) theMap.get("content");
-        commentStatus = (CommentStatus) theMap.get("commentStatus");
-        didUserBuy = (boolean) theMap.get("didUserBuy");
+        user = market.getUserById(theMap.get("user"));
+        product = market.getProductById(theMap.get("product"));
+        title = theMap.get("title");
+        content = theMap.get("content");
+//        commentStatus = (CommentStatus) theMap.get("commentStatus");
+//        didUserBuy = (boolean) theMap.get("didUserBuy");
     }
 
     enum CommentStatus {

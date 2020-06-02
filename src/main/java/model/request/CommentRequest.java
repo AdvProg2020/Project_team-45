@@ -39,16 +39,16 @@ public class CommentRequest extends Request {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = super.convertToHashMap();
-        result.put("comment", comment.convertToHashMap());
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = super.convertToHashMap();
+//        result.put("comment", comment.convertToHashMap());
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         super.setFieldsFromHashMap(theMap);
         comment = new Comment();
-        comment.setFieldsFromHashMap((HashMap<String, Object>) theMap.get("comment"));
+//        comment.setFieldsFromHashMap((HashMap<String, Object>) theMap.get("comment"));
     }
 }

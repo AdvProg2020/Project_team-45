@@ -44,17 +44,17 @@ public class RemoveProductRequest extends Request{
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = super.convertToHashMap();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = super.convertToHashMap();
         result.put("seller", seller.getId());
         result.put("productId", productId);
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         super.setFieldsFromHashMap(theMap);
-        seller = (Seller) Market.getInstance().getUserById((String) theMap.get("seller"));
-        productId = (String) theMap.get("productId");
+        seller = (Seller) Market.getInstance().getUserById(theMap.get("seller"));
+        productId = theMap.get("productId");
     }
 }

@@ -21,14 +21,14 @@ public class BuyLog implements Savable {
 
 
     @Override
-    public HashMap convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
         result.put("mainLog", mainLog.getId());
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap theMap) {
-        mainLog = Market.getInstance().getLogById((String) theMap.get("mainLog"));
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+        mainLog = Market.getInstance().getLogById(theMap.get("mainLog"));
     }
 }

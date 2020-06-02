@@ -63,18 +63,18 @@ public abstract class Request extends IdRecognized implements Savable {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
         result.put("id", id);
-        result.put("requestStatus", requestStatus);
-        result.put("fieldsAndValues", fieldsAndValues);
+//        result.put("requestStatus", requestStatus);
+//        result.put("fieldsAndValues", fieldsAndValues);
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
-        id = (String) theMap.get("id");
-        requestStatus = (RequestStatus) theMap.get("requestStatus");
-        fieldsAndValues = (HashMap<String, String>) theMap.get("fieldsAndValues");
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+        id = theMap.get("id");
+//        requestStatus = (RequestStatus) theMap.get("requestStatus");
+//        fieldsAndValues = (HashMap<String, String>) theMap.get("fieldsAndValues");
     }
 }

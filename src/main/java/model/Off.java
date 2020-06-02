@@ -84,30 +84,30 @@ public class Off extends IdRecognized implements Savable {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
         ArrayList<String> productsId = new ArrayList<>();
         for (Product product : productsList) {
             productsId.add(product.getId());
         }
-        result.put("productsList", productsId);
-        result.put("offStatus", offStatus);
-        result.put("startTime", startTime);
-        result.put("endTime", endTime);
-        result.put("discountAmount", discountAmount);
+//        result.put("productsList", productsId);
+//        result.put("offStatus", offStatus);
+//        result.put("startTime", startTime);
+//        result.put("endTime", endTime);
+//        result.put("discountAmount", discountAmount);
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         Market market = Market.getInstance();
-        for (String productId : ((ArrayList<String>) theMap.get("productsList"))) {
-            productsList.add(market.getProductById(productId));
-        }
-        offStatus = (OffStatus) theMap.get("offStatus");
-        startTime = (Date) theMap.get("startTime");
-        endTime = (Date) theMap.get("endTime");
-        discountAmount = (int) theMap.get("discountAmount");
+//        for (String productId : ((ArrayList<String>) theMap.get("productsList"))) {
+//            productsList.add(market.getProductById(productId));
+//        }
+//        offStatus = (OffStatus) theMap.get("offStatus");
+//        startTime = (Date) theMap.get("startTime");
+//        endTime = (Date) theMap.get("endTime");
+//        discountAmount = (int) theMap.get("discountAmount");
     }
 
     enum OffStatus {

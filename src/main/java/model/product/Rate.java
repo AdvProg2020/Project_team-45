@@ -38,19 +38,19 @@ public class Rate extends IdRecognized implements Savable {
 
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
         result.put("buyer", buyer.getId());
-        result.put("score", score);
+        result.put("score", "" + score);
         result.put("productId", productId);
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
-        buyer = (Buyer) Market.getInstance().getUserById((String) theMap.get("buyer"));
-        score = (int) theMap.get("productId");
-        productId = (String) theMap.get("productId");
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+        buyer = (Buyer) Market.getInstance().getUserById(theMap.get("buyer"));
+        score = Integer.parseInt(theMap.get("score"));
+        productId = theMap.get("productId");
     }
 
     @Override

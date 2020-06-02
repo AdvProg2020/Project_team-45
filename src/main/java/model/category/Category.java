@@ -71,7 +71,7 @@ public abstract class Category extends IdRecognized implements Savable {
     public abstract boolean isFinal();
 
     @Override
-    public HashMap<String, String> convertToHashMap(int i) {
+    public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = new HashMap<>();
         result.put("name", name);
         if (parent == null) {
@@ -83,7 +83,7 @@ public abstract class Category extends IdRecognized implements Savable {
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, String> theMap, int i) {
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         name = theMap.get("name");
         String parentId = theMap.get("parent");
         if (parentId == null) {

@@ -87,22 +87,22 @@ public class CodedDiscount extends IdRecognized implements Savable {
     }
 
     @Override
-    public HashMap<String, Object> convertToHashMap() {
-        HashMap<String, Object> result = new HashMap<>();
+    public HashMap<String, String> convertToHashMap() {
+        HashMap<String, String> result = new HashMap<>();
         result.put("code", code);
-        result.put("startDate", startDate);
-        result.put("endDate", endDate);
-        result.put("percentage", percentage);
+//        result.put("startDate", startDate);
+//        result.put("endDate", endDate);
+//        result.put("percentage", percentage);
         result.put("owner", owner.getId());
         return result;
     }
 
     @Override
-    public void setFieldsFromHashMap(HashMap<String, Object> theMap) {
-        startDate = (Date) theMap.get("startDate");
-        endDate = (Date) theMap.get("endDate");
-        percentage = (int) theMap.get("percentage");
-        owner = (Buyer) Market.getInstance().getUserById((String) theMap.get("owner"));
+    public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+//        startDate = (Date) theMap.get("startDate");
+//        endDate = (Date) theMap.get("endDate");
+//        percentage = (int) theMap.get("percentage");
+        owner = (Buyer) Market.getInstance().getUserById(theMap.get("owner"));
     }
 
     @Override

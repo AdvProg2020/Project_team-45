@@ -1,5 +1,7 @@
 package model.request;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.Comment;
 
 import java.util.HashMap;
@@ -41,7 +43,7 @@ public class CommentRequest extends Request {
     @Override
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = super.convertToHashMap();
-//        result.put("comment", comment.convertToHashMap());
+        result.put("comment", (new Gson()).toJson(comment.convertToHashMap()));
         return result;
     }
 
@@ -49,6 +51,6 @@ public class CommentRequest extends Request {
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         super.setFieldsFromHashMap(theMap);
         comment = new Comment();
-//        comment.setFieldsFromHashMap((HashMap<String, Object>) theMap.get("comment"));
+        comment.setFieldsFromHashMap((new Gson()).fromJson(theMap.get("comment"), new TypeToken<HashMap<String, Object>>(){}.getType()) );
     }
 }

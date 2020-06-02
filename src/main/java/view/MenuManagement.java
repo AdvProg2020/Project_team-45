@@ -1,9 +1,13 @@
 package view;
 
+import com.sun.corba.se.impl.orb.DataCollectorBase;
+import controller.DatabaseController;
 import controller.userControllers.AdminController;
 import model.Market;
+import model.MarketCopier;
 import view.userMenus.adminMenus.UsersManagingMenu;
 
+import javax.xml.crypto.Data;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -32,6 +36,7 @@ public abstract class MenuManagement {
     }
 
     public static void run() {
+        Market.getInstance().initialize();
         UIPage.setScanner(new Scanner(System.in));
         while (Market.getInstance().getAllUsers().isEmpty()) {
             runStartingPanel();
@@ -40,6 +45,7 @@ public abstract class MenuManagement {
         while (!isExit) {
             activeMenus.peek().execute();
         }
+        DatabaseController.getInstance().writeToDatabase();
     }
 
     private static void runStartingPanel(){

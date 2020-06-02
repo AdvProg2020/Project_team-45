@@ -1,5 +1,6 @@
 package model;
 
+import controller.DatabaseController;
 import model.category.Category;
 import model.log.Log;
 import model.product.Product;
@@ -45,6 +46,12 @@ public class Market {
         if (marketInstance == null)
             marketInstance = new Market();
         return marketInstance;
+    }
+
+    public void initialize() {
+        DatabaseController.getInstance().readFromDatabase();
+        MarketCopier.getInstance().buildMarketWithIds();
+        MarketCopier.getInstance().buildMarketWithHashMaps();
     }
 
     public ArrayList<User> getAllUsers() {

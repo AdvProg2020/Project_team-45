@@ -59,7 +59,7 @@ public class MarketCopier { // copies and rebuilds market
         MarketCopier.instance = instance;
     }
 
-    private void copyMarket() {
+    public void copyMarket() {
         allLogs = buildIdToObjectHashMapHashMap(market.getAllLogs());
         allOffs = buildIdToObjectHashMapHashMap(market.getAllOffs());
         allUsers = buildIdToObjectHashMapHashMap(market.getAllUsers());

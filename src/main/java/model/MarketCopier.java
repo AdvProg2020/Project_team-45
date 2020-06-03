@@ -20,18 +20,18 @@ import java.util.Set;
 
 public class MarketCopier {
     private static MarketCopier instance = new MarketCopier();
-    private static Market market = Market.getInstance();
+    private static final Market market = Market.getInstance();
     private HashMap<String, HashMap<String, String>> allUsers;
     private HashMap<String, HashMap<String, String>> requestedSellers;
-    private HashMap<String, HashMap> allCodedDiscounts;
+    private HashMap<String, HashMap<String, String>> allCodedDiscounts;
     private HashMap<String, HashMap<String, String>> allCategories;
-    private HashMap<String, HashMap> mainCategories;
-    private HashMap<String, HashMap> allProducts;
-    private HashMap<String, HashMap> allLogs;
-    private HashMap<String, HashMap> allOffs;
+    private HashMap<String, HashMap<String, String>> mainCategories;
+    private HashMap<String, HashMap<String, String>> allProducts;
+    private HashMap<String, HashMap<String, String>> allLogs;
+    private HashMap<String, HashMap<String, String>> allOffs;
     private HashMap<String, HashMap<String, String>> allRequests;
-    private HashMap<String, HashMap> allProductSellInfos;
-    private HashMap<String, HashMap> allRates;
+    private HashMap<String, HashMap<String, String>> allProductSellInfos;
+    private HashMap<String, HashMap<String, String>> allRates;
     private ArrayList<Company> allCompanies;
     private IdKeeper idKeeper;
 
@@ -60,18 +60,18 @@ public class MarketCopier {
     }
 
     public void copyMarket() {
-//        allLogs = buildIdToObjectHashMapHashMap(market.getAllLogs());
-//        allOffs = buildIdToObjectHashMapHashMap(market.getAllOffs());
+        allLogs = buildIdToObjectHashMapHashMap(market.getAllLogs());
+        allOffs = buildIdToObjectHashMapHashMap(market.getAllOffs());
         allUsers = buildIdToObjectHashMapHashMap(market.getAllUsers());
-//        allCodedDiscounts = buildIdToObjectHashMapHashMap(market.getAllCodedDiscounts());
+        allCodedDiscounts = buildIdToObjectHashMapHashMap(market.getAllCodedDiscounts());
         allCategories = buildIdToObjectHashMapHashMap(market.getAllCategories());
-//        mainCategories = buildIdToObjectHashMapHashMap(market.getMainCategories());
-//        allProducts = buildIdToObjectHashMapHashMap(market.getAllProducts());
+        mainCategories = buildIdToObjectHashMapHashMap(market.getMainCategories());
+        allProducts = buildIdToObjectHashMapHashMap(market.getAllProducts());
         allRequests = buildIdToObjectHashMapHashMap(market.getAllRequests());
-//        allProductSellInfos = buildIdToObjectHashMapHashMap(market.getAllProductSellInfos());
+        allProductSellInfos = buildIdToObjectHashMapHashMap(market.getAllProductSellInfos());
         requestedSellers = buildIdToObjectHashMapHashMap(market.getRequestedSellers());
-//        allRates = buildIdToObjectHashMapHashMap(market.getAllRates());
-//        allCompanies = market.getAllCompanies();
+        allRates = buildIdToObjectHashMapHashMap(market.getAllRates());
+        allCompanies = market.getAllCompanies();
     }
 
     private <Type extends IdRecognized & Savable> HashMap<String, HashMap<String, String>> buildIdToObjectHashMapHashMap(ArrayList<Type> objects) {
@@ -83,19 +83,19 @@ public class MarketCopier {
     }
 
     public void buildMarketWithIds() {
-//        market.setAllLogs(buildArrayListOfPrimaryObjects(Log.class, allLogs.keySet()));
-//        market.setAllOffs(buildArrayListOfPrimaryObjects(Off.class, allOffs.keySet()));
+        market.setAllLogs(buildArrayListOfPrimaryObjects(Log.class, allLogs.keySet()));
+        market.setAllOffs(buildArrayListOfPrimaryObjects(Off.class, allOffs.keySet()));
         market.setAllUsers(buildArrayListOfPrimaryUsers(allUsers.keySet()));
-//        market.setAllCodedDiscounts(buildArrayListOfPrimaryObjects(CodedDiscount.class, allCodedDiscounts.keySet()));
+        market.setAllCodedDiscounts(buildArrayListOfPrimaryObjects(CodedDiscount.class, allCodedDiscounts.keySet()));
         market.setAllCategories(buildArrayListOfPrimaryCategories(allCategories.keySet()));
-//        market.setMainCategories(buildArrayListOfPrimaryCategories(mainCategories.keySet()));
-//        market.setAllProducts(buildArrayListOfPrimaryObjects(Product.class, allProducts.keySet()));
+        market.setMainCategories(buildArrayListOfPrimaryCategories(mainCategories.keySet()));
+        market.setAllProducts(buildArrayListOfPrimaryObjects(Product.class, allProducts.keySet()));
         market.setAllRequests(buildArrayListOfPrimaryRequests(allRequests.keySet()));
-//        market.setAllProductSellInfos(buildArrayListOfPrimaryObjects(ProductSellInfo.class, allProductSellInfos.keySet()));
+        market.setAllProductSellInfos(buildArrayListOfPrimaryObjects(ProductSellInfo.class, allProductSellInfos.keySet()));
         market.setRequestedSellers(buildArrayListOfPrimaryObjects(Seller.class, requestedSellers.keySet()));
-//        market.setAllRates(buildArrayListOfPrimaryObjects(Rate.class, allRates.keySet()));
-//        market.setAllCompanies(allCompanies);
-//        IdKeeper.setInstance(idKeeper);
+        market.setAllRates(buildArrayListOfPrimaryObjects(Rate.class, allRates.keySet()));
+        market.setAllCompanies(allCompanies);
+        IdKeeper.setInstance(idKeeper);
     }
 
     private <Type extends Savable> ArrayList<Type> buildArrayListOfPrimaryObjects(Class<Type> typeClass, Set<String> set) {
@@ -175,15 +175,15 @@ public class MarketCopier {
     public void buildMarketWithHashMaps() {
         buildUsersWithHashMaps();
         buildRequestedSellersWithHashMaps();
-//        buildDiscountsWithHashMaps();
+        buildDiscountsWithHashMaps();
         buildCategoriesWithHashMaps();
-//        buildMainCategoriesWithHashMaps();
-//        buildProductsWithHashMaps();
-//        buildLogsWithHashMaps();
-//        buildOffsWithHashMaps();
+        buildMainCategoriesWithHashMaps();
+        buildProductsWithHashMaps();
+        buildLogsWithHashMaps();
+        buildOffsWithHashMaps();
         buildRequestsWithHashMaps();
-//        buildProductSellInfosWithHashMaps();
-//        buildRatesWithHashMaps();
+        buildProductSellInfosWithHashMaps();
+        buildRatesWithHashMaps();
     }
 
     private void buildUsersWithHashMaps() {
@@ -203,7 +203,7 @@ public class MarketCopier {
     private void buildDiscountsWithHashMaps() {
         for (String id : allCodedDiscounts.keySet()) {
             CodedDiscount discount = Market.getInstance().getCodedDiscountById(id);
-//            discount.setFieldsFromHashMap(allCodedDiscounts.get(id));
+            discount.setFieldsFromHashMap(allCodedDiscounts.get(id));
         }
     }
 
@@ -231,14 +231,14 @@ public class MarketCopier {
     private void buildLogsWithHashMaps() {
         for (String id : allLogs.keySet()) {
             Log log = Market.getInstance().getLogById(id);
-//            log.setFieldsFromHashMap(allLogs.get(id));
+            log.setFieldsFromHashMap(allLogs.get(id));
         }
     }
 
     private void buildOffsWithHashMaps() {
         for (String id : allOffs.keySet()) {
             Off off = Market.getInstance().getOffById(id);
-//            off.setFieldsFromHashMap(allOffs.get(id));
+            off.setFieldsFromHashMap(allOffs.get(id));
         }
     }
 
@@ -252,14 +252,14 @@ public class MarketCopier {
     private void buildProductSellInfosWithHashMaps() {
         for (String id : allProductSellInfos.keySet()) {
             ProductSellInfo sellInfo = Market.getInstance().getProductSellInfoById(id);
-//            sellInfo.setFieldsFromHashMap(allProductSellInfos.get(id));
+            sellInfo.setFieldsFromHashMap(allProductSellInfos.get(id));
         }
     }
 
     private void buildRatesWithHashMaps() {
         for (String id : allRates.keySet()) {
             Rate rate = Market.getInstance().getRateById(id);
-//            rate.setFieldsFromHashMap(allRates.get(id));
+            rate.setFieldsFromHashMap(allRates.get(id));
         }
     }
 

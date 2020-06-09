@@ -105,7 +105,7 @@ public class Seller extends User {
         result.put("personalInfo", (new Gson()).toJson(personalInfo));
         result.put("company", company.getName());
 
-        ArrayList<HashMap> sellLogs = new ArrayList<>();
+        ArrayList<HashMap<String, String>> sellLogs = new ArrayList<>();
         for (SellLog sellLog : listOfSellLogs) {
             sellLogs.add(sellLog.convertToHashMap());
         }
@@ -130,15 +130,15 @@ public class Seller extends User {
         company = Market.getInstance().getCompanyByName(theMap.get("company"));
 
         listOfSellLogs = new ArrayList<>();
-//        ArrayList<HashMap> sellLogs = (new Gson()).fromJson(theMap.get("listOfSellLogs"), new TypeToken<ArrayList<String>>(){}.getType());
-//        for (HashMap hashMap : sellLogs) {
-//            SellLog sellLog = new SellLog();
-//            sellLog.setFieldsFromHashMap(hashMap);
-//            listOfSellLogs.add(sellLog);
-//        }
+        ArrayList<HashMap<String, String>> sellLogs = (new Gson()).fromJson(theMap.get("listOfSellLogs"), new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
+        for (HashMap<String, String> hashMap : sellLogs) {
+            SellLog sellLog = new SellLog();
+            sellLog.setFieldsFromHashMap(hashMap);
+            listOfSellLogs.add(sellLog);
+        }
 
         availableProducts = new HashMap<>();
-        HashMap<String, String> products = (new Gson()).fromJson(theMap.get("availableProducts"), new TypeToken<ArrayList<String>>(){}.getType());
+        HashMap<String, String> products = (new Gson()).fromJson(theMap.get("availableProducts"), new TypeToken<HashMap<String, String>>(){}.getType());
         for (String productId : products.keySet()) {
             availableProducts.put(Market.getInstance().getProductById(productId),
                     Market.getInstance().getProductSellInfoById(products.get(productId)));

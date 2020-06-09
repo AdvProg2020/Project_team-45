@@ -146,7 +146,7 @@ public class Buyer extends User implements CartHolder, Savable {
 
         result.put("balance", "" + balance);
 
-        ArrayList<HashMap> buyLogs = new ArrayList<>();
+        ArrayList<HashMap<String, String>> buyLogs = new ArrayList<>();
         for (BuyLog buyLog : listOfBuyLogs) {
             buyLogs.add(buyLog.convertToHashMap());
         }
@@ -172,9 +172,9 @@ public class Buyer extends User implements CartHolder, Savable {
 
         balance = Integer.parseInt((new Gson()).fromJson(theMap.get("balance"), String.class));
 
-        ArrayList<HashMap> buyLogs = (new Gson()).fromJson(theMap.get("listOfBuyLogs"), new TypeToken<ArrayList<String>>(){}.getType());
+        ArrayList<HashMap<String, String>> buyLogs = (new Gson()).fromJson(theMap.get("listOfBuyLogs"), new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
         listOfBuyLogs = new ArrayList<>();
-        for (HashMap hashMap : buyLogs) {
+        for (HashMap<String, String> hashMap : buyLogs) {
             BuyLog buyLog = new BuyLog();
             buyLog.setFieldsFromHashMap(hashMap);
             listOfBuyLogs.add(buyLog);

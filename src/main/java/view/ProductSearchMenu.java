@@ -4,6 +4,9 @@ package view;
 import controller.CategoryController;
 import controller.FilteringController;
 import controller.SortingController;
+import view.bagheri.FilteringPanel;
+import view.bagheri.ProductMenu;
+import view.bagheri.SortingPanel;
 
 public abstract class ProductSearchMenu extends Menu {
     protected CategoryController categoryController;

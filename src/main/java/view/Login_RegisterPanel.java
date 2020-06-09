@@ -1,6 +1,7 @@
 package view;
 
 import controller.userControllers.UserController;
+import view.nedaei.MainMenu;
 
 public class Login_RegisterPanel extends Panel {
     private static final Login_RegisterPanel instance = new Login_RegisterPanel();

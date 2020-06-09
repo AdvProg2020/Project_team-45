@@ -1,6 +1,6 @@
 package view;
 
-import view.personalinfopanel.PersonalInfoPanel;
+import view.nedaei.personalinfopanel.PersonalInfoPanel;
 
 public abstract class UserMenu extends Menu {
 

@@ -8,7 +8,7 @@ import model.category.FinalCategory;
 import model.category.ParentCategory;
 import model.product.Product;
 import view.UIPage;
-import view.userMenus.adminMenus.CategoriesManagingMenu;
+import view.hatemi.adminMenus.CategoriesManagingMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;

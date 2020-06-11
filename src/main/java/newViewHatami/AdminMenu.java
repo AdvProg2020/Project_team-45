@@ -1,4 +1,4 @@
-package newView;
+package newViewHatami;
 
 import javafx.event.ActionEvent;
 

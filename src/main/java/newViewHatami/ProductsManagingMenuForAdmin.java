@@ -1,4 +1,4 @@
-package newView;
+package newViewHatami;
 
 public class ProductsManagingMenuForAdmin extends AppMenu {
 

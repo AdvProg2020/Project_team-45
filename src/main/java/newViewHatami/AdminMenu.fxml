@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newView.AdminMenu">
+<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewHatami.AdminMenu">
    <children>
       <Button onAction="#manageUsersAction" layoutX="367.0" layoutY="52.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="152.0" text="manage users" />
       <Button onAction="#manageDiscountCodesAction" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="152.0" text="manage discount codes" GridPane.columnIndex="1" GridPane.rowIndex="1" />

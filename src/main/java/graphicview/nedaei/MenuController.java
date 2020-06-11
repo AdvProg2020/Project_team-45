@@ -13,7 +13,7 @@ public class MenuController {
     private MenuController() {
         try {
             backgroundPane = FXMLLoader.load(getClass().getResource("/BackgroundPane.fxml"));
-            goToMenu(MainMenu.getInstance().getFxmlFilePath());
+            goToMenu(MainMenu.getFxmlFilePath());
         } catch (IOException ignored) {
 
         }
@@ -33,6 +33,7 @@ public class MenuController {
             backgroundPane.getChildren().remove(currentPane);
             pane.setTranslateX(0);
             pane.setTranslateY(55);
+            pane.setStyle("-fx-background-color: transparent");
             backgroundPane.getChildren().add(pane);
             currentPane = pane;
         } catch (IOException ignored) {

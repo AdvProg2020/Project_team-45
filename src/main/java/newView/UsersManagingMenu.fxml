@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newView.UsersManagingMenu">
+   <children>
+      <ListView fx:id="usersList" layoutX="200.0" layoutY="86.0" prefHeight="200.0" prefWidth="200.0" />
+      <Button onAction="#fillList" layoutX="254.0" layoutY="47.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="fill list" />
+   </children>
+</AnchorPane>

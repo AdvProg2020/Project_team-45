@@ -8,7 +8,7 @@ import model.log.Log;
 import model.product.ProductSellInfo;
 import model.product.Rate;
 import model.user.*;
-import view.RegisterPanel;
+import consuleview.RegisterPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

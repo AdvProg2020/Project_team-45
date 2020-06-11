@@ -11,7 +11,7 @@ import model.request.*;
 import model.user.PersonalInfo;
 import model.user.Seller;
 import model.user.User;
-import view.RegisterPanel;
+import consuleview.RegisterPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;

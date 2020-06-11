@@ -10,7 +10,6 @@ public class Main extends Application {
         Scene scene = new Scene(MenuController.getInstance().getBackgroundPane());
         primaryStage.setTitle("my market");
         primaryStage.setScene(scene);
-        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 

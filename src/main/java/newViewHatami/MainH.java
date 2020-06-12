@@ -1,5 +1,6 @@
 package newViewHatami;
 
+import controller.userControllers.UserController;
 import graphicview.nedaei.MenuController;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ public class MainH extends Application {
     public static void main(String[] args) {
 //        MenuManagement.run();
         Market.getInstance().initialize();
+        UserController.getInstance().setActiveUserByUsername("a");
         launch(args);
     }
 }

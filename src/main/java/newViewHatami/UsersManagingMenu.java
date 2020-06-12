@@ -1,7 +1,9 @@
 package newViewHatami;
 
+import controller.userControllers.AllUsersController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import model.Market;
 import model.user.User;
@@ -10,7 +12,8 @@ import java.util.ArrayList;
 
 public class UsersManagingMenu extends AppMenu {
     public ListView usersList;
-    private User selectedUser;
+    public Label errorLabel;
+    private String selectedUserId;
 
     public static String getFxmlFilePath() {
         return "/UsersManagingMenu.fxml";
@@ -18,11 +21,34 @@ public class UsersManagingMenu extends AppMenu {
 
 
     public void fillList() {
+        // TODO : change list to table
         ArrayList<User> allUsersList = Market.getInstance().getAllUsers();
         ObservableList<String> items = FXCollections.observableArrayList ();
         for (User user : allUsersList) {
             items.add(user.getUsername());
         }
         usersList.setItems(items);
+    }
+
+    public void setSelectedUser() {
+        selectedUserId = (String) usersList.getSelectionModel().getSelectedItem();
+    }
+
+    public void viewSelectedUser() {
+        // TODO : make view panel
+    }
+
+    public void deleteSelectedUser() {
+        try {
+            AllUsersController.getInstance().deleteItemById(selectedUserId);
+            errorLabel.setText("user deleted successfully");
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
+        }
+        fillList();
+    }
+
+    public void openAdminCreatorPanel() {
+        // TODO : open admin creator panel
     }
 }

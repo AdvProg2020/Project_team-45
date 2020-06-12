@@ -4,6 +4,7 @@ import controller.userControllers.AllUsersController;
 import graphicview.nedaei.MenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import model.Market;
@@ -20,6 +21,10 @@ public class UsersManagingMenu extends AppMenu {
         return "/UsersManagingMenu.fxml";
     }
 
+    @FXML
+    public void initialize(){
+        fillList();
+    }
 
     public void fillList() {
         // TODO : change list to table
@@ -40,6 +45,7 @@ public class UsersManagingMenu extends AppMenu {
     }
 
     public void deleteSelectedUser() {
+        setSelectedUser();
         try {
             AllUsersController.getInstance().deleteItemById(selectedUserId);
             errorLabel.setText("user deleted successfully");
@@ -50,6 +56,7 @@ public class UsersManagingMenu extends AppMenu {
     }
 
     public void openAdminCreatorPanel() {
+        setSelectedUser();
         // TODO : open admin creator panel
     }
 

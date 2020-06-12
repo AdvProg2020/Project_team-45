@@ -10,5 +10,7 @@
       <Button onAction="#deleteSelectedUser" layoutX="319.0" layoutY="297.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="delete user" />
       <Button onAction="#openAdminCreatorPanel" layoutX="99.0" layoutY="173.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="92.0" text="create admin" />
       <Label fx:id="errorLabel" layoutX="322.0" layoutY="339.0" prefHeight="26.0" prefWidth="247.0" />
+      <Button layoutX="98.0" layoutY="34.0" mnemonicParsing="false"  onAction="#back" prefHeight="26.0" prefWidth="62.0" text="back" />
+
    </children>
 </AnchorPane>

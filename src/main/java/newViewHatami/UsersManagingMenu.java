@@ -1,6 +1,7 @@
 package newViewHatami;
 
 import controller.userControllers.AllUsersController;
+import graphicview.nedaei.MenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -50,5 +51,9 @@ public class UsersManagingMenu extends AppMenu {
 
     public void openAdminCreatorPanel() {
         // TODO : open admin creator panel
+    }
+
+    public void back() {
+        MenuController.getInstance().goToMenu(AdminMenu.getFxmlFilePath());
     }
 }

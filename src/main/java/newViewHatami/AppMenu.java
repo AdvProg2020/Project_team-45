@@ -13,4 +13,8 @@ public abstract class AppMenu  {
     public static void setWindow(Stage window) {
         AppMenu.window = window;
     }
+
+    public static String getFxmlFilePath() {
+        return "";
+    }
 }

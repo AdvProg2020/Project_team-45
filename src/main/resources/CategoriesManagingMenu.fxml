@@ -5,7 +5,6 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewHatami.CategoriesManagingMenu">
     <children>
         <TreeView fx:id="categoriesTreeView" layoutX="266.0" layoutY="78.0" prefHeight="203.0" prefWidth="290.0" />
-        <Button layoutX="365.0" layoutY="21.0" mnemonicParsing="false" onAction="#fillTreeList" prefHeight="26.0" prefWidth="92.0" text="fill list" />
         <Button layoutX="420.0" layoutY="296.0" mnemonicParsing="false" onAction="#editSelectedCategory" prefHeight="26.0" prefWidth="160.0" text="edit category" />
         <Button layoutX="251.0" layoutY="297.0" mnemonicParsing="false" onAction="#deleteSelectedCategory" prefHeight="26.0" prefWidth="160.0" text="delete category" />
         <Button layoutX="51.0" layoutY="173.0" mnemonicParsing="false" onAction="#createNewCategory" prefHeight="100.0" prefWidth="140.0" text="create new category" />

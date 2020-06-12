@@ -1,6 +1,8 @@
 package newViewHatami;
 
+import controller.CategoryController;
 import graphicview.nedaei.MenuController;
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -19,11 +21,15 @@ public class CategoriesManagingMenu extends AppMenu {
         return "/CategoriesManagingMenu.fxml";
     }
 
+    @FXML
+    public void initialize(){
+        fillTreeList();
+    }
+
     public void fillTreeList() {
         ArrayList<Category> mainCategories = Market.getInstance().getMainCategories();
         TreeItem<String> rootNode = new TreeItem<String>("categories");
         for (Category mainCategory : mainCategories) {
-            System.out.println(mainCategory.getName());
             TreeItem<String> mainNode = new TreeItem<String>(mainCategory.getName());
             addChildrenToNode(mainNode, mainCategory);
             rootNode.getChildren().add(mainNode);
@@ -48,11 +54,19 @@ public class CategoriesManagingMenu extends AppMenu {
     }
 
     public void deleteSelectedCategory() {
-        // TODO
+        String selectedCategoryId = getSelectedCategoryId();
+        CategoryController.getInstance().deleteItemById(selectedCategoryId);
+        fillTreeList();
+        errorLabel.setText("category deleted successfully");
     }
 
     public void createNewCategory() {
         // TODO
+    }
+
+    public String getSelectedCategoryId(){
+        TreeItem<String> selectedItem = (TreeItem<String>) categoriesTreeView.getSelectionModel().getSelectedItem();
+        return selectedItem.getValue();
     }
 
     public void back() {

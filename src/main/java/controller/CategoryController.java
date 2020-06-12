@@ -1,5 +1,7 @@
 package controller;
 
+import consuleview.UIPage;
+import consuleview.hatemi.adminMenus.CategoriesManagingMenu;
 import controller.managers.Creator;
 import controller.managers.Editor;
 import model.Market;
@@ -7,8 +9,6 @@ import model.category.Category;
 import model.category.FinalCategory;
 import model.category.ParentCategory;
 import model.product.Product;
-import consuleview.UIPage;
-import consuleview.hatemi.adminMenus.CategoriesManagingMenu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,12 +39,12 @@ public class CategoryController implements Editor, Creator {
             for (Category subcategory : ((ParentCategory) removingCategory).getSubcategories()) {
                 removeCategory(subcategory);
             }
-        else for (Product product : new ArrayList<Product>(removingCategory.getProductsList())) {
+        else for (Product product : removingCategory.getProductsList()) {
             productController.removeProduct(product);
         }
         market.removeCategoryFromList(removingCategory);
         if (removingCategory.isMain())
-            market.getMainCategories().remove(removingCategory);
+            market.removeMainCategory(removingCategory);
         else
             removingCategory.getParent().removeSubcategoryFromList(removingCategory);
     }

@@ -367,5 +367,8 @@ public class Market {
         return null;
     }
 
+    public void removeMainCategory(Category removingCategory) {
+        mainCategories.remove(removingCategory);
+    }
 }
 

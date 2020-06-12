@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class UsersManagingMenu extends AppMenu {
     public ListView usersList;
     public Label errorLabel;
-    private String selectedUserId;
 
     public static String getFxmlFilePath() {
         return "/UsersManagingMenu.fxml";
@@ -36,8 +35,8 @@ public class UsersManagingMenu extends AppMenu {
         usersList.setItems(items);
     }
 
-    public void setSelectedUser() {
-        selectedUserId = (String) usersList.getSelectionModel().getSelectedItem();
+    public String getSelectedUser() {
+        return (String) usersList.getSelectionModel().getSelectedItem();
     }
 
     public void viewSelectedUser() {
@@ -45,7 +44,7 @@ public class UsersManagingMenu extends AppMenu {
     }
 
     public void deleteSelectedUser() {
-        setSelectedUser();
+        String selectedUserId = getSelectedUser();
         try {
             AllUsersController.getInstance().deleteItemById(selectedUserId);
             errorLabel.setText("user deleted successfully");
@@ -56,7 +55,6 @@ public class UsersManagingMenu extends AppMenu {
     }
 
     public void openAdminCreatorPanel() {
-        setSelectedUser();
         // TODO : open admin creator panel
     }
 

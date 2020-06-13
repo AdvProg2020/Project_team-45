@@ -370,5 +370,9 @@ public class Market {
     public void removeMainCategory(Category removingCategory) {
         mainCategories.remove(removingCategory);
     }
+
+    public void addCompanyToList(Company company) {
+        allCompanies.add(company);
+    }
 }
 

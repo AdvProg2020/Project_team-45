@@ -120,7 +120,7 @@ public class LoginRegisterMenu {
     public void doLogin() {
     }
 
-    public void testAction(KeyEvent actionEvent) {
-        System.out.println("hi!");
+    public void validate(KeyEvent keyEvent) {
+        ((ValidatorField) keyEvent.getSource()).validate();
     }
 }

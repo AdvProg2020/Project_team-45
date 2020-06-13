@@ -1,7 +1,6 @@
 package controller;
 
 import com.google.gson.Gson;
-import model.Market;
 import model.MarketCopier;
 
 import java.io.FileReader;
@@ -10,7 +9,7 @@ import java.io.Reader;
 import java.io.Writer;
 
 public class DatabaseController {
-    private static DatabaseController instance = new DatabaseController();
+    private static final DatabaseController instance = new DatabaseController();
 
     private DatabaseController() {
 

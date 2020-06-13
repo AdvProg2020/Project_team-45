@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="newViewHatami.ProductsManagingMenuForAdmin"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewHatami.ProductsManagingMenuForAdmin">
+    <children>
+        <ListView fx:id="productsList" layoutX="311.0" layoutY="73.0" prefHeight="209.0" prefWidth="264.0" />
+        <Button onAction="#viewSelectedProduct" layoutX="462.0" layoutY="296.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="view product" />
+        <Button onAction="#deleteSelectedProduct" layoutX="319.0" layoutY="297.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="delete product" />
+        <Label fx:id="errorLabel" layoutX="322.0" layoutY="339.0" prefHeight="26.0" prefWidth="247.0" />
+        <Button layoutX="98.0" layoutY="34.0" mnemonicParsing="false"  onAction="#back" prefHeight="26.0" prefWidth="62.0" text="back" />
 
+    </children>
 </AnchorPane>

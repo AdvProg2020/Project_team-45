@@ -367,9 +367,8 @@ public class Market {
         return null;
     }
 
-    public void addCompanyToList(Company company) {
-        allCompanies.add(company);
+    public void removeMainCategory(Category removingCategory) {
+        mainCategories.remove(removingCategory);
     }
-
 }
 

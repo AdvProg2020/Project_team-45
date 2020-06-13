@@ -341,6 +341,10 @@ public class Product extends IdRecognized implements Savable {
         seen = Integer.parseInt(theMap.get("seen"));
     }
 
+    public void setDefaultSellInfo(ProductSellInfo defaultSellInfo) {
+        this.defaultSellInfo = defaultSellInfo;
+    }
+
     //    enum ProductStatus {
 //        UNDER_REVIEW_FOR_CREATE,
 //        REVIEW_FOR_EDITING,

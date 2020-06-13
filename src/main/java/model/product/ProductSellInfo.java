@@ -126,7 +126,9 @@ public class ProductSellInfo extends IdRecognized implements Savable {
         result.put("product", product.getId());
         result.put("price", "" + price);
         result.put("stock", "" + stock);
-        result.put("off", off.getId());
+        if (off != null) {
+            result.put("off", off.getId());
+        }
         HashMap<String, Integer> buyersId = new HashMap<>();
         for (Map.Entry<Buyer, Integer> buyer : allBuyers.entrySet()) {
             buyersId.put(buyer.getKey().getId(), buyer.getValue());
@@ -142,7 +144,9 @@ public class ProductSellInfo extends IdRecognized implements Savable {
         product = market.getProductById(theMap.get("product"));
         price = Integer.parseInt(theMap.get("price"));
         stock = Integer.parseInt(theMap.get("stock"));
-        off = market.getOffById(theMap.get("off"));
+        if (theMap.containsKey("off")) {
+            off = market.getOffById(theMap.get("off"));
+        }
         HashMap<String, Integer> buyersId = (new Gson()).fromJson(theMap.get("allBuyers"), new TypeToken<HashMap<String, Integer>>(){}.getType());
         for (Map.Entry<String, Integer> buyerId : buyersId.entrySet()) {
             allBuyers.put((Buyer) market.getUserById(buyerId.getKey()), buyerId.getValue());

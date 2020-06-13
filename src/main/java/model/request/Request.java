@@ -61,7 +61,6 @@ public abstract class Request extends IdRecognized implements Savable {
     @Override
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = new HashMap<>();
-        result.put("id", id);
         result.put("requestStatus", (new Gson()).toJson(requestStatus));
         result.put("fieldsAndValues", (new Gson()).toJson(fieldsAndValues));
         return result;
@@ -69,9 +68,7 @@ public abstract class Request extends IdRecognized implements Savable {
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
-        id = theMap.get("id");
         requestStatus = (new Gson()).fromJson(theMap.get("requestStatus"), RequestStatus.class);
-
         fieldsAndValues = (new Gson()).fromJson(theMap.get("fieldsAndValues"), new TypeToken<HashMap<String, String>>(){}.getType());
     }
 

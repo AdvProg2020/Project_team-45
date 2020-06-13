@@ -37,6 +37,8 @@ public class AddProductRequest extends Request {
                     , fieldsAndValues.get("description"));
             ProductSellInfo sellInfo = new ProductSellInfo(product, seller);
             product.addSeller(sellInfo);
+            product.setCompany(seller.getCompany());
+            product.setDefaultSellInfo(sellInfo);
             Market.getInstance().addSellInfoToList(sellInfo);
             ((FinalCategory)category).addProduct(product);
             Market.getInstance().getAllProducts().add(product);
@@ -69,7 +71,9 @@ public class AddProductRequest extends Request {
         HashMap<String, String> result = super.convertToHashMap();
         result.put("seller", seller.getId());
         result.put("mode", mode);
-        result.put("product", product.getId());
+        if (product != null) {
+            result.put("product", product.getId());
+        }
         return result;
     }
 
@@ -78,6 +82,8 @@ public class AddProductRequest extends Request {
         super.setFieldsFromHashMap(theMap);
         seller = (Seller) Market.getInstance().getUserById(theMap.get("seller"));
         mode = theMap.get("mode");
-        product = Market.getInstance().getProductById(theMap.get("product"));
+        if (theMap.containsKey("product")) {
+            product = Market.getInstance().getProductById(theMap.get("product"));
+        }
     }
 }

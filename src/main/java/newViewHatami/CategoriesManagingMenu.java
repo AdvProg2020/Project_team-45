@@ -1,7 +1,6 @@
 package newViewHatami;
 
 import controller.CategoryController;
-import graphicview.nedaei.MenuController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
@@ -9,6 +8,7 @@ import javafx.scene.control.TreeView;
 import model.Market;
 import model.category.Category;
 import model.category.ParentCategory;
+import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 

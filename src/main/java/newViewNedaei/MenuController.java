@@ -36,8 +36,8 @@ public class MenuController {
             pane.setStyle("-fx-background-color: transparent");
             backgroundPane.getChildren().add(pane);
             currentPane = pane;
-        } catch (IOException ignored) {
-            ignored.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,9 +1,11 @@
-package newViewNedaei.user;
+package newViewNedaei.user.buyer;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import newViewNedaei.MenuController;
 
 import java.io.IOException;
 
@@ -25,5 +27,9 @@ public class BuyerMenu {
         } catch (IOException ignored) {
 
         }
+    }
+
+    public void viewOrders() {
+        MenuController.getInstance().goToMenu(OrdersManagingMenu.getFxmlFilePath());
     }
 }

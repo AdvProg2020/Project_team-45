@@ -1,6 +1,6 @@
 package newViewNedaei;
 
-import newViewNedaei.user.BuyerMenu;
+import newViewNedaei.user.buyer.BuyerMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

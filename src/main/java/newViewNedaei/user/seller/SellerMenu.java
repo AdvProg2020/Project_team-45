@@ -12,7 +12,9 @@ import java.io.IOException;
 
 public class SellerMenu {
     @FXML
-    private Button ProductsManaging;
+    private Button offsViewing;
+    @FXML
+    private Button productsManaging;
     @FXML
     private AnchorPane mainPane;
 
@@ -35,5 +37,9 @@ public class SellerMenu {
 
     public void manageProducts() {
         MenuController.getInstance().goToMenu(ProductsManagingMenu.getFxmlFilePath());
+    }
+
+    public void viewOffs() {
+        MenuController.getInstance().goToMenu(OffsManagingMenu.getFxmlFilePath());
     }
 }

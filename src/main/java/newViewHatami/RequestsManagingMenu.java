@@ -1,7 +1,7 @@
 package newViewHatami;
 
 import controller.RequestController;
-import graphicview.nedaei.MenuController;
+import newViewNedaei.MenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

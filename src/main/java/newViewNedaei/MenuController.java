@@ -1,4 +1,4 @@
-package graphicview.nedaei;
+package newViewNedaei;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -36,8 +36,8 @@ public class MenuController {
             pane.setStyle("-fx-background-color: transparent");
             backgroundPane.getChildren().add(pane);
             currentPane = pane;
-        } catch (IOException ignored) {
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

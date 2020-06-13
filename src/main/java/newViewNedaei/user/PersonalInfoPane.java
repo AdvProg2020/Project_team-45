@@ -1,13 +1,12 @@
-package graphicview.nedaei.user;
+package newViewNedaei.user;
 
-import controller.userControllers.UserController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.user.PersonalInfo;
 
 public class PersonalInfoPane {
     @FXML
-    private TextField username;
+    private Label username;
     @FXML
     private TextField firstName;
     @FXML
@@ -26,7 +25,7 @@ public class PersonalInfoPane {
     @FXML
     public void initialize() {
 //        PersonalInfo personalInfo = UserController.getActiveUser().getPersonalInfo();
-        username.setPromptText("personalInfo.getUsername()");
+        username.setText("personalInfo.getUsername()");
         firstName.setPromptText("personalInfo.getFirstName()");
         lastName.setPromptText("personalInfo.getLastName()");
         emailAddress.setPromptText("personalInfo.getEmailAddress()");

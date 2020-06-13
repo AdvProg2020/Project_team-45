@@ -1,11 +1,10 @@
-package graphicview.nedaei;
+package newViewNedaei;
 
-import graphicview.nedaei.user.BuyerMenu;
-import graphicview.nedaei.user.PersonalInfoPane;
-import graphicview.nedaei.user.SellerMenu;
+import newViewNedaei.user.buyer.BuyerMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import newViewNedaei.user.seller.SellerMenu;
 
 public class MainMenu{
     @FXML
@@ -39,9 +38,9 @@ public class MainMenu{
         if (role.equals("admin")) {
 
         } else if (role.equals("seller")) {
-            MenuController.getInstance().goToMenu(PersonalInfoPane.getFxmlFilePath());
+            MenuController.getInstance().goToMenu(SellerMenu.getFxmlFilePath());
         } else if (role.equals("buyer")) {
-            MenuController.getInstance().goToMenu(PersonalInfoPane.getFxmlFilePath());
+            MenuController.getInstance().goToMenu(BuyerMenu.getFxmlFilePath());
         }
         deInitialize();
     }

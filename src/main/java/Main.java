@@ -1,4 +1,4 @@
-import graphicview.nedaei.MenuController;
+import newViewNedaei.MenuController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

@@ -19,14 +19,15 @@ public class DiscountCodesManagingMenu extends AppMenu {
     public static String getFxmlFilePath() {
         return "/DiscountCodesManagingMenu.fxml";
     }
-    public void initialize(){
+
+    public void initialize() {
         fillList();
     }
 
     public void fillList() {
         // TODO : change list to table
         ArrayList<CodedDiscount> allDiscountsList = Market.getInstance().getAllCodedDiscounts();
-        ObservableList<String> items = FXCollections.observableArrayList ();
+        ObservableList<String> items = FXCollections.observableArrayList();
         for (CodedDiscount codedDiscount : allDiscountsList) {
             items.add(codedDiscount.getId());
         }

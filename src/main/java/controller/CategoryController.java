@@ -39,8 +39,11 @@ public class CategoryController implements Editor, Creator {
             for (Category subcategory : ((ParentCategory) removingCategory).getSubcategories()) {
                 removeCategory(subcategory);
             }
-        else for (Product product : removingCategory.getProductsList()) {
-            productController.removeProduct(product);
+        else {
+            ArrayList<Product> removingProducts = new ArrayList<>(removingCategory.getProductsList());
+            for (Product product : removingProducts) {
+                productController.removeProduct(product);
+            }
         }
         market.removeCategoryFromList(removingCategory);
         if (removingCategory.isMain())

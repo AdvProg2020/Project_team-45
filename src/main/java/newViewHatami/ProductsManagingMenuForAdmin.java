@@ -25,7 +25,7 @@ public class ProductsManagingMenuForAdmin extends AppMenu {
         ArrayList<Product> allProductsList = Market.getInstance().getAllProducts();
         ObservableList<String> items = FXCollections.observableArrayList();
         for (Product product : allProductsList) {
-            items.add(product.getId());
+            items.add(product.getId() + ":" + product.getName());
         }
         productsList.setItems(items);
     }
@@ -47,7 +47,9 @@ public class ProductsManagingMenuForAdmin extends AppMenu {
     }
 
     public String getSelectedProductId(){
-        return (String) productsList.getSelectionModel().getSelectedItem();
+        if (productsList.getSelectionModel().getSelectedItem() != null)
+            return ((String) productsList.getSelectionModel().getSelectedItem()).split(":")[0];
+        return null;
     }
 
     public void back() {

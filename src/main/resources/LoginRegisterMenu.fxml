@@ -27,7 +27,7 @@
                <children>
                   <PasswordValidatorField fx:id="newPasswordField" promptText="password" GridPane.columnIndex="2" />
                   <PasswordValidatorField fx:id="repeatPasswordField" layoutX="10.0" layoutY="93.0" promptText="repeat password" GridPane.columnIndex="4" />
-                  <ValidatorField fx:id="newUsernameField" validation="alphaNumeric" onKeyTyped="#validate" prefHeight="4.0" prefWidth="107.0" promptText="username" />
+                  <ValidatorField fx:id="newUsernameField" validation="alphaNumeric" isNecessary="true" onKeyReleased="#validate" prefHeight="4.0" prefWidth="107.0" promptText="username" />
                   <ValidatorField fx:id="firstNameField" validation="englishTense" onKeyTyped="#validate" promptText="first name" GridPane.rowIndex="1" />
                   <ValidatorField fx:id="lastNameField" promptText="last name" onKeyTyped="#validate" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <ValidatorField fx:id="emailField" promptText="Email" onKeyTyped="#validate" GridPane.rowIndex="2" />

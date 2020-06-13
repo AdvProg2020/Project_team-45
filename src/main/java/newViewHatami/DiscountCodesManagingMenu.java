@@ -1,13 +1,13 @@
 package newViewHatami;
 
 import controller.CodedDiscountController;
-import graphicview.nedaei.MenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import model.CodedDiscount;
 import model.Market;
+import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 

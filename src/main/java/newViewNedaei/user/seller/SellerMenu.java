@@ -12,10 +12,6 @@ import java.io.IOException;
 
 public class SellerMenu {
     @FXML
-    private Button offsViewing;
-    @FXML
-    private Button productsManaging;
-    @FXML
     private AnchorPane mainPane;
 
     public static String getFxmlFilePath() {
@@ -33,7 +29,6 @@ public class SellerMenu {
             ignored.printStackTrace();
         }
     }
-
 
     public void manageProducts() {
         MenuController.getInstance().goToMenu(ProductsManagingMenu.getFxmlFilePath());

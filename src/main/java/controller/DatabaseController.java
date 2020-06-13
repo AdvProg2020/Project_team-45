@@ -36,7 +36,7 @@ public class DatabaseController {
             MarketCopier.getInstance().copyMarket();
             (new Gson()).toJson(MarketCopier.getInstance(), writer);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 }

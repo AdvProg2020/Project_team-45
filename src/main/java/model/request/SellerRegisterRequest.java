@@ -24,6 +24,7 @@ public class SellerRegisterRequest extends Request {
     @Override
     public void apply() {
         Market.getInstance().addUserToList(seller);
+        Market.getInstance().addCompanyToList(seller.getCompany());
         Market.getInstance().removeRequestedSellerFromList(seller);
     }
 

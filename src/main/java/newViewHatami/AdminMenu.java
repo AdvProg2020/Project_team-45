@@ -1,6 +1,6 @@
 package newViewHatami;
 
-import graphicview.nedaei.MenuController;
+import newViewNedaei.MenuController;
 
 public class AdminMenu extends AppMenu {
 

@@ -3,8 +3,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphicview.nedaei.user.SellerMenu">
+<AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.seller.SellerMenu">
    <children>
-      <Label layoutX="400.0" layoutY="291.0" prefHeight="17.0" prefWidth="200.0" text="Hello fancy face!" />
+      <AnchorPane layoutX="500.0" prefHeight="600.0" prefWidth="500.0">
+         <children>
+            <AnchorPane layoutX="10.0" layoutY="175.0" prefHeight="250.0" prefWidth="480.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="50.0" prefWidth="130.0" text="Company Name" />
+                  <Label alignment="CENTER" layoutY="100.0" prefHeight="50.0" prefWidth="130.0" text="Balance" />
+                  <Label alignment="CENTER" layoutY="50.0" prefHeight="50.0" prefWidth="130.0" text="Company Info" />
+                  <Button layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Sales History" />
+                  <Button fx:id="ProductsManaging" onMouseClicked="#manageProducts" layoutX="120.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Manage Products" />
+                  <Button layoutX="240.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Add Product" />
+                  <Button layoutX="360.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Remove Product" />
+                  <Button layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Show Categories" />
+                  <Button layoutX="120.0" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="View Offs" />
+                  <Button layoutX="430.0" layoutY="112.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" />
+                  <Label alignment="CENTER" layoutX="130.0" layoutY="50.0" prefHeight="50.0" prefWidth="350.0" />
+                  <Label alignment="CENTER" layoutX="130.0" prefHeight="50.0" prefWidth="350.0" />
+                  <TextField layoutX="130.0" layoutY="112.0" prefWidth="300.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

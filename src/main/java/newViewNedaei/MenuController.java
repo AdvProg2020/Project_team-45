@@ -1,4 +1,4 @@
-package graphicview.nedaei;
+package newViewNedaei;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -37,7 +37,7 @@ public class MenuController {
             backgroundPane.getChildren().add(pane);
             currentPane = pane;
         } catch (IOException ignored) {
-
+            ignored.printStackTrace();
         }
     }
 }

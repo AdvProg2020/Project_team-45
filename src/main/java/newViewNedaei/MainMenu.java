@@ -34,7 +34,7 @@ public class MainMenu{
 //            return;
 //        }
 //        String role = UserController.getActiveUser().getRole();
-        String role = "buyer";
+        String role = "seller";
         if (role.equals("admin")) {
 
         } else if (role.equals("seller")) {

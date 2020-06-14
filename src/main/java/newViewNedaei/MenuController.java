@@ -9,6 +9,7 @@ public class MenuController {
     private static final MenuController instance = new MenuController();
     private Pane backgroundPane;
     private Pane currentPane;
+    private String currentFxmlFilePath;
     private Pane panel;
 
     private MenuController() {
@@ -30,7 +31,8 @@ public class MenuController {
 
     public void goToMenu(String fxmlFilePath) {
         try {
-            Pane pane = FXMLLoader.load(getClass().getResource(fxmlFilePath));
+            currentFxmlFilePath = fxmlFilePath;
+            Pane pane = FXMLLoader.load(getClass().getResource(currentFxmlFilePath));
             backgroundPane.getChildren().remove(currentPane);
             pane.setTranslateX(0);
             pane.setTranslateY(55);
@@ -57,6 +59,6 @@ public class MenuController {
 
     public void enableCurrentPane() {
         backgroundPane.getChildren().remove(panel);
-        currentPane.setDisable(false);
+        goToMenu(currentFxmlFilePath);
     }
 }

@@ -3,6 +3,7 @@ package newViewNedaei.user.buyer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import newViewNedaei.MenuController;
@@ -31,5 +32,13 @@ public class BuyerMenu {
 
     public void viewOrders() {
         MenuController.getInstance().goToMenu(OrdersManagingMenu.getFxmlFilePath());
+    }
+
+    public void purchase() {
+        MenuController.getInstance().goToPanel(PurchasePanel.getFxmlFilePath());
+    }
+
+    public void viewDiscounts() {
+        MenuController.getInstance().goToPanel(DiscountCodesPanel.getFxmlFilePath());
     }
 }

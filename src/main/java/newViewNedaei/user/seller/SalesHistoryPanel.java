@@ -10,11 +10,12 @@ import javafx.scene.layout.Pane;
 import model.log.SellLog;
 import model.user.Seller;
 import newViewNedaei.MenuController;
+import newViewNedaei.Panel;
 
 import java.text.SimpleDateFormat;
 
 
-public class SalesHistoryPanel {
+public class SalesHistoryPanel extends Panel {
     @FXML
     private Pane mainPane;
     @FXML
@@ -44,9 +45,5 @@ public class SalesHistoryPanel {
         label.setPrefWidth(100);
         label.setPrefHeight(50);
         return label;
-    }
-
-    public void goBack() {
-        MenuController.getInstance().enableCurrentPane();
     }
 }

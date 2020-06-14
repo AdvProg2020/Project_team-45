@@ -4,8 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.GridPane;
 import newViewNedaei.MenuController;
+import newViewNedaei.Panel;
 
-public class AddProductPanel {
+public class AddProductPanel extends Panel {
     @FXML
     private GridPane newPane;
     @FXML
@@ -39,7 +40,4 @@ public class AddProductPanel {
         }
     }
 
-    public void goBack() {
-        MenuController.getInstance().enableCurrentPane();
-    }
 }

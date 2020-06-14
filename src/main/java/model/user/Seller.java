@@ -152,4 +152,13 @@ public class Seller extends User {
 
         balance = Integer.parseInt(theMap.get("balance"));
     }
+
+    public SellLog getSellLogById(String id) {
+        for (SellLog sellLog : listOfSellLogs) {
+            if (sellLog.getMainLog().getId().equals(id)) {
+                return sellLog;
+            }
+        }
+        return null;
+    }
 }

@@ -1,3 +1,6 @@
+import controller.DatabaseController;
+import controller.userControllers.UserController;
+import model.Market;
 import newViewNedaei.MenuController;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -14,7 +17,9 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-//        MenuManagement.run();
+        Market.getInstance().initialize();
+        UserController.getInstance().setActiveUserByUsername("s");
+        UserController.setLoggedIn(true);
         launch(args);
     }
 }

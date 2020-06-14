@@ -28,7 +28,11 @@ public class PersonalInfoPanel extends Panel {
             if ((matcher = PersonalInfoPanelCommands.EDIT.getMatcher(input)).find() &&
                     UserController.getPersonalInfoFieldsToEdit().contains(matcher.group(1))) {
                 System.out.print("new value: ");
-                UserController.getInstance().setPersonalInfoField(matcher.group(1), scanner.nextLine().trim());
+                try {
+                    UserController.getInstance().setPersonalInfoField(matcher.group(1), scanner.nextLine().trim());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } else {
                 System.out.println("invalid command!");
             }

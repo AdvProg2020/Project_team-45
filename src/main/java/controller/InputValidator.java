@@ -94,6 +94,12 @@ public class InputValidator {
     public static InputValidator getExistingProductValidator() {
         return new InputValidator("\\w[\\w|\\s]+", "existing product Id", ProductController.getInstance(), "no");
     }
+    public static InputValidator getFirstNameValidator() {
+        return new InputValidator("[a-zA-Z ]*", "englishTense");
+    }
+    public static InputValidator getPhoneNumberValidator() {
+        return new InputValidator("09\\d{9}", "09*********");
+    }
 
     public static Date convertStringToDate(String dateString){
         Date date= null;

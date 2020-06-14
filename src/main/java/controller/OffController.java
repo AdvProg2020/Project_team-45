@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class OffController implements Printer {
     private static final OffController instance = new OffController();
+    private Off currentOff;
 
     private OffController() {
 
@@ -51,5 +52,13 @@ public class OffController implements Printer {
     @Override
     public Off getItemById(String Id) {
         return Market.getInstance().getOffById(Id);
+    }
+
+    public Off getCurrentOff() {
+        return currentOff;
+    }
+
+    public void setCurrentOff(Off currentOff) {
+        this.currentOff = currentOff;
     }
 }

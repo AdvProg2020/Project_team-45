@@ -26,6 +26,7 @@ public class SellerController extends UserController implements Creator {
     private final LinkedHashMap<String, InputValidator> newProductFieldsToCreate;
     private final ArrayList<String> offAvailableFieldsToEdit;
     private final ArrayList<String> offFieldsToCreate;
+    private SellLog currentSellLog;
 
     private SellerController() {
         super();
@@ -252,8 +253,11 @@ public class SellerController extends UserController implements Creator {
         return ((Seller) UserController.getActiveUser()).getCompany();
     }
 
-    public void setSellerBalance(int balance) {
-        ((Seller) UserController.getActiveUser()).setBalance(balance);
+    public SellLog getCurrentSellLog() {
+        return currentSellLog;
     }
 
+    public void setCurrentSellLog(String id) {
+        this.currentSellLog = ((Seller) getActiveUser()).getSellLogById(id);
+    }
 }

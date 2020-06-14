@@ -8,7 +8,7 @@ import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class ValidatorField extends TextField {
+public class ValidatorField extends TextField implements Validator{
 
     private String validatorRegex;
 
@@ -17,7 +17,7 @@ public class ValidatorField extends TextField {
     public final String getValidation() { return validation.get(); }
     public final void setValidation(String value) { validation.set(value); }
 
-    private final BooleanProperty isNecessary = new SimpleBooleanProperty(this, "fieldType", false);
+    private final BooleanProperty isNecessary = new SimpleBooleanProperty(this, "fieldType", true);
     //    public final StringProperty fieldTypeProperty() { return fieldType; }
     public final boolean getIsNecessary() { return isNecessary.get(); }
     public final void setIsNecessary(boolean value) { isNecessary.set(value); }
@@ -61,6 +61,10 @@ public class ValidatorField extends TextField {
             case "emailAddress":
                 validatorRegex = "\\w+@\\w+.\\w+";
                 break;
+            case "phoneNumber":
+                validatorRegex = "09\\d{9}";
+                break;
+
         }
     }
 

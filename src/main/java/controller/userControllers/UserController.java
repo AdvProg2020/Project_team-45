@@ -95,6 +95,16 @@ public class UserController {
         return false;
     }
 
+    public boolean login(String username, String password) {
+        User loggingInUser = market.getUserByUsername(username);
+        if (loggingInUser.checkPassword(password)) {
+            loggedIn = true;
+            anonymousUser = new AnonymousUser();
+            return true;
+        }
+        return false;
+    }
+
     public boolean logout() {
         if (loggedIn) {
             loggedIn = false;
@@ -102,6 +112,10 @@ public class UserController {
             return true;
         }
         return false;
+    }
+
+    public boolean usernameExists(String username) {
+        return market.getUserByUsername(username) != null;
     }
 
     public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {

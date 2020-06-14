@@ -1,14 +1,18 @@
 package newViewHatami;
 
+import controller.userControllers.UserController;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static javafx.scene.paint.Color.RED;
 
 public class LoginRegisterMenu {
     public ToggleButton registerToggleButton;
@@ -28,8 +32,9 @@ public class LoginRegisterMenu {
     public ValidatorField phoneNumberField;
     public ValidatorField companyNameField;
     public TextArea companyDescriptionField;
-    public ValidatorField loginUsernameField;
+    public TextField loginUsernameField;
     public PasswordField loginPasswordField;
+    public Label loginErrorLabel;
     private ArrayList<ValidatorField> personalInfoFields;
 
     private ToggleButton selectedToggle;
@@ -45,18 +50,17 @@ public class LoginRegisterMenu {
     public void initialize() {
         makeToggleGroup();
         makeRegisterRoleSelectionChoiceBox();
-        setPersonalInfoFields();
+//        setPersonalInfoFields();
     }
 
-    private void setPersonalInfoFields() {
-        personalInfoFields = new ArrayList<>();
-        personalInfoFields.add(loginUsernameField);
-        personalInfoFields.add(firstNameField);
-        personalInfoFields.add(lastNameField);
-        personalInfoFields.add(emailField);
-        personalInfoFields.add(phoneNumberField);
-
-    }
+//    private void setPersonalInfoFields() {
+//        personalInfoFields = new ArrayList<>();
+//        personalInfoFields.add(firstNameField);
+//        personalInfoFields.add(lastNameField);
+//        personalInfoFields.add(emailField);
+//        personalInfoFields.add(phoneNumberField);
+//
+//    }
 
     private void makeRegisterRoleSelectionChoiceBox() {
         roleSelectionChoiceBox.setItems(FXCollections.observableArrayList("customer", "seller"));
@@ -110,17 +114,27 @@ public class LoginRegisterMenu {
         personalInfoFields.put("username", loginUsernameField.getText());
         personalInfoFields.put("username", loginUsernameField.getText());
         personalInfoFields.put("username", loginUsernameField.getText());
-
-
-
-
         return personalInfoFields;
     }
 
     public void doLogin() {
+        loginErrorLabel.setTextFill(RED);
+        if (loginUsernameField.getText().equals("")) {
+            loginErrorLabel.setText("you missed username");
+        } else if (loginPasswordField.getText().equals("")) {
+            loginErrorLabel.setText("you missed password");
+        } else if (!UserController.getInstance().usernameExists(loginUsernameField.getText())) {
+            loginErrorLabel.setText("The username is invalid!");
+        } else if (!UserController.getInstance().login(loginUsernameField.getText(), loginPasswordField.getText())) {
+            loginErrorLabel.setText("wrong password");
+        } else {
+            loginErrorLabel.setText("login successful");
+            MenuController.getInstance().goToMenu(AdminMenu.getFxmlFilePath());
+            // TODO : put address to go after login
+        }
     }
 
     public void validate(KeyEvent keyEvent) {
-        ((ValidatorField) keyEvent.getSource()).validate();
+        ((Validator) keyEvent.getSource()).validate();
     }
 }

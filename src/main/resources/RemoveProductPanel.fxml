@@ -3,12 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.seller.product.RemoveProductPanel">
    <children>
-      <Button onMouseClicked="#goBack" layoutX="300.0" layoutY="373.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Back" />
-      <Button layoutX="300.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Send Request" />
+      <Button layoutX="300.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="25.0" prefWidth="100.0" text="Back" />
+      <Button layoutX="300.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#sendRequest" prefHeight="25.0" prefWidth="100.0" text="Send Request" />
       <Label alignment="CENTER" layoutY="150.0" prefHeight="50.0" prefWidth="100.0" text="Product Id" />
-      <TextField layoutX="100.0" layoutY="162.0" prefHeight="25.0" prefWidth="200.0" />
+      <ChoiceBox fx:id="targetProduct" layoutX="100.0" layoutY="163.0" prefWidth="200.0" />
+      <Label fx:id="error" textFill="red" layoutX="100.0" layoutY="204.0" prefHeight="25.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

@@ -4,6 +4,7 @@ import controller.userControllers.SellerController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.log.SellLog;
+import newViewNedaei.MenuController;
 import newViewNedaei.Panel;
 
 import java.text.SimpleDateFormat;
@@ -33,5 +34,10 @@ public class SellLogPanel extends Panel {
         address.setText(sellLog.getMainLog().getAddress());
         phone.setText(sellLog.getMainLog().getPhoneNumber());
         product.setText(sellLog.getMainLog().getSellingProducts().get(0).getId());
+    }
+
+    @Override
+    public void goBack() {
+        MenuController.getInstance().goToPanel(SalesHistoryPanel.getFxmlFilePath());
     }
 }

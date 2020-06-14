@@ -1,7 +1,6 @@
-package newViewNedaei.user.seller;
+package newViewNedaei.user.seller.off;
 
 import controller.OffController;
-import controller.userControllers.SellerController;
 import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -12,6 +11,7 @@ import javafx.scene.layout.Pane;
 import model.Off;
 import model.user.Seller;
 import newViewNedaei.MenuController;
+import newViewNedaei.user.seller.off.EditOffPanel;
 
 import java.text.SimpleDateFormat;
 

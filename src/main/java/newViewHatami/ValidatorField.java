@@ -64,6 +64,9 @@ public class ValidatorField extends TextField implements Validator{
             case "phoneNumber":
                 validatorRegex = "09\\d{9}";
                 break;
+            case "naturalNumber":
+                validatorRegex = "\\d*";
+                break;
 
         }
     }

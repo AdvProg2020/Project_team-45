@@ -25,11 +25,11 @@ public class ProductEditionRequest extends Request {
     public void apply() {
         ProductSellInfo productSellInfo = seller.getAvailableProductById(productId)
                 .getSellerInfoForProductByUsername(seller.getPersonalInfo().getUsername());
-        if (fieldsAndValues.containsKey("price")) {
+        if (fieldsAndValues.containsKey("price") && !fieldsAndValues.get("price").equals("")) {
             productSellInfo.setPrice(Integer.parseInt(fieldsAndValues.get("price")));
-        } if (fieldsAndValues.containsKey("stock")) {
+        } if (fieldsAndValues.containsKey("stock") && !fieldsAndValues.get("stock").equals("")) {
             productSellInfo.setStock(Integer.parseInt(fieldsAndValues.get("stock")));
-        } if (fieldsAndValues.containsKey("offId")) {
+        } if (fieldsAndValues.containsKey("offId") && !fieldsAndValues.get("offId").equals("")) {
             Off off = Market.getInstance().getOffById(fieldsAndValues.get("offId"));
             if (off != null) {
                 productSellInfo.setOff(off);

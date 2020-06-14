@@ -1,4 +1,4 @@
-package newViewNedaei.user.seller;
+package newViewNedaei.user.seller.product;
 
 import controller.ProductController;
 import controller.userControllers.UserController;
@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import model.product.Product;
 import model.product.ProductSellInfo;
 import model.user.Seller;
 import newViewNedaei.MenuController;

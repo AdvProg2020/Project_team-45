@@ -21,6 +21,7 @@
                   <Label fx:id="companyInfo" alignment="CENTER" layoutX="130.0" layoutY="50.0" prefHeight="50.0" prefWidth="350.0" />
                   <Label fx:id="companyName" alignment="CENTER" layoutX="130.0" prefHeight="50.0" prefWidth="350.0" />
                   <Label fx:id="balance" alignment="CENTER" layoutX="130.0" layoutY="100.0" prefHeight="50.0" prefWidth="350.0" />
+                  <Button onMouseClicked="#addOff" layoutX="240.0" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Add Off" />
                </children>
             </AnchorPane>
          </children>

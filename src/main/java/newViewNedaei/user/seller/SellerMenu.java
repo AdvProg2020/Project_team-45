@@ -8,6 +8,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import model.Company;
 import newViewNedaei.MenuController;
+import newViewNedaei.user.seller.off.AddOffPanel;
+import newViewNedaei.user.seller.off.OffsManagingMenu;
+import newViewNedaei.user.seller.product.AddProductPanel;
+import newViewNedaei.user.seller.product.ProductsManagingMenu;
+import newViewNedaei.user.seller.product.RemoveProductPanel;
 
 import java.io.IOException;
 
@@ -64,5 +69,9 @@ public class SellerMenu {
 
     public void showCategories() {
         MenuController.getInstance().goToPanel(ShowCategoriesPanel.getFxmlFilePath());
+    }
+
+    public void addOff() {
+        MenuController.getInstance().goToPanel(AddOffPanel.getFxmlFilePath());
     }
 }

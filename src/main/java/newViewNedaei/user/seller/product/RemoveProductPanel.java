@@ -1,4 +1,4 @@
-package newViewNedaei.user.seller;
+package newViewNedaei.user.seller.product;
 
 import newViewNedaei.MenuController;
 import newViewNedaei.Panel;

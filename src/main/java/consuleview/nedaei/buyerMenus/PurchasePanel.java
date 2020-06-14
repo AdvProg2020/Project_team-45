@@ -1,9 +1,9 @@
 package consuleview.nedaei.buyerMenus;
 
+import consuleview.Panel;
+import consuleview.hatemi.adminMenus.Login_RegisterPanel;
 import controller.userControllers.BuyerController;
 import controller.userControllers.UserController;
-import consuleview.Login_RegisterPanel;
-import consuleview.Panel;
 
 import java.util.ArrayList;
 import java.util.HashMap;

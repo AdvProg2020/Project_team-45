@@ -1,7 +1,9 @@
-package consuleview;
+package consuleview.hatemi.adminMenus;
 
-import controller.userControllers.UserController;
+import consuleview.Panel;
+import consuleview.RegisterPanel;
 import consuleview.nedaei.MainMenu;
+import controller.userControllers.UserController;
 
 public class Login_RegisterPanel extends Panel {
     private static final Login_RegisterPanel instance = new Login_RegisterPanel();

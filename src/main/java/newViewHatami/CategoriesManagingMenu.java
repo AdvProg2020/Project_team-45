@@ -61,6 +61,7 @@ public class CategoriesManagingMenu extends AppMenu {
     }
 
     public void createNewCategory() {
+        MenuController.getInstance().goToPanel(CreateCategoryPanel.getFxmlFilePath());
         // TODO
     }
 

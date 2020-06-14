@@ -7,7 +7,7 @@
         <TreeView fx:id="categoriesTreeView" layoutX="266.0" layoutY="78.0" prefHeight="203.0" prefWidth="290.0" />
         <Button layoutX="420.0" layoutY="296.0" mnemonicParsing="false" onAction="#editSelectedCategory" prefHeight="26.0" prefWidth="160.0" text="edit category" />
         <Button layoutX="251.0" layoutY="297.0" mnemonicParsing="false" onAction="#deleteSelectedCategory" prefHeight="26.0" prefWidth="160.0" text="delete category" />
-        <Button layoutX="51.0" layoutY="173.0" mnemonicParsing="false" onAction="#createNewCategory" prefHeight="100.0" prefWidth="140.0" text="create new category" />
+        <Button layoutX="40.0" layoutY="136.0" mnemonicParsing="false" onAction="#createNewCategory" prefHeight="112.0" prefWidth="178.0" text="create new category" />
         <Label fx:id="errorLabel" layoutX="322.0" layoutY="339.0" prefHeight="26.0" prefWidth="247.0" />
         <Button layoutX="98.0" layoutY="34.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="62.0" text="back" />
 

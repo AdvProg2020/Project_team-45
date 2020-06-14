@@ -56,7 +56,7 @@ public class UsersManagingMenu extends AppMenu {
     }
 
     public void openAdminCreatorPanel() {
-
+        MenuController.getInstance().goToPanel(CreateAdminPanel.getFxmlFilePath());
         // TODO : open admin creator panel
     }
 

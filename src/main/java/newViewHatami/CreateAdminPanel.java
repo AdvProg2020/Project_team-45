@@ -4,10 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import newViewNedaei.MenuController;
+import newViewNedaei.Panel;
 
 
-public class CreateAdminPanel {
+public class CreateAdminPanel extends Panel {
     public Button createAdminButton;
 
     public static String getFxmlFilePath() {
@@ -35,7 +35,7 @@ public class CreateAdminPanel {
     }
 
     public void closeAdminCreatorPanel() {
-        MenuController.getInstance().goToMenu(AdminMenu.getFxmlFilePath());
+        goBack();
         // TODO
     }
 }

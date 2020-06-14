@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class UsersManagingMenu extends AppMenu {
     public ListView usersList;
     public Label errorLabel;
+    private static String selectedUsername;
 
     public static String getFxmlFilePath() {
         return "/UsersManagingMenu.fxml";
@@ -35,19 +36,33 @@ public class UsersManagingMenu extends AppMenu {
         usersList.setItems(items);
     }
 
-    public String getSelectedUser() {
-        return (String) usersList.getSelectionModel().getSelectedItem();
+    public void setSelectedUser() {
+        selectedUsername = (String) usersList.getSelectionModel().getSelectedItem();
+    }
+
+    public static String getSelectedUsername() {
+        return selectedUsername;
     }
 
     public void viewSelectedUser() {
+        setSelectedUser();
+        if (selectedUsername == null) {
+            errorLabel.setText("no selected user");
+            return;
+        }
+        MenuController.getInstance().goToPanel(ViewUserPanel.getFxmlFilePath());
         // TODO : make view panel
     }
 
     public void deleteSelectedUser() {
         // TODO : add confirmation alert
-        String selectedUserId = getSelectedUser();
+        setSelectedUser();
+        if (selectedUsername == null) {
+            errorLabel.setText("no selected user");
+            return;
+        }
         try {
-            AllUsersController.getInstance().deleteItemById(selectedUserId);
+            AllUsersController.getInstance().deleteItemById(selectedUsername);
             errorLabel.setText("user deleted successfully");
         } catch (Exception e) {
             errorLabel.setText(e.getMessage());

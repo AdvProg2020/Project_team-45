@@ -16,6 +16,7 @@ public class CategoriesManagingMenu extends AppMenu {
 
     public TreeView categoriesTreeView;
     public Label errorLabel;
+    private static String selectedCategoryId;
 
     public static String getFxmlFilePath() {
         return "/CategoriesManagingMenu.fxml";
@@ -24,6 +25,7 @@ public class CategoriesManagingMenu extends AppMenu {
     @FXML
     public void initialize(){
         fillTreeList();
+        selectedCategoryId = null;
     }
 
     public void fillTreeList() {
@@ -35,6 +37,10 @@ public class CategoriesManagingMenu extends AppMenu {
             rootNode.getChildren().add(mainNode);
         }
         categoriesTreeView.setRoot(rootNode);
+    }
+
+    public static String getSelectedCategoryId() {
+        return selectedCategoryId;
     }
 
     private void addChildrenToNode(TreeItem<String> rootNode, Category category) {
@@ -50,23 +56,33 @@ public class CategoriesManagingMenu extends AppMenu {
     }
 
     public void editSelectedCategory() {
-        // TODO
+        setSelectedCategoryId();
+        if (selectedCategoryId == null) {
+            errorLabel.setText("no salacted category");
+            return;
+        }
+        MenuController.getInstance().goToPanel(EditCategoryPanel.getFxmlFilePath());
     }
 
     public void deleteSelectedCategory() {
-        String selectedCategoryId = getSelectedCategoryId();
+        setSelectedCategoryId();
+        if (selectedCategoryId == null) {
+            errorLabel.setText("no salacted category");
+            return;
+        }
         CategoryController.getInstance().deleteItemById(selectedCategoryId);
         fillTreeList();
         errorLabel.setText("category deleted successfully");
     }
 
     public void createNewCategory() {
-        // TODO
+        MenuController.getInstance().goToPanel(CreateCategoryPanel.getFxmlFilePath());
     }
 
-    public String getSelectedCategoryId(){
+    public void setSelectedCategoryId(){
         TreeItem<String> selectedItem = (TreeItem<String>) categoriesTreeView.getSelectionModel().getSelectedItem();
-        return selectedItem.getValue();
+        if (selectedItem != null)
+            selectedCategoryId = selectedItem.getValue();
     }
 
     public void back() {

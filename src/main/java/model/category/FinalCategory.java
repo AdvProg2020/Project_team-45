@@ -6,7 +6,6 @@ import model.Market;
 import model.product.Product;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class FinalCategory extends Category {
@@ -30,6 +29,7 @@ public class FinalCategory extends Category {
         this.specialFeatures = new ArrayList<>();
         this.productsList = new ArrayList<>();
     }
+
 
     public ArrayList<String> getSpecialFeatures() {
         return specialFeatures;
@@ -87,16 +87,12 @@ public class FinalCategory extends Category {
         return true;
     }
 
-    public void addFeatures(String newFeaturesString) {
-        ArrayList<String> newFeatures = (ArrayList<String>) Arrays.asList(newFeaturesString.split("-"));
-        this.specialFeatures.addAll(newFeatures);
+    public void addFeature(String newFeature) {
+        this.specialFeatures.add(newFeature);
     }
 
-    public void removeFeatures(String removingFeaturesString) {
-        ArrayList<String> removingFeatures = (ArrayList<String>) Arrays.asList(removingFeaturesString.split("-"));
-        for (String removingFeature : removingFeatures) {
+    public void removeFeature(String removingFeature) {
             specialFeatures.remove(removingFeature);
-        }
     }
 
     @Override

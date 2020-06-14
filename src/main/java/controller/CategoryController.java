@@ -10,9 +10,8 @@ import model.category.FinalCategory;
 import model.category.ParentCategory;
 import model.product.Product;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class CategoryController implements Editor, Creator {
     private static final CategoryController instance = new CategoryController();
@@ -69,6 +68,14 @@ public class CategoryController implements Editor, Creator {
         }
         if (editingCategory.getType().equals("FinalCategory")) {
         }
+    }
+
+    public void editCategoryName(Category editingCategory, String newName) {
+            editingCategory.setName(newName);
+    }
+
+    public boolean categoryNameExists(String keyName) {
+        return market.getCategoryByName(keyName) != null;
     }
 
     public boolean deleteItemById(String Id) {
@@ -238,9 +245,14 @@ public class CategoryController implements Editor, Creator {
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
         Category createdCategory;
-        filledFeatures.put("name", UIPage.getMatcher().group(1));
+        ArrayList<String> categorySpecialFeatures;
+        if (!filledFeatures.containsKey("name")) {
+            filledFeatures.put("name", UIPage.getMatcher().group(1));
+            categorySpecialFeatures = CategoriesManagingMenu.getCategoryFeatures();
+        } else {
+            categorySpecialFeatures = new ArrayList<String>(Arrays.asList(filledFeatures.get("features").trim().split("\n")));
+        }
         if (filledFeatures.get("is final?").equals("yes")) {
-            ArrayList<String> categorySpecialFeatures = CategoriesManagingMenu.getCategoryFeatures();
             createdCategory = new FinalCategory(filledFeatures, categorySpecialFeatures);
         } else createdCategory = new ParentCategory(filledFeatures);
         if (createdCategory.isMain())
@@ -252,5 +264,29 @@ public class CategoryController implements Editor, Creator {
     @Override
     public Category getItemById(String Id) {
         return market.getCategoryByName(Id);
+    }
+
+    public List<ParentCategory> getParentCategories() {
+        List<Category> allCategories = Market.getInstance().getAllCategories();
+        return  allCategories.stream().filter(category -> !category.isFinal()).map(category -> (ParentCategory) category).collect(Collectors.toList());
+
+    }
+
+    public List<FinalCategory> getFinalCategories() {
+        List<Category> allCategories = Market.getInstance().getAllCategories();
+        return  allCategories.stream().filter(Category::isFinal).map(category -> (FinalCategory) category).collect(Collectors.toList());
+    }
+
+    public void addFeatureToCategory(FinalCategory editingCategory, String newFeature) {
+        editingCategory.addFeature(newFeature);
+    }
+
+    public void removeFeatureFromCategory(FinalCategory editingCategory, String removingFeature) {
+        editingCategory.removeFeature(removingFeature);
+    }
+
+
+    public boolean categoryHasFeature(FinalCategory editingCategory, String feature) {
+        return editingCategory.getSpecialFeatures().contains(feature);
     }
 }

@@ -8,7 +8,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
-import model.Market;
 import model.category.Category;
 import model.category.ParentCategory;
 import newViewNedaei.Panel;
@@ -54,7 +53,7 @@ public class CreateCategoryPanel extends Panel {
             errorLabel.setText("invalid category name");
             return;
         }
-        if (Market.getInstance().getCategoryByName(categoryName.getText()) != null) {
+        if (CategoryController.getInstance().categoryNameExists(categoryName.getText())) {
             errorLabel.setText("category name already exists");
             return;
         }
@@ -68,6 +67,7 @@ public class CreateCategoryPanel extends Panel {
         CategoryController.getInstance().createItem(categoryInfo);
         errorLabel.setText("category made successfully");
         categoryName.clear();
+        categoryFeaturesInput.clear();
         setUpChoiceBox();
     }
 

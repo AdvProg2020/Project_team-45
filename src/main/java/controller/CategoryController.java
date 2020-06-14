@@ -70,6 +70,14 @@ public class CategoryController implements Editor, Creator {
         }
     }
 
+    public void editCategoryName(Category editingCategory, String newName) {
+            editingCategory.setName(newName);
+    }
+
+    public boolean categoryNameExists(String keyName) {
+        return market.getCategoryByName(keyName) != null;
+    }
+
     public boolean deleteItemById(String Id) {
         Category removingCategory = getItemById(Id);
         if (removingCategory == null)
@@ -267,5 +275,18 @@ public class CategoryController implements Editor, Creator {
     public List<FinalCategory> getFinalCategories() {
         List<Category> allCategories = Market.getInstance().getAllCategories();
         return  allCategories.stream().filter(Category::isFinal).map(category -> (FinalCategory) category).collect(Collectors.toList());
+    }
+
+    public void addFeatureToCategory(FinalCategory editingCategory, String newFeature) {
+        editingCategory.addFeature(newFeature);
+    }
+
+    public void removeFeatureFromCategory(FinalCategory editingCategory, String removingFeature) {
+        editingCategory.removeFeature(removingFeature);
+    }
+
+
+    public boolean categoryHasFeature(FinalCategory editingCategory, String feature) {
+        return editingCategory.getSpecialFeatures().contains(feature);
     }
 }

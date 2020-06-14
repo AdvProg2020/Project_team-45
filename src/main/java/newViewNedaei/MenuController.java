@@ -9,6 +9,7 @@ public class MenuController {
     private static final MenuController instance = new MenuController();
     private Pane backgroundPane;
     private Pane currentPane;
+    private Pane panel;
 
     private MenuController() {
         try {
@@ -39,5 +40,23 @@ public class MenuController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void goToPanel(String fxmlFilePath) {
+        try {
+            panel = FXMLLoader.load(getClass().getResource(fxmlFilePath));
+            panel.setTranslateX(300);
+            panel.setTranslateY(155);
+            panel.setStyle("-fx-background-color: royalblue");
+            currentPane.setDisable(true);
+            backgroundPane.getChildren().add(panel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void enableCurrentPane() {
+        backgroundPane.getChildren().remove(panel);
+        currentPane.setDisable(false);
     }
 }

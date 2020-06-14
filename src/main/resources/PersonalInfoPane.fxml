@@ -31,11 +31,11 @@
             <TextField fx:id="emailAddress" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <TextField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Button onMouseClicked="#editFirstName" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button onMouseClicked="#editLastName" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button onMouseClicked="#editEmail" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button onMouseClicked="#editPhone" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button onMouseClicked="#editPassword" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Label fx:id="username" alignment="CENTER" prefHeight="50.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.columnSpan="2" />
          </children>
       </GridPane>

@@ -178,11 +178,11 @@ public class MarketCopier {
         buildDiscountsWithHashMaps();
         buildCategoriesWithHashMaps();
         buildMainCategoriesWithHashMaps();
-        buildProductsWithHashMaps();
         buildLogsWithHashMaps();
         buildOffsWithHashMaps();
         buildRequestsWithHashMaps();
         buildProductSellInfosWithHashMaps();
+        buildProductsWithHashMaps();
         buildRatesWithHashMaps();
     }
 

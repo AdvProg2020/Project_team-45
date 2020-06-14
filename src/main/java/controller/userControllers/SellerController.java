@@ -247,4 +247,13 @@ public class SellerController extends UserController implements Creator {
             return null;
         return (Seller) market.getUserByUsername(Id);
     }
+
+    public Company getSellerCompany() {
+        return ((Seller) UserController.getActiveUser()).getCompany();
+    }
+
+    public void setSellerBalance(int balance) {
+        ((Seller) UserController.getActiveUser()).setBalance(balance);
+    }
+
 }

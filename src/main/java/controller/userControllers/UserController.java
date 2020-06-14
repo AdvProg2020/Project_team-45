@@ -8,6 +8,7 @@ import model.user.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class UserController {
@@ -55,6 +56,19 @@ public class UserController {
 
     public static ArrayList<String> getPersonalInfoFieldsToEdit() {
         return personalInfoFieldsToEdit;
+    }
+
+    public static HashMap<String, String> getUserViewInfo(String username) {
+        User showingUser = Market.getInstance().getUserByUsername(username);
+        HashMap<String, String> filledMap = new HashMap<>();
+
+        filledMap.put("username", showingUser.getUsername());
+        filledMap.put("role", showingUser.getRole());
+        filledMap.put("firstName", showingUser.getPersonalInfo().getFirstName());
+        filledMap.put("lastName", showingUser.getPersonalInfo().getLastName());
+        filledMap.put("phoneNumber", showingUser.getPersonalInfo().getPhoneNumber());
+        filledMap.put("email", showingUser.getPersonalInfo().getEmailAddress());
+        return filledMap;
     }
 
     // personal info panel

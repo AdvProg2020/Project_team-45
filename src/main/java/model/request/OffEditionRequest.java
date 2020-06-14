@@ -29,21 +29,21 @@ public class OffEditionRequest extends Request{
             return;
         }
 
-        if (fieldsAndValues.containsKey("startTime")) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy");
+        if (fieldsAndValues.containsKey("startTime") && !fieldsAndValues.get("startTime").equals("")) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
             try {
                 off.setStartTime(simpleDateFormat.parse(fieldsAndValues.get("startTime")));
             } catch (ParseException parseException) {
                 return;
             }
-        } if (fieldsAndValues.containsKey("endTime")) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/M/yyyy");
+        } if (fieldsAndValues.containsKey("endTime") && !fieldsAndValues.get("endTime").equals("")) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
             try {
                 off.setEndTime(simpleDateFormat.parse(fieldsAndValues.get("startTime")));
             } catch (ParseException parseException) {
                 return;
             }
-        } if (fieldsAndValues.containsKey("discountAmount")) {
+        } if (fieldsAndValues.containsKey("discountAmount") && !fieldsAndValues.get("discountAmount").equals("")) {
             off.setDiscountAmount(Integer.parseInt(fieldsAndValues.get("discountAmount")));
         }
     }

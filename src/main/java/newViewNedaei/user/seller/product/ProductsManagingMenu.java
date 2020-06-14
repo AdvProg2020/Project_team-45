@@ -1,5 +1,6 @@
-package newViewNedaei.user.seller;
+package newViewNedaei.user.seller.product;
 
+import controller.ProductController;
 import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -7,8 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import model.product.Product;
+import model.product.ProductSellInfo;
 import model.user.Seller;
+import newViewNedaei.MenuController;
 
 public class ProductsManagingMenu {
     @FXML
@@ -20,20 +22,20 @@ public class ProductsManagingMenu {
 
     @FXML
     public void initialize() {
-//        Seller seller = (Seller) UserController.getActiveUser();
-//        int i = 0;
-//        for (Product product : seller.getAvailableProducts().keySet()) {
-//            mainPane.add(createProductDisplay(product), i%5, i/5);
-//            i++;
-//        }
+        Seller seller = (Seller) UserController.getActiveUser();
+        int i = 0;
+        for (ProductSellInfo productSellInfo : seller.getAvailableProducts().values()) {
+            mainPane.add(createProductDisplay(productSellInfo), i%5, i/5);
+            i++;
+        }
     }
 
-    private Pane createProductDisplay(Product product) {
+    private Pane createProductDisplay(ProductSellInfo productSellInfo) {
         Label name = new Label();
         name.setPrefWidth(180);
         name.setPrefHeight(50);
         name.setAlignment(Pos.CENTER);
-        name.setText(product.getName());
+        name.setText(productSellInfo.getProduct().getName());
         name.setTranslateX(0);
         name.setTranslateY(0);
 
@@ -41,7 +43,7 @@ public class ProductsManagingMenu {
         id.setPrefWidth(180);
         id.setPrefHeight(50);
         id.setAlignment(Pos.CENTER);
-        id.setText("id: " + product.getId());
+        id.setText("id: " + productSellInfo.getProduct().getId());
         id.setTranslateX(0);
         id.setTranslateY(60);
 
@@ -57,7 +59,10 @@ public class ProductsManagingMenu {
         edit.setPrefHeight(50);
         edit.setTranslateX(90);
         edit.setTranslateY(120);
-//        view.setOnMouseClicked(event -> );
+        edit.setOnMouseClicked(event -> {
+            ProductController.getInstance().setActiveProductSellInfo(productSellInfo);
+            MenuController.getInstance().goToPanel(EditProductPanel.getFxmlFilePath());
+        });
 
         Pane pane = new Pane();
         pane.getChildren().add(name);

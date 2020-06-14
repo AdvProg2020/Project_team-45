@@ -67,6 +67,10 @@ public class ValidatorField extends TextField implements Validator{
             case "percentage":
                 validatorRegex = "[1-9]|([1-9][0-9])";
                 break;
+            case "naturalNumber":
+                validatorRegex = "\\d*";
+                break;
+
         }
     }
 

@@ -4,25 +4,31 @@ import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import model.user.PersonalInfo;
+import newViewHatami.Validator;
+import newViewHatami.ValidatorField;
 
 public class PersonalInfoPane {
     @FXML
+    private Label error;
+    @FXML
     private Label username;
     @FXML
-    private TextField firstName;
+    private ValidatorField firstName;
     @FXML
-    private TextField lastName;
+    private ValidatorField lastName;
     @FXML
-    private TextField emailAddress;
+    private ValidatorField emailAddress;
     @FXML
-    private TextField phoneNumber;
+    private ValidatorField phoneNumber;
     @FXML
-    private TextField password;
-    private PersonalInfo personalInfo;
+    private ValidatorField password;
+    private final PersonalInfo personalInfo;
 
     public PersonalInfoPane() {
-//        personalInfo = UserController.getActiveUser().getPersonalInfo();
+        personalInfo = UserController.getActiveUser().getPersonalInfo();
     }
 
     public static String getFxmlFilePath() {
@@ -31,37 +37,66 @@ public class PersonalInfoPane {
 
     @FXML
     public void initialize() {
-//        PersonalInfo personalInfo = UserController.getActiveUser().getPersonalInfo();
-        username.setText("personalInfo.getUsername()");
-        firstName.setPromptText("personalInfo.getFirstName()");
-        lastName.setPromptText("personalInfo.getLastName()");
-        emailAddress.setPromptText("personalInfo.getEmailAddress()");
-        phoneNumber.setPromptText("personalInfo.getPhoneNumber()");
-        password.setPromptText("personalInfo.getPassword()");
+        PersonalInfo personalInfo = UserController.getActiveUser().getPersonalInfo();
+        username.setText(personalInfo.getUsername());
+        firstName.setPromptText(personalInfo.getFirstName());
+        lastName.setPromptText(personalInfo.getLastName());
+        emailAddress.setPromptText(personalInfo.getEmailAddress());
+        phoneNumber.setPromptText(personalInfo.getPhoneNumber());
+        password.setPromptText(personalInfo.getPassword());
     }
 
     public void editFirstName() {
-        UserController.getInstance().setPersonalInfoField("firstName", firstName.getText());
-        firstName.setPromptText(personalInfo.getFirstName());
+        try {
+            UserController.getInstance().setPersonalInfoField("firstName", firstName.getText());
+            firstName.setPromptText(personalInfo.getFirstName());
+            error.setText("");
+        } catch (Exception e) {
+            error.setText(e.getMessage());
+        }
     }
 
     public void editLastName() {
-        UserController.getInstance().setPersonalInfoField("lastName", lastName.getText());
-        lastName.setPromptText(personalInfo.getLastName());
+        try {
+            UserController.getInstance().setPersonalInfoField("lastName", lastName.getText());
+            lastName.setPromptText(personalInfo.getLastName());
+            error.setText("");
+        } catch (Exception e) {
+            error.setText(e.getMessage());
+        }
     }
 
     public void editEmail() {
-        UserController.getInstance().setPersonalInfoField("emailAddress", emailAddress.getText());
-        emailAddress.setPromptText(personalInfo.getEmailAddress());
+        try {
+            UserController.getInstance().setPersonalInfoField("emailAddress", emailAddress.getText());
+            emailAddress.setPromptText(personalInfo.getEmailAddress());
+            error.setText("");
+        } catch (Exception e) {
+            error.setText(e.getMessage());
+        }
     }
 
     public void editPhone() {
-        UserController.getInstance().setPersonalInfoField("phoneNumber", phoneNumber.getText());
-        phoneNumber.setPromptText(personalInfo.getPhoneNumber());
+        try {
+            UserController.getInstance().setPersonalInfoField("phoneNumber", phoneNumber.getText());
+            phoneNumber.setPromptText(personalInfo.getPhoneNumber());
+            error.setText("");
+        } catch (Exception e) {
+            error.setText(e.getMessage());
+        }
     }
 
     public void editPassword() {
-        UserController.getInstance().setPersonalInfoField("password", password.getText());
-        password.setPromptText(personalInfo.getPassword());
+        try {
+            UserController.getInstance().setPersonalInfoField("password", password.getText());
+            password.setPromptText(personalInfo.getPassword());
+            error.setText("");
+        } catch (Exception e) {
+            error.setText(e.getMessage());
+        }
+    }
+
+    public void validate(KeyEvent keyEvent) {
+        ((Validator) keyEvent.getSource()).validate();
     }
 }

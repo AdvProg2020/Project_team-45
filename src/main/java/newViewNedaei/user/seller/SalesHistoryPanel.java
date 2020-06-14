@@ -1,9 +1,11 @@
 package newViewNedaei.user.seller;
 
 
+import controller.userControllers.SellerController;
 import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -27,16 +29,28 @@ public class SalesHistoryPanel extends Panel {
 
     @FXML
     public void initialize() {
-//        Seller seller = (Seller) UserController.getActiveUser();
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//        int row = 1;
-//        for (SellLog sellLog : seller.getListOfSellLogs()) {
-//            list.add(createLabel(simpleDateFormat.format(sellLog.getMainLog().getDate())), 0, row);
-//            list.add(createLabel(sellLog.getMainLog().getId()), 1, row);
-//            list.add(createLabel("" + sellLog.getMainLog().getFinalPrice()), 2, row);
-//            list.add(createLabel(sellLog.getMainLog().getBuyerUsername()), 3, row);
-//            row++;
-//        }
+        Seller seller = (Seller) UserController.getActiveUser();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        int row = 1;
+        for (SellLog sellLog : seller.getListOfSellLogs()) {
+            list.add(createLabel(simpleDateFormat.format(sellLog.getMainLog().getDate())), 0, row);
+            list.add(createHyperLink(sellLog.getMainLog().getId()), 1, row);
+            list.add(createLabel("" + sellLog.getMainLog().getFinalPrice()), 2, row);
+            list.add(createLabel(sellLog.getMainLog().getBuyerUsername()), 3, row);
+            row++;
+        }
+    }
+
+    private Hyperlink createHyperLink(String text) {
+        Hyperlink hyperlink = new Hyperlink(text);
+        hyperlink.setAlignment(Pos.CENTER);
+        hyperlink.setPrefWidth(100);
+        hyperlink.setPrefHeight(50);
+        hyperlink.setOnAction(event -> {
+            SellerController.getInstance().setCurrentSellLog(hyperlink.getText());
+            MenuController.getInstance().goToPanel(SellLogPanel.getFxmlFilePath());
+        });
+        return hyperlink;
     }
 
     private Label createLabel(String text) {

@@ -73,17 +73,32 @@ public class UserController {
 
     // personal info panel
 
-    public void setPersonalInfoField(String field, String newValue) {
+    public void setPersonalInfoField(String field, String newValue) throws Exception{
         PersonalInfo personalInfo = activeUser.getPersonalInfo();
         if (field.equalsIgnoreCase("firstName")) {
+            if (!InputValidator.getFirstNameValidator().checkInput(newValue)) {
+                throw new Exception("invalid first name format");
+            }
             personalInfo.setFirstName(newValue);
         } else if (field.equalsIgnoreCase("lastName")) {
+            if (!InputValidator.getFirstNameValidator().checkInput(newValue)) {
+                throw new Exception("invalid last name format");
+            }
             personalInfo.setLastName(newValue);
         } else if (field.equalsIgnoreCase("emailAddress")) {
+            if (!InputValidator.getEmailAddressValidator().checkInput(newValue)) {
+                throw new Exception("invalid email address format");
+            }
             personalInfo.setEmailAddress(newValue);
         } else if (field.equalsIgnoreCase("phoneNumber")) {
+            if (!InputValidator.getPhoneNumberValidator().checkInput(newValue)) {
+                throw new Exception("invalid phoneNumber format");
+            }
             personalInfo.setPhoneNumber(newValue);
         } else if (field.equalsIgnoreCase("password")) {
+            if (!InputValidator.getSimpleTextValidator().checkInput(newValue)) {
+                throw new Exception("invalid first name format");
+            }
             personalInfo.setPassword(newValue);
         }
     }
@@ -142,5 +157,9 @@ public class UserController {
         necessaryFields.put("email address", InputValidator.getEmailAddressValidator());
         necessaryFields.put("phone number", InputValidator.getSimpleNumberValidator());
         return necessaryFields;
+    }
+
+    public static void setLoggedIn(boolean loggedIn) {
+        UserController.loggedIn = loggedIn;
     }
 }

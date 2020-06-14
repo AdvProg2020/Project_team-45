@@ -12,16 +12,16 @@
                   <Label alignment="CENTER" prefHeight="50.0" prefWidth="130.0" text="Company Name" />
                   <Label alignment="CENTER" layoutY="100.0" prefHeight="50.0" prefWidth="130.0" text="Balance" />
                   <Label alignment="CENTER" layoutY="50.0" prefHeight="50.0" prefWidth="130.0" text="Company Info" />
-                  <Button onMouseClicked="#viewSales" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Sales History" />
-                  <Button onMouseClicked="#manageProducts" layoutX="120.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Manage Products" />
-                  <Button onMouseClicked="#addProduct" layoutX="240.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Add Product" />
-                  <Button onMouseClicked="#removeProduct" layoutX="360.0" layoutY="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Remove Product" />
-                  <Button onMouseClicked="#showCategories" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Show Categories" />
-                  <Button onMouseClicked="#viewOffs" layoutX="120.0" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="View Offs" />
-                  <Button onMouseClicked="#editBalance" layoutX="430.0" layoutY="112.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" />
+                  <Button layoutY="150.0" mnemonicParsing="false" onMouseClicked="#viewSales" prefHeight="50.0" prefWidth="120.0" text="Sales History" />
+                  <Button layoutX="120.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="50.0" prefWidth="120.0" text="Manage Products" />
+                  <Button layoutX="240.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#addProduct" prefHeight="50.0" prefWidth="120.0" text="Add Product" />
+                  <Button layoutX="360.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#removeProduct" prefHeight="50.0" prefWidth="120.0" text="Remove Product" />
+                  <Button layoutY="200.0" mnemonicParsing="false" onMouseClicked="#showCategories" prefHeight="50.0" prefWidth="120.0" text="Show Categories" />
+                  <Button layoutX="120.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#viewOffs" prefHeight="50.0" prefWidth="120.0" text="View Offs" />
                   <Label fx:id="companyInfo" alignment="CENTER" layoutX="130.0" layoutY="50.0" prefHeight="50.0" prefWidth="350.0" />
                   <Label fx:id="companyName" alignment="CENTER" layoutX="130.0" prefHeight="50.0" prefWidth="350.0" />
-                  <TextField fx:id="balance" layoutX="130.0" layoutY="112.0" prefWidth="300.0" />
+                  <Label fx:id="balance" alignment="CENTER" layoutX="130.0" layoutY="100.0" prefHeight="50.0" prefWidth="350.0" />
+                  <Button onMouseClicked="#addOff" layoutX="240.0" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Add Off" />
                </children>
             </AnchorPane>
          </children>

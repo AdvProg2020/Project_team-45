@@ -2,10 +2,11 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import newViewHatami.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.PersonalInfoPane">
    <children>
-      <GridPane alignment="CENTER" layoutX="14.0" layoutY="150.0" prefHeight="300.0" prefWidth="480.0">
+      <GridPane alignment="CENTER" layoutX="10.0" layoutY="125.0" prefHeight="350.0" prefWidth="480.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="300.0" />
@@ -18,6 +19,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="130.0" text="Last Name" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
@@ -26,17 +28,18 @@
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="130.0" text="Phone Number" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="130.0" text="Password" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="130.0" text="First Name" textAlignment="RIGHT" GridPane.rowIndex="1" />
-            <TextField fx:id="firstName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="emailAddress" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button onMouseClicked="#editFirstName" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button onMouseClicked="#editLastName" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Button onMouseClicked="#editEmail" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button onMouseClicked="#editPhone" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Button onMouseClicked="#editPassword" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <ValidatorField fx:id="firstName" onKeyReleased="#validate" validation="englishTense" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ValidatorField fx:id="lastName" onKeyReleased="#validate" validation="englishTense" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ValidatorField fx:id="emailAddress" onKeyReleased="#validate" validation="emailAddress" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ValidatorField fx:id="phoneNumber" onKeyReleased="#validate" validation="phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ValidatorField fx:id="password" onKeyReleased="#validate" validation="alphaNumeric" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button mnemonicParsing="false" onMouseClicked="#editFirstName" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" onMouseClicked="#editLastName" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onMouseClicked="#editEmail" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onMouseClicked="#editPhone" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" onMouseClicked="#editPassword" prefHeight="25.0" prefWidth="50.0" text="Edit" GridPane.columnIndex="2" GridPane.rowIndex="5" />
             <Label fx:id="username" alignment="CENTER" prefHeight="50.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+            <Label fx:id="error" textFill="red" prefHeight="50.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>

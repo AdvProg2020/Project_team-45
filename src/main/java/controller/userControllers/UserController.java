@@ -114,7 +114,9 @@ public class UserController {
         return false;
     }
 
-    public boolean usernameExists(String username) {
+    public boolean usernameExists(String username) throws Exception {
+        if (market.usernameRequestExists(username))
+            throw new Exception("username is Request");
         return market.getUserByUsername(username) != null;
     }
 

@@ -1,5 +1,6 @@
 package controller.userControllers;
 
+import consuleview.RegisterPanel;
 import controller.InputValidator;
 import controller.managers.Creator;
 import model.CodedDiscount;
@@ -8,7 +9,6 @@ import model.log.Log;
 import model.product.ProductSellInfo;
 import model.product.Rate;
 import model.user.*;
-import consuleview.RegisterPanel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -170,6 +170,12 @@ public class BuyerController extends UserController implements Creator {
     @Override
     public void createItem(HashMap<String, String> filledFeatures) {
         filledFeatures.put("username", RegisterPanel.getLastRegisterUsername());
+        Buyer newBuyer = new Buyer(new PersonalInfo(filledFeatures));
+        market.addUserToList(newBuyer);
+    }
+
+    public void createItem(HashMap<String, String> filledFeatures, String username) {
+        filledFeatures.put("username", username);
         Buyer newBuyer = new Buyer(new PersonalInfo(filledFeatures));
         market.addUserToList(newBuyer);
     }

@@ -7,6 +7,7 @@ import model.product.Product;
 import model.product.ProductSellInfo;
 import model.product.Rate;
 import model.request.Request;
+import model.request.SellerRegisterRequest;
 import model.user.Seller;
 import model.user.User;
 
@@ -373,6 +374,17 @@ public class Market {
 
     public void addCompanyToList(Company company) {
         allCompanies.add(company);
+    }
+
+    public boolean usernameRequestExists(String username) {
+        for (Request request : allRequests) {
+            if (request.getType().equals("seller register")) {
+                Seller requestSeller = ((SellerRegisterRequest) request).getSeller();
+                if (requestSeller.getUsername().equals(username))
+                    return true;
+            }
+        }
+        return false;
     }
 }
 

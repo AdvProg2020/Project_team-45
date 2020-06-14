@@ -53,14 +53,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ValidatorField fx:id="companyNameField" promptText="english char + space" GridPane.columnIndex="1" />
+                  <ValidatorField fx:id="companyNameField" promptText="english char + space" validation="englishTense" GridPane.columnIndex="1" />
                   <TextArea fx:id="companyDescriptionField" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" />
                   <Label prefHeight="18.0" prefWidth="95.0" text="company name:" />
                   <Label layoutX="10.0" layoutY="28.0" prefHeight="18.0" prefWidth="88.0" text="company info:" GridPane.columnIndex="3" />
                </children>
             </GridPane>
-            <Button fx:id="registerButton" layoutX="225.0" layoutY="311.0" mnemonicParsing="false" onAction="#doRegister" prefHeight="25.0" prefWidth="116.0" text="register" />
-            <Label fx:id="messageLabel" layoutX="271.0" layoutY="280.0" prefHeight="25.0" prefWidth="180.0" />
+            <Button fx:id="registerButton" layoutX="155.0" layoutY="311.0" mnemonicParsing="false" onAction="#doRegister" prefHeight="25.0" prefWidth="116.0" text="register" />
+            <Label fx:id="registerErrorLabel" layoutX="332.0" layoutY="311.0" prefHeight="25.0" prefWidth="355.0" />
          </children></Pane>
       <Pane fx:id="loginPane" layoutX="293.0" layoutY="136.0" prefHeight="216.0" prefWidth="200.0">
          <children>

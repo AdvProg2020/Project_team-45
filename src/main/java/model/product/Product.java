@@ -282,7 +282,7 @@ public class Product extends IdRecognized implements Savable {
         result.put("productionDate", (new Gson()).toJson(productionDate));
         result.put("productStatus", productStatus);
         ArrayList<String> sellers = new ArrayList<>();
-        for (Seller sellInfo : sellersList.keySet()) {
+        for (ProductSellInfo sellInfo : sellersList.values()) {
             sellers.add(sellInfo.getId());
         }
         result.put("sellersList", (new Gson()).toJson(sellers));

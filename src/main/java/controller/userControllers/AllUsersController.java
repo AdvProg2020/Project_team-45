@@ -1,6 +1,8 @@
 package controller.userControllers;
 
+import controller.CodedDiscountController;
 import controller.managers.Deleter;
+import model.CodedDiscount;
 import model.Market;
 import model.product.Product;
 import model.user.Admin;
@@ -9,6 +11,8 @@ import model.user.Seller;
 import model.user.User;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AllUsersController implements Deleter {
 
@@ -90,12 +94,18 @@ public class AllUsersController implements Deleter {
     }
 
     private void deleteBuyer(Buyer buyer) {
-        // no action needed yet //
+        deleteBuyerAllDiscounts(buyer);
     }
 
     private void deleteSeller(Seller seller) {
         removeSellerFromProducts(seller);
         removeSellerFromOffs(seller);
+    }
+
+    private void deleteBuyerAllDiscounts(Buyer buyer) {
+        for (CodedDiscount codedDiscount : buyer.getListOfCodedDiscounts()) {
+            CodedDiscountController.getInstance().deleteItemById(codedDiscount.getCode());
+        }
     }
 
     private void removeSellerFromOffs(Seller seller) {
@@ -108,6 +118,14 @@ public class AllUsersController implements Deleter {
         for (Product product : seller.getAvailableProducts().keySet()) {
             product.removeSeller(seller);
         }
+    }
+
+    public List<Buyer> getAllBuyers() {
+        List<User> allUsersList = market.getAllUsers();
+        return allUsersList.stream()
+                .filter(user -> user.getRole().equals("buyer"))
+                .map(buyer -> (Buyer) buyer)
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -112,4 +112,7 @@ public class CodedDiscountController implements Editor, Creator {
     }
 
 
+    public boolean discountCodeExists(String code) {
+        return getItemById(code) != null;
+    }
 }

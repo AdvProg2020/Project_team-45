@@ -98,7 +98,7 @@ public class InputValidator {
     public static Date convertStringToDate(String dateString){
         Date date= null;
         try {
-            date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
+            date = new SimpleDateFormat("dd-MM-yyyy").parse(dateString);
         } catch (ParseException ignored) {}
         return date;
     }

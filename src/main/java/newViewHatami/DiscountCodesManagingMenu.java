@@ -13,8 +13,9 @@ import java.util.ArrayList;
 
 public class DiscountCodesManagingMenu extends AppMenu {
 
-    public ListView discountsList;
+    public ListView<String> discountsList;
     public Label errorLabel;
+    public static String selectedDiscountCode;
 
     public static String getFxmlFilePath() {
         return "/DiscountCodesManagingMenu.fxml";
@@ -29,23 +30,24 @@ public class DiscountCodesManagingMenu extends AppMenu {
         ArrayList<CodedDiscount> allDiscountsList = Market.getInstance().getAllCodedDiscounts();
         ObservableList<String> items = FXCollections.observableArrayList();
         for (CodedDiscount codedDiscount : allDiscountsList) {
-            items.add(codedDiscount.getId());
+            items.add(codedDiscount.getCode());
         }
         discountsList.setItems(items);
     }
 
-    public String getSelectedDiscount() {
-        return (String) discountsList.getSelectionModel().getSelectedItem();
+    public void setSelectedDiscount() {
+        selectedDiscountCode = discountsList.getSelectionModel().getSelectedItem();
     }
 
     public void viewSelectedDiscount() {
+        setSelectedDiscount();
         // TODO : make view panel
     }
 
     public void deleteSelectedDiscount() {
-        String selectedDiscountId = getSelectedDiscount();
+        setSelectedDiscount();
         try {
-            CodedDiscountController.getInstance().deleteItemById(selectedDiscountId);
+            CodedDiscountController.getInstance().deleteItemById(selectedDiscountCode);
             errorLabel.setText("discount deleted successfully");
         } catch (Exception e) {
             errorLabel.setText(e.getMessage());
@@ -54,7 +56,7 @@ public class DiscountCodesManagingMenu extends AppMenu {
     }
 
     public void openDiscountCreatorPanel() {
-        // TODO : open admin creator panel
+        MenuController.getInstance().goToPanel(CreateDiscountCodePanel.getFxmlFilePath());
     }
 
     public void back() {

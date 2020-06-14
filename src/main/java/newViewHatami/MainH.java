@@ -12,7 +12,7 @@ public class MainH extends Application {
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(MenuController.getInstance().getBackgroundPane());
-        MenuController.getInstance().goToMenu(CategoriesManagingMenu.getFxmlFilePath());
+        MenuController.getInstance().goToMenu(LoginRegisterMenu.getFxmlFilePath());
         primaryStage.setTitle("my market");
         primaryStage.setScene(scene);
         primaryStage.show();

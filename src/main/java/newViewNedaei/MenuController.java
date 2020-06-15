@@ -61,4 +61,8 @@ public class MenuController {
         backgroundPane.getChildren().remove(panel);
         goToMenu(currentFxmlFilePath);
     }
+
+    public void removeCurrentPanel() {
+        backgroundPane.getChildren().remove(panel);
+    }
 }

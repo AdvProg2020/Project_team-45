@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.buyer.purchase.PaymentPanel">
+   <children>
+      <Button onMouseClicked="#goBack" layoutX="300.0" layoutY="373.0" mnemonicParsing="false" prefWidth="100.0" text="Exit" />
+      <Label fx:id="message" alignment="CENTER" layoutX="50.0" layoutY="175.0" prefHeight="50.0" prefWidth="300.0" />
+   </children>
+</AnchorPane>

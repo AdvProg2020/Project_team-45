@@ -49,18 +49,18 @@ public class OrdersManagingMenu {
         view.setTranslateY(120);
 //        view.setOnMouseClicked(event -> );
 
-        Button edit = new Button("Rate");
-        edit.setPrefWidth(90);
-        edit.setPrefHeight(50);
-        edit.setTranslateX(90);
-        edit.setTranslateY(120);
-//        view.setOnMouseClicked(event -> );
+        Button rate = new Button("Rate");
+        rate.setPrefWidth(90);
+        rate.setPrefHeight(50);
+        rate.setTranslateX(90);
+        rate.setTranslateY(120);
+//        rate.setOnMouseClicked(event -> );
 
         Pane pane = new Pane();
         pane.getChildren().add(dateAndId);
         pane.getChildren().add(finalPrice);
         pane.getChildren().add(view);
-        pane.getChildren().add(edit);
+        pane.getChildren().add(rate);
 
         return pane;
     }

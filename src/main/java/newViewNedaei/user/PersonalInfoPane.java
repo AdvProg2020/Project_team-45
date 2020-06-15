@@ -11,6 +11,7 @@ import newViewHatami.Validator;
 import newViewHatami.ValidatorField;
 
 public class PersonalInfoPane {
+    public Label role;
     @FXML
     private Label error;
     @FXML
@@ -37,6 +38,7 @@ public class PersonalInfoPane {
 
     @FXML
     public void initialize() {
+        role.setText(UserController.getActiveUser().getRole());
         PersonalInfo personalInfo = UserController.getActiveUser().getPersonalInfo();
         username.setText(personalInfo.getUsername());
         firstName.setPromptText(personalInfo.getFirstName());

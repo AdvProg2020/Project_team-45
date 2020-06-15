@@ -33,7 +33,7 @@ public class SellLogPanel extends Panel {
         finalPrice.setText("" + sellLog.getMainLog().getFinalPrice());
         address.setText(sellLog.getMainLog().getAddress());
         phone.setText(sellLog.getMainLog().getPhoneNumber());
-        product.setText(sellLog.getMainLog().getSellingProducts().get(0).getId());
+        product.setText(sellLog.getSoldProducts().get(0).getId());
     }
 
     @Override

@@ -164,4 +164,12 @@ public class ProductController implements Deleter {
     public void setActiveProductSellInfo(ProductSellInfo activeProductSellInfo) {
         this.activeProductSellInfo = activeProductSellInfo;
     }
+
+    public Product getActiveProduct() {
+        return activeProduct;
+    }
+
+    public void setActiveProduct(Product activeProduct) {
+        this.activeProduct = activeProduct;
+    }
 }

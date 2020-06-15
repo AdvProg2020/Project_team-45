@@ -21,6 +21,7 @@ public class BuyerController extends UserController implements Creator {
     private final ArrayList<String> buyLogInformationToReceive;
     private Log log;
     private CartHolder buyer;
+    private BuyLog currentBuyLog;
 
     private BuyerController() {
         super();
@@ -186,5 +187,13 @@ public class BuyerController extends UserController implements Creator {
         if (user == null || !user.getRole().equals("buyer"))
             return null;
         return (Buyer) market.getUserByUsername(Id);
+    }
+
+    public BuyLog getCurrentBuyLog() {
+        return currentBuyLog;
+    }
+
+    public void setCurrentBuyLog(BuyLog currentBuyLog) {
+        this.currentBuyLog = currentBuyLog;
     }
 }

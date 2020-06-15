@@ -1,5 +1,7 @@
-package newViewNedaei.user.buyer;
+package newViewNedaei.user.buyer.orders;
 
+import controller.userControllers.BuyerController;
+import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -8,8 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.log.BuyLog;
 import model.product.Product;
+import model.user.Buyer;
+import newViewNedaei.MenuController;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 public class OrdersManagingMenu {
     @FXML
@@ -21,7 +26,12 @@ public class OrdersManagingMenu {
 
     @FXML
     public void initialize() {
-
+        ArrayList<BuyLog> buyLogs = ((Buyer) UserController.getActiveUser()).getListOfBuyLogs();
+        int i = 0;
+        for (BuyLog buyLog : buyLogs) {
+            mainPane.add(createOrderDisplay(buyLog), i%5, i/5);
+            i++;
+        }
     }
 
     private Pane createOrderDisplay(BuyLog buyLog) {
@@ -47,20 +57,26 @@ public class OrdersManagingMenu {
         view.setPrefHeight(50);
         view.setTranslateX(0);
         view.setTranslateY(120);
-//        view.setOnMouseClicked(event -> );
+        view.setOnMouseClicked(event -> {
+            BuyerController.getInstance().setCurrentBuyLog(buyLog);
+            MenuController.getInstance().goToPanel(BuyLogPanel.getFxmlFilePath());
+        });
 
-        Button rate = new Button("Rate");
-        rate.setPrefWidth(90);
-        rate.setPrefHeight(50);
-        rate.setTranslateX(90);
-        rate.setTranslateY(120);
-//        rate.setOnMouseClicked(event -> );
+//        Button rate = new Button("Rate");
+//        rate.setPrefWidth(90);
+//        rate.setPrefHeight(50);
+//        rate.setTranslateX(90);
+//        rate.setTranslateY(120);
+//        rate.setOnMouseClicked(event -> {
+//            BuyerController.getInstance().setCurrentBuyLog(buyLog);
+//            MenuController.getInstance().goToPanel();
+//        });
 
         Pane pane = new Pane();
         pane.getChildren().add(dateAndId);
         pane.getChildren().add(finalPrice);
         pane.getChildren().add(view);
-        pane.getChildren().add(rate);
+//        pane.getChildren().add(rate);
 
         return pane;
     }

@@ -12,6 +12,8 @@ import model.user.Buyer;
 import newViewHatami.Validator;
 import newViewHatami.ValidatorField;
 import newViewNedaei.MenuController;
+import newViewNedaei.user.buyer.discounts.DiscountCodesPanel;
+import newViewNedaei.user.buyer.orders.OrdersManagingMenu;
 import newViewNedaei.user.buyer.purchase.ReceiveInfoPanel;
 
 import java.io.IOException;

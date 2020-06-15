@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 public class CodedDiscountController implements Editor, Creator {
     private static final CodedDiscountController instance = new CodedDiscountController();
     private final Market market = Market.getInstance();
+    private CodedDiscount currentDiscount;
 
     private CodedDiscountController() {
 
@@ -114,5 +115,13 @@ public class CodedDiscountController implements Editor, Creator {
 
     public boolean discountCodeExists(String code) {
         return getItemById(code) != null;
+    }
+
+    public CodedDiscount getCurrentDiscount() {
+        return currentDiscount;
+    }
+
+    public void setCurrentDiscount(CodedDiscount currentDiscount) {
+        this.currentDiscount = currentDiscount;
     }
 }

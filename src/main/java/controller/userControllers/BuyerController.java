@@ -6,6 +6,7 @@ import controller.managers.Creator;
 import model.CodedDiscount;
 import model.log.BuyLog;
 import model.log.Log;
+import model.product.Product;
 import model.product.ProductSellInfo;
 import model.product.Rate;
 import model.user.*;
@@ -195,5 +196,10 @@ public class BuyerController extends UserController implements Creator {
 
     public void setCurrentBuyLog(BuyLog currentBuyLog) {
         this.currentBuyLog = currentBuyLog;
+    }
+
+    public Cart getCart() {
+        updateBuyer();
+        return buyer.getCart();
     }
 }

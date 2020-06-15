@@ -2,6 +2,8 @@ package newViewNedaei;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import newViewNedaei.background.BackgroundPane;
+import newViewNedaei.background.TopPane;
 
 import java.io.IOException;
 import java.util.Stack;
@@ -9,6 +11,7 @@ import java.util.Stack;
 public class MenuController {
     private static final MenuController instance = new MenuController();
     private Pane backgroundPane;
+    private Pane topPane;
     private Pane currentPane;
     private String currentFxmlFilePath;
     private Pane panel;
@@ -17,7 +20,9 @@ public class MenuController {
     private MenuController() {
         try {
             menuFxmlFilePaths = new Stack<>();
-            backgroundPane = FXMLLoader.load(getClass().getResource("/BackgroundPane.fxml"));
+            topPane = FXMLLoader.load(getClass().getResource(TopPane.getFxmlFilePath()));
+            backgroundPane = FXMLLoader.load(getClass().getResource(BackgroundPane.getFxmlFilePath()));
+            backgroundPane.getChildren().add(topPane);
             goToMenu(MainMenu.getFxmlFilePath());
         } catch (IOException ignored) {
 
@@ -54,6 +59,7 @@ public class MenuController {
             panel.setTranslateX(300);
             panel.setTranslateY(155);
             panel.setStyle("-fx-background-color: royalblue");
+            topPane.setDisable(true);
             currentPane.setDisable(true);
             backgroundPane.getChildren().add(panel);
         } catch (IOException e) {
@@ -63,6 +69,7 @@ public class MenuController {
 
     public void enableCurrentPane() {
         backgroundPane.getChildren().remove(panel);
+        topPane.setDisable(false);
         goToMenu(currentFxmlFilePath);
         menuFxmlFilePaths.pop();
     }

@@ -18,7 +18,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         Market.getInstance().initialize();
-        UserController.getInstance().setActiveUserByUsername("b");
+        UserController.getInstance().setActiveUserByUsername("s");
         UserController.setLoggedIn(true);
         launch(args);
     }

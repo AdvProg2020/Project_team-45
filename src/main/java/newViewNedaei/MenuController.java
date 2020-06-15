@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.Stack;
 
 public class MenuController {
     private static final MenuController instance = new MenuController();
@@ -11,9 +12,11 @@ public class MenuController {
     private Pane currentPane;
     private String currentFxmlFilePath;
     private Pane panel;
+    private Stack<String> menuFxmlFilePaths;
 
     private MenuController() {
         try {
+            menuFxmlFilePaths = new Stack<>();
             backgroundPane = FXMLLoader.load(getClass().getResource("/BackgroundPane.fxml"));
             goToMenu(MainMenu.getFxmlFilePath());
         } catch (IOException ignored) {
@@ -32,6 +35,7 @@ public class MenuController {
     public void goToMenu(String fxmlFilePath) {
         try {
             currentFxmlFilePath = fxmlFilePath;
+            menuFxmlFilePaths.push(currentFxmlFilePath);
             Pane pane = FXMLLoader.load(getClass().getResource(currentFxmlFilePath));
             backgroundPane.getChildren().remove(currentPane);
             pane.setTranslateX(0);
@@ -60,9 +64,18 @@ public class MenuController {
     public void enableCurrentPane() {
         backgroundPane.getChildren().remove(panel);
         goToMenu(currentFxmlFilePath);
+        menuFxmlFilePaths.pop();
     }
 
     public void removeCurrentPanel() {
         backgroundPane.getChildren().remove(panel);
+    }
+
+    public void goBack() {
+        if (menuFxmlFilePaths.size() > 1) {
+            menuFxmlFilePaths.pop();
+            goToMenu(menuFxmlFilePaths.peek());
+            menuFxmlFilePaths.pop();
+        }
     }
 }

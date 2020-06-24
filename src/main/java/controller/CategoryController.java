@@ -4,11 +4,13 @@ import consuleview.UIPage;
 import consuleview.hatemi.adminMenus.CategoriesManagingMenu;
 import controller.managers.Creator;
 import controller.managers.Editor;
+import model.Company;
 import model.Market;
 import model.category.Category;
 import model.category.FinalCategory;
 import model.category.ParentCategory;
 import model.product.Product;
+import model.product.ProductSellInfo;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -289,4 +291,66 @@ public class CategoryController implements Editor, Creator {
     public boolean categoryHasFeature(FinalCategory editingCategory, String feature) {
         return editingCategory.getSpecialFeatures().contains(feature);
     }
+
+
+    //bagheri
+    public Set<String> getActiveCategoryCompanies() {
+        Set<String> categoriesName = new HashSet<>();
+        for (Product product : activeCategory.getProductsList()) {
+            categoriesName.add(product.getCompany().getName());
+        }
+        return categoriesName;
+    }
+
+    public Set<String> getActiveCategoryDiscountedCompanies() {
+        Set<String> categoriesName = new HashSet<>();
+        for (Product product : activeCategory.getInOffProductsList()) {
+            categoriesName.add(product.getCompany().getName());
+        }
+        return categoriesName;
+    }
+
+    public Set<String> getActiveCategorySellers() {
+        Set<String> sellersUsername = new HashSet<>();
+        for (Product product : activeCategory.getProductsList()) {
+            for (ProductSellInfo productSellInfo : product.getSellInfosList()) {
+                sellersUsername.add(productSellInfo.getSeller().getUsername());
+            }
+        }
+        return sellersUsername;
+    }
+
+    public Set<String> getActiveCategoryDiscountedSellers() {
+        Set<String> sellersName = new HashSet<>();
+        for (Product product : activeCategory.getInOffProductsList()) {
+            for (ProductSellInfo productSellInfo : product.getSellInfosList()) {
+                sellersName.add(productSellInfo.getSeller().getUsername());
+            }
+        }
+        return sellersName;
+    }
+
+    public boolean isActiveCategoryFinal() {
+         return activeCategory.isFinal();
+    }
+
+    public LinkedHashMap<String, Set<String>> getActiveCategoryFeaturesAndValues() {
+        LinkedHashMap<String, Set<String>> featuresAndValues = new LinkedHashMap<>();
+        if (activeCategory.isFinal()) {
+            ArrayList<String> specialFeatures = ((FinalCategory) activeCategory).getSpecialFeatures();
+            for (String specialFeature : specialFeatures) {
+                featuresAndValues.put(specialFeature, new HashSet<>());
+            }
+            for (Product product : activeCategory.getProductsList()) {
+                LinkedHashMap<String, String> productCategoryFeatures = product.getCategoryFeatures();
+                for (String specialFeature : specialFeatures) {
+                    String value = productCategoryFeatures.get(specialFeature);
+                    if (value != null)
+                        featuresAndValues.get(specialFeature).add(value);
+                }
+            }
+        }
+        return featuresAndValues;
+    }
+    //bagheri
 }

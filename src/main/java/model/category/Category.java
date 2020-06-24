@@ -1,14 +1,13 @@
 package model.category;
 
 import controller.CategoryController;
-import model.IdKeeper;
-import model.IdRecognized;
-import model.Market;
-import model.Savable;
+import model.*;
 import model.product.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class Category extends IdRecognized implements Savable {
     private String name;

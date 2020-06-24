@@ -10,6 +10,7 @@
         <Button layoutX="51.0" layoutY="160.0" mnemonicParsing="false" onAction="#openDiscountCreatorPanel" prefHeight="79.0" prefWidth="156.0" text="create discount code" />
         <Label fx:id="errorLabel" layoutX="322.0" layoutY="339.0" prefHeight="26.0" prefWidth="247.0" />
         <Button layoutX="98.0" layoutY="34.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="62.0" text="back" />
+      <Button layoutX="327.0" layoutY="339.0" mnemonicParsing="false" onAction="#editSelectedDiscount" prefHeight="26.0" prefWidth="169.0" text="edit discount code" />
 
     </children>
 </AnchorPane>

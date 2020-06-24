@@ -2,9 +2,14 @@ package newViewNedaei;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import newViewNedaei.background.BackgroundPane;
 import newViewNedaei.background.TopPane;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Stack;
 
@@ -16,6 +21,9 @@ public class MenuController {
     private String currentFxmlFilePath;
     private Pane panel;
     private Stack<String> menuFxmlFilePaths;
+    private int resourceFileCounter = 0;
+
+    private Stage window;
 
     private MenuController() {
         try {
@@ -25,8 +33,8 @@ public class MenuController {
             backgroundPane.getChildren().add(topPane);
             goToMenu(MainMenu.getFxmlFilePath());
         } catch (IOException ignored) {
-
         }
+
     }
 
     public static MenuController getInstance() {
@@ -84,5 +92,56 @@ public class MenuController {
             goToMenu(menuFxmlFilePaths.peek());
             menuFxmlFilePaths.pop();
         }
+    }
+
+    public void setWindow(Stage window) {
+        this.window = window;
+    }
+
+    public Stage getWindow() {
+        return window;
+    }
+
+    public String pickPhoto() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+        File avatarFile = fileChooser.showOpenDialog(MenuController.getInstance().getWindow());
+        if (avatarFile != null)
+            return copyFile(avatarFile);
+        return null;
+    }
+
+    public String copyFile(File copyingFile) {
+        String format = copyingFile.getName().split("\\.")[1];
+        File dest = new File("src/main/resources/photos/" + resourceFileCounter + "." +  format);
+        try {
+            do {
+                resourceFileCounter++;
+                dest = new File("src/main/resources/photos/" + resourceFileCounter + "." +  format);
+            } while (!dest.createNewFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        resourceFileCounter++;
+        try {
+             FileInputStream fileInputStream = new FileInputStream(copyingFile);
+             FileOutputStream fileOutputStream = new FileOutputStream(dest) ;
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = fileInputStream.read(buffer)) > 0) {
+
+                fileOutputStream.write(buffer, 0, length);
+            }
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return dest.getPath();
     }
 }

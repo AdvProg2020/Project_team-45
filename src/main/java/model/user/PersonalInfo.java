@@ -1,16 +1,15 @@
 package model.user;
 
-import model.Savable;
-
 import java.util.HashMap;
 
 public class PersonalInfo {
-    private String username;
+    private final String username;
     private String firstName;
     private String lastName;
     private String emailAddress;
     private String phoneNumber;
     private String password;
+    private String avatarPath;
 
     public PersonalInfo(HashMap<String, String> information){
         this.username = information.get("username");
@@ -19,6 +18,7 @@ public class PersonalInfo {
         this.emailAddress = information.get("email address");
         this.phoneNumber = information.get("phone number");
         this.password = information.get("password");
+        this.avatarPath = information.get("avatar");
     }
 
     public String getUsername() {
@@ -63,6 +63,14 @@ public class PersonalInfo {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
+
+    public String getAvatarPath() {
+        return avatarPath;
     }
 
     @Override

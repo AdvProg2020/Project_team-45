@@ -34,9 +34,6 @@ public class ProductsManagingMenuForAdmin extends AppMenu {
         return "/ProductsManagingMenuForAdmin.fxml";
     }
 
-    public void viewSelectedProduct() {
-        // TODO
-    }
 
     public void deleteSelectedProduct() {
         String selectedProductId = getSelectedProductId();

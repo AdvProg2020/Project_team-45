@@ -4,11 +4,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import model.Market;
 import newViewNedaei.Panel;
 
 
 public class CreateAdminPanel extends Panel {
     public Button createAdminButton;
+    public Button closeButton;
 
     public static String getFxmlFilePath() {
         return "/CreateAdminPanel.fxml";
@@ -32,10 +34,12 @@ public class CreateAdminPanel extends Panel {
         roleSelectionChoiceBox.setVisible(false);
         registerButton.setVisible(false);
         createAdminButton.setVisible(true);
+        if (Market.getInstance().noAdmin()) {
+            closeButton.setVisible(false);
+        }
     }
 
     public void closeAdminCreatorPanel() {
         goBack();
-        // TODO
     }
 }

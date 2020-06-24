@@ -68,6 +68,7 @@ public class UserController {
         filledMap.put("lastName", showingUser.getPersonalInfo().getLastName());
         filledMap.put("phoneNumber", showingUser.getPersonalInfo().getPhoneNumber());
         filledMap.put("email", showingUser.getPersonalInfo().getEmailAddress());
+        filledMap.put("avatar", showingUser.getPersonalInfo().getAvatarPath());
         return filledMap;
     }
 

@@ -58,7 +58,7 @@ public class CategoriesManagingMenu extends AppMenu {
     public void editSelectedCategory() {
         setSelectedCategoryId();
         if (selectedCategoryId == null) {
-            errorLabel.setText("no salacted category");
+            errorLabel.setText("no selected category");
             return;
         }
         MenuController.getInstance().goToPanel(EditCategoryPanel.getFxmlFilePath());

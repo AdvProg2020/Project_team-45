@@ -21,6 +21,7 @@ public class MainH extends Application {
     public static void main(String[] args) {
 //        MenuManagement.run();
         Market.getInstance().initialize();
+
         UserController.getInstance().setActiveUserByUsername("a");
         launch(args);
     }

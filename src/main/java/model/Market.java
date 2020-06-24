@@ -386,5 +386,9 @@ public class Market {
         }
         return false;
     }
+
+    public boolean noAdmin() {
+        return allUsers.isEmpty();
+    }
 }
 

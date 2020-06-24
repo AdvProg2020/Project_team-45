@@ -3,9 +3,12 @@ package newViewHatami;
 import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import newViewNedaei.Panel;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 public class ViewUserPanel extends Panel {
@@ -37,17 +40,19 @@ public class ViewUserPanel extends Panel {
         lastNameLabel.setText(showingInfo.get("lastName"));
         emailLabel.setText(showingInfo.get("email"));
         phoneNumberLabel.setText(showingInfo.get("phoneNumber"));
+
         // TODO : set image
 
-//        FileInputStream input = null;
-//        try {
-//            input = new FileInputStream("/poker.png");
-//        } catch (FileNotFoundException e) {
-//            e.getMessage();
-//            System.out.println("oh!");
-//        }
-//        Image image = new Image(input);
-//        userImage.setImage(image);
+        String imagePath = showingInfo.get("avatar");
+        FileInputStream input = null;
+        try {
+            input = new FileInputStream(imagePath);
+            Image image = new Image(input);
+            userImage.setImage(image);
+        } catch (FileNotFoundException e) {
+            System.err.println(e.getMessage());
+        }
+
     }
 
 }

@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import model.Market;
+import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -17,6 +19,8 @@ import java.util.LinkedHashMap;
 import static javafx.scene.paint.Color.RED;
 
 public class UserRegisterPane {
+    public Label firstAdminLabel;
+
     public static String getFxmlFilePath() {
         return "/UserRegisterPane.fxml";
     }
@@ -41,11 +45,16 @@ public class UserRegisterPane {
     private ArrayList<Validator> personalInfoFields;
 
     public ChoiceBox<String> roleSelectionChoiceBox;
+    private String avatarPhotoPath;
 
     @FXML
     public void initialize() {
         setPersonalInfoFields();
         makeRegisterRoleSelectionChoiceBox();
+        if (Market.getInstance().noAdmin()) {
+            firstAdminLabel.setVisible(true);
+        }
+
     }
 
     private void setPersonalInfoFields() {
@@ -70,6 +79,7 @@ public class UserRegisterPane {
     }
 
     public void createAdmin() {
+
         if (!checkPersonalInfoFields("admin"))
             return;
         LinkedHashMap<String, String> registerFields = getRegisterInfoHashMap();
@@ -108,6 +118,7 @@ public class UserRegisterPane {
         registerFields.put("last name", lastNameField.getText());
         registerFields.put("email address", emailField.getText());
         registerFields.put("phone number", phoneNumberField.getText());
+        registerFields.put("avatar", avatarPhotoPath);
         if (roleSelectionChoiceBox.getValue().equals("seller")) {
             registerFields.put("company name", companyNameField.getText());
             registerFields.put("company info", companyDescriptionField.getText());
@@ -154,4 +165,10 @@ public class UserRegisterPane {
     }
 
 
+    public void pickPhoto() {
+        String photoPath = MenuController.getInstance().pickPhoto();
+        if (photoPath != null) {
+            avatarPhotoPath = photoPath;
+        }
+    }
 }

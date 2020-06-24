@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.chart.NumberAxis?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="newViewBagheri.ProductsMenu">
+    <center>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <center>
+                <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+            </center>
+        </BorderPane>
+    </center>
+    <left>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox fx:id="subcategoriesList" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Subcategories:"/>
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Search by product name:"/>
+                        <TextField fx:id="productNameField" onAction="#changeFilter"/>
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Brand:"/>
+                        <ScrollPane prefHeight="200.0" prefWidth="100.0">
+                            <content>
+                                <VBox fx:id="companiesNameList"/>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </VBox>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Label text="Seller:"/>
+                        <ScrollPane prefHeight="200.0" prefWidth="100.0">
+                            <content>
+                                <VBox fx:id="sellersUsernameList"/>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </VBox>
+                <VBox fx:id="specialFeaturesListVBox"/>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <Label text="Price:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                    <Label text="min:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                    <TextField fx:id="minPriceField" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction=""/>
+                    <Label text="max:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+                    <Button text="submit" onAction="#addPriceFilter" GridPane.rowIndex="2" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+                    <Button text="submit" onAction="#clearPriceFilter" GridPane.rowIndex="2" GridPane.columnIndex="3" GridPane.columnSpan="2"/>
+                </GridPane>
+            </children>
+        </VBox>
+    </left>
+</BorderPane>

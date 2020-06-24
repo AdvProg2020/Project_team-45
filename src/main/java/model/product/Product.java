@@ -25,7 +25,7 @@ public class Product extends IdRecognized implements Savable {
     private final ArrayList<Rate> rates;
     private int sellCount;
     private int seen;
-
+    private String imageAddress;
 
     public Product(String name, FinalCategory category, String description) {
         this.id = "" + IdKeeper.getInstance().getProductsNewId();
@@ -238,6 +238,7 @@ public class Product extends IdRecognized implements Savable {
     private LinkedHashMap<String, String> getGeneralFeatures() {
         LinkedHashMap<String, String> generalFeatures = new LinkedHashMap<>();
         generalFeatures.put("name", this.name);
+        generalFeatures.put("companyName", this.company.getName());
         generalFeatures.put("description", this.description);
         generalFeatures.put("price", String.valueOf(this.minimumPrice));
         generalFeatures.put("averageScore", String.valueOf(averageScore));
@@ -248,9 +249,9 @@ public class Product extends IdRecognized implements Savable {
         LinkedHashMap<String, String> digestInformation = new LinkedHashMap<>();
         digestInformation.putAll(getGeneralFeatures());
         digestInformation.put("category", this.category.getName());
-        for (Seller seller : sellersList.keySet()) {
-            digestInformation.put("seller", seller.getUsername());
-        }
+//        for (Seller seller : sellersList.keySet()) {
+//            digestInformation.put("seller", seller.getUsername());
+//        }
         return digestInformation;
     }
 
@@ -304,6 +305,7 @@ public class Product extends IdRecognized implements Savable {
         result.put("rates", (new Gson()).toJson(ratesId));
         result.put("sellCount", "" + sellCount);
         result.put("seen", "" + seen);
+        result.put("imageAddress", imageAddress);
         return result;
     }
 
@@ -339,6 +341,7 @@ public class Product extends IdRecognized implements Savable {
         }
         sellCount = Integer.parseInt(theMap.get("sellCount"));
         seen = Integer.parseInt(theMap.get("seen"));
+        imageAddress = theMap.get("imageAddress");
     }
 
     public void setDefaultSellInfo(ProductSellInfo defaultSellInfo) {

@@ -12,6 +12,7 @@ import model.user.Buyer;
 import model.user.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class ProductController implements Deleter {
@@ -172,4 +173,36 @@ public class ProductController implements Deleter {
     public void setActiveProduct(Product activeProduct) {
         this.activeProduct = activeProduct;
     }
+
+    //bagheri
+    public ArrayList<HashMap<String, String>> getActiveProductCommentsList() {
+        ArrayList<HashMap<String, String>> productComments = new ArrayList<>();
+        for (Comment comment : activeProduct.getApprovedComments()) {
+            HashMap<String, String> commentFields = new HashMap<>();
+            commentFields.put("title", comment.getTitle());
+            commentFields.put("content", comment.getContent());
+            productComments.add(commentFields);
+        }
+        return productComments;
+    }
+
+    public ArrayList<HashMap<String, String>> getActiveProductSellInfos() {
+        ArrayList<HashMap<String, String>> productSellInfos = new ArrayList<>();
+        for (ProductSellInfo productSellInfo : activeProduct.getSellInfosList()) {
+            if (productSellInfo.getStock() > 0) {
+                HashMap<String, String> sellInfo = new HashMap<>();
+                sellInfo.put("id", productSellInfo.getId());
+                sellInfo.put("sellerUsername", productSellInfo.getSeller().getUsername());
+                sellInfo.put("price", "" + productSellInfo.getPrice());
+                sellInfo.put("finalPrice", "" + productSellInfo.getFinalPrice());
+                productSellInfos.add(sellInfo);
+            }
+        }
+        return productSellInfos;
+    }
+
+    public void addActiveProductToCart(String productSellInfoId) {
+        CartController.getInstance().addProductToCart(activeProduct, market.getProductSellInfoById(productSellInfoId));
+    }
+    //bahgeri
 }

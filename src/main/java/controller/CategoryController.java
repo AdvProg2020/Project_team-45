@@ -4,7 +4,6 @@ import consuleview.UIPage;
 import consuleview.hatemi.adminMenus.CategoriesManagingMenu;
 import controller.managers.Creator;
 import controller.managers.Editor;
-import model.Company;
 import model.Market;
 import model.category.Category;
 import model.category.FinalCategory;
@@ -36,11 +35,12 @@ public class CategoryController implements Editor, Creator {
     }
 
     public void removeCategory(Category removingCategory) {
-        if (removingCategory.getType().equals("ParentCategory"))
-            for (Category subcategory : ((ParentCategory) removingCategory).getSubcategories()) {
+        if (removingCategory.getType().equals("ParentCategory")) {
+            ArrayList<Category> subCategories = new ArrayList<>(((ParentCategory) removingCategory).getSubcategories());
+            for (Category subcategory : subCategories) {
                 removeCategory(subcategory);
             }
-        else {
+        } else {
             ArrayList<Product> removingProducts = new ArrayList<>(removingCategory.getProductsList());
             for (Product product : removingProducts) {
                 productController.removeProduct(product);
@@ -69,11 +69,16 @@ public class CategoryController implements Editor, Creator {
             editingCategory.setName(changedFields.get("name"));
         }
         if (editingCategory.getType().equals("FinalCategory")) {
+            // for console
         }
     }
 
-    public void editCategoryName(Category editingCategory, String newName) {
-            editingCategory.setName(newName);
+    public void editCategoryName(String editingCategoryId, String newName) {
+            getCategoryById(editingCategoryId).setName(newName);
+    }
+
+    private Category getCategoryById(String categoryId) {
+        return market.getCategoryById(categoryId);
     }
 
     public boolean categoryNameExists(String keyName) {
@@ -279,17 +284,17 @@ public class CategoryController implements Editor, Creator {
         return  allCategories.stream().filter(Category::isFinal).map(category -> (FinalCategory) category).collect(Collectors.toList());
     }
 
-    public void addFeatureToCategory(FinalCategory editingCategory, String newFeature) {
-        editingCategory.addFeature(newFeature);
+    public void addFeatureToCategory(String editingCategoryId, String newFeature) {
+        ((FinalCategory) getCategoryById(editingCategoryId)).addFeature(newFeature);
     }
 
-    public void removeFeatureFromCategory(FinalCategory editingCategory, String removingFeature) {
-        editingCategory.removeFeature(removingFeature);
+    public void removeFeatureFromCategory(String editingCategoryId, String removingFeature) {
+        ((FinalCategory) getCategoryById(editingCategoryId)).removeFeature(removingFeature);
     }
 
 
-    public boolean categoryHasFeature(FinalCategory editingCategory, String feature) {
-        return editingCategory.getSpecialFeatures().contains(feature);
+    public boolean categoryHasFeature(String editingCategoryId, String feature) {
+        return ((FinalCategory) getCategoryById(editingCategoryId)).getSpecialFeatures().contains(feature);
     }
 
 
@@ -352,5 +357,23 @@ public class CategoryController implements Editor, Creator {
         }
         return featuresAndValues;
     }
+
+    public String getCategoryName(String categoryId) {
+        return getCategoryById(categoryId).getName();
+    }
+
+    public boolean categoryIsFinal(String categoryId) {
+        return getCategoryById(categoryId).isFinal();
+    }
+
+    public ArrayList<String> getCategorySpecialFeatures(String categoryId) {
+        return ((FinalCategory) market.getCategoryById(categoryId)).getSpecialFeatures();
+    }
+
+    public String getCategoryId(String categoryName) {
+        return getItemById(categoryName).getId();
+    }
+
+
     //bagheri
 }

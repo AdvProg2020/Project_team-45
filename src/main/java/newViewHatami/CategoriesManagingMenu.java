@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class CategoriesManagingMenu extends AppMenu {
 
-    public TreeView categoriesTreeView;
+    public TreeView<String> categoriesTreeView;
     public Label errorLabel;
-    private static String selectedCategoryId;
+    private static String selectedCategoryName;
 
     public static String getFxmlFilePath() {
         return "/CategoriesManagingMenu.fxml";
@@ -25,7 +25,7 @@ public class CategoriesManagingMenu extends AppMenu {
     @FXML
     public void initialize(){
         fillTreeList();
-        selectedCategoryId = null;
+        selectedCategoryName = null;
     }
 
     public void fillTreeList() {
@@ -33,44 +33,47 @@ public class CategoriesManagingMenu extends AppMenu {
         TreeItem<String> rootNode = new TreeItem<String>("categories");
         for (Category mainCategory : mainCategories) {
             TreeItem<String> mainNode = new TreeItem<String>(mainCategory.getName());
-            addChildrenToNode(mainNode, mainCategory);
+            addSubcategoriesToCategory(mainNode, mainCategory);
             rootNode.getChildren().add(mainNode);
         }
         categoriesTreeView.setRoot(rootNode);
     }
 
-    public static String getSelectedCategoryId() {
-        return selectedCategoryId;
-    }
 
-    private void addChildrenToNode(TreeItem<String> rootNode, Category category) {
+    private void addSubcategoriesToCategory(TreeItem<String> rootNode, Category category) {
         if (category.isFinal())
             return;
         rootNode.setExpanded(true);
         ArrayList<Category> subCategories = ((ParentCategory) category).getSubcategories();
         for (Category subCategory : subCategories) {
             TreeItem<String> node = new TreeItem<String>(subCategory.getName());
-            addChildrenToNode(node, subCategory);
+            addSubcategoriesToCategory(node, subCategory);
             rootNode.getChildren().add(node);
         }
     }
 
     public void editSelectedCategory() {
         setSelectedCategoryId();
-        if (selectedCategoryId == null) {
+        if (selectedCategoryName == null) {
             errorLabel.setText("no selected category");
             return;
         }
+        setEditingCategory();
         MenuController.getInstance().goToPanel(EditCategoryPanel.getFxmlFilePath());
+    }
+
+    private void setEditingCategory() {
+        System.out.println(CategoryController.getInstance().getCategoryId(selectedCategoryName));
+        EditCategoryPanel.setEditingCategoryId(CategoryController.getInstance().getCategoryId(selectedCategoryName));
     }
 
     public void deleteSelectedCategory() {
         setSelectedCategoryId();
-        if (selectedCategoryId == null) {
-            errorLabel.setText("no salacted category");
+        if (selectedCategoryName == null) {
+            errorLabel.setText("no selected category");
             return;
         }
-        CategoryController.getInstance().deleteItemById(selectedCategoryId);
+        CategoryController.getInstance().deleteItemById(selectedCategoryName);
         fillTreeList();
         errorLabel.setText("category deleted successfully");
     }
@@ -80,9 +83,9 @@ public class CategoriesManagingMenu extends AppMenu {
     }
 
     public void setSelectedCategoryId(){
-        TreeItem<String> selectedItem = (TreeItem<String>) categoriesTreeView.getSelectionModel().getSelectedItem();
-        if (selectedItem != null)
-            selectedCategoryId = selectedItem.getValue();
+        TreeItem<String> selectedItem = categoriesTreeView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null && !selectedItem.getValue().equals("categories"))
+            selectedCategoryName = selectedItem.getValue();
     }
 
     public void back() {

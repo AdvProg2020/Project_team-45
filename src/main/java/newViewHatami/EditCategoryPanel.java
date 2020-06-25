@@ -9,8 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import model.category.Category;
-import model.category.FinalCategory;
 import newViewNedaei.Panel;
 
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ public class EditCategoryPanel extends Panel {
     public Button removeFeatureButton;
     public TextField newFeatureField;
     public Label errorLabel;
-    private Category editingCategory;
+    private static String editingCategoryId;
 
     public static String getFxmlFilePath() {
         return "/EditCategoryPanel.fxml";
@@ -34,18 +32,25 @@ public class EditCategoryPanel extends Panel {
 
     @FXML
     public void initialize() {
-        editingCategory = CategoryController.getInstance().getItemById(CategoriesManagingMenu.getSelectedCategoryId());
         setUpFeaturesList();
-        oldNameLabel.setText(editingCategory.getName());
+        oldNameLabel.setText(CategoryController.getInstance().getCategoryName(editingCategoryId));
+    }
+
+    public static String getEditingCategoryId() {
+        return editingCategoryId;
+    }
+
+    public static void setEditingCategoryId(String editingCategoryId) {
+        EditCategoryPanel.editingCategoryId = editingCategoryId;
     }
 
     private void setUpFeaturesList() {
         featuresList.setItems(FXCollections.observableArrayList());
-        if (!editingCategory.isFinal()) {
+        if (!CategoryController.getInstance().categoryIsFinal(editingCategoryId)) {
             categoryFeaturesPane.setVisible(false);
             return;
         }
-        ArrayList<String> categorySpecialFeatures = ((FinalCategory) editingCategory).getSpecialFeatures();
+        ArrayList<String> categorySpecialFeatures = CategoryController.getInstance().getCategorySpecialFeatures(editingCategoryId);
         for (String categorySpecialFeature : categorySpecialFeatures) {
             featuresList.getItems().add(categorySpecialFeature);
         }
@@ -65,25 +70,25 @@ public class EditCategoryPanel extends Panel {
             errorLabel.setText("new name already exists");
             return;
         }
-        CategoryController.getInstance().editCategoryName(editingCategory, newName);
+        CategoryController.getInstance().editCategoryName(editingCategoryId, newName);
         errorLabel.setText("category name changed");
-        oldNameLabel.setText(editingCategory.getName());
+        oldNameLabel.setText(CategoryController.getInstance().getCategoryName(editingCategoryId));
         newNameField.clear();
     }
 
     public void addFeature() {
         String newFeature = newFeatureField.getText();
-        if (CategoryController.getInstance().categoryHasFeature((FinalCategory) editingCategory, newFeature)) {
+        if (CategoryController.getInstance().categoryHasFeature(editingCategoryId, newFeature)) {
             errorLabel.setText("feature already exists");
             return;
         }
-        CategoryController.getInstance().addFeatureToCategory((FinalCategory) editingCategory, newFeatureField.getText());
+        CategoryController.getInstance().addFeatureToCategory(editingCategoryId, newFeatureField.getText());
         setUpFeaturesList();
         newFeatureField.clear();
     }
 
     public void removeSelectedFeature() {
-        CategoryController.getInstance().removeFeatureFromCategory((FinalCategory) editingCategory, featuresList.getSelectionModel().getSelectedItem());
+        CategoryController.getInstance().removeFeatureFromCategory(editingCategoryId, featuresList.getSelectionModel().getSelectedItem());
         setUpFeaturesList();
     }
 }

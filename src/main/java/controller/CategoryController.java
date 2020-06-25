@@ -352,5 +352,32 @@ public class CategoryController implements Editor, Creator {
         }
         return featuresAndValues;
     }
+
+    public ArrayList<HashMap<String, String>> getActiveCategoryProductInfosList() {
+        ArrayList<HashMap<String, String>> output = new ArrayList<>();
+        ArrayList<Product> activeCategoryProducts = activeCategory.getProductsList();
+        activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
+        SortingController.getInstance().sortingProducts(activeCategoryProducts);
+        for (Product product : activeCategoryProducts) {
+            output.add(product.getProductInfoForProductsList());
+        }
+        return output;
+    }
+
+    public ArrayList<HashMap<String, String>> getActiveCategoryDiscountedProductInfosList() {
+        ArrayList<HashMap<String, String>> output = new ArrayList<>();
+        ArrayList<Product> activeCategoryProducts;
+        if (activeCategory == null) {
+            activeCategoryProducts = market.getAllDiscountedProductsList();
+        } else {
+            activeCategoryProducts = activeCategory.getInOffProductsList();
+        }
+        activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
+        SortingController.getInstance().sortingProducts(activeCategoryProducts);
+        for (Product product : activeCategoryProducts) {
+            output.addAll(product.getProductOffInfoForProductsList());
+        }
+        return output;
+    }
     //bagheri
 }

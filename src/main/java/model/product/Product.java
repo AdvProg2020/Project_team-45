@@ -195,7 +195,7 @@ public class Product extends IdRecognized implements Savable {
     }
 
     public void increaseSeen() {
-
+        seen++;
     }
 
     public void changeSellCount(int sellCount) {
@@ -314,9 +314,10 @@ public class Product extends IdRecognized implements Savable {
         Market market = Market.getInstance();
         name = theMap.get("name");
         company = market.getCompanyByName(theMap.get("company"));
-        productionDate = (new Gson()).fromJson(theMap.get("productionDate"), Date.class) ;
+        productionDate = (new Gson()).fromJson(theMap.get("productionDate"), Date.class);
         productStatus = theMap.get("productStatus");
-        ArrayList<String> sellInfosId = (new Gson()).fromJson(theMap.get("sellersList"), new TypeToken<ArrayList<String>>(){}.getType());
+        ArrayList<String> sellInfosId = (new Gson()).fromJson(theMap.get("sellersList"), new TypeToken<ArrayList<String>>() {
+        }.getType());
         for (String sellInfoId : sellInfosId) {
             ProductSellInfo productSellInfo = market.getProductSellInfoById(sellInfoId);
             sellersList.put(productSellInfo.getSeller(), productSellInfo);
@@ -324,10 +325,12 @@ public class Product extends IdRecognized implements Savable {
         defaultSellInfo = market.getProductSellInfoById(theMap.get("defaultSellInfo"));
         minimumPrice = Integer.parseInt(theMap.get("minimumPrice"));
         category = (FinalCategory) market.getCategoryById(theMap.get("category"));
-        categoryFeatures = (new Gson()).fromJson(theMap.get("categoryFeatures"), new TypeToken<LinkedHashMap<String, String>>(){}.getType());
+        categoryFeatures = (new Gson()).fromJson(theMap.get("categoryFeatures"), new TypeToken<LinkedHashMap<String, String>>() {
+        }.getType());
         description = theMap.get("description");
         averageScore = Float.parseFloat(theMap.get("averageScore"));
-        ArrayList<HashMap<String, String>> allCommentMap = (new Gson()).fromJson(theMap.get("allComments"), new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
+        ArrayList<HashMap<String, String>> allCommentMap = (new Gson()).fromJson(theMap.get("allComments"), new TypeToken<ArrayList<HashMap<String, String>>>() {
+        }.getType());
         for (HashMap<String, String> commentMap : allCommentMap) {
             Comment comment = new Comment();
             comment.setFieldsFromHashMap(commentMap);
@@ -335,7 +338,8 @@ public class Product extends IdRecognized implements Savable {
             if (comment.isApprovedComment())
                 approvedComments.add(comment);
         }
-        ArrayList<String> ratesId = (new Gson()).fromJson(theMap.get("rates"), new TypeToken<ArrayList<String>>(){}.getType());
+        ArrayList<String> ratesId = (new Gson()).fromJson(theMap.get("rates"), new TypeToken<ArrayList<String>>() {
+        }.getType());
         for (String rateId : ratesId) {
             rates.add(market.getRateById(rateId));
         }
@@ -353,4 +357,30 @@ public class Product extends IdRecognized implements Savable {
 //        REVIEW_FOR_EDITING,
 //        APPROVED;
 //    }
+
+    public HashMap<String, String> getProductInfoForProductsList() {
+        HashMap<String, String> productInfo = new HashMap<>();
+        productInfo.put("id", id);
+        productInfo.put("name", name);
+        productInfo.put("averageScore", "" + averageScore);
+        productInfo.put("imageAddress", imageAddress);
+        if (isAvailable())
+            productInfo.put("price", "" + minimumPrice);
+        else
+            productInfo.put("price", "unavailable");
+        return productInfo;
+    }
+
+    public ArrayList<HashMap<String, String>> getProductOffInfoForProductsList() {
+        ArrayList<HashMap<String, String>> productOffInfos = new ArrayList<>();
+        // TODO: start loop
+        HashMap<String, String> OffInfo = new HashMap<>();
+        OffInfo.put("name", name);
+        OffInfo.put("averageScore", "" + averageScore);
+        OffInfo.put("imageAddress", imageAddress);
+        // TODO
+        productOffInfos.add(OffInfo);
+        // TODO: end loop
+        return productOffInfos;
+    }
 }

@@ -12,13 +12,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import model.Market;
 import newViewNedaei.MenuController;
+import newViewNedaei.Panel;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import static javafx.scene.paint.Color.RED;
 
-public class UserRegisterPane {
+public class UserRegisterPane extends Panel {
     public Label firstAdminLabel;
 
     public static String getFxmlFilePath() {
@@ -89,6 +90,9 @@ public class UserRegisterPane {
         registerErrorLabel.setText("admin profile created");
         for (Validator personalInfoField : personalInfoFields) {
             ((TextField) personalInfoField).clear();
+        }
+        if (UserController.getInstance().onlyHasAdmin()) {
+            goBack();
         }
     }
 

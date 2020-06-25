@@ -124,4 +124,8 @@ public class CodedDiscountController implements Editor, Creator {
     public void setCurrentDiscount(CodedDiscount currentDiscount) {
         this.currentDiscount = currentDiscount;
     }
+
+    public HashMap<String, String> getDetailsHashMap(String viewingDiscountCode) {
+        return market.getCodedDiscountByCode(viewingDiscountCode).convertToHashMap();
+    }
 }

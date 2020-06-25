@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class UsersManagingMenu extends AppMenu {
     public ListView usersList;
     public Label errorLabel;
-    private static String selectedUsername;
+    private String selectedUsername;
 
     public static String getFxmlFilePath() {
         return "/UsersManagingMenu.fxml";
@@ -40,18 +40,19 @@ public class UsersManagingMenu extends AppMenu {
         selectedUsername = (String) usersList.getSelectionModel().getSelectedItem();
     }
 
-    public static String getSelectedUsername() {
-        return selectedUsername;
-    }
-
     public void viewSelectedUser() {
         setSelectedUser();
-        if (selectedUsername == null) {
+        setViewingUser();
+        if (!ViewUserPanel.hasSelectedUser()) {
             errorLabel.setText("no selected user");
             return;
         }
         MenuController.getInstance().goToPanel(ViewUserPanel.getFxmlFilePath());
         // TODO : make view panel
+    }
+
+    private void setViewingUser() {
+        ViewUserPanel.setSelectedUsername(selectedUsername);
     }
 
     public void deleteSelectedUser() {

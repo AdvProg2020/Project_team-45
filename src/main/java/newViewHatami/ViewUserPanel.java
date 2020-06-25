@@ -16,11 +16,11 @@ public class ViewUserPanel extends Panel {
     public static String getFxmlFilePath() {
         return "/ViewUserPanel.fxml";
     }
+    private static String selectedUsername;
 
     @FXML
     public void initialize() {
-        String showingUserUsername = UsersManagingMenu.getSelectedUsername();
-        HashMap<String, String> showingInfo = UserController.getUserViewInfo(showingUserUsername);
+        HashMap<String, String> showingInfo = UserController.getUserViewInfo(selectedUsername);
         setLabelsValues(showingInfo);
     }
 
@@ -44,15 +44,33 @@ public class ViewUserPanel extends Panel {
         // TODO : set image
 
         String imagePath = showingInfo.get("avatar");
-        FileInputStream input = null;
-        try {
-            input = new FileInputStream(imagePath);
-            Image image = new Image(input);
-            userImage.setImage(image);
-        } catch (FileNotFoundException e) {
-            System.err.println(e.getMessage());
+        if (imagePath != null) {
+            FileInputStream input = null;
+            try {
+                input = new FileInputStream(imagePath);
+                Image image = new Image(input);
+                userImage.setImage(image);
+            } catch (FileNotFoundException e) {
+                System.err.println(e.getMessage());
+            }
         }
 
     }
 
+    public static void setSelectedUsername(String selectedUsername) {
+        ViewUserPanel.selectedUsername = selectedUsername;
+    }
+
+    public static String getSelectedUsername() {
+        return selectedUsername;
+    }
+
+    public void goBack() {
+        setSelectedUsername(null);
+        super.goBack();
+    }
+
+    public static boolean hasSelectedUser() {
+        return selectedUsername != null;
+    }
 }

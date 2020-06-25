@@ -19,7 +19,7 @@ public class MenuController {
     private Pane topPane;
     private Pane currentPane;
     private String currentFxmlFilePath;
-    private Pane panel;
+    private Stack<Pane> panels;
     private Stack<String> menuFxmlFilePaths;
     private int resourceFileCounter = 0;
 
@@ -32,6 +32,7 @@ public class MenuController {
             backgroundPane = FXMLLoader.load(getClass().getResource(BackgroundPane.getFxmlFilePath()));
             backgroundPane.getChildren().add(topPane);
             goToMenu(MainMenu.getFxmlFilePath());
+            panels = new Stack<>();
         } catch (IOException ignored) {
         }
 
@@ -63,27 +64,33 @@ public class MenuController {
 
     public void goToPanel(String fxmlFilePath) {
         try {
-            panel = FXMLLoader.load(getClass().getResource(fxmlFilePath));
+            Pane panel = FXMLLoader.load(getClass().getResource(fxmlFilePath));
             panel.setTranslateX(300);
             panel.setTranslateY(155);
             panel.setStyle("-fx-background-color: royalblue");
             topPane.setDisable(true);
             currentPane.setDisable(true);
+            if (!panels.isEmpty())
+                panels.lastElement().setDisable(true);
             backgroundPane.getChildren().add(panel);
+            panels.push(panel);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void enableCurrentPane() {
-        backgroundPane.getChildren().remove(panel);
+        backgroundPane.getChildren().remove(panels.pop());
         topPane.setDisable(false);
-        goToMenu(currentFxmlFilePath);
+        if (panels.isEmpty())
+            goToMenu(currentFxmlFilePath);
+        else
+            panels.lastElement().setDisable(false);
         menuFxmlFilePaths.pop();
     }
 
     public void removeCurrentPanel() {
-        backgroundPane.getChildren().remove(panel);
+        backgroundPane.getChildren().remove(panels.pop());
     }
 
     public void goBack() {

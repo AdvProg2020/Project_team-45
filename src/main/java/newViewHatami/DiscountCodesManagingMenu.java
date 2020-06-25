@@ -41,11 +41,19 @@ public class DiscountCodesManagingMenu extends AppMenu {
 
     public void viewSelectedDiscount() {
         setSelectedDiscount();
+        if (noSelectedDiscount()) return;
+        setViewingDiscount();
+        MenuController.getInstance().goToPanel(ViewDiscountCodePanel.getFxmlPath());
         // TODO : make view panel
+    }
+
+    private void setViewingDiscount() {
+        ViewDiscountCodePanel.setViewingDiscountCode(selectedDiscountCode);
     }
 
     public void deleteSelectedDiscount() {
         setSelectedDiscount();
+        if (noSelectedDiscount()) return;
         try {
             CodedDiscountController.getInstance().deleteItemById(selectedDiscountCode);
             errorLabel.setText("discount deleted successfully");
@@ -53,6 +61,14 @@ public class DiscountCodesManagingMenu extends AppMenu {
             errorLabel.setText(e.getMessage());
         }
         fillList();
+    }
+
+    private boolean noSelectedDiscount() {
+        if (selectedDiscountCode == null) {
+            errorLabel.setText("no selected discount");
+            return true;
+        }
+        return false;
     }
 
     public void openDiscountCreatorPanel() {
@@ -63,4 +79,7 @@ public class DiscountCodesManagingMenu extends AppMenu {
         MenuController.getInstance().goToMenu(AdminMenu.getFxmlFilePath());
     }
 
+    public void editSelectedDiscount() {
+
+    }
 }

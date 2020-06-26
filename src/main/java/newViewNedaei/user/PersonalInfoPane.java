@@ -3,15 +3,19 @@ package newViewNedaei.user;
 import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import model.user.PersonalInfo;
 import newViewHatami.Validator;
 import newViewHatami.ValidatorField;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class PersonalInfoPane {
     public Label role;
+    public ImageView profileImage;
     @FXML
     private Label error;
     @FXML
@@ -46,6 +50,18 @@ public class PersonalInfoPane {
         emailAddress.setPromptText(personalInfo.getEmailAddress());
         phoneNumber.setPromptText(personalInfo.getPhoneNumber());
         password.setPromptText(personalInfo.getPassword());
+
+        String imagePath = personalInfo.getAvatarPath();
+        if (imagePath != null) {
+            FileInputStream input = null;
+            try {
+                input = new FileInputStream(imagePath);
+                Image image = new Image(input);
+                profileImage.setImage(image);
+            } catch (FileNotFoundException e) {
+                System.err.println(e.getMessage());
+            }
+        }
     }
 
     public void editFirstName() {

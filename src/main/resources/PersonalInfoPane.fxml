@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import newViewHatami.*?>
-
 <AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.PersonalInfoPane">
    <children>
-      <GridPane alignment="CENTER" layoutX="10.0" layoutY="100.0" prefHeight="400.0" prefWidth="480.0">
+      <GridPane alignment="CENTER" layoutX="10.0" layoutY="163.0" prefHeight="400.0" prefWidth="480.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="130.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="292.0" minWidth="10.0" prefWidth="300.0" />
@@ -45,5 +45,6 @@
             <Label fx:id="role" alignment="CENTER" prefHeight="50.0" prefWidth="350.0" GridPane.columnIndex="1" GridPane.columnSpan="2" />
          </children>
       </GridPane>
+      <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="228.0" layoutX="28.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

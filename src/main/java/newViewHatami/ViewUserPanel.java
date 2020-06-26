@@ -41,8 +41,6 @@ public class ViewUserPanel extends Panel {
         emailLabel.setText(showingInfo.get("email"));
         phoneNumberLabel.setText(showingInfo.get("phoneNumber"));
 
-        // TODO : set image
-
         String imagePath = showingInfo.get("avatar");
         if (imagePath != null) {
             FileInputStream input = null;

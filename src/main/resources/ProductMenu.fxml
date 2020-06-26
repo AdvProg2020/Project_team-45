@@ -15,27 +15,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewBagheri.ProductMenu">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewBagheri.ProductMenu">
     <children>
-        <VBox layoutX="227.0" layoutY="86.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0"
-              AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox layoutX="227.0" layoutY="86.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <BorderPane prefHeight="200.0" prefWidth="200.0">
                     <left>
                         <Pane>
                             <ScrollPane prefHeight="300" prefWidth="300">
-                                <ImageView fx:id="productImageView" fitHeight="150.0" fitWidth="200.0"
-                                           pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER"/>
+                                <ImageView fx:id="productImageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
                             </ScrollPane>
-                            <Button/>
-                            <Button/>
+                            <Button />
+                            <Button />
                         </Pane>
                     </left>
                     <center>
                         <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <top>
-                                <Label fx:id="productNameLabel" text="Label" BorderPane.alignment="CENTER"/>
+                                <Label fx:id="productNameLabel" text="Label" BorderPane.alignment="CENTER" />
                             </top>
                             <center>
                                 <GridPane BorderPane.alignment="CENTER">
@@ -48,36 +45,35 @@
                                     <!--                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>-->
                                     <!--                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>-->
                                     <!--                                    </rowConstraints>-->
-                                    <Label fx:id="brandNameLabel" GridPane.rowIndex="0"/>
-                                    <Label fx:id="categoryNameLabel" GridPane.rowIndex="1"/>
+                                    <Label fx:id="brandNameLabel" GridPane.rowIndex="0" />
+                                    <Label fx:id="categoryNameLabel" GridPane.rowIndex="1" />
                                     <GridPane BorderPane.alignment="CENTER" GridPane.rowIndex="2">
-                                        <Label text="Score:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-                                        <Label fx:id="scoreLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                        <Label text="Score:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                        <Label fx:id="scoreLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                                        <Button fx:id="ScoringButton" text="Scoring" GridPane.columnIndex="3"
-                                                GridPane.rowIndex="0"/>
+                                        <Button fx:id="ScoringButton" text="Scoring" GridPane.columnIndex="3" GridPane.rowIndex="0" />
                                         <columnConstraints>
-                                            <ColumnConstraints/>
-                                            <ColumnConstraints/>
-                                            <ColumnConstraints/>
-                                            <ColumnConstraints/>
+                                            <ColumnConstraints />
+                                            <ColumnConstraints />
+                                            <ColumnConstraints />
+                                            <ColumnConstraints />
                                         </columnConstraints>
                                         <rowConstraints>
-                                            <RowConstraints/>
-                                            <RowConstraints/>
+                                            <RowConstraints />
+                                            <RowConstraints />
                                         </rowConstraints>
                                     </GridPane>
-                                    <Label text="Description:" GridPane.rowIndex="3"/>
-                                    <Text fx:id="descriptionText" GridPane.rowIndex="4"/>
+                                    <Label text="Description:" GridPane.rowIndex="3" />
+                                    <Text fx:id="descriptionText" GridPane.rowIndex="4" />
                                     <columnConstraints>
-                                        <ColumnConstraints/>
+                                        <ColumnConstraints />
                                     </columnConstraints>
                                     <rowConstraints>
-                                        <RowConstraints/>
-                                        <RowConstraints/>
-                                        <RowConstraints/>
-                                        <RowConstraints/>
-                                        <RowConstraints/>
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                        <RowConstraints />
                                     </rowConstraints>
                                 </GridPane>
                             </center>
@@ -92,24 +88,20 @@
                                     <!--                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>-->
                                     <!--                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>-->
                                     <!--                                    </rowConstraints>-->
-                                    <Label fx:id="sellerNameLabel" GridPane.columnIndex="0" GridPane.columnSpan="3"
-                                           GridPane.rowIndex="0"/>
-                                    <Label fx:id="originalPriceLabel" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                                    <Label fx:id="discountPercent" visible="false" GridPane.columnIndex="1"
-                                           GridPane.rowIndex="1"/>
-                                    <Label fx:id="finalPriceLabel" visible="false" GridPane.columnIndex="2"
-                                           GridPane.rowIndex="1"/>
-                                    <Button onAction="#addDefaultSellerToCart" text="Add To Card"
-                                            GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2"/>
+                                    <Label fx:id="sellerNameLabel" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0" />
+                                    <Label fx:id="originalPriceLabel" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                                    <Label fx:id="discountPercent" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label fx:id="finalPriceLabel" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Button onAction="#addDefaultSellerToCart" text="Add To Card" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="2" />
                                     <columnConstraints>
-                                        <ColumnConstraints/>
-                                        <ColumnConstraints/>
-                                        <ColumnConstraints/>
+                                        <ColumnConstraints />
+                                        <ColumnConstraints />
+                                        <ColumnConstraints />
                                     </columnConstraints>
                                     <rowConstraints>
-                                        <RowConstraints/>
-                                        <RowConstraints/>
-                                        <RowConstraints/>
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                        <RowConstraints />
                                     </rowConstraints>
                                 </GridPane>
                             </right>
@@ -118,10 +110,10 @@
                 </BorderPane>
                 <BorderPane prefHeight="200.0" prefWidth="200.0">
                     <top>
-                        <Label text="Sellers List:"/>
+                        <Label text="Sellers List:" />
                     </top>
                     <center>
-                        <GridPane fx:id="sellersListPain"/>
+                        <GridPane fx:id="sellersListPain" />
                     </center>
                 </BorderPane>
                 <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
@@ -129,7 +121,7 @@
                         <Tab text="Features">
                             <content>
                                 <ScrollPane>
-                                    <GridPane fx:id="featuresListPain"/>
+                                    <GridPane fx:id="featuresListPain" />
                                 </ScrollPane>
                             </content>
                         </Tab>
@@ -138,16 +130,14 @@
                                 <BorderPane>
                                     <center>
                                         <ScrollPane prefHeight="200.0" prefWidth="200.0">
-                                            <VBox fx:id="commentsList"/>
+                                            <VBox fx:id="commentsList" />
                                         </ScrollPane>
                                     </center>
                                     <bottom>
                                         <Pane prefHeight="30.0" BorderPane.alignment="CENTER">
                                             <children>
-                                                <Button layoutX="662.0" layoutY="2.0" onAction="#addNewComment"
-                                                        text="Add New Comment"/>
-                                                <Label fx:id="errorLabelForAddComment" layoutX="358.0" layoutY="7.0" text="You should login!"
-                                                       textFill="red" visible="false"/>
+                                                <Button layoutX="840.0" layoutY="2.0" onAction="#addNewComment" text="Add New Comment" />
+                                                <Label fx:id="errorLabelForAddComment" layoutX="454.0" layoutY="8.0" text="You should login!" textFill="red" visible="false" />
                                             </children>
                                         </Pane>
                                     </bottom>

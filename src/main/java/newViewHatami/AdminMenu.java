@@ -1,11 +1,30 @@
 package newViewHatami;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
 import newViewNedaei.MenuController;
+
+import java.io.IOException;
 
 public class AdminMenu extends AppMenu {
 
+    public Pane mainPane;
+
     public static String getFxmlFilePath() {
         return "/AdminMenu.fxml";
+    }
+
+    @FXML
+    public void initialize() {
+        try {
+            Pane pane = FXMLLoader.load(getClass().getResource("/PersonalInfoPane.fxml"));
+            pane.setTranslateX(0);
+            pane.setTranslateY(0);
+            mainPane.getChildren().add(pane);
+        } catch (IOException ignored) {
+
+        }
     }
 
     public void manageUsersAction(){

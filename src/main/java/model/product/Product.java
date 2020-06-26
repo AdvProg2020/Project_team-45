@@ -38,10 +38,13 @@ public class Product extends IdRecognized implements Savable {
         this.approvedComments = new ArrayList<>();
         this.sellersList = new HashMap<>();
         this.rates = new ArrayList<>();
-        this.imageAddress = imageAddress;
-        if (this.imageAddress == null) {
+
+        if (imageAddress == null) {
             this.imageAddress = "/poker.png";
         }
+        else
+            this.imageAddress = "/photos/" + imageAddress.substring(imageAddress.lastIndexOf("\\")+1);
+
     }
 
     public Product(String productId) {
@@ -393,7 +396,4 @@ public class Product extends IdRecognized implements Savable {
         return imageAddress;
     }
 
-    public String getLocalImageAddress() {
-            return "/photos/" + imageAddress.substring(imageAddress.lastIndexOf("\\")+1);
-    }
 }

@@ -1,27 +1,20 @@
 package newViewNedaei.user.seller.product;
 
-import controller.CategoryController;
 import controller.ProductController;
 import controller.userControllers.SellerController;
-import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import model.Market;
 import model.category.FinalCategory;
 import model.product.Product;
-import model.product.ProductSellInfo;
-import model.user.Seller;
 import newViewHatami.Validator;
 import newViewHatami.ValidatorField;
 import newViewNedaei.MenuController;
 import newViewNedaei.Panel;
-
-import java.util.HashMap;
 
 public class AddProductPanel extends Panel {
     public TextField id;
@@ -40,6 +33,8 @@ public class AddProductPanel extends Panel {
     private GridPane existingPane;
     @FXML
     private CheckBox checkBox;
+
+    private String productPhotoPath;
 
     public static String getFxmlFilePath() {
         return "/AddProductPanel.fxml";
@@ -117,8 +112,15 @@ public class AddProductPanel extends Panel {
 //        fieldsAndValues.put("description", description.getText());
 //        fieldsAndValues.put("price", newPrice.getText());
 //        fieldsAndValues.put("stock", newStock.getText());
-        Product product = new Product(name.getText(), (FinalCategory) Market.getInstance().getCategoryByName(category.getText()), description.getText());
+        Product product = new Product(name.getText(), (FinalCategory) Market.getInstance().getCategoryByName(category.getText()), description.getText(), productPhotoPath);
         SellerController.getInstance().createAddProductRequest("new", product, Integer.parseInt(newPrice.getText()), Integer.parseInt(newStock.getText()));
         existingError.setText("");
+    }
+
+    public void pickPhoto() {
+        String photoPath = MenuController.getInstance().pickPhoto();
+        if (photoPath != null) {
+            productPhotoPath = photoPath;
+        }
     }
 }

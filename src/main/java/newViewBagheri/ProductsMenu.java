@@ -26,6 +26,7 @@ public class ProductsMenu implements Initializable {
     public TextField productNameField;
     public VBox companiesNameList;
     public VBox sellersUsernameList;
+    public CheckBox availableCheckBox;
     public VBox specialFeaturesListVBox;
     public ChoiceBox sortingChoiceBox;
     public GridPane productsListPain;
@@ -130,6 +131,13 @@ public class ProductsMenu implements Initializable {
             filteringController.removeFilter(type, input.getText());
         }
         showProducts();
+    }
+
+    public void filteringByStock() {
+        if (availableCheckBox.isSelected())
+            filteringController.addFilter("available", "");
+        else
+            filteringController.removeFilter("available", "");
     }
 
     public void addPriceFilter() {

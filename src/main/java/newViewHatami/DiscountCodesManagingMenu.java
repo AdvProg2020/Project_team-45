@@ -80,6 +80,12 @@ public class DiscountCodesManagingMenu extends AppMenu {
     }
 
     public void editSelectedDiscount() {
+        setSelectedDiscount();
+        setEditingDiscount();
+        MenuController.getInstance().goToPanel(EditDiscountCodePanel.getFxmlFilePath());
+    }
 
+    private void setEditingDiscount() {
+        EditDiscountCodePanel.setEditingDiscount(selectedDiscountCode);
     }
 }

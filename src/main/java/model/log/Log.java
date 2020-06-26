@@ -52,7 +52,7 @@ public class Log extends IdRecognized implements Savable {
     }
 
     public int getFinalPrice() {
-        //calculateFinalPrice();
+        calculateFinalPrice();
         return finalPrice;
     }
 
@@ -80,12 +80,10 @@ public class Log extends IdRecognized implements Savable {
     public void calculateFinalPrice(){
         int result = 0;
         for (ProductSellInfo sellInfo : sellingProducts) {
-            //System.out.println("########################" + ((Buyer) BuyerController.getInstance().getBuyer()).getCart().getCartProducts());
             result += sellInfo.getFinalPrice() * BuyerController.getInstance().getBuyer().getCart()
-                    .getProductAmountById(sellInfo.getProduct().getId());
+                    .getProductAmountById(sellInfo.getId());
         }
         result = (100 - getAppliedDiscountPercentage()) * result / 100;
-        //System.out.println("####################" + result);
         finalPrice = result;
     }
 

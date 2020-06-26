@@ -84,8 +84,8 @@ public class LoginRegisterMenu {
     }
 
     private void processLogin(String username) {
-        MenuController.getInstance().getTopPane().getChildren().get(2).setDisable(true);
-        MenuController.getInstance().getTopPane().getChildren().get(6).setDisable(false);
+        MenuController.getInstance().getTopPane().getChildren().get(2).setVisible(false);
+        MenuController.getInstance().getTopPane().getChildren().get(6).setVisible(true);
         MenuController.getInstance().goBack();
     }
 }

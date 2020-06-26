@@ -106,11 +106,12 @@ public class Buyer extends User implements CartHolder, Savable {
             purchasedProducts.put(sellInfo.getProduct().getId(), null);
             sellInfo.getProduct().addSellCount();
             sellInfo.addSellCount();
-            sellInfo.getAllBuyers().put(this, getCart().getProductAmountById(sellInfo.getProduct().getId()));
+            sellInfo.getAllBuyers().put(this, getCart().getProductAmountById(sellInfo.getId()));
             Seller seller = sellInfo.getSeller();
             SellLog sellLog = new SellLog(log, seller);
             seller.getListOfSellLogs().add(sellLog);
             seller.setBalance(seller.getBalance() + sellLog.getIncome());
+            sellInfo.setStock(sellInfo.getStock() - cart.getProductAmountById(sellInfo.getId()));
         }
         BuyLog buyLog = new BuyLog(log);
         listOfBuyLogs.add(buyLog);

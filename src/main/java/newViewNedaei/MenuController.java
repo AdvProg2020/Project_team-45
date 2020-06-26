@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Stack;
 
 public class MenuController {
@@ -64,6 +65,7 @@ public class MenuController {
             backgroundPane.getChildren().remove(topPane);
             topPane = FXMLLoader.load(getClass().getResource(TopPane.getFxmlFilePath()));
             backgroundPane.getChildren().add(topPane);
+            SoundPlayer.playBackground((new Random()).nextInt(3) + 1);
         } catch (IOException e) {
             e.printStackTrace();
         }

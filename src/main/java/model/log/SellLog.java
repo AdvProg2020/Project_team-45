@@ -47,6 +47,7 @@ public class SellLog implements Savable {
     }
 
     public int getIncome() {
+        findMyProductsAndIncome();
         return income;
     }
 

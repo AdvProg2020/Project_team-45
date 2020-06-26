@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.log.SellLog;
 import model.user.Seller;
+import newViewNedaei.MainMenu;
 import newViewNedaei.MenuController;
 import newViewNedaei.Panel;
 

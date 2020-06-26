@@ -15,6 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.CheckBox?>
+<?import newViewHatami.ValidatorField?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
             prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="newViewBagheri.ProductsMenu">
@@ -100,10 +101,12 @@
                     </rowConstraints>
                     <Label text="Price:" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0"/>
                     <Label text="min:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                    <TextField fx:id="minPriceField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    <ValidatorField fx:id="minPriceField" isNecessary="false" validation="naturalNumber"
+                                    onAction="#addMinPriceFilter" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                     <Label text="max:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                    <TextField fx:id="maxPriceField" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                    <Button onAction="#addPriceFilter" text="submit" GridPane.columnIndex="0" GridPane.columnSpan="2"
+                    <ValidatorField fx:id="maxPriceField" isNecessary="false" validation="naturalNumber"
+                                    onAction="#addMaxPriceFilter" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                    <Button onAction="#submitPriceFilter" text="submit" GridPane.columnIndex="0" GridPane.columnSpan="2"
                             GridPane.rowIndex="2"/>
                     <Button onAction="#clearPriceFilter" text="clear" GridPane.columnIndex="2" GridPane.columnSpan="2"
                             GridPane.rowIndex="2"/>

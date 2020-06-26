@@ -27,7 +27,7 @@ public class Product extends IdRecognized implements Savable {
     private int seen;
     private String imageAddress;
 
-    public Product(String name, FinalCategory category, String description) {
+    public Product(String name, FinalCategory category, String description, String imageAddress) {
         this.id = "" + IdKeeper.getInstance().getProductsNewId();
         this.name = name;
         this.productionDate = new Date();
@@ -38,6 +38,10 @@ public class Product extends IdRecognized implements Savable {
         this.approvedComments = new ArrayList<>();
         this.sellersList = new HashMap<>();
         this.rates = new ArrayList<>();
+        this.imageAddress = imageAddress;
+        if (this.imageAddress == null) {
+            this.imageAddress = "/poker.png";
+        }
     }
 
     public Product(String productId) {

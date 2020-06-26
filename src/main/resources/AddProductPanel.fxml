@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import newViewHatami.*?>
-
 <AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.seller.product.AddProductPanel">
    <children>
       <CheckBox fx:id="checkBox" layoutX="100.0" mnemonicParsing="false" onAction="#actionCheckBox" prefHeight="25.0" prefWidth="200.0" text="Selling an Existing Product" />
@@ -24,11 +23,11 @@
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Id" />
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Price" GridPane.rowIndex="1" />
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Stock" GridPane.rowIndex="2" />
-            <Button onMouseClicked="#sendExisting" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Send Request" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onMouseClicked="#sendExisting" prefHeight="25.0" prefWidth="100.0" text="Send Request" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <TextField fx:id="id" GridPane.columnIndex="1" />
             <ValidatorField fx:id="existingPrice" onKeyReleased="#validate" validation="naturalNumber" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ValidatorField fx:id="existingStock" onKeyReleased="#validate" validation="naturalNumber" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="existingError" textFill="red" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="existingError" prefHeight="25.0" prefWidth="200.0" textFill="red" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <GridPane fx:id="newPane" layoutY="25.0" prefHeight="275.0" prefWidth="400.0">
@@ -43,10 +42,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button onMouseClicked="#sendNew" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Send Request" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Button mnemonicParsing="false" onMouseClicked="#sendNew" prefHeight="25.0" prefWidth="100.0" text="Send Request" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Product Name" />
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Category Name" GridPane.rowIndex="1" />
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Description" GridPane.rowIndex="2" />
@@ -54,10 +54,12 @@
             <Label alignment="CENTER" prefHeight="50.0" prefWidth="100.0" text="Stock" GridPane.rowIndex="4" />
             <ValidatorField fx:id="name" onKeyReleased="#validate" validation="alphaNumeric" GridPane.columnIndex="1" />
             <ValidatorField fx:id="category" onKeyReleased="#validate" validation="alphaNumeric" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField  fx:id="description" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="description" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ValidatorField fx:id="newPrice" onKeyReleased="#validate" validation="naturalNumber" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ValidatorField fx:id="newStock" onKeyReleased="#validate" validation="naturalNumber" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label fx:id="newError" textFill="red" prefHeight="25.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="newError" prefHeight="25.0" prefWidth="200.0" textFill="red" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label alignment="CENTER" prefHeight="37.0" prefWidth="110.0" text="Label" GridPane.rowIndex="5" />
+            <Button mnemonicParsing="false" onAction="#pickPhoto" prefHeight="26.0" prefWidth="84.0" text="browse" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
    </children>

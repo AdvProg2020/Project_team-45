@@ -411,6 +411,8 @@ public class CategoryController implements Editor, Creator {
         return getItemById(categoryName).getId();
     }
 
-
+    public String getActiveCategoryName() {
+        return activeCategory.getName();
+    }
     //bagheri
 }

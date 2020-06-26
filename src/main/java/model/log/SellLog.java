@@ -53,7 +53,8 @@ public class SellLog implements Savable {
         HashMap<String, String> result = new HashMap<>();
         result.put("mainLog", mainLog.getId());
         result.put("seller", seller.getId());
-//        result.put("income", income);
+        findMyProductsAndIncome();
+        result.put("income", "" + income);
         ArrayList<String> soldIds = new ArrayList<>();
         for (ProductSellInfo soldProduct : soldProducts) {
             soldIds.add(soldProduct.getId());

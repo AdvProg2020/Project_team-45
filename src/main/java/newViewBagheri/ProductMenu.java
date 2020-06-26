@@ -58,7 +58,7 @@ public class ProductMenu implements Initializable {
     }
 
     private void addImage() {
-        productImageView.setImage(new Image(convertPhotoPath(productController.getActiveProduct().getImageAddress())));
+//        productImageView.setImage(new Image(convertPhotoPath(productController.getActiveProduct().getImageAddress())));
     }
 
     private void addDefaultSellerInfo() {

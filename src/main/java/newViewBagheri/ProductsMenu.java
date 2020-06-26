@@ -5,9 +5,11 @@ import controller.FilteringController;
 import controller.ProductController;
 import controller.SortingController;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -210,19 +212,29 @@ public class ProductsMenu implements Initializable {
         VBox productInfoVBox = new VBox();
         ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
         productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+        productImageView.setPreserveRatio(true);
+        productImageView.setFitWidth(190.0);
+        productImageView.setFitHeight(250.0);
+        BorderPane imagePane = new BorderPane(productImageView);
+        BorderPane.setAlignment(productImageView, Pos.CENTER);
+        imagePane.setPrefWidth(195.0);
+        imagePane.setPrefHeight(250.0);
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
         Label productName = new Label(productInfo.get("name"));
         productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+        productName.setPrefHeight(30.0);
         Label productScore = new Label("score: " + productInfo.get("averageScore") + " out 0f 5");
+        productScore.setPrefHeight(30.0);
         String productPrice = productInfo.get("price");
         Label productPriceLabel = new Label(productPrice);
+        productPriceLabel.setPrefHeight(30.0);
         if (productPrice.equals("unavailable")) {
             // TODO : change color
         } else {
             // TODO : add unit
         }
-        productInfoVBox.getChildren().addAll(productImageView, productName, productScore, productPriceLabel);
+        productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPriceLabel);
         return productInfoVBox;
     }
 

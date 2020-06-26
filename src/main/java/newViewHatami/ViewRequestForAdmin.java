@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
+import model.Comment;
 import model.Market;
+import model.product.Product;
 import model.request.*;
 import newViewNedaei.MenuController;
 import newViewNedaei.Panel;
@@ -24,6 +26,9 @@ public class ViewRequestForAdmin extends Panel {
     public GridPane addProductPane;
     public ListView<String> editListView;
     public Label editLabel;
+    public Label commentText;
+    public GridPane commentGridPane;
+    public Label commentTitle;
 
     public static String getFxmlFilePath() {
         return "/ViewRequestForAdmin.fxml";
@@ -46,8 +51,19 @@ public class ViewRequestForAdmin extends Panel {
             addProductPane.setVisible(true);
             editLabel.setVisible(true);
             setListView(showingRequest.getFieldsAndValues());
+        } else if (showingRequest.getType().equals("new comment")) {
+            setUpCommentInfo();
+            commentGridPane.setVisible(true);
         }
     }
+
+    private void setUpCommentInfo() {
+        Comment comment = ((CommentRequest) showingRequest).getComment();
+        commentTitle.setText(comment.getTitle());
+        commentText.setText(comment.getContent());
+    }
+
+
 
     private void setListView(HashMap<String, String> fieldsAndValues) {
         ObservableList<String> items = FXCollections.observableArrayList ();
@@ -77,6 +93,8 @@ public class ViewRequestForAdmin extends Panel {
             sellerUsername = ((AddProductRequest) showingRequest).getSeller().getUsername();
         else if (showingRequest.getType().equals("remove product"))
             sellerUsername = ((RemoveProductRequest) showingRequest).getSeller().getUsername();
+        else if (showingRequest.getType().equals("new comment"))
+            sellerUsername = ((CommentRequest) showingRequest).getComment().getUser().getUsername();
         else {
             sellerUsername = ((ProductEditionRequest) showingRequest).getSeller().getUsername();
         }
@@ -98,6 +116,9 @@ public class ViewRequestForAdmin extends Panel {
         else if (showingRequest.getType().equals("remove product")){
             String productId =  ((RemoveProductRequest) showingRequest).getProductId();
             ViewProductForAdmin.setShowingProductInfo(((RemoveProductRequest) showingRequest).getSeller().getAvailableProductSellInfoById(productId));
+        }else if (showingRequest.getType().equals("new comment")){
+            Product product =  ((CommentRequest) showingRequest).getComment().getProduct();
+            ViewProductForAdmin.setShowingProductInfo(product.getDefaultSellInfo());
         }else {
             String productId =  ((ProductEditionRequest) showingRequest).getProductId();
             ViewProductForAdmin.setShowingProductInfo(((ProductEditionRequest) showingRequest).getSeller().getAvailableProductSellInfoById(productId));

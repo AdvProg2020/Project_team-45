@@ -36,7 +36,13 @@ public class TopPane {
 
     @FXML
     public void initialize() {
-        logout.setDisable(true);
+        loginRegister.setDisable(false);
+        logout.setDisable(false);
+        if (UserController.isLoggedIn()) {
+            loginRegister.setDisable(true);
+        } else {
+            logout.setDisable(true);
+        }
         addMenuItems();
     }
 

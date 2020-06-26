@@ -155,7 +155,6 @@ public class SellerController extends UserController implements Creator {
     }
 
     public void createAddProductRequest(String mode, Product product, int price, int stock) {
-        
         product.setCompany(((Seller) getActiveUser()).getCompany());
         ProductSellInfo productSellInfo = new ProductSellInfo(product, (Seller) getActiveUser());
         productSellInfo.setPrice(price);

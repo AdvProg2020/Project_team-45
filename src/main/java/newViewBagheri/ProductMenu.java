@@ -51,7 +51,7 @@ public class ProductMenu implements Initializable {
     }
 
     private void addImage() {
-        productImageView.setImage(new Image(productController.getActiveProductImageAddress()));
+        productImageView.setImage(new Image(convertPhotoPath(productController.getActiveProduct().getImageAddress())));
     }
 
     private void addSellersList() {
@@ -104,5 +104,9 @@ public class ProductMenu implements Initializable {
 
     private void addSimilarProductsList() {
 
+    }
+
+    private String convertPhotoPath(String path) {
+        return "/photos/" + path.substring(path.lastIndexOf("\\")+1);
     }
 }

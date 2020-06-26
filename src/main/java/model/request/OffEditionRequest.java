@@ -18,6 +18,10 @@ public class OffEditionRequest extends Request{
         this.offId = offId;
     }
 
+    public String getOffId() {
+        return offId;
+    }
+
     public OffEditionRequest(String id) {
         super(id);
     }

@@ -21,6 +21,14 @@ public class ProductEditionRequest extends Request {
         super(id);
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
     @Override
     public void apply() {
         ProductSellInfo productSellInfo = seller.getAvailableProductById(productId)

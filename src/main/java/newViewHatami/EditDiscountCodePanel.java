@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import model.CodedDiscount;
 import model.Market;
 import newViewNedaei.MenuController;
@@ -30,6 +31,7 @@ public class EditDiscountCodePanel extends Panel {
     @FXML
     public void initialize() {
         setUpFields();
+        errorLabel.setTextFill(Color.RED);
     }
 
     private void setUpFields() {
@@ -63,6 +65,7 @@ public class EditDiscountCodePanel extends Panel {
             return;
         }
         editingDiscount.setPercentage(Integer.parseInt(percentageField.getText()));
+        setUpFields();
     }
 
     public void changeStartDate() {
@@ -77,7 +80,7 @@ public class EditDiscountCodePanel extends Panel {
             return;
         }
         editingDiscount.setStartDate(newDate);
-
+        setUpFields();
     }
 
     public void changeEndDate() {
@@ -92,6 +95,7 @@ public class EditDiscountCodePanel extends Panel {
             return;
         }
         editingDiscount.setEndDate(newDate);
-
+        setUpFields();
     }
+
 }

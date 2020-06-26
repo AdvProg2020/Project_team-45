@@ -88,9 +88,10 @@ public class MenuController {
 
     public void enableCurrentPane() {
         backgroundPane.getChildren().remove(panels.pop());
-        topPane.setDisable(false);
-        if (panels.isEmpty())
+        if (panels.isEmpty()) {
             goToMenu(currentFxmlFilePath);
+            topPane.setDisable(false);
+        }
         else
             panels.lastElement().setDisable(false);
         menuFxmlFilePaths.pop();

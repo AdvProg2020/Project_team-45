@@ -107,7 +107,7 @@
                                         </ScrollPane>
                                     </center>
                                     <bottom>
-                                        <Button text="Add New Comment"/>
+                                        <Button text="Add New Comment" onAction="#goToCommentingPanel"/>
                                     </bottom>
                                 </BorderPane>
                             </content>

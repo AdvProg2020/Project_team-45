@@ -2,13 +2,10 @@ package model.product;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.sun.applet2.AppletParameters;
-import javafx.scene.control.Label;
 import model.*;
 import model.user.Buyer;
 import model.user.Seller;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;

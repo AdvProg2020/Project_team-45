@@ -10,12 +10,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import newViewNedaei.MenuController;
 
 import java.net.URL;
 import java.util.*;
 
 public class ProductMenu implements Initializable {
     private final ProductController productController = ProductController.getInstance();
+    private final MenuController menuController = MenuController.getInstance();
     public Label productNameLabel;
     public Label brandNameLabel;
     public Label categoryNameLabel;
@@ -122,6 +124,10 @@ public class ProductMenu implements Initializable {
             commentPane.setCenter(contentText);
             commentsList.getChildren().add(commentPane);
         }
+    }
+
+    public void goToCommentingPanel() {
+        menuController.goToPanel(CommentingPanel.getFxmlFilePath());
     }
 
     private void addSimilarProductsList() {

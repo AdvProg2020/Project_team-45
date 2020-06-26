@@ -4,6 +4,8 @@ import controller.ProductController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -20,6 +22,7 @@ public class ProductMenu implements Initializable {
     public Text descriptionText;
     public Label scoreLabel;
     public Button ScoringButton;
+    public ImageView productImageView;
     public GridPane sellersListPain;
     public GridPane featuresListPain;
     public VBox commentsList;
@@ -31,6 +34,7 @@ public class ProductMenu implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addProductInformation();
+        addImage();
         addSellersList();
         addFeaturesList();
         addCommentsList();
@@ -44,6 +48,10 @@ public class ProductMenu implements Initializable {
         categoryNameLabel.setText("category:" + productInformation.get("category"));
         descriptionText.setText(productInformation.get("description"));
         scoreLabel.setText(productInformation.get("averageScore"));
+    }
+
+    private void addImage() {
+        productImageView.setImage(new Image(productController.getActiveProductImageAddress()));
     }
 
     private void addSellersList() {

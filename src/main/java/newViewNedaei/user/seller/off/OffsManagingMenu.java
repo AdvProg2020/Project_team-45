@@ -10,6 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.Off;
 import model.user.Seller;
+import newViewHatami.ViewOffForAdmin;
 import newViewNedaei.MenuController;
 import newViewNedaei.user.seller.off.EditOffPanel;
 
@@ -55,7 +56,10 @@ public class OffsManagingMenu {
         view.setPrefHeight(50);
         view.setTranslateY(120);
         view.setTranslateX(0);
-//        view.setOnMouseClicked(event -> );
+        view.setOnMouseClicked(event -> {
+            ViewOffForAdmin.setViewingOff(off);
+            MenuController.getInstance().goToPanel(ViewOffForAdmin.getFxmlFilePath());
+        });
 
         Button edit = new Button("Edit");
         edit.setPrefWidth(90);

@@ -9,10 +9,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import newViewHatami.ValidatorField;
 import newViewNedaei.MenuController;
 
@@ -210,9 +208,11 @@ public class ProductsMenu implements Initializable {
 
     private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
         VBox productInfoVBox = new VBox();
+        productInfoVBox.setBorder(new Border(new BorderStroke(Color.BROWN,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         int sizePrefWidth = 195;
         productInfoVBox.setPrefWidth(sizePrefWidth);
-        productInfoVBox.setPrefHeight(400.0);
+        productInfoVBox.setPrefHeight(350.0);
         ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
         productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         productImageView.setPreserveRatio(true);

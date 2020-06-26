@@ -221,14 +221,15 @@ public class ProductsMenu implements Initializable {
         imagePane.setPrefHeight(250.0);
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
+        int labelSize = 30;
         Label productName = new Label(productInfo.get("name"));
         productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
-        productName.setPrefHeight(30.0);
+        productName.setPrefHeight(labelSize);
         Label productScore = new Label("score: " + productInfo.get("averageScore") + " out 0f 5");
-        productScore.setPrefHeight(30.0);
+        productScore.setPrefHeight(labelSize);
         String productPrice = productInfo.get("price");
         Label productPriceLabel = new Label(productPrice);
-        productPriceLabel.setPrefHeight(30.0);
+        productPriceLabel.setPrefHeight(labelSize);
         if (productPrice.equals("unavailable")) {
             // TODO : change color
         } else {

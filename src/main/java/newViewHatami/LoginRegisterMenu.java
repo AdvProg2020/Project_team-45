@@ -1,13 +1,16 @@
 package newViewHatami;
 
 import controller.userControllers.UserController;
+import controller.userControllers.UsernameIsRequestException;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import newViewNedaei.MenuController;
 
 import java.io.IOException;
+import java.util.stream.Stream;
 
 public class LoginRegisterMenu {
     public ToggleButton registerToggleButton;
@@ -74,13 +77,14 @@ public class LoginRegisterMenu {
                     processLogin(loginUsernameField.getText());
                     // TODO : put address to go after login
                 }
-            } catch (Exception e) {
+            } catch (UsernameIsRequestException e) {
                 loginErrorLabel.setText("this username has a non-accepted register request");
             }
         }
     }
 
     private void processLogin(String username) {
+        MenuController.getInstance().getTopPane().getChildren().get(2).setDisable(true);
         MenuController.getInstance().goBack();
     }
 }

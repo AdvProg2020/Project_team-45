@@ -120,4 +120,8 @@ public class TopPane {
         categoryController.changeIsOffMenuToTrue();
         menuController.goToMenu(OffMenu.getFxmlFilePath());
     }
+
+    public Button getLoginRegister() {
+        return loginRegister;
+    }
 }

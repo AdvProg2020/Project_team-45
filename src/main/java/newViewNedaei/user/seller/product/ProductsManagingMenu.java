@@ -36,7 +36,7 @@ public class ProductsManagingMenu {
 
         Image image = null;
         try {
-            image = new Image(convertPhotoPath(productSellInfo.getProduct().getImageAddress()));
+            image = new Image(productSellInfo.getProduct().getLocalImageAddress());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(productSellInfo.getProduct().getImageAddress());
@@ -90,7 +90,5 @@ public class ProductsManagingMenu {
         return pane;
     }
 
-    private String convertPhotoPath(String path) {
-        return "/photos/" + path.substring(path.lastIndexOf("\\")+1);
-    }
+
 }

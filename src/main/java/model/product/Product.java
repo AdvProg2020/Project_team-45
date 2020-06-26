@@ -392,4 +392,8 @@ public class Product extends IdRecognized implements Savable {
     public String getImageAddress() {
         return imageAddress;
     }
+
+    public String getLocalImageAddress() {
+            return "/photos/" + imageAddress.substring(imageAddress.lastIndexOf("\\")+1);
+    }
 }

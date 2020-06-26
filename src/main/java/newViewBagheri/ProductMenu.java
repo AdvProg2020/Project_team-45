@@ -23,6 +23,10 @@ public class ProductMenu implements Initializable {
     public Label scoreLabel;
     public Button ScoringButton;
     public ImageView productImageView;
+    public Label sellerNameLabel;
+    public Label originalPriceLabel;
+    public Label discountPercent;
+    public Label finalPriceLabel;
     public GridPane sellersListPain;
     public GridPane featuresListPain;
     public VBox commentsList;
@@ -35,6 +39,7 @@ public class ProductMenu implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         addProductInformation();
         addImage();
+        addDefaultSellerInfo();
         addSellersList();
         addFeaturesList();
         addCommentsList();
@@ -52,6 +57,23 @@ public class ProductMenu implements Initializable {
 
     private void addImage() {
         productImageView.setImage(new Image(convertPhotoPath(productController.getActiveProduct().getImageAddress())));
+    }
+
+    private void addDefaultSellerInfo() {
+        HashMap<String, String> defaultSellerInfo = productController.getActiveSellInfo();
+        sellerNameLabel.setText("seller: " + defaultSellerInfo.get("sellerUsername"));
+        originalPriceLabel.setText(defaultSellerInfo.get("originalPrice"));
+        if (!defaultSellerInfo.get("discountPercent").equals("0")) {
+//            originalPriceLabel.;
+            discountPercent.setText(defaultSellerInfo.get("discountPercent") + "%");
+            discountPercent.setVisible(true);
+            finalPriceLabel.setText(defaultSellerInfo.get("finalPrice"));
+            finalPriceLabel.setVisible(true);
+        }
+    }
+
+    public void addDefaultSellerToCart() {
+        productController.addActiveProductToCart();
     }
 
     private void addSellersList() {

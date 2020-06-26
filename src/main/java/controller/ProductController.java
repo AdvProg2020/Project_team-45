@@ -216,5 +216,9 @@ public class ProductController implements Deleter {
     public void setActiveProductById(String productId) {
         activeProduct = market.getProductById(productId);
     }
+
+    public HashMap<String, String> getActiveSellInfo() {
+        return activeProductSellInfo.getInformation();
+    }
     //bahgeri
 }

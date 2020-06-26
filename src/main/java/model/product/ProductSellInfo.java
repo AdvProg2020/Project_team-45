@@ -3,6 +3,7 @@ package model.product;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.applet2.AppletParameters;
+import javafx.scene.control.Label;
 import model.*;
 import model.user.Buyer;
 import model.user.Seller;
@@ -146,5 +147,18 @@ public class ProductSellInfo extends IdRecognized implements Savable {
         for (Map.Entry<String, Integer> buyerId : buyersId.entrySet()) {
             allBuyers.put((Buyer) market.getUserById(buyerId.getKey()), buyerId.getValue());
         }
+    }
+
+    public HashMap<String, String> getInformation() {
+        HashMap<String, String> information = new HashMap<>();
+        information.put("sellerUsername", seller.getUsername());
+        information.put("originalPrice", "" + price);
+        information.put("finalPrice", "" + getFinalPrice());
+        if (off != null) {
+            information.put("discountPercent", "" + off.getDiscountAmount());
+        } else {
+            information.put("discountPercent", "0");
+        }
+        return information;
     }
 }

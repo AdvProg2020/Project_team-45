@@ -1,6 +1,7 @@
 package newViewNedaei.user.buyer;
 
 import controller.userControllers.BuyerController;
+import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -96,6 +97,10 @@ public class CartManagingMenu {
     }
 
     public void purchase() {
-        MenuController.getInstance().goToPanel(ReceiveInfoPanel.getFxmlFilePath());
+        if (!UserController.isLoggedIn()) {
+            // todo
+        } else {
+            MenuController.getInstance().goToPanel(ReceiveInfoPanel.getFxmlFilePath());
+        }
     }
 }

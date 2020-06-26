@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import model.Market;
+import model.Off;
 import model.product.Product;
 import model.user.Seller;
 import newViewHatami.Validator;
@@ -18,8 +20,10 @@ import newViewNedaei.Panel;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.regex.Matcher;
 
 public class AddOffPanel extends Panel {
     public ChoiceBox<String> products;
@@ -53,18 +57,17 @@ public class AddOffPanel extends Panel {
     }
 
     public void sendRequest() {
-        HashMap<String, String> fieldsAndValues = new HashMap<>();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date start = null;
         try {
-            simpleDateFormat.parse(startDate.getText());
-            fieldsAndValues.put("startDate", startDate.getText());
+            start = simpleDateFormat.parse(startDate.getText());
         } catch (ParseException parseException) {
             error.setText("invalid start date format");
             return;
         }
+        Date end = null;
         try {
-            simpleDateFormat.parse(endDate.getText());
-            fieldsAndValues.put("endDate", endDate.getText());
+            end = simpleDateFormat.parse(endDate.getText());
         } catch (ParseException parseException) {
             error.setText("invalid end date format");
             return;
@@ -73,13 +76,13 @@ public class AddOffPanel extends Panel {
             error.setText("invalid discount amount format");
             return;
         }
-        fieldsAndValues.put("discountAmount", discount.getText());
-        String productsString = "";
+        ArrayList<Product> products = new ArrayList<>();
         for (String item : productsList.getItems()) {
-            productsString += item + ", ";
+            System.out.println(item);
+            products.add(Market.getInstance().getProductById(item.split(" -> ")[1]));
         }
-        fieldsAndValues.put("productIds(separated by ',')", productsString);
-        SellerController.getInstance().createAddOffRequest(fieldsAndValues);
+        Off off = new Off(products, start, end, Integer.parseInt(discount.getText()));
+        SellerController.getInstance().createAddOffRequest(off);
         error.setText("");
     }
 

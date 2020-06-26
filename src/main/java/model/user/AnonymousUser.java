@@ -1,7 +1,7 @@
 package model.user;
 
 public class AnonymousUser implements CartHolder {
-    private final Cart cart;
+    private Cart cart;
 
     public AnonymousUser() {
         this.cart = new Cart();
@@ -9,5 +9,10 @@ public class AnonymousUser implements CartHolder {
 
     public Cart getCart() {
         return cart;
+    }
+
+    @Override
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

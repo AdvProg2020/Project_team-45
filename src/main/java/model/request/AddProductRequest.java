@@ -10,14 +10,17 @@ import model.user.Seller;
 import java.util.HashMap;
 
 public class AddProductRequest extends Request {
-    private Seller seller;
     private String mode;
+    private ProductSellInfo productSellInfo;
     private Product product;
+    private Seller seller;
 
-    public AddProductRequest(String mode, Seller seller, HashMap<String, String> fieldsAndValues) {
-        super(fieldsAndValues);
-        this.seller = seller;
+    public AddProductRequest(String mode, ProductSellInfo productSellInfo) {
+        super();
         this.mode = mode;
+        this.productSellInfo = productSellInfo;
+        product = productSellInfo.getProduct();
+        seller = productSellInfo.getSeller();
     }
 
     public AddProductRequest(String id) {
@@ -26,31 +29,17 @@ public class AddProductRequest extends Request {
 
     @Override
     public void apply() {
-        if (mode.equalsIgnoreCase("existing")) {
-            product = Market.getInstance().getProductById(fieldsAndValues.get("productId"));
-        } else if (mode.equalsIgnoreCase("new")){
-            Category category = Market.getInstance().getCategoryByName(fieldsAndValues.get("categoryName"));
-            if (category == null || !category.getType().equalsIgnoreCase("FinalCategory")) {
-                return;
-            }
-            product = new Product(fieldsAndValues.get("name"), ((FinalCategory)category)
-                    , fieldsAndValues.get("description"));
-            ProductSellInfo sellInfo = new ProductSellInfo(product, seller);
-            product.addSeller(sellInfo);
-            product.setCompany(seller.getCompany());
-            product.setDefaultSellInfo(sellInfo);
-            Market.getInstance().addSellInfoToList(sellInfo);
-            ((FinalCategory)category).addProduct(product);
+        if (mode.equalsIgnoreCase("new")) {
+            product = productSellInfo.getProduct();
+            seller = productSellInfo.getSeller();
+            product.addSeller(productSellInfo);
+            product.setCompany(productSellInfo.getSeller().getCompany());
+            product.setDefaultSellInfo(productSellInfo);
+            Market.getInstance().addSellInfoToList(productSellInfo);
+            product.getCategory().addProduct(product);
             Market.getInstance().getAllProducts().add(product);
         }
-
-        ProductSellInfo productSellInfo = product.getSellerInfoForProductByUsername(seller.getPersonalInfo().getUsername());
-        if (fieldsAndValues.containsKey("price")) {
-            productSellInfo.setPrice(Integer.parseInt(fieldsAndValues.get("price")));
-        } if (fieldsAndValues.containsKey("stock")) {
-            productSellInfo.setStock(Integer.parseInt(fieldsAndValues.get("stock")));
-        }
-        seller.getAvailableProducts().put(product, productSellInfo);
+        productSellInfo.getSeller().getAvailableProducts().put(product, productSellInfo);
     }
 
     @Override
@@ -69,21 +58,15 @@ public class AddProductRequest extends Request {
     @Override
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = super.convertToHashMap();
-        result.put("seller", seller.getId());
+        result.put("productSellInfo", productSellInfo.getId());
         result.put("mode", mode);
-        if (product != null) {
-            result.put("product", product.getId());
-        }
         return result;
     }
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         super.setFieldsFromHashMap(theMap);
-        seller = (Seller) Market.getInstance().getUserById(theMap.get("seller"));
         mode = theMap.get("mode");
-        if (theMap.containsKey("product")) {
-            product = Market.getInstance().getProductById(theMap.get("product"));
-        }
+        productSellInfo = Market.getInstance().getProductSellInfoById(theMap.get("productSellInfo"));
     }
 }

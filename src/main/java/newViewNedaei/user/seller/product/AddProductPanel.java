@@ -1,5 +1,6 @@
 package newViewNedaei.user.seller.product;
 
+import controller.CategoryController;
 import controller.ProductController;
 import controller.userControllers.SellerController;
 import controller.userControllers.UserController;
@@ -11,6 +12,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import model.Market;
+import model.category.FinalCategory;
+import model.product.Product;
+import model.product.ProductSellInfo;
 import model.user.Seller;
 import newViewHatami.Validator;
 import newViewHatami.ValidatorField;
@@ -78,11 +82,12 @@ public class AddProductPanel extends Panel {
             existingError.setText("invalid stock format");
             return;
         }
-        HashMap<String, String> fieldsAndValues = new HashMap<>();
-        fieldsAndValues.put("productId", id.getText());
-        fieldsAndValues.put("price", existingPrice.getText());
-        fieldsAndValues.put("stock", existingStock.getText());
-        SellerController.getInstance().createAddProductRequest("existing", (Seller) UserController.getActiveUser(), fieldsAndValues);
+//        HashMap<String, String> fieldsAndValues = new HashMap<>();
+//        fieldsAndValues.put("productId", id.getText());
+//        fieldsAndValues.put("price", existingPrice.getText());
+//        fieldsAndValues.put("stock", existingStock.getText());
+        Product product = ProductController.getInstance().getItemById(id.getText());
+        SellerController.getInstance().createAddProductRequest("existing", product, Integer.parseInt(newPrice.getText()), Integer.parseInt(newStock.getText()));
         existingError.setText("");
     }
 
@@ -93,6 +98,12 @@ public class AddProductPanel extends Panel {
         } if (!category.validate()) {
             newError.setText("invalid category name format");
             return;
+        } if (Market.getInstance().getCategoryByName(category.getText()) == null) {
+            newError.setText("category does not exist");
+            return;
+        } if (!Market.getInstance().getCategoryByName(category.getText()).getType().equals("FinalCategory")) {
+            newError.setText("category is not final");
+            return;
         } if (!newPrice.validate()) {
             newError.setText("invalid price format");
             return;
@@ -100,13 +111,14 @@ public class AddProductPanel extends Panel {
             newError.setText("invalid stock format");
             return;
         }
-        HashMap<String, String> fieldsAndValues = new HashMap<>();
-        fieldsAndValues.put("name", name.getText());
-        fieldsAndValues.put("categoryName", category.getText());
-        fieldsAndValues.put("description", description.getText());
-        fieldsAndValues.put("price", newPrice.getText());
-        fieldsAndValues.put("stock", newStock.getText());
-        SellerController.getInstance().createAddProductRequest("new", (Seller) UserController.getActiveUser(), fieldsAndValues);
+//        HashMap<String, String> fieldsAndValues = new HashMap<>();
+//        fieldsAndValues.put("name", name.getText());
+//        fieldsAndValues.put("categoryName", category.getText());
+//        fieldsAndValues.put("description", description.getText());
+//        fieldsAndValues.put("price", newPrice.getText());
+//        fieldsAndValues.put("stock", newStock.getText());
+        Product product = new Product(name.getText(), (FinalCategory) Market.getInstance().getCategoryByName(category.getText()), description.getText());
+        SellerController.getInstance().createAddProductRequest("new", product, Integer.parseInt(newPrice.getText()), Integer.parseInt(newStock.getText()));
         existingError.setText("");
     }
 }

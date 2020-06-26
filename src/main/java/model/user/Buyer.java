@@ -41,6 +41,11 @@ public class Buyer extends User implements CartHolder, Savable {
         return cart;
     }
 
+    @Override
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
     public ArrayList<CodedDiscount> getListOfCodedDiscounts() {
         return listOfCodedDiscounts;
     }

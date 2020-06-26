@@ -8,6 +8,7 @@ import model.Market;
 import model.Off;
 import model.log.SellLog;
 import model.product.Product;
+import model.product.ProductSellInfo;
 import model.request.*;
 import model.user.PersonalInfo;
 import model.user.Seller;
@@ -153,8 +154,18 @@ public class SellerController extends UserController implements Creator {
         return newProductFieldsToCreate;
     }
 
-    public void createAddProductRequest(String mode, Seller seller, HashMap<String, String> fieldsAndValues) {
-        Market.getInstance().getAllRequests().add(new AddProductRequest(mode, seller, fieldsAndValues));
+    public void createAddProductRequest(String mode, Product product, int price, int stock) {
+        
+        product.setCompany(((Seller) getActiveUser()).getCompany());
+        ProductSellInfo productSellInfo = new ProductSellInfo(product, (Seller) getActiveUser());
+        productSellInfo.setPrice(price);
+        productSellInfo.setStock(stock);
+        if (mode.equals("new")) {
+            product.setDefaultSellInfo(productSellInfo);
+        }
+        Market.getInstance().getAllProducts().add(product);
+        Market.getInstance().getAllProductSellInfos().add(productSellInfo);
+        Market.getInstance().getAllRequests().add(new AddProductRequest(mode, productSellInfo));
     }
 
     // remove product panel
@@ -201,8 +212,8 @@ public class SellerController extends UserController implements Creator {
         return offFieldsToCreate;
     }
 
-    public void createAddOffRequest(HashMap<String, String> fieldsAndValues) {
-        Market.getInstance().getAllRequests().add(new AddOffRequest(((Seller)UserController.getActiveUser()), fieldsAndValues));
+    public void createAddOffRequest(Off off) {
+        Market.getInstance().getAllRequests().add(new AddOffRequest(((Seller)UserController.getActiveUser()), off));
     }
 
     // view balance panel

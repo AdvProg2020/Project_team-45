@@ -1,5 +1,6 @@
 package newViewNedaei.background;
 
+import controller.CartController;
 import controller.CategoryController;
 import controller.userControllers.UserController;
 import javafx.fxml.FXML;
@@ -79,9 +80,10 @@ public class TopPane {
 
 
     public void logItOut() {
-        UserController.setLoggedIn(true);
+        UserController.setLoggedIn(false);
         loginRegister.setDisable(false);
-//        CartController.getInstance().resetCart();
+        CartController.getInstance().resetCart();
+        MenuController.getInstance().goToMenu(MainMenu.getFxmlFilePath());
     }
 
 

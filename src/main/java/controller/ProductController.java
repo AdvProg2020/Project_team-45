@@ -212,5 +212,9 @@ public class ProductController implements Deleter {
     public String getActiveProductImageAddress() {
         return activeProduct.getImageAddress();
     }
+
+    public void setActiveProductById(String productId) {
+        activeProduct = market.getProductById(productId);
+    }
     //bahgeri
 }

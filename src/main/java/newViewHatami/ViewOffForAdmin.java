@@ -7,10 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import model.Off;
 import model.product.Product;
+import newViewNedaei.Panel;
 
 import java.util.ArrayList;
 
-public class ViewOffForAdmin {
+public class ViewOffForAdmin extends Panel {
     public Label startTimeLabel;
     public Label endTimeLabel;
     public Label discountAmountLabel;

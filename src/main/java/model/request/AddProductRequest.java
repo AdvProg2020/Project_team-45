@@ -1,8 +1,6 @@
 package model.request;
 
 import model.Market;
-import model.category.Category;
-import model.category.FinalCategory;
 import model.product.Product;
 import model.product.ProductSellInfo;
 import model.user.Seller;
@@ -25,6 +23,15 @@ public class AddProductRequest extends Request {
 
     public AddProductRequest(String id) {
         super(id);
+    }
+
+
+    public ProductSellInfo getProductSellInfo() {
+        return productSellInfo;
+    }
+
+    public Seller getSeller() {
+        return seller;
     }
 
     @Override

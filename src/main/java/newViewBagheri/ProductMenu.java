@@ -1,6 +1,8 @@
 package newViewBagheri;
 
 import controller.ProductController;
+import controller.userControllers.UserController;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,6 +34,7 @@ public class ProductMenu implements Initializable {
     public GridPane sellersListPain;
     public GridPane featuresListPain;
     public VBox commentsList;
+    public Label errorLabelForAddComment;
 
     public static String getFxmlFilePath() {
         return "/ProductMenu.fxml";
@@ -126,8 +129,11 @@ public class ProductMenu implements Initializable {
         }
     }
 
-    public void goToCommentingPanel() {
-        menuController.goToPanel(CommentingPanel.getFxmlFilePath());
+    public void addNewComment() {
+        if(UserController.isLoggedIn())
+            menuController.goToPanel(CommentingPanel.getFxmlFilePath());
+        else
+            errorLabelForAddComment.setVisible(true);
     }
 
     private void addSimilarProductsList() {

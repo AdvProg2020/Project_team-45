@@ -24,6 +24,10 @@ public abstract class Request extends IdRecognized implements Savable {
         requestStatus = RequestStatus.WAITING_FOR_CONFIRMATION;
     }
 
+    public HashMap<String, String> getFieldsAndValues() {
+        return fieldsAndValues;
+    }
+
     public Request(String id) {
         this.id = id;
     }

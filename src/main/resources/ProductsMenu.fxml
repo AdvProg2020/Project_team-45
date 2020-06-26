@@ -39,8 +39,8 @@
                 </HBox>
             </top>
             <center>
-                <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                    <GridPane fx:id="productsListPain">
+                <ScrollPane prefHeight="500.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                    <GridPane fx:id="productsListPain" prefHeight="1750.0" prefWidth="780.0">
 
                     </GridPane>
                 </ScrollPane>

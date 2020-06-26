@@ -20,6 +20,14 @@ public class RemoveProductRequest extends Request{
         super(id);
     }
 
+    public String getProductId() {
+        return productId;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
     @Override
     public void apply() {
         Product product = seller.getAvailableProductById(productId);

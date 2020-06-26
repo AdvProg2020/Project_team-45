@@ -6,10 +6,10 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewHatami.ViewRequestForAdmin">
 
     <children>
-        <GridPane layoutX="101.0" layoutY="85.0" prefHeight="118.0" prefWidth="398.0">
+        <GridPane layoutX="32.0" layoutY="85.0" prefHeight="118.0" prefWidth="337.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="28.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="72.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -31,7 +31,7 @@
             </font>
         </Label>
         <Button layoutX="491.0" layoutY="40.0" mnemonicParsing="false" onAction="#goBack" prefHeight="26.0" prefWidth="77.0" text="back" />
-      <GridPane fx:id="sellerRegisterPane" layoutX="101.0" layoutY="219.0" prefHeight="40.0" prefWidth="398.0" visible="false">
+      <GridPane fx:id="sellerRegisterPane" layoutX="20.0" layoutY="226.0" prefHeight="40.0" prefWidth="348.0" visible="false">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,7 +44,7 @@
             <Button mnemonicParsing="false" onAction="#viewSeller" text="view seller" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane fx:id="addOffPane" layoutX="100.0" layoutY="219.0" prefHeight="40.0" prefWidth="398.0" visible="false">
+      <GridPane fx:id="addOffPane" layoutX="19.0" layoutY="226.0" prefHeight="40.0" prefWidth="348.0" visible="false">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -57,7 +57,7 @@
             <Button mnemonicParsing="false" onAction="#viewOff" text="view off" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <GridPane fx:id="addProductPane" layoutX="100.0" layoutY="219.0" prefHeight="103.0" prefWidth="398.0" visible="false">
+      <GridPane fx:id="addProductPane" layoutX="19.0" layoutY="226.0" prefHeight="103.0" prefWidth="348.0" visible="false">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -71,6 +71,34 @@
             <Button mnemonicParsing="false" onAction="#viewProduct" text="view product" GridPane.columnIndex="1" />
             <Label layoutX="10.0" layoutY="18.0" prefHeight="18.0" prefWidth="105.0" text="seller :" GridPane.rowIndex="1" />
             <Button layoutX="209.0" layoutY="14.0" mnemonicParsing="false" onAction="#viewSeller" text="view seller" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <ListView fx:id="editListView" layoutX="381.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+      <Label fx:id="editLabel" layoutX="423.0" layoutY="153.0" prefHeight="18.0" prefWidth="116.0" text="editing fields" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="commentGridPane" layoutX="27.0" layoutY="211.0" prefHeight="149.0" prefWidth="348.0" visible="false">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label prefHeight="18.0" prefWidth="105.0" text="text :" GridPane.rowIndex="1" />
+            <Label layoutX="10.0" layoutY="18.0" prefHeight="18.0" prefWidth="105.0" text="user :" GridPane.rowIndex="3" />
+            <Button layoutX="209.0" layoutY="14.0" mnemonicParsing="false" onAction="#viewSeller" text="view user" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="commentText" prefHeight="50.0" prefWidth="185.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label layoutX="10.0" layoutY="52.0" prefHeight="18.0" prefWidth="105.0" text="title :" />
+            <Label fx:id="commentTitle" layoutX="184.0" layoutY="44.0" prefHeight="50.0" prefWidth="185.0" wrapText="true" GridPane.columnIndex="1" />
+            <Label layoutX="10.0" layoutY="93.0" prefHeight="18.0" prefWidth="105.0" text="product :" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#viewProduct" prefHeight="26.0" prefWidth="95.0" text="view product" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
     </children>

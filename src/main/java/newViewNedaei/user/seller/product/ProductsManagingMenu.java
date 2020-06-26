@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.product.ProductSellInfo;
 import model.user.Seller;
-import newViewBagheri.ProductMenu;
 import newViewNedaei.MenuController;
 
 public class ProductsManagingMenu {
@@ -37,7 +36,10 @@ public class ProductsManagingMenu {
 
         Image image = null;
         try {
+            String path = productSellInfo.getProduct().getImageAddress();
             image = new Image(productSellInfo.getProduct().getImageAddress());
+//            image = new Image();
+
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(productSellInfo.getProduct().getImageAddress());

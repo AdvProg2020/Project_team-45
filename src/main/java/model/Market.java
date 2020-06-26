@@ -204,6 +204,10 @@ public class Market {
             if (user.getPersonalInfo().getUsername().equals(username))
                 return user;
         }
+        for (Seller seller : requestedSellers) {
+            if (seller.getPersonalInfo().getUsername().equals(username))
+                return seller;
+        }
         return null;
     }
 

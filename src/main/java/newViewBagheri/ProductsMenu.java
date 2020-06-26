@@ -2,6 +2,7 @@ package newViewBagheri;
 
 import controller.CategoryController;
 import controller.FilteringController;
+import controller.ProductController;
 import controller.SortingController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -10,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import newViewNedaei.MenuController;
 
 import java.net.URL;
 import java.util.*;
@@ -18,6 +20,8 @@ public class ProductsMenu implements Initializable {
     private final CategoryController categoryController = CategoryController.getInstance();
     private final FilteringController filteringController = FilteringController.getInstance();
     private final SortingController sortingController = SortingController.getInstance();
+    private final ProductController productController = ProductController.getInstance();
+    private final MenuController menuController = MenuController.getInstance();
     public VBox subcategoriesList;
     public TextField productNameField;
     public VBox companiesNameList;
@@ -42,7 +46,7 @@ public class ProductsMenu implements Initializable {
             specialFeaturesListVBox.setVisible(false);
             //TODO
         } else {
-            sellersUsernameList.setVisible(false);
+            subcategoriesList.setVisible(false);
             //TODO
             addSpecialFeaturesList();
         }
@@ -94,7 +98,9 @@ public class ProductsMenu implements Initializable {
     }
 
     private void goToCategory(String categoryName) {
-        //TODO
+        categoryController.setActiveCategoryByName(categoryName);
+        categoryController.changeIsOffMenuToFalse();
+        menuController.goToMenu(ProductsMenu.getFxmlFilePath());
     }
 
     private void addCheckBoxListToVBox(Set<String> checkBoxTextList, VBox inputVBox, String type) {
@@ -165,21 +171,21 @@ public class ProductsMenu implements Initializable {
     private void changeProductsListPainProductInfos(ArrayList<HashMap<String, String>> productInfosList, int page) {
         productsListPain.getChildren().clear();
         int i = 0;
-        for (HashMap<String, String> productInfo : productInfosList.subList((page - 1) * 20, page * 20)) {
-            productsListPain.add(createProductInfoVBox(productInfo), i / 4, i % 4);
+        for (HashMap<String, String> productInfo : productInfosList.subList((page - 1) * 20, Math.min(page * 20, productInfosList.size()))) {
+            productsListPain.add(createProductInfoVBox(productInfo), i % 4, i / 4);
             i++;
         }
     }
 
     private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
         VBox productInfoVBox = new VBox();
-        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
-        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+//        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
+//        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
         Label productName = new Label(productInfo.get("name"));
         productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
-        Label productScore = new Label("score:" + productInfo.get("averageScore") + "out 0f 5");
+        Label productScore = new Label("score: " + productInfo.get("averageScore") + " out 0f 5");
         String productPrice = productInfo.get("price");
         Label productPriceLabel = new Label(productPrice);
         if (productPrice.equals("unavailable")) {
@@ -187,11 +193,13 @@ public class ProductsMenu implements Initializable {
         } else {
             // TODO : add unit
         }
-        productInfoVBox.getChildren().addAll(productImageView, productName, productScore, productPriceLabel);
+//        productInfoVBox.getChildren().addAll(productImageView, productName, productScore, productPriceLabel);
+        productInfoVBox.getChildren().addAll(productName, productScore, productPriceLabel);
         return productInfoVBox;
     }
 
     private void goToProduct(String productId) {
-        //TODO
+        productController.setActiveProductBYProductIdForCategory(productId);
+        menuController.goToMenu(ProductMenu.getFxmlFilePath());
     }
 }

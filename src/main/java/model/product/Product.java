@@ -27,7 +27,7 @@ public class Product extends IdRecognized implements Savable {
     private int seen;
     private String imageAddress;
 
-    public Product(String name, FinalCategory category, String description) {
+    public Product(String name, FinalCategory category, String description, String imageAddress) {
         this.id = "" + IdKeeper.getInstance().getProductsNewId();
         this.name = name;
         this.productionDate = new Date();
@@ -38,6 +38,10 @@ public class Product extends IdRecognized implements Savable {
         this.approvedComments = new ArrayList<>();
         this.sellersList = new HashMap<>();
         this.rates = new ArrayList<>();
+        this.imageAddress = imageAddress;
+        if (this.imageAddress == null) {
+            this.imageAddress = "/poker.png";
+        }
     }
 
     public Product(String productId) {
@@ -240,7 +244,7 @@ public class Product extends IdRecognized implements Savable {
         generalFeatures.put("name", this.name);
         generalFeatures.put("companyName", this.company.getName());
         generalFeatures.put("description", this.description);
-        generalFeatures.put("price", String.valueOf(this.minimumPrice));
+        generalFeatures.put("price", String.valueOf(getMinimumPrice()));
         generalFeatures.put("averageScore", String.valueOf(averageScore));
         return generalFeatures;
     }
@@ -272,7 +276,7 @@ public class Product extends IdRecognized implements Savable {
     public String toString() {
         return "productId: " + id + '\n' +
                 "name: " + name + '\n' +
-                "price: " + minimumPrice;
+                "price: " + getMinimumPrice();
     }
 
     @Override
@@ -365,7 +369,7 @@ public class Product extends IdRecognized implements Savable {
         productInfo.put("averageScore", "" + averageScore);
         productInfo.put("imageAddress", imageAddress);
         if (isAvailable())
-            productInfo.put("price", "" + minimumPrice);
+            productInfo.put("price", "" + getMinimumPrice());
         else
             productInfo.put("price", "unavailable");
         return productInfo;

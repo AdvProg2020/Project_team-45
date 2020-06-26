@@ -196,16 +196,16 @@ public class CategoryController implements Editor, Creator {
         isOffMenu = false;
     }
 
-    public boolean setActiveCategoryByName(String name) {
-        Category category = market.getCategoryByName(name);
-        if (category != null && (category.getParent() == activeCategory
-                || (activeCategory == null && category.getParent().getParent() == null))) {
-            activeCategory = category;
-            return true;
-        }
-        return false;
-        // TODO bagheri
-    }
+//    public boolean setActiveCategoryByName(String name) {
+//        Category category = market.getCategoryByName(name);
+//        if (category != null && (category.getParent() == activeCategory
+//                || (activeCategory == null && category.getParent().getParent() == null))) {
+//            activeCategory = category;
+//            return true;
+//        }
+//        return false;
+//        // TODO bagheri
+//    }
 
     public void clearActiveCategory() {
         activeCategory = null;
@@ -389,6 +389,10 @@ public class CategoryController implements Editor, Creator {
                 mainCategoriesName.add(mainCategory.getName());
         }
         return mainCategoriesName;
+    }
+
+    public void setActiveCategoryByName(String name) {
+        activeCategory = market.getCategoryByName(name);
     }
 
     public String getCategoryName(String categoryId) {

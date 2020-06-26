@@ -89,7 +89,7 @@ public class ProductMenu extends Menu {
 
     @Override
     protected boolean check() {
-        if (matcher.group().startsWith("consuleview") && productController.setActiveProductBYProductIdForCart(matcher.group(1))) {
+        if (matcher.group().startsWith("view") && productController.setActiveProductBYProductIdForCart(matcher.group(1))) {
             return true;
         } else if (productController.setActiveProductBYProductIdForCategory(matcher.group(1))) {
             return true;

@@ -48,13 +48,13 @@ public abstract class ProductSearchMenu extends Menu {
         super.back();
     }
 
-    @Override
-    protected boolean check() {
-        if (categoryController.setActiveCategoryByName(matcher.group(1)))
-            return true;
-        System.out.println("There is no category with this name!");
-        return false;
-    }
+//    @Override
+//    protected boolean check() {
+//        if (categoryController.setActiveCategoryByName(matcher.group(1)))
+//            return true;
+//        System.out.println("There is no category with this name!");
+//        return false;
+//    }
 
     @Override
     protected void show() {

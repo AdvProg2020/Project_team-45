@@ -387,4 +387,8 @@ public class Product extends IdRecognized implements Savable {
         // TODO: end loop
         return productOffInfos;
     }
+
+    public String getImageAddress() {
+        return imageAddress;
+    }
 }

@@ -6,6 +6,7 @@ import model.*;
 import model.category.FinalCategory;
 import model.user.Seller;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Product extends IdRecognized implements Savable {
@@ -381,14 +382,25 @@ public class Product extends IdRecognized implements Savable {
 
     public ArrayList<HashMap<String, String>> getProductOffInfoForProductsList() {
         ArrayList<HashMap<String, String>> productOffInfos = new ArrayList<>();
-        // TODO: start loop
-        HashMap<String, String> OffInfo = new HashMap<>();
-        OffInfo.put("name", name);
-        OffInfo.put("averageScore", "" + averageScore);
-        OffInfo.put("imageAddress", imageAddress);
-        // TODO
-        productOffInfos.add(OffInfo);
-        // TODO: end loop
+        for (Map.Entry<Seller, ProductSellInfo> sellerInfo : sellersList.entrySet()) {
+            HashMap<String, String> offInfo = new HashMap<>();
+            ProductSellInfo sellInfo = sellerInfo.getValue();
+            if (sellInfo.isInOff()) {
+                offInfo.put("productId", id);
+                offInfo.put("name", name);
+                offInfo.put("averageScore", "" + averageScore);
+                offInfo.put("imageAddress", imageAddress);
+                offInfo.put("sellInfoId", sellInfo.getId());
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd - hh : mm");
+                offInfo.put("startTime", simpleDateFormat.format(sellInfo.getOff().getStartTime()));
+                offInfo.put("endTime", simpleDateFormat.format(sellInfo.getOff().getEndTime()));
+                offInfo.put("remainingTime", "" + (sellInfo.getOff().getEndTime().getTime())/3600000);
+                offInfo.put("originalPrice", "" + sellInfo.getPrice());
+                offInfo.put("discountPercent", "" + sellInfo.getOff().getDiscountAmount());
+                offInfo.put("finalPrice", "" + sellInfo.getFinalPrice());
+                productOffInfos.add(offInfo);
+            }
+        }
         return productOffInfos;
     }
 

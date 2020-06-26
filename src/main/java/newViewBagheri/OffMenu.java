@@ -175,7 +175,7 @@ public class OffMenu implements Initializable {
     }
 
     private void showProducts() {
-        ArrayList<HashMap<String, String>> productInfosList = categoryController.getActiveCategoryProductInfosList();
+        ArrayList<HashMap<String, String>> productInfosList = categoryController.getActiveCategoryDiscountedProductInfosList();
         createPageButton(productInfosList);
         changeProductsListPainProductInfos(productInfosList, 1);
     }
@@ -207,9 +207,9 @@ public class OffMenu implements Initializable {
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         int sizePrefWidth = 195;
         productInfoVBox.setPrefWidth(sizePrefWidth);
-        productInfoVBox.setPrefHeight(350.0);
+        productInfoVBox.setPrefHeight(400.0);
         ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
-        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("productId"), productInfo.get("sellInfoId")));
         productImageView.setPreserveRatio(true);
         productImageView.setFitWidth(190.0);
         productImageView.setFitHeight(250.0);
@@ -217,24 +217,25 @@ public class OffMenu implements Initializable {
         BorderPane.setAlignment(productImageView, Pos.CENTER);
         imagePane.setPrefWidth(sizePrefWidth);
         imagePane.setPrefHeight(250.0);
-        // TODO: productImageView.setFitWidth();
-        // TODO: add pane and centering image
-        int labelSize = 30;
+        productInfoVBox.getChildren().add(imagePane);
         Label productName = new Label(productInfo.get("name"));
-        productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
-        setLabelStyle(productName, sizePrefWidth, labelSize);
-        Label productScore = new Label("score: " + productInfo.get("averageScore") + " out 0f 5");
-        setLabelStyle(productScore, sizePrefWidth, labelSize);
-        String productPrice = productInfo.get("price");
-        Label productPriceLabel = new Label();
-        setLabelStyle(productPriceLabel, sizePrefWidth, labelSize);
-        if (productPrice.equals("unavailable")) {
-            productPriceLabel.setText(productPrice);
-        } else {
-            productPriceLabel.setText("price: " + productPrice);
-        }
-        productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPriceLabel);
+        productName.setOnMouseClicked(e -> goToProduct(productInfo.get("productId"), productInfo.get("sellInfoId")));
+        setLabelStyle(productName, sizePrefWidth, 30);
+        productInfoVBox.getChildren().add(productName);
+        productInfoVBox.getChildren().add(createLabelForProductInfoVBox("score: " + productInfo.get("averageScore") + " out 0f 5"));
+        productInfoVBox.getChildren().add(createLabelForProductInfoVBox("Start Time: " + productInfo.get("startTime")));
+        productInfoVBox.getChildren().add(createLabelForProductInfoVBox("End Time: " + productInfo.get("endTime")));
+        productInfoVBox.getChildren().add(createLabelForProductInfoVBox("Remaining Time: " + productInfo.get("remainingTime") + " hour"));
+        productInfoVBox.getChildren().add(createLabelForProductInfoVBox("Original Price: " + productInfo.get("originalPrice")));
+        productInfoVBox.getChildren().add(createLabelForProductInfoVBox("Discount Percent: " + productInfo.get("discountPercent")));
+        productInfoVBox.getChildren().add(createLabelForProductInfoVBox("Final Price: " + productInfo.get("finalPrice")));
         return productInfoVBox;
+    }
+
+    private Label createLabelForProductInfoVBox(String text) {
+        Label productScore = new Label(text);
+        setLabelStyle(productScore, 195, 30);
+        return productScore;
     }
 
     private void setLabelStyle(Label label, int prefWidth, int prefHeight) {
@@ -243,8 +244,8 @@ public class OffMenu implements Initializable {
         label.setAlignment(Pos.CENTER);
     }
 
-    private void goToProduct(String productId) {
-        productController.setActiveProductBYProductIdForCategory(productId);
+    private void goToProduct(String productId, String sellInfoId) {
+        productController.setActiveProductBYProductIdForOff(productId, sellInfoId);
         menuController.goToMenu(ProductMenu.getFxmlFilePath());
     }
 }

@@ -111,12 +111,7 @@ public class ProductSellInfo extends IdRecognized implements Savable {
 
     @Override
     public String toString() {
-        return "seller:" + seller.getUsername() +
-                ", product:" + product.getName() +
-                ", price:" + price +
-                ", stock:" + stock +
-                ", off:" + off +
-                ", sellCount:" + sellCount;
+        return ", id:" + id;
     }
 
     @Override

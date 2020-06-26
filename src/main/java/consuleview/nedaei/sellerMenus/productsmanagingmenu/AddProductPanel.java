@@ -50,8 +50,8 @@ public class AddProductPanel extends Panel {
             }
             fieldsAndValues.put(productField, input.trim());
         }
-        SellerController.getInstance().createAddProductRequest(mode, ((Seller) UserController.getActiveUser())
-                , fieldsAndValues);
+//        SellerController.getInstance().createAddProductRequest(mode, ((Seller) UserController.getActiveUser())
+//                , fieldsAndValues);
     }
 
     @Override

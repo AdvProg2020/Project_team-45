@@ -28,7 +28,7 @@ public class CreateOffPanel extends Panel {
             System.out.println(productField + ":");
             fieldsAndValues.put(productField, scanner.nextLine().trim());
         }
-        SellerController.getInstance().createAddOffRequest(fieldsAndValues);
+//        SellerController.getInstance().createAddOffRequest(fieldsAndValues);
     }
 
 }

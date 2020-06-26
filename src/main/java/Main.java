@@ -1,4 +1,4 @@
-import com.sun.corba.se.spi.servicecontext.UEInfoServiceContext;
+import controller.DatabaseController;
 import controller.userControllers.UserController;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -23,8 +23,6 @@ public class Main extends Application {
         if (Market.getInstance().getAllUsers().isEmpty()) {
             getFirstAdmin();
         }
-        UserController.getInstance().setActiveUserByUsername("s");
-        UserController.setLoggedIn(true);
         launch(args);
     }
 

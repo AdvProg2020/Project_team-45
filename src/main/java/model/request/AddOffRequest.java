@@ -1,5 +1,7 @@
 package model.request;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.Market;
 import model.Off;
 import model.product.Product;
@@ -14,10 +16,12 @@ import java.util.HashMap;
 
 public class AddOffRequest extends Request{
     private Seller seller;
+    private Off off;
 
-    public AddOffRequest(Seller seller, HashMap<String, String> fieldsAndValues) {
-        super(fieldsAndValues);
+    public AddOffRequest(Seller seller, Off off) {
+        super();
         this.seller = seller;
+        this.off = off;
     }
 
     public AddOffRequest(String id) {
@@ -26,65 +30,12 @@ public class AddOffRequest extends Request{
 
     @Override
     public void apply() {
-        ArrayList<Product> products = extractProducts();
-        Date startTime = extractStartTime();
-        Date endTime = extractEndTime();
-        int discountAmount;
-        try {
-            discountAmount = Integer.parseInt(fieldsAndValues.get("discountAmount"));
-        } catch (NumberFormatException numberFormatException) {
-            return;
-        }
-
-        Off off = new Off(products, startTime, endTime, discountAmount);
         seller.getListOfOffs().put(off.getId(), off);
-        ArrayList<String> productIds = new ArrayList<>();
-        productIds.addAll(Arrays.asList(fieldsAndValues.get("productIds(separated by ',')").split("\\s*,\\s*")));
-        for (String productId : productIds) {
-            Product product = seller.getAvailableProductById(productId);
-            if (product != null) {
-                product.getSellerInfoForProductByUsername(seller.getUsername()).setOff(off);
-            }
+        for (Product product : off.getProductsList()) {
+            System.out.println("" + product + seller);
+            product.getSellerInfoForProductByUsername(seller.getUsername()).setOff(off);
         }
-
         Market.getInstance().getAllOffs().add(off);
-    }
-
-    private ArrayList<Product> extractProducts() {
-        ArrayList<String> productIds = new ArrayList<>();
-        productIds.addAll(Arrays.asList(fieldsAndValues.get("productIds(separated by ',')")
-                .split("\\s*,\\s*")));
-
-        ArrayList<Product> products = new ArrayList<>();
-        for (String productId : productIds) {
-            Product product = seller.getAvailableProductById(productId);
-            if (product != null) {
-                products.add(product);
-            }
-        }
-        return products;
-    }
-
-    private Date extractStartTime() {
-        Date startTime;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            startTime = simpleDateFormat.parse(fieldsAndValues.get("startTime"));
-        } catch (ParseException parseException) {
-            return new Date();
-        }
-        return startTime;
-    }
-
-    private Date extractEndTime() {
-        Date endTime;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            endTime = simpleDateFormat.parse(fieldsAndValues.get("endTime"));
-        } catch (ParseException parseException) {
-            return new Date();
-        }
-        return endTime;
     }
 
     @Override
@@ -101,6 +52,8 @@ public class AddOffRequest extends Request{
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = super.convertToHashMap();
         result.put("seller", seller.getId());
+        result.put("off", (new Gson()).toJson(off));
+
         return result;
     }
 
@@ -108,6 +61,7 @@ public class AddOffRequest extends Request{
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         super.setFieldsFromHashMap(theMap);
         seller = (Seller) Market.getInstance().getUserById(theMap.get("seller"));
-
+        off = (new Gson()).fromJson(theMap.get("off"), Off.class);
+//        get requested off
     }
 }

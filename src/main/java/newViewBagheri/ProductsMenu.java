@@ -50,7 +50,7 @@ public class ProductsMenu implements Initializable {
             //TODO
             addSpecialFeaturesList();
         }
-        showProducts();
+//        showProducts();
     }
 
     private void addSubcategoriesName() {

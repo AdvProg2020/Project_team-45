@@ -129,6 +129,7 @@ public class UserController {
         User loggingInUser = market.getUserByUsername(username);
         if (loggingInUser.checkPassword(password)) {
             loggedIn = true;
+            activeUser = loggingInUser;
             anonymousUser = new AnonymousUser();
             return true;
         }

@@ -40,6 +40,7 @@ public class OrdersManagingMenu {
         dateAndId.setPrefHeight(50);
         dateAndId.setAlignment(Pos.CENTER);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        System.out.println(buyLog.getMainLog());
         dateAndId.setText(simpleDateFormat.format(buyLog.getMainLog().getDate()) + " - id: " + buyLog.getMainLog().getId());
         dateAndId.setTranslateX(0);
         dateAndId.setTranslateY(0);

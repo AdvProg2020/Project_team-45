@@ -158,8 +158,9 @@ public class Buyer extends User implements CartHolder, Savable {
         result.put("listOfBuyLogs", (new Gson()).toJson(buyLogs));
 
         HashMap<String, String> products = new HashMap<>();
+        System.out.println(purchasedProducts);
         for (String productId : purchasedProducts.keySet()) {
-            products.put(productId, purchasedProducts.get(productId).getId());
+            products.put(productId, purchasedProducts.get(productId) == null ? "null" : purchasedProducts.get(productId).getId());
         }
         result.put("purchasedProducts", (new Gson()).toJson(products));
 

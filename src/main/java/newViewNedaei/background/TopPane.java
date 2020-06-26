@@ -36,6 +36,7 @@ public class TopPane {
 
     @FXML
     public void initialize() {
+        logout.setDisable(true);
         addMenuItems();
     }
 
@@ -82,6 +83,7 @@ public class TopPane {
     public void logItOut() {
         UserController.setLoggedIn(false);
         loginRegister.setDisable(false);
+        logout.setDisable(true);
         CartController.getInstance().resetCart();
         MenuController.getInstance().goToMenu(MainMenu.getFxmlFilePath());
     }

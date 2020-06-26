@@ -82,7 +82,7 @@ public class AddProductPanel extends Panel {
 //        fieldsAndValues.put("price", existingPrice.getText());
 //        fieldsAndValues.put("stock", existingStock.getText());
         Product product = ProductController.getInstance().getItemById(id.getText());
-        SellerController.getInstance().createAddProductRequest("existing", product, Integer.parseInt(newPrice.getText()), Integer.parseInt(newStock.getText()));
+        SellerController.getInstance().createAddProductRequest("existing", product, Integer.parseInt(existingPrice.getText()), Integer.parseInt(existingStock.getText()));
         existingError.setText("");
     }
 

@@ -154,9 +154,9 @@ public class ProductFilters {
         if (!sellerUsernameList.isEmpty() && !checkExistSellerForProduct(product)) {
             return false;
         }
-        if (minimumPrice != 0 && product.getMinimumPrice() < minimumSeen)
+        if (minimumPrice != 0 && product.getMinimumPrice() < minimumPrice)
             return false;
-        if (maximumPrice != 0 && product.getMinimumPrice() < maximumPrice)
+        if (maximumPrice != 0 && product.getMinimumPrice() > maximumPrice)
             return false;
         if (minimumAverageScore != 0 && product.getAverageScore() < minimumAverageScore)
             return false;

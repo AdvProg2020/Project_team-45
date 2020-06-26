@@ -61,6 +61,9 @@ public class MenuController {
             pane.setStyle("-fx-background-color: transparent");
             backgroundPane.getChildren().add(pane);
             currentPane = pane;
+            backgroundPane.getChildren().remove(topPane);
+            topPane = FXMLLoader.load(getClass().getResource(TopPane.getFxmlFilePath()));
+            backgroundPane.getChildren().add(topPane);
         } catch (IOException e) {
             e.printStackTrace();
         }

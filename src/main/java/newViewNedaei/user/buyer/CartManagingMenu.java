@@ -1,5 +1,6 @@
 package newViewNedaei.user.buyer;
 
+import controller.ProductController;
 import controller.userControllers.BuyerController;
 import controller.userControllers.UserController;
 import javafx.fxml.FXML;
@@ -12,14 +13,19 @@ import javafx.scene.layout.Pane;
 import model.product.Product;
 import model.product.ProductSellInfo;
 import model.user.Cart;
+import newViewBagheri.ProductMenu;
+import newViewHatami.LoginRegisterMenu;
 import newViewHatami.Validator;
 import newViewNedaei.MenuController;
 import newViewNedaei.user.buyer.purchase.ReceiveInfoPanel;
+
+import java.util.HashMap;
 
 public class CartManagingMenu {
     public Label price;
     public GridPane grid;
     private final Cart cart;
+//    private HashMap<>
 
     public CartManagingMenu() {
         cart = BuyerController.getInstance().getCart();
@@ -49,7 +55,7 @@ public class CartManagingMenu {
         nameAndAmount.setPrefWidth(180);
         nameAndAmount.setPrefHeight(50);
         nameAndAmount.setAlignment(Pos.CENTER);
-        nameAndAmount.setText(product.getName() + "(" + cart.getProductAmountById(product.getId()) + ")");
+        nameAndAmount.setText(product.getName() + "(" + cart.getProductAmountById(productSellInfo.getId()) + ")");
         nameAndAmount.setTranslateX(0);
         nameAndAmount.setTranslateY(0);
 
@@ -66,12 +72,9 @@ public class CartManagingMenu {
         increase.setPrefHeight(50);
         increase.setTranslateX(0);
         increase.setTranslateY(120);
+        ProductSellInfo productSellInfo1 = productSellInfo;
         increase.setOnMouseClicked(event -> {
-            if (cart.getProductAmountById(product.getId()) < productSellInfo.getStock()) {
-                BuyerController.getInstance().increaseCartProductById(product.getId());
-                nameAndAmount.setText(product.getName() + "(" + cart.getProductAmountById(product.getId()) + ")");
-                price.setText("" + cart.getTotalPrice());
-            }
+            increaseProduct(product, nameAndAmount, productSellInfo1);
         });
 
         Button decrease = new Button("-");
@@ -80,11 +83,7 @@ public class CartManagingMenu {
         decrease.setTranslateX(60);
         decrease.setTranslateY(120);
         decrease.setOnMouseClicked(event -> {
-            if (cart.getProductAmountById(product.getId()) > 1) {
-                BuyerController.getInstance().decreaseCartProductById(product.getId());
-                nameAndAmount.setText(product.getName() + "(" + cart.getProductAmountById(product.getId()) + ")");
-                price.setText("" + cart.getTotalPrice());
-            }
+            decreaseProduct(product, nameAndAmount, productSellInfo1);
         });
 
         Button view = new Button("View");
@@ -92,7 +91,8 @@ public class CartManagingMenu {
         view.setPrefHeight(50);
         view.setTranslateX(120);
         view.setTranslateY(120);
-//        view.setOnMouseClicked(event -> );
+        ProductController.getInstance().setActiveProduct(product);
+        view.setOnMouseClicked(event -> MenuController.getInstance().goToMenu(ProductMenu.getFxmlFilePath()));
 
         Pane pane = new Pane();
         pane.getChildren().add(nameAndAmount);
@@ -104,9 +104,27 @@ public class CartManagingMenu {
         return pane;
     }
 
+    private void decreaseProduct(Product product, Label nameAndAmount, ProductSellInfo productSellInfo1) {
+        if (cart.getProductAmountById(productSellInfo1.getId()) > 1) {
+            BuyerController.getInstance().decreaseCartProductById(productSellInfo1.getId());
+            nameAndAmount.setText(product.getName() + "(" + cart.getProductAmountById(productSellInfo1.getId()) + ")");
+            price.setText("" + cart.getTotalPrice());
+        } else {
+
+        }
+    }
+
+    private void increaseProduct(Product product, Label nameAndAmount, ProductSellInfo productSellInfo1) {
+        if (cart.getProductAmountById(productSellInfo1.getId()) < productSellInfo1.getStock()) {
+            BuyerController.getInstance().increaseCartProductById(productSellInfo1.getId());
+            nameAndAmount.setText(product.getName() + "(" + cart.getProductAmountById(productSellInfo1.getId()) + ")");
+            price.setText("" + cart.getTotalPrice());
+        }
+    }
+
     public void purchase() {
         if (!UserController.isLoggedIn()) {
-            // todo
+            MenuController.getInstance().goToMenu(LoginRegisterMenu.getFxmlFilePath());
         } else {
             MenuController.getInstance().goToPanel(ReceiveInfoPanel.getFxmlFilePath());
         }

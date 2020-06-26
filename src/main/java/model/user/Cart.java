@@ -34,7 +34,7 @@ public class Cart {
 
     public int getProductAmountById(String productId) {
         for (ProductInfo productInfo : products) {
-            if (productInfo.getProduct().getId().equals(productId)) {
+            if (productInfo.getProductSellInfo().getId().equals(productId)) {
                 return productInfo.getAmount();
             }
         }

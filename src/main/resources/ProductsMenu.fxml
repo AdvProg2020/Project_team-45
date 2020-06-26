@@ -39,8 +39,8 @@
                 </HBox>
             </top>
             <center>
-                <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                    <GridPane fx:id="productsListPain">
+                <ScrollPane prefHeight="500.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                    <GridPane fx:id="productsListPain" prefHeight="1750.0" prefWidth="780.0">
 
                     </GridPane>
                 </ScrollPane>
@@ -50,7 +50,7 @@
             </bottom>
         </BorderPane>
     </center>
-    <left >
+    <left>
         <ScrollPane prefHeight="600.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <content>
                 <VBox alignment="CENTER" prefHeight="595.0" prefWidth="185.0">
@@ -105,13 +105,11 @@
                             <Label text="Price:" GridPane.columnIndex="0" GridPane.columnSpan="2"
                                    GridPane.rowIndex="0"/>
                             <Label text="min:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-                            <ValidatorField fx:id="minPriceField" isNecessary="false" validation="naturalNumber"
-                                            onAction="#addMinPriceFilter" GridPane.columnIndex="1"
-                                            GridPane.rowIndex="1"/>
+                            <ValidatorField fx:id="minPriceField" validation="naturalNumber" isNecessary="false"
+                                            GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                             <Label text="max:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-                            <ValidatorField fx:id="maxPriceField" isNecessary="false" validation="naturalNumber"
-                                            onAction="#addMaxPriceFilter" GridPane.columnIndex="3"
-                                            GridPane.rowIndex="1"/>
+                            <ValidatorField fx:id="maxPriceField" validation="naturalNumber" isNecessary="false"
+                                            GridPane.columnIndex="3" GridPane.rowIndex="1"/>
                             <Button onAction="#submitPriceFilter" text="submit" GridPane.columnIndex="0"
                                     GridPane.columnSpan="2" GridPane.rowIndex="2" prefWidth="90"/>
                             <Button onAction="#clearPriceFilter" text="clear" GridPane.columnIndex="2"

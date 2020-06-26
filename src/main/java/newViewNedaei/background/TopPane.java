@@ -36,7 +36,13 @@ public class TopPane {
 
     @FXML
     public void initialize() {
-        logout.setDisable(true);
+        loginRegister.setDisable(false);
+        logout.setDisable(false);
+        if (UserController.isLoggedIn()) {
+            loginRegister.setDisable(true);
+        } else {
+            logout.setDisable(true);
+        }
         addMenuItems();
     }
 
@@ -90,7 +96,7 @@ public class TopPane {
 
 
 
-    private void addMenuItems() {
+    public void addMenuItems() {
         addCategoryMenuItems();
         addOffMenuItems();
     }
@@ -103,7 +109,7 @@ public class TopPane {
         }
     }
 
-    private void addOffMenuItems() {
+    public void addOffMenuItems() {
         for (String mainCategory : categoryController.getDiscountedMainCategories()) {
             MenuItem menuItem = new MenuItem(mainCategory);
             menuItem.setOnAction(e -> goToDiscountedCategory(mainCategory));

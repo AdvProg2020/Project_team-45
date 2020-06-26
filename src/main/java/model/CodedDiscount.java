@@ -100,6 +100,7 @@ public class CodedDiscount extends IdRecognized implements Savable {
 
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
+        code = (new Gson()).fromJson(theMap.get("code"), String.class);
         startDate = (new Gson()).fromJson(theMap.get("startDate"), Date.class);
         endDate = (new Gson()).fromJson(theMap.get("endDate"), Date.class);
         percentage = Integer.parseInt(theMap.get("percentage"));

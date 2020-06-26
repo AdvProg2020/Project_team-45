@@ -3,6 +3,7 @@ package controller.userControllers;
 import controller.InputValidator;
 import model.Market;
 import model.user.AnonymousUser;
+import model.user.Buyer;
 import model.user.PersonalInfo;
 import model.user.User;
 
@@ -119,6 +120,9 @@ public class UserController {
     public boolean login(String password) {
         if (activeUser.checkPassword(password)) {
             loggedIn = true;
+            if (activeUser.getRole().equals("buyer")) {
+                ((Buyer) activeUser).setCart(anonymousUser.getCart());
+            }
             anonymousUser = new AnonymousUser();
             return true;
         }
@@ -130,6 +134,9 @@ public class UserController {
         if (loggingInUser.checkPassword(password)) {
             loggedIn = true;
             activeUser = loggingInUser;
+            if (activeUser.getRole().equals("buyer")) {
+                ((Buyer) activeUser).setCart(anonymousUser.getCart());
+            }
             anonymousUser = new AnonymousUser();
             return true;
         }

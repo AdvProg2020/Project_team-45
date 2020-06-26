@@ -1,5 +1,8 @@
 package model.log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.sun.deploy.security.WSeedGenerator;
 import controller.userControllers.BuyerController;
 import model.*;
 import model.product.ProductSellInfo;
@@ -114,21 +117,23 @@ public class Log extends IdRecognized implements Savable {
     @Override
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> result = new HashMap<>();
-//        result.put("id", id);
-//        result.put("date", date);
-//        result.put("buyerUsername", buyerUsername);
-//        result.put("finalPrice", finalPrice);
-//        result.put("buyerFee", buyerFee);
-//        result.put("appliedDiscount", appliedDiscount.getId());
-//        result.put("address", address);
-//        result.put("phoneNumber", phoneNumber);
-//        result.put("deliveryStatus", deliveryStatus);
-//
-//        ArrayList<String> sellInfos = new ArrayList<>();
-//        for (ProductSellInfo sellingProduct : sellingProducts) {
-//            sellInfos.add(sellingProduct.getId());
-//        }
-//        result.put("sellingProducts", sellInfos);
+        result.put("id", id);
+        result.put("date", (new Gson()).toJson(date));
+        result.put("buyerUsername", buyerUsername);
+        result.put("finalPrice", "" + finalPrice);
+        result.put("buyerFee", "" + buyerFee);
+        if (appliedDiscount != null) {
+            result.put("appliedDiscount", appliedDiscount.getId());
+        }
+        result.put("address", address);
+        result.put("phoneNumber", phoneNumber);
+        result.put("deliveryStatus", deliveryStatus);
+
+        ArrayList<String> sellInfos = new ArrayList<>();
+        for (ProductSellInfo sellingProduct : sellingProducts) {
+            sellInfos.add(sellingProduct.getId());
+        }
+        result.put("sellingProducts", (new Gson()).toJson(sellInfos));
         return result;
     }
 
@@ -136,20 +141,22 @@ public class Log extends IdRecognized implements Savable {
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         id = theMap.get("id");
-//        date = (Date) theMap.get("date");
+        date = (new Gson()).fromJson(theMap.get("date"), Date.class);
         buyerUsername = theMap.get("buyerUsername");
         finalPrice = Integer.parseInt(theMap.get("finalPrice"));
         buyerFee = Integer.parseInt(theMap.get("buyerFee"));
-        appliedDiscount = Market.getInstance().getCodedDiscountByCode(theMap.get("appliedDiscount"));
+        if (theMap.containsKey("appliedDiscount")) {
+            appliedDiscount = Market.getInstance().getCodedDiscountByCode(theMap.get("appliedDiscount"));
+        }
         address = theMap.get("address");
         phoneNumber = theMap.get("phoneNumber");
         deliveryStatus = theMap.get("deliveryStatus");
 
-//        ArrayList<String> sellInfoIds = (ArrayList<String>) theMap.get("sellingProducts");
-//        sellingProducts = new ArrayList<>();
-//        for (String sellInfoId : sellInfoIds) {
-//            sellingProducts.add(Market.getInstance().getProductSellInfoById(sellInfoId));
-//        }
+        ArrayList<String> sellInfos = (new Gson()).fromJson(theMap.get("sellingProducts"), new TypeToken<ArrayList<String>>(){}.getType());
+        sellingProducts = new ArrayList<>();
+        for (String sellInfo : sellInfos) {
+            sellingProducts.add(Market.getInstance().getProductSellInfoById(sellInfo));
+        }
     }
 
 //    enum DeliveryStatus{

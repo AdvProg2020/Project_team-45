@@ -20,6 +20,7 @@ public class PaymentPanel extends Panel {
             message.setText("do not have enough balance!");
             return;
         }
+        message.setStyle("-fx-background-color: white");
         message.setTextFill(Color.GREEN);
         message.setText("purchased successfully!");
         BuyerController.getInstance().purchase();

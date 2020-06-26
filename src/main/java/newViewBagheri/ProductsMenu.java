@@ -9,10 +9,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import newViewHatami.ValidatorField;
 import newViewNedaei.MenuController;
 
@@ -46,14 +44,11 @@ public class ProductsMenu implements Initializable {
         filteringController.clearFilters();
         addCompaniesNameList();
         addSellersNameList();
-
         if (!categoryController.isActiveCategoryFinal()) {
             addSubcategoriesName();
             specialFeaturesListVBox.setVisible(false);
-            //TODO
         } else {
             subcategoriesList.setVisible(false);
-            //TODO
             addSpecialFeaturesList();
         }
         showProducts();
@@ -69,20 +64,10 @@ public class ProductsMenu implements Initializable {
 
     private void addCompaniesNameList() {
         addCheckBoxListToVBox(categoryController.getActiveCategoryCompanies(), companiesNameList, "companyName");
-//        for (String companyName : categoryController.getActiveCategoryCompanies()) {
-//            CheckBox checkBox = new CheckBox(companyName);
-//            checkBox.setOnAction(e -> changeFilter("companyName", checkBox));
-//            companiesNameList.getChildren().add(checkBox);
-//        }
     }
 
     private void addSellersNameList() {
         addCheckBoxListToVBox(categoryController.getActiveCategorySellers(), sellersUsernameList, "sellerUsername");
-//        for (String sellerUsername : categoryController.getActiveCategorySellers()) {
-//            CheckBox checkBox = new CheckBox(sellerUsername);
-//            checkBox.setOnAction(e -> changeFilter("sellerUsername", checkBox));
-//            sellersUsernameList.getChildren().add(checkBox);
-//        }
     }
 
     private void addSpecialFeaturesList() {
@@ -93,11 +78,6 @@ public class ProductsMenu implements Initializable {
             ScrollPane valuesScrollPane = new ScrollPane();
             VBox valuesVBox = new VBox();
             addCheckBoxListToVBox(specialFeature.getValue(), valuesVBox, specialFeature.getKey());
-//            for (String value : specialFeature.getValue()) {
-//                CheckBox valueCheckBox = new CheckBox(value);
-//                valueCheckBox.setOnAction(e -> changeFilter(specialFeature.getKey(), valueCheckBox));
-//                valuesVBox.getChildren().add(valueCheckBox);
-//            }
             valuesScrollPane.setContent(valuesVBox);
             featureVBox.getChildren().add(valuesScrollPane);
         }
@@ -142,33 +122,40 @@ public class ProductsMenu implements Initializable {
         if (availableCheckBox.isSelected())
             filteringController.addFilter("available", "");
         else
-            filteringController.removeFilter("available", "");
+            filteringController.removeFilter("available");
+        showProducts();
     }
 
     public void submitPriceFilter() {
         addMinPriceFilter();
         addMaxPriceFilter();
-    }
-
-    public void clearPriceFilter() {
-        minPriceField.clear();
-        maxPriceField.clear();
+        showProducts();
     }
 
     public void addMinPriceFilter() {
         if (minPriceField.validate()) {
-            filteringController.addFilter("minimumPrice", "" + minPriceField.getText());
-        } else {
-            minPriceField.clear();
+            String minPrice = minPriceField.getText();
+            if (!minPrice.isEmpty())
+                filteringController.addFilter("minimumPrice", "" + minPriceField.getText());
         }
     }
 
     public void addMaxPriceFilter() {
-        if (minPriceField.validate()) {
-            filteringController.addFilter("maximumPrice", "" + maxPriceField.getText());
-        } else {
-            maxPriceField.clear();
+        if (maxPriceField.validate()) {
+            String maxPrice = maxPriceField.getText();
+            if (!maxPrice.isEmpty())
+                filteringController.addFilter("maximumPrice", "" + maxPrice);
         }
+    }
+
+    public void clearPriceFilter() {
+        minPriceField.clear();
+        minPriceField.setStyle("-fx-text-box-border: #039ed3;");
+        maxPriceField.clear();
+        maxPriceField.setStyle("-fx-text-box-border: #039ed3;");
+        filteringController.removeFilter("minimumPrice");
+        filteringController.removeFilter("maximumPrice");
+        showProducts();
     }
 
 //    private void clearFilter(String type, VBox inputVBox) {
@@ -210,6 +197,11 @@ public class ProductsMenu implements Initializable {
 
     private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
         VBox productInfoVBox = new VBox();
+        productInfoVBox.setBorder(new Border(new BorderStroke(Color.BROWN,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        int sizePrefWidth = 195;
+        productInfoVBox.setPrefWidth(sizePrefWidth);
+        productInfoVBox.setPrefHeight(350.0);
         ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
         productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         productImageView.setPreserveRatio(true);
@@ -217,25 +209,32 @@ public class ProductsMenu implements Initializable {
         productImageView.setFitHeight(250.0);
         BorderPane imagePane = new BorderPane(productImageView);
         BorderPane.setAlignment(productImageView, Pos.CENTER);
-        imagePane.setPrefWidth(195.0);
+        imagePane.setPrefWidth(sizePrefWidth);
         imagePane.setPrefHeight(250.0);
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
+        int labelSize = 30;
         Label productName = new Label(productInfo.get("name"));
         productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
-        productName.setPrefHeight(30.0);
+        setLabelStyle(productName, sizePrefWidth, labelSize);
         Label productScore = new Label("score: " + productInfo.get("averageScore") + " out 0f 5");
-        productScore.setPrefHeight(30.0);
+        setLabelStyle(productScore, sizePrefWidth, labelSize);
         String productPrice = productInfo.get("price");
-        Label productPriceLabel = new Label(productPrice);
-        productPriceLabel.setPrefHeight(30.0);
+        Label productPriceLabel = new Label();
+        setLabelStyle(productPriceLabel, sizePrefWidth, labelSize);
         if (productPrice.equals("unavailable")) {
-            // TODO : change color
+            productPriceLabel.setText(productPrice);
         } else {
-            // TODO : add unit
+            productPriceLabel.setText("price: " + productPrice);
         }
         productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPriceLabel);
         return productInfoVBox;
+    }
+
+    private void setLabelStyle(Label label, int prefWidth, int prefHeight) {
+        label.setPrefWidth(prefWidth);
+        label.setPrefHeight(prefHeight);
+        label.setAlignment(Pos.CENTER);
     }
 
     private void goToProduct(String productId) {

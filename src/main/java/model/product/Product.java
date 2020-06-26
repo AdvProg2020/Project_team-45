@@ -133,9 +133,6 @@ public class Product extends IdRecognized implements Savable {
         return seen;
     }
 
-    public String getImageAddress() {
-        return imageAddress;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -390,5 +387,9 @@ public class Product extends IdRecognized implements Savable {
         productOffInfos.add(OffInfo);
         // TODO: end loop
         return productOffInfos;
+    }
+
+    public String getImageAddress() {
+        return imageAddress;
     }
 }

@@ -1,6 +1,7 @@
 import controller.DatabaseController;
 import controller.userControllers.UserController;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.Market;
@@ -16,6 +17,11 @@ public class Main extends Application {
         primaryStage.setTitle("my market");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        DatabaseController.getInstance().writeToDatabase();
     }
 
     public static void main(String[] args) {

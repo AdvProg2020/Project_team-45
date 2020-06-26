@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.product.ProductSellInfo;
@@ -31,20 +33,34 @@ public class ProductsManagingMenu {
     }
 
     private Pane createProductDisplay(ProductSellInfo productSellInfo) {
+
+        Image image = null;
+        try {
+            image = new Image(convertPhotoPath(productSellInfo.getProduct().getImageAddress()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(productSellInfo.getProduct().getImageAddress());
+        }
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(50);
+        imageView.setFitWidth(50);
+        imageView.setTranslateX(65);
+        imageView.setTranslateY(0);
+
         Label name = new Label();
-        name.setPrefWidth(180);
+        name.setPrefWidth(90);
         name.setPrefHeight(50);
         name.setAlignment(Pos.CENTER);
         name.setText(productSellInfo.getProduct().getName());
         name.setTranslateX(0);
-        name.setTranslateY(0);
+        name.setTranslateY(60);
 
         Label id = new Label();
-        id.setPrefWidth(180);
+        id.setPrefWidth(90);
         id.setPrefHeight(50);
         id.setAlignment(Pos.CENTER);
         id.setText("id: " + productSellInfo.getProduct().getId());
-        id.setTranslateX(0);
+        id.setTranslateX(90);
         id.setTranslateY(60);
 
         Button view = new Button("View");
@@ -65,11 +81,16 @@ public class ProductsManagingMenu {
         });
 
         Pane pane = new Pane();
+        pane.getChildren().add(imageView);
         pane.getChildren().add(name);
         pane.getChildren().add(id);
         pane.getChildren().add(view);
         pane.getChildren().add(edit);
 
         return pane;
+    }
+
+    private String convertPhotoPath(String path) {
+        return "/photos/" + path.substring(path.lastIndexOf("\\")+1);
     }
 }

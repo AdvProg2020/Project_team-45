@@ -40,9 +40,7 @@
             </top>
             <center>
                 <ScrollPane prefHeight="500.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-                    <GridPane fx:id="productsListPain" prefHeight="1750.0" prefWidth="780.0">
-
-                    </GridPane>
+                    <GridPane fx:id="productsListPain" prefWidth="780.0"/>
                 </ScrollPane>
             </center>
             <bottom>
@@ -55,6 +53,9 @@
             <content>
                 <VBox alignment="CENTER" prefHeight="595.0" prefWidth="185.0">
                     <children>
+                        <VBox>
+                            <Label fx:id="activeCategoryNameLabel"/>
+                        </VBox>
                         <VBox fx:id="subcategoriesList" prefWidth="200.0">
                             <children>
                                 <Label maxHeight="100.0" text="Subcategories:"/>

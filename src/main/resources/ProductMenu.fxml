@@ -147,7 +147,7 @@
                         <Tab text="Similar Products">
                             <content>
                                 <ScrollPane prefHeight="200.0" prefWidth="200.0">
-
+                                    <GridPane fx:id="SimilarProductsListPain"/>
                                 </ScrollPane>
                             </content>
                         </Tab>

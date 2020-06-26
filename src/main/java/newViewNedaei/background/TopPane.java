@@ -126,7 +126,7 @@ public class TopPane {
     private void goToDiscountedCategory(String mainCategory) {
         categoryController.setActiveCategoryByName(mainCategory);
         categoryController.changeIsOffMenuToTrue();
-        menuController.goToMenu(OffMenu.getFxmlFilePath());
+        MenuController.getInstance().goToMenu(OffMenu.getFxmlFilePath());
     }
 
     public Button getLoginRegister() {

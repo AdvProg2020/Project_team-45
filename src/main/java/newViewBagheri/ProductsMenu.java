@@ -23,6 +23,7 @@ public class ProductsMenu implements Initializable {
     private final SortingController sortingController = SortingController.getInstance();
     private final ProductController productController = ProductController.getInstance();
     private final MenuController menuController = MenuController.getInstance();
+    public Label activeCategoryNameLabel;
     public VBox subcategoriesList;
     public TextField productNameField;
     public VBox companiesNameList;
@@ -42,6 +43,7 @@ public class ProductsMenu implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         filteringController.clearFilters();
+        addActiveCategoryName();
         addCompaniesNameList();
         addSellersNameList();
         if (!categoryController.isActiveCategoryFinal()) {
@@ -52,6 +54,10 @@ public class ProductsMenu implements Initializable {
             addSpecialFeaturesList();
         }
         showProducts();
+    }
+
+    private void addActiveCategoryName() {
+        activeCategoryNameLabel.setText("Active Category: " + categoryController.getActiveCategoryName());
     }
 
     private void addSubcategoriesName() {

@@ -100,8 +100,9 @@ public class CategoryController implements Editor, Creator {
         String categoryInfo;
         for (Category category : allCategories) {
             if (category.isMain())
-                 categoryInfo = category.getName() + "," + "IS MAIN" + "," + category.isFinal() + "\n";
-            else categoryInfo = category.getName() + "," + category.getParent().getName() + "," + category.isFinal() + "\n";
+                categoryInfo = category.getName() + "," + "IS MAIN" + "," + category.isFinal() + "\n";
+            else
+                categoryInfo = category.getName() + "," + category.getParent().getName() + "," + category.isFinal() + "\n";
             listString.append(categoryInfo);
         }
         return listString.toString();
@@ -271,13 +272,13 @@ public class CategoryController implements Editor, Creator {
 
     public List<ParentCategory> getParentCategories() {
         List<Category> allCategories = Market.getInstance().getAllCategories();
-        return  allCategories.stream().filter(category -> !category.isFinal()).map(category -> (ParentCategory) category).collect(Collectors.toList());
+        return allCategories.stream().filter(category -> !category.isFinal()).map(category -> (ParentCategory) category).collect(Collectors.toList());
 
     }
 
     public List<FinalCategory> getFinalCategories() {
         List<Category> allCategories = Market.getInstance().getAllCategories();
-        return  allCategories.stream().filter(Category::isFinal).map(category -> (FinalCategory) category).collect(Collectors.toList());
+        return allCategories.stream().filter(Category::isFinal).map(category -> (FinalCategory) category).collect(Collectors.toList());
     }
 
     public void addFeatureToCategory(String editingCategoryId, String newFeature) {
@@ -325,14 +326,15 @@ public class CategoryController implements Editor, Creator {
         Set<String> sellersName = new HashSet<>();
         for (Product product : activeCategory.getInOffProductsList()) {
             for (ProductSellInfo productSellInfo : product.getSellInfosList()) {
-                sellersName.add(productSellInfo.getSeller().getUsername());
+                if (productSellInfo.isInOff())
+                    sellersName.add(productSellInfo.getSeller().getUsername());
             }
         }
         return sellersName;
     }
 
     public boolean isActiveCategoryFinal() {
-         return activeCategory.isFinal();
+        return activeCategory.isFinal();
     }
 
     public LinkedHashMap<String, Set<String>> getActiveCategoryFeaturesAndValues() {
@@ -411,6 +413,8 @@ public class CategoryController implements Editor, Creator {
         return getItemById(categoryName).getId();
     }
 
-
+    public String getActiveCategoryName() {
+        return activeCategory.getName();
+    }
     //bagheri
 }

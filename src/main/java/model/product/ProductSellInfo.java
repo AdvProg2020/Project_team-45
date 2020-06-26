@@ -85,7 +85,9 @@ public class ProductSellInfo extends IdRecognized implements Savable {
     }
 
     public boolean isInOff() {
-        return off != null;
+        return off != null
+                && (off.getStartTime().compareTo(new Date()) <= 0)
+                && (off.getEndTime().compareTo(new Date()) >= 0);
     }
 
     public Product getProduct() {
@@ -140,7 +142,8 @@ public class ProductSellInfo extends IdRecognized implements Savable {
         if (theMap.containsKey("off")) {
             off = market.getOffById(theMap.get("off"));
         }
-        HashMap<String, Integer> buyersId = (new Gson()).fromJson(theMap.get("allBuyers"), new TypeToken<HashMap<String, Integer>>(){}.getType());
+        HashMap<String, Integer> buyersId = (new Gson()).fromJson(theMap.get("allBuyers"), new TypeToken<HashMap<String, Integer>>() {
+        }.getType());
         for (Map.Entry<String, Integer> buyerId : buyersId.entrySet()) {
             allBuyers.put((Buyer) market.getUserById(buyerId.getKey()), buyerId.getValue());
         }

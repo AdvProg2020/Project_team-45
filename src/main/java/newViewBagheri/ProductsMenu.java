@@ -188,6 +188,7 @@ public class ProductsMenu implements Initializable {
     private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
         VBox productInfoVBox = new VBox();
         ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
+
         productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image

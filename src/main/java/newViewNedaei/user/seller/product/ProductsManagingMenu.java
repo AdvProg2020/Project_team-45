@@ -36,7 +36,7 @@ public class ProductsManagingMenu {
 
         Image image = null;
         try {
-            image = new Image(productSellInfo.getProduct().getLocalImageAddress());
+            image = new Image(productSellInfo.getProduct().getImageAddress());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(productSellInfo.getProduct().getImageAddress());

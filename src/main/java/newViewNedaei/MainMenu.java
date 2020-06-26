@@ -1,15 +1,7 @@
 package newViewNedaei;
 
-import controller.userControllers.UserController;
-import javafx.event.ActionEvent;
-import newViewBagheri.ProductsMenu;
-import newViewHatami.AdminMenu;
-import newViewHatami.LoginRegisterMenu;
-import newViewNedaei.user.buyer.BuyerMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import newViewNedaei.user.seller.SellerMenu;
 
 public class MainMenu{
 

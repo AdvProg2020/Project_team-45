@@ -92,7 +92,6 @@ public class BuyerController extends UserController implements Creator {
     public void applyDiscountCode(String discountCode) {
         CodedDiscount discount = ((Buyer) UserController.getActiveUser()).getDiscountByCode(discountCode);
         log.setAppliedDiscount(discount);
-        //System.out.println("******************************" + log.getFinalPrice());
         ((Buyer) UserController.getActiveUser()).removeCodedDiscountFromList(discount);
     }
 
@@ -205,5 +204,9 @@ public class BuyerController extends UserController implements Creator {
     public Cart getCart() {
         updateBuyer();
         return buyer.getCart();
+    }
+
+    public Log getLog() {
+        return log;
     }
 }

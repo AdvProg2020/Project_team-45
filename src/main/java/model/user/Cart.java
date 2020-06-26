@@ -80,8 +80,8 @@ public class Cart {
         //System.out.println("^^^^^^^^^^^^^^^^^^^^^^^^" + products.size());
     }
 
-    public void removeProduct(Product product, ProductSellInfo productSellInfo) {
-
+    public void removeProduct(ProductSellInfo productSellInfo) {
+        products.removeIf(productInfo -> productInfo.getProductSellInfo().getId().equals(productSellInfo.getId()));
     }
 
     public void changeProductByProductIdAndSellerUsername(String productId, String sellerUsername, int amountChange) {

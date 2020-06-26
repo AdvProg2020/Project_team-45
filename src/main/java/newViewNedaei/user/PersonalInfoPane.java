@@ -4,14 +4,19 @@ import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import model.user.PersonalInfo;
 import newViewHatami.Validator;
 import newViewHatami.ValidatorField;
 
+import java.io.File;
+
 public class PersonalInfoPane {
     public Label role;
+    public ImageView view;
     @FXML
     private Label error;
     @FXML
@@ -46,6 +51,16 @@ public class PersonalInfoPane {
         emailAddress.setPromptText(personalInfo.getEmailAddress());
         phoneNumber.setPromptText(personalInfo.getPhoneNumber());
         password.setPromptText(personalInfo.getPassword());
+
+        Image image = null;
+        try {
+            image = new Image("/photos/poker.png");
+            String imageAddress = UserController.getActiveUser().getPersonalInfo().getAvatarPath();
+            image = new Image("/photos/" + imageAddress.substring(imageAddress.lastIndexOf("\\")+1));
+        } catch (Exception ignored) {
+
+        }
+        view.setImage(image);
     }
 
     public void editFirstName() {

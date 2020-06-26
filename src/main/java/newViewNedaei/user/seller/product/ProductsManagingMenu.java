@@ -36,13 +36,9 @@ public class ProductsManagingMenu {
 
         Image image = null;
         try {
-            String path = productSellInfo.getProduct().getImageAddress();
             image = new Image(productSellInfo.getProduct().getImageAddress());
-//            image = new Image();
+        } catch (Exception ignored) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(productSellInfo.getProduct().getImageAddress());
         }
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(50);

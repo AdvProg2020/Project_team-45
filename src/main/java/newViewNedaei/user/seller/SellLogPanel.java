@@ -36,8 +36,4 @@ public class SellLogPanel extends Panel {
         product.setText(sellLog.getSoldProducts().get(0).getId());
     }
 
-    @Override
-    public void goBack() {
-        MenuController.getInstance().goToPanel(SalesHistoryPanel.getFxmlFilePath());
-    }
 }

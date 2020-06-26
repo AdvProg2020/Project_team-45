@@ -2,6 +2,7 @@ package newViewNedaei;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 import java.io.File;
 
@@ -10,7 +11,12 @@ public class SoundPlayer {
     private static MediaPlayer mediaPlayer;
 
     private SoundPlayer() {
-
+        Media media = new Media(new File("src/main/java/sounds/1.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.seek(Duration.ZERO);
+        });
+        mediaPlayer.play();
     }
 
     public static SoundPlayer getInstance() {
@@ -18,8 +24,21 @@ public class SoundPlayer {
     }
 
     public static void playClickEffect() {
-        Media media = new Media(new File("src/main/java/sounds/click.mp3").toURI().toString());
+        (new Thread(() -> {
+            MediaPlayer temp;
+            Media media = new Media(new File("src/main/java/sounds/click.mp3").toURI().toString());
+            temp = new MediaPlayer(media);
+            temp.play();
+        })).start();
+    }
+
+    public static void playBackground(int n) {
+        Media media = new Media(new File("src/main/java/sounds/" + n + ".mp3").toURI().toString());
+        mediaPlayer.stop();
         mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.seek(Duration.ZERO);
+        });
         mediaPlayer.play();
     }
 }

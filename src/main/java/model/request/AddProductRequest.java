@@ -36,15 +36,15 @@ public class AddProductRequest extends Request {
 
     @Override
     public void apply() {
+        product = productSellInfo.getProduct();
+        seller = productSellInfo.getSeller();
         if (mode.equalsIgnoreCase("new")) {
-            product = productSellInfo.getProduct();
-            seller = productSellInfo.getSeller();
             product.setCompany(productSellInfo.getSeller().getCompany());
             product.setDefaultSellInfo(productSellInfo);
-            Market.getInstance().addSellInfoToList(productSellInfo);
             product.getCategory().addProduct(product);
             Market.getInstance().getAllProducts().add(product);
         }
+        Market.getInstance().addSellInfoToList(productSellInfo);
         product.addSeller(productSellInfo);
         productSellInfo.getSeller().getAvailableProducts().put(product, productSellInfo);
     }
@@ -77,9 +77,4 @@ public class AddProductRequest extends Request {
         productSellInfo = Market.getInstance().getProductSellInfoById(theMap.get("productSellInfo"));
     }
 
-    @Override
-    public void accept() {
-        super.accept();
-        System.out.println(productSellInfo.getProduct().getSellersList());
-    }
 }

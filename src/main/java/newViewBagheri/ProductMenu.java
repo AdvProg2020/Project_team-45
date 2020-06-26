@@ -54,8 +54,8 @@ public class ProductMenu implements Initializable {
     private void addProductInformation() {
         HashMap<String, String> productInformation = productController.getProductDigestInformation();
         productNameLabel.setText(productInformation.get("name"));
-        brandNameLabel.setText("brand:" + productInformation.get("companyName"));
-        categoryNameLabel.setText("category:" + productInformation.get("category"));
+        brandNameLabel.setText("brand: " + productInformation.get("companyName"));
+        categoryNameLabel.setText("category: " + productInformation.get("category"));
         descriptionText.setText(productInformation.get("description"));
         scoreLabel.setText(productInformation.get("averageScore"));
     }
@@ -67,12 +67,12 @@ public class ProductMenu implements Initializable {
     private void addDefaultSellerInfo() {
         HashMap<String, String> defaultSellerInfo = productController.getActiveSellInfo();
         sellerNameLabel.setText("seller: " + defaultSellerInfo.get("sellerUsername"));
-        originalPriceLabel.setText(defaultSellerInfo.get("originalPrice"));
+        originalPriceLabel.setText("price: " + defaultSellerInfo.get("originalPrice"));
         if (!defaultSellerInfo.get("discountPercent").equals("0")) {
 //            originalPriceLabel.;
-            discountPercent.setText(defaultSellerInfo.get("discountPercent") + "%");
+            discountPercent.setText("discountPercent: " + defaultSellerInfo.get("discountPercent") + "%");
             discountPercent.setVisible(true);
-            finalPriceLabel.setText(defaultSellerInfo.get("finalPrice"));
+            finalPriceLabel.setText("finalPrice: " + defaultSellerInfo.get("finalPrice"));
             finalPriceLabel.setVisible(true);
         }
     }

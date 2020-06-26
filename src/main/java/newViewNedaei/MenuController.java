@@ -65,8 +65,7 @@ public class MenuController {
     public void goToPanel(String fxmlFilePath) {
         try {
             Pane panel = FXMLLoader.load(getClass().getResource(fxmlFilePath));
-            System.out.println((1000 - panel.getPrefWidth())/2);
-            panel.setTranslateX((1000 - panel.getPrefHeight())/2);
+            panel.setTranslateX((1000 - panel.getPrefWidth())/2);
             panel.setTranslateY(55 + (600 - panel.getPrefHeight())/2);
             panel.setStyle("-fx-background-color: royalblue");
             topPane.setDisable(true);
@@ -151,5 +150,9 @@ public class MenuController {
             e.printStackTrace();
         }
         return dest.getPath();
+    }
+
+    public Pane getTopPane() {
+        return topPane;
     }
 }

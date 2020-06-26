@@ -17,6 +17,7 @@ public class SoundPlayer {
             mediaPlayer.seek(Duration.ZERO);
         });
         mediaPlayer.play();
+
     }
 
     public static SoundPlayer getInstance() {

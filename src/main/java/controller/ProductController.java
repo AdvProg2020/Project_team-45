@@ -204,5 +204,9 @@ public class ProductController implements Deleter {
     public void addActiveProductToCart(String productSellInfoId) {
         CartController.getInstance().addProductToCart(activeProduct, market.getProductSellInfoById(productSellInfoId));
     }
+
+    public LinkedHashMap<String, String> getActiveProductFeatures() {
+        return activeProduct.getCategoryFeatures();
+    }
     //bahgeri
 }

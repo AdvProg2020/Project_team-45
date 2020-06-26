@@ -24,6 +24,10 @@ public class ProductMenu implements Initializable {
     public GridPane featuresListPain;
     public VBox commentsList;
 
+    public static String getFxmlFilePath() {
+        return "/ProductMenu.fxml";
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         addProductInformation();
@@ -66,7 +70,7 @@ public class ProductMenu implements Initializable {
     }
 
     private void addFeaturesList() {
-        LinkedHashMap<String, String> productAttributes = productController.getProductAttributes();
+        LinkedHashMap<String, String> productAttributes = productController.getActiveProductFeatures();
         int i = 0;
         for (Map.Entry<String, String> attribute : productAttributes.entrySet()) {
             if (attribute.getValue() != null) {

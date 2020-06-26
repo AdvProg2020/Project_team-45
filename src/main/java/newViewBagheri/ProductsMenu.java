@@ -2,6 +2,7 @@ package newViewBagheri;
 
 import controller.CategoryController;
 import controller.FilteringController;
+import controller.ProductController;
 import controller.SortingController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -10,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import newViewNedaei.MenuController;
 
 import java.net.URL;
 import java.util.*;
@@ -18,6 +20,8 @@ public class ProductsMenu implements Initializable {
     private final CategoryController categoryController = CategoryController.getInstance();
     private final FilteringController filteringController = FilteringController.getInstance();
     private final SortingController sortingController = SortingController.getInstance();
+    private final ProductController productController = ProductController.getInstance();
+    private final MenuController menuController = MenuController.getInstance();
     public VBox subcategoriesList;
     public TextField productNameField;
     public VBox companiesNameList;
@@ -94,7 +98,9 @@ public class ProductsMenu implements Initializable {
     }
 
     private void goToCategory(String categoryName) {
-        //TODO
+        categoryController.setActiveCategoryByName(categoryName);
+        categoryController.changeIsOffMenuToFalse();
+        menuController.goToMenu(ProductsMenu.getFxmlFilePath());
     }
 
     private void addCheckBoxListToVBox(Set<String> checkBoxTextList, VBox inputVBox, String type) {
@@ -173,8 +179,8 @@ public class ProductsMenu implements Initializable {
 
     private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
         VBox productInfoVBox = new VBox();
-        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
-        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+//        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
+//        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
         Label productName = new Label(productInfo.get("name"));
@@ -193,6 +199,7 @@ public class ProductsMenu implements Initializable {
     }
 
     private void goToProduct(String productId) {
-        //TODO
+        productController.setActiveProductBYProductIdForCategory(productId);
+        menuController.goToMenu(ProductMenu.getFxmlFilePath());
     }
 }

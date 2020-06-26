@@ -108,7 +108,6 @@ public class TopPane {
     }
 
     private void goToCategory(String mainCategory) {
-        System.out.println(mainCategory);
         categoryController.setActiveCategoryByName(mainCategory);
         categoryController.changeIsOffMenuToFalse();
         MenuController.getInstance().goToMenu(ProductsMenu.getFxmlFilePath());

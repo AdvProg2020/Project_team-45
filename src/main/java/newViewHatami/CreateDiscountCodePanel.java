@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import model.user.Buyer;
 import newViewNedaei.Panel;
 
@@ -60,6 +61,8 @@ public class CreateDiscountCodePanel extends Panel {
         discountFeatures.put("start date", startDateField.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         discountFeatures.put("end date", endDateField.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         CodedDiscountController.getInstance().createItem(discountFeatures);
+        errorLabel.setText("discount created!");
+        errorLabel.setTextFill(Color.LIGHTGREEN);
         clearAll();
     }
 
@@ -72,6 +75,7 @@ public class CreateDiscountCodePanel extends Panel {
     }
 
     private boolean checkFields() {
+        errorLabel.setTextFill(Color.RED);
         if (!codeField.validate()) {
             errorLabel.setText("invalid code");
         } else if (!percentageField.validate()) {

@@ -132,4 +132,8 @@ public class AllUsersController implements Deleter {
     public User getItemById(String Id) {
         return market.getUserByUsername(Id);
     }
+
+    public String getUsernameById(String userId) {
+        return market.getUserById(userId).getUsername();
+    }
 }

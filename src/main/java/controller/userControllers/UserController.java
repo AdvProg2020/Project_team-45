@@ -163,4 +163,8 @@ public class UserController {
     public static void setLoggedIn(boolean loggedIn) {
         UserController.loggedIn = loggedIn;
     }
+
+    public boolean onlyHasAdmin() {
+        return Market.getInstance().getAllUsers().size() == 1;
+    }
 }

@@ -4,6 +4,7 @@ import consuleview.RegisterPanel;
 import controller.InputValidator;
 import controller.managers.Creator;
 import model.CodedDiscount;
+import model.Market;
 import model.log.BuyLog;
 import model.log.Log;
 import model.product.Product;
@@ -102,6 +103,7 @@ public class BuyerController extends UserController implements Creator {
 
     public void purchase() {
         ((Buyer) UserController.getActiveUser()).purchase(log);
+        Market.getInstance().getAllLogs().add(log);
     }
 
     // orders managing menu

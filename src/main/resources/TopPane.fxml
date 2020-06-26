@@ -14,7 +14,7 @@
       <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#goBack" prefWidth="100.0" text="Back" />
       <Button fx:id="loginRegister" layoutX="886.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToLoginRegister" onMouseClicked="#click" prefWidth="100.0" text="Login/Register" />
       <Button fx:id="mainMenu" layoutX="243.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToMainMenu" onMouseClicked="#click" prefWidth="100.0" text="Main Menu" />
-      <Button fx:id="userPage" layoutX="343.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToUserPage" onMouseClicked="#click" prefWidth="100.0" text="User Page" />
+      <Button fx:id="userPage" layoutX="343.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToUserPage" onMouseClicked="#click" prefWidth="100.0" text="User Account" />
       <Button fx:id="viewCart" layoutX="443.0" layoutY="15.0" mnemonicParsing="false" onAction="#gotoCart" onMouseClicked="#click" prefWidth="100.0" text="View Cart" />
       <Button fx:id="logout" layoutX="543.0" layoutY="15.0" mnemonicParsing="false" onAction="#logItOut" onMouseClicked="#click" prefWidth="100.0" text="Logout" />
    </children>

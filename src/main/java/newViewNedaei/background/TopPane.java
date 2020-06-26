@@ -90,7 +90,7 @@ public class TopPane {
 
 
 
-    private void addMenuItems() {
+    public void addMenuItems() {
         addCategoryMenuItems();
         addOffMenuItems();
     }
@@ -103,7 +103,7 @@ public class TopPane {
         }
     }
 
-    private void addOffMenuItems() {
+    public void addOffMenuItems() {
         for (String mainCategory : categoryController.getDiscountedMainCategories()) {
             MenuItem menuItem = new MenuItem(mainCategory);
             menuItem.setOnAction(e -> goToDiscountedCategory(mainCategory));

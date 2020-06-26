@@ -1,5 +1,7 @@
 package model.log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import model.Market;
 import model.Savable;
 import model.product.ProductSellInfo;
@@ -59,7 +61,7 @@ public class SellLog implements Savable {
         for (ProductSellInfo soldProduct : soldProducts) {
             soldIds.add(soldProduct.getId());
         }
-//        result.put("soldProducts", soldIds);
+        result.put("soldProducts", (new Gson()).toJson(soldIds));
 
         return result;
     }
@@ -69,11 +71,11 @@ public class SellLog implements Savable {
         mainLog = Market.getInstance().getLogById(theMap.get("mainLog"));
         seller = (Seller) Market.getInstance().getUserById(theMap.get("seller"));
         income = Integer.parseInt(theMap.get("income"));
-//        ArrayList<String> soldIds = (ArrayList<String>) theMap.get("soldProducts");
-//        soldProducts = new ArrayList<>();
-//        for (String soldId : soldIds) {
-//            soldProducts.add(Market.getInstance().getProductSellInfoById(soldId));
-//        }
+        ArrayList<String> soldIds = (new Gson()).fromJson(theMap.get("soldProducts"), new TypeToken<ArrayList<String>>(){}.getType());
+        soldProducts = new ArrayList<>();
+        for (String soldId : soldIds) {
+            soldProducts.add(Market.getInstance().getProductSellInfoById(soldId));
+        }
     }
 
 }

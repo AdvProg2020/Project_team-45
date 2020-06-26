@@ -133,8 +133,4 @@ public class ProductMenu implements Initializable {
     private void addSimilarProductsList() {
 
     }
-
-    private String convertPhotoPath(String path) {
-        return "/photos/" + path.substring(path.lastIndexOf("\\")+1);
-    }
 }

@@ -1,9 +1,7 @@
 package newViewNedaei.background;
 
-import controller.CartController;
 import controller.CategoryController;
 import controller.userControllers.UserController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
@@ -83,7 +81,7 @@ public class TopPane {
     public void logItOut() {
         UserController.setLoggedIn(true);
         loginRegister.setDisable(false);
-        CartController.getInstance().resetCart();
+//        CartController.getInstance().resetCart();
     }
 
 

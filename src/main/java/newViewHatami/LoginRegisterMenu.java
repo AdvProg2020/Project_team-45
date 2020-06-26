@@ -71,12 +71,16 @@ public class LoginRegisterMenu {
                     loginErrorLabel.setText("login successful");
                     loginUsernameField.clear();
                     loginPasswordField.clear();
-                    MenuController.getInstance().goToMenu(AdminMenu.getFxmlFilePath());
+                    processLogin(loginUsernameField.getText());
                     // TODO : put address to go after login
                 }
             } catch (Exception e) {
                 loginErrorLabel.setText("this username has a non-accepted register request");
             }
         }
+    }
+
+    private void processLogin(String username) {
+        MenuController.getInstance().goBack();
     }
 }

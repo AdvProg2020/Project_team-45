@@ -70,7 +70,7 @@ public class EditCategoryPanel extends Panel {
             errorLabel.setText("new name already exists");
             return;
         }
-        CategoryController.getInstance().editCategoryName(editingCategoryId, newName);
+//        CategoryController.getInstance().editCategoryName(editingCategoryId, newName);
         errorLabel.setText("category name changed");
         oldNameLabel.setText(CategoryController.getInstance().getCategoryName(editingCategoryId));
         newNameField.clear();

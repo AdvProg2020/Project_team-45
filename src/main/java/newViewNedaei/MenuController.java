@@ -49,6 +49,9 @@ public class MenuController {
     public void goToMenu(String fxmlFilePath) {
         try {
             currentFxmlFilePath = fxmlFilePath;
+            if (!fxmlFilePath.equals(MainMenu.getFxmlFilePath())) {
+                MainMenu.deInitialize();
+            }
             menuFxmlFilePaths.push(currentFxmlFilePath);
             Pane pane = FXMLLoader.load(getClass().getResource(currentFxmlFilePath));
             backgroundPane.getChildren().remove(currentPane);

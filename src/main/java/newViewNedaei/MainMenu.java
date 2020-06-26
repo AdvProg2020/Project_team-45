@@ -29,7 +29,7 @@ public class MainMenu{
                 MenuController.getInstance().getBackgroundPane().setStyle("-fx-background-color: royalblue"));
     }
 
-    public void deInitialize() {
+    public static void deInitialize() {
         Platform.runLater(() ->
                 MenuController.getInstance().getBackgroundPane().setStyle("-fx-background-color: rosybrown"));
     }
@@ -47,7 +47,6 @@ public class MainMenu{
         } else if (role.equals("buyer")) {
             MenuController.getInstance().goToMenu(BuyerMenu.getFxmlFilePath());
         }
-        deInitialize();
     }
 
     public void goToProductsMenu() {

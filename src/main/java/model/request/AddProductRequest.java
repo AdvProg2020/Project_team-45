@@ -32,13 +32,13 @@ public class AddProductRequest extends Request {
         if (mode.equalsIgnoreCase("new")) {
             product = productSellInfo.getProduct();
             seller = productSellInfo.getSeller();
-            product.addSeller(productSellInfo);
             product.setCompany(productSellInfo.getSeller().getCompany());
             product.setDefaultSellInfo(productSellInfo);
             Market.getInstance().addSellInfoToList(productSellInfo);
             product.getCategory().addProduct(product);
             Market.getInstance().getAllProducts().add(product);
         }
+        product.addSeller(productSellInfo);
         productSellInfo.getSeller().getAvailableProducts().put(product, productSellInfo);
     }
 
@@ -68,5 +68,11 @@ public class AddProductRequest extends Request {
         super.setFieldsFromHashMap(theMap);
         mode = theMap.get("mode");
         productSellInfo = Market.getInstance().getProductSellInfoById(theMap.get("productSellInfo"));
+    }
+
+    @Override
+    public void accept() {
+        super.accept();
+        System.out.println(productSellInfo.getProduct().getSellersList());
     }
 }

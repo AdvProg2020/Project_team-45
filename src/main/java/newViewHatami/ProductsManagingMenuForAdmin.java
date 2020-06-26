@@ -46,6 +46,7 @@ public class ProductsManagingMenuForAdmin extends AppMenu {
     public String getSelectedProductId(){
         if (productsList.getSelectionModel().getSelectedItem() != null)
             return ((String) productsList.getSelectionModel().getSelectedItem()).split(":")[0];
+        errorLabel.setText("no selected product");
         return null;
     }
 

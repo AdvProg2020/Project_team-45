@@ -1,15 +1,17 @@
 package newViewHatami;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import model.Market;
-import model.request.AddOffRequest;
-import model.request.AddProductRequest;
-import model.request.Request;
-import model.request.SellerRegisterRequest;
+import model.request.*;
 import newViewNedaei.MenuController;
 import newViewNedaei.Panel;
+
+import java.util.HashMap;
 
 public class ViewRequestForAdmin extends Panel {
 
@@ -20,6 +22,8 @@ public class ViewRequestForAdmin extends Panel {
     public Label typeLabel;
     public GridPane addOffPane;
     public GridPane addProductPane;
+    public ListView<String> editListView;
+    public Label editLabel;
 
     public static String getFxmlFilePath() {
         return "/ViewRequestForAdmin.fxml";
@@ -32,8 +36,27 @@ public class ViewRequestForAdmin extends Panel {
             sellerRegisterPane.setVisible(true);
         else if (showingRequest.getType().equals("add off"))
             addOffPane.setVisible(true);
-        else if (showingRequest.getType().equals("add product"))
+        else if (showingRequest.getType().equals("add product") || showingRequest.getType().equals("remove product"))
             addProductPane.setVisible(true);
+        else if (showingRequest.getType().equals("edit off")) {
+            addOffPane.setVisible(true);
+            editLabel.setVisible(true);
+            setListView(showingRequest.getFieldsAndValues());
+        }else if (showingRequest.getType().equals("edit product")) {
+            addProductPane.setVisible(true);
+            editLabel.setVisible(true);
+            setListView(showingRequest.getFieldsAndValues());
+        }
+    }
+
+    private void setListView(HashMap<String, String> fieldsAndValues) {
+        ObservableList<String> items = FXCollections.observableArrayList ();
+        for (String field : fieldsAndValues.keySet()) {
+            String row = field + "->" + fieldsAndValues.get(field);
+            items.add(row);
+        }
+        editListView.setItems(items);
+        editListView.setVisible(true);
     }
 
     private void setDefaultFields() {
@@ -52,17 +75,33 @@ public class ViewRequestForAdmin extends Panel {
             sellerUsername = ((SellerRegisterRequest) showingRequest).getSeller().getUsername();
         else if (showingRequest.getType().equals("add product"))
             sellerUsername = ((AddProductRequest) showingRequest).getSeller().getUsername();
+        else if (showingRequest.getType().equals("remove product"))
+            sellerUsername = ((RemoveProductRequest) showingRequest).getSeller().getUsername();
+        else {
+            sellerUsername = ((ProductEditionRequest) showingRequest).getSeller().getUsername();
+        }
         ViewUserPanel.setSelectedUsername(sellerUsername);
         MenuController.getInstance().goToPanel(ViewUserPanel.getFxmlFilePath());
     }
 
     public void viewOff() {
-        ViewOffForAdmin.setViewingOff(((AddOffRequest) showingRequest).getOff());
+        if (showingRequest.getType().equals("add off"))
+            ViewOffForAdmin.setViewingOff(((AddOffRequest) showingRequest).getOff());
+        else
+            ViewOffForAdmin.setViewingOff(Market.getInstance().getOffById(((OffEditionRequest) showingRequest).getOffId()));
         MenuController.getInstance().goToPanel(ViewOffForAdmin.getFxmlFilePath());
     }
 
     public void viewProduct() {
-        ViewProductForAdmin.setShowingProductInfo(((AddProductRequest) showingRequest).getProductSellInfo());
+        if (showingRequest.getType().equals("add product"))
+            ViewProductForAdmin.setShowingProductInfo(((AddProductRequest) showingRequest).getProductSellInfo());
+        else if (showingRequest.getType().equals("remove product")){
+            String productId =  ((RemoveProductRequest) showingRequest).getProductId();
+            ViewProductForAdmin.setShowingProductInfo(((RemoveProductRequest) showingRequest).getSeller().getAvailableProductSellInfoById(productId));
+        }else {
+            String productId =  ((ProductEditionRequest) showingRequest).getProductId();
+            ViewProductForAdmin.setShowingProductInfo(((ProductEditionRequest) showingRequest).getSeller().getAvailableProductSellInfoById(productId));
+        }
         MenuController.getInstance().goToPanel(ViewProductForAdmin.getFxmlFilePath());
     }
 }

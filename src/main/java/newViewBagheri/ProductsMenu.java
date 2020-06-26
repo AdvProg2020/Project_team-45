@@ -44,14 +44,11 @@ public class ProductsMenu implements Initializable {
         filteringController.clearFilters();
         addCompaniesNameList();
         addSellersNameList();
-
         if (!categoryController.isActiveCategoryFinal()) {
             addSubcategoriesName();
             specialFeaturesListVBox.setVisible(false);
-            //TODO
         } else {
             subcategoriesList.setVisible(false);
-            //TODO
             addSpecialFeaturesList();
         }
         showProducts();
@@ -67,20 +64,10 @@ public class ProductsMenu implements Initializable {
 
     private void addCompaniesNameList() {
         addCheckBoxListToVBox(categoryController.getActiveCategoryCompanies(), companiesNameList, "companyName");
-//        for (String companyName : categoryController.getActiveCategoryCompanies()) {
-//            CheckBox checkBox = new CheckBox(companyName);
-//            checkBox.setOnAction(e -> changeFilter("companyName", checkBox));
-//            companiesNameList.getChildren().add(checkBox);
-//        }
     }
 
     private void addSellersNameList() {
         addCheckBoxListToVBox(categoryController.getActiveCategorySellers(), sellersUsernameList, "sellerUsername");
-//        for (String sellerUsername : categoryController.getActiveCategorySellers()) {
-//            CheckBox checkBox = new CheckBox(sellerUsername);
-//            checkBox.setOnAction(e -> changeFilter("sellerUsername", checkBox));
-//            sellersUsernameList.getChildren().add(checkBox);
-//        }
     }
 
     private void addSpecialFeaturesList() {
@@ -91,11 +78,6 @@ public class ProductsMenu implements Initializable {
             ScrollPane valuesScrollPane = new ScrollPane();
             VBox valuesVBox = new VBox();
             addCheckBoxListToVBox(specialFeature.getValue(), valuesVBox, specialFeature.getKey());
-//            for (String value : specialFeature.getValue()) {
-//                CheckBox valueCheckBox = new CheckBox(value);
-//                valueCheckBox.setOnAction(e -> changeFilter(specialFeature.getKey(), valueCheckBox));
-//                valuesVBox.getChildren().add(valueCheckBox);
-//            }
             valuesScrollPane.setContent(valuesVBox);
             featureVBox.getChildren().add(valuesScrollPane);
         }
@@ -140,33 +122,40 @@ public class ProductsMenu implements Initializable {
         if (availableCheckBox.isSelected())
             filteringController.addFilter("available", "");
         else
-            filteringController.removeFilter("available", "");
+            filteringController.removeFilter("available");
+        showProducts();
     }
 
     public void submitPriceFilter() {
         addMinPriceFilter();
         addMaxPriceFilter();
-    }
-
-    public void clearPriceFilter() {
-        minPriceField.clear();
-        maxPriceField.clear();
+        showProducts();
     }
 
     public void addMinPriceFilter() {
         if (minPriceField.validate()) {
-            filteringController.addFilter("minimumPrice", "" + minPriceField.getText());
-        } else {
-            minPriceField.clear();
+            String minPrice = minPriceField.getText();
+            if (!minPrice.isEmpty())
+                filteringController.addFilter("minimumPrice", "" + minPriceField.getText());
         }
     }
 
     public void addMaxPriceFilter() {
-        if (minPriceField.validate()) {
-            filteringController.addFilter("maximumPrice", "" + maxPriceField.getText());
-        } else {
-            maxPriceField.clear();
+        if (maxPriceField.validate()) {
+            String maxPrice = maxPriceField.getText();
+            if (!maxPrice.isEmpty())
+                filteringController.addFilter("maximumPrice", "" + maxPrice);
         }
+    }
+
+    public void clearPriceFilter() {
+        minPriceField.clear();
+        minPriceField.setStyle("-fx-text-box-border: #039ed3;");
+        maxPriceField.clear();
+        maxPriceField.setStyle("-fx-text-box-border: #039ed3;");
+        filteringController.removeFilter("minimumPrice");
+        filteringController.removeFilter("maximumPrice");
+        showProducts();
     }
 
 //    private void clearFilter(String type, VBox inputVBox) {

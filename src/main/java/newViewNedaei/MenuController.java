@@ -51,6 +51,7 @@ public class MenuController {
             currentFxmlFilePath = fxmlFilePath;
             if (!fxmlFilePath.equals(MainMenu.getFxmlFilePath())) {
                 MainMenu.deInitialize();
+
             }
             menuFxmlFilePaths.push(currentFxmlFilePath);
             Pane pane = FXMLLoader.load(getClass().getResource(currentFxmlFilePath));

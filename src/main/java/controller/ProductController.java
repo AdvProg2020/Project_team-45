@@ -226,5 +226,13 @@ public class ProductController implements Deleter {
         activeProductSellInfo = market.getProductSellInfoById(sellInfoId);
         activeProduct.increaseSeen();
     }
+
+    public ArrayList<HashMap<String, String>> getActiveProductSimilarProducts() {
+        ArrayList<HashMap<String, String>> similarProductsInfo = new ArrayList<>();
+        for (Product product : activeProduct.getCategory().getProductsList()) {
+            similarProductsInfo.add(product.getProductInfoForProductsList());
+        }
+        return similarProductsInfo;
+    }
     //bahgeri
 }

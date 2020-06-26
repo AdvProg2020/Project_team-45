@@ -2,15 +2,14 @@ package newViewBagheri;
 
 import controller.ProductController;
 import controller.userControllers.UserController;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import newViewNedaei.MenuController;
 
@@ -35,6 +34,7 @@ public class ProductMenu implements Initializable {
     public GridPane featuresListPain;
     public VBox commentsList;
     public Label errorLabelForAddComment;
+    public GridPane SimilarProductsListPain;
 
     public static String getFxmlFilePath() {
         return "/ProductMenu.fxml";
@@ -130,13 +130,64 @@ public class ProductMenu implements Initializable {
     }
 
     public void addNewComment() {
-        if(UserController.isLoggedIn())
+        if (UserController.isLoggedIn())
             menuController.goToPanel(CommentingPanel.getFxmlFilePath());
         else
             errorLabelForAddComment.setVisible(true);
     }
 
     private void addSimilarProductsList() {
+        int i = 0;
+        for (HashMap<String, String> similarProductInfo : productController.getActiveProductSimilarProducts()) {
+            SimilarProductsListPain.add(createProductInfoVBox(similarProductInfo), i % 5, i / 5);
+            i++;
+        }
+    }
 
+    private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
+        VBox productInfoVBox = new VBox();
+        productInfoVBox.setBorder(new Border(new BorderStroke(Color.BROWN,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+        int sizePrefWidth = 195;
+        productInfoVBox.setPrefWidth(sizePrefWidth);
+        productInfoVBox.setPrefHeight(350.0);
+        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
+        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+        productImageView.setPreserveRatio(true);
+        productImageView.setFitWidth(190.0);
+        productImageView.setFitHeight(250.0);
+        BorderPane imagePane = new BorderPane(productImageView);
+        BorderPane.setAlignment(productImageView, Pos.CENTER);
+        imagePane.setPrefWidth(sizePrefWidth);
+        imagePane.setPrefHeight(250.0);
+        // TODO: productImageView.setFitWidth();
+        // TODO: add pane and centering image
+        int labelSize = 30;
+        Label productName = new Label(productInfo.get("name"));
+        productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+        setLabelStyle(productName, sizePrefWidth, labelSize);
+        Label productScore = new Label("score: " + productInfo.get("averageScore") + " out 0f 5");
+        setLabelStyle(productScore, sizePrefWidth, labelSize);
+        String productPrice = productInfo.get("price");
+        Label productPriceLabel = new Label();
+        setLabelStyle(productPriceLabel, sizePrefWidth, labelSize);
+        if (productPrice.equals("unavailable")) {
+            productPriceLabel.setText(productPrice);
+        } else {
+            productPriceLabel.setText("price: " + productPrice);
+        }
+        productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPriceLabel);
+        return productInfoVBox;
+    }
+
+    private void setLabelStyle(Label label, int prefWidth, int prefHeight) {
+        label.setPrefWidth(prefWidth);
+        label.setPrefHeight(prefHeight);
+        label.setAlignment(Pos.CENTER);
+    }
+
+    private void goToProduct(String productId) {
+        productController.setActiveProductBYProductIdForCategory(productId);
+        menuController.goToMenu(ProductMenu.getFxmlFilePath());
     }
 }

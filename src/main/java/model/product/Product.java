@@ -26,8 +26,9 @@ public class Product extends IdRecognized implements Savable {
     private int sellCount;
     private int seen;
     private String imageAddress;
+    private String videoAddress;
 
-    public Product(String name, FinalCategory category, String description, String imageAddress) {
+    public Product(String name, FinalCategory category, String description, String imageAddress, String videoAddress) {
         this.id = "" + IdKeeper.getInstance().getProductsNewId();
         this.name = name;
         this.productionDate = new Date();
@@ -38,6 +39,9 @@ public class Product extends IdRecognized implements Savable {
         this.approvedComments = new ArrayList<>();
         this.sellersList = new HashMap<>();
         this.rates = new ArrayList<>();
+
+//        this.videoAddress = "/photos/" + videoAddress.substring(videoAddress.lastIndexOf("\\")+1);
+        this.videoAddress = videoAddress;
 
         if (imageAddress == null) {
             this.imageAddress = "/poker.png";
@@ -55,6 +59,7 @@ public class Product extends IdRecognized implements Savable {
         this.sellersList = new HashMap<>();
         this.rates = new ArrayList<>();
     }
+
 
     public ProductSellInfo getSellerInfoForProductByUsername(String sellerUsername) {
         for (Seller seller : sellersList.keySet()) {
@@ -102,6 +107,10 @@ public class Product extends IdRecognized implements Savable {
     public ProductSellInfo getDefaultSellInfo() {
         updateMinimumPriceAndDefaultSellInfo();
         return defaultSellInfo;
+    }
+
+    public String getVideoAddress() {
+        return videoAddress;
     }
 
     public FinalCategory getCategory() {
@@ -314,6 +323,7 @@ public class Product extends IdRecognized implements Savable {
         result.put("sellCount", "" + sellCount);
         result.put("seen", "" + seen);
         result.put("imageAddress", imageAddress);
+        result.put("videoAddress", videoAddress);
         return result;
     }
 
@@ -354,6 +364,7 @@ public class Product extends IdRecognized implements Savable {
         sellCount = Integer.parseInt(theMap.get("sellCount"));
         seen = Integer.parseInt(theMap.get("seen"));
         imageAddress = theMap.get("imageAddress");
+        videoAddress = theMap.get("videoAddress");
     }
 
     public void setDefaultSellInfo(ProductSellInfo defaultSellInfo) {

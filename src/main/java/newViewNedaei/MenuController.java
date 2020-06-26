@@ -119,7 +119,7 @@ public class MenuController {
 
     public String pickPhoto() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
+        fileChooser.setTitle("Open photo");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
@@ -127,6 +127,19 @@ public class MenuController {
         File avatarFile = fileChooser.showOpenDialog(MenuController.getInstance().getWindow());
         if (avatarFile != null)
             return copyFile(avatarFile);
+        return null;
+    }
+
+    public String pickVideo() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open video");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("mkv", "*.mkv"),
+                new FileChooser.ExtensionFilter("mp4", "*.mp4")
+        );
+        File videoFile = fileChooser.showOpenDialog(MenuController.getInstance().getWindow());
+        if (videoFile != null)
+            return copyFile(videoFile);
         return null;
     }
 

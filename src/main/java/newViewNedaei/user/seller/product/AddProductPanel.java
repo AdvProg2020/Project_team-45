@@ -35,6 +35,7 @@ public class AddProductPanel extends Panel {
     private CheckBox checkBox;
 
     private String productPhotoPath;
+    private String productVideoPath;
 
     public static String getFxmlFilePath() {
         return "/AddProductPanel.fxml";
@@ -112,7 +113,7 @@ public class AddProductPanel extends Panel {
 //        fieldsAndValues.put("description", description.getText());
 //        fieldsAndValues.put("price", newPrice.getText());
 //        fieldsAndValues.put("stock", newStock.getText());
-        Product product = new Product(name.getText(), (FinalCategory) Market.getInstance().getCategoryByName(category.getText()), description.getText(), productPhotoPath);
+        Product product = new Product(name.getText(), (FinalCategory) Market.getInstance().getCategoryByName(category.getText()), description.getText(), productPhotoPath, productVideoPath);
         SellerController.getInstance().createAddProductRequest("new", product, Integer.parseInt(newPrice.getText()), Integer.parseInt(newStock.getText()));
         existingError.setText("");
     }
@@ -121,6 +122,13 @@ public class AddProductPanel extends Panel {
         String photoPath = MenuController.getInstance().pickPhoto();
         if (photoPath != null) {
             productPhotoPath = photoPath;
+        }
+    }
+
+    public void pickVideo() {
+        String videoPath = MenuController.getInstance().pickVideo();
+        if (videoPath != null) {
+            productVideoPath = videoPath;
         }
     }
 }

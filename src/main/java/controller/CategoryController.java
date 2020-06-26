@@ -113,7 +113,7 @@ public class CategoryController implements Editor, Creator {
 
 
     public ArrayList<String> getMainCategories() {
-        ArrayList<String> mainCategoriesName = new ArrayList<String>();
+        ArrayList<String> mainCategoriesName = new ArrayList<>();
         ArrayList<Category> mainCategories = market.getMainCategories();
         for (Category mainCategory : mainCategories) {
             mainCategoriesName.add(mainCategory.getName());
@@ -378,6 +378,16 @@ public class CategoryController implements Editor, Creator {
             output.addAll(product.getProductOffInfoForProductsList());
         }
         return output;
+    }
+
+    public ArrayList<String> getDiscountedMainCategories() {
+        ArrayList<String> mainCategoriesName = new ArrayList<>();
+        ArrayList<Category> mainCategories = market.getMainCategories();
+        for (Category mainCategory : mainCategories) {
+            if (mainCategory.hasInOffProduct())
+                mainCategoriesName.add(mainCategory.getName());
+        }
+        return mainCategoriesName;
     }
     //bagheri
 }

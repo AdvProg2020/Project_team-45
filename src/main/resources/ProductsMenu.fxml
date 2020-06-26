@@ -35,6 +35,9 @@
                     </GridPane>
                 </ScrollPane>
             </center>
+            <bottom>
+                <HBox fx:id="pageNumberVBox"/>
+            </bottom>
         </BorderPane>
     </center>
     <left>
@@ -86,7 +89,7 @@
                     </rowConstraints>
                     <Label text="Price:" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
                     <Label text="min:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                    <TextField fx:id="minPriceField" GridPane.rowIndex="1" GridPane.columnIndex="1" onAction=""/>
+                    <TextField fx:id="minPriceField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
                     <Label text="max:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
 
                     <Button text="submit" onAction="#addPriceFilter" GridPane.rowIndex="2" GridPane.columnIndex="0"

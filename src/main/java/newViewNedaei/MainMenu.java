@@ -1,6 +1,8 @@
 package newViewNedaei;
 
 import controller.userControllers.UserController;
+import javafx.event.ActionEvent;
+import newViewBagheri.ProductsMenu;
 import newViewHatami.AdminMenu;
 import newViewNedaei.user.buyer.BuyerMenu;
 import javafx.application.Platform;
@@ -44,5 +46,9 @@ public class MainMenu{
             MenuController.getInstance().goToMenu(BuyerMenu.getFxmlFilePath());
         }
         deInitialize();
+    }
+
+    public void goToProductsMenu() {
+        MenuController.getInstance().goToMenu(ProductsMenu.getFxmlFilePath());
     }
 }

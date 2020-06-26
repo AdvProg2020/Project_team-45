@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -24,6 +25,11 @@ public class ProductsMenu implements Initializable {
     public VBox specialFeaturesListVBox;
     public ChoiceBox sortingChoiceBox;
     public GridPane productsListPain;
+    public HBox pageNumberVBox;
+
+    public static String getFxmlFilePath() {
+        return "/ProductsMenu.fxml";
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,7 +52,7 @@ public class ProductsMenu implements Initializable {
     private void addSubcategoriesName() {
         for (String subcategoryName : categoryController.getActiveCategorySubcategories()) {
             Label label = new Label(subcategoryName);
-            label.setOnMouseClicked(e -> viewCategory(subcategoryName));
+            label.setOnMouseClicked(e -> goToCategory(subcategoryName));
             subcategoriesList.getChildren().add(label);
         }
     }
@@ -87,7 +93,7 @@ public class ProductsMenu implements Initializable {
         }
     }
 
-    private void viewCategory(String categoryName) {
+    private void goToCategory(String categoryName) {
         //TODO
     }
 
@@ -151,6 +157,7 @@ public class ProductsMenu implements Initializable {
                 Button pageNumber = new Button("" + i);
                 int finalI = i;
                 pageNumber.setOnAction(e -> changeProductsListPainProductInfos(productInfosList, finalI));
+                pageNumberVBox.getChildren().add(pageNumber);
             }
         }
     }
@@ -167,11 +174,11 @@ public class ProductsMenu implements Initializable {
     private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
         VBox productInfoVBox = new VBox();
         ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
-        productImageView.setOnMouseClicked(e -> viewProduct(productInfo.get("id")));
+        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
         Label productName = new Label(productInfo.get("name"));
-        productName.setOnMouseClicked(e -> viewProduct(productInfo.get("id")));
+        productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         Label productScore = new Label("score:" + productInfo.get("averageScore") + "out 0f 5");
         String productPrice = productInfo.get("price");
         Label productPriceLabel = new Label(productPrice);
@@ -184,7 +191,7 @@ public class ProductsMenu implements Initializable {
         return productInfoVBox;
     }
 
-    private void viewProduct(String productId) {
+    private void goToProduct(String productId) {
         //TODO
     }
 }

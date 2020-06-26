@@ -2,18 +2,24 @@ package newViewBagheri;
 
 import controller.ProductController;
 import controller.userControllers.UserController;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import newViewNedaei.MenuController;
 
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class ProductMenu implements Initializable {
@@ -34,6 +40,7 @@ public class ProductMenu implements Initializable {
     public GridPane featuresListPain;
     public VBox commentsList;
     public Label errorLabelForAddComment;
+    public MediaView mediaView;
     public GridPane SimilarProductsListPain;
 
     public static String getFxmlFilePath() {
@@ -44,6 +51,7 @@ public class ProductMenu implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         addProductInformation();
         addImage();
+        addVideo();
         addDefaultSellerInfo();
         addSellersList();
         addFeaturesList();
@@ -62,6 +70,15 @@ public class ProductMenu implements Initializable {
 
     private void addImage() {
 //        productImageView.setImage(new Image(convertPhotoPath(productController.getActiveProduct().getImageAddress())));
+    }
+
+    private void addVideo() {
+        String path = productController.getActiveProduct().getVideoAddress();
+        if (path == null)
+            return;
+        Media media = new Media(Paths.get(path).toUri().toString());
+        mediaView.setMediaPlayer(new MediaPlayer(media));
+        mediaView.getMediaPlayer().setOnEndOfMedia(mediaView.getMediaPlayer().getOnRepeat());
     }
 
     private void addDefaultSellerInfo() {
@@ -178,6 +195,16 @@ public class ProductMenu implements Initializable {
         }
         productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPriceLabel);
         return productInfoVBox;
+    }
+
+
+
+    public void videoClicked(MouseEvent mouseEvent) {
+        mediaView.getMediaPlayer().play();
+    }
+
+    public void puaseVideo(ActionEvent actionEvent) {
+        mediaView.getMediaPlayer().pause();
     }
 
     private void setLabelStyle(Label label, int prefWidth, int prefHeight) {

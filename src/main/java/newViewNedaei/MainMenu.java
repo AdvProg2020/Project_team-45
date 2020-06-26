@@ -30,7 +30,6 @@ public class MainMenu{
     }
 
     public static void deInitialize() {
-
         Platform.runLater(() ->
                 MenuController.getInstance().getBackgroundPane().setStyle("-fx-background-color: rosybrown"));
     }

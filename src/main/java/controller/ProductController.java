@@ -208,5 +208,9 @@ public class ProductController implements Deleter {
     public LinkedHashMap<String, String> getActiveProductFeatures() {
         return activeProduct.getCategoryFeatures();
     }
+
+    public String getActiveProductImageAddress() {
+        return activeProduct.getImageAddress();
+    }
     //bahgeri
 }

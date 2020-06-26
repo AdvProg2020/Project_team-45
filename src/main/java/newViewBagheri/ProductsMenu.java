@@ -50,7 +50,7 @@ public class ProductsMenu implements Initializable {
             //TODO
             addSpecialFeaturesList();
         }
-//        showProducts();
+        showProducts();
     }
 
     private void addSubcategoriesName() {
@@ -179,8 +179,8 @@ public class ProductsMenu implements Initializable {
 
     private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
         VBox productInfoVBox = new VBox();
-//        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
-//        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
+        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
         Label productName = new Label(productInfo.get("name"));
@@ -193,8 +193,7 @@ public class ProductsMenu implements Initializable {
         } else {
             // TODO : add unit
         }
-//        productInfoVBox.getChildren().addAll(productImageView, productName, productScore, productPriceLabel);
-        productInfoVBox.getChildren().addAll(productName, productScore, productPriceLabel);
+        productInfoVBox.getChildren().addAll(productImageView, productName, productScore, productPriceLabel);
         return productInfoVBox;
     }
 

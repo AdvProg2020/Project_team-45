@@ -36,8 +36,8 @@ public class ProductMenu implements Initializable {
     private void addProductInformation() {
         HashMap<String, String> productInformation = productController.getProductDigestInformation();
         productNameLabel.setText(productInformation.get("name"));
-        brandNameLabel.setText(productInformation.get("companyName"));
-        categoryNameLabel.setText(productInformation.get("category"));
+        brandNameLabel.setText("brand:" + productInformation.get("companyName"));
+        categoryNameLabel.setText("category:" + productInformation.get("category"));
         descriptionText.setText(productInformation.get("description"));
         scoreLabel.setText(productInformation.get("averageScore"));
     }

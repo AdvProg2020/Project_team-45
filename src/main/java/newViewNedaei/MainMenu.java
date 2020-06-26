@@ -1,7 +1,10 @@
 package newViewNedaei;
 
 import controller.userControllers.UserController;
+import javafx.event.ActionEvent;
+import newViewBagheri.ProductsMenu;
 import newViewHatami.AdminMenu;
+import newViewHatami.LoginRegisterMenu;
 import newViewNedaei.user.buyer.BuyerMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -33,6 +36,7 @@ public class MainMenu{
 
     public void goToUserAccount() {
         if (!UserController.isLoggedIn()) {
+            MenuController.getInstance().goToMenu(LoginRegisterMenu.getFxmlFilePath());
             return;
         }
         String role = UserController.getActiveUser().getRole();
@@ -44,5 +48,9 @@ public class MainMenu{
             MenuController.getInstance().goToMenu(BuyerMenu.getFxmlFilePath());
         }
         deInitialize();
+    }
+
+    public void goToProductsMenu() {
+        MenuController.getInstance().goToMenu(ProductsMenu.getFxmlFilePath());
     }
 }

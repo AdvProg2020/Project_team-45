@@ -34,7 +34,7 @@ public class CategoryMenu extends ProductSearchMenu {
 
             @Override
             protected void show() {
-                ArrayList<String> submenus = categoryController.getActiveCategorySubcategories();
+                  ArrayList<String> submenus = categoryController.getActiveCategorySubcategories();
                 if (submenus.isEmpty()) {
                     System.out.println("This category has no subcategories");
                 }

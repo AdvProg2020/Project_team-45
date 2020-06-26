@@ -22,8 +22,6 @@ public class Main extends Application {
         if (Market.getInstance().getAllUsers().isEmpty()) {
             getFirstAdmin();
         }
-        UserController.getInstance().setActiveUserByUsername("s");
-        UserController.setLoggedIn(true);
         launch(args);
     }
 

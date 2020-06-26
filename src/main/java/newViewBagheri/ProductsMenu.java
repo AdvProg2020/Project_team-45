@@ -2,12 +2,13 @@ package newViewBagheri;
 
 import controller.CategoryController;
 import controller.FilteringController;
-import javafx.event.ActionEvent;
+import controller.SortingController;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -16,11 +17,19 @@ import java.util.*;
 public class ProductsMenu implements Initializable {
     private final CategoryController categoryController = CategoryController.getInstance();
     private final FilteringController filteringController = FilteringController.getInstance();
+    private final SortingController sortingController = SortingController.getInstance();
     public VBox subcategoriesList;
     public TextField productNameField;
     public VBox companiesNameList;
     public VBox sellersUsernameList;
     public VBox specialFeaturesListVBox;
+    public ChoiceBox sortingChoiceBox;
+    public GridPane productsListPain;
+    public HBox pageNumberVBox;
+
+    public static String getFxmlFilePath() {
+        return "/ProductsMenu.fxml";
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,7 +52,7 @@ public class ProductsMenu implements Initializable {
     private void addSubcategoriesName() {
         for (String subcategoryName : categoryController.getActiveCategorySubcategories()) {
             Label label = new Label(subcategoryName);
-            label.setOnMouseClicked(e -> viewCategory(subcategoryName));
+            label.setOnMouseClicked(e -> goToCategory(subcategoryName));
             subcategoriesList.getChildren().add(label);
         }
     }
@@ -84,7 +93,7 @@ public class ProductsMenu implements Initializable {
         }
     }
 
-    private void viewCategory(String categoryName) {
+    private void goToCategory(String categoryName) {
         //TODO
     }
 
@@ -130,7 +139,59 @@ public class ProductsMenu implements Initializable {
 //        inputVBox.getChildren().
 //    }
 
-    private void showProducts() {
+    public void sortProductsList() {
+        sortingController.setActiveSort((String) sortingChoiceBox.getValue());
+        showProducts();
+    }
 
+    private void showProducts() {
+        ArrayList<HashMap<String, String>> productInfosList = categoryController.getActiveCategoryProductInfosList();
+        createPageButton(productInfosList);
+        changeProductsListPainProductInfos(productInfosList, 1);
+    }
+
+    private void createPageButton(ArrayList<HashMap<String, String>> productInfosList) {
+        int pagesNumber = (productInfosList.size() + 19) / 20;
+        if (pagesNumber > 1) {
+            for (int i = 1; i <= pagesNumber; i++) {
+                Button pageNumber = new Button("" + i);
+                int finalI = i;
+                pageNumber.setOnAction(e -> changeProductsListPainProductInfos(productInfosList, finalI));
+                pageNumberVBox.getChildren().add(pageNumber);
+            }
+        }
+    }
+
+    private void changeProductsListPainProductInfos(ArrayList<HashMap<String, String>> productInfosList, int page) {
+        productsListPain.getChildren().clear();
+        int i = 0;
+        for (HashMap<String, String> productInfo : productInfosList.subList((page - 1) * 20, page * 20)) {
+            productsListPain.add(createProductInfoVBox(productInfo), i / 4, i % 4);
+            i++;
+        }
+    }
+
+    private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
+        VBox productInfoVBox = new VBox();
+        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
+        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+        // TODO: productImageView.setFitWidth();
+        // TODO: add pane and centering image
+        Label productName = new Label(productInfo.get("name"));
+        productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+        Label productScore = new Label("score:" + productInfo.get("averageScore") + "out 0f 5");
+        String productPrice = productInfo.get("price");
+        Label productPriceLabel = new Label(productPrice);
+        if (productPrice.equals("unavailable")) {
+            // TODO : change color
+        } else {
+            // TODO : add unit
+        }
+        productInfoVBox.getChildren().addAll(productImageView, productName, productScore, productPriceLabel);
+        return productInfoVBox;
+    }
+
+    private void goToProduct(String productId) {
+        //TODO
     }
 }

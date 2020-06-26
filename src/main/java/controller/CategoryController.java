@@ -4,6 +4,7 @@ import consuleview.UIPage;
 import consuleview.hatemi.adminMenus.CategoriesManagingMenu;
 import controller.managers.Creator;
 import controller.managers.Editor;
+import model.Company;
 import model.Market;
 import model.category.Category;
 import model.category.FinalCategory;
@@ -69,12 +70,7 @@ public class CategoryController implements Editor, Creator {
             editingCategory.setName(changedFields.get("name"));
         }
         if (editingCategory.getType().equals("FinalCategory")) {
-            // for console
         }
-    }
-
-    public void editCategoryName(String editingCategoryId, String newName) {
-            getCategoryById(editingCategoryId).setName(newName);
     }
 
     private Category getCategoryById(String categoryId) {
@@ -118,7 +114,7 @@ public class CategoryController implements Editor, Creator {
 
 
     public ArrayList<String> getMainCategories() {
-        ArrayList<String> mainCategoriesName = new ArrayList<String>();
+        ArrayList<String> mainCategoriesName = new ArrayList<>();
         ArrayList<Category> mainCategories = market.getMainCategories();
         for (Category mainCategory : mainCategories) {
             mainCategoriesName.add(mainCategory.getName());
@@ -356,6 +352,43 @@ public class CategoryController implements Editor, Creator {
             }
         }
         return featuresAndValues;
+    }
+
+    public ArrayList<HashMap<String, String>> getActiveCategoryProductInfosList() {
+        ArrayList<HashMap<String, String>> output = new ArrayList<>();
+        ArrayList<Product> activeCategoryProducts = activeCategory.getProductsList();
+        activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
+        SortingController.getInstance().sortingProducts(activeCategoryProducts);
+        for (Product product : activeCategoryProducts) {
+            output.add(product.getProductInfoForProductsList());
+        }
+        return output;
+    }
+
+    public ArrayList<HashMap<String, String>> getActiveCategoryDiscountedProductInfosList() {
+        ArrayList<HashMap<String, String>> output = new ArrayList<>();
+        ArrayList<Product> activeCategoryProducts;
+        if (activeCategory == null) {
+            activeCategoryProducts = market.getAllDiscountedProductsList();
+        } else {
+            activeCategoryProducts = activeCategory.getInOffProductsList();
+        }
+        activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
+        SortingController.getInstance().sortingProducts(activeCategoryProducts);
+        for (Product product : activeCategoryProducts) {
+            output.addAll(product.getProductOffInfoForProductsList());
+        }
+        return output;
+    }
+
+    public ArrayList<String> getDiscountedMainCategories() {
+        ArrayList<String> mainCategoriesName = new ArrayList<>();
+        ArrayList<Category> mainCategories = market.getMainCategories();
+        for (Category mainCategory : mainCategories) {
+            if (mainCategory.hasInOffProduct())
+                mainCategoriesName.add(mainCategory.getName());
+        }
+        return mainCategoriesName;
     }
 
     public String getCategoryName(String categoryId) {

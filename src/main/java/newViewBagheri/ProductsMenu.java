@@ -210,6 +210,9 @@ public class ProductsMenu implements Initializable {
 
     private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
         VBox productInfoVBox = new VBox();
+        int sizePrefWidth = 195;
+        productInfoVBox.setPrefWidth(sizePrefWidth);
+        productInfoVBox.setPrefHeight(400.0);
         ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
         productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         productImageView.setPreserveRatio(true);
@@ -217,26 +220,32 @@ public class ProductsMenu implements Initializable {
         productImageView.setFitHeight(250.0);
         BorderPane imagePane = new BorderPane(productImageView);
         BorderPane.setAlignment(productImageView, Pos.CENTER);
-        imagePane.setPrefWidth(195.0);
+        imagePane.setPrefWidth(sizePrefWidth);
         imagePane.setPrefHeight(250.0);
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
         int labelSize = 30;
         Label productName = new Label(productInfo.get("name"));
         productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
-        productName.setPrefHeight(labelSize);
+        setLabelStyle(productName, sizePrefWidth, labelSize);
         Label productScore = new Label("score: " + productInfo.get("averageScore") + " out 0f 5");
-        productScore.setPrefHeight(labelSize);
+        setLabelStyle(productScore, sizePrefWidth, labelSize);
         String productPrice = productInfo.get("price");
-        Label productPriceLabel = new Label(productPrice);
-        productPriceLabel.setPrefHeight(labelSize);
+        Label productPriceLabel = new Label();
+        setLabelStyle(productPriceLabel, sizePrefWidth, labelSize);
         if (productPrice.equals("unavailable")) {
-            // TODO : change color
+            productPriceLabel.setText(productPrice);
         } else {
-            // TODO : add unit
+            productPriceLabel.setText("price: " + productPrice);
         }
         productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPriceLabel);
         return productInfoVBox;
+    }
+
+    private void setLabelStyle(Label label, int prefWidth, int prefHeight) {
+        label.setPrefWidth(prefWidth);
+        label.setPrefHeight(prefHeight);
+        label.setAlignment(Pos.CENTER);
     }
 
     private void goToProduct(String productId) {

@@ -42,7 +42,7 @@ public class ProductsMenu implements Initializable {
             specialFeaturesListVBox.setVisible(false);
             //TODO
         } else {
-            sellersUsernameList.setVisible(false);
+            subcategoriesList.setVisible(false);
             //TODO
             addSpecialFeaturesList();
         }
@@ -165,8 +165,8 @@ public class ProductsMenu implements Initializable {
     private void changeProductsListPainProductInfos(ArrayList<HashMap<String, String>> productInfosList, int page) {
         productsListPain.getChildren().clear();
         int i = 0;
-        for (HashMap<String, String> productInfo : productInfosList.subList((page - 1) * 20, page * 20)) {
-            productsListPain.add(createProductInfoVBox(productInfo), i / 4, i % 4);
+        for (HashMap<String, String> productInfo : productInfosList.subList((page - 1) * 20, Math.min(page * 20, productInfosList.size()))) {
+            productsListPain.add(createProductInfoVBox(productInfo), i % 4, i / 4);
             i++;
         }
     }
@@ -179,7 +179,7 @@ public class ProductsMenu implements Initializable {
         // TODO: add pane and centering image
         Label productName = new Label(productInfo.get("name"));
         productName.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
-        Label productScore = new Label("score:" + productInfo.get("averageScore") + "out 0f 5");
+        Label productScore = new Label("score: " + productInfo.get("averageScore") + " out 0f 5");
         String productPrice = productInfo.get("price");
         Label productPriceLabel = new Label(productPrice);
         if (productPrice.equals("unavailable")) {
@@ -187,7 +187,8 @@ public class ProductsMenu implements Initializable {
         } else {
             // TODO : add unit
         }
-        productInfoVBox.getChildren().addAll(productImageView, productName, productScore, productPriceLabel);
+//        productInfoVBox.getChildren().addAll(productImageView, productName, productScore, productPriceLabel);
+        productInfoVBox.getChildren().addAll(productName, productScore, productPriceLabel);
         return productInfoVBox;
     }
 

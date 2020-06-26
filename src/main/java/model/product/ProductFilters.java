@@ -146,7 +146,7 @@ public class ProductFilters {
     }
 
     public boolean checkProductMatchFilter(Product product) {
-        if (product.getName().equals(this.productName)) {
+        if (this.productName != null && !product.getName().contains(this.productName)) {
             return false;
         }
         if (!companyNameList.isEmpty() && !companyNameList.contains(product.getCompany().getName()))

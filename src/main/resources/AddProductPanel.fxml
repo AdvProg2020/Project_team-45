@@ -58,7 +58,7 @@
             <ValidatorField fx:id="newPrice" onKeyReleased="#validate" validation="naturalNumber" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <ValidatorField fx:id="newStock" onKeyReleased="#validate" validation="naturalNumber" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label fx:id="newError" prefHeight="25.0" prefWidth="200.0" textFill="red" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Label alignment="CENTER" prefHeight="37.0" prefWidth="110.0" text="Label" GridPane.rowIndex="5" />
+            <Label alignment="CENTER" prefHeight="37.0" prefWidth="110.0" text="photo" GridPane.rowIndex="5" />
             <Button mnemonicParsing="false" onAction="#pickPhoto" prefHeight="26.0" prefWidth="84.0" text="browse" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>

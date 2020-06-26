@@ -1,7 +1,6 @@
 package newViewHatami;
 
 import controller.RequestController;
-import newViewNedaei.MenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import model.Market;
 import model.request.Request;
+import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 
@@ -58,6 +58,8 @@ public class RequestsManagingMenu extends AppMenu {
     }
 
     public void showRequestDetails() {
+        ViewRequestForAdmin.setShowingRequest(getSelectedRequest());
+        MenuController.getInstance().goToPanel(ViewRequestForAdmin.getFxmlFilePath());
         // TODO : make request viewer panel
     }
 }

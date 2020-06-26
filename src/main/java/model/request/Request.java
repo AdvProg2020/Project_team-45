@@ -14,12 +14,14 @@ public abstract class Request extends IdRecognized implements Savable {
     protected HashMap<String, String> fieldsAndValues;
 
     public Request() {
+        requestStatus = RequestStatus.WAITING_FOR_CONFIRMATION;
         this.id = getType() + IdKeeper.getInstance().getRequestsNewId();
     }
 
     public Request(HashMap<String, String> fieldsAndValues) {
         this.id = getType() + IdKeeper.getInstance().getRequestsNewId();
         this.fieldsAndValues = fieldsAndValues;
+        requestStatus = RequestStatus.WAITING_FOR_CONFIRMATION;
     }
 
     public Request(String id) {
@@ -31,8 +33,8 @@ public abstract class Request extends IdRecognized implements Savable {
         return id;
     }
 
-    public RequestStatus getRequestStatus() {
-        return requestStatus;
+    public String getRequestStatus() {
+        return requestStatus.toString();
     }
 
     public void setRequestStatus(RequestStatus requestStatus) {
@@ -46,10 +48,12 @@ public abstract class Request extends IdRecognized implements Savable {
     public void accept(){
         apply();
         Market.getInstance().removeRequestById(id);
+        requestStatus = RequestStatus.ACCEPTED;
     }
 
     public void decline() {
         Market.getInstance().removeRequestById(id);
+        requestStatus = RequestStatus.DECLINED;
     }
 
     @Override
@@ -75,6 +79,11 @@ public abstract class Request extends IdRecognized implements Savable {
     enum RequestStatus{
         WAITING_FOR_CONFIRMATION,
         ACCEPTED,
-        DECLINED,
+        DECLINED;
+
+        @Override
+        public String toString() {
+            return super.toString();
+        }
     }
 }

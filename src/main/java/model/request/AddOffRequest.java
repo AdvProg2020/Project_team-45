@@ -1,17 +1,11 @@
 package model.request;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import model.Market;
 import model.Off;
 import model.product.Product;
 import model.user.Seller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 
 public class AddOffRequest extends Request{
@@ -36,6 +30,10 @@ public class AddOffRequest extends Request{
             product.getSellerInfoForProductByUsername(seller.getUsername()).setOff(off);
         }
         Market.getInstance().getAllOffs().add(off);
+    }
+
+    public Off getOff() {
+        return off;
     }
 
     @Override

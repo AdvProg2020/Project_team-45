@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import newViewHatami.ValidatorField;
 import newViewNedaei.MenuController;
 
 import java.net.URL;
@@ -26,7 +27,10 @@ public class ProductsMenu implements Initializable {
     public TextField productNameField;
     public VBox companiesNameList;
     public VBox sellersUsernameList;
+    public CheckBox availableCheckBox;
     public VBox specialFeaturesListVBox;
+    public ValidatorField minPriceField;
+    public ValidatorField maxPriceField;
     public ChoiceBox sortingChoiceBox;
     public GridPane productsListPain;
     public HBox pageNumberVBox;
@@ -132,12 +136,37 @@ public class ProductsMenu implements Initializable {
         showProducts();
     }
 
-    public void addPriceFilter() {
+    public void filteringByStock() {
+        if (availableCheckBox.isSelected())
+            filteringController.addFilter("available", "");
+        else
+            filteringController.removeFilter("available", "");
+    }
 
+    public void submitPriceFilter() {
+        addMinPriceFilter();
+        addMaxPriceFilter();
     }
 
     public void clearPriceFilter() {
+        minPriceField.clear();
+        maxPriceField.clear();
+    }
 
+    public void addMinPriceFilter() {
+        if (minPriceField.validate()) {
+            filteringController.addFilter("minimumPrice", "" + minPriceField.getText());
+        } else {
+            minPriceField.clear();
+        }
+    }
+
+    public void addMaxPriceFilter() {
+        if (minPriceField.validate()) {
+            filteringController.addFilter("maximumPrice", "" + maxPriceField.getText());
+        } else {
+            maxPriceField.clear();
+        }
     }
 
 //    private void clearFilter(String type, VBox inputVBox) {
@@ -180,7 +209,6 @@ public class ProductsMenu implements Initializable {
     private VBox createProductInfoVBox(HashMap<String, String> productInfo) {
         VBox productInfoVBox = new VBox();
         ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
-
         productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image

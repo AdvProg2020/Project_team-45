@@ -1,8 +1,7 @@
 package controller.userControllers;
 
-import consuleview.RegisterPanel;
 import controller.InputValidator;
-import controller.managers.Creator;
+import controller.managers.Manager;
 import model.Company;
 import model.Market;
 import model.Off;
@@ -19,24 +18,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class SellerController extends UserController implements Creator {
+public class SellerController extends UserController implements Manager {
     private static final SellerController instance = new SellerController();
 
-    private final ArrayList<String> productAvailableFieldsToEdit;
-    private final LinkedHashMap<String, InputValidator> existingProductFieldsToCreate;
     private final LinkedHashMap<String, InputValidator> newProductFieldsToCreate;
-    private final ArrayList<String> offAvailableFieldsToEdit;
     private final ArrayList<String> offFieldsToCreate;
     private SellLog currentSellLog;
 
     private SellerController() {
         super();
-        this.productAvailableFieldsToEdit = new ArrayList<>();
-        this.productAvailableFieldsToEdit.addAll(Arrays.asList("price", "stock", "offId"));
-        this.existingProductFieldsToCreate = makeExistingFieldsToCreate();
         this.newProductFieldsToCreate = makeNewProductFieldsToCreate();
-        this.offAvailableFieldsToEdit = new ArrayList<>();
-        this.offAvailableFieldsToEdit.addAll(Arrays.asList("startTime", "endTime", "discountAmount"));
 
         this.offFieldsToCreate = new ArrayList<>();
         this.offFieldsToCreate.addAll(Arrays.asList("productIds(separated by ',')", "startTime", "endTime"
@@ -130,25 +121,14 @@ public class SellerController extends UserController implements Creator {
                 .getUsername()).getAllBuyers();
     }
 
-    public boolean isProductFieldAvailableToEdit(String productId, String field) {
-        return (productAvailableFieldsToEdit.contains(field)
-                || getSellerAvailableProductById(productId).getCategoryFeatures().containsKey(field));
-    }
 
     public void createProductEditionRequest(String productId, HashMap<String, String> fieldsAndValues) {
         Market.getInstance().getAllRequests().add(new ProductEditionRequest(productId, ((Seller)UserController.getActiveUser())
                 , fieldsAndValues));
     }
 
-    public String getProductAvailableFieldsToEditDisplay() {
-        return "" + productAvailableFieldsToEdit;
-    }
-
     // add product panel
 
-    public LinkedHashMap<String, InputValidator> getExistingProductFieldsToCreate() {
-        return existingProductFieldsToCreate;
-    }
 
     public LinkedHashMap<String, InputValidator> getNewProductFieldsToCreate() {
         return newProductFieldsToCreate;
@@ -194,10 +174,6 @@ public class SellerController extends UserController implements Creator {
                 "discountAmount = " + off.getDiscountAmount();
     }
 
-    public ArrayList<String> getOffAvailableFieldsToEdit() {
-        return offAvailableFieldsToEdit;
-    }
-
     public void createOffEditionRequest(String offId, HashMap<String, String> fieldsAndValues) {
         Off off = getAvailableOffById(offId);
         if (off == null) {
@@ -221,27 +197,6 @@ public class SellerController extends UserController implements Creator {
         return ((Seller) UserController.getActiveUser()).getBalance();
     }
 
-    @Override
-    public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        LinkedHashMap<String, InputValidator> necessaryFields = super.getNecessaryFieldsToCreate();
-        necessaryFields.put("company name", InputValidator.getSimpleTextValidator());
-        necessaryFields.put("company info", InputValidator.getSimpleTextValidator());
-        return necessaryFields;
-    }
-
-    @Override
-    public LinkedHashMap<String, InputValidator> getOptionalFieldsToCreate() {
-        return null;
-    }
-
-    @Override
-    public void createItem(HashMap<String, String> filledFeatures) {
-        filledFeatures.put("username", RegisterPanel.getLastRegisterUsername());
-        Seller newSeller = new Seller(new PersonalInfo(filledFeatures), new Company(filledFeatures));
-        SellerRegisterRequest registerRequest  = new SellerRegisterRequest(newSeller);
-        market.addRequest(registerRequest);
-        market.addRequestedSeller(newSeller);
-    }
 
     public void createItem(HashMap<String, String> filledFeatures, String username) {
         filledFeatures.put("username", username);

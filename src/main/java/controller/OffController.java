@@ -1,14 +1,10 @@
 package controller;
 
-import controller.managers.Printer;
-import controller.userControllers.UserController;
+import controller.managers.Manager;
 import model.Market;
 import model.Off;
-import model.user.Seller;
 
-import java.util.ArrayList;
-
-public class OffController implements Printer {
+public class OffController implements Manager {
     private static final OffController instance = new OffController();
     private Off currentOff;
 
@@ -28,24 +24,6 @@ public class OffController implements Printer {
     }
 
     public Off getOffById(String offId) {
-        return null;
-    }
-
-    @Override
-    public String getAllInListAsString() {
-        Seller activeSeller = (Seller) UserController.getActiveUser();
-        ArrayList<Off> sellerOffs = new ArrayList<>();
-        sellerOffs.addAll(activeSeller.getListOfOffs().values());
-        StringBuilder offsListString = new StringBuilder("Id,discount amount\n");
-        for (Off off : sellerOffs) {
-            offsListString.append(off.getId() + "," + off.getDiscountAmount() + "\n");
-        }
-        return offsListString.toString();
-    }
-
-    @Override
-    public String getDetailStringById(String Id) {
-        // should refactor // TODO : not now
         return null;
     }
 

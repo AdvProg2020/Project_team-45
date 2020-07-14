@@ -116,11 +116,6 @@ public class ProductController implements Deleter {
         return true;
     }
 
-    @Override
-    public boolean justRequests() {
-        return false;
-    }
-
     public void removeProduct(Product product) {
         removeProductFromSellersList(product);
         removeProductFromCategory(product);
@@ -135,22 +130,6 @@ public class ProductController implements Deleter {
         for (ProductSellInfo sellInfo : product.getSellInfosList()) {
             sellInfo.removeProduct();
         }
-    }
-
-    public String getAllInListAsString() {
-        ArrayList<Product> allProducts = market.getAllProducts();
-        StringBuilder output = new StringBuilder();
-        output.append("product Id,product name\n");
-        for (Product product : allProducts) {
-            String productInfo = product.getId() + "," + product.getName() + "\n";
-            output.append(productInfo);
-        }
-        return output.toString();
-    }
-
-    public String getDetailStringById(String Id) {
-        // not involved yet //
-        return null;
     }
 
     @Override

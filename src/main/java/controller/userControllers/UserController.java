@@ -10,7 +10,6 @@ import model.user.User;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class UserController {
     private static final UserController instance = new UserController();
@@ -158,15 +157,6 @@ public class UserController {
         return market.getUserByUsername(username) != null;
     }
 
-    public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        LinkedHashMap<String, InputValidator> necessaryFields = new LinkedHashMap<>();
-        necessaryFields.put("password", InputValidator.getSimpleTextValidator());
-        necessaryFields.put("first name", InputValidator.getSimpleTextValidator());
-        necessaryFields.put("last name", InputValidator.getSimpleTextValidator());
-        necessaryFields.put("email address", InputValidator.getEmailAddressValidator());
-        necessaryFields.put("phone number", InputValidator.getSimpleNumberValidator());
-        return necessaryFields;
-    }
 
     public static void setLoggedIn(boolean loggedIn) {
         UserController.loggedIn = loggedIn;

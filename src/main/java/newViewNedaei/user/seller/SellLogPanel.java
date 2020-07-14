@@ -4,7 +4,6 @@ import controller.userControllers.SellerController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import model.log.SellLog;
-import newViewNedaei.MenuController;
 import newViewNedaei.Panel;
 
 import java.text.SimpleDateFormat;

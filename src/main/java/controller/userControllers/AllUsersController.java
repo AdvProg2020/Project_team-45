@@ -10,7 +10,6 @@ import model.user.Buyer;
 import model.user.Seller;
 import model.user.User;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,48 +27,12 @@ public class AllUsersController implements Deleter {
         this.market = Market.getInstance();
     }
 
-    public String getAllInListAsString() {
-        ArrayList<User> allUsers = market.getAllUsers();
-        StringBuilder adminsString = new StringBuilder();
-        StringBuilder buyersString = new StringBuilder();
-        StringBuilder sellersString = new StringBuilder();
-        for (User user : allUsers) {
-            if (user.equals(UserController.getActiveUser()))
-                continue;
-            String userInfo = user.getPersonalInfo().getUsername() + "," + user.getRole() + "\n";
-            switch (user.getRole()) {
-                case "admin":
-                    adminsString.append(userInfo);
-                    break;
-                case "buyer":
-                    buyersString.append(userInfo);
-                    break;
-                case "seller":
-                    sellersString.append(userInfo);
-                    break;
-            }
-        }
-        return "username,role\n" + adminsString + sellersString + buyersString;
-    }
-
-    public String getDetailStringById(String Id) {
-        User showingUser = getItemById(Id);
-        if (showingUser == null)
-            return null;
-        return showingUser.getPersonalInfo().toString();
-    }
-
     public boolean deleteItemById(String Id) throws Exception {
         User removingUser = getItemById(Id);
         if (removingUser == null)
             return false;
         removeUser(removingUser);
         return true;
-    }
-
-    @Override
-    public boolean justRequests() {
-        return false;
     }
 
     private void removeUser(User removingUser) throws Exception {

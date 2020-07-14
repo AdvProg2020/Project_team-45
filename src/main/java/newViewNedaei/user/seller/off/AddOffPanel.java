@@ -2,7 +2,6 @@ package newViewNedaei.user.seller.off;
 
 import controller.userControllers.SellerController;
 import controller.userControllers.UserController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -21,9 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Set;
-import java.util.regex.Matcher;
 
 public class AddOffPanel extends Panel {
     public ChoiceBox<String> products;

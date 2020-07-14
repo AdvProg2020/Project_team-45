@@ -1,6 +1,5 @@
 package controller.managers;
 
-public interface Deleter extends Printer {
+public interface Deleter extends Manager {
     boolean deleteItemById(String Id) throws Exception;
-    boolean justRequests();
 }

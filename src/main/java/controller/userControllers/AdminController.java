@@ -1,16 +1,14 @@
 package controller.userControllers;
 
-import controller.InputValidator;
-import controller.managers.Creator;
+import controller.managers.Manager;
 import model.user.Admin;
 import model.user.PersonalInfo;
 import model.user.User;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
-public class AdminController extends UserController implements Creator {
-    private static AdminController instance = new AdminController();
+public class AdminController extends UserController implements Manager {
+    private static final AdminController instance = new AdminController();
 
     public static AdminController getInstance() {
         return instance;
@@ -20,21 +18,7 @@ public class AdminController extends UserController implements Creator {
         super();
     }
 
-    public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
 
-        LinkedHashMap<String, InputValidator> necessaryFieldsToCreate = new LinkedHashMap<>();
-        necessaryFieldsToCreate.put("username", InputValidator.getUsernameIsNewValidator());
-        necessaryFieldsToCreate.putAll(super.getNecessaryFieldsToCreate());
-
-        return necessaryFieldsToCreate;
-    }
-
-    @Override
-    public LinkedHashMap<String, InputValidator> getOptionalFieldsToCreate() {
-        return null;
-    }
-
-    @Override
     public void createItem(HashMap<String, String> filledFeatures) {
         Admin newAdmin = new Admin(new PersonalInfo(filledFeatures));
         market.addUserToList(newAdmin);

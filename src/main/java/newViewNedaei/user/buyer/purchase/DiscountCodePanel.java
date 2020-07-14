@@ -3,7 +3,6 @@ package newViewNedaei.user.buyer.purchase;
 import controller.userControllers.BuyerController;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import newViewNedaei.MenuController;
 import newViewNedaei.Panel;
 

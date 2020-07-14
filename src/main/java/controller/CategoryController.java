@@ -1,10 +1,6 @@
 package controller;
 
-import consuleview.UIPage;
-import consuleview.hatemi.adminMenus.CategoriesManagingMenu;
-import controller.managers.Creator;
 import controller.managers.Editor;
-import model.Company;
 import model.Market;
 import model.category.Category;
 import model.category.FinalCategory;
@@ -15,7 +11,7 @@ import model.product.ProductSellInfo;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CategoryController implements Editor, Creator {
+public class CategoryController implements Editor {
     private static final CategoryController instance = new CategoryController();
     private final Market market;
     private Category activeCategory;
@@ -54,23 +50,22 @@ public class CategoryController implements Editor, Creator {
             removingCategory.getParent().removeSubcategoryFromList(removingCategory);
     }
 
+    public void createItem(HashMap<String, String> filledFeatures) {
+        Category createdCategory;
+        ArrayList<String> categorySpecialFeatures;
+
+        categorySpecialFeatures = new ArrayList<String>(Arrays.asList(filledFeatures.get("features").trim().split("\n")));
+        if (filledFeatures.get("is final?").equals("yes")) {
+            createdCategory = new FinalCategory(filledFeatures, categorySpecialFeatures);
+        } else createdCategory = new ParentCategory(filledFeatures);
+        if (createdCategory.isMain())
+            market.addMainCategoryToList(createdCategory);
+        else createdCategory.getParent().addSubcategory(createdCategory);
+        market.addCategoryToList(createdCategory);
+    }
+
+
     public void setParentOfCategory(Category category, String parentName) {
-    }
-
-    public LinkedHashMap<String, InputValidator> getAvailableFieldsToEdit() {
-        LinkedHashMap<String, InputValidator> availableFieldsToEdit = new LinkedHashMap<>();
-        availableFieldsToEdit.put("name", InputValidator.getSimpleTextValidator());
-        return availableFieldsToEdit;
-    }
-
-    @Override
-    public void editItem(Object editingObject, HashMap<String, String> changedFields) {
-        Category editingCategory = (Category) editingObject;
-        if (changedFields.containsKey("name")) {
-            editingCategory.setName(changedFields.get("name"));
-        }
-        if (editingCategory.getType().equals("FinalCategory")) {
-        }
     }
 
     private Category getCategoryById(String categoryId) {
@@ -87,30 +82,6 @@ public class CategoryController implements Editor, Creator {
             return false;
         removeCategory(removingCategory);
         return true;
-    }
-
-    @Override
-    public boolean justRequests() {
-        return false;
-    }
-
-    public String getAllInListAsString() {
-        ArrayList<Category> allCategories = market.getAllCategories();
-        StringBuilder listString = new StringBuilder("name,parent,is final?\n");
-        String categoryInfo;
-        for (Category category : allCategories) {
-            if (category.isMain())
-                categoryInfo = category.getName() + "," + "IS MAIN" + "," + category.isFinal() + "\n";
-            else
-                categoryInfo = category.getName() + "," + category.getParent().getName() + "," + category.isFinal() + "\n";
-            listString.append(categoryInfo);
-        }
-        return listString.toString();
-    }
-
-    public String getDetailStringById(String Id) {
-        // not involved yet //
-        return null;
     }
 
 
@@ -234,36 +205,6 @@ public class CategoryController implements Editor, Creator {
         return null;
     }
 
-    public LinkedHashMap<String, InputValidator> getNecessaryFieldsToCreate() {
-        LinkedHashMap<String, InputValidator> necessaryFields = new LinkedHashMap<>();
-        necessaryFields.put("parent category", InputValidator.getCategoryParentValidator());
-        necessaryFields.put("is final?", new InputValidator("yes|no", "yes or no"));
-        return necessaryFields;
-    }
-
-    @Override
-    public LinkedHashMap<String, InputValidator> getOptionalFieldsToCreate() {
-        return null;
-    }
-
-    @Override
-    public void createItem(HashMap<String, String> filledFeatures) {
-        Category createdCategory;
-        ArrayList<String> categorySpecialFeatures;
-        if (!filledFeatures.containsKey("name")) {
-            filledFeatures.put("name", UIPage.getMatcher().group(1));
-            categorySpecialFeatures = CategoriesManagingMenu.getCategoryFeatures();
-        } else {
-            categorySpecialFeatures = new ArrayList<String>(Arrays.asList(filledFeatures.get("features").trim().split("\n")));
-        }
-        if (filledFeatures.get("is final?").equals("yes")) {
-            createdCategory = new FinalCategory(filledFeatures, categorySpecialFeatures);
-        } else createdCategory = new ParentCategory(filledFeatures);
-        if (createdCategory.isMain())
-            market.addMainCategoryToList(createdCategory);
-        else createdCategory.getParent().addSubcategory(createdCategory);
-        market.addCategoryToList(createdCategory);
-    }
 
     @Override
     public Category getItemById(String Id) {

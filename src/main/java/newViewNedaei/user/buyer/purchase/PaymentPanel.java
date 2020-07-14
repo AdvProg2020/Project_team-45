@@ -1,7 +1,6 @@
 package newViewNedaei.user.buyer.purchase;
 
 import controller.userControllers.BuyerController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;

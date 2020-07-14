@@ -1,12 +1,10 @@
 package controller;
 
-import controller.managers.Printer;
+import controller.managers.Manager;
 import model.Market;
 import model.request.Request;
 
-import java.util.ArrayList;
-
-public class RequestController implements Printer {
+public class RequestController implements Manager {
     private static final RequestController instance = new RequestController();
     private final Market market = Market.getInstance();
 
@@ -19,23 +17,6 @@ public class RequestController implements Printer {
 
     public Request createRequestByRequestName(String requestName) {
         return null;
-    }
-
-    public String getAllInListAsString() {
-        ArrayList<Request> allRequests = market.getAllRequests();
-        StringBuilder listString = new StringBuilder("Id,action,status\n");
-        for (Request request : allRequests) {
-            String info = request.getId() + "," + request.getType() + "," + request.getRequestStatus() + "\n";
-            listString.append(info);
-        }
-        return listString.toString();
-    }
-
-    public String getDetailStringById(String Id) {
-        Request showingRequest = getItemById(Id);
-        if (showingRequest == null)
-            return null;
-        return showingRequest.toString();
     }
 
     @Override

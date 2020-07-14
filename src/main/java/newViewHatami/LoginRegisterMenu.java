@@ -3,14 +3,12 @@ package newViewHatami;
 import controller.userControllers.UserController;
 import controller.userControllers.UsernameIsRequestException;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import newViewNedaei.MenuController;
 
 import java.io.IOException;
-import java.util.stream.Stream;
 
 public class LoginRegisterMenu {
     public ToggleButton registerToggleButton;

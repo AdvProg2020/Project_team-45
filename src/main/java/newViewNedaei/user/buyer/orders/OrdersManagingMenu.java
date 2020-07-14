@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.log.BuyLog;
-import model.product.Product;
 import model.user.Buyer;
 import newViewNedaei.MenuController;
 

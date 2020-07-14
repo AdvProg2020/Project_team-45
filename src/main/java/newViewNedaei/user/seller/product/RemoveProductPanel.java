@@ -7,7 +7,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import model.product.Product;
 import model.user.Seller;
-import newViewNedaei.MenuController;
 import newViewNedaei.Panel;
 
 import java.util.Set;

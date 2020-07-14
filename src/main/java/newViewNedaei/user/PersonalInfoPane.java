@@ -3,16 +3,12 @@ package newViewNedaei.user;
 import controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
 import model.user.PersonalInfo;
 import newViewHatami.Validator;
 import newViewHatami.ValidatorField;
-
-import java.io.File;
 
 public class PersonalInfoPane {
     public Label role;

@@ -54,7 +54,7 @@ public class CategoryController implements Editor {
         Category createdCategory;
         ArrayList<String> categorySpecialFeatures;
 
-        categorySpecialFeatures = new ArrayList<String>(Arrays.asList(filledFeatures.get("features").trim().split("\n")));
+        categorySpecialFeatures = new ArrayList<>(Arrays.asList(filledFeatures.get("features").trim().split("\n")));
         if (filledFeatures.get("is final?").equals("yes")) {
             createdCategory = new FinalCategory(filledFeatures, categorySpecialFeatures);
         } else createdCategory = new ParentCategory(filledFeatures);
@@ -62,10 +62,6 @@ public class CategoryController implements Editor {
             market.addMainCategoryToList(createdCategory);
         else createdCategory.getParent().addSubcategory(createdCategory);
         market.addCategoryToList(createdCategory);
-    }
-
-
-    public void setParentOfCategory(Category category, String parentName) {
     }
 
     private Category getCategoryById(String categoryId) {
@@ -94,47 +90,6 @@ public class CategoryController implements Editor {
         return mainCategoriesName;
     }
 
-    public ArrayList<String> getSubcategoriesByNameCategory(String categoryName) {
-        ArrayList<String> subcategoriesName = new ArrayList<String>();
-        Category mainCategory = market.getMainCategoryByName(categoryName);
-        if (mainCategory == null) {
-            return null;
-        }
-        if (mainCategory.getType().equals("ParentCategory")) {
-            ArrayList<Category> subcategories = ((ParentCategory) mainCategory).getSubcategories();
-            for (Category subcategory : subcategories) {
-                subcategoriesName.add(subcategory.getName());
-            }
-        }
-        return subcategoriesName;
-    }
-
-    public ArrayList<String> getActiveCategoryProducts() {
-        ArrayList<String> output = new ArrayList<>();
-        ArrayList<Product> activeCategoryProducts = activeCategory.getProductsList();
-        activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
-        SortingController.getInstance().sortingProducts(activeCategoryProducts);
-        for (Product product : activeCategoryProducts) {
-            output.add(product.toString());
-        }
-        return output;
-    }
-
-    public ArrayList<String> getActiveCategoryDiscountedProducts() {
-        ArrayList<String> output = new ArrayList<>();
-        ArrayList<Product> activeCategoryProducts;
-        if (activeCategory == null) {
-            activeCategoryProducts = market.getAllDiscountedProductsList();
-        } else {
-            activeCategoryProducts = activeCategory.getInOffProductsList();
-        }
-        activeCategoryProducts = FilteringController.getInstance().filteringProducts(activeCategoryProducts);
-        SortingController.getInstance().sortingProducts(activeCategoryProducts);
-        for (Product product : activeCategoryProducts) {
-            output.addAll(product.getOffsInfo());
-        }
-        return output;
-    }
 
     public ArrayList<String> getActiveCategorySubcategories() {
         ArrayList<String> subcategoriesName = new ArrayList<>();
@@ -168,25 +123,17 @@ public class CategoryController implements Editor {
         isOffMenu = false;
     }
 
-//    public boolean setActiveCategoryByName(String name) {
-//        Category category = market.getCategoryByName(name);
-//        if (category != null && (category.getParent() == activeCategory
-//                || (activeCategory == null && category.getParent().getParent() == null))) {
-//            activeCategory = category;
-//            return true;
-//        }
-//        return false;
-//        // TODO bagheri
-//    }
 
     public void clearActiveCategory() {
         activeCategory = null;
+        // TODO : bagheri use it
     }
 
     public void backCategory() {
         if (activeCategory != null) {
             activeCategory = activeCategory.getParent();
         }
+        // TODO : bagheri use it
     }
 
     public ArrayList<Product> getActiveCategoryProductsList() {
@@ -215,11 +162,6 @@ public class CategoryController implements Editor {
         List<Category> allCategories = Market.getInstance().getAllCategories();
         return allCategories.stream().filter(category -> !category.isFinal()).map(category -> (ParentCategory) category).collect(Collectors.toList());
 
-    }
-
-    public List<FinalCategory> getFinalCategories() {
-        List<Category> allCategories = Market.getInstance().getAllCategories();
-        return allCategories.stream().filter(Category::isFinal).map(category -> (FinalCategory) category).collect(Collectors.toList());
     }
 
     public void addFeatureToCategory(String editingCategoryId, String newFeature) {

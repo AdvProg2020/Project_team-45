@@ -7,8 +7,6 @@ import model.user.Buyer;
 import model.user.PersonalInfo;
 import model.user.User;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class UserController {
@@ -17,13 +15,9 @@ public class UserController {
     private static User activeUser;
     private static AnonymousUser anonymousUser = new AnonymousUser();
     private static boolean loggedIn;
-    private static ArrayList<String> personalInfoFieldsToEdit;
 
     protected UserController() {
         this.market = Market.getInstance();
-        personalInfoFieldsToEdit = new ArrayList<>();
-        personalInfoFieldsToEdit.addAll(Arrays.asList("firstName", "lastName", "emailAddress", "phoneNumber"
-                , "password"));
     }
 
     public static UserController getInstance() {
@@ -40,22 +34,6 @@ public class UserController {
 
     public static boolean isLoggedIn() {
         return loggedIn;
-    }
-
-    public static boolean isBuyerLoggedIn() {
-        return loggedIn && activeUser.getRole().equals("buyer");
-    }
-
-    public static boolean isSellerLoggedIn() {
-        return loggedIn && activeUser.getRole().equals("seller");
-    }
-
-    public static boolean isAdminLoggedIn() {
-        return loggedIn && activeUser.getRole().equals("admin");
-    }
-
-    public static ArrayList<String> getPersonalInfoFieldsToEdit() {
-        return personalInfoFieldsToEdit;
     }
 
     public static HashMap<String, String> getUserViewInfo(String username) {
@@ -104,29 +82,8 @@ public class UserController {
         }
     }
 
-    public String getPersonalInfoDisplay() {
-        PersonalInfo personalInfo = activeUser.getPersonalInfo();
-        return personalInfo.toString();
-    }
 
     ///
-
-    public boolean setActiveUserByUsername(String username) {
-        activeUser = market.getUserByUsername(username);
-        return activeUser != null;
-    }
-
-    public boolean login(String password) {
-        if (activeUser.checkPassword(password)) {
-            loggedIn = true;
-            if (activeUser.getRole().equals("buyer")) {
-                ((Buyer) activeUser).setCart(anonymousUser.getCart());
-            }
-            anonymousUser = new AnonymousUser();
-            return true;
-        }
-        return false;
-    }
 
     public boolean login(String username, String password) {
         User loggingInUser = market.getUserByUsername(username);
@@ -142,24 +99,15 @@ public class UserController {
         return false;
     }
 
-    public boolean logout() {
-        if (loggedIn) {
+    public void logout() {
             loggedIn = false;
             activeUser = null;
-            return true;
-        }
-        return false;
     }
 
     public boolean usernameExists(String username) throws UsernameIsRequestException {
         if (market.usernameRequestExists(username))
             throw new UsernameIsRequestException();
         return market.getUserByUsername(username) != null;
-    }
-
-
-    public static void setLoggedIn(boolean loggedIn) {
-        UserController.loggedIn = loggedIn;
     }
 
     public boolean onlyHasAdmin() {

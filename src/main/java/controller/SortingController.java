@@ -25,10 +25,6 @@ public class SortingController {
         return instance;
     }
 
-    public ArrayList<String> getAvailableSorts() {
-        return new ArrayList<>(sortTypes);
-    }
-
     public boolean setActiveSort(String inputSort) {
         if (sortTypes.contains(inputSort)) {
             activeSort = inputSort;
@@ -37,11 +33,8 @@ public class SortingController {
         return false;
     }
 
-    public String showCurrentSort() {
-        return activeSort;
-    }
-
     public void disableCurrentSort() {
+        // TODO : bagheri use it
         activeSort = "seen";
     }
 

@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class ProductController implements Deleter {
+
+    // TODO : bagheri check all
     private static final ProductController instance = new ProductController();
     private final Market market;
     private Product activeProduct;
@@ -29,9 +31,6 @@ public class ProductController implements Deleter {
         return instance;
     }
 
-    //    public Product createProduct() {
-//        return null;
-//    }
 
     public boolean setActiveProductBYProductIdForCategory(String productId) {
         ArrayList<Product> productsList = CategoryController.getInstance().getActiveCategoryProductsList();
@@ -55,23 +54,10 @@ public class ProductController implements Deleter {
         return false;
     }
 
-    public void getProductBuyers(Product product) {
-    }
-
     public LinkedHashMap<String, String> getProductDigestInformation() {
         return activeProduct.getDigestInformation();
     }
 
-    public LinkedHashMap<String, String> getProductAttributes() {
-        return activeProduct.getAttributes();
-    }
-
-    public LinkedHashMap<String, String> getProductAttributesById(String productId) {
-        Product product = CategoryController.getInstance().getActiveCategoryProduct(productId);
-        if (product == null)
-            return null;
-        return product.getAttributes();
-    }
 
     public void addActiveProductToCart() {
         CartController.getInstance().addProductToCart(activeProduct, activeProductSellInfo);
@@ -83,18 +69,6 @@ public class ProductController implements Deleter {
             return false;
         activeProductSellInfo = sellInfo;
         return true;
-    }
-
-    public float getAverageScore() {
-        return activeProduct.getAverageScore();
-    }
-
-    public ArrayList<String> getProductComments() {
-        ArrayList<String> productComments = new ArrayList<>();
-        for (Comment comment : activeProduct.getApprovedComments()) {
-            productComments.add(comment.showComment());
-        }
-        return productComments;
     }
 
     public void addComment(String title, String content) {
@@ -195,6 +169,7 @@ public class ProductController implements Deleter {
     public void setActiveProductById(String productId) {
         activeProduct = market.getProductById(productId);
     }
+
 
     public HashMap<String, String> getActiveSellInfo() {
         return activeProductSellInfo.getInformation();

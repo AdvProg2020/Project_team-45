@@ -9,28 +9,18 @@ public class OffController implements Manager {
     private Off currentOff;
 
     private OffController() {
-
     }
 
     public static OffController getInstance() {
         return instance;
     }
 
-    public Off createOff() {
-        return null;
-    }
-
-    public void setFieldOfOff(Off off, String field, String value) {
-    }
-
-    public Off getOffById(String offId) {
-        return null;
-    }
-
     @Override
     public Off getItemById(String Id) {
         return Market.getInstance().getOffById(Id);
     }
+
+    // TODO : edit come here
 
     public Off getCurrentOff() {
         return currentOff;

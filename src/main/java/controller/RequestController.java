@@ -8,8 +8,11 @@ public class RequestController implements Manager {
     private static final RequestController instance = new RequestController();
     private final Market market = Market.getInstance();
 
+    // TODO : bring apply here?
+
     private RequestController() {
     }
+
 
     public static RequestController getInstance() {
         return instance;

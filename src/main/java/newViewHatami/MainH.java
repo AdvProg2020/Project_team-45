@@ -1,6 +1,5 @@
 package newViewHatami;
 
-import controller.userControllers.UserController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,7 +21,7 @@ public class MainH extends Application {
 //        MenuManagement.run();
         Market.getInstance().initialize();
 
-        UserController.getInstance().setActiveUserByUsername("a");
+//        UserController.getInstance().setActiveUserByUsername("a");
         launch(args);
     }
 }

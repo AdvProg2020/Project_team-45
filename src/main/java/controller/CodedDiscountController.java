@@ -19,10 +19,6 @@ public class CodedDiscountController implements Editor {
         return instance;
     }
 
-    public boolean isDiscountCodeValid(String code) {
-        return false;
-    }
-
     public boolean deleteItemById(String Id) {
         CodedDiscount removingCodedDiscount = getItemById(Id);
         if (removingCodedDiscount == null)

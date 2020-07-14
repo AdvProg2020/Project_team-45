@@ -87,7 +87,7 @@ public class TopPane {
 
 
     public void logItOut() {
-        UserController.setLoggedIn(false);
+        UserController.getInstance().logout();
         loginRegister.setDisable(false);
         logout.setDisable(true);
         CartController.getInstance().resetCart();

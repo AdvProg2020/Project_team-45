@@ -1,12 +1,12 @@
 package controller;
 
-import controller.managers.Editor;
+import controller.managers.Deleter;
 import model.CodedDiscount;
 import model.Market;
 
 import java.util.HashMap;
 
-public class CodedDiscountController implements Editor {
+public class CodedDiscountController implements Deleter {
     private static final CodedDiscountController instance = new CodedDiscountController();
     private final Market market = Market.getInstance();
     private CodedDiscount currentDiscount;

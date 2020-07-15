@@ -1,6 +1,6 @@
 package controller;
 
-import controller.managers.Editor;
+import controller.managers.Deleter;
 import model.Market;
 import model.category.Category;
 import model.category.FinalCategory;
@@ -11,7 +11,7 @@ import model.product.ProductSellInfo;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CategoryController implements Editor {
+public class CategoryController implements Deleter {
     private static final CategoryController instance = new CategoryController();
     private final Market market;
     private Category activeCategory;

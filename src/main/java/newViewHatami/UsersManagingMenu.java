@@ -12,7 +12,7 @@ import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 
-public class UsersManagingMenu extends AppMenu {
+public class UsersManagingMenu {
     public ListView usersList;
     public Label errorLabel;
     private String selectedUsername;

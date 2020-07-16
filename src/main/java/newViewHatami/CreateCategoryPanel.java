@@ -8,8 +8,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
-import model.category.Category;
-import model.category.ParentCategory;
 import newViewNedaei.Panel;
 
 import java.util.HashMap;
@@ -32,18 +30,16 @@ public class CreateCategoryPanel extends Panel {
 
     private void setUpChoiceBox() {
         parentCategoryChoiceBox.setItems(FXCollections.observableArrayList());
-        ParentCategory nullCategory = Category.getNullCategory();
-        parentCategoryChoiceBox.getItems().add(nullCategory);
+        parentCategoryChoiceBox.getItems().add("null");
 
-        List<ParentCategory> parentCategories = CategoryController.getInstance().getParentCategories();
-        for (ParentCategory parentCategory : parentCategories) {
-            parentCategoryChoiceBox.getItems().add(parentCategory);
+        List<String> parentCategoriesNames = CategoryController.getInstance().getParentCategoriesNames();
+        for (String parentCategoryName : parentCategoriesNames) {
+            parentCategoryChoiceBox.getItems().add(parentCategoryName);
         }
-        parentCategoryChoiceBox.setValue(null);
-        parentCategoryChoiceBox.setValue(nullCategory);
+        parentCategoryChoiceBox.setValue("null");
     }
 
-    public ChoiceBox<ParentCategory> parentCategoryChoiceBox;
+    public ChoiceBox<String> parentCategoryChoiceBox;
     public CheckBox finalCategoryCheckBox;
     public ValidatorField categoryName;
 
@@ -62,7 +58,7 @@ public class CreateCategoryPanel extends Panel {
         categoryInfo.put("name", categoryName.getText());
         categoryInfo.put("is final?", finalCategoryCheckBox.isSelected() ? "yes" : "no");
         categoryInfo.put("features", categoryFeaturesInput.getText());
-        categoryInfo.put("parent category", parentCategoryChoiceBox.getValue().getName());
+        categoryInfo.put("parent category", parentCategoryChoiceBox.getValue());
 
         CategoryController.getInstance().createItem(categoryInfo);
         errorLabel.setText("category made successfully");

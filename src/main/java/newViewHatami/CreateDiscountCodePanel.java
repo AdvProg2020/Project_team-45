@@ -8,7 +8,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import model.user.Buyer;
 import newViewNedaei.Panel;
 
 import java.time.format.DateTimeFormatter;
@@ -34,9 +33,9 @@ public class CreateDiscountCodePanel extends Panel {
     }
 
     private void setUpChoiceBox() {
-        List<Buyer> allBuyers = AllUsersController.getInstance().getAllBuyers();
-        for (Buyer buyer : allBuyers) {
-            ownerChoiceBox.getItems().add(buyer.getUsername());
+        List<String> allBuyers = AllUsersController.getInstance().getAllBuyersNames();
+        for (String buyerUsername : allBuyers) {
+            ownerChoiceBox.getItems().add(buyerUsername);
         }
     }
 

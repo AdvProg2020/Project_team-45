@@ -11,7 +11,7 @@ import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 
-public class DiscountCodesManagingMenu extends AppMenu {
+public class DiscountCodesManagingMenu {
 
     public ListView<String> discountsList;
     public Label errorLabel;

@@ -158,10 +158,9 @@ public class CategoryController implements Deleter {
         return market.getCategoryByName(Id);
     }
 
-    public List<ParentCategory> getParentCategories() {
+    public List<String> getParentCategoriesNames() {
         List<Category> allCategories = Market.getInstance().getAllCategories();
-        return allCategories.stream().filter(category -> !category.isFinal()).map(category -> (ParentCategory) category).collect(Collectors.toList());
-
+        return allCategories.stream().filter(category -> !category.isFinal()).map(Category::getName).collect(Collectors.toList());
     }
 
     public void addFeatureToCategory(String editingCategoryId, String newFeature) {
@@ -299,5 +298,26 @@ public class CategoryController implements Deleter {
     public String getActiveCategoryName() {
         return activeCategory.getName();
     }
+
+    public ArrayList<String> getCategoriesTree() {
+        ArrayList<String> output = new ArrayList<>();
+        for (Category mainCategory : market.getMainCategories()) {
+            output.add(0 + ":" + mainCategory.getName());
+            if (!mainCategory.isFinal()) {
+                addSubcategories(1, output, (ParentCategory) mainCategory);
+            }
+        }
+        return output;
+    }
+
+    private void addSubcategories(int depth, ArrayList<String> current, ParentCategory parent) {
+        for (Category subcategory : parent.getSubcategories()) {
+            current.add(depth + ":" + subcategory.getName());
+            if (!subcategory.isFinal()) {
+                addSubcategories(depth+1, current, (ParentCategory) subcategory);
+            }
+        }
+    }
+
     //bagheri
 }

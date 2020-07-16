@@ -7,7 +7,7 @@ import newViewNedaei.MenuController;
 
 import java.io.IOException;
 
-public class AdminMenu extends AppMenu {
+public class AdminMenu {
 
     public Pane mainPane;
 

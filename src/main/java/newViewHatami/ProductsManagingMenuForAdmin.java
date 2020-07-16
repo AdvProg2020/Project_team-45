@@ -12,7 +12,7 @@ import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 
-public class ProductsManagingMenuForAdmin extends AppMenu {
+public class ProductsManagingMenuForAdmin {
     public ListView productsList;
     public Label errorLabel;
 

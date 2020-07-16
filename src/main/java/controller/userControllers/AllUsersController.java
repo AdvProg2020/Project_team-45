@@ -83,11 +83,11 @@ public class AllUsersController implements Deleter {
         }
     }
 
-    public List<Buyer> getAllBuyers() {
+    public List<String> getAllBuyersNames() {
         List<User> allUsersList = market.getAllUsers();
         return allUsersList.stream()
                 .filter(user -> user.getRole().equals("buyer"))
-                .map(buyer -> (Buyer) buyer)
+                .map(User::getUsername)
                 .collect(Collectors.toList());
     }
 
@@ -98,5 +98,9 @@ public class AllUsersController implements Deleter {
 
     public String getUsernameById(String userId) {
         return market.getUserById(userId).getUsername();
+    }
+
+    public boolean noAdmin() {
+        return market.noAdmin();
     }
 }

@@ -5,14 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import model.Market;
-import model.category.Category;
-import model.category.ParentCategory;
 import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 
-public class CategoriesManagingMenu extends AppMenu {
+public class CategoriesManagingMenu {
 
     public TreeView<String> categoriesTreeView;
     public Label errorLabel;
@@ -29,27 +26,23 @@ public class CategoriesManagingMenu extends AppMenu {
     }
 
     public void fillTreeList() {
-        ArrayList<Category> mainCategories = Market.getInstance().getMainCategories();
+        ArrayList<TreeItem<String>> stack = new ArrayList<>();
+        ArrayList<String> categoriesTree = CategoryController.getInstance().getCategoriesTree();
         TreeItem<String> rootNode = new TreeItem<String>("categories");
-        for (Category mainCategory : mainCategories) {
-            TreeItem<String> mainNode = new TreeItem<String>(mainCategory.getName());
-            addSubcategoriesToCategory(mainNode, mainCategory);
-            rootNode.getChildren().add(mainNode);
+        for (String categoryNode : categoriesTree) {
+            int depth = Integer.parseInt(categoryNode.split(":")[0]);
+            String categoryName = categoryNode.split(":")[1];
+            TreeItem<String> treeNode = new TreeItem<>(categoryName);
+            if (stack.size() <= depth)
+                stack.add(treeNode);
+            else
+                stack.set(depth, treeNode);
+            if (depth == 0)
+                rootNode.getChildren().add(treeNode);
+            else
+                stack.get(depth-1).getChildren().add(treeNode);
         }
         categoriesTreeView.setRoot(rootNode);
-    }
-
-
-    private void addSubcategoriesToCategory(TreeItem<String> rootNode, Category category) {
-        if (category.isFinal())
-            return;
-        rootNode.setExpanded(true);
-        ArrayList<Category> subCategories = ((ParentCategory) category).getSubcategories();
-        for (Category subCategory : subCategories) {
-            TreeItem<String> node = new TreeItem<String>(subCategory.getName());
-            addSubcategoriesToCategory(node, subCategory);
-            rootNode.getChildren().add(node);
-        }
     }
 
     public void editSelectedCategory() {

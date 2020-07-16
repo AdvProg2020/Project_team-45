@@ -1,10 +1,10 @@
 package newViewHatami;
 
+import controller.userControllers.AllUsersController;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import model.Market;
 import newViewNedaei.Panel;
 
 
@@ -34,7 +34,7 @@ public class CreateAdminPanel extends Panel {
         roleSelectionChoiceBox.setVisible(false);
         registerButton.setVisible(false);
         createAdminButton.setVisible(true);
-        if (Market.getInstance().noAdmin()) {
+        if (AllUsersController.getInstance().noAdmin()) {
             closeButton.setVisible(false);
         }
     }

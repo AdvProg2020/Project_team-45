@@ -1,10 +1,18 @@
 package network;
 
-public class ClientHandler implements Runnable {
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
-    private int token;
+public class ClientHandler extends Thread {
 
-    public ClientHandler() {
+    private final int token;
+    DataInputStream clientInputStream;
+    DataOutputStream clientOutputStream;
+
+    public ClientHandler(int token, DataInputStream clientInputStream, DataOutputStream clientOutputStream) {
+        this.token = token;
+        this.clientInputStream = clientInputStream;
+        this.clientOutputStream = clientOutputStream;
     }
 
     @Override

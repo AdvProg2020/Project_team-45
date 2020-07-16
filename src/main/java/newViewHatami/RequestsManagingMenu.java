@@ -12,7 +12,7 @@ import newViewNedaei.MenuController;
 
 import java.util.ArrayList;
 
-public class RequestsManagingMenu extends AppMenu {
+public class RequestsManagingMenu {
     public ListView requestsList;
     public Label messageLabel;
 

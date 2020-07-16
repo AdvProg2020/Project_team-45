@@ -1,10 +1,13 @@
 package newModel;
 
 public abstract class DataBaseCompatible {
-    protected String id;
+    protected int id;
     protected boolean justId;
 
-    public DataBaseCompatible(String id, boolean justId) {
+    public DataBaseCompatible() {
+    }
+
+    public DataBaseCompatible(int id, boolean justId) {
         this.id = id;
         this.justId = justId;
         if (!justId) {
@@ -16,7 +19,7 @@ public abstract class DataBaseCompatible {
 
     protected abstract void saveToDataBase();
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -24,7 +27,11 @@ public abstract class DataBaseCompatible {
         return justId;
     }
 
-    public boolean equals(DataBaseCompatible d) {
-        return this.id == d.id;
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof DataBaseCompatible)) {
+            return false;
+        }
+        return this.getId() == ((DataBaseCompatible) obj).getId();
     }
 }

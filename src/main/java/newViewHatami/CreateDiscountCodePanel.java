@@ -1,5 +1,4 @@
 package newViewHatami;
-
 import controller.CodedDiscountController;
 import controller.userControllers.AllUsersController;
 import javafx.fxml.FXML;

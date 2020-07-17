@@ -6,14 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import model.Market;
-import model.product.Product;
 import newViewNedaei.MenuController;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProductsManagingMenuForAdmin {
-    public ListView productsList;
+    public ListView<String> productsList;
     public Label errorLabel;
 
     @FXML
@@ -22,11 +20,9 @@ public class ProductsManagingMenuForAdmin {
     }
 
     private void fillList() {
-        ArrayList<Product> allProductsList = Market.getInstance().getAllProducts();
+        List<String> allProductsList = ProductController.getInstance().getAllProductsNamesList();
         ObservableList<String> items = FXCollections.observableArrayList();
-        for (Product product : allProductsList) {
-            items.add(product.getId() + ":" + product.getName());
-        }
+        items.addAll(allProductsList);
         productsList.setItems(items);
     }
 
@@ -45,7 +41,7 @@ public class ProductsManagingMenuForAdmin {
 
     public String getSelectedProductId(){
         if (productsList.getSelectionModel().getSelectedItem() != null)
-            return ((String) productsList.getSelectionModel().getSelectedItem()).split(":")[0];
+            return (productsList.getSelectionModel().getSelectedItem()).split(":")[0];
         errorLabel.setText("no selected product");
         return null;
     }

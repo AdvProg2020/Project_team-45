@@ -319,5 +319,11 @@ public class CategoryController implements Deleter {
         }
     }
 
+
+
     //bagheri
+
+    public void editCategoryName(String editingCategoryId, String newName) {
+        market.getCategoryById(editingCategoryId).setName(newName);
+    }
 }

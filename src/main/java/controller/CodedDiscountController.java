@@ -4,7 +4,10 @@ import controller.managers.Deleter;
 import model.CodedDiscount;
 import model.Market;
 
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CodedDiscountController implements Deleter {
     private static final CodedDiscountController instance = new CodedDiscountController();
@@ -58,5 +61,31 @@ public class CodedDiscountController implements Deleter {
 
     public HashMap<String, String> getDetailsHashMap(String viewingDiscountCode) {
         return market.getCodedDiscountByCode(viewingDiscountCode).convertToHashMap();
+    }
+
+    public List<String> getAllDiscountCodes() {
+        return market.getAllCodedDiscounts().stream().map(CodedDiscount::getCode).collect(Collectors.toList());
+    }
+
+    public void changeDiscountPercentage(String editingDiscountCode, int percentage) {
+        market.getCodedDiscountByCode(editingDiscountCode).setPercentage(percentage);
+    }
+
+    public void changeDiscountStartDate(String editingDiscountCode, Date newStartDate) {
+        market.getCodedDiscountByCode(editingDiscountCode).setStartDate(newStartDate);
+    }
+
+    public void changeDiscountEndDate(String editingDiscountCode, Date newEndDate) {
+        market.getCodedDiscountByCode(editingDiscountCode).setEndDate(newEndDate);
+    }
+
+    public boolean validateDate(String discountCode, Date startDate, Date endDate) {
+        if (startDate == null) {
+            startDate = market.getCodedDiscountByCode(discountCode).getStartDate();
+        }
+        if (endDate == null) {
+            endDate = market.getCodedDiscountByCode(discountCode).getEndDate();
+        }
+        return startDate.before(endDate);
     }
 }

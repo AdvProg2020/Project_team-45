@@ -14,6 +14,8 @@ import model.user.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductController implements Deleter {
 
@@ -187,6 +189,10 @@ public class ProductController implements Deleter {
             similarProductsInfo.add(product.getProductInfoForProductsList());
         }
         return similarProductsInfo;
+    }
+
+    public List<String> getAllProductsNamesList() {
+        return market.getAllProducts().stream().map(product -> product.getId() + ":" + product.getName()).collect(Collectors.toList());
     }
     //bahgeri
 }

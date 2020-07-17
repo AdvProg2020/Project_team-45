@@ -4,6 +4,9 @@ import controller.managers.Manager;
 import model.Market;
 import model.request.Request;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class RequestController implements Manager {
     private static final RequestController instance = new RequestController();
     private final Market market = Market.getInstance();
@@ -25,5 +28,9 @@ public class RequestController implements Manager {
     @Override
     public Request getItemById(String Id) {
         return market.getRequestById(Id);
+    }
+
+    public List<String> getAllRequestsIds() {
+        return market.getAllRequests().stream().map(Request::getId).collect(Collectors.toList());
     }
 }

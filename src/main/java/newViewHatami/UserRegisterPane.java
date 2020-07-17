@@ -1,16 +1,12 @@
 package newViewHatami;
 
-import controller.userControllers.AdminController;
-import controller.userControllers.BuyerController;
-import controller.userControllers.SellerController;
-import controller.userControllers.UserController;
+import controller.userControllers.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import model.Market;
 import newViewNedaei.MenuController;
 import newViewNedaei.Panel;
 
@@ -52,7 +48,7 @@ public class UserRegisterPane extends Panel {
     public void initialize() {
         setPersonalInfoFields();
         makeRegisterRoleSelectionChoiceBox();
-        if (Market.getInstance().noAdmin()) {
+        if (AllUsersController.getInstance().noAdmin()) {
             firstAdminLabel.setVisible(true);
         }
 

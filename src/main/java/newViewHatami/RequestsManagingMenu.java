@@ -6,14 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import model.Market;
-import model.request.Request;
 import newViewNedaei.MenuController;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RequestsManagingMenu {
-    public ListView requestsList;
+    public ListView<String> requestsList;
     public Label messageLabel;
 
     public static String getFxmlFilePath() {
@@ -27,11 +25,9 @@ public class RequestsManagingMenu {
 
     public void fillList() {
         // TODO : change list to table
-        ArrayList<Request> allRequestsList = Market.getInstance().getAllRequests();
+        List<String> allRequestsList = RequestController.getInstance().getAllRequestsIds();
         ObservableList<String> items = FXCollections.observableArrayList ();
-        for (Request request : allRequestsList) {
-            items.add(request.getId());
-        }
+        items.addAll(allRequestsList);
         requestsList.setItems(items);
     }
 
@@ -50,7 +46,7 @@ public class RequestsManagingMenu {
     }
 
     public String getSelectedRequest() {
-        return (String) requestsList.getSelectionModel().getSelectedItem();
+        return requestsList.getSelectionModel().getSelectedItem();
     }
 
     public void back() {

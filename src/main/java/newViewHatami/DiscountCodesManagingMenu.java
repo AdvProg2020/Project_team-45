@@ -5,11 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import model.CodedDiscount;
-import model.Market;
 import newViewNedaei.MenuController;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DiscountCodesManagingMenu {
 
@@ -27,11 +25,9 @@ public class DiscountCodesManagingMenu {
 
     public void fillList() {
         // TODO : change list to table
-        ArrayList<CodedDiscount> allDiscountsList = Market.getInstance().getAllCodedDiscounts();
+        List<String> allDiscountsList = CodedDiscountController.getInstance().getAllDiscountCodes();
         ObservableList<String> items = FXCollections.observableArrayList();
-        for (CodedDiscount codedDiscount : allDiscountsList) {
-            items.add(codedDiscount.getCode());
-        }
+        items.addAll(allDiscountsList);
         discountsList.setItems(items);
     }
 
@@ -44,7 +40,6 @@ public class DiscountCodesManagingMenu {
         if (noSelectedDiscount()) return;
         setViewingDiscount();
         MenuController.getInstance().goToPanel(ViewDiscountCodePanel.getFxmlPath());
-        // TODO : make view panel
     }
 
     private void setViewingDiscount() {

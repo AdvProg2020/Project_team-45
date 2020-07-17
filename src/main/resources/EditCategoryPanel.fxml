@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import client.newViewHatami.ValidatorField?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<?import newViewHatami.ValidatorField?>
-<AnchorPane prefHeight="400.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewHatami.EditCategoryPanel">
+<AnchorPane prefHeight="400.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewHatami.EditCategoryPanel">
    <children>
       <GridPane layoutX="25.0" layoutY="85.0" prefHeight="62.0" prefWidth="592.0">
         <columnConstraints>

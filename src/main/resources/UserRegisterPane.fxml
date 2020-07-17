@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import client.newViewHatami.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<?import newViewHatami.*?>
-<AnchorPane fx:id="registerPane" layoutX="37.0" layoutY="70.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewHatami.UserRegisterPane">
+<AnchorPane fx:id="registerPane" layoutX="37.0" layoutY="70.0" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewHatami.UserRegisterPane">
     <children>
 
         <ChoiceBox fx:id="roleSelectionChoiceBox" layoutX="281.0" layoutY="3.0" onAction="#changeRegisterRole" prefWidth="150.0" />

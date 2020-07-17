@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
-
-<GridPane fx:id="mainPane" alignment="CENTER" hgap="16.0" prefHeight="600.0" prefWidth="1000.0" vgap="15.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.seller.product.ProductsManagingMenu">
+<GridPane fx:id="mainPane" alignment="CENTER" hgap="16.0" prefHeight="600.0" prefWidth="1000.0" vgap="15.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewNedaei.user.seller.product.ProductsManagingMenu">
    <columnConstraints>
       <ColumnConstraints minWidth="10.0" prefWidth="180.0" />
        <ColumnConstraints minWidth="10.0" prefWidth="180.0" />

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.seller.product.RemoveProductPanel">
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewNedaei.user.seller.product.RemoveProductPanel">
    <children>
       <Button layoutX="300.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="25.0" prefWidth="100.0" text="Back" />
       <Button layoutX="300.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#sendRequest" prefHeight="25.0" prefWidth="100.0" text="Send Request" />

@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<Pane fx:id="mainPane" prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewHatami.AdminMenu">
+<Pane fx:id="mainPane" prefHeight="600" prefWidth="1000" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewHatami.AdminMenu">
 <GridPane alignment="CENTER" layoutX="500.0" prefHeight="600.0" prefWidth="500.0">
    <children>
       <Button layoutX="367.0" layoutY="52.0" mnemonicParsing="false" onAction="#manageUsersAction" prefHeight="80.0" prefWidth="152.0" text="manage users" />

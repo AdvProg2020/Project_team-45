@@ -1,10 +1,10 @@
-import controller.DatabaseController;
+import client.newViewHatami.CreateAdminPanel;
+import client.newViewNedaei.MenuController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Market;
-import newViewHatami.CreateAdminPanel;
-import newViewNedaei.MenuController;
+import server.controller.DatabaseController;
+import server.model.Market;
 
 public class Main extends Application {
 

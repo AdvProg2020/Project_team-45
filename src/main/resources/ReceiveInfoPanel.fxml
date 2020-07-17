@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import client.newViewHatami.ValidatorField?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<?import newViewHatami.ValidatorField?>
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.buyer.purchase.ReceiveInfoPanel">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewNedaei.user.buyer.purchase.ReceiveInfoPanel">
    <children>
       <Button layoutX="300.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#goBack" prefHeight="25.0" prefWidth="100.0" text="Exit" />
       <GridPane layoutY="155.0" minHeight="125.0" minWidth="400.0">

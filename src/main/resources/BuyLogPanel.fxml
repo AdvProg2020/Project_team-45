@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewNedaei.user.buyer.orders.BuyLogPanel">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewNedaei.user.buyer.orders.BuyLogPanel">
     <children>
         <Button layoutX="300.0" layoutY="373.0" mnemonicParsing="false" onMouseClicked="#goBack" prefWidth="100.0" text="Back" />
         <GridPane layoutX="100.0" layoutY="65.0" prefWidth="200.0">

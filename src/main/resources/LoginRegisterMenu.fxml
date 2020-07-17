@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<AnchorPane prefHeight="456.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="newViewHatami.LoginRegisterMenu">
+<AnchorPane prefHeight="456.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewHatami.LoginRegisterMenu">
    <children>
       <ToggleButton fx:id="loginToggleButton" layoutX="277.0" layoutY="29.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="116.0" text="login" />
       <ToggleButton fx:id="registerToggleButton" layoutX="393.0" layoutY="29.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="116.0" text="register" />

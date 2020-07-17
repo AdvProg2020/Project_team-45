@@ -1,14 +1,19 @@
 package newModel.bagheri;
 
-public class Comment {
-    private final String userId;
-    private final String productId;
-    private final String title;
-    private final String content;
-    private CommentStatus commentStatus;
-    private final boolean didUserBuy;
+import model.product.Product;
+import model.user.Admin;
+import model.user.User;
+import newModel.DataBaseCompatible;
 
-    public Comment(String userId, String productId, String title, String content, boolean didUserBuy) {
+public class Comment extends DataBaseCompatible {
+    private int userId;
+    private int productId;
+    private String title;
+    private String content;
+    private CommentStatus commentStatus;
+    private boolean didUserBuy;
+
+    public Comment(int userId, int productId, String title, String content, boolean didUserBuy) {
         this.userId = userId;
         this.productId = productId;
         this.title = title;
@@ -17,13 +22,34 @@ public class Comment {
         commentStatus = CommentStatus.WAITING_FOR_APPROVAL;
     }
 
-    public String getUserId() {
-        return userId;
+    public Comment(int id, boolean justId) {
+        super(id, justId);
     }
 
-    public String getProductId() {
-        return productId;
+    @Override
+    protected void readFromDataBase() {
+
     }
+
+    @Override
+    protected void saveToDataBase() {
+
+    }
+
+//    public User getUser() {
+//        return getUser(false);
+//    }
+
+//    public User getUser(boolean justId) {
+//        if (justId) {
+//            return new Admin(userId, true);
+//        }
+//        return ;
+//    }
+
+//    public Product getProduct() {
+//        return product;
+//    }
 
     public String getTitle() {
         return title;
@@ -31,6 +57,10 @@ public class Comment {
 
     public String getContent() {
         return content;
+    }
+
+    public CommentStatus getCommentStatus() {
+        return commentStatus;
     }
 
     public boolean isDidUserBuy() {
@@ -47,6 +77,10 @@ public class Comment {
 
     public void declineComment() {
         this.commentStatus = CommentStatus.NOT_APPROVED_BY_ADMIN;
+    }
+
+    public String showComment() {
+        return "title: " + title + '\n' + "content: " + content;
     }
 
     enum CommentStatus {

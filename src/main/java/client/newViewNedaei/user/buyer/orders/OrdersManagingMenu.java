@@ -1,23 +1,20 @@
 package client.newViewNedaei.user.buyer.orders;
 
 import client.newViewNedaei.MenuController;
+import client.controller.userControllers.BuyerController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import server.controller.userControllers.BuyerController;
-import server.controller.userControllers.UserController;
-import server.model.log.BuyLog;
-import server.model.user.Buyer;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class OrdersManagingMenu {
-    @FXML
-    private GridPane mainPane;
+    public GridPane mainPane;
 
     public static String getFxmlFilePath() {
         return "/OrdersManagingMenu.fxml";
@@ -25,22 +22,21 @@ public class OrdersManagingMenu {
 
     @FXML
     public void initialize() {
-        ArrayList<BuyLog> buyLogs = ((Buyer) UserController.getActiveUser()).getListOfBuyLogs();
+        ArrayList<HashMap<String, String>> buyLogs = BuyerController.getInstance().getListOfBuyLogs();
         int i = 0;
-        for (BuyLog buyLog : buyLogs) {
+        for (HashMap<String, String> buyLog : buyLogs) {
             mainPane.add(createOrderDisplay(buyLog), i%5, i/5);
             i++;
         }
     }
 
-    private Pane createOrderDisplay(BuyLog buyLog) {
+    private Pane createOrderDisplay(HashMap<String, String> buyLog) {
         Label dateAndId = new Label();
         dateAndId.setPrefWidth(180);
         dateAndId.setPrefHeight(50);
         dateAndId.setAlignment(Pos.CENTER);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        System.out.println(buyLog.getMainLog());
-        dateAndId.setText(simpleDateFormat.format(buyLog.getMainLog().getDate()) + " - id: " + buyLog.getMainLog().getId());
+        dateAndId.setText(simpleDateFormat.format(buyLog.get("date")) + " - id: " + buyLog.get("id"));
         dateAndId.setTranslateX(0);
         dateAndId.setTranslateY(0);
 
@@ -48,7 +44,7 @@ public class OrdersManagingMenu {
         finalPrice.setPrefWidth(180);
         finalPrice.setPrefHeight(50);
         finalPrice.setAlignment(Pos.CENTER);
-        finalPrice.setText("" + buyLog.getMainLog().getFinalPrice());
+        finalPrice.setText("" + buyLog.get("finalPrice"));
         finalPrice.setTranslateX(0);
         finalPrice.setTranslateY(60);
 
@@ -58,7 +54,7 @@ public class OrdersManagingMenu {
         view.setTranslateX(0);
         view.setTranslateY(120);
         view.setOnMouseClicked(event -> {
-            BuyerController.getInstance().setCurrentBuyLog(buyLog);
+            BuyerController.getInstance().setCurrentBuyLogById(Integer.parseInt(buyLog.get("id")));
             MenuController.getInstance().goToPanel(BuyLogPanel.getFxmlFilePath());
         });
 

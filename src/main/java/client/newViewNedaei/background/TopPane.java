@@ -64,7 +64,7 @@ public class TopPane {
         if (!UserController.isLoggedIn()) {
             MenuController.getInstance().goToMenu(LoginRegisterMenu.getFxmlFilePath());
         } else {
-            String role = UserController.getActiveUser().getRole();
+            String role = UserController.getInstance().getRole();
             switch (role) {
                 case "admin":
                     MenuController.getInstance().goToMenu(AdminMenu.getFxmlFilePath());

@@ -1,12 +1,15 @@
 package client.controller.userControllers;
 
-import client.controller.InputValidator;
+import client.network.ClientSocket;
+import client.network.MethodStringer;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import server.model.Market;
 import server.model.user.AnonymousUser;
 import server.model.user.Buyer;
-import server.model.user.PersonalInfo;
 import server.model.user.User;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 public class UserController {
@@ -32,8 +35,16 @@ public class UserController {
         return anonymousUser;
     }
 
-    public static boolean isLoggedIn() {
-        return loggedIn;
+    public static Boolean isLoggedIn() {
+        Method me = UserController.class.getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+            return (new Gson()).fromJson(returnJson, Boolean.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static HashMap<String, String> getUserViewInfo(String username) {
@@ -52,36 +63,15 @@ public class UserController {
 
     // personal info panel
 
-    public void setPersonalInfoField(String field, String newValue) throws Exception{
-        PersonalInfo personalInfo = activeUser.getPersonalInfo();
-        if (field.equalsIgnoreCase("firstName")) {
-            if (!InputValidator.getFirstNameValidator().checkInput(newValue)) {
-                throw new Exception("invalid first name format");
-            }
-            personalInfo.setFirstName(newValue);
-        } else if (field.equalsIgnoreCase("lastName")) {
-            if (!InputValidator.getFirstNameValidator().checkInput(newValue)) {
-                throw new Exception("invalid last name format");
-            }
-            personalInfo.setLastName(newValue);
-        } else if (field.equalsIgnoreCase("emailAddress")) {
-            if (!InputValidator.getEmailAddressValidator().checkInput(newValue)) {
-                throw new Exception("invalid email address format");
-            }
-            personalInfo.setEmailAddress(newValue);
-        } else if (field.equalsIgnoreCase("phoneNumber")) {
-            if (!InputValidator.getPhoneNumberValidator().checkInput(newValue)) {
-                throw new Exception("invalid phoneNumber format");
-            }
-            personalInfo.setPhoneNumber(newValue);
-        } else if (field.equalsIgnoreCase("password")) {
-            if (!InputValidator.getSimpleTextValidator().checkInput(newValue)) {
-                throw new Exception("invalid first name format");
-            }
-            personalInfo.setPassword(newValue);
+    public void setPersonalInfoField(String field, String newValue) {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, field, newValue);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
-
 
     ///
 
@@ -100,8 +90,13 @@ public class UserController {
     }
 
     public void logout() {
-            loggedIn = false;
-            activeUser = null;
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean usernameExists(String username) throws UsernameIsRequestException {
@@ -112,5 +107,29 @@ public class UserController {
 
     public boolean onlyHasAdmin() {
         return Market.getInstance().getAllUsers().size() == 1;
+    }
+
+    public String getRole() {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+            return (new Gson()).fromJson(returnJson, String.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public HashMap<String, String> getActiveUserPersonalInfo() {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>(){}.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

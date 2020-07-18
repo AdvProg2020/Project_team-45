@@ -1,6 +1,10 @@
 package client.controller.userControllers;
 
 import client.controller.managers.Manager;
+import client.network.ClientSocket;
+import client.network.MethodStringer;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import server.model.CodedDiscount;
 import server.model.Market;
 import server.model.log.BuyLog;
@@ -9,6 +13,7 @@ import server.model.product.ProductSellInfo;
 import server.model.product.Rate;
 import server.model.user.*;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,9 +28,28 @@ public class BuyerController extends UserController implements Manager {
         return instance;
     }
 
-    public int getCartTotalPrice() {
-        updateBuyer();
-        return buyer.getCart().getTotalPrice();
+    public ArrayList<HashMap<String, String>> getListOfBuyLogs() {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Integer getCartTotalPrice() {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+            return (new Gson()).fromJson(returnJson, Integer.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public CartHolder getBuyer() {
@@ -88,15 +112,27 @@ public class BuyerController extends UserController implements Manager {
 
 
     public void rateProductById(String productId, int score) {
-        Rate rate = new Rate(((Buyer) UserController.getActiveUser()), score, productId);
-        market.getProductById(productId).addRate(rate);
-        ((Buyer) UserController.getActiveUser()).getPurchasedProducts().put(productId, rate);
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, productId, score);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     // view balance panel
 
-    public int getBuyerBalance() {
-        return ((Buyer) UserController.getActiveUser()).getBalance();
+    public Integer getBuyerBalance() {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+            return (new Gson()).fromJson(returnJson, Integer.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     // view discount codes panel
@@ -116,27 +152,38 @@ public class BuyerController extends UserController implements Manager {
         return (Buyer) market.getUserByUsername(Id);
     }
 
-    public BuyLog getCurrentBuyLog() {
-        return currentBuyLog;
+    public HashMap<String, String> getCurrentBuyLog() {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>(){}.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public void setCurrentBuyLog(BuyLog currentBuyLog) {
-        this.currentBuyLog = currentBuyLog;
+    public void setCurrentBuyLogById(int buyLogId) {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, buyLogId);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<HashMap<String, String>> getCart() {
-        updateBuyer();
-        ArrayList<HashMap<String, String>> cartDisplay = new ArrayList<>();
-        Cart cart = buyer.getCart();
-        for (ProductSellInfo sellInfo : cart.getProductSellInfos()) {
-            HashMap<String, String> sellInfoDisplay = new HashMap<>();
-            sellInfoDisplay.put("id", sellInfo.getId());
-            sellInfoDisplay.put("name", sellInfo.getProduct().getName());
-            sellInfoDisplay.put("amount", "" + cart.getProductAmountById(sellInfo.getId()));
-            sellInfoDisplay.put("finalPrice", "" + sellInfo.getFinalPrice());
-            sellInfoDisplay.put("totalPrice", "" + cart.getTotalPrice());
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
-        return cartDisplay;
     }
 
     public int getSellInfoTotalPrice(int sellInfoId) {
@@ -150,6 +197,24 @@ public class BuyerController extends UserController implements Manager {
     }
 
     public void setBuyerBalance(int balance) {
-        ((Buyer) UserController.getActiveUser()).setBalance(balance);
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, balance);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<HashMap<String, String>> getBuyLogSellInfosById(int buyLogId) {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, buyLogId);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

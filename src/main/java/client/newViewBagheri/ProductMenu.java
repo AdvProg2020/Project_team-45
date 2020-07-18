@@ -15,8 +15,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import server.controller.ProductController;
-import server.controller.userControllers.UserController;
+import client.controller.ProductController;
+import client.controller.userControllers.UserController;
 
 import java.net.URL;
 import java.nio.file.Paths;

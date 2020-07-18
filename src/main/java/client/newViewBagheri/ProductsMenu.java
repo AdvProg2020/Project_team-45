@@ -9,10 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import server.controller.CategoryController;
-import server.controller.FilteringController;
-import server.controller.ProductController;
-import server.controller.SortingController;
+import client.controller.CategoryController;
+import client.controller.FilteringController;
+import client.controller.ProductController;
+import client.controller.SortingController;
 
 import java.net.URL;
 import java.util.*;

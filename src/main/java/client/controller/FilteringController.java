@@ -1,10 +1,15 @@
 package client.controller;
 
+import client.network.ClientSocket;
+import client.network.MethodStringer;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import server.model.category.Category;
 import server.model.category.FinalCategory;
 import server.model.product.Product;
 import server.model.product.ProductFilters;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -45,81 +50,37 @@ public class FilteringController {
     }
 
     public boolean addFilter(String type, String value) {
-        Category activeCategory = CategoryController.getInstance().getActiveCategory();
-        if (type.equals("productName")) {
-            productFilters.setProductName(value);
-        } else if (type.equals("companyName")) {
-            productFilters.addCompanyName(value);
-        } else if (type.equals("sellerUsername")) {
-            productFilters.addSellerUsername(value);
-        } else if (type.equals("minimumPrice")) {
-            productFilters.setMinimumPrice(Integer.parseInt(value));
-        } else if (type.equals("maximumPrice")) {
-            productFilters.setMaximumPrice(Integer.parseInt(value));
-        } else if (type.equals("minimumAverageScore")) {
-            productFilters.setMinimumAverageScore(Integer.parseInt(value));
-        } else if (type.equals("minimumSellCount")) {
-            productFilters.setMinimumSellCount(Integer.parseInt(value));
-        } else if (type.equals("minimumSeen")) {
-            productFilters.setMinimumSeen(Integer.parseInt(value));
-        } else if (type.equals("available")) {
-            productFilters.setIsAvailable(true);
-        } else if (activeCategory.getType().equals("FinalCategory")) {
-            ArrayList<String> specialFeatures = ((FinalCategory) activeCategory).getSpecialFeatures();
-            if (specialFeatures.contains(type)) {
-                productFilters.addFeatureAndAmount(type, value);
-            }
-        } else {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, type, value);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, boolean.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     public void removeFilter(String type, String value) {
-        Category activeCategory = CategoryController.getInstance().getActiveCategory();
-        if (type.equals("companyName")) {
-            productFilters.removeCompanyName(value);
-        } else if (type.equals("sellerUsername")) {
-            productFilters.removeSellerUsername(value);
-        } else if (activeCategory.getType().equals("FinalCategory")) {
-            ArrayList<String> specialFeatures = ((FinalCategory) activeCategory).getSpecialFeatures();
-            if (specialFeatures.contains(type)) {
-                productFilters.removeFeatureAndAmount(type, value);
-            }
-        } else {
-
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, type, value);
+            ClientSocket.sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
     public boolean removeFilter(String type) {
-        Category activeCategory = CategoryController.getInstance().getActiveCategory();
-        if (type.equals("productName")) {
-            productFilters.setProductName(null);
-        } else if (type.equals("companyName")) {
-            productFilters.clearCompanyNameList();
-        } else if (type.equals("sellerUsername")) {
-            productFilters.clearSellerUsernameList();
-        } else if (type.equals("minimumPrice")) {
-            productFilters.setMinimumPrice(0);
-        } else if (type.equals("maximumPrice")) {
-            productFilters.setMaximumPrice(0);
-        } else if (type.equals("minimumAverageScore")) {
-            productFilters.setMinimumAverageScore(0);
-        } else if (type.equals("minimumSellCount")) {
-            productFilters.setMinimumSellCount(0);
-        } else if (type.equals("minimumSeen")) {
-            productFilters.setMinimumSeen(0);
-        } else if (type.equals("available")) {
-            productFilters.setIsAvailable(false);
-        } else if (activeCategory.getType().equals("FinalCategory")) {
-            ArrayList<String> specialFeatures = ((FinalCategory) activeCategory).getSpecialFeatures();
-            if (specialFeatures.contains(type)) {
-                productFilters.clearFeature(type);
-            }
-        } else {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, type);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, boolean.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
             return false;
         }
-        return true;
     }
 
     public ArrayList<Product> filteringProducts(ArrayList<Product> productsList) {
@@ -133,6 +94,13 @@ public class FilteringController {
     }
 
     public void clearFilters() {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            ClientSocket.sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         productFilters.clear();
     }
 }

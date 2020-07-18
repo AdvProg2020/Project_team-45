@@ -5,7 +5,7 @@ import client.newViewNedaei.MenuController;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import server.controller.CategoryController;
+import client.controller.CategoryController;
 
 import java.net.URL;
 import java.util.ResourceBundle;

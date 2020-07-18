@@ -3,6 +3,10 @@ package client.controller;
 import client.controller.managers.Deleter;
 import client.controller.userControllers.BuyerController;
 import client.controller.userControllers.UserController;
+import client.network.ClientSocket;
+import client.network.MethodStringer;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import server.model.Comment;
 import server.model.Market;
 import server.model.product.Product;
@@ -11,6 +15,7 @@ import server.model.request.CommentRequest;
 import server.model.user.Buyer;
 import server.model.user.User;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -35,8 +40,15 @@ public class ProductController implements Deleter {
 
 
     public boolean setActiveProductBYProductIdForCategory(String productId) {
-        ArrayList<Product> productsList = CategoryController.getInstance().getActiveCategoryProductsList();
-        return setActiveProductByListAndId(productsList, productId);
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, productId);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, boolean.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     public boolean setActiveProductBYProductIdForCart(String productId) {
@@ -57,7 +69,16 @@ public class ProductController implements Deleter {
     }
 
     public LinkedHashMap<String, String> getProductDigestInformation() {
-        return activeProduct.getDigestInformation();
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
+            }.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -74,14 +95,13 @@ public class ProductController implements Deleter {
     }
 
     public void addComment(String title, String content) {
-        User activeUser = UserController.getActiveUser();
-        boolean didUserBuy = false;
-        if (activeUser.getRole().equals("Buyer") && ((Buyer) activeUser).didBuyProduct(activeProduct.getId())) {
-            didUserBuy = true;
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, title, content);
+            ClientSocket.sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        Comment newComment = new Comment(activeUser, activeProduct, title, content, didUserBuy);
-        activeProduct.addComment(newComment);
-        market.addRequest(new CommentRequest(newComment));
     }
 
     public boolean deleteItemById(String Id) {
@@ -131,37 +151,53 @@ public class ProductController implements Deleter {
 
     //bagheri
     public ArrayList<HashMap<String, String>> getActiveProductCommentsList() {
-        ArrayList<HashMap<String, String>> productComments = new ArrayList<>();
-        for (Comment comment : activeProduct.getApprovedComments()) {
-            HashMap<String, String> commentFields = new HashMap<>();
-            commentFields.put("title", comment.getTitle());
-            commentFields.put("content", comment.getContent());
-            productComments.add(commentFields);
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
+            }.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
-        return productComments;
     }
 
     public ArrayList<HashMap<String, String>> getActiveProductSellInfos() {
-        ArrayList<HashMap<String, String>> productSellInfos = new ArrayList<>();
-        for (ProductSellInfo productSellInfo : activeProduct.getSellInfosList()) {
-            if (productSellInfo.getStock() > 0) {
-                HashMap<String, String> sellInfo = new HashMap<>();
-                sellInfo.put("id", productSellInfo.getId());
-                sellInfo.put("sellerUsername", productSellInfo.getSeller().getUsername());
-                sellInfo.put("price", "" + productSellInfo.getPrice());
-                sellInfo.put("finalPrice", "" + productSellInfo.getFinalPrice());
-                productSellInfos.add(sellInfo);
-            }
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
+            }.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
-        return productSellInfos;
     }
 
     public void addActiveProductToCart(String productSellInfoId) {
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, productSellInfoId);
+            ClientSocket.sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         CartController.getInstance().addProductToCart(activeProduct, market.getProductSellInfoById(productSellInfoId));
     }
 
     public LinkedHashMap<String, String> getActiveProductFeatures() {
-        return activeProduct.getCategoryFeatures();
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
+            }.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String getActiveProductImageAddress() {
@@ -174,21 +210,39 @@ public class ProductController implements Deleter {
 
 
     public HashMap<String, String> getActiveSellInfo() {
-        return activeProductSellInfo.getInformation();
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
+            }.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void setActiveProductBYProductIdForOff(String productId, String sellInfoId) {
-        activeProduct = market.getProductById(productId);
-        activeProductSellInfo = market.getProductSellInfoById(sellInfoId);
-        activeProduct.increaseSeen();
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, productId, sellInfoId);
+            ClientSocket.sendAction(action);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public ArrayList<HashMap<String, String>> getActiveProductSimilarProducts() {
-        ArrayList<HashMap<String, String>> similarProductsInfo = new ArrayList<>();
-        for (Product product : activeProduct.getCategory().getProductsList()) {
-            similarProductsInfo.add(product.getProductInfoForProductsList());
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
+            }.getType());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
-        return similarProductsInfo;
     }
 
     public List<String> getAllProductsNamesList() {

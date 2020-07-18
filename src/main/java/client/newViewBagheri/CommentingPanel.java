@@ -3,7 +3,7 @@ package client.newViewBagheri;
 import client.newViewNedaei.Panel;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import server.controller.ProductController;
+import client.controller.ProductController;
 
 public class CommentingPanel extends Panel {
     ProductController productController = ProductController.getInstance();

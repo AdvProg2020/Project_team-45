@@ -1,7 +1,11 @@
 package client.controller;
 
+import client.network.ClientSocket;
+import client.network.MethodStringer;
+import com.google.gson.Gson;
 import server.model.product.Product;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -26,11 +30,15 @@ public class SortingController {
     }
 
     public boolean setActiveSort(String inputSort) {
-        if (sortTypes.contains(inputSort)) {
-            activeSort = inputSort;
-            return true;
+        Method me = getClass().getEnclosingMethod();
+        try {
+            String action = MethodStringer.stringTheMethod(me, inputSort);
+            String returnJson = ClientSocket.sendAction(action);
+            return (new Gson()).fromJson(returnJson, boolean.class);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
         }
-        return false;
     }
 
     public void disableCurrentSort() {

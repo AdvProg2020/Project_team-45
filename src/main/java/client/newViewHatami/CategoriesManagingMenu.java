@@ -1,11 +1,11 @@
 package client.newViewHatami;
 
+import client.controller.CategoryController;
 import client.newViewNedaei.MenuController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import server.controller.CategoryController;
 
 import java.util.ArrayList;
 

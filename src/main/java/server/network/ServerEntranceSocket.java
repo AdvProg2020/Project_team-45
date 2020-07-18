@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class ServerEntranceSocket implements Runnable {
 
-    public static final int PORT = 8888;
+    public static final int PORT = 8890;
     public static final String IP = "127.0.0.1";
 
 

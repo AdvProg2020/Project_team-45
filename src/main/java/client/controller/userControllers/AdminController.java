@@ -18,7 +18,6 @@ public class AdminController extends UserController implements Manager {
         super();
     }
 
-
     public void createItem(HashMap<String, String> filledFeatures) {
         Admin newAdmin = new Admin(new PersonalInfo(filledFeatures));
         market.addUserToList(newAdmin);

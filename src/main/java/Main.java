@@ -7,7 +7,6 @@ import server.controller.DatabaseController;
 import server.model.Market;
 
 public class Main extends Application {
-
     @Override
     public void start(Stage primaryStage) {
         Scene scene = new Scene(MenuController.getInstance().getBackgroundPane());

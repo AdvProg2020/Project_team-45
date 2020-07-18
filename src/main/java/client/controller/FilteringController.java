@@ -3,7 +3,6 @@ package client.controller;
 import client.network.ClientSocket;
 import client.network.MethodStringer;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import server.model.category.Category;
 import server.model.category.FinalCategory;
 import server.model.product.Product;
@@ -53,7 +52,7 @@ public class FilteringController {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me, type, value);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, boolean.class);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -65,7 +64,7 @@ public class FilteringController {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me, type, value);
-            ClientSocket.sendAction(action);
+            ClientSocket.getInstance().sendAction(action);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -75,7 +74,7 @@ public class FilteringController {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me, type);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, boolean.class);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -97,7 +96,7 @@ public class FilteringController {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me);
-            ClientSocket.sendAction(action);
+            ClientSocket.getInstance().sendAction(action);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

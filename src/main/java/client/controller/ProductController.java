@@ -2,18 +2,13 @@ package client.controller;
 
 import client.controller.managers.Deleter;
 import client.controller.userControllers.BuyerController;
-import client.controller.userControllers.UserController;
 import client.network.ClientSocket;
 import client.network.MethodStringer;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import server.model.Comment;
 import server.model.Market;
 import server.model.product.Product;
 import server.model.product.ProductSellInfo;
-import server.model.request.CommentRequest;
-import server.model.user.Buyer;
-import server.model.user.User;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -43,7 +38,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me, productId);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, boolean.class);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -72,7 +67,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
             }.getType());
         } catch (ClassNotFoundException e) {
@@ -98,7 +93,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me, title, content);
-            ClientSocket.sendAction(action);
+            ClientSocket.getInstance().sendAction(action);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -154,7 +149,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
             }.getType());
         } catch (ClassNotFoundException e) {
@@ -167,7 +162,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
             }.getType());
         } catch (ClassNotFoundException e) {
@@ -180,7 +175,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me, productSellInfoId);
-            ClientSocket.sendAction(action);
+            ClientSocket.getInstance().sendAction(action);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -191,7 +186,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
             }.getType());
         } catch (ClassNotFoundException e) {
@@ -213,7 +208,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
             }.getType());
         } catch (ClassNotFoundException e) {
@@ -226,7 +221,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me, productId, sellInfoId);
-            ClientSocket.sendAction(action);
+            ClientSocket.getInstance().sendAction(action);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -236,7 +231,7 @@ public class ProductController implements Deleter {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
             }.getType());
         } catch (ClassNotFoundException e) {

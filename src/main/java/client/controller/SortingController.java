@@ -33,7 +33,7 @@ public class SortingController {
         Method me = getClass().getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me, inputSort);
-            String returnJson = ClientSocket.sendAction(action);
+            String returnJson = ClientSocket.getInstance().sendAction(action);
             return (new Gson()).fromJson(returnJson, boolean.class);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

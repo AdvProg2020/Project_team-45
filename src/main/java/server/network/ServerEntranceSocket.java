@@ -13,7 +13,7 @@ public class ServerEntranceSocket implements Runnable {
     private final ServerSocket serverSocket;
     private int lastTokenGiven;
 
-    public ServerEntranceSocket(ServerSocket serverSocket) throws IOException {
+    public ServerEntranceSocket() throws IOException {
         this.serverSocket = new ServerSocket(PORT);
         this.lastTokenGiven = 1000;
     }
@@ -33,6 +33,7 @@ public class ServerEntranceSocket implements Runnable {
 
                 // connection successful message
                 clientOutputStream.writeUTF("done");
+                System.out.println("a client connected.");
                 clientOutputStream.flush();
                 //
             }catch (IOException exception) {

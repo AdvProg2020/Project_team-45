@@ -7,7 +7,7 @@ public class ClientSocket {
     public static final int PORT = 8890;
     public static final String IP = "127.0.0.1";
 
-    private static final ClientSocket instance = new ClientSocket();
+    private static ClientSocket instance ;
 
     private int token;
     private DataInputStream inputStream;
@@ -24,6 +24,8 @@ public class ClientSocket {
     }
 
     public static ClientSocket getInstance() {
+        if (instance == null)
+            return new ClientSocket();
         return instance;
     }
 
@@ -50,8 +52,4 @@ public class ClientSocket {
         outputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
     }
 
-
-    public static void main(String[] args) {
-        ClientSocket socket = ClientSocket.getInstance();
-    }
 }

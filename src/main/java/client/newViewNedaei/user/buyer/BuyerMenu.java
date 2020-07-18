@@ -6,23 +6,20 @@ import client.newViewNedaei.MenuController;
 import client.newViewNedaei.user.buyer.discounts.DiscountCodesPanel;
 import client.newViewNedaei.user.buyer.orders.OrdersManagingMenu;
 import client.newViewNedaei.user.buyer.purchase.ReceiveInfoPanel;
+import client.controller.userControllers.BuyerController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import server.controller.userControllers.BuyerController;
-import server.controller.userControllers.UserController;
-import server.model.user.Buyer;
 
 import java.io.IOException;
 
 public class BuyerMenu {
     public ValidatorField balance;
     public Label error;
-    @FXML
-    private AnchorPane mainPane;
+    public AnchorPane mainPane;
 
     public static String getFxmlFilePath() {
         return "/BuyerMenu.fxml";
@@ -35,10 +32,9 @@ public class BuyerMenu {
             pane.setTranslateX(0);
             pane.setTranslateY(0);
             mainPane.getChildren().add(pane);
-
             balance.setPromptText("" + BuyerController.getInstance().getBuyerBalance());
-        } catch (IOException ignored) {
-
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -63,7 +59,7 @@ public class BuyerMenu {
             error.setText("invalid balance format");
             return;
         }
-        ((Buyer) UserController.getActiveUser()).setBalance(Integer.parseInt(balance.getText()));
+        BuyerController.getInstance().setBuyerBalance(Integer.parseInt(balance.getText()));
         balance.setPromptText("" + BuyerController.getInstance().getBuyerBalance());
         error.setText("");
     }

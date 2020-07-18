@@ -23,6 +23,11 @@ public class BuyerController extends UserController implements Manager {
         return instance;
     }
 
+    public int getCartTotalPrice() {
+        updateBuyer();
+        return buyer.getCart().getTotalPrice();
+    }
+
     public CartHolder getBuyer() {
         BuyerController.getInstance().updateBuyer();
 //        buyer = BuyerController.getInstance().getBuyer();
@@ -119,12 +124,32 @@ public class BuyerController extends UserController implements Manager {
         this.currentBuyLog = currentBuyLog;
     }
 
-    public Cart getCart() {
+    public ArrayList<HashMap<String, String>> getCart() {
         updateBuyer();
-        return buyer.getCart();
+        ArrayList<HashMap<String, String>> cartDisplay = new ArrayList<>();
+        Cart cart = buyer.getCart();
+        for (ProductSellInfo sellInfo : cart.getProductSellInfos()) {
+            HashMap<String, String> sellInfoDisplay = new HashMap<>();
+            sellInfoDisplay.put("id", sellInfo.getId());
+            sellInfoDisplay.put("name", sellInfo.getProduct().getName());
+            sellInfoDisplay.put("amount", "" + cart.getProductAmountById(sellInfo.getId()));
+            sellInfoDisplay.put("finalPrice", "" + sellInfo.getFinalPrice());
+            sellInfoDisplay.put("totalPrice", "" + cart.getTotalPrice());
+        }
+        return cartDisplay;
+    }
+
+    public int getSellInfoTotalPrice(int sellInfoId) {
+        updateBuyer();
+        return buyer.getCart().getProductAmountById("" + sellInfoId)*
+                buyer.getCart().getSellInfoById(sellInfoId).getFinalPrice();
     }
 
     public Log getLog() {
         return log;
+    }
+
+    public void setBuyerBalance(int balance) {
+        ((Buyer) UserController.getActiveUser()).setBalance(balance);
     }
 }

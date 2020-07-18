@@ -1,5 +1,6 @@
 package server.model.user;
 
+import server.model.Market;
 import server.model.product.Product;
 import server.model.product.ProductSellInfo;
 
@@ -94,6 +95,10 @@ public class Cart {
             result.add(productInfo.getProductSellInfo());
         }
         return result;
+    }
+
+    public ProductSellInfo getSellInfoById(int sellInfoId) {
+        return Market.getInstance().getProductSellInfoById("" + sellInfoId);
     }
 
     class ProductInfo {

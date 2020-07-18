@@ -10,13 +10,13 @@ import client.newViewNedaei.SoundPlayer;
 import client.newViewNedaei.user.buyer.BuyerMenu;
 import client.newViewNedaei.user.buyer.CartManagingMenu;
 import client.newViewNedaei.user.seller.SellerMenu;
+import client.controller.CartController;
+import client.controller.CategoryController;
+import client.controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import server.controller.CartController;
-import server.controller.CategoryController;
-import server.controller.userControllers.UserController;
 
 public class TopPane {
     public Button loginRegister;
@@ -25,8 +25,6 @@ public class TopPane {
     public Button viewCart;
     public Button logout;
 
-    private final CategoryController categoryController = CategoryController.getInstance();
-    private final MenuController menuController = MenuController.getInstance();
     public Menu categoryMenu;
     public Menu offMenu;
 
@@ -85,7 +83,6 @@ public class TopPane {
         MenuController.getInstance().goToMenu(CartManagingMenu.getFxmlFilePath());
     }
 
-
     public void logItOut() {
         UserController.getInstance().logout();
         loginRegister.setDisable(false);
@@ -94,15 +91,13 @@ public class TopPane {
         MenuController.getInstance().goToMenu(MainMenu.getFxmlFilePath());
     }
 
-
-
     public void addMenuItems() {
         addCategoryMenuItems();
         addOffMenuItems();
     }
 
     private void addCategoryMenuItems() {
-        for (String mainCategory : categoryController.getMainCategories()) {
+        for (String mainCategory : CategoryController.getInstance().getMainCategories()) {
             MenuItem menuItem = new MenuItem(mainCategory);
             menuItem.setOnAction(e -> goToCategory(mainCategory));
             categoryMenu.getItems().add(menuItem);
@@ -110,7 +105,7 @@ public class TopPane {
     }
 
     public void addOffMenuItems() {
-        for (String mainCategory : categoryController.getDiscountedMainCategories()) {
+        for (String mainCategory : CategoryController.getInstance().getDiscountedMainCategories()) {
             MenuItem menuItem = new MenuItem(mainCategory);
             menuItem.setOnAction(e -> goToDiscountedCategory(mainCategory));
             offMenu.getItems().add(menuItem);
@@ -118,18 +113,15 @@ public class TopPane {
     }
 
     private void goToCategory(String mainCategory) {
-        categoryController.setActiveCategoryByName(mainCategory);
-        categoryController.changeIsOffMenuToFalse();
+        CategoryController.getInstance().setActiveCategoryByName(mainCategory);
+        CategoryController.getInstance().changeIsOffMenuToFalse();
         MenuController.getInstance().goToMenu(ProductsMenu.getFxmlFilePath());
     }
 
     private void goToDiscountedCategory(String mainCategory) {
-        categoryController.setActiveCategoryByName(mainCategory);
-        categoryController.changeIsOffMenuToTrue();
+        CategoryController.getInstance().setActiveCategoryByName(mainCategory);
+        CategoryController.getInstance().changeIsOffMenuToTrue();
         MenuController.getInstance().goToMenu(OffMenu.getFxmlFilePath());
     }
 
-    public Button getLoginRegister() {
-        return loginRegister;
-    }
 }

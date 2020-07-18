@@ -125,8 +125,8 @@ public class ProductController implements Deleter {
         return activeProduct;
     }
 
-    public void setActiveProduct(Product activeProduct) {
-        this.activeProduct = activeProduct;
+    public void setActiveProductById(int productId) {
+        this.activeProduct = Market.getInstance().getProductById("" + productId);
     }
 
     //bagheri

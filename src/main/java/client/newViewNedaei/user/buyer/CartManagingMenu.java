@@ -5,6 +5,9 @@ import client.newViewHatami.LoginRegisterMenu;
 import client.newViewHatami.Validator;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.user.buyer.purchase.ReceiveInfoPanel;
+import client.controller.ProductController;
+import client.controller.userControllers.BuyerController;
+import client.controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,24 +15,17 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import server.controller.ProductController;
-import server.controller.userControllers.BuyerController;
-import server.controller.userControllers.UserController;
-import server.model.product.Product;
-import server.model.product.ProductSellInfo;
-import server.model.user.Cart;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CartManagingMenu {
     public Label price;
     public GridPane grid;
-    private final Cart cart;
-    private final HashMap<Pane, ProductSellInfo> sellInfos;
+    private final ArrayList<HashMap<String, String>> cart;
 
     public CartManagingMenu() {
         cart = BuyerController.getInstance().getCart();
-        sellInfos = new HashMap<>();
     }
 
     public static String getFxmlFilePath() {
@@ -43,23 +39,22 @@ public class CartManagingMenu {
     @FXML
     public void initialize() {
         int i = 0;
-        for (ProductSellInfo productSellInfo : cart.getProductSellInfos()) {
-            Pane pane = createProductDisplay(productSellInfo);
+        for (HashMap<String, String> product : cart) {
+            Pane pane = createProductDisplay(product);
             grid.add(pane, i%5, i/5);
             i++;
         }
-        price.setText("" + cart.getTotalPrice());
+        price.setText("" + BuyerController.getInstance().getCartTotalPrice());
     }
 
-    private Pane createProductDisplay(ProductSellInfo productSellInfo) {
+    private Pane createProductDisplay(HashMap<String, String> product) {
         Pane pane = new Pane();
-        sellInfos.put(pane, productSellInfo);
 
         Label nameAndAmount = new Label();
         nameAndAmount.setPrefWidth(90);
         nameAndAmount.setPrefHeight(50);
         nameAndAmount.setAlignment(Pos.CENTER);
-        nameAndAmount.setText(sellInfos.get(pane).getProduct().getName() + "(" + cart.getProductAmountById(productSellInfo.getId()) + ")");
+        nameAndAmount.setText(product.get("name") + " (" + product.get("amount") + ")");
         nameAndAmount.setTranslateX(0);
         nameAndAmount.setTranslateY(0);
 
@@ -67,7 +62,7 @@ public class CartManagingMenu {
         id.setPrefWidth(90);
         id.setPrefHeight(50);
         id.setAlignment(Pos.CENTER);
-        id.setText("id: " + sellInfos.get(pane).getProduct().getId());
+        id.setText("id: " + product.get("id"));
         id.setTranslateX(90);
         id.setTranslateY(0);
 
@@ -75,7 +70,7 @@ public class CartManagingMenu {
         singlePrice.setPrefWidth(90);
         singlePrice.setPrefHeight(50);
         singlePrice.setAlignment(Pos.CENTER);
-        singlePrice.setText("fee: " + sellInfos.get(pane).getFinalPrice());
+        singlePrice.setText("fee: " + product.get("finalPrice"));
         singlePrice.setTranslateX(0);
         singlePrice.setTranslateY(60);
 
@@ -83,7 +78,8 @@ public class CartManagingMenu {
         totalPrice.setPrefWidth(90);
         totalPrice.setPrefHeight(50);
         totalPrice.setAlignment(Pos.CENTER);
-        totalPrice.setText("total: " + cart.getTotalPrice());
+        totalPrice.setText("total: " +
+                Integer.parseInt(product.get("amount"))*Integer.parseInt(product.get("finalPrice")));
         totalPrice.setTranslateX(90);
         totalPrice.setTranslateY(60);
 
@@ -93,9 +89,7 @@ public class CartManagingMenu {
         increase.setTranslateX(0);
         increase.setTranslateY(120);
         increase.setOnMouseClicked(event -> {
-            Product product = sellInfos.get(pane).getProduct();
-            increaseProduct(product, nameAndAmount, sellInfos.get(pane));
-            totalPrice.setText("total: " + cart.getTotalPrice());
+
         });
 
         Button decrease = new Button("-");
@@ -104,9 +98,7 @@ public class CartManagingMenu {
         decrease.setTranslateX(60);
         decrease.setTranslateY(120);
         decrease.setOnMouseClicked(event -> {
-            Product product = sellInfos.get(pane).getProduct();
-            decreaseProduct(pane, product, nameAndAmount, sellInfos.get(pane));
-            totalPrice.setText("total: " + cart.getTotalPrice());
+
         });
 
         Button view = new Button("View");
@@ -114,7 +106,7 @@ public class CartManagingMenu {
         view.setPrefHeight(50);
         view.setTranslateX(120);
         view.setTranslateY(120);
-        ProductController.getInstance().setActiveProduct(sellInfos.get(pane).getProduct());
+        ProductController.getInstance().setActiveProductById(Integer.parseInt(product.get("id")));
         view.setOnMouseClicked(event -> MenuController.getInstance().goToMenu(ProductMenu.getFxmlFilePath()));
 
         pane.getChildren().add(nameAndAmount);
@@ -126,24 +118,6 @@ public class CartManagingMenu {
         pane.getChildren().add(view);
 
         return pane;
-    }
-
-    private void decreaseProduct(Pane pane, Product product, Label nameAndAmount, ProductSellInfo productSellInfo1) {
-        BuyerController.getInstance().decreaseCartProductById(productSellInfo1.getId());
-        nameAndAmount.setText(product.getName() + "(" + cart.getProductAmountById(productSellInfo1.getId()) + ")");
-        price.setText("" + cart.getTotalPrice());
-        if (cart.getProductAmountById(productSellInfo1.getId()) == 0) {
-            grid.getChildren().remove(pane);
-            cart.removeProduct(productSellInfo1);
-        }
-    }
-
-    private void increaseProduct(Product product, Label nameAndAmount, ProductSellInfo productSellInfo1) {
-        if (cart.getProductAmountById(productSellInfo1.getId()) < productSellInfo1.getStock()) {
-            BuyerController.getInstance().increaseCartProductById(productSellInfo1.getId());
-            nameAndAmount.setText(product.getName() + "(" + cart.getProductAmountById(productSellInfo1.getId()) + ")");
-            price.setText("" + cart.getTotalPrice());
-        }
     }
 
     public void purchase() {

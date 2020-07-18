@@ -11,13 +11,12 @@ public class SoundPlayer {
     private static MediaPlayer mediaPlayer;
 
     private SoundPlayer() {
-        Media media = new Media(new File("src/main/java/client.sounds/1.mp3").toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnEndOfMedia(() -> {
-            mediaPlayer.seek(Duration.ZERO);
-        });
-        mediaPlayer.play();
-
+//        Media media = new Media(new File("src/main/java/client.sounds/1.mp3").toURI().toString());
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setOnEndOfMedia(() -> {
+//            mediaPlayer.seek(Duration.ZERO);
+//        });
+//        mediaPlayer.play();
     }
 
     public static SoundPlayer getInstance() {
@@ -25,21 +24,21 @@ public class SoundPlayer {
     }
 
     public static void playClickEffect() {
-        (new Thread(() -> {
-            MediaPlayer temp;
-            Media media = new Media(new File("src/main/java/client.sounds/click.mp3").toURI().toString());
-            temp = new MediaPlayer(media);
-            temp.play();
-        })).start();
+//        (new Thread(() -> {
+//            MediaPlayer temp;
+//            Media media = new Media(new File("src/main/java/client.sounds/click.mp3").toURI().toString());
+//            temp = new MediaPlayer(media);
+//            temp.play();
+//        })).start();
     }
 
     public static void playBackground(int n) {
-        Media media = new Media(new File("src/main/java/client.sounds/" + n + ".mp3").toURI().toString());
-        mediaPlayer.stop();
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnEndOfMedia(() -> {
-            mediaPlayer.seek(Duration.ZERO);
-        });
-        mediaPlayer.play();
+//        Media media = new Media(new File("src/main/java/client.sounds/" + n + ".mp3").toURI().toString());
+//        mediaPlayer.stop();
+//        mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setOnEndOfMedia(() -> {
+//            mediaPlayer.seek(Duration.ZERO);
+//        });
+//        mediaPlayer.play();
     }
 }

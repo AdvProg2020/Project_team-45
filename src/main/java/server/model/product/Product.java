@@ -62,27 +62,13 @@ public class Product extends IdRecognized implements Savable {
     }
 
 
-    public ProductSellInfo getSellerInfoForProductByUsername(String sellerUsername) {
-        for (Seller seller : sellersList.keySet()) {
-            if (seller.getPersonalInfo().getUsername().equals(sellerUsername)) {
-                return sellersList.get(seller);
-            }
-        }
-        return null;
-    }
-
-    public int getMinimumPrice() {
-        updateMinimumPriceAndDefaultSellInfo();
-        return minimumPrice;
+    @Override
+    public String getId() {
+        return id;
     }
 
     public String getName() {
         return name;
-    }
-
-    @Override
-    public String getId() {
-        return id;
     }
 
     public Company getCompany() {
@@ -97,10 +83,6 @@ public class Product extends IdRecognized implements Savable {
         return productStatus;
     }
 
-    public ArrayList<ProductSellInfo> getSellInfosList() {
-        return new ArrayList<>(sellersList.values());
-    }
-
     public HashMap<Seller, ProductSellInfo> getSellersList() {
         return sellersList;
     }
@@ -110,8 +92,9 @@ public class Product extends IdRecognized implements Savable {
         return defaultSellInfo;
     }
 
-    public String getVideoAddress() {
-        return videoAddress;
+    public int getMinimumPrice() {
+        updateMinimumPriceAndDefaultSellInfo();
+        return minimumPrice;
     }
 
     public FinalCategory getCategory() {
@@ -146,6 +129,23 @@ public class Product extends IdRecognized implements Savable {
         return seen;
     }
 
+    public String getVideoAddress() {
+        return videoAddress;
+    }
+
+    public ArrayList<ProductSellInfo> getSellInfosList() {
+        return new ArrayList<>(sellersList.values());
+    }
+
+    public ProductSellInfo getSellerInfoForProductByUsername(String sellerUsername) {
+        for (Seller seller : sellersList.keySet()) {
+            if (seller.getPersonalInfo().getUsername().equals(sellerUsername)) {
+                return sellersList.get(seller);
+            }
+        }
+        return null;
+    }
+
 
     public void setName(String name) {
         this.name = name;
@@ -176,11 +176,13 @@ public class Product extends IdRecognized implements Savable {
             return;
         }
         ProductSellInfo sellInfo = ((ProductSellInfo) sellersList.values().toArray()[0]);
-        int price = sellInfo.getFinalPrice();
+        int price = 0;
         for (ProductSellInfo productSellInfo : sellersList.values()) {
-            if (productSellInfo.getFinalPrice() < price) {
-                sellInfo = productSellInfo;
-                price = sellInfo.getFinalPrice();
+            if (productSellInfo.getFinalPrice() < price || price == 0 ) {
+                if(!productSellInfo.isInAuction()) {
+                    sellInfo = productSellInfo;
+                    price = sellInfo.getFinalPrice();
+                }
             }
         }
         defaultSellInfo = sellInfo;
@@ -217,7 +219,7 @@ public class Product extends IdRecognized implements Savable {
     }
 
     public void changeSellCount(int sellCount) {
-
+        this.sellCount += sellCount;
     }
 
     public void requestForEdition() {
@@ -239,7 +241,7 @@ public class Product extends IdRecognized implements Savable {
 
     public boolean isAvailable() {
         for (Map.Entry<Seller, ProductSellInfo> sellerInfo : sellersList.entrySet()) {
-            if (sellerInfo.getValue().getStock() != 0)
+            if (sellerInfo.getValue().getStock() != 0  && !sellerInfo.getValue().isInAuction())
                 return true;
         }
         return false;

@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import server.model.*;
 import server.model.user.Buyer;
 import server.model.user.Seller;
+import server.newModel.bagheri.Auction;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ public class ProductSellInfo extends IdRecognized implements Savable {
     private int price;
     private int stock;
     private Off off;
+    private Auction auction;
     private int sellCount;
     private final HashMap<Buyer, Integer> allBuyers;
 
@@ -31,8 +33,17 @@ public class ProductSellInfo extends IdRecognized implements Savable {
         this.id = id;
     }
 
+    @Override
+    public String getId() {
+        return id;
+    }
+
     public Seller getSeller() {
         return seller;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 
     public int getPrice() {
@@ -47,16 +58,16 @@ public class ProductSellInfo extends IdRecognized implements Savable {
         return off;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public Auction getAuction() {
+        return auction;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public int getSellCount() {
+        return sellCount;
     }
 
-    public void setOff(Off off) {
-        this.off = off;
+    public HashMap<Buyer, Integer> getAllBuyers() {
+        return allBuyers;
     }
 
     public int getFinalPrice() {
@@ -71,17 +82,20 @@ public class ProductSellInfo extends IdRecognized implements Savable {
         return price;
     }
 
-    @Override
-    public String getId() {
-        return id;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public int getSellCount() {
-        return sellCount;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
-    public HashMap<Buyer, Integer> getAllBuyers() {
-        return allBuyers;
+    public void setOff(Off off) {
+        this.off = off;
+    }
+
+    public void setAuction(Auction auction) {
+        this.auction = auction;
     }
 
     public boolean isInOff() {
@@ -90,23 +104,23 @@ public class ProductSellInfo extends IdRecognized implements Savable {
                 && (off.getEndTime().compareTo(new Date()) >= 0);
     }
 
-    public Product getProduct() {
-        return product;
+    public boolean isInAuction() {
+        return auction != null && auction.getEndTime().compareTo(new Date()) >= 0;
     }
 
     public void addSellCount() {
         sellCount++;
     }
 
-    @Override
-    public ProductSellInfo clone() {
-        return new ProductSellInfo(this.product, this.seller);
-    }
-
-    public void removeProduct() {
+    public void removeProduct() { // ?!
         seller.removeProductFromSellerList(product);
         if (isInOff())
             off.removeProduct(product);
+    }
+
+    @Override
+    public ProductSellInfo clone() {
+        return new ProductSellInfo(this.product, this.seller);
     }
 
     @Override
@@ -123,6 +137,9 @@ public class ProductSellInfo extends IdRecognized implements Savable {
         result.put("stock", "" + stock);
         if (off != null) {
             result.put("off", off.getId());
+        }
+        if (auction != null) {
+            // TODO: result.put("auction", auction.getId());
         }
         HashMap<String, Integer> buyersId = new HashMap<>();
         for (Map.Entry<Buyer, Integer> buyer : allBuyers.entrySet()) {
@@ -141,6 +158,9 @@ public class ProductSellInfo extends IdRecognized implements Savable {
         stock = Integer.parseInt(theMap.get("stock"));
         if (theMap.containsKey("off")) {
             off = market.getOffById(theMap.get("off"));
+        }
+        if (theMap.containsKey("auction")) {
+            // TODO: off = market.getAuctionById(theMap.get("auction"));
         }
         HashMap<String, Integer> buyersId = (new Gson()).fromJson(theMap.get("allBuyers"), new TypeToken<HashMap<String, Integer>>() {
         }.getType());

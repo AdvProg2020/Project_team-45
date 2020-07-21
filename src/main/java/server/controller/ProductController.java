@@ -144,7 +144,7 @@ public class ProductController implements Deleter {
     public ArrayList<HashMap<String, String>> getActiveProductSellInfos() {
         ArrayList<HashMap<String, String>> productSellInfos = new ArrayList<>();
         for (ProductSellInfo productSellInfo : activeProduct.getSellInfosList()) {
-            if (productSellInfo.getStock() > 0) {
+            if (productSellInfo.getStock() > 0 && !productSellInfo.isInAuction()) {
                 HashMap<String, String> sellInfo = new HashMap<>();
                 sellInfo.put("id", productSellInfo.getId());
                 sellInfo.put("sellerUsername", productSellInfo.getSeller().getUsername());

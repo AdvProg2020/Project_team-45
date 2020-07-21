@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class BuyLogPanel extends Panel {
     public Label date;
     public Label id;
@@ -31,6 +32,7 @@ public class BuyLogPanel extends Panel {
     @FXML
     public void initialize() {
         HashMap<String, String> buyLog = BuyerController.getInstance().getCurrentBuyLog();
+
         id.setText(buyLog.get("id"));
         date.setText(new SimpleDateFormat("yyyy/MM/dd").format(buyLog.get("date")));
         buyer.setText(buyLog.get("buyerUsername"));
@@ -38,12 +40,14 @@ public class BuyLogPanel extends Panel {
         finalPrice.setText("" + buyLog.get("finalPrice"));
         address.setText(buyLog.get("address"));
         phone.setText(buyLog.get("phoneNumber"));
+
         ArrayList<HashMap<String, String>> sellInfos =
                 BuyerController.getInstance().getBuyLogSellInfosById(Integer.parseInt(buyLog.get("id")));
         for (HashMap<String, String> sellInfo : sellInfos) {
             products.getItems().add(sellInfo.get("productName") + " -> " + sellInfo.get("finalPrice"));
             ids.getItems().add(sellInfo.get("id"));
         }
+
         for (int i = 0; i < 6; i++) {
             scores.getItems().add("" + i);
         }

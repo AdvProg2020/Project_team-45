@@ -19,6 +19,8 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
+// todo: nedaei, handle changing amount
 public class CartManagingMenu {
     public Label price;
     public GridPane grid;
@@ -30,10 +32,6 @@ public class CartManagingMenu {
 
     public static String getFxmlFilePath() {
         return "/CartManagingMenu.fxml";
-    }
-
-    public void validate(KeyEvent keyEvent) {
-        ((Validator) keyEvent.getSource()).validate();
     }
 
     @FXML
@@ -89,7 +87,7 @@ public class CartManagingMenu {
         increase.setTranslateX(0);
         increase.setTranslateY(120);
         increase.setOnMouseClicked(event -> {
-
+            // changing amount
         });
 
         Button decrease = new Button("-");
@@ -98,7 +96,7 @@ public class CartManagingMenu {
         decrease.setTranslateX(60);
         decrease.setTranslateY(120);
         decrease.setOnMouseClicked(event -> {
-
+            // changing amount
         });
 
         Button view = new Button("View");
@@ -118,6 +116,10 @@ public class CartManagingMenu {
         pane.getChildren().add(view);
 
         return pane;
+    }
+
+    public void validate(KeyEvent keyEvent) {
+        ((Validator) keyEvent.getSource()).validate();
     }
 
     public void purchase() {

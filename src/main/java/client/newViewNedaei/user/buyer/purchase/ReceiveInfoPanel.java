@@ -11,8 +11,8 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class ReceiveInfoPanel extends Panel {
-
     public ValidatorField phone;
     public TextField address;
     public Label error;
@@ -35,6 +35,7 @@ public class ReceiveInfoPanel extends Panel {
         fieldsAndValues.put("phoneNumber", phone.getText());
         BuyerController.getInstance().createNewLog(fieldsAndValues);
         error.setText("");
+
         MenuController.getInstance().removeCurrentPanel();
         MenuController.getInstance().goToPanel(DiscountCodePanel.getFxmlFilePath());
     }

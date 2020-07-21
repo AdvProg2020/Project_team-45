@@ -1,17 +1,17 @@
 package client.newViewNedaei.user.buyer.discounts;
 
 import client.controller.CodedDiscountController;
-import client.controller.userControllers.UserController;
+import client.controller.userControllers.BuyerController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
-import server.model.CodedDiscount;
-import server.model.user.Buyer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class DiscountCodesPanel extends Panel {
     public ListView<Hyperlink> discounts;
 
@@ -21,11 +21,11 @@ public class DiscountCodesPanel extends Panel {
 
     @FXML
     public void initialize() {
-        ArrayList<CodedDiscount> codes = ((Buyer) UserController.getActiveUser()).getListOfCodedDiscounts();
-        for (CodedDiscount code : codes) {
-            Hyperlink hyperlink = new Hyperlink(code.getCode() + " -> " + code.getPercentage() + "%");
+        ArrayList<HashMap<String, String>> codes = BuyerController.getInstance().getListOfCodedDiscounts();
+        for (HashMap<String, String> code : codes) {
+            Hyperlink hyperlink = new Hyperlink(code.get("code") + " -> " + code.get("percentage") + "%");
             hyperlink.setOnAction(event -> {
-                CodedDiscountController.getInstance().setCurrentDiscount(code);
+                CodedDiscountController.getInstance().setCurrentDiscountById(Integer.parseInt(code.get("id")));
                 MenuController.getInstance().goToPanel(DisplayDiscountCodePanel.getFxmlFilePath());
             });
             discounts.getItems().add(hyperlink);

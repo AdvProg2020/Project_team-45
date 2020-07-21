@@ -1,14 +1,14 @@
 package client.newViewNedaei.user.buyer.discounts;
 
 import client.controller.CodedDiscountController;
-import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import server.model.CodedDiscount;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class DisplayDiscountCodePanel extends Panel {
     public Label code;
     public Label start;
@@ -20,19 +20,14 @@ public class DisplayDiscountCodePanel extends Panel {
         return "/DisplayDiscountCodePanel.fxml";
     }
 
-    @Override
-    public void goBack() {
-        MenuController.getInstance().goToPanel(DiscountCodesPanel.getFxmlFilePath());
-    }
-
     @FXML
     public void initialize() {
-        CodedDiscount discount = CodedDiscountController.getInstance().getCurrentDiscount();
-        code.setText(discount.getCode());
+        HashMap<String, String> discount = CodedDiscountController.getInstance().getCurrentDiscount();
+        code.setText(discount.get("code"));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        start.setText(simpleDateFormat.format(discount.getStartDate()));
-        end.setText(simpleDateFormat.format(discount.getEndDate()));
-        percentage.setText("" + discount.getPercentage());
-        owner.setText(discount.getOwner().getUsername());
+        start.setText(simpleDateFormat.format(discount.get("startDate")));
+        end.setText(simpleDateFormat.format(discount.get("endDate")));
+        percentage.setText(discount.get("percentage") + "%");
+        owner.setText(discount.get("ownerUsername"));
     }
 }

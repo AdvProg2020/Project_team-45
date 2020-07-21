@@ -115,8 +115,8 @@ public class BuyerController extends UserController implements Manager {
         return currentBuyLog;
     }
 
-    public void setCurrentBuyLog(BuyLog currentBuyLog) {
-        this.currentBuyLog = currentBuyLog;
+    public void setCurrentBuyLog() {
+        this.currentBuyLog = new BuyLog(log);
     }
 
     public Cart getCart() {

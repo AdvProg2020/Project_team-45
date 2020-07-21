@@ -102,6 +102,7 @@ public class ProductController {
     }
     // Needs review
 
+    // used in cart managing menu
 
     public void setActiveProductById(int productId) {
         try {

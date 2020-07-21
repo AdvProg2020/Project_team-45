@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
+// todo: handle rating
 public class OrdersManagingMenu {
     public GridPane mainPane;
 
@@ -58,21 +60,20 @@ public class OrdersManagingMenu {
             MenuController.getInstance().goToPanel(BuyLogPanel.getFxmlFilePath());
         });
 
-//        Button rate = new Button("Rate");
-//        rate.setPrefWidth(90);
-//        rate.setPrefHeight(50);
-//        rate.setTranslateX(90);
-//        rate.setTranslateY(120);
-//        rate.setOnMouseClicked(event -> {
-//            BuyerController.getInstance().setCurrentBuyLog(buyLog);
-//            MenuController.getInstance().goToPanel();
-//        });
+        Button rate = new Button("Rate");
+        rate.setPrefWidth(90);
+        rate.setPrefHeight(50);
+        rate.setTranslateX(90);
+        rate.setTranslateY(120);
+        rate.setOnMouseClicked(event -> {
+            // rate
+        });
 
         Pane pane = new Pane();
         pane.getChildren().add(dateAndId);
         pane.getChildren().add(finalPrice);
         pane.getChildren().add(view);
-//        pane.getChildren().add(rate);
+        pane.getChildren().add(rate);
 
         return pane;
     }

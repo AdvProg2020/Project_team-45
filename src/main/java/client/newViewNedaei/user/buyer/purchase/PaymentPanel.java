@@ -7,15 +7,12 @@ import client.newViewNedaei.user.buyer.orders.BuyLogPanel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import server.model.log.BuyLog;
-import server.model.log.Log;
 
+// nedaei: turned to new format successfully!
 public class PaymentPanel extends Panel {
     public Label message;
-    private final Log log;
 
     public PaymentPanel() {
-        log = BuyerController.getInstance().getLog();
     }
 
     public static String getFxmlFilePath() {
@@ -36,7 +33,7 @@ public class PaymentPanel extends Panel {
     }
 
     public void showDetails() {
-        BuyerController.getInstance().setCurrentBuyLog(new BuyLog(log));
+        BuyerController.getInstance().setCurrentBuyLog();
         MenuController.getInstance().goToPanel(BuyLogPanel.getFxmlFilePath());
     }
 }

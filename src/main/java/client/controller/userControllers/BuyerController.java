@@ -22,108 +22,11 @@ import java.util.HashMap;
 public class BuyerController extends UserController implements Manager {
     private static final BuyerController instance = new BuyerController();
 
-    private Log log;
-    private CartHolder buyer;
-    private BuyLog currentBuyLog;
-
     public static BuyerController getInstance() {
         return instance;
     }
 
-    public ArrayList<HashMap<String, String>> getListOfBuyLogs() {
-        Method me = getClass().getEnclosingMethod();
-        try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public Integer getCartTotalPrice() {
-        Method me = getClass().getEnclosingMethod();
-        try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, Integer.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public CartHolder getBuyer() {
-        BuyerController.getInstance().updateBuyer();
-//        buyer = BuyerController.getInstance().getBuyer();
-        return buyer;
-    }
-
-    public void updateBuyer() {
-        if (UserController.isLoggedIn() && UserController.getActiveUser() != null && UserController.getActiveUser().getRole().equals("buyer")) {
-            buyer = ((Buyer) UserController.getActiveUser());
-        } else {
-            buyer = UserController.getAnonymousUser();
-        }
-    }
-
-    // cart managing menu
-
-    public void increaseCartProductById(String productId) {
-        updateBuyer();
-        Cart cart = buyer.getCart();
-        cart.changeProductAmountById(productId, 1);
-    }
-
-    public void decreaseCartProductById(String productId) {
-        updateBuyer();
-        Cart cart = buyer.getCart();
-        cart.changeProductAmountById(productId, -1);
-    }
-
-    // purchase panel
-
-    public void createNewLog(HashMap<String, String> fieldsAndValues) {
-        ArrayList<ProductSellInfo> sellingProducts = ((Buyer) UserController.getActiveUser()).getCart().getProductSellInfos();
-        log = new Log(sellingProducts, UserController.getActiveUser().getPersonalInfo().getUsername()
-                , fieldsAndValues.get("address"), fieldsAndValues.get("phoneNumber"));
-    }
-
-    public boolean isDiscountCodeValid(String discountCode) {
-        return ((Buyer) UserController.getActiveUser()).isDiscountCodeValid(discountCode);
-    }
-
-    public void applyDiscountCode(String discountCode) {
-        CodedDiscount discount = ((Buyer) UserController.getActiveUser()).getDiscountByCode(discountCode);
-        log.setAppliedDiscount(discount);
-        ((Buyer) UserController.getActiveUser()).removeCodedDiscountFromList(discount);
-    }
-
-    public boolean canPurchase() {
-        return ((Buyer) UserController.getActiveUser()).getCart().getTotalPrice() <=
-                ((Buyer) UserController.getActiveUser()).getBalance();
-    }
-
-    public void purchase() {
-        ((Buyer) UserController.getActiveUser()).purchase(log);
-        Market.getInstance().getAllLogs().add(log);
-    }
-
-    // orders managing menu
-
-
-    public void rateProductById(String productId, int score) {
-        Method me = getClass().getEnclosingMethod();
-        try {
-            String action = MethodStringer.stringTheMethod(me, productId, score);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // view balance panel
+    // used in buyer menu
 
     public Integer getBuyerBalance() {
         try {
@@ -134,8 +37,162 @@ public class BuyerController extends UserController implements Manager {
         }
     }
 
-    // view discount codes panel
+    public void setBuyerBalance(int balance) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "setBuyerBalance", balance);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
 
+    // used in cart managing menu
+
+    public ArrayList<HashMap<String, String>> getCart() {
+        try {
+            return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(), "getCart");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public Integer getCartTotalPrice() {
+        try {
+            return (Integer) MethodStringer.sampleMethod(getClass(), "getCartTotalPrice");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    // used in orders managing menu
+
+    public ArrayList<HashMap<String, String>> getListOfBuyLogs() {
+        try {
+            return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(), "getListOfBuyLogs");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public void setCurrentBuyLogById(int buyLogId) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "setCurrentBuyLogById", buyLogId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+
+    // used in buy log panel
+    public HashMap<String, String> getCurrentBuyLog() {
+        try {
+            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getCurrentBuyLog");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<HashMap<String, String>> getBuyLogSellInfosById(int buyLogId) {
+        try {
+            return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(),
+                    "getBuyLogSellInfosById", buyLogId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public void rateProductById(String productId, int score) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "rateProductById", productId, score);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    // used in coded discounts panel
+
+    public ArrayList<HashMap<String, String>> getListOfCodedDiscounts() {
+        try {
+            return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(), "getListOfCodedDiscounts");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    // used in receive info panel
+
+    public void createNewLog(HashMap<String, String> fieldsAndValues) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "createNewLog", fieldsAndValues);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    public Boolean isDiscountCodeValid(String discountCode) {
+        try {
+            return (Boolean) MethodStringer.sampleMethod(getClass(), "isDiscountCodeValid", discountCode);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public void applyDiscountCode(String discountCode) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "applyDiscountCode", discountCode);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    // used in payment panel
+
+    public Boolean canPurchase() {
+        try {
+            return (Boolean) MethodStringer.sampleMethod(getClass(), "canPurchase");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public void purchase() {
+        try {
+            MethodStringer.sampleMethod(getClass(), "purchase");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    public void setCurrentBuyLog() {
+        try {
+            MethodStringer.sampleMethod(getClass(), "setCurrentBuyLog");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    // todo: nedaei, cart managing menu
+
+//    public void increaseCartProductById(String productId) {
+//        updateBuyer();
+//        Cart cart = buyer.getCart();
+//        cart.changeProductAmountById(productId, 1);
+//    }
+//
+//    public void decreaseCartProductById(String productId) {
+//        updateBuyer();
+//        Cart cart = buyer.getCart();
+//        cart.changeProductAmountById(productId, -1);
+//    }
+
+    // i dont know!
 
     public void createItem(HashMap<String, String> filledFeatures, String username) {
         try {
@@ -152,71 +209,5 @@ public class BuyerController extends UserController implements Manager {
         if (user == null || !user.getRole().equals("buyer"))
             return null;
         return (Buyer) market.getUserByUsername(Id);
-    }
-
-    public HashMap<String, String> getCurrentBuyLog() {
-        Method me = getClass().getEnclosingMethod();
-        try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>(){}.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void setCurrentBuyLogById(int buyLogId) {
-        Method me = getClass().getEnclosingMethod();
-        try {
-            String action = MethodStringer.stringTheMethod(me, buyLogId);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public ArrayList<HashMap<String, String>> getCart() {
-        Method me = getClass().getEnclosingMethod();
-        try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public int getSellInfoTotalPrice(int sellInfoId) {
-        updateBuyer();
-        return buyer.getCart().getProductAmountById("" + sellInfoId)*
-                buyer.getCart().getSellInfoById(sellInfoId).getFinalPrice();
-    }
-
-    public Log getLog() {
-        return log;
-    }
-
-    public void setBuyerBalance(int balance) {
-        Method me = getClass().getEnclosingMethod();
-        try {
-            String action = MethodStringer.stringTheMethod(me, balance);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public ArrayList<HashMap<String, String>> getBuyLogSellInfosById(int buyLogId) {
-        Method me = getClass().getEnclosingMethod();
-        try {
-            String action = MethodStringer.stringTheMethod(me, buyLogId);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

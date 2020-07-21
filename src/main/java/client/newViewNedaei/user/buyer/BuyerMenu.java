@@ -16,6 +16,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
+// nedaei: turned to new format successfully!
 public class BuyerMenu {
     public ValidatorField balance;
     public Label error;
@@ -59,8 +60,8 @@ public class BuyerMenu {
             error.setText("invalid balance format");
             return;
         }
+        balance.setPromptText(balance.getText());
         BuyerController.getInstance().setBuyerBalance(Integer.parseInt(balance.getText()));
-        balance.setPromptText("" + BuyerController.getInstance().getBuyerBalance());
         error.setText("");
     }
 }

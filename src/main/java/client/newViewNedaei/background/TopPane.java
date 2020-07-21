@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 
+// nedaei: turned to new format successfully!
 public class TopPane {
     public Button loginRegister;
     public Button mainMenu;

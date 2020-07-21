@@ -11,6 +11,7 @@ import server.model.product.ProductFilters;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 public class FilteringController {
     private static final FilteringController instance = new FilteringController();
@@ -49,35 +50,29 @@ public class FilteringController {
     }
 
     public boolean addFilter(String type, String value) {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me, type, value);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, boolean.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (boolean) MethodStringer.sampleMethod(getClass(),
+                    "addFilter", type, value);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return false;
         }
     }
 
     public void removeFilter(String type, String value) {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me, type, value);
-            ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            MethodStringer.sampleMethod(getClass(), "removeFilter", type, value);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
 
     public boolean removeFilter(String type) {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me, type);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, boolean.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (boolean) MethodStringer.sampleMethod(getClass(),
+                    "removeFilter", type);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return false;
         }
     }

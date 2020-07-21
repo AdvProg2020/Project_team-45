@@ -84,67 +84,51 @@ public class CategoryController implements Deleter {
         return true;
     }
 
-
     public ArrayList<String> getMainCategories() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
+                    "getMainCategories");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
-
     public ArrayList<String> getActiveCategorySubcategories() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategorySubcategories");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public ArrayList<String> getActiveCategoryDiscountedSubcategories() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategoryDiscountedSubcategories");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public void changeIsOffMenuToTrue() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            MethodStringer.sampleMethod(getClass(), "changeIsOffMenuToTrue");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
 
     public void changeIsOffMenuToFalse() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            MethodStringer.sampleMethod(getClass(), "changeIsOffMenuToFalse");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
-
 
     public void clearActiveCategory() {
         activeCategory = null;
@@ -199,128 +183,99 @@ public class CategoryController implements Deleter {
     }
 
     public Set<String> getActiveCategoryCompanies() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<Set<String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (Set<String>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategoryCompanies");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public Set<String> getActiveCategoryDiscountedCompanies() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<Set<String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (Set<String>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategoryDiscountedCompanies");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public Set<String> getActiveCategorySellers() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<Set<String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (Set<String>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategorySellers");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public Set<String> getActiveCategoryDiscountedSellers() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<Set<String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (Set<String>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategoryDiscountedSellers");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public boolean isActiveCategoryFinal() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, boolean.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (boolean) MethodStringer.sampleMethod(getClass(), "isActiveCategoryFinal");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return false;
         }
     }
 
     public LinkedHashMap<String, Set<String>> getActiveCategoryFeaturesAndValues() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<LinkedHashMap<String, Set<String>>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (LinkedHashMap<String, Set<String>>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategoryFeaturesAndValues");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public ArrayList<HashMap<String, String>> getActiveCategoryProductInfosList() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategoryProductInfosList");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public ArrayList<HashMap<String, String>> getActiveCategoryDiscountedProductInfosList() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<HashMap<String, String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategoryDiscountedProductInfosList");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public ArrayList<String> getDiscountedMainCategories() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<String>>() {
-            }.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
+                    "getDiscountedMainCategories");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public void setActiveCategoryByName(String name) {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me, name);
-            ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            MethodStringer.sampleMethod(getClass(), "setActiveCategoryByName", name);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
 
@@ -342,26 +297,21 @@ public class CategoryController implements Deleter {
     }
 
     public String getActiveCategoryName() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, String.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (String) MethodStringer.sampleMethod(getClass(),
+                    "getActiveCategoryName");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
 
     public ArrayList<String> getCategoriesTree() {
-
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, new TypeToken<ArrayList<String>>(){}.getType());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
+                    "getCategoriesTree");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
@@ -374,9 +324,6 @@ public class CategoryController implements Deleter {
             }
         }
     }
-
-
-    //bagheri
 
     public void editCategoryName(String editingCategoryId, String newName) {
         market.getCategoryById(editingCategoryId).setName(newName);

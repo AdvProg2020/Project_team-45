@@ -8,6 +8,7 @@ import server.model.product.Product;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Set;
 
 public class SortingController {
     private static final SortingController instance = new SortingController();
@@ -30,13 +31,11 @@ public class SortingController {
     }
 
     public boolean setActiveSort(String inputSort) {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me, inputSort);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, boolean.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (boolean) MethodStringer.sampleMethod(getClass(),
+                    "setActiveSort", inputSort);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return false;
         }
     }

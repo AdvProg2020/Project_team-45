@@ -89,13 +89,23 @@ public class UserController {
     }
 
     public boolean usernameExists(String username) throws UsernameIsRequestException {
-        if (market.usernameRequestExists(username))
-            throw new UsernameIsRequestException();
-        return market.getUserByUsername(username) != null;
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(), "usernameExists", username);
+        } catch (UsernameIsRequestException e) {
+            throw e;
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
     }
 
     public boolean onlyHasAdmin() {
-        return Market.getInstance().getAllUsers().size() == 1;
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(), "onlyHasAdmin");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
     }
 
     public String getRole() {

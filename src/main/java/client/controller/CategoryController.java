@@ -3,7 +3,6 @@ package client.controller;
 import client.network.MethodStringer;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CategoryController {
     private static final CategoryController instance = new CategoryController();
@@ -15,49 +14,30 @@ public class CategoryController {
         return instance;
     }
 
-    public void removeCategory(Category removingCategory) {
-        if (removingCategory.getType().equals("ParentCategory")) {
-            ArrayList<Category> subCategories = new ArrayList<>(((ParentCategory) removingCategory).getSubcategories());
-            for (Category subcategory : subCategories) {
-                removeCategory(subcategory);
-            }
-        } else {
-            ArrayList<Product> removingProducts = new ArrayList<>(removingCategory.getProductsList());
-            for (Product product : removingProducts) {
-                productController.removeProduct(product);
-            }
-        }
-        market.removeCategoryFromList(removingCategory);
-        if (removingCategory.isMain())
-            market.removeMainCategory(removingCategory);
-        else
-            removingCategory.getParent().removeSubcategoryFromList(removingCategory);
-    }
-
     public void createItem(HashMap<String, String> filledFeatures) {
-        Category createdCategory;
-        ArrayList<String> categorySpecialFeatures;
-
-        categorySpecialFeatures = new ArrayList<>(Arrays.asList(filledFeatures.get("features").trim().split("\n")));
-        if (filledFeatures.get("is final?").equals("yes")) {
-            createdCategory = new FinalCategory(filledFeatures, categorySpecialFeatures);
-        } else createdCategory = new ParentCategory(filledFeatures);
-        if (createdCategory.isMain())
-            market.addMainCategoryToList(createdCategory);
-        else createdCategory.getParent().addSubcategory(createdCategory);
-        market.addCategoryToList(createdCategory);
+        try {
+            MethodStringer.sampleMethod(getClass(), "createItem", filledFeatures);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public boolean categoryNameExists(String keyName) {
-        return market.getCategoryByName(keyName) != null;
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(), "categoryNameExists", keyName);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
     }
 
     public boolean deleteItemById(String Id) {
-        Category removingCategory = getItemById(Id);
-        if (removingCategory == null)
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(), "deleteItemById", Id);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return false;
-        removeCategory(removingCategory);
-        return true;
+        }
     }
 
     public ArrayList<String> getMainCategories() {
@@ -258,7 +238,12 @@ public class CategoryController {
     }
 
     public String getCategoryName(String categoryId) {
-        return getCategoryById(categoryId).getName();
+        try {
+            return (String) MethodStringer.sampleMethod(getClass(), "getCategoryName", categoryId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public boolean categoryIsFinal(String categoryId) {
@@ -281,8 +266,12 @@ public class CategoryController {
     }
 
     public String getCategoryId(String categoryName) {
-//        return (String) MethodStringer.sampleMethod(getClass(), "getCategoryId", categoryName);
-        return getItemById(categoryName).getId();
+        try {
+            return (String) MethodStringer.sampleMethod(getClass(), "getCategoryId", categoryName);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public String getActiveCategoryName() {
@@ -302,15 +291,6 @@ public class CategoryController {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;
-        }
-    }
-
-    private void addSubcategories(int depth, ArrayList<String> current, ParentCategory parent) {
-        for (Category subcategory : parent.getSubcategories()) {
-            current.add(depth + ":" + subcategory.getName());
-            if (!subcategory.isFinal()) {
-                addSubcategories(depth + 1, current, (ParentCategory) subcategory);
-            }
         }
     }
 

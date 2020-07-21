@@ -1,13 +1,12 @@
 package client.controller;
 
 import client.controller.managers.Manager;
+import client.network.MethodStringer;
 import server.model.Market;
 import server.model.Off;
-import server.model.product.Product;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OffController implements Manager {
     private static final OffController instance = new OffController();
@@ -22,6 +21,7 @@ public class OffController implements Manager {
 
     @Override
     public Off getItemById(String Id) {
+        // TODO : must be deleted
         return Market.getInstance().getOffById(Id);
     }
 
@@ -36,16 +36,20 @@ public class OffController implements Manager {
     }
 
     public HashMap<String, String> getOffInfo(String offId) {
-        Off off =  Market.getInstance().getOffById(offId);
-        HashMap<String, String> offInfo = new HashMap<>();
-        offInfo.put("startTime", String.valueOf(off.getStartTime()));
-        offInfo.put("endTime", String.valueOf(off.getEndTime()));
-        offInfo.put("discountAmount", String.valueOf(off.getDiscountAmount()));
-        return offInfo;
+        try {
+            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getOffInfo", offId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public List<String> getProductsList(String viewingOffId) {
-        return Market.getInstance().getOffById(viewingOffId).getProductsList().
-                stream().map(Product::getName).collect(Collectors.toList());
+        try {
+            return (List<String>) MethodStringer.sampleMethod(getClass(), "getProductsList", viewingOffId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 }

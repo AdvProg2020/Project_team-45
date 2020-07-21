@@ -2,18 +2,15 @@ package client.controller.userControllers;
 
 import client.controller.managers.Manager;
 import client.network.MethodStringer;
-import server.model.Company;
 import server.model.Market;
 import server.model.Off;
 import server.model.log.SellLog;
 import server.model.product.Product;
 import server.model.product.ProductSellInfo;
 import server.model.request.*;
-import server.model.user.PersonalInfo;
 import server.model.user.Seller;
 import server.model.user.User;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SellerController extends UserController implements Manager {
@@ -99,15 +96,16 @@ public class SellerController extends UserController implements Manager {
 
 
     public void createItem(HashMap<String, String> filledFeatures, String username) {
-        filledFeatures.put("username", username);
-        Seller newSeller = new Seller(new PersonalInfo(filledFeatures), new Company(filledFeatures));
-        SellerRegisterRequest registerRequest  = new SellerRegisterRequest(newSeller);
-        market.addRequest(registerRequest);
-        market.addRequestedSeller(newSeller);
+        try {
+            MethodStringer.sampleMethod(getClass(), "createItem", filledFeatures, username);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     @Override
     public Seller getItemById(String Id) {
+        //TODO : must be deleted
         User user = market.getUserByUsername(Id);
         if (user == null || !user.getRole().equals("seller"))
             return null;

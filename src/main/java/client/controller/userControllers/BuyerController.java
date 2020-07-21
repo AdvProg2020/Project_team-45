@@ -10,8 +10,10 @@ import server.model.Market;
 import server.model.log.BuyLog;
 import server.model.log.Log;
 import server.model.product.ProductSellInfo;
-import server.model.product.Rate;
-import server.model.user.*;
+import server.model.user.Buyer;
+import server.model.user.Cart;
+import server.model.user.CartHolder;
+import server.model.user.User;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -136,13 +138,16 @@ public class BuyerController extends UserController implements Manager {
 
 
     public void createItem(HashMap<String, String> filledFeatures, String username) {
-        filledFeatures.put("username", username);
-        Buyer newBuyer = new Buyer(new PersonalInfo(filledFeatures));
-        market.addUserToList(newBuyer);
+        try {
+            MethodStringer.sampleMethod(getClass(), "createItem", filledFeatures, username);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     @Override
     public Buyer getItemById(String Id) {
+        // TODO : must be deleted
         User user = market.getUserByUsername(Id);
         if (user == null || !user.getRole().equals("buyer"))
             return null;

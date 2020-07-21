@@ -6,7 +6,6 @@ import server.model.Market;
 import server.model.user.User;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AllUsersController implements Deleter {
 
@@ -34,27 +33,45 @@ public class AllUsersController implements Deleter {
     }
 
     public List<String> getAllBuyersNames() {
-        List<User> allUsersList = market.getAllUsers();
-        return allUsersList.stream()
-                .filter(user -> user.getRole().equals("buyer"))
-                .map(User::getUsername)
-                .collect(Collectors.toList());
+        try {
+            return (List<String>) MethodStringer.sampleMethod(getClass(), "getAllBuyersNames");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
+
 
     @Override
     public User getItemById(String Id) {
+        // TODO : must be deleted
         return market.getUserByUsername(Id);
     }
 
     public String getUsernameById(String userId) {
-        return market.getUserById(userId).getUsername();
+        try {
+            return (String) MethodStringer.sampleMethod(getClass(), "getUsernameById", userId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public boolean noAdmin() {
-        return market.noAdmin();
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(), "noAdmin");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
     }
 
     public List<String> getAllUsernames() {
-        return market.getAllUsers().stream().map(User::getUsername).collect(Collectors.toList());
+        try {
+            return (List<String>) MethodStringer.sampleMethod(getClass(), "getAllUsernames");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 }

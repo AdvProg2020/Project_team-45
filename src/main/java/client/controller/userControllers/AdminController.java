@@ -22,12 +22,4 @@ public class AdminController extends UserController {
             throwable.printStackTrace();
         }
     }
-
-//    @Override
-//    public Admin getItemById(String Id) {
-//        User user = market.getUserByUsername(Id);
-//        if (user == null || !user.getRole().equals("admin"))
-//            return null;
-//        return (Admin) market.getUserByUsername(Id);
-//    }
 }

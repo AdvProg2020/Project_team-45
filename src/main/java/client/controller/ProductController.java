@@ -69,7 +69,7 @@ public class ProductController {
         ProductSellInfo sellInfo = activeProduct.getSellerInfoForProductByUsername(sellerUsername);
         if (sellInfo == null)
             return false;
-        activeProductSellInfo = sellInfo;
+        activeProductSellInfo =  sellInfo;
         return true;
     }
 

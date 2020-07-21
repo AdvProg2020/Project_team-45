@@ -18,7 +18,7 @@ public class MethodStringer {
         for (Object input : inputs) {
             output.append(input.getClass().getName()).append(":").append((new Gson()).toJson(input)).append(" ");
         }
-        System.out.println(output);
+//        System.out.println(output);
         return output.toString();
     }
 
@@ -55,7 +55,7 @@ public class MethodStringer {
             e.printStackTrace();
             return null;
         } catch (InvocationTargetException e) {
-            return (new Gson()).toJson(e);
+            return e.getTargetException().getClass() + ":" + (new Gson()).toJson(e.getTargetException());
         }
     }
 
@@ -67,13 +67,27 @@ public class MethodStringer {
 ////        adminController.sayHi("ali");
 //    }
 
-    public String sampleMethod(String name) {
-        Method me = getClass().getEnclosingMethod();
+    public static Object sampleMethod(Class enclosingClass, String methodName, Object... inputs) throws Throwable {
         try {
-            String action = MethodStringer.stringTheMethod(me, name);
+            Class[] parameterTypes = new Class[inputs.length];
+            for (int i = 0; i < inputs.length; i++) {
+                parameterTypes[i] = inputs[i].getClass();
+            }
+            Method method = enclosingClass.getDeclaredMethod(methodName, parameterTypes);
+
+//            method.getExceptionTypes()
+
+            String action = MethodStringer.stringTheMethod(method, inputs);
             String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, String.class);
-        } catch (ClassNotFoundException e) {
+            if (!returnJson.startsWith("{")) {
+                String eType = returnJson.split("::")[0];
+                String eJson = returnJson.split("::")[1];
+                Throwable t = (Throwable) (new Gson()).fromJson(eJson, Class.forName(eType));
+                throw t;
+            }
+            Class a = method.getReturnType();
+            return (new Gson()).fromJson(returnJson, method.getReturnType());
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
             e.printStackTrace();
             return null;
         }

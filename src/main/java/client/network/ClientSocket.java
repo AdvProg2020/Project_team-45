@@ -4,10 +4,10 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientSocket {
-    public static final int PORT = 8890;
+    public static final int PORT = 8891;
     public static final String IP = "127.0.0.1";
 
-    private static ClientSocket instance ;
+    private static final ClientSocket instance = new ClientSocket();
 
     private int token;
     private DataInputStream inputStream;
@@ -15,17 +15,9 @@ public class ClientSocket {
     private boolean isConnected;
 
     private ClientSocket() {
-        try {
-            connectToServer();
-        } catch (IOException exception) {
-            isConnected = false;
-            System.err.println("server not found...");
-        }
     }
 
     public static ClientSocket getInstance() {
-        if (instance == null)
-            return new ClientSocket();
         return instance;
     }
 
@@ -48,6 +40,7 @@ public class ClientSocket {
 
     public void connectToServer() throws IOException {
         Socket socket = new Socket(IP, PORT);
+//        System.out.println("hi");
         inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         outputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
     }

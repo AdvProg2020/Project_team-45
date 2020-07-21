@@ -90,7 +90,8 @@ public class UserController {
     }
 
     public void logout() {
-        Method me = getClass().getEnclosingMethod();
+        Class thisClass = getClass();
+        Method me = thisClass.getEnclosingMethod();
         try {
             String action = MethodStringer.stringTheMethod(me);
             String returnJson = ClientSocket.getInstance().sendAction(action);

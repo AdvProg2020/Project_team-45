@@ -3,6 +3,7 @@ package server.network;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.SocketException;
 
 public class ClientHandler extends Thread {
 
@@ -28,9 +29,13 @@ public class ClientHandler extends Thread {
                 serverAnswer = MethodStringer.runMethodReturnJson(clientMessage);
                 clientOutputStream.writeUTF(serverAnswer);
                 clientOutputStream.flush();
-            } catch (IOException exception) {
+            } catch (SocketException socketException) {
+                System.out.println("client disconnected.");
+                break;
+            }catch (IOException exception) {
                 exception.printStackTrace();
             }
         }
+        // TODO : end while when connection died
     }
 }

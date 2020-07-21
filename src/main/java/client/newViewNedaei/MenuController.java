@@ -35,6 +35,8 @@ public class MenuController {
             goToMenu(MainMenu.getFxmlFilePath());
             panels = new Stack<>();
         } catch (IOException ignored) {
+            System.out.println(".......................................................");
+            ignored.printStackTrace();
         }
 
     }

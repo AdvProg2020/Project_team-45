@@ -6,7 +6,7 @@ import java.net.Socket;
 
 public class ServerEntranceSocket implements Runnable {
 
-    public static final int PORT = 8890;
+    public static final int PORT = 8891;
     public static final String IP = "127.0.0.1";
 
 
@@ -24,17 +24,19 @@ public class ServerEntranceSocket implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("server is running...");
         while (true) {
             try {
                 Socket clientSocket = serverSocket.accept();
+                System.out.println("a client connected.");
                 DataInputStream clientInputStream = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
                 DataOutputStream clientOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
                 new ClientHandler(getNextToken(), clientInputStream, clientOutputStream).start();
 
                 // connection successful message
-                clientOutputStream.writeUTF("done");
-                System.out.println("a client connected.");
-                clientOutputStream.flush();
+//                clientOutputStream.writeUTF("done");
+//                System.out.println("a client connected.");
+//                clientOutputStream.flush();
                 //
             }catch (IOException exception) {
                 System.err.println(exception.getMessage());

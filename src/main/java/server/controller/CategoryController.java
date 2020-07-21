@@ -326,4 +326,22 @@ public class CategoryController implements Deleter {
     public void editCategoryName(String editingCategoryId, String newName) {
         market.getCategoryById(editingCategoryId).setName(newName);
     }
+
+//    public ArrayList<HashMap<String, String>> testii(String name) throws Exception {
+//        if (!name.isEmpty()) {
+//            throw new Exception("oh!");
+//        }
+//        ArrayList<HashMap<String, String>> a = new ArrayList<>();
+//        HashMap<String, String> b = new HashMap<>();
+//        b.put("hatam", "mammad");
+//        b.put("OS", "neda");
+//        b.put("ghofli", "bagheri");
+//        a.add(b);
+//        HashMap<String, String> c = new HashMap<>();
+//        c.put("hatam", "mammad");
+//        c.put("OS", "neda");
+//        c.put("ghofli", "bagheri");
+//        a.add(c);
+//        return a;
+//    }
 }

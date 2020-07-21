@@ -337,6 +337,7 @@ public class CategoryController implements Deleter {
     }
 
     public String getCategoryId(String categoryName) {
+//        return (String) MethodStringer.sampleMethod(getClass(), "getCategoryId", categoryName);
         return getItemById(categoryName).getId();
     }
 
@@ -380,4 +381,8 @@ public class CategoryController implements Deleter {
     public void editCategoryName(String editingCategoryId, String newName) {
         market.getCategoryById(editingCategoryId).setName(newName);
     }
+
+//    public ArrayList<HashMap<String, String>> testii(String name) throws Throwable {
+//        return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(), "testii", name);
+//    }
 }

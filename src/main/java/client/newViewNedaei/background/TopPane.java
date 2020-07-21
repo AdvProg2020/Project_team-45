@@ -1,5 +1,8 @@
 package client.newViewNedaei.background;
 
+import client.controller.CartController;
+import client.controller.CategoryController;
+import client.controller.userControllers.UserController;
 import client.newViewBagheri.OffMenu;
 import client.newViewBagheri.ProductsMenu;
 import client.newViewHatami.AdminMenu;
@@ -10,9 +13,6 @@ import client.newViewNedaei.SoundPlayer;
 import client.newViewNedaei.user.buyer.BuyerMenu;
 import client.newViewNedaei.user.buyer.CartManagingMenu;
 import client.newViewNedaei.user.seller.SellerMenu;
-import client.controller.CartController;
-import client.controller.CategoryController;
-import client.controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
@@ -36,12 +36,12 @@ public class TopPane {
     public void initialize() {
         loginRegister.setVisible(true);
         logout.setVisible(true);
-        if (UserController.isLoggedIn()) {
-            loginRegister.setVisible(false);
-        } else {
-            logout.setVisible(false);
-        }
-        addMenuItems();
+//        if (UserController.isLoggedIn()) {
+//            loginRegister.setVisible(false);
+//        } else {
+//            logout.setVisible(false);
+//        }
+//        addMenuItems();
     }
 
     public void goBack() {

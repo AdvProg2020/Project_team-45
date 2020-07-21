@@ -26,7 +26,7 @@ public class MethodStringer {
     public static String runMethodReturnJson(String action) {
         String[] parts = action.trim().split(" ");
         try {
-            Class srcClass = Class.forName(parts[0]);
+            Class srcClass = Class.forName(parts[0].replace("client", "server"));
             Class[] classes = new Class[parts.length - 2];
             for (int i = 2; i < parts.length; i++) {
                 classes[i-2] = Class.forName(parts[i].split(":")[0]);
@@ -52,9 +52,12 @@ public class MethodStringer {
             Object instance = srcClass.getDeclaredMethod("getInstance").invoke(null);
             Object output = method.invoke(instance, inputs);
             return (new Gson()).toJson(output);
-        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+        } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException e) {
             e.printStackTrace();
             return null;
+        } catch (InvocationTargetException e) {
+            Exception targetException = (Exception) e.getTargetException();
+            return targetException.getClass().getName() + "::" + (new Gson()).toJson(targetException);
         }
     }
 

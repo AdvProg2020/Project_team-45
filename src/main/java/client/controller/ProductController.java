@@ -216,7 +216,7 @@ public class ProductController implements Deleter {
             return null;
         }
     }
-
+    ////////////////////////////////////////////////////////////////////////////////////////////
     public void setActiveProductBYProductIdForOff(String productId, String sellInfoId) {
         Method me = getClass().getEnclosingMethod();
         try {
@@ -226,6 +226,7 @@ public class ProductController implements Deleter {
             e.printStackTrace();
         }
     }
+    /////////////////////////////////////////////////////////////////////////////////////////////
 
     public ArrayList<HashMap<String, String>> getActiveProductSimilarProducts() {
         Method me = getClass().getEnclosingMethod();

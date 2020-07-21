@@ -1,18 +1,10 @@
 package client.controller;
 
-import client.controller.managers.Deleter;
 import client.network.MethodStringer;
-import server.model.Market;
-import server.model.product.Product;
-import server.model.product.ProductSellInfo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
-public class ProductController implements Deleter {
+public class ProductController {
 
     // TODO : bagheri check all
     private static final ProductController instance = new ProductController();
@@ -55,15 +47,11 @@ public class ProductController implements Deleter {
     }
 
     public void addActiveProductToCart() {
-        CartController.getInstance().addProductToCart(activeProduct, activeProductSellInfo);
-    }
-
-    public boolean selectSellerForActiveProduct(String sellerUsername) {
-        ProductSellInfo sellInfo = activeProduct.getSellerInfoForProductByUsername(sellerUsername);
-        if (sellInfo == null)
-            return false;
-        activeProductSellInfo = sellInfo;
-        return true;
+        try {
+            MethodStringer.sampleMethod(getClass(), "addActiveProductToCart");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public void addComment(String title, String content) {
@@ -73,6 +61,16 @@ public class ProductController implements Deleter {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+    }
+
+
+    // Needs review
+    public boolean selectSellerForActiveProduct(String sellerUsername) {
+        ProductSellInfo sellInfo = activeProduct.getSellerInfoForProductByUsername(sellerUsername);
+        if (sellInfo == null)
+            return false;
+        activeProductSellInfo = sellInfo;
+        return true;
     }
 
     public boolean deleteItemById(String Id) {
@@ -99,25 +97,28 @@ public class ProductController implements Deleter {
         }
     }
 
-    @Override
-    public Product getItemById(String Id) {
-        return market.getProductById(Id);
-    }
-
-    public ProductSellInfo getActiveProductSellInfo() {
-        return activeProductSellInfo;
-    }
-
     public void setActiveProductSellInfo(ProductSellInfo activeProductSellInfo) {
         this.activeProductSellInfo = activeProductSellInfo;
     }
+    // Needs review
 
-    public Product getActiveProduct() {
-        return activeProduct;
-    }
 
     public void setActiveProductById(int productId) {
-        this.activeProduct = Market.getInstance().getProductById("" + productId);
+        try {
+            MethodStringer.sampleMethod(getClass(),
+                    "setActiveProductById", productId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    public void setActiveProductById(String productId) {
+        try {
+            MethodStringer.sampleMethod(getClass(),
+                    "setActiveProductById", productId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public ArrayList<HashMap<String, String>> getActiveProductCommentsList() {
@@ -160,13 +161,14 @@ public class ProductController implements Deleter {
     }
 
     public String getActiveProductImageAddress() {
-        return activeProduct.getImageAddress();
+        try {
+            return (String) MethodStringer.sampleMethod(getClass(),
+                    "getActiveProductImageAddress");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
-
-    public void setActiveProductById(String productId) {
-        activeProduct = market.getProductById(productId);
-    }
-
 
     public HashMap<String, String> getActiveSellInfo() {
         try {
@@ -198,6 +200,12 @@ public class ProductController implements Deleter {
     }
 
     public List<String> getAllProductsNamesList() {
-        return market.getAllProducts().stream().map(product -> product.getId() + ":" + product.getName()).collect(Collectors.toList());
+        try {
+            return (List<String>) MethodStringer.sampleMethod(getClass(),
+                    "getAllProductsNamesList");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 }

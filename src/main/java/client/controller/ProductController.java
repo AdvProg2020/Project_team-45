@@ -76,34 +76,19 @@ public class ProductController {
         return true;
     }
 
-    public boolean deleteItemById(String Id) {
-        Product product = getItemById(Id);
-        if (product == null)
-            return false;
-        removeProduct(getItemById(Id));
-        return true;
-    }
-
-    public void removeProduct(Product product) {
-        removeProductFromSellersList(product);
-        removeProductFromCategory(product);
-        market.removeProductFromAllList(product);
-    }
-
-    private void removeProductFromCategory(Product product) {
-        product.getCategory().removeProduct(product);
-    }
-
-    private void removeProductFromSellersList(Product product) {
-        for (ProductSellInfo sellInfo : product.getSellInfosList()) {
-            sellInfo.removeProduct();
-        }
-    }
-
     public void setActiveProductSellInfo(ProductSellInfo activeProductSellInfo) {
         this.activeProductSellInfo = activeProductSellInfo;
     }
+
     // Needs review
+
+    public void deleteItemById(String Id) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "deleteItemById", Id);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
 
     // used in cart managing menu
 

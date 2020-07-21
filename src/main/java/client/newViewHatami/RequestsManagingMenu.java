@@ -33,14 +33,14 @@ public class RequestsManagingMenu {
 
     public void acceptSelectedRequest() {
         String selectedRequestId = getSelectedRequest();
-        RequestController.getInstance().getItemById(selectedRequestId).accept();
+        RequestController.getInstance().acceptRequest(selectedRequestId);
         messageLabel.setText("request accepted");
         fillList();
     }
 
     public void declineSelectedRequest() {
         String selectedRequestId = getSelectedRequest();
-        RequestController.getInstance().getItemById(selectedRequestId).decline();
+        RequestController.getInstance().declineRequest(selectedRequestId);
         messageLabel.setText("request declined");
         fillList();
     }
@@ -54,7 +54,7 @@ public class RequestsManagingMenu {
     }
 
     public void showRequestDetails() {
-        ViewRequestForAdmin.setShowingRequest(getSelectedRequest());
+        ViewRequestForAdmin.setShowingRequestId(getSelectedRequest());
         MenuController.getInstance().goToPanel(ViewRequestForAdmin.getFxmlFilePath());
         // TODO : make request viewer panel
     }

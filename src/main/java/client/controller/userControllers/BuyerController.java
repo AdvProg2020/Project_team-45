@@ -1,25 +1,11 @@
 package client.controller.userControllers;
 
-import client.controller.managers.Manager;
-import client.network.ClientSocket;
 import client.network.MethodStringer;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import server.model.CodedDiscount;
-import server.model.Market;
-import server.model.log.BuyLog;
-import server.model.log.Log;
-import server.model.product.ProductSellInfo;
-import server.model.user.Buyer;
-import server.model.user.Cart;
-import server.model.user.CartHolder;
-import server.model.user.User;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BuyerController extends UserController implements Manager {
+public class BuyerController extends UserController {
     private static final BuyerController instance = new BuyerController();
 
     public static BuyerController getInstance() {
@@ -202,12 +188,4 @@ public class BuyerController extends UserController implements Manager {
         }
     }
 
-    @Override
-    public Buyer getItemById(String Id) {
-        // TODO : must be deleted
-        User user = market.getUserByUsername(Id);
-        if (user == null || !user.getRole().equals("buyer"))
-            return null;
-        return (Buyer) market.getUserByUsername(Id);
-    }
 }

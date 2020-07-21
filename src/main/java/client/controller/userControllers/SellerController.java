@@ -1,6 +1,5 @@
 package client.controller.userControllers;
 
-import client.controller.managers.Manager;
 import client.network.MethodStringer;
 import server.model.Market;
 import server.model.Off;
@@ -9,11 +8,10 @@ import server.model.product.Product;
 import server.model.product.ProductSellInfo;
 import server.model.request.*;
 import server.model.user.Seller;
-import server.model.user.User;
 
 import java.util.HashMap;
 
-public class SellerController extends UserController implements Manager {
+public class SellerController extends UserController {
     private static final SellerController instance = new SellerController();
 
     private SellLog currentSellLog;
@@ -101,15 +99,6 @@ public class SellerController extends UserController implements Manager {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
-    }
-
-    @Override
-    public Seller getItemById(String Id) {
-        //TODO : must be deleted
-        User user = market.getUserByUsername(Id);
-        if (user == null || !user.getRole().equals("seller"))
-            return null;
-        return (Seller) market.getUserByUsername(Id);
     }
 
     public HashMap<String, String> getSellerCompany() {

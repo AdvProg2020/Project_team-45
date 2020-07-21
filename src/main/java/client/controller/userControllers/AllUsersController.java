@@ -1,13 +1,11 @@
 package client.controller.userControllers;
 
-import client.controller.managers.Deleter;
 import client.network.MethodStringer;
 import server.model.Market;
-import server.model.user.User;
 
 import java.util.List;
 
-public class AllUsersController implements Deleter {
+public class AllUsersController {
 
     private final Market market;
 
@@ -39,13 +37,6 @@ public class AllUsersController implements Deleter {
             throwable.printStackTrace();
             return null;
         }
-    }
-
-
-    @Override
-    public User getItemById(String Id) {
-        // TODO : must be deleted
-        return market.getUserByUsername(Id);
     }
 
     public String getUsernameById(String userId) {

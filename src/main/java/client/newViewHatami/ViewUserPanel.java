@@ -20,7 +20,7 @@ public class ViewUserPanel extends Panel {
 
     @FXML
     public void initialize() {
-        HashMap<String, String> showingInfo = UserController.getUserViewInfo(selectedUsername);
+        HashMap<String, String> showingInfo = UserController.getInstance().getUserViewInfo(selectedUsername);
         setLabelsValues(showingInfo);
     }
 

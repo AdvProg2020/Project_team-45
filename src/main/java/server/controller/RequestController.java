@@ -101,4 +101,12 @@ public class RequestController implements Manager {
             }
         }
     }
+
+    public void acceptRequest(String requestId) {
+        market.getRequestById(requestId).accept();
+    }
+
+    public void declineRequest(String requestId) {
+        market.getRequestById(requestId).decline();
+    }
 }

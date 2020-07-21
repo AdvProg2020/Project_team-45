@@ -37,12 +37,6 @@ public class CodedDiscountController {
         }
     }
 
-    public CodedDiscount getItemById(String Id) {
-        // TODO : must be deleted
-        return Market.getInstance().getCodedDiscountByCode(Id);
-    }
-
-
     public boolean discountCodeExists(String code) {
         try {
             return (boolean) MethodStringer.sampleMethod(getClass(), "discountCodeExists", code);

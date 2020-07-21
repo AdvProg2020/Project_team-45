@@ -48,4 +48,8 @@ public class OffController implements Manager {
         return Market.getInstance().getOffById(viewingOffId).getProductsList().
                 stream().map(Product::getName).collect(Collectors.toList());
     }
+
+    public boolean offIdExists(String id) {
+        return Market.getInstance().getOffById(id) != null;
+    }
 }

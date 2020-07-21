@@ -1,14 +1,12 @@
 package client.controller;
 
-import client.controller.managers.Manager;
 import client.network.MethodStringer;
-import server.model.Market;
 import server.model.Off;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class OffController implements Manager {
+public class OffController {
     private static final OffController instance = new OffController();
     private Off currentOff;
 
@@ -17,12 +15,6 @@ public class OffController implements Manager {
 
     public static OffController getInstance() {
         return instance;
-    }
-
-    @Override
-    public Off getItemById(String Id) {
-        // TODO : must be deleted
-        return Market.getInstance().getOffById(Id);
     }
 
     // TODO : edit come here
@@ -50,6 +42,15 @@ public class OffController implements Manager {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;
+        }
+    }
+
+    public boolean offIdExists(String id) {
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(), "offIdExists", id);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return false;
         }
     }
 }

@@ -27,7 +27,7 @@ public class EditProductPanel extends Panel {
     }
 
     public void sendRequest() {
-        if (!offId.getText().equals("") && OffController.getInstance().getItemById(offId.getText()) == null) {
+        if (!offId.getText().equals("") && !OffController.getInstance().offIdExists(offId.getText())) {
             error.setText("off id does not exist");
             return;
         } if (!price.getText().equals("") && !price.validate()) {

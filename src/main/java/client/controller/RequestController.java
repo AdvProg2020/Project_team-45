@@ -1,6 +1,5 @@
 package client.controller;
 
-import client.controller.managers.Manager;
 import client.network.MethodStringer;
 import server.model.Market;
 import server.model.request.Request;
@@ -8,7 +7,7 @@ import server.model.request.Request;
 import java.util.HashMap;
 import java.util.List;
 
-public class RequestController implements Manager {
+public class RequestController {
     private static final RequestController instance = new RequestController();
     private final Market market = Market.getInstance();
 
@@ -24,12 +23,6 @@ public class RequestController implements Manager {
 
     public Request createRequestByRequestName(String requestName) {
         return null;
-    }
-
-    @Override
-    public Request getItemById(String Id) {
-        // TODO : must be removed
-        return market.getRequestById(Id);
     }
 
     public List<String> getAllRequestsIds() {
@@ -92,6 +85,22 @@ public class RequestController implements Manager {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;
+        }
+    }
+
+    public void acceptRequest(String requestId) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "acceptRequest", requestId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    public void declineRequest(String requestId) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "declineRequest", requestId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
 }

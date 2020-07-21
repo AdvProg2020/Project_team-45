@@ -1,7 +1,6 @@
 package client.controller.userControllers;
 
 import client.network.MethodStringer;
-import server.model.Market;
 import server.model.user.AnonymousUser;
 import server.model.user.Buyer;
 import server.model.user.User;
@@ -23,6 +22,15 @@ public class UserController {
     public static Boolean isLoggedIn() {
         try {
             return (Boolean) MethodStringer.sampleMethod(UserController.class, "isLoggedIn");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public HashMap<String, String> getUserViewInfo(String username) {
+        try {
+            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getSellerId", username);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;

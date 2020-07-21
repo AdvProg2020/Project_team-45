@@ -36,7 +36,7 @@ public class UserController {
         return loggedIn;
     }
 
-    public static HashMap<String, String> getUserViewInfo(String username) {
+    public HashMap<String, String> getUserViewInfo(String username) {
         User showingUser = Market.getInstance().getUserByUsername(username);
         HashMap<String, String> filledMap = new HashMap<>();
 

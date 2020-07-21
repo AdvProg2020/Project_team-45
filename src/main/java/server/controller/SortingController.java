@@ -33,11 +33,6 @@ public class SortingController {
         return false;
     }
 
-    public void disableCurrentSort() {
-        // TODO : bagheri use it
-        activeSort = "seen";
-    }
-
     public void sortingProducts(ArrayList<Product> productsList) {
         switch (activeSort) {
             case "seen":

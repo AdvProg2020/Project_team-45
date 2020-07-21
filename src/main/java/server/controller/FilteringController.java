@@ -31,19 +31,6 @@ public class FilteringController {
         return instance;
     }
 
-    public ArrayList<String> getAvailableFilters() {
-        ArrayList<String> availableFilters = new ArrayList<>(generalFilters);
-        Category activeCategory = CategoryController.getInstance().getActiveCategory();
-        if (activeCategory.getType().equals("FinalCategory")) {
-            availableFilters.addAll(((FinalCategory) activeCategory).getSpecialFeatures());
-        }
-        return availableFilters;
-    }
-
-    public LinkedHashMap<String, String> getCurrentFilters() {
-        return productFilters.getCurrentFilters();
-    }
-
     public boolean addFilter(String type, String value) {
         Category activeCategory = CategoryController.getInstance().getActiveCategory();
         if (type.equals("productName")) {

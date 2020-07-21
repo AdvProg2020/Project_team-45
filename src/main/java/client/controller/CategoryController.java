@@ -17,14 +17,8 @@ import java.util.stream.Collectors;
 
 public class CategoryController implements Deleter {
     private static final CategoryController instance = new CategoryController();
-    private final Market market;
-    private Category activeCategory;
-    private boolean isOffMenu;
-    private final ProductController productController = ProductController.getInstance();
 
     private CategoryController() {
-        market = Market.getInstance();
-        activeCategory = null;
     }
 
     public static CategoryController getInstance() {

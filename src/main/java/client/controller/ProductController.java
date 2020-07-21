@@ -18,12 +18,8 @@ public class ProductController implements Deleter {
 
     // TODO : bagheri check all
     private static final ProductController instance = new ProductController();
-    private final Market market;
-    private Product activeProduct;
-    private ProductSellInfo activeProductSellInfo;
 
     private ProductController() {
-        this.market = Market.getInstance();
     }
 
     public static ProductController getInstance() {

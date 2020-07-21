@@ -2,7 +2,10 @@ package client.controller;
 
 import client.network.MethodStringer;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class ProductController {
 
@@ -204,6 +207,15 @@ public class ProductController {
         try {
             return (List<String>) MethodStringer.sampleMethod(getClass(),
                     "getAllProductsNamesList");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public HashMap<String, String> getProductAndSellInfo(String sellInfoId) {
+        try {
+            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getProductAndSellInfo", sellInfoId);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;

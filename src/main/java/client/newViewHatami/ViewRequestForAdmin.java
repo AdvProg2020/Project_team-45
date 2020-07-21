@@ -1,5 +1,6 @@
 package client.newViewHatami;
 
+import client.controller.RequestController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.collections.FXCollections;
@@ -8,10 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
-import server.model.Comment;
-import server.model.Market;
-import server.model.product.Product;
-import server.model.request.*;
 
 import java.util.HashMap;
 
@@ -19,7 +16,8 @@ import java.util.HashMap;
 
 public class ViewRequestForAdmin extends Panel {
 
-    private static Request showingRequest;
+    private static String showingRequestId;
+
     public GridPane sellerRegisterPane;
     public Label idLabel;
     public Label statusLabel;
@@ -38,31 +36,41 @@ public class ViewRequestForAdmin extends Panel {
 
     @FXML
     public void initialize() {
-        setDefaultFields();
-        if (showingRequest.getType().equals("seller register"))
-            sellerRegisterPane.setVisible(true);
-        else if (showingRequest.getType().equals("add off"))
-            addOffPane.setVisible(true);
-        else if (showingRequest.getType().equals("add product") || showingRequest.getType().equals("remove product"))
-            addProductPane.setVisible(true);
-        else if (showingRequest.getType().equals("edit off")) {
-            addOffPane.setVisible(true);
-            editLabel.setVisible(true);
-            setListView(showingRequest.getFieldsAndValues());
-        }else if (showingRequest.getType().equals("edit product")) {
-            addProductPane.setVisible(true);
-            editLabel.setVisible(true);
-            setListView(showingRequest.getFieldsAndValues());
-        } else if (showingRequest.getType().equals("new comment")) {
-            setUpCommentInfo();
-            commentGridPane.setVisible(true);
+        HashMap<String, String> requestInfo = RequestController.getInstance().getRequestInfo(showingRequestId);
+        setDefaultFields(requestInfo);
+        String requestType = String.valueOf(requestInfo.get("type"));
+        switch (requestType) {
+            case "seller register":
+                sellerRegisterPane.setVisible(true);
+                break;
+            case "add off":
+                addOffPane.setVisible(true);
+                break;
+            case "add product":
+            case "remove product":
+                addProductPane.setVisible(true);
+                break;
+            case "edit off":
+                addOffPane.setVisible(true);
+                editLabel.setVisible(true);
+                setListView(RequestController.getInstance().getRequestFieldsAndValues(showingRequestId));
+                break;
+            case "edit product":
+                addProductPane.setVisible(true);
+                editLabel.setVisible(true);
+                setListView(RequestController.getInstance().getRequestFieldsAndValues(showingRequestId));
+                break;
+            case "new comment":
+                setUpCommentInfo();
+                commentGridPane.setVisible(true);
+                break;
         }
     }
 
     private void setUpCommentInfo() {
-        Comment comment = ((CommentRequest) showingRequest).getComment();
-        commentTitle.setText(comment.getTitle());
-        commentText.setText(comment.getContent());
+        HashMap<String, String> commentInfo = RequestController.getInstance().getRequestsCommentInfo(showingRequestId);
+        commentTitle.setText(commentInfo.get("title"));
+        commentText.setText(commentInfo.get("text"));
     }
 
 
@@ -77,54 +85,31 @@ public class ViewRequestForAdmin extends Panel {
         editListView.setVisible(true);
     }
 
-    private void setDefaultFields() {
-        idLabel.setText(showingRequest.getId());
-        statusLabel.setText(showingRequest.getRequestStatus());
-        typeLabel.setText(showingRequest.getType());
+    private void setDefaultFields(HashMap<String, String> requestInfo) {
+        idLabel.setText(showingRequestId);
+        statusLabel.setText(requestInfo.get("status"));
+        typeLabel.setText(requestInfo.get("type"));
     }
 
-    public static void setShowingRequest(String showingRequest) {
-        ViewRequestForAdmin.showingRequest = Market.getInstance().getRequestById(showingRequest);
+    public static void setShowingRequestId(String showingRequestId) {
+        ViewRequestForAdmin.showingRequestId = showingRequestId;
     }
 
     public void viewSeller() {
-        String sellerUsername = "";
-        if (showingRequest.getType().equals("seller register"))
-            sellerUsername = ((SellerRegisterRequest) showingRequest).getSeller().getUsername();
-        else if (showingRequest.getType().equals("add product"))
-            sellerUsername = ((AddProductRequest) showingRequest).getSeller().getUsername();
-        else if (showingRequest.getType().equals("remove product"))
-            sellerUsername = ((RemoveProductRequest) showingRequest).getSeller().getUsername();
-        else if (showingRequest.getType().equals("new comment"))
-            sellerUsername = ((CommentRequest) showingRequest).getComment().getUser().getUsername();
-        else {
-            sellerUsername = ((ProductEditionRequest) showingRequest).getSeller().getUsername();
-        }
+        String sellerUsername = RequestController.getInstance().getSellerId(showingRequestId);
         ViewUserPanel.setSelectedUsername(sellerUsername);
         MenuController.getInstance().goToPanel(ViewUserPanel.getFxmlFilePath());
     }
 
     public void viewOff() {
-        if (showingRequest.getType().equals("add off"))
-            ViewOffForAdmin.setViewingOff(((AddOffRequest) showingRequest).getOff().getId());
-        else
-            ViewOffForAdmin.setViewingOff(((OffEditionRequest) showingRequest).getOffId());
+        String showingOffId =  RequestController.getInstance().getOffId(showingRequestId);
+        ViewOffForAdmin.setViewingOff(showingOffId);
         MenuController.getInstance().goToPanel(ViewOffForAdmin.getFxmlFilePath());
     }
 
     public void viewProduct() {
-        if (showingRequest.getType().equals("add product"))
-            ViewProductForAdmin.setShowingProductInfo(((AddProductRequest) showingRequest).getProductSellInfo());
-        else if (showingRequest.getType().equals("remove product")){
-            String productId =  ((RemoveProductRequest) showingRequest).getProductId();
-            ViewProductForAdmin.setShowingProductInfo(((RemoveProductRequest) showingRequest).getSeller().getAvailableProductSellInfoById(productId));
-        }else if (showingRequest.getType().equals("new comment")){
-            Product product =  ((CommentRequest) showingRequest).getComment().getProduct();
-            ViewProductForAdmin.setShowingProductInfo(product.getDefaultSellInfo());
-        }else {
-            String productId =  ((ProductEditionRequest) showingRequest).getProductId();
-            ViewProductForAdmin.setShowingProductInfo(((ProductEditionRequest) showingRequest).getSeller().getAvailableProductSellInfoById(productId));
-        }
+        String showingSellInfoId =  RequestController.getInstance().getProductId(showingRequestId);
+        ViewProductForAdmin.setShowingProductInfo(showingSellInfoId);
         MenuController.getInstance().goToPanel(ViewProductForAdmin.getFxmlFilePath());
     }
 }

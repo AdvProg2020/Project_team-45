@@ -195,4 +195,17 @@ public class ProductController implements Deleter {
         return market.getAllProducts().stream().map(product -> product.getId() + ":" + product.getName()).collect(Collectors.toList());
     }
     //bahgeri
+
+    public HashMap<String, String> getProductAndSellInfo(String sellInfoId) {
+        HashMap<String, String> information = new HashMap<>();
+        ProductSellInfo sellInfo = Market.getInstance().getProductSellInfoById(sellInfoId);
+        Product product = sellInfo.getProduct();
+        information.put("name", product.getName());
+        information.put("companyName", product.getCompany().getName());
+        information.put("categoryName", product.getCategory().getName());
+        information.put("imageAddress", product.getImageAddress());
+        information.put("price", String.valueOf(sellInfo.getFinalPrice()));
+        information.put("stock", String.valueOf(sellInfo.getStock()));
+        return information;
+    }
 }

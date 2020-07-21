@@ -1,5 +1,7 @@
 package client.newViewBagheri;
 
+import client.controller.ProductController;
+import client.controller.userControllers.UserController;
 import client.newViewNedaei.MenuController;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -15,8 +17,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import client.controller.ProductController;
-import client.controller.userControllers.UserController;
 
 import java.net.URL;
 import java.nio.file.Paths;
@@ -203,7 +203,7 @@ public class ProductMenu implements Initializable {
         mediaView.getMediaPlayer().play();
     }
 
-    public void puaseVideo(ActionEvent actionEvent) {
+    public void puasevideo(ActionEvent actionEvent) {
         mediaView.getMediaPlayer().pause();
     }
 

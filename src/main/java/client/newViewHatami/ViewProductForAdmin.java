@@ -1,14 +1,13 @@
 package client.newViewHatami;
 
+import client.controller.ProductController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import server.model.product.Product;
-import server.model.product.ProductSellInfo;
 
-// TODO
+import java.util.HashMap;
 
 public class ViewProductForAdmin extends Panel {
     public Label nameLabel;
@@ -18,11 +17,10 @@ public class ViewProductForAdmin extends Panel {
     public Label priceLabel;
     public Label stockLabel;
 
-    private static ProductSellInfo showingProductInfo;
     private static String showingProductInfoId;
 
-    public static void setShowingProductInfo(ProductSellInfo showingProductInfo) {
-        ViewProductForAdmin.showingProductInfo = showingProductInfo;
+    public static void setShowingProductInfo(String showingProductInfoId) {
+        ViewProductForAdmin.showingProductInfoId = showingProductInfoId;
     }
 
     public static String getFxmlFilePath() {
@@ -31,17 +29,17 @@ public class ViewProductForAdmin extends Panel {
 
     @FXML
     public void initialize() {
-        Product product = showingProductInfo.getProduct();
-        nameLabel.setText(product.getName());
-        companyLabel.setText(product.getCompany().getName());
-        categoryLabel.setText(product.getCategory().getName());
+        HashMap<String, String> information = ProductController.getInstance().getProductAndSellInfo(showingProductInfoId);
+        nameLabel.setText(information.get("name"));
+        companyLabel.setText(information.get("companyName"));
+        categoryLabel.setText(information.get("categoryName"));
         try {
-            imageView.setImage(new Image(product.getImageAddress()));
+            imageView.setImage(new Image(information.get("imageAddress")));
         } catch (Exception e) {
             System.err.println("couldn't open image");
             imageView.setImage(new Image("/poker.png"));
         }
-        priceLabel.setText(String.valueOf(showingProductInfo.getPrice()));
-        stockLabel.setText(String.valueOf(showingProductInfo.getStock()));
+        priceLabel.setText(information.get("price"));
+        stockLabel.setText(information.get("stock"));
     }
 }

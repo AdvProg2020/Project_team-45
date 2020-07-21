@@ -36,12 +36,12 @@ public class TopPane {
     public void initialize() {
         loginRegister.setVisible(true);
         logout.setVisible(true);
-//        if (UserController.isLoggedIn()) {
-//            loginRegister.setVisible(false);
-//        } else {
-//            logout.setVisible(false);
-//        }
-//        addMenuItems();
+        if (UserController.isLoggedIn()) {
+            loginRegister.setVisible(false);
+        } else {
+            logout.setVisible(false);
+        }
+        addMenuItems();
     }
 
     public void goBack() {

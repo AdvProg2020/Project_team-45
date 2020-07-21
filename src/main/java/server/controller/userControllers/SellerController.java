@@ -86,7 +86,7 @@ public class SellerController extends UserController implements Manager {
 
     // view balance panel
 
-    public int getSellerBalance() {
+    public Integer getSellerBalance() {
         return ((Seller) UserController.getActiveUser()).getBalance();
     }
 
@@ -107,8 +107,12 @@ public class SellerController extends UserController implements Manager {
         return (Seller) market.getUserByUsername(Id);
     }
 
-    public Company getSellerCompany() {
-        return ((Seller) UserController.getActiveUser()).getCompany();
+    public HashMap<String, String> getSellerCompany() {
+        HashMap<String, String> result = new HashMap<>();
+        Company company = ((Seller) UserController.getActiveUser()).getCompany();
+        result.put("name", company.getName());
+        result.put("info", company.getOtherInformation());
+        return result;
     }
 
     public SellLog getCurrentSellLog() {

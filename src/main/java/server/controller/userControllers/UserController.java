@@ -100,8 +100,8 @@ public class UserController {
     }
 
     public void logout() {
-            loggedIn = false;
-            activeUser = null;
+        loggedIn = false;
+        activeUser = null;
     }
 
     public boolean usernameExists(String username) throws UsernameIsRequestException {
@@ -112,5 +112,9 @@ public class UserController {
 
     public boolean onlyHasAdmin() {
         return Market.getInstance().getAllUsers().size() == 1;
+    }
+
+    public String getRole() {
+        return activeUser.getRole();
     }
 }

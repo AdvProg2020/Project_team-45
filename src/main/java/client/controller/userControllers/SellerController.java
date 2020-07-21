@@ -1,6 +1,7 @@
 package client.controller.userControllers;
 
 import client.controller.managers.Manager;
+import client.network.MethodStringer;
 import server.model.Company;
 import server.model.Market;
 import server.model.Off;
@@ -12,6 +13,7 @@ import server.model.user.PersonalInfo;
 import server.model.user.Seller;
 import server.model.user.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SellerController extends UserController implements Manager {
@@ -86,8 +88,13 @@ public class SellerController extends UserController implements Manager {
 
     // view balance panel
 
-    public int getSellerBalance() {
-        return ((Seller) UserController.getActiveUser()).getBalance();
+    public Integer getSellerBalance() {
+        try {
+            return (Integer) MethodStringer.sampleMethod(getClass(), "getSellerBalance");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -107,8 +114,13 @@ public class SellerController extends UserController implements Manager {
         return (Seller) market.getUserByUsername(Id);
     }
 
-    public Company getSellerCompany() {
-        return ((Seller) UserController.getActiveUser()).getCompany();
+    public HashMap<String, String> getSellerCompany() {
+        try {
+            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getSellerCompany");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public SellLog getCurrentSellLog() {

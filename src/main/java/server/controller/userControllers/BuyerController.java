@@ -90,7 +90,7 @@ public class BuyerController extends UserController implements Manager {
 
     // view balance panel
 
-    public int getBuyerBalance() {
+    public Integer getBuyerBalance() {
         return ((Buyer) UserController.getActiveUser()).getBalance();
     }
 

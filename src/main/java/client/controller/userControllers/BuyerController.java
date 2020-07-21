@@ -124,13 +124,10 @@ public class BuyerController extends UserController implements Manager {
     // view balance panel
 
     public Integer getBuyerBalance() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, Integer.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (Integer) MethodStringer.sampleMethod(getClass(), "getBuyerBalance");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }

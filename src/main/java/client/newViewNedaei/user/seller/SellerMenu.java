@@ -6,15 +6,15 @@ import client.newViewNedaei.user.seller.off.OffsManagingMenu;
 import client.newViewNedaei.user.seller.product.AddProductPanel;
 import client.newViewNedaei.user.seller.product.ProductsManagingMenu;
 import client.newViewNedaei.user.seller.product.RemoveProductPanel;
+import client.controller.userControllers.SellerController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import server.controller.userControllers.SellerController;
-import server.model.Company;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class SellerMenu {
     @FXML
@@ -38,12 +38,12 @@ public class SellerMenu {
             pane.setTranslateY(0);
             mainPane.getChildren().add(pane);
 
-            Company company = SellerController.getInstance().getSellerCompany();
-            companyName.setText(company.getName());
-            companyInfo.setText(company.getOtherInformation());
+            HashMap<String, String> company = SellerController.getInstance().getSellerCompany();
+            companyName.setText(company.get("name"));
+            companyInfo.setText(company.get("info"));
             balance.setText("" + SellerController.getInstance().getSellerBalance());
-        } catch (IOException ignored) {
-            ignored.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -5,7 +5,6 @@ import client.newViewHatami.ValidatorField;
 import client.controller.userControllers.UserController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
@@ -46,7 +45,7 @@ public class PersonalInfoPane {
 //            image = new Image("/photos/poker.png");
 //            String imageAddress = UserController.getActiveUser().getPersonalInfo().getAvatarPath();
 //            image = new Image("/photos/" + imageAddress.substring(imageAddress.lastIndexOf("\\")+1));
-//        } catch (Exception ignored) {
+//        } catch (Throwable ignored) {
 //
 //        }
 //        view.setImage(image);
@@ -57,7 +56,7 @@ public class PersonalInfoPane {
             UserController.getInstance().setPersonalInfoField("firstName", firstName.getText());
             firstName.setPromptText(firstName.getText());
             error.setText("");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             error.setText(e.getMessage());
         }
     }
@@ -67,7 +66,7 @@ public class PersonalInfoPane {
             UserController.getInstance().setPersonalInfoField("lastName", lastName.getText());
             lastName.setPromptText(lastName.getText());
             error.setText("");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             error.setText(e.getMessage());
         }
     }
@@ -77,7 +76,7 @@ public class PersonalInfoPane {
             UserController.getInstance().setPersonalInfoField("emailAddress", emailAddress.getText());
             emailAddress.setPromptText(emailAddress.getText());
             error.setText("");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             error.setText(e.getMessage());
         }
     }
@@ -87,7 +86,7 @@ public class PersonalInfoPane {
             UserController.getInstance().setPersonalInfoField("phoneNumber", phoneNumber.getText());
             phoneNumber.setPromptText(phoneNumber.getText());
             error.setText("");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             error.setText(e.getMessage());
         }
     }
@@ -97,7 +96,7 @@ public class PersonalInfoPane {
             UserController.getInstance().setPersonalInfoField("password", password.getText());
             password.setPromptText(password.getText());
             error.setText("");
-        } catch (Exception e) {
+        } catch (Throwable e) {
             error.setText(e.getMessage());
         }
     }

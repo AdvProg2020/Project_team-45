@@ -20,12 +20,10 @@ public class CartController {
     }
 
     public void resetCart() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            MethodStringer.sampleMethod(getClass(), "resetCart");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
 

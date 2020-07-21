@@ -36,13 +36,10 @@ public class UserController {
     }
 
     public static Boolean isLoggedIn() {
-        Method me = UserController.class.getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, Boolean.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (Boolean) MethodStringer.sampleMethod(UserController.class, "isLoggedIn");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }
@@ -63,14 +60,8 @@ public class UserController {
 
     // personal info panel
 
-    public void setPersonalInfoField(String field, String newValue) {
-        Method me = getClass().getEnclosingMethod();
-        try {
-            String action = MethodStringer.stringTheMethod(me, field, newValue);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void setPersonalInfoField(String field, String newValue) throws Throwable {
+        MethodStringer.sampleMethod(getClass(), "setPersonalInfoField", field, newValue);
     }
 
     ///
@@ -90,13 +81,10 @@ public class UserController {
     }
 
     public void logout() {
-        Class thisClass = getClass();
-        Method me = thisClass.getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            MethodStringer.sampleMethod(getClass(), "logout");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
     }
 
@@ -111,13 +99,10 @@ public class UserController {
     }
 
     public String getRole() {
-        Method me = getClass().getEnclosingMethod();
         try {
-            String action = MethodStringer.stringTheMethod(me);
-            String returnJson = ClientSocket.getInstance().sendAction(action);
-            return (new Gson()).fromJson(returnJson, String.class);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (String) MethodStringer.sampleMethod(getClass(), "getRole");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return null;
         }
     }

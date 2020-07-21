@@ -1,21 +1,11 @@
 package client.controller;
 
-import client.controller.managers.Deleter;
-import client.network.ClientSocket;
 import client.network.MethodStringer;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import server.model.Market;
-import server.model.category.Category;
-import server.model.category.FinalCategory;
-import server.model.category.ParentCategory;
-import server.model.product.Product;
 
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class CategoryController implements Deleter {
+public class CategoryController {
     private static final CategoryController instance = new CategoryController();
 
     private CategoryController() {
@@ -23,10 +13,6 @@ public class CategoryController implements Deleter {
 
     public static CategoryController getInstance() {
         return instance;
-    }
-
-    public Category getActiveCategory() {
-        return activeCategory;
     }
 
     public void removeCategory(Category removingCategory) {
@@ -60,10 +46,6 @@ public class CategoryController implements Deleter {
             market.addMainCategoryToList(createdCategory);
         else createdCategory.getParent().addSubcategory(createdCategory);
         market.addCategoryToList(createdCategory);
-    }
-
-    private Category getCategoryById(String categoryId) {
-        return market.getCategoryById(categoryId);
     }
 
     public boolean categoryNameExists(String keyName) {
@@ -125,55 +107,57 @@ public class CategoryController implements Deleter {
     }
 
     public void clearActiveCategory() {
-        activeCategory = null;
-        // TODO : bagheri use it
+        try {
+            MethodStringer.sampleMethod(getClass(), "activeCategory");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public void backCategory() {
-        if (activeCategory != null) {
-            activeCategory = activeCategory.getParent();
+        try {
+            MethodStringer.sampleMethod(getClass(), "backCategory");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
         }
-        // TODO : bagheri use it
-    }
-
-    public ArrayList<Product> getActiveCategoryProductsList() {
-        if (!isOffMenu)
-            return activeCategory.getProductsList();
-        if (activeCategory == null)
-            return market.getAllDiscountedProductsList();
-        return activeCategory.getInOffProductsList();
-    }
-
-    public Product getActiveCategoryProduct(String productId) {
-        for (Product product : activeCategory.getProductsList()) {
-            if (product.getId().equals(productId))
-                return product;
-        }
-        return null;
-    }
-
-
-    @Override
-    public Category getItemById(String Id) {
-        return market.getCategoryByName(Id);
     }
 
     public List<String> getParentCategoriesNames() {
-        List<Category> allCategories = Market.getInstance().getAllCategories();
-        return allCategories.stream().filter(category -> !category.isFinal()).map(Category::getName).collect(Collectors.toList());
+        try {
+            return (List<String>) MethodStringer.sampleMethod(getClass(),
+                    "getParentCategoriesNames");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public void addFeatureToCategory(String editingCategoryId, String newFeature) {
-        ((FinalCategory) getCategoryById(editingCategoryId)).addFeature(newFeature);
+        try {
+            MethodStringer.sampleMethod(getClass(),
+                    "addFeatureToCategory", editingCategoryId, newFeature);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public void removeFeatureFromCategory(String editingCategoryId, String removingFeature) {
-        ((FinalCategory) getCategoryById(editingCategoryId)).removeFeature(removingFeature);
+        try {
+            MethodStringer.sampleMethod(getClass(),
+                    "removeFeatureFromCategory", editingCategoryId, removingFeature);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
-
     public boolean categoryHasFeature(String editingCategoryId, String feature) {
-        return ((FinalCategory) getCategoryById(editingCategoryId)).getSpecialFeatures().contains(feature);
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(),
+                    "categoryHasFeature", editingCategoryId, feature);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
     }
 
     public Set<String> getActiveCategoryCompanies() {
@@ -278,11 +262,22 @@ public class CategoryController implements Deleter {
     }
 
     public boolean categoryIsFinal(String categoryId) {
-        return getCategoryById(categoryId).isFinal();
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(), "categoryIsFinal", categoryId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
     }
 
     public ArrayList<String> getCategorySpecialFeatures(String categoryId) {
-        return ((FinalCategory) market.getCategoryById(categoryId)).getSpecialFeatures();
+        try {
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
+                    "getCategorySpecialFeatures");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public String getCategoryId(String categoryName) {
@@ -320,7 +315,12 @@ public class CategoryController implements Deleter {
     }
 
     public void editCategoryName(String editingCategoryId, String newName) {
-        market.getCategoryById(editingCategoryId).setName(newName);
+        try {
+            MethodStringer.sampleMethod(getClass(),
+                    "editCategoryName", editingCategoryId, newName);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
 //    public ArrayList<HashMap<String, String>> testii(String name) throws Throwable {

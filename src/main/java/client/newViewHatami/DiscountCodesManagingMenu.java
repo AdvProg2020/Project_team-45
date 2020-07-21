@@ -1,11 +1,11 @@
 package client.newViewHatami;
 
+import client.controller.CodedDiscountController;
 import client.newViewNedaei.MenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import server.controller.CodedDiscountController;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
 package client.newViewNedaei.user.buyer.purchase;
 
+import client.controller.userControllers.BuyerController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import client.newViewNedaei.user.buyer.orders.BuyLogPanel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import server.controller.userControllers.BuyerController;
 import server.model.log.BuyLog;
 import server.model.log.Log;
 

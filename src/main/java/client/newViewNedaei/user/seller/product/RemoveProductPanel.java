@@ -1,11 +1,11 @@
 package client.newViewNedaei.user.seller.product;
 
+import client.controller.userControllers.SellerController;
+import client.controller.userControllers.UserController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import server.controller.userControllers.SellerController;
-import server.controller.userControllers.UserController;
 import server.model.product.Product;
 import server.model.user.Seller;
 

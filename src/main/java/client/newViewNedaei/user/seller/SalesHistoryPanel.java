@@ -1,6 +1,8 @@
 package client.newViewNedaei.user.seller;
 
 
+import client.controller.userControllers.SellerController;
+import client.controller.userControllers.UserController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
@@ -9,8 +11,6 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import server.controller.userControllers.SellerController;
-import server.controller.userControllers.UserController;
 import server.model.log.SellLog;
 import server.model.user.Seller;
 

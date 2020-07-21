@@ -1,13 +1,10 @@
 package client.controller.userControllers;
 
-import client.controller.managers.Manager;
-import server.model.user.Admin;
-import server.model.user.PersonalInfo;
-import server.model.user.User;
+import client.network.MethodStringer;
 
 import java.util.HashMap;
 
-public class AdminController extends UserController implements Manager {
+public class AdminController extends UserController {
     private static final AdminController instance = new AdminController();
 
     public static AdminController getInstance() {
@@ -19,15 +16,18 @@ public class AdminController extends UserController implements Manager {
     }
 
     public void createItem(HashMap<String, String> filledFeatures) {
-        Admin newAdmin = new Admin(new PersonalInfo(filledFeatures));
-        market.addUserToList(newAdmin);
+        try {
+            MethodStringer.sampleMethod(getClass(), "createItem", filledFeatures);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
-    @Override
-    public Admin getItemById(String Id) {
-        User user = market.getUserByUsername(Id);
-        if (user == null || !user.getRole().equals("admin"))
-            return null;
-        return (Admin) market.getUserByUsername(Id);
-    }
+//    @Override
+//    public Admin getItemById(String Id) {
+//        User user = market.getUserByUsername(Id);
+//        if (user == null || !user.getRole().equals("admin"))
+//            return null;
+//        return (Admin) market.getUserByUsername(Id);
+//    }
 }

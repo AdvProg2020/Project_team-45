@@ -1,5 +1,6 @@
 package client.newViewNedaei.user.buyer.purchase;
 
+import client.controller.userControllers.BuyerController;
 import client.newViewHatami.Validator;
 import client.newViewHatami.ValidatorField;
 import client.newViewNedaei.MenuController;
@@ -7,7 +8,6 @@ import client.newViewNedaei.Panel;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import server.controller.userControllers.BuyerController;
 
 import java.util.HashMap;
 

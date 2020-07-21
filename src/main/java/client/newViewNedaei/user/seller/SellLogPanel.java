@@ -1,9 +1,9 @@
 package client.newViewNedaei.user.seller;
 
+import client.controller.userControllers.SellerController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import server.controller.userControllers.SellerController;
 import server.model.log.SellLog;
 
 import java.text.SimpleDateFormat;

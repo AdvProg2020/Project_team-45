@@ -1,5 +1,7 @@
 package client.newViewNedaei.user.seller.off;
 
+import client.controller.userControllers.SellerController;
+import client.controller.userControllers.UserController;
 import client.newViewHatami.Validator;
 import client.newViewHatami.ValidatorField;
 import client.newViewNedaei.Panel;
@@ -9,8 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import server.controller.userControllers.SellerController;
-import server.controller.userControllers.UserController;
 import server.model.Market;
 import server.model.Off;
 import server.model.product.Product;

@@ -1,13 +1,13 @@
 package client.newViewNedaei.user.seller.off;
 
+import client.controller.OffController;
+import client.controller.userControllers.SellerController;
 import client.newViewHatami.Validator;
 import client.newViewHatami.ValidatorField;
 import client.newViewNedaei.Panel;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import server.controller.OffController;
-import server.controller.userControllers.SellerController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

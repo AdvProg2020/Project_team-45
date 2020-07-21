@@ -1,10 +1,10 @@
 package client.newViewNedaei.user.buyer.purchase;
 
+import client.controller.userControllers.BuyerController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import server.controller.userControllers.BuyerController;
 
 public class DiscountCodePanel extends Panel {
     public Label error;

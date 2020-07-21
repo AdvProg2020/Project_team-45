@@ -1,5 +1,7 @@
 package client.newViewHatami;
 
+import client.controller.CodedDiscountController;
+import client.controller.userControllers.AllUsersController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
@@ -7,8 +9,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import server.controller.CodedDiscountController;
-import server.controller.userControllers.AllUsersController;
 
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;

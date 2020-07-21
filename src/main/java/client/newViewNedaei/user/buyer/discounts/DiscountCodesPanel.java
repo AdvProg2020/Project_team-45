@@ -1,12 +1,12 @@
 package client.newViewNedaei.user.buyer.discounts;
 
+import client.controller.CodedDiscountController;
+import client.controller.userControllers.UserController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
-import server.controller.CodedDiscountController;
-import server.controller.userControllers.UserController;
 import server.model.CodedDiscount;
 import server.model.user.Buyer;
 

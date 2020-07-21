@@ -1,12 +1,12 @@
 package client.newViewHatami;
 
+import client.controller.CodedDiscountController;
+import client.controller.userControllers.AllUsersController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import server.controller.CodedDiscountController;
-import server.controller.userControllers.AllUsersController;
 
 import java.util.HashMap;
 

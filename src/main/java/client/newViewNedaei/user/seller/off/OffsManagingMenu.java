@@ -1,5 +1,7 @@
 package client.newViewNedaei.user.seller.off;
 
+import client.controller.OffController;
+import client.controller.userControllers.UserController;
 import client.newViewHatami.ViewOffForAdmin;
 import client.newViewNedaei.MenuController;
 import javafx.fxml.FXML;
@@ -8,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import server.controller.OffController;
-import server.controller.userControllers.UserController;
 import server.model.Off;
 import server.model.user.Seller;
 

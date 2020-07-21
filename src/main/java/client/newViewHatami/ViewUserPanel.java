@@ -1,11 +1,11 @@
 package client.newViewHatami;
 
+import client.controller.userControllers.UserController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import server.controller.userControllers.UserController;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -1,5 +1,7 @@
 package client.newViewNedaei.user.seller.product;
 
+import client.controller.ProductController;
+import client.controller.userControllers.UserController;
 import client.newViewNedaei.MenuController;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -9,8 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import server.controller.ProductController;
-import server.controller.userControllers.UserController;
 import server.model.product.ProductSellInfo;
 import server.model.user.Seller;
 

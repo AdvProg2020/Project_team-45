@@ -1,10 +1,10 @@
 package client.newViewNedaei.user.buyer.discounts;
 
+import client.controller.CodedDiscountController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import server.controller.CodedDiscountController;
 import server.model.CodedDiscount;
 
 import java.text.SimpleDateFormat;

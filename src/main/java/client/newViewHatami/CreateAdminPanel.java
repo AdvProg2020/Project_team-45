@@ -1,11 +1,11 @@
 package client.newViewHatami;
 
+import client.controller.userControllers.AllUsersController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-import server.controller.userControllers.AllUsersController;
 
 
 public class CreateAdminPanel extends Panel {

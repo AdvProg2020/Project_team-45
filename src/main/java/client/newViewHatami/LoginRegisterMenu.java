@@ -1,12 +1,12 @@
 package client.newViewHatami;
 
+import client.controller.userControllers.UserController;
+import client.controller.userControllers.UsernameIsRequestException;
 import client.newViewNedaei.MenuController;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import server.controller.userControllers.UserController;
-import server.controller.userControllers.UsernameIsRequestException;
 
 import java.io.IOException;
 

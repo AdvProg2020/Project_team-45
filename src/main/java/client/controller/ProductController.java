@@ -1,17 +1,15 @@
 package client.controller;
 
 import client.controller.managers.Deleter;
-import client.network.ClientSocket;
 import client.network.MethodStringer;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import server.controller.userControllers.BuyerController;
 import server.model.Market;
 import server.model.product.Product;
 import server.model.product.ProductSellInfo;
 
-import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductController implements Deleter {

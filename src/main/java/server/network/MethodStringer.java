@@ -57,7 +57,7 @@ public class MethodStringer {
             return null;
         } catch (InvocationTargetException e) {
             Exception targetException = (Exception) e.getTargetException();
-            return targetException.getClass().getName() + "::" + (new Gson()).toJson(targetException);
+            return "E::" + targetException.getClass().getName() + "::" + (new Gson()).toJson(targetException);
         }
     }
 

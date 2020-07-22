@@ -28,6 +28,12 @@ public class UserController {
         return activeUser;
     }
 
+    public static String getActiveUserUsername() {
+        if (activeUser == null)
+            return null;
+        return activeUser.getUsername();
+    }
+
     public static AnonymousUser getAnonymousUser() {
         return anonymousUser;
     }
@@ -36,6 +42,10 @@ public class UserController {
 
     public static Boolean isLoggedIn() {
         return loggedIn;
+    }
+
+    public static void setLoggedIn(boolean loggedIn) {
+        UserController.loggedIn = loggedIn;
     }
 
     public HashMap<String, String> getUserViewInfo(String username) {
@@ -60,8 +70,8 @@ public class UserController {
         activeUser = null;
     }
 
-    // used in personal info panel
 
+    // used in personal info panel
     public HashMap<String, String> getActiveUserPersonalInfo() {
         HashMap<String, String> filledMap = new HashMap<>();
         filledMap.put("username", activeUser.getUsername());
@@ -104,8 +114,8 @@ public class UserController {
         }
     }
 
-    // i don't know
 
+    // i don't know
     public boolean login(String username, String password) {
         User loggingInUser = market.getUserByUsername(username);
         if (loggingInUser.checkPassword(password)) {
@@ -128,5 +138,10 @@ public class UserController {
 
     public boolean onlyHasAdmin() {
         return Market.getInstance().getAllUsers().size() == 1;
+    }
+
+    public static void setActiveUserByUsername(String username) {
+        if (username == null) activeUser = null;
+        UserController.activeUser = Market.getInstance().getUserByUsername(username);
     }
 }

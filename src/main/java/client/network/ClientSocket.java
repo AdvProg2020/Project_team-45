@@ -25,7 +25,8 @@ public class ClientSocket {
         String Json = null;
         try {
             // action -> Server
-            outputStream.writeUTF(action);
+            String messageToServer = getOutPutReady(action);
+            outputStream.writeUTF(messageToServer);
             outputStream.flush();
 
             // Server -> Json
@@ -38,11 +39,16 @@ public class ClientSocket {
         return Json;
     }
 
+    private String getOutPutReady(String action) {
+        return "T" + token + "T" + action;
+    }
+
     public void connectToServer() throws IOException {
         Socket socket = new Socket(IP, PORT);
 //        System.out.println("hi");
         inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         outputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+        token = Integer.parseInt(inputStream.readUTF());
     }
 
 }

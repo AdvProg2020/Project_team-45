@@ -32,7 +32,6 @@ public class ServerEntranceSocket implements Runnable {
                 DataInputStream clientInputStream = new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
                 DataOutputStream clientOutputStream = new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
                 new ClientHandler(getNextToken(), clientInputStream, clientOutputStream).start();
-
                 // connection successful message
 //                clientOutputStream.writeUTF("done");
 //                System.out.println("a client connected.");

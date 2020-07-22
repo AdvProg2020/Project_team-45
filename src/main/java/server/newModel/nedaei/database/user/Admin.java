@@ -1,4 +1,4 @@
-package server.newModel.nedaei.user;
+package server.newModel.nedaei.database.user;
 
 public class Admin extends User {
 

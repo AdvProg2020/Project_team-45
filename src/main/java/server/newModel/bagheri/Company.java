@@ -1,6 +1,6 @@
 package server.newModel.bagheri;
 
-import server.newModel.IdRecognized;
+import server.newModel.nedaei.database.IdRecognized;
 
 public class Company extends IdRecognized {
     private String name;

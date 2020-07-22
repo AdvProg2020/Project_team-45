@@ -1,4 +1,4 @@
-package server.newModel.nedaei.request;
+package server.newModel.nedaei.database.request;
 
 import server.model.Market;
 import server.model.product.Product;

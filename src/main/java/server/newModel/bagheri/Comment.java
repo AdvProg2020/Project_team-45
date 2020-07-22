@@ -1,6 +1,6 @@
 package server.newModel.bagheri;
 
-import server.newModel.DataBaseCompatible;
+import server.newModel.nedaei.database.DataBaseCompatible;
 
 public class Comment extends DataBaseCompatible {
     private int userId;

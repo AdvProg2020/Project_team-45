@@ -1,6 +1,6 @@
-package server.newModel.nedaei.user;
+package server.newModel.nedaei.database.user;
 
-import server.newModel.DataBaseCompatible;
+import server.newModel.nedaei.database.DataBaseCompatible;
 
 public abstract class User extends DataBaseCompatible {
     private String username;

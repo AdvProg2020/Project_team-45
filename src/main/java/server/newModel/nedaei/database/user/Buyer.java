@@ -1,4 +1,4 @@
-package server.newModel.nedaei.user;
+package server.newModel.nedaei.database.user;
 
 import server.model.CodedDiscount;
 import server.model.log.BuyLog;

@@ -1,4 +1,4 @@
-package server.newModel;
+package server.newModel.nedaei.database;
 
 public abstract class IdRecognized {
     protected String id;

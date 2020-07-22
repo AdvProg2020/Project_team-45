@@ -1,4 +1,4 @@
-package server.newModel.nedaei.request;
+package server.newModel.nedaei.database.request;
 
 import com.google.gson.Gson;
 import server.model.Market;

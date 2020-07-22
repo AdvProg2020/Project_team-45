@@ -1,7 +1,7 @@
-package server.newModel.nedaei.user;
+package server.newModel.nedaei.database.user;
 
 import server.model.product.ProductSellInfo;
-import server.newModel.DataBaseCompatible;
+import server.newModel.nedaei.database.DataBaseCompatible;
 
 import java.util.ArrayList;
 

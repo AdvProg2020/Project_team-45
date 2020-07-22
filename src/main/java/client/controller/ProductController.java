@@ -76,9 +76,6 @@ public class ProductController {
         return true;
     }
 
-    public void setActiveProductSellInfo(ProductSellInfo activeProductSellInfo) {
-        this.activeProductSellInfo = activeProductSellInfo;
-    }
 
     // Needs review
 
@@ -95,7 +92,7 @@ public class ProductController {
     public void setActiveProductById(int productId) {
         try {
             MethodStringer.sampleMethod(getClass(),
-                    "setActiveProductById", productId);
+            "setActiveProductById", productId);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
@@ -104,9 +101,32 @@ public class ProductController {
     public void setActiveProductById(String productId) {
         try {
             MethodStringer.sampleMethod(getClass(),
-                    "setActiveProductById", productId);
+            "setActiveProductById", productId);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
+        }
+    }
+
+    // used in products managing menu
+
+    public void setActiveProductSellInfo(String sellInfoId) {
+        try {
+            MethodStringer.sampleMethod(getClass(),
+                    "setActiveProductSellInfo", sellInfoId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    // used in add product panel
+
+    public Boolean hasProductWithId(String text) {
+        try {
+            return (Boolean) MethodStringer.sampleMethod(getClass(),
+                    "hasProductWithId", text);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
         }
     }
 
@@ -158,6 +178,8 @@ public class ProductController {
             return null;
         }
     }
+
+    // used in edit product panel
 
     public HashMap<String, String> getActiveSellInfo() {
         try {

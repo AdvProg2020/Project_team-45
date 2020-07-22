@@ -303,6 +303,18 @@ public class CategoryController {
         }
     }
 
+    // used in add product panel
+
+    public String getCategoryTypeByName(String text) {
+        try {
+            return (String) MethodStringer.sampleMethod(getClass(),
+                    "getCategoryTypeByName", text);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
 //    public ArrayList<HashMap<String, String>> testii(String name) throws Throwable {
 //        return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(), "testii", name);
 //    }

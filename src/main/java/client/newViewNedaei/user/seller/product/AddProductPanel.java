@@ -1,5 +1,6 @@
 package client.newViewNedaei.user.seller.product;
 
+import client.controller.CategoryController;
 import client.controller.ProductController;
 import client.controller.userControllers.SellerController;
 import client.newViewHatami.Validator;
@@ -12,10 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-import server.model.Market;
-import server.model.category.FinalCategory;
-import server.model.product.Product;
 
+import java.util.HashMap;
+
+// nedaei: turned to new format successfully!
 public class AddProductPanel extends Panel {
     public TextField id;
     public ValidatorField existingPrice;
@@ -27,12 +28,9 @@ public class AddProductPanel extends Panel {
     public ValidatorField newPrice;
     public ValidatorField newStock;
     public Label newError;
-    @FXML
-    private GridPane newPane;
-    @FXML
-    private GridPane existingPane;
-    @FXML
-    private CheckBox checkBox;
+    public GridPane newPane;
+    public GridPane existingPane;
+    public CheckBox checkBox;
 
     private String productPhotoPath;
     private String productVideoPath;
@@ -68,7 +66,7 @@ public class AddProductPanel extends Panel {
     }
 
     public void sendExisting() {
-        if (ProductController.getInstance().getItemById(id.getText()) == null) {
+        if (!ProductController.getInstance().hasProductWithId(id.getText())) {
             existingError.setText("product does not exist");
             return;
         } if (!existingPrice.validate()) {
@@ -78,11 +76,10 @@ public class AddProductPanel extends Panel {
             existingError.setText("invalid stock format");
             return;
         }
-//        HashMap<String, String> fieldsAndValues = new HashMap<>();
-//        fieldsAndValues.put("productId", id.getText());
-//        fieldsAndValues.put("price", existingPrice.getText());
-//        fieldsAndValues.put("stock", existingStock.getText());
-        Product product = ProductController.getInstance().getItemById(id.getText());
+        HashMap<String, String> product = new HashMap<>();
+        product.put("id", id.getText());
+        product.put("price", existingPrice.getText());
+        product.put("stock", existingStock.getText());
         SellerController.getInstance().createAddProductRequest("existing", product, Integer.parseInt(existingPrice.getText()), Integer.parseInt(existingStock.getText()));
         existingError.setText("");
     }
@@ -94,10 +91,10 @@ public class AddProductPanel extends Panel {
         } if (!category.validate()) {
             newError.setText("invalid category name format");
             return;
-        } if (Market.getInstance().getCategoryByName(category.getText()) == null) {
+        } if (CategoryController.getInstance().getCategoryId(name.getText()) == null) {
             newError.setText("category does not exist");
             return;
-        } if (!Market.getInstance().getCategoryByName(category.getText()).getType().equals("FinalCategory")) {
+        } if (CategoryController.getInstance().getCategoryTypeByName(name.getText()).equals("FinalCategory")) {
             newError.setText("category is not final");
             return;
         } if (!newPrice.validate()) {
@@ -107,15 +104,14 @@ public class AddProductPanel extends Panel {
             newError.setText("invalid stock format");
             return;
         }
-//        HashMap<String, String> fieldsAndValues = new HashMap<>();
-//        fieldsAndValues.put("name", name.getText());
-//        fieldsAndValues.put("categoryName", category.getText());
-//        fieldsAndValues.put("description", description.getText());
-//        fieldsAndValues.put("price", newPrice.getText());
-//        fieldsAndValues.put("stock", newStock.getText());
-        Product product = new Product(name.getText(), (FinalCategory) Market.getInstance().getCategoryByName(category.getText()), description.getText(), productPhotoPath, productVideoPath);
+        HashMap<String, String> product = new HashMap<>();
+        product.put("name", name.getText());
+        product.put("categoryName", category.getText());
+        product.put("description", description.getText());
+        product.put("price", newPrice.getText());
+        product.put("stock", newStock.getText());
         SellerController.getInstance().createAddProductRequest("new", product, Integer.parseInt(newPrice.getText()), Integer.parseInt(newStock.getText()));
-        existingError.setText("");
+        newError.setText("");
     }
 
     public void pickPhoto() {

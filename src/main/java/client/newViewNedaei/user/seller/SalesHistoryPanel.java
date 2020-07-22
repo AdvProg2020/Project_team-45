@@ -1,8 +1,6 @@
 package client.newViewNedaei.user.seller;
 
-
 import client.controller.userControllers.SellerController;
-import client.controller.userControllers.UserController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
@@ -11,17 +9,15 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import server.model.log.SellLog;
-import server.model.user.Seller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-
+// nedaei: turned to new format successfully!
 public class SalesHistoryPanel extends Panel {
-    @FXML
-    private Pane mainPane;
-    @FXML
-    private GridPane list;
+    public Pane mainPane;
+    public GridPane list;
 
     public static String getFxmlFilePath() {
         return "/SalesHistoryPanel.fxml";
@@ -29,14 +25,14 @@ public class SalesHistoryPanel extends Panel {
 
     @FXML
     public void initialize() {
-        Seller seller = (Seller) UserController.getActiveUser();
+        ArrayList<HashMap<String, String>> listOfSellLogs = SellerController.getInstance().getSellerSellLogs();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
         int row = 1;
-        for (SellLog sellLog : seller.getListOfSellLogs()) {
-            list.add(createLabel(simpleDateFormat.format(sellLog.getMainLog().getDate())), 0, row);
-            list.add(createHyperLink(sellLog.getMainLog().getId()), 1, row);
-            list.add(createLabel("" + sellLog.getMainLog().getFinalPrice()), 2, row);
-            list.add(createLabel(sellLog.getMainLog().getBuyerUsername()), 3, row);
+        for (HashMap<String, String> sellLog : listOfSellLogs) {
+            list.add(createLabel(simpleDateFormat.format(sellLog.get("date"))), 0, row);
+            list.add(createHyperLink(sellLog.get("id")), 1, row);
+            list.add(createLabel(sellLog.get("finalPrice")), 2, row);
+            list.add(createLabel(sellLog.get("buyerUsername")), 3, row);
             row++;
         }
     }
@@ -47,7 +43,7 @@ public class SalesHistoryPanel extends Panel {
         hyperlink.setPrefWidth(100);
         hyperlink.setPrefHeight(50);
         hyperlink.setOnAction(event -> {
-            SellerController.getInstance().setCurrentSellLog(hyperlink.getText());
+            SellerController.getInstance().setCurrentSellLog(Integer.parseInt(hyperlink.getText()));
             MenuController.getInstance().goToPanel(SellLogPanel.getFxmlFilePath());
         });
         return hyperlink;

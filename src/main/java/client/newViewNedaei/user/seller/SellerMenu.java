@@ -16,15 +16,12 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class SellerMenu {
-    @FXML
-    private Label balance;
-    @FXML
-    private Label companyName;
-    @FXML
-    private Label companyInfo;
-    @FXML
-    private AnchorPane mainPane;
+    public Label balance;
+    public Label companyName;
+    public Label companyInfo;
+    public AnchorPane mainPane;
 
     public static String getFxmlFilePath() {
         return "/SellerMenu.fxml";

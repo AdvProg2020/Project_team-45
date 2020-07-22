@@ -1,6 +1,5 @@
 package client.newViewNedaei.user.seller.off;
 
-import client.controller.OffController;
 import client.controller.userControllers.SellerController;
 import client.newViewHatami.Validator;
 import client.newViewHatami.ValidatorField;
@@ -13,8 +12,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class EditOffPanel extends Panel {
-
     public TextField startDate;
     public TextField endDate;
     public ValidatorField discount;
@@ -58,8 +57,7 @@ public class EditOffPanel extends Panel {
             return;
         }
         fieldsAndValues.put("discountAmount", discount.getText());
-        SellerController.getInstance().createOffEditionRequest(OffController.getInstance().getCurrentOff().getId(),
-                fieldsAndValues);
+        SellerController.getInstance().createOffEditionRequest(fieldsAndValues);
         error.setText("");
     }
 }

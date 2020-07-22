@@ -1,16 +1,15 @@
 package client.newViewNedaei.user.seller.product;
 
 import client.controller.userControllers.SellerController;
-import client.controller.userControllers.UserController;
 import client.newViewNedaei.Panel;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import server.model.product.Product;
-import server.model.user.Seller;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class RemoveProductPanel extends Panel {
     public ChoiceBox<String> targetProduct;
     public Label error;
@@ -21,9 +20,9 @@ public class RemoveProductPanel extends Panel {
 
     @FXML
     public void initialize() {
-        Set<Product> availableProducts =  ((Seller) UserController.getActiveUser()).getAvailableProducts().keySet();
-        for (Product product : availableProducts) {
-            targetProduct.getItems().add(product.getName() + " -> " + product.getId());
+        ArrayList<HashMap<String, String>> availableProducts = SellerController.getInstance().getAvailableProducts();
+        for (HashMap<String, String> product : availableProducts) {
+            targetProduct.getItems().add(product.get("name") + " -> " + product.get("id"));
         }
     }
 

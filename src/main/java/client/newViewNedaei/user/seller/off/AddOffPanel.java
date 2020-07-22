@@ -1,7 +1,6 @@
 package client.newViewNedaei.user.seller.off;
 
 import client.controller.userControllers.SellerController;
-import client.controller.userControllers.UserController;
 import client.newViewHatami.Validator;
 import client.newViewHatami.ValidatorField;
 import client.newViewNedaei.Panel;
@@ -11,17 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import server.model.Market;
-import server.model.Off;
-import server.model.product.Product;
-import server.model.user.Seller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Set;
+import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class AddOffPanel extends Panel {
     public ChoiceBox<String> products;
     public ListView<String> productsList;
@@ -40,9 +36,9 @@ public class AddOffPanel extends Panel {
 
     @FXML
     public void initialize() {
-        Set<Product> availableProducts =  ((Seller) UserController.getActiveUser()).getAvailableProducts().keySet();
-        for (Product product : availableProducts) {
-            products.getItems().add(product.getName() + " -> " + product.getId());
+        ArrayList<HashMap<String, String>> availableProducts =  SellerController.getInstance().getAvailableProducts();
+        for (HashMap<String, String> product : availableProducts) {
+            products.getItems().add(product.get("name") + " -> " + product.get("id"));
         }
     }
 
@@ -73,13 +69,15 @@ public class AddOffPanel extends Panel {
             error.setText("invalid discount amount format");
             return;
         }
-        ArrayList<Product> products = new ArrayList<>();
+        ArrayList<String> products = new ArrayList<>();
         for (String item : productsList.getItems()) {
-            System.out.println(item);
-            products.add(Market.getInstance().getProductById(item.split(" -> ")[1]));
+            products.add(item.split(" -> ")[1]);
         }
-        Off off = new Off(products, start, end, Integer.parseInt(discount.getText()));
-        SellerController.getInstance().createAddOffRequest(off);
+        HashMap<String, String> off = new HashMap<>();
+        off.put("start", startDate.getText());
+        off.put("end", endDate.getText());
+        off.put("discount", discount.getText());
+        SellerController.getInstance().createAddOffRequest(products, off);
         error.setText("");
     }
 

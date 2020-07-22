@@ -1,7 +1,7 @@
 package client.newViewNedaei.user.seller.off;
 
 import client.controller.OffController;
-import client.controller.userControllers.UserController;
+import client.controller.userControllers.SellerController;
 import client.newViewHatami.ViewOffForAdmin;
 import client.newViewNedaei.MenuController;
 import javafx.fxml.FXML;
@@ -10,14 +10,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import server.model.Off;
-import server.model.user.Seller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class OffsManagingMenu {
-    @FXML
-    private GridPane mainPane;
+    public GridPane mainPane;
 
     public static String getFxmlFilePath() {
         return "/OffsManagingMenu.fxml";
@@ -25,19 +25,19 @@ public class OffsManagingMenu {
 
     @FXML
     public void initialize() {
-        Seller seller = (Seller) UserController.getActiveUser();
+        ArrayList<HashMap<String, String>> listOfOffs = SellerController.getInstance().getSellerOffs();
         int i = 0;
-        for (Off off : seller.getListOfOffs().values()) {
+        for (HashMap<String, String> off : listOfOffs) {
             mainPane.add(createOffDisplay(off), i%5, i/5);
         }
     }
 
-    private Pane createOffDisplay(Off off) {
+    private Pane createOffDisplay(HashMap<String, String> off) {
         Label idAndDiscount = new Label();
         idAndDiscount.setPrefWidth(180);
         idAndDiscount.setPrefHeight(50);
         idAndDiscount.setAlignment(Pos.CENTER);
-        idAndDiscount.setText(off.getId() + " - " + off.getDiscountAmount() + "%");
+        idAndDiscount.setText(off.get("id") + " - " + off.get("discountAmount") + "%");
         idAndDiscount.setTranslateX(0);
         idAndDiscount.setTranslateY(0);
 
@@ -46,7 +46,7 @@ public class OffsManagingMenu {
         startAndEnd.setPrefHeight(50);
         startAndEnd.setAlignment(Pos.CENTER);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        startAndEnd.setText(simpleDateFormat.format(off.getStartTime()) + " - " + simpleDateFormat.format(off.getEndTime()));
+        startAndEnd.setText(simpleDateFormat.format(off.get("startTime")) + " - " + simpleDateFormat.format(off.get("endTime")));
         startAndEnd.setTranslateX(0);
         startAndEnd.setTranslateY(60);
 
@@ -56,7 +56,7 @@ public class OffsManagingMenu {
         view.setTranslateY(120);
         view.setTranslateX(0);
         view.setOnMouseClicked(event -> {
-            ViewOffForAdmin.setViewingOff(off.getId());
+            ViewOffForAdmin.setViewingOff(off.get("id"));
             MenuController.getInstance().goToPanel(ViewOffForAdmin.getFxmlFilePath());
         });
 
@@ -66,7 +66,7 @@ public class OffsManagingMenu {
         edit.setTranslateY(120);
         edit.setTranslateX(90);
         edit.setOnMouseClicked(event -> {
-            OffController.getInstance().setCurrentOff(off);
+            OffController.getInstance().setCurrentOff(off.get("id"));
             MenuController.getInstance().goToPanel(EditOffPanel.getFxmlFilePath());
         });
 

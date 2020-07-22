@@ -12,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.HashMap;
 
+// nedaei: turned to new format successfully!
 public class EditProductPanel extends Panel {
     public Label error;
     public ValidatorField price;
@@ -42,7 +43,7 @@ public class EditProductPanel extends Panel {
         fieldsAndValues.put("price", price.getText());
         fieldsAndValues.put("stock", stock.getText());
         SellerController.getInstance().createProductEditionRequest(ProductController.getInstance()
-                .getActiveProductSellInfo().getProduct().getId(), fieldsAndValues);
+                .getActiveSellInfo().get("productId"), fieldsAndValues);
         error.setText("");
     }
 }

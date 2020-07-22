@@ -1,9 +1,6 @@
 package client.controller.userControllers;
 
 import client.network.MethodStringer;
-import server.model.user.AnonymousUser;
-import server.model.user.Buyer;
-import server.model.user.User;
 
 import java.util.HashMap;
 
@@ -71,18 +68,13 @@ public class UserController {
 
     // i dont know!
 
-    public boolean login(String username, String password) {
-        User loggingInUser = market.getUserByUsername(username);
-        if (loggingInUser.checkPassword(password)) {
-            loggedIn = true;
-            activeUser = loggingInUser;
-            if (activeUser.getRole().equals("buyer")) {
-                ((Buyer) activeUser).setCart(anonymousUser.getCart());
-            }
-            anonymousUser = new AnonymousUser();
-            return true;
+    public Boolean login(String username, String password) {
+        try {
+            return (Boolean) MethodStringer.sampleMethod(getClass(), "login", username, password);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
         }
-        return false;
     }
 
     public boolean usernameExists(String username) throws UsernameIsRequestException {

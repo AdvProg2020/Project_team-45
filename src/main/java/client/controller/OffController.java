@@ -19,12 +19,16 @@ public class OffController {
 
     // TODO : edit come here
 
-    public Off getCurrentOff() {
-        return currentOff;
-    }
 
-    public void setCurrentOff(Off currentOff) {
-        this.currentOff = currentOff;
+
+    // used in offs managing menu
+
+    public void setCurrentOff(String offId) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "setCurrentOff", offId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public HashMap<String, String> getOffInfo(String offId) {

@@ -66,15 +66,15 @@ public class ProductController {
         }
     }
 
-    // Needs review
     public boolean selectSellerForActiveProduct(String sellerUsername) {
-        ProductSellInfo sellInfo = activeProduct.getSellerInfoForProductByUsername(sellerUsername);
-        if (sellInfo == null)
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(),
+                    "selectSellerForActiveProduct", sellerUsername);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return false;
-        activeProductSellInfo = sellInfo;
-        return true;
+        }
     }
-    // Needs review
 
     public void deleteItemById(String Id) {
         try {

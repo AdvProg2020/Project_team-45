@@ -1,27 +1,37 @@
 package server.newModel.bagheri;
 
-
+import server.model.IdRecognized;
+import server.model.Off;
+import server.model.Savable;
 import server.model.product.ProductSellInfo;
 import server.model.user.Buyer;
 
 import java.util.Date;
 import java.util.HashMap;
 
-public class Auction {
+public class Auction extends IdRecognized implements Savable {
     private final ProductSellInfo productSellInfo;
     private final Date endTime;
+    private final int basePrice;
     private int highestDidPrice;
     private Buyer winner;
     private final HashMap<Buyer, Integer> suggestedPrices;
     private final ChatRoom chatRoom;
 
-    public Auction(ProductSellInfo productSellInfo, Date endTime) {
+    public Auction(ProductSellInfo productSellInfo, Date endTime, int basePrice) {
+        this.id = "";
         this.productSellInfo = productSellInfo;
         this.endTime = endTime;
+        this.basePrice = basePrice;
         highestDidPrice = 0;
         winner = null;
         suggestedPrices = new HashMap<>();
         chatRoom = new ChatRoom();
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 
     public ProductSellInfo getProductSellInfo() {
@@ -30,6 +40,10 @@ public class Auction {
 
     public Date getEndTime() {
         return endTime;
+    }
+
+    public int getBasePrice() {
+        return basePrice;
     }
 
     public int getHighestDidPrice() {
@@ -49,12 +63,21 @@ public class Auction {
     }
 
     public boolean addSuggestedPrice(Buyer buyer, int suggestedPrice) {
-        if(suggestedPrice > highestDidPrice) {
-            suggestedPrices.put(buyer, suggestedPrice);
-            highestDidPrice = suggestedPrice;
-            winner = buyer;
-            return true;
+        if(suggestedPrice > basePrice) {
+            Integer previousPrice = suggestedPrices.get(buyer);
+            if(previousPrice == null || previousPrice < suggestedPrice) {
+                suggestedPrices.put(buyer, suggestedPrice);
+                if (suggestedPrice > highestDidPrice) {
+                    highestDidPrice = suggestedPrice;
+                    winner = buyer;
+                }
+                return true;
+            }
         }
         return false;
+    }
+
+    public boolean equals(Auction auction) {
+        return auction.id.equals(this.id);
     }
 }

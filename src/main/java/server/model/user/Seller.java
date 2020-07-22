@@ -8,6 +8,8 @@ import server.model.Off;
 import server.model.log.SellLog;
 import server.model.product.Product;
 import server.model.product.ProductSellInfo;
+import server.newModel.bagheri.Auction;
+import server.newModel.bagheri.wallet.SellerWallet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,15 +19,18 @@ public class Seller extends User {
     private ArrayList<SellLog> listOfSellLogs;
     private HashMap<Product, ProductSellInfo> availableProducts;
     private HashMap<String, Off> listOfOffs; // offIds and offs
+    private HashMap<String, Auction> listOfAuctions; // auctionIds and auctions
     private int balance;
+    private SellerWallet sellerWallet;
 
     public Seller(PersonalInfo personalInfo, Company company) {
         super(personalInfo);
         this.company = company;
         this.listOfSellLogs = new ArrayList<>();
-        listOfOffs = new HashMap<>();
         availableProducts = new HashMap<>();
         listOfOffs = new HashMap<>();
+        listOfAuctions = new HashMap<>();
+        sellerWallet = new SellerWallet(this);
     }
 
     public Seller(String id) {
@@ -66,12 +71,20 @@ public class Seller extends User {
         return listOfOffs;
     }
 
+    public HashMap<String, Auction> getListOfAuctions() {
+        return listOfAuctions;
+    }
+
     public int getBalance() {
         return balance;
     }
 
     public Off getOffByOffId(String offId) {
         return listOfOffs.get(offId);
+    }
+
+    public Auction getAuctionByAuctionId(String auctionId) {
+        return listOfAuctions.get(auctionId);
     }
 
     public void addProduct(Product product, ProductSellInfo productSellInfo) {

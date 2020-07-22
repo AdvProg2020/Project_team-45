@@ -33,7 +33,6 @@ public class ProductController implements Deleter {
         return instance;
     }
 
-
     public boolean setActiveProductBYProductIdForCategory(String productId) {
         ArrayList<Product> productsList = CategoryController.getInstance().getActiveCategoryProductsList();
         return setActiveProductByListAndId(productsList, productId);
@@ -59,7 +58,6 @@ public class ProductController implements Deleter {
     public LinkedHashMap<String, String> getProductDigestInformation() {
         return activeProduct.getDigestInformation();
     }
-
 
     public void addActiveProductToCart() {
         CartController.getInstance().addProductToCart(activeProduct, activeProductSellInfo);
@@ -129,7 +127,6 @@ public class ProductController implements Deleter {
         this.activeProduct = activeProduct;
     }
 
-    //bagheri
     public ArrayList<HashMap<String, String>> getActiveProductCommentsList() {
         ArrayList<HashMap<String, String>> productComments = new ArrayList<>();
         for (Comment comment : activeProduct.getApprovedComments()) {
@@ -164,14 +161,9 @@ public class ProductController implements Deleter {
         return activeProduct.getCategoryFeatures();
     }
 
-    public String getActiveProductImageAddress() {
-        return activeProduct.getImageAddress();
-    }
-
     public void setActiveProductById(String productId) {
         activeProduct = market.getProductById(productId);
     }
-
 
     public HashMap<String, String> getActiveSellInfo() {
         return activeProductSellInfo.getInformation();
@@ -194,7 +186,6 @@ public class ProductController implements Deleter {
     public List<String> getAllProductsNamesList() {
         return market.getAllProducts().stream().map(product -> product.getId() + ":" + product.getName()).collect(Collectors.toList());
     }
-    //bahgeri
 
     public HashMap<String, String> getProductAndSellInfo(String sellInfoId) {
         HashMap<String, String> information = new HashMap<>();
@@ -207,5 +198,13 @@ public class ProductController implements Deleter {
         information.put("price", String.valueOf(sellInfo.getFinalPrice()));
         information.put("stock", String.valueOf(sellInfo.getStock()));
         return information;
+    }
+
+    public String getActiveProductImageAddress() {
+        return activeProduct.getImageAddress();
+    }
+
+    public String getActiveProductVideoAddress() {
+        return activeProduct.getVideoAddress();
     }
 }

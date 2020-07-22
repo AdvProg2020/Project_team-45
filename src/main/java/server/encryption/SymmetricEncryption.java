@@ -4,6 +4,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
+import javax.xml.bind.DatatypeConverter;
 import java.security.SecureRandom;
 
 public class SymmetricEncryption {
@@ -31,28 +32,28 @@ public class SymmetricEncryption {
         }
     }
 
-    public byte[] generateInitializationVector() {
+    public String generateInitializationVector() {
         byte[] initializationVector = new byte[16];
         (new SecureRandom()).nextBytes(initializationVector);
-        return initializationVector;
+        return DatatypeConverter.printHexBinary(initializationVector);
     }
 
-    public byte[] encrypt(String plainText, SecretKey secretKey, byte[] initializationVector) {
+    public String encrypt(String plainText, SecretKey secretKey, String initializationVector) {
         try {
             Cipher cipher = Cipher.getInstance(cipherEncryptionAlgorithm);
-            cipher.init(Cipher.ENCRYPT_MODE, secretKey, new IvParameterSpec(initializationVector));
-            return cipher.doFinal(plainText.getBytes());
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey, new IvParameterSpec(DatatypeConverter.parseHexBinary(initializationVector)));
+            return DatatypeConverter.printHexBinary(cipher.doFinal(plainText.getBytes()));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public String decrypt(byte[] cipherText, SecretKey secretKey, byte[] initializationVector) {
+    public String decrypt(String cipherText, SecretKey secretKey, String initializationVector) {
         try {
             Cipher cipher = Cipher.getInstance(cipherEncryptionAlgorithm);
-            cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(initializationVector));
-            return new String(cipher.doFinal(cipherText));
+            cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(DatatypeConverter.parseHexBinary(initializationVector)));
+            return new String(cipher.doFinal(DatatypeConverter.parseHexBinary(cipherText)));
         } catch (Exception e) {
             e.printStackTrace();
             return null;

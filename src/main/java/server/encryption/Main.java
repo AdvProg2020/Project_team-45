@@ -1,7 +1,6 @@
 package server.encryption;
 
 import javax.crypto.SecretKey;
-import javax.xml.bind.DatatypeConverter;
 import java.security.KeyPair;
 
 public class Main {
@@ -10,11 +9,11 @@ public class Main {
 //
 //        String plainText = "I love bagheri";
 //
-//        byte[] cipherText = AsymmetricEncryption.getInstance().encrypt(plainText, keypair.getPublic());
+//        String cipherText = AsymmetricEncryption.getInstance().encrypt(plainText, keypair.getPublic());
 //
 //        System.out.print("Asymmetric Encrypted Text is: ");
 //
-//        System.out.println(DatatypeConverter.printHexBinary(cipherText));
+//        System.out.println(cipherText);
 //
 //        String decryptedText = AsymmetricEncryption.getInstance().decrypt(cipherText, keypair.getPrivate());
 //
@@ -23,18 +22,16 @@ public class Main {
 
         SecretKey secretKey = SymmetricEncryption.getInstance().generateSecretKey();
 
-        byte[] initializationVector = SymmetricEncryption.getInstance().generateInitializationVector();
+        String initializationVector = SymmetricEncryption.getInstance().generateInitializationVector();
 
         String plainText = "I love bagheri";
 
-        byte[] cipherText = SymmetricEncryption.getInstance().encrypt(plainText, secretKey, initializationVector);
+        String cipherText = SymmetricEncryption.getInstance().encrypt(plainText, secretKey, initializationVector);
 
-        System.out.print("Symmetric Encrypted Text is: ");
-
-        System.out.println(DatatypeConverter.printHexBinary(cipherText));
+        System.out.println("Symmetric Encrypted Text is: " + cipherText);
 
         String decryptedText = SymmetricEncryption.getInstance().decrypt(cipherText, secretKey, initializationVector);
 
-        System.out.print("Symmetric Decrypted Text is: " + decryptedText);
+        System.out.println("Symmetric Decrypted Text is: " + decryptedText);
     }
 }

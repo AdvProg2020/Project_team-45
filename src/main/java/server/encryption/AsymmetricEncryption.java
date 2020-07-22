@@ -1,6 +1,7 @@
 package server.encryption;
 
 import javax.crypto.Cipher;
+import javax.xml.bind.DatatypeConverter;
 import java.security.*;
 
 public class AsymmetricEncryption {
@@ -26,22 +27,22 @@ public class AsymmetricEncryption {
         }
     }
 
-    public byte[] encrypt(String plainText, PublicKey publicKey) {
+    public String encrypt(String plainText, PublicKey publicKey) {
         try {
             Cipher cipher = Cipher.getInstance(encryptionAlgorithm);
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
-            return cipher.doFinal(plainText.getBytes());
+            return DatatypeConverter.printHexBinary(cipher.doFinal(plainText.getBytes()));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public String decrypt(byte[] cipherText, PrivateKey privateKey) {
+    public String decrypt(String cipherText, PrivateKey privateKey) {
         try {
             Cipher cipher = Cipher.getInstance(encryptionAlgorithm);
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
-            return new String(cipher.doFinal(cipherText));
+            return new String(cipher.doFinal(DatatypeConverter.parseHexBinary(cipherText)));
         } catch (Exception e) {
             e.printStackTrace();
             return null;

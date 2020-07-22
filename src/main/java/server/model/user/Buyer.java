@@ -11,6 +11,8 @@ import server.model.log.SellLog;
 import server.model.product.Product;
 import server.model.product.ProductSellInfo;
 import server.model.product.Rate;
+import server.newModel.bagheri.Auction;
+import server.newModel.bagheri.wallet.BuyerWallet;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +24,8 @@ public class Buyer extends User implements CartHolder, Savable {
     private int balance;
     private ArrayList<BuyLog> listOfBuyLogs;
     private HashMap<String, Rate> purchasedProducts; // productIds and rates
+    private BuyerWallet wallet;
+    private HashMap<Auction, Integer> allAuctions;
 
     public Buyer(PersonalInfo personalInfo) {
         super(personalInfo);
@@ -30,6 +34,7 @@ public class Buyer extends User implements CartHolder, Savable {
         this.listOfCodedDiscounts = new ArrayList<>();
         this.listOfBuyLogs = new ArrayList<>();
         this.purchasedProducts = new HashMap<>();
+        this.wallet = new BuyerWallet(this);
     }
 
     public Buyer(String id) {
@@ -171,7 +176,8 @@ public class Buyer extends User implements CartHolder, Savable {
     @Override
     public void setFieldsFromHashMap(HashMap<String, String> theMap) {
         personalInfo = (new Gson()).fromJson(theMap.get("personalInfo"), PersonalInfo.class);
-        ArrayList<String> codedDiscounts = (new Gson()).fromJson(theMap.get("listOfCodedDiscounts"), new TypeToken<ArrayList<String>>(){}.getType());
+        ArrayList<String> codedDiscounts = (new Gson()).fromJson(theMap.get("listOfCodedDiscounts"), new TypeToken<ArrayList<String>>() {
+        }.getType());
         listOfCodedDiscounts = new ArrayList<>();
         for (String id : codedDiscounts) {
             listOfCodedDiscounts.add(Market.getInstance().getCodedDiscountById(id));
@@ -179,7 +185,8 @@ public class Buyer extends User implements CartHolder, Savable {
 
         balance = Integer.parseInt((new Gson()).fromJson(theMap.get("balance"), String.class));
 
-        ArrayList<HashMap<String, String>> buyLogs = (new Gson()).fromJson(theMap.get("listOfBuyLogs"), new TypeToken<ArrayList<HashMap<String, String>>>(){}.getType());
+        ArrayList<HashMap<String, String>> buyLogs = (new Gson()).fromJson(theMap.get("listOfBuyLogs"), new TypeToken<ArrayList<HashMap<String, String>>>() {
+        }.getType());
         listOfBuyLogs = new ArrayList<>();
         for (HashMap<String, String> hashMap : buyLogs) {
             BuyLog buyLog = new BuyLog();
@@ -187,10 +194,24 @@ public class Buyer extends User implements CartHolder, Savable {
             listOfBuyLogs.add(buyLog);
         }
 
-        HashMap<String, String> products = (new Gson()).fromJson(theMap.get("purchasedProducts"), new TypeToken<HashMap<String, String>>(){}.getType());
+        HashMap<String, String> products = (new Gson()).fromJson(theMap.get("purchasedProducts"), new TypeToken<HashMap<String, String>>() {
+        }.getType());
         purchasedProducts = new HashMap<>();
         for (String productId : products.keySet()) {
             purchasedProducts.put(productId, Market.getInstance().getRateById(products.get(productId)));
         }
+    }
+
+    public void addAuction(Auction auction, int proposedPrice) {
+        Integer previousPrice = allAuctions.get(auction);
+        int amount = proposedPrice;
+        if (previousPrice != null)
+            amount -= previousPrice;
+        wallet.changeUsableBalance(-amount);
+        allAuctions.put(auction, proposedPrice);
+    }
+
+    public void removeAuction(Auction auction) {
+        wallet.changeUsableBalance(allAuctions.remove(auction));
     }
 }

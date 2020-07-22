@@ -56,7 +56,7 @@
                                     <Label text="Description:" GridPane.rowIndex="3" />
                                     <Text fx:id="descriptionText" GridPane.rowIndex="4" />
                            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" onMouseClicked="#videoClicked" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                           <Button mnemonicParsing="false" onAction="#puasevideo" text="puase" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                           <Button mnemonicParsing="false" onAction="#puaseVideo" text="puase" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                                     <columnConstraints>
                                         <ColumnConstraints />
                               <ColumnConstraints />

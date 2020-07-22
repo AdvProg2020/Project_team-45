@@ -66,18 +66,15 @@ public class ProductController {
         }
     }
 
-
-    // Needs review
     public boolean selectSellerForActiveProduct(String sellerUsername) {
-        ProductSellInfo sellInfo = activeProduct.getSellerInfoForProductByUsername(sellerUsername);
-        if (sellInfo == null)
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(),
+                    "selectSellerForActiveProduct", sellerUsername);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
             return false;
-        activeProductSellInfo =  sellInfo;
-        return true;
+        }
     }
-
-
-    // Needs review
 
     public void deleteItemById(String Id) {
         try {
@@ -169,16 +166,6 @@ public class ProductController {
         }
     }
 
-    public String getActiveProductImageAddress() {
-        try {
-            return (String) MethodStringer.sampleMethod(getClass(),
-                    "getActiveProductImageAddress");
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-            return null;
-        }
-    }
-
     // used in edit product panel
 
     public HashMap<String, String> getActiveSellInfo() {
@@ -223,6 +210,26 @@ public class ProductController {
     public HashMap<String, String> getProductAndSellInfo(String sellInfoId) {
         try {
             return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getProductAndSellInfo", sellInfoId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getActiveProductImageAddress() {
+        try {
+            return (String) MethodStringer.sampleMethod(getClass(),
+                    "getActiveProductImageAddress");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getActiveProductVideoAddress() {
+        try {
+            return (String) MethodStringer.sampleMethod(getClass(),
+                    "getActiveProductVideoAddress");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;

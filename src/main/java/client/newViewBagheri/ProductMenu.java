@@ -69,11 +69,11 @@ public class ProductMenu implements Initializable {
     }
 
     private void addImage() {
-//        productImageView.setImage(new Image(convertPhotoPath(productController.getActiveProduct().getImageAddress())));
+//        productImageView.setImage(new Image(convertPhotoPath(productController.getActiveProductImageAddress()));
     }
 
     private void addVideo() {
-        String path = productController.getActiveProduct().getVideoAddress();
+        String path = productController.getActiveProductVideoAddress();
         if (path == null)
             return;
         Media media = new Media(Paths.get(path).toUri().toString());
@@ -197,13 +197,11 @@ public class ProductMenu implements Initializable {
         return productInfoVBox;
     }
 
-
-
     public void videoClicked(MouseEvent mouseEvent) {
         mediaView.getMediaPlayer().play();
     }
 
-    public void puasevideo(ActionEvent actionEvent) {
+    public void puaseVideo(ActionEvent actionEvent) {
         mediaView.getMediaPlayer().pause();
     }
 

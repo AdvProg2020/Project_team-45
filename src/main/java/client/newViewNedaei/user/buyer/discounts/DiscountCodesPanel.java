@@ -25,7 +25,7 @@ public class DiscountCodesPanel extends Panel {
         for (HashMap<String, String> code : codes) {
             Hyperlink hyperlink = new Hyperlink(code.get("code") + " -> " + code.get("percentage") + "%");
             hyperlink.setOnAction(event -> {
-                CodedDiscountController.getInstance().setCurrentDiscountById(Integer.parseInt(code.get("id")));
+                CodedDiscountController.getInstance().setCurrentDiscountById(code.get("id"));
                 MenuController.getInstance().goToPanel(DisplayDiscountCodePanel.getFxmlFilePath());
             });
             discounts.getItems().add(hyperlink);

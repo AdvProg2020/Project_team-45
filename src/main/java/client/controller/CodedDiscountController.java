@@ -46,12 +46,23 @@ public class CodedDiscountController {
         }
     }
 
-    public CodedDiscount getCurrentDiscount() {
-        return currentDiscount;
+    // used in display discount panel
+
+    public HashMap<String, String> getCurrentDiscount() {
+        try {
+            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getCurrentDiscount");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
-    public void setCurrentDiscount(CodedDiscount currentDiscount) {
-        this.currentDiscount = currentDiscount;
+    public void setCurrentDiscountById(String currentDiscountId) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "setCurrentDiscountById", currentDiscountId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public HashMap<String, String> getDetailsHashMap(String viewingDiscountCode) {

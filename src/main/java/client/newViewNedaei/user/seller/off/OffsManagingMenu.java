@@ -45,8 +45,7 @@ public class OffsManagingMenu {
         startAndEnd.setPrefWidth(180);
         startAndEnd.setPrefHeight(50);
         startAndEnd.setAlignment(Pos.CENTER);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        startAndEnd.setText(simpleDateFormat.format(off.get("startTime")) + " - " + simpleDateFormat.format(off.get("endTime")));
+        startAndEnd.setText(off.get("startTime") + " - " + off.get("endTime"));
         startAndEnd.setTranslateX(0);
         startAndEnd.setTranslateY(60);
 

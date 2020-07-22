@@ -26,10 +26,9 @@ public class SalesHistoryPanel extends Panel {
     @FXML
     public void initialize() {
         ArrayList<HashMap<String, String>> listOfSellLogs = SellerController.getInstance().getSellerSellLogs();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
         int row = 1;
         for (HashMap<String, String> sellLog : listOfSellLogs) {
-            list.add(createLabel(simpleDateFormat.format(sellLog.get("date"))), 0, row);
+            list.add(createLabel(sellLog.get("date")), 0, row);
             list.add(createHyperLink(sellLog.get("id")), 1, row);
             list.add(createLabel(sellLog.get("finalPrice")), 2, row);
             list.add(createLabel(sellLog.get("buyerUsername")), 3, row);
@@ -43,7 +42,7 @@ public class SalesHistoryPanel extends Panel {
         hyperlink.setPrefWidth(100);
         hyperlink.setPrefHeight(50);
         hyperlink.setOnAction(event -> {
-            SellerController.getInstance().setCurrentSellLog(Integer.parseInt(hyperlink.getText()));
+            SellerController.getInstance().setCurrentSellLog(hyperlink.getText());
             MenuController.getInstance().goToPanel(SellLogPanel.getFxmlFilePath());
         });
         return hyperlink;

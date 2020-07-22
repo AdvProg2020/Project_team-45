@@ -26,7 +26,7 @@ public class SellLogPanel extends Panel {
     @FXML
     public void initialize() {
         HashMap<String, String> sellLog = SellerController.getInstance().getCurrentSellLog();
-        date.setText(new SimpleDateFormat("yyyy/MM/dd").format(sellLog.get("date")));
+        date.setText(sellLog.get("date"));
         id.setText(sellLog.get("id"));
         buyer.setText(sellLog.get("buyerUsername"));
         discount.setText(sellLog.get("discountPercentage") + "%");

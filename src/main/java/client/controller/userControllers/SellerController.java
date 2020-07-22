@@ -43,7 +43,7 @@ public class SellerController extends UserController {
         }
     }
 
-    public void setCurrentSellLog(int id) {
+    public void setCurrentSellLog(String id) {
         try {
             MethodStringer.sampleMethod(getClass(), "setCurrentSellLog", id);
         } catch (Throwable throwable) {

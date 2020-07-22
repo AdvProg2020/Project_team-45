@@ -79,9 +79,9 @@ public class MethodStringer {
 
             String action = MethodStringer.stringTheMethod(method, inputs);
             String returnJson = ClientSocket.getInstance().sendAction(action);
-            if (!returnJson.startsWith("{")) {
-                String eType = returnJson.split("::")[0];
-                String eJson = returnJson.split("::")[1];
+            if (returnJson.startsWith("E::")) {
+                String eType = returnJson.split("::")[1];
+                String eJson = returnJson.split("::")[2];
                 Throwable t = (Throwable) (new Gson()).fromJson(eJson, Class.forName(eType));
                 throw t;
             }

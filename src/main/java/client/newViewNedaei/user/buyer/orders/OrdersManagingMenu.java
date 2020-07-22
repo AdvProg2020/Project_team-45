@@ -37,8 +37,7 @@ public class OrdersManagingMenu {
         dateAndId.setPrefWidth(180);
         dateAndId.setPrefHeight(50);
         dateAndId.setAlignment(Pos.CENTER);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        dateAndId.setText(simpleDateFormat.format(buyLog.get("date")) + " - id: " + buyLog.get("id"));
+        dateAndId.setText(buyLog.get("date") + " - id: " + buyLog.get("id"));
         dateAndId.setTranslateX(0);
         dateAndId.setTranslateY(0);
 
@@ -56,7 +55,7 @@ public class OrdersManagingMenu {
         view.setTranslateX(0);
         view.setTranslateY(120);
         view.setOnMouseClicked(event -> {
-            BuyerController.getInstance().setCurrentBuyLogById(Integer.parseInt(buyLog.get("id")));
+            BuyerController.getInstance().setCurrentBuyLogById(buyLog.get("id"));
             MenuController.getInstance().goToPanel(BuyLogPanel.getFxmlFilePath());
         });
 

@@ -62,7 +62,7 @@ public class BuyerController extends UserController {
         }
     }
 
-    public void setCurrentBuyLogById(int buyLogId) {
+    public void setCurrentBuyLogById(String buyLogId) {
         try {
             MethodStringer.sampleMethod(getClass(), "setCurrentBuyLogById", buyLogId);
         } catch (Throwable throwable) {
@@ -70,8 +70,8 @@ public class BuyerController extends UserController {
         }
     }
 
-
     // used in buy log panel
+
     public HashMap<String, String> getCurrentBuyLog() {
         try {
             return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getCurrentBuyLog");
@@ -81,7 +81,7 @@ public class BuyerController extends UserController {
         }
     }
 
-    public ArrayList<HashMap<String, String>> getBuyLogSellInfosById(int buyLogId) {
+    public ArrayList<HashMap<String, String>> getBuyLogSellInfosById(String buyLogId) {
         try {
             return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(),
                     "getBuyLogSellInfosById", buyLogId);

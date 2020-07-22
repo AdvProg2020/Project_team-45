@@ -34,15 +34,15 @@ public class BuyLogPanel extends Panel {
         HashMap<String, String> buyLog = BuyerController.getInstance().getCurrentBuyLog();
 
         id.setText(buyLog.get("id"));
-        date.setText(new SimpleDateFormat("yyyy/MM/dd").format(buyLog.get("date")));
+        date.setText(buyLog.get("date"));
         buyer.setText(buyLog.get("buyerUsername"));
         discount.setText(buyLog.get("discountPercentage") + "%");
-        finalPrice.setText("" + buyLog.get("finalPrice"));
+        finalPrice.setText(buyLog.get("finalPrice"));
         address.setText(buyLog.get("address"));
         phone.setText(buyLog.get("phoneNumber"));
 
         ArrayList<HashMap<String, String>> sellInfos =
-                BuyerController.getInstance().getBuyLogSellInfosById(Integer.parseInt(buyLog.get("id")));
+                BuyerController.getInstance().getBuyLogSellInfosById(buyLog.get("id"));
         for (HashMap<String, String> sellInfo : sellInfos) {
             products.getItems().add(sellInfo.get("productName") + " -> " + sellInfo.get("finalPrice"));
             ids.getItems().add(sellInfo.get("id"));

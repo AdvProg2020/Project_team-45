@@ -32,14 +32,15 @@ public class UserController {
         return anonymousUser;
     }
 
-    public static boolean isLoggedIn() {
+    // used in top pane
+
+    public static Boolean isLoggedIn() {
         return loggedIn;
     }
 
     public HashMap<String, String> getUserViewInfo(String username) {
         User showingUser = Market.getInstance().getUserByUsername(username);
         HashMap<String, String> filledMap = new HashMap<>();
-
         filledMap.put("username", showingUser.getUsername());
         filledMap.put("role", showingUser.getRole());
         filledMap.put("firstName", showingUser.getPersonalInfo().getFirstName());
@@ -50,9 +51,30 @@ public class UserController {
         return filledMap;
     }
 
-    // personal info panel
+    public String getRole() {
+        return activeUser.getRole();
+    }
 
-    public void setPersonalInfoField(String field, String newValue) throws Exception{
+    public void logout() {
+        loggedIn = false;
+        activeUser = null;
+    }
+
+    // used in personal info panel
+
+    public HashMap<String, String> getActiveUserPersonalInfo() {
+        HashMap<String, String> filledMap = new HashMap<>();
+        filledMap.put("username", activeUser.getUsername());
+        filledMap.put("role", activeUser.getRole());
+        filledMap.put("firstName", activeUser.getPersonalInfo().getFirstName());
+        filledMap.put("lastName", activeUser.getPersonalInfo().getLastName());
+        filledMap.put("phoneNumber", activeUser.getPersonalInfo().getPhoneNumber());
+        filledMap.put("emailAddress", activeUser.getPersonalInfo().getEmailAddress());
+        filledMap.put("avatar", activeUser.getPersonalInfo().getAvatarPath());
+        return filledMap;
+    }
+
+    public void setPersonalInfoField(String field, String newValue) throws Exception {
         PersonalInfo personalInfo = activeUser.getPersonalInfo();
         if (field.equalsIgnoreCase("firstName")) {
             if (!InputValidator.getFirstNameValidator().checkInput(newValue)) {
@@ -82,8 +104,7 @@ public class UserController {
         }
     }
 
-
-    ///
+    // i don't know
 
     public boolean login(String username, String password) {
         User loggingInUser = market.getUserByUsername(username);
@@ -99,11 +120,6 @@ public class UserController {
         return false;
     }
 
-    public void logout() {
-        loggedIn = false;
-        activeUser = null;
-    }
-
     public boolean usernameExists(String username) throws UsernameIsRequestException {
         if (market.usernameRequestExists(username))
             throw new UsernameIsRequestException();
@@ -112,9 +128,5 @@ public class UserController {
 
     public boolean onlyHasAdmin() {
         return Market.getInstance().getAllUsers().size() == 1;
-    }
-
-    public String getRole() {
-        return activeUser.getRole();
     }
 }

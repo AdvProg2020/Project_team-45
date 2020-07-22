@@ -24,12 +24,12 @@ public class MethodStringer {
     }
 
     public static String runMethodReturnJson(String action) {
-        String[] parts = action.trim().split(" ");
+        String[] parts = action.trim().split("%");
         try {
             Class srcClass = Class.forName(parts[0].replace("client", "server"));
             Class[] classes = new Class[parts.length - 2];
             for (int i = 2; i < parts.length; i++) {
-                classes[i-2] = Class.forName(parts[i].split(":")[0]);
+                classes[i-2] = Class.forName(parts[i].split("&")[0]);
             }
             Method method = srcClass.getDeclaredMethod(parts[1], classes);
 
@@ -40,7 +40,7 @@ public class MethodStringer {
 
             Object[] inputs = inputsStrings.stream().map(string -> {
                 try {
-                    String[] strings = string.split(":");
+                    String[] strings = string.split("&");
                     Class objectClass = Class.forName(strings[0]);
                     return (new Gson()).fromJson(strings[1], objectClass);
                 } catch (ClassNotFoundException e) {

@@ -11,7 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 
 import static javafx.scene.paint.Color.RED;
 
@@ -79,7 +79,7 @@ public class UserRegisterPane extends Panel {
 
         if (!checkPersonalInfoFields("admin"))
             return;
-        LinkedHashMap<String, String> registerFields = getRegisterInfoHashMap();
+        HashMap<String, String> registerFields = getRegisterInfoHashMap();
         registerFields.put("username", newUsernameField.getText());
         registerErrorLabel.setTextFill(Color.LIGHTGREEN);
         AdminController.getInstance().createItem(registerFields);
@@ -95,7 +95,7 @@ public class UserRegisterPane extends Panel {
     public void doRegister() {
         if (!checkPersonalInfoFields(roleSelectionChoiceBox.getValue()))
             return;
-        LinkedHashMap<String, String> registerFields = getRegisterInfoHashMap();
+        HashMap<String, String> registerFields = getRegisterInfoHashMap();
         registerErrorLabel.setTextFill(Color.LIGHTGREEN);
         if (roleSelectionChoiceBox.getValue().equals("seller")) {
             SellerController.getInstance().createItem(registerFields, newUsernameField.getText());
@@ -111,8 +111,8 @@ public class UserRegisterPane extends Panel {
         companyDescriptionField.clear();
     }
 
-    private LinkedHashMap<String, String> getRegisterInfoHashMap() {
-        LinkedHashMap<String, String> registerFields = new LinkedHashMap<>();
+    private HashMap<String, String> getRegisterInfoHashMap() {
+        HashMap<String, String> registerFields = new HashMap<>();
         registerFields.put("password", newPasswordField.getText());
         registerFields.put("first name", firstNameField.getText());
         registerFields.put("last name", lastNameField.getText());

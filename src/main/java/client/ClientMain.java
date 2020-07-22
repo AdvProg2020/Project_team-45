@@ -1,6 +1,8 @@
 package client;
 
+import client.controller.userControllers.AllUsersController;
 import client.network.ClientSocket;
+import client.newViewHatami.CreateAdminPanel;
 import client.newViewNedaei.MenuController;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -21,6 +23,9 @@ public class ClientMain extends Application {
         primaryStage.setTitle("my market");
         primaryStage.setScene(scene);
         primaryStage.show();
+        if (AllUsersController.getInstance().noAdmin()) {
+            getFirstAdmin();
+        }
     }
 
 //    @Override
@@ -30,9 +35,7 @@ public class ClientMain extends Application {
 
     public static void main(String[] args) {
 //        Market.getInstance().initialize();
-//        if (Market.getInstance().getAllUsers().isEmpty()) {
-//            getFirstAdmin();
-//        }
+
         launch(args);
 //        try {
 //            ClientSocket.getInstance().connectToServer();
@@ -49,7 +52,7 @@ public class ClientMain extends Application {
 
 
 
-//    private static void getFirstAdmin() {
-//        MenuController.getInstance().goToPanel(CreateAdminPanel.getFxmlFilePath());
-//    }
+    private static void getFirstAdmin() {
+        MenuController.getInstance().goToPanel(CreateAdminPanel.getFxmlFilePath());
+    }
 }

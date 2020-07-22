@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 
@@ -14,9 +15,10 @@ public class MethodStringer {
     public static String stringTheMethod(Method method, Object... inputs) throws ClassNotFoundException {
         StringBuilder output = new StringBuilder();
         output.append(method.getDeclaringClass().getName());
-        output.append(" ").append(method.getName()).append(" ");
-        for (Object input : inputs) {
-            output.append(input.getClass().getName()).append(":").append((new Gson()).toJson(input)).append(" ");
+        output.append("%").append(method.getName()).append("%");
+        Class[] classes = method.getParameterTypes();
+        for (int i = 0; i < inputs.length; i++) {
+            output.append(classes[i].getName()).append("&").append((new Gson()).toJson(inputs[i])).append("%");
         }
 //        System.out.println(output);
         return output.toString();
@@ -69,11 +71,26 @@ public class MethodStringer {
 
     public static Object sampleMethod(Class enclosingClass, String methodName, Object... inputs) throws Throwable {
         try {
+
+            Method[] nameMatchedMethods = Arrays.stream(enclosingClass.getMethods())
+                    .filter(method -> method.getName().equals(methodName)).toArray(Method[]::new);
             Class[] parameterTypes = new Class[inputs.length];
             for (int i = 0; i < inputs.length; i++) {
                 parameterTypes[i] = inputs[i].getClass();
             }
-            Method method = enclosingClass.getDeclaredMethod(methodName, parameterTypes);
+
+//            Method method = enclosingClass.getDeclaredMethod(methodName, parameterTypes);
+            Method method;
+            if (nameMatchedMethods.length == 1) {
+                method = nameMatchedMethods[0];
+            } else {
+                System.out.println("overload darim :|");
+                method = enclosingClass.getDeclaredMethod(methodName, parameterTypes);
+//                for (Method nameMatchedMethod : nameMatchedMethods) {
+//                    // TODO : age omri baghi bood
+//                }
+            }
+
 
 //            method.getExceptionTypes()
 
@@ -86,6 +103,8 @@ public class MethodStringer {
                 throw t;
             }
             Class a = method.getReturnType();
+            if (a.getSimpleName().equals("void"))
+                return null;
             return (new Gson()).fromJson(returnJson, method.getReturnType());
         } catch (ClassNotFoundException | NoSuchMethodException e) {
             e.printStackTrace();

@@ -27,7 +27,7 @@ public class UserController {
 
     public HashMap<String, String> getUserViewInfo(String username) {
         try {
-            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getSellerId", username);
+            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getUserViewInfo", username);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;

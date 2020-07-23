@@ -15,6 +15,7 @@ public class ClientMain extends Application {
     public void start(Stage primaryStage) {
         try {
             ClientSocket.getInstance().connectToServer();
+            ClientSocket.getInstance().start();
         } catch (IOException exception) {
             System.err.println("error in connecting to server");
         }

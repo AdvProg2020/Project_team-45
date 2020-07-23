@@ -3,7 +3,7 @@ package client.network;
 import java.io.*;
 import java.net.Socket;
 
-public class ClientSocket {
+public class ClientSocket extends Thread {
     public static final int PORT = 8891;
     public static final String IP = "127.0.0.1";
 
@@ -16,11 +16,11 @@ public class ClientSocket {
     private boolean isConnected;
 
     private final ClientSecurityGate securityGate;
+    private final Object inputLock = new Object();
+    private String lastMessage;
 
     private ClientSocket() {
-
         securityGate = new ClientSecurityGate();
-
     }
 
     public static ClientSocket getInstance() {
@@ -36,13 +36,20 @@ public class ClientSocket {
             outputStream.flush();
 
             // Server -> Json
-            Json = inputStream.readUTF();
+            synchronized (inputLock) {
+                inputLock.wait();
+                Json = getInputReady(lastMessage);
+            }
             // check if json is an exception
             // TODO
-        } catch (IOException exception) {
+        } catch (IOException | InterruptedException exception) {
             exception.printStackTrace();
         }
         return Json;
+    }
+
+    private String getInputReady(String readUTF) {
+        return readUTF;
     }
 
     private String getOutPutReady(String action) {
@@ -56,6 +63,7 @@ public class ClientSocket {
 
         securityGate.exchangeKeys(inputStream, outputStream);
 
+
         token = Integer.parseInt(inputStream.readUTF());
 
         outputStream.writeUTF(p2pSocket.IP);
@@ -68,5 +76,24 @@ public class ClientSocket {
 
     public P2PSocket getP2pSocket() {
         return p2pSocket;
+    }
+
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                String serverMessage = inputStream.readUTF();
+                if (serverMessage.startsWith("%%update%%")) {
+                    // TODO : bagheri go on
+                } else {
+                    synchronized (inputLock) {
+                        lastMessage = serverMessage;
+                        inputLock.notify();
+                    }
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        }
     }
 }

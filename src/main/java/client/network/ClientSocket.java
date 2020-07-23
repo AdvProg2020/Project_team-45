@@ -20,7 +20,9 @@ public class ClientSocket extends Thread {
     private String lastMessage;
 
     private ClientSocket() {
+
         securityGate = new ClientSecurityGate();
+
     }
 
     public static ClientSocket getInstance() {
@@ -42,7 +44,7 @@ public class ClientSocket extends Thread {
             }
             // check if json is an exception
             // TODO
-        } catch (IOException | InterruptedException exception) {
+        } catch (IOException exception) {
             exception.printStackTrace();
         }
         return Json;
@@ -60,9 +62,6 @@ public class ClientSocket extends Thread {
         Socket socket = new Socket(IP, PORT);
         inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         outputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
-
-        securityGate.exchangeKeys(inputStream, outputStream);
-
 
         token = Integer.parseInt(inputStream.readUTF());
 

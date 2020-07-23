@@ -44,6 +44,8 @@ public class AuctionController {
     }
 
     public void recordProposedPrice(String proposedPriceText) throws IOException {
+        if (!activeAuction.isAvailable())
+            throw new IOException("The auction is over!");
         Buyer activeBuyer = (Buyer) UserController.getActiveUser();
         int proposedPrice = Integer.parseInt(proposedPriceText);
         int usableBalance = activeBuyer.getWallet().getUsableBalance();
@@ -68,11 +70,7 @@ public class AuctionController {
     }
 
     public ArrayList<String> getActiveAuctionAllMassages() {
-        ArrayList<String> allMassages = new ArrayList<>();
-        for (Massage massage : activeAuction.getChatRoom().getAllMassages()) {
-            allMassages.add(massage.toString());
-        }
-        return allMassages;
+        return activeAuction.getChatRoom().getAllMassagesText();
     }
 
     public void addMassageToActiveAuction(String newMassageContent) {

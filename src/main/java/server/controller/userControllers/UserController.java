@@ -1,12 +1,14 @@
 package server.controller.userControllers;
 
 import server.controller.InputValidator;
+import server.controller.ServerManager;
 import server.model.Market;
 import server.model.user.AnonymousUser;
 import server.model.user.Buyer;
 import server.model.user.PersonalInfo;
 import server.model.user.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserController {
@@ -143,5 +145,9 @@ public class UserController {
     public static void setActiveUserByUsername(String username) {
         if (username == null) activeUser = null;
         UserController.activeUser = Market.getInstance().getUserByUsername(username);
+    }
+
+    public ArrayList<String> getOnlineUsers() {
+        return ServerManager.getInstance().getOnlineUsernames();
     }
 }

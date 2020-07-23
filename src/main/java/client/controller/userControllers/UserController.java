@@ -2,6 +2,7 @@ package client.controller.userControllers;
 
 import client.network.MethodStringer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserController {
@@ -94,6 +95,15 @@ public class UserController {
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return false;
+        }
+    }
+
+    public ArrayList<String> getOnlineUsers() {
+        try {
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(), "getOnlineUsers");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
         }
     }
 }

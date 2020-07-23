@@ -1,6 +1,7 @@
 package client.newViewHatami;
 
 import client.controller.userControllers.AllUsersController;
+import client.controller.userControllers.UserController;
 import client.newViewNedaei.MenuController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UsersManagingMenu {
     public ListView<String> usersList;
@@ -27,13 +30,17 @@ public class UsersManagingMenu {
     public void fillList() {
         // TODO : change list to table
         List<String> allUsersList = AllUsersController.getInstance().getAllUsernames();
+        ArrayList<String> onlineUsernames = UserController.getInstance().getOnlineUsers();
+        allUsersList = allUsersList.stream()
+                .map(username -> onlineUsernames.contains(username) ? username + "\t\t:online" : username + "\t\t:offline")
+                .collect(Collectors.toList());
         ObservableList<String> items = FXCollections.observableArrayList ();
         items.addAll(allUsersList);
         usersList.setItems(items);
     }
 
     public void setSelectedUser() {
-        selectedUsername = usersList.getSelectionModel().getSelectedItem();
+        selectedUsername = usersList.getSelectionModel().getSelectedItem().split(":")[0].trim();
     }
 
     public void viewSelectedUser() {

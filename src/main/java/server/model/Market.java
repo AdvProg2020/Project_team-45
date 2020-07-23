@@ -10,6 +10,7 @@ import server.model.request.Request;
 import server.model.request.SellerRegisterRequest;
 import server.model.user.Seller;
 import server.model.user.User;
+import server.newModel.bagheri.Auction;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class Market {
     private ArrayList<ProductSellInfo> allProductSellInfos; // add news to it
     private ArrayList<Rate> allRates;
     private ArrayList<Company> allCompanies;
+    private final ArrayList<Auction> allAuction;
 
     private Market() {
         allUsers = new ArrayList<>();
@@ -41,6 +43,7 @@ public class Market {
         allProductSellInfos = new ArrayList<>();
         allRates = new ArrayList<>();
         allCompanies = new ArrayList<>();
+        allAuction = new ArrayList<>();
     }
 
     public static Market getInstance() {
@@ -111,6 +114,10 @@ public class Market {
             }
         }
         return allDiscountedProductsList;
+    }
+
+    public ArrayList<Auction> getAllAuction() {
+        return allAuction;
     }
 
     public User getUserById(String id) {
@@ -190,6 +197,15 @@ public class Market {
         return null;
     }
 
+    public Auction getAuctionById(String id) {
+        for (Auction auction : allAuction) {
+            if (auction.getId().equals(id)) {
+                return auction;
+            }
+        }
+        return null;
+    }
+
     public Company getCompanyByName(String name) {
         for (Company company : allCompanies) {
             if (company.getName().equals(name)) {
@@ -263,6 +279,10 @@ public class Market {
 
     public void addSellInfoToList(ProductSellInfo sellInfo) {
         allProductSellInfos.add(sellInfo);
+    }
+
+    public void addAuctionToList(Auction auction) {
+        allAuction.add(auction);
     }
 
     public void removeUserFromAllUsers(User user) {
@@ -395,4 +415,3 @@ public class Market {
         return allUsers.isEmpty();
     }
 }
-

@@ -43,6 +43,8 @@ public class AuctionController {
     }
 
     public void recordProposedPrice(String proposedPriceText) throws IOException {
+        if (!activeAuction.isAvailable())
+            throw new IOException("The auction is over!");
         Buyer activeBuyer = (Buyer) UserController.getActiveUser();
         int proposedPrice = Integer.parseInt(proposedPriceText);
         int usableBalance = activeBuyer.getWallet().getUsableBalance();

@@ -1,7 +1,7 @@
 package server.newModel.bagheri;
 
+import server.model.IdKeeper;
 import server.model.IdRecognized;
-import server.model.Off;
 import server.model.Savable;
 import server.model.product.ProductSellInfo;
 import server.model.user.Buyer;
@@ -19,7 +19,7 @@ public class Auction extends IdRecognized implements Savable {
     private final ChatRoom chatRoom;
 
     public Auction(ProductSellInfo productSellInfo, Date endTime, int basePrice) {
-        this.id = "";
+        this.id = "" + IdKeeper.getInstance().getAuctionNewId();
         this.productSellInfo = productSellInfo;
         this.endTime = endTime;
         this.basePrice = basePrice;

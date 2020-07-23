@@ -69,11 +69,7 @@ public class AuctionController {
     }
 
     public ArrayList<String> getActiveAuctionAllMassages() {
-        ArrayList<String> allMassages = new ArrayList<>();
-        for (Massage massage : activeAuction.getChatRoom().getAllMassages()) {
-            allMassages.add(massage.toString());
-        }
-        return allMassages;
+        return activeAuction.getChatRoom().getAllMassagesText();
     }
 
     public void addMassageToActiveAuction(String newMassageContent) {

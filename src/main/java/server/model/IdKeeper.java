@@ -11,9 +11,9 @@ public class IdKeeper {
     private int requestsNewId;
     private int productSellInfosNewId;
     private int ratesNewId;
+    private int auctionNewId;
 
     private IdKeeper() {
-
     }
 
     public static IdKeeper getInstance() {
@@ -69,5 +69,8 @@ public class IdKeeper {
         return ratesNewId;
     }
 
-
+    public int getAuctionNewId() {
+        auctionNewId++;
+        return auctionNewId;
+    }
 }

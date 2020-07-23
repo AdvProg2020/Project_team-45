@@ -20,7 +20,7 @@ public class P2PController {
         if (tellSellerSendFile(fileInfoForServer, p2pIP, p2pPort)) {
             // TODO : file is being sent for me, what to do? (option : wait and notify me by P2PSocket)
         } else {
-            // couldn't connect to seller
+            // TODO : couldn't connect to seller
         }
     }
 

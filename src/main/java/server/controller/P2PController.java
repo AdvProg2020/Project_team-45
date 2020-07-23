@@ -17,10 +17,8 @@ public class P2PController {
     }
 
     private boolean tellSellerSendFile(String fileInfoForServer, String p2pIP, int p2pPort) {
-        String sellerUserName = "";
-        // TODO nedaeai : get sellerUsername from fileInfoForServer
-        String message = "";
-        // TODO nedaeai : make message for seller P2PSocket to send file // not contain "%, &"
+        String sellerUserName = ""; // TODO nedaeai : get sellerUsername from fileInfoForServer
+        String message = ""; // TODO nedaeai : make message for seller P2PSocket to send file // not contain "%, &"
         ClientHandler sellerHandler = ServerManager.getInstance().findUserClientHandlerByUsername(sellerUserName);
         if (sellerHandler == null) {
             return false;

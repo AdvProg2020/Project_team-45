@@ -44,7 +44,7 @@ public class P2PSocket extends Thread {
                     }
                     dataOutputStream.flush();
                 } else if (clientMessage.startsWith("seller:")) {
-                    receiveFile();
+                    receiveFile(clientSocket);
                 }
 
             } catch (IOException exception) {
@@ -81,16 +81,13 @@ public class P2PSocket extends Thread {
         }).start();
     }
 
-    private void receiveFile() {
-        // for buyer : I'm going to send you a file -> notify fileLock
-        // TODO : nedaeai , handle recieving file
-
+    private void receiveFile(Socket sellerSocket) {
+        // TODO : nedaeai , handle receiving file
     }
 
     private void sendFileForBuyer(Socket buyerSocket, String fileInfo) {
         // TODO : nedaeai
     }
-
 
     public String getIP() {
         return IP;

@@ -2,19 +2,26 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="55.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewNedaei.background.TopPane">
-   <children>
-      <MenuBar layoutX="114.0" layoutY="15.0">
-         <menus>
-            <Menu fx:id="categoryMenu" mnemonicParsing="false" text="Categories" />
-            <Menu fx:id="offMenu" mnemonicParsing="false" text="Offs" />
-         </menus>
-      </MenuBar>
-      <Button onMouseClicked="#click" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#goBack" prefWidth="100.0" text="Back" />
-      <Button fx:id="loginRegister" layoutX="886.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToLoginRegister" onMouseClicked="#click" prefWidth="100.0" text="Login/Register" />
-      <Button fx:id="mainMenu" layoutX="243.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToMainMenu" onMouseClicked="#click" prefWidth="100.0" text="Main Menu" />
-      <Button fx:id="userPage" layoutX="343.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToUserPage" onMouseClicked="#click" prefWidth="100.0" text="User Account" />
-      <Button fx:id="viewCart" layoutX="443.0" layoutY="15.0" mnemonicParsing="false" onAction="#gotoCart" onMouseClicked="#click" prefWidth="100.0" text="View Cart" />
-      <Button fx:id="logout" layoutX="886.0" layoutY="15.0" mnemonicParsing="false" onAction="#logItOut" onMouseClicked="#click" prefWidth="100.0" text="Logout" />
-   </children>
+<AnchorPane prefHeight="55.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewNedaei.background.TopPane">
+    <children>
+        <MenuBar layoutX="114.0" layoutY="15.0">
+            <menus>
+                <Menu fx:id="categoryMenu" mnemonicParsing="false" text="Categories"/>
+                <Menu fx:id="offMenu" mnemonicParsing="false" text="Offs"/>
+            </menus>
+        </MenuBar>
+        <Button onMouseClicked="#click" layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onAction="#goBack"
+                prefWidth="100.0" text="Back"/>
+        <Button fx:id="loginRegister" layoutX="886.0" layoutY="15.0" mnemonicParsing="false"
+                onAction="#goToLoginRegister" onMouseClicked="#click" prefWidth="100.0" text="Login/Register"/>
+        <Button fx:id="mainMenu" layoutX="243.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToMainMenu"
+                onMouseClicked="#click" prefWidth="100.0" text="Main Menu"/>
+        <Button fx:id="userPage" layoutX="343.0" layoutY="15.0" mnemonicParsing="false" onAction="#goToUserPage"
+                onMouseClicked="#click" prefWidth="100.0" text="User Account"/>
+        <Button fx:id="viewCart" layoutX="443.0" layoutY="15.0" mnemonicParsing="false" onAction="#gotoCart"
+                onMouseClicked="#click" prefWidth="100.0" text="View Cart"/>
+        <Button fx:id="logout" layoutX="886.0" layoutY="15.0" mnemonicParsing="false" onAction="#logItOut"
+                onMouseClicked="#click" prefWidth="100.0" text="Logout"/>
+    </children>
 </AnchorPane>

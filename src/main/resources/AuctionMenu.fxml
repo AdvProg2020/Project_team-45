@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<?import javafx.scene.control.TextArea?>
+<BorderPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewBagheri.AuctionMenu">
+    <top>
+        <AnchorPane prefHeight="80.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="productNameLabel" layoutX="41.0" layoutY="32.0" text=""/>
+                <Label fx:id="basePriceLabel" layoutX="205.0" layoutY="32.0" text=""/>
+                <Label fx:id="proposedPriceLabel" layoutX="390.0" layoutY="32.0" text=""/>
+                <Label fx:id="endDateLabel" layoutX="561.0" layoutY="32.0" text=""/>
+                <Button layoutX="839.0" layoutY="28.0" mnemonicParsing="false" text="Submit New Offer"
+                        onAction="#goToParticipateAuctionPanel"/>
+            </children>
+        </AnchorPane>
+    </top>
+    <center>
+        <ScrollPane prefHeight="281.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+            <content>
+                <VBox fx:id="allMassagesBox" prefHeight="200.0" prefWidth="100.0"/>
+            </content>
+        </ScrollPane>
+    </center>
+    <bottom>
+        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <center>
+                <ScrollPane prefHeight="110.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                    <TextArea fx:id="newMassageTextArea"/>
+                </ScrollPane>
+            </center>
+            <bottom>
+                <AnchorPane prefHeight="45.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button layoutX="870.0" layoutY="10.0" mnemonicParsing="false" text="Send"
+                                onAction="#sendNewMassage"/>
+                    </children>
+                </AnchorPane>
+            </bottom>
+        </BorderPane>
+    </bottom>
+</BorderPane>

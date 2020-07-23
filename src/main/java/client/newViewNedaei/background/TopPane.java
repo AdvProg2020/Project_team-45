@@ -3,6 +3,7 @@ package client.newViewNedaei.background;
 import client.controller.CartController;
 import client.controller.CategoryController;
 import client.controller.userControllers.UserController;
+import client.newViewBagheri.AuctionsMenu;
 import client.newViewBagheri.OffMenu;
 import client.newViewBagheri.ProductsMenu;
 import client.newViewHatami.AdminMenu;
@@ -125,4 +126,8 @@ public class TopPane {
         MenuController.getInstance().goToMenu(OffMenu.getFxmlFilePath());
     }
 
+    private void goToAuctionsMenu() {
+        MenuController.getInstance().goToMenu(AuctionsMenu.getFxmlFilePath());
+
+    }
 }

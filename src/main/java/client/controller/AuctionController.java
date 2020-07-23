@@ -30,4 +30,20 @@ public class AuctionController {
     public void recordProposedPrice(String proposedPrice) throws IOException {
 
     }
+
+    public HashMap<String, String> getActiveAuctionInfos() {
+        return null;
+    }
+
+    public String getActiveUserProposedPrice() {
+        return null;
+    }
+
+    public ArrayList<String> getActiveAuctionAllMassages() {
+        return null;
+    }
+
+    public void addMassageToActiveAuction(String newMassage) {
+
+    }
 }

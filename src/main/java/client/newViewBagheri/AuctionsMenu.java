@@ -85,7 +85,7 @@ public class AuctionsMenu {
         if (auctionController.hasActiveUserParticipatedInActiveAuction()) {
             menuController.goToPanel(ParticipateAuctionPanel.getFxmlFilePath());
         } else {
-            menuController.goToMenu(AuctionMenu.getFxmlFilePath());
+//            menuController.goToMenu(AuctionMenu.getFxmlFilePath());
         }
     }
 }

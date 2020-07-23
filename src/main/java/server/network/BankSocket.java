@@ -54,11 +54,12 @@ public class BankSocket {
      * @param msg to Bank server.
      * @throws IOException when OUT data stream been interrupted.
      */
-    public static void SendMessage(String msg) throws IOException {
+    public static String SendMessage(String msg) throws IOException {
         try {
             outputStream.writeUTF(msg);
+            return inputStream.readUTF();
         } catch (IOException e) {
-            throw new IOException("Exception while sending message:");
+            throw new IOException("Exception while sending message");
         }
     }
 
@@ -80,5 +81,76 @@ public class BankSocket {
 
     }
 
+    // my methods
 
+    public static Integer createAccount(String firstName, String lastName, String username, String password) {
+        try {
+            return Integer.parseInt(SendMessage("create_account " + firstName + " " + lastName + " " + username + " " + password + " " + password));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getToken(String username, String password) {
+        try {
+            return SendMessage("get_token " + username + " " + password);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Integer createDepositReceipt(String token, int money, int destId) {
+        try {
+            return Integer.parseInt(SendMessage("create_receipt " + token + " deposit " + money + " -1 " + destId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Integer createWithdrawReceipt(String token, int money, int sourceId) {
+        try {
+            return Integer.parseInt(SendMessage("create_receipt " + token + " withdraw " + money + " " + sourceId + " -1"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Integer createMoveReceipt(String token, int money, int sourceId, int destId) {
+        try {
+            return Integer.parseInt(SendMessage("create_receipt " + token + " move " + money + " " + sourceId + " " + destId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static boolean payReceipt(int receiptId) {
+        try {
+            return SendMessage("pay " + receiptId).equals("done successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static Integer getBalance(String token) {
+        try {
+            return Integer.parseInt(SendMessage("get_balance " + token));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void exit() {
+        try {
+            SendMessage("exit");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

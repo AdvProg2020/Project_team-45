@@ -14,7 +14,12 @@ public class ClientSocket {
     private DataOutputStream outputStream;
     private boolean isConnected;
 
+    private final ClientSecurityGate securityGate;
+
     private ClientSocket() {
+
+        securityGate = new ClientSecurityGate();
+
     }
 
     public static ClientSocket getInstance() {
@@ -48,6 +53,9 @@ public class ClientSocket {
 //        System.out.println("hi");
         inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         outputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
+
+        securityGate.exchangeKeys(inputStream, outputStream);
+
         token = Integer.parseInt(inputStream.readUTF());
     }
 

@@ -1,4 +1,4 @@
-package server.encryption;
+package server.network.encryption;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;

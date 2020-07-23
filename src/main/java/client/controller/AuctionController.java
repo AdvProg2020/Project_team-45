@@ -1,6 +1,8 @@
 package client.controller;
 
 
+import client.network.MethodStringer;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,35 +17,77 @@ public class AuctionController {
         return instance;
     }
 
-    public void setActiveAuctionById(String AuctionId) {
-
+    public void setActiveAuctionById(String auctionId) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "setActiveAuctionById", auctionId);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public ArrayList<HashMap<String, String>> getAuctionInfosList() {
-        return null;
+        try {
+            return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(),
+                    "getAuctionInfosList");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public boolean hasActiveUserParticipatedInActiveAuction() {
-        return false;
+        try {
+            return (boolean) MethodStringer.sampleMethod(getClass(),
+                    "hasActiveUserParticipatedInActiveAuction");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return false;
+        }
     }
 
     public void recordProposedPrice(String proposedPrice) throws IOException {
-
+        try {
+            MethodStringer.sampleMethod(getClass(), "recordProposedPrice", proposedPrice);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public HashMap<String, String> getActiveAuctionInfos() {
-        return null;
+        try {
+            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveAuctionInfos");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public String getActiveUserProposedPrice() {
-        return null;
+        try {
+            return (String) MethodStringer.sampleMethod(getClass(),
+                    "getActiveUserProposedPrice");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public ArrayList<String> getActiveAuctionAllMassages() {
-        return null;
+        try {
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveAuctionAllMassages");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
     public void addMassageToActiveAuction(String newMassage) {
-
+        try {
+            MethodStringer.sampleMethod(getClass(), "addMassageToActiveAuction", newMassage);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 }

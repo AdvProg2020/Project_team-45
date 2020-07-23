@@ -209,7 +209,8 @@ public class ProductController {
 
     public HashMap<String, String> getProductAndSellInfo(String sellInfoId) {
         try {
-            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(), "getProductAndSellInfo", sellInfoId);
+            return (HashMap<String, String>) MethodStringer.sampleMethod(getClass(),
+                    "getProductAndSellInfo", sellInfoId);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;

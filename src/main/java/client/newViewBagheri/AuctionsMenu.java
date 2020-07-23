@@ -47,7 +47,7 @@ public class AuctionsMenu {
         productInfoVBox.setPrefWidth(sizePrefWidth);
         productInfoVBox.setPrefHeight(350.0);
         ImageView productImageView = new ImageView(new Image(AuctionInfo.get("imageAddress")));
-        productImageView.setOnMouseClicked(e -> goToProduct(AuctionInfo.get("id")));
+        productImageView.setOnMouseClicked(e -> goToProduct(AuctionInfo.get("productId")));
         productImageView.setPreserveRatio(true);
         productImageView.setFitWidth(190.0);
         productImageView.setFitHeight(250.0);
@@ -57,14 +57,14 @@ public class AuctionsMenu {
         imagePane.setPrefHeight(250.0);
         int labelSize = 30;
         Label productName = new Label(AuctionInfo.get("name"));
-        productName.setOnMouseClicked(e -> goToProduct(AuctionInfo.get("id")));
+        productName.setOnMouseClicked(e -> goToProduct(AuctionInfo.get("productId")));
         setLabelStyle(productName, sizePrefWidth, labelSize);
         Label productScore = new Label("score: " + AuctionInfo.get("averageScore") + " out 0f 5");
         setLabelStyle(productScore, sizePrefWidth, labelSize);
         Label productPrice = new Label("base price: " + AuctionInfo.get("basePrice"));
         setLabelStyle(productPrice, sizePrefWidth, labelSize);
         Button participate = new Button("Participate in the auction");
-        participate.setOnAction(e -> goToAuction(AuctionInfo.get("id")));
+        participate.setOnAction(e -> goToAuction(AuctionInfo.get("auctionId")));
         productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPrice, participate);
         return productInfoVBox;
     }
@@ -83,9 +83,9 @@ public class AuctionsMenu {
     private void goToAuction(String auctionId) {
         auctionController.setActiveAuctionById(auctionId);
         if (auctionController.hasActiveUserParticipatedInActiveAuction()) {
-            menuController.goToPanel(ParticipateAuctionPanel.getFxmlFilePath());
+            menuController.goToMenu(AuctionMenu.getFxmlFilePath());
         } else {
-//            menuController.goToMenu(AuctionMenu.getFxmlFilePath());
+            menuController.goToPanel(ParticipateAuctionPanel.getFxmlFilePath());
         }
     }
 }

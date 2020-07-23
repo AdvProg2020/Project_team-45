@@ -214,4 +214,8 @@ public class Buyer extends User implements CartHolder, Savable {
     public void removeAuction(Auction auction) {
         wallet.changeUsableBalance(allAuctions.remove(auction));
     }
+
+    public BuyerWallet getWallet() {
+        return wallet;
+    }
 }

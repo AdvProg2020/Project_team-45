@@ -10,6 +10,10 @@ public class ChatRoom {
         isActive = true;
     }
 
+    public ArrayList<Massage> getAllMassages() {
+        return allMassages;
+    }
+
     public boolean addMassage(Massage newMassage) {
         if (!isActive)
             return false;

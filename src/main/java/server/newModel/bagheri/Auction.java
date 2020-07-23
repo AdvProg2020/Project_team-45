@@ -80,4 +80,20 @@ public class Auction extends IdRecognized implements Savable {
     public boolean equals(Auction auction) {
         return auction.id.equals(this.id);
     }
+
+    public HashMap<String, String> getAuctionInfo() {
+        HashMap<String, String> auctionInfo = new HashMap<>();
+        auctionInfo.put("auctionId", this.id);
+        auctionInfo.put("basePrice", "" + this.basePrice);
+        HashMap<String, String> productInfo = productSellInfo.getProduct().getProductInfoForProductsList();
+        auctionInfo.put("productId", productInfo.get("id"));
+        auctionInfo.put("name", productInfo.get("name"));
+        auctionInfo.put("averageScore", productInfo.get("averageScore"));
+        auctionInfo.put("imageAddress", productInfo.get("imageAddress"));
+        return auctionInfo;
+    }
+
+    public boolean isAvailable() {
+        return endTime.compareTo(new Date()) >= 0;
+    }
 }

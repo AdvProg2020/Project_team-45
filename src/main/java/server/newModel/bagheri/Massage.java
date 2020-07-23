@@ -19,4 +19,9 @@ public class Massage {
     public String getContent() {
         return content;
     }
+
+    @Override
+    public String toString() {
+        return sender + ":\n" + content;
+    }
 }

@@ -31,11 +31,17 @@ public class CreateAdminPanel extends Panel {
                 .filter(x -> x.getId().equals("createAdminButton"))
                 .findFirst().get();
 
+        Node createSupporterButton = registerPane.getChildren().stream()
+                .filter(x -> x.getId().equals("createSupporterButton"))
+                .findFirst().get();
+
         roleSelectionChoiceBox.setVisible(false);
         registerButton.setVisible(false);
         createAdminButton.setVisible(true);
+        createSupporterButton.setVisible(true);
         if (AllUsersController.getInstance().noAdmin()) {
             closeButton.setVisible(false);
+            createSupporterButton.setVisible(false);
         }
     }
 

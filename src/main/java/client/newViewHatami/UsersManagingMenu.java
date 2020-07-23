@@ -66,7 +66,7 @@ public class UsersManagingMenu {
         fillList();
     }
 
-    public void openAdminCreatorPanel() {
+    public void openUserCreatorPanel() {
         MenuController.getInstance().goToPanel(CreateAdminPanel.getFxmlFilePath());
     }
 

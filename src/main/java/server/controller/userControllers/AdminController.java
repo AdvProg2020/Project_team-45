@@ -1,13 +1,13 @@
 package server.controller.userControllers;
 
-import server.controller.managers.Manager;
 import server.model.user.Admin;
 import server.model.user.PersonalInfo;
 import server.model.user.User;
+import server.newModel.bagheri.Supporter;
 
 import java.util.HashMap;
 
-public class AdminController extends UserController implements Manager {
+public class AdminController extends UserController {
     private static final AdminController instance = new AdminController();
 
     public static AdminController getInstance() {
@@ -24,7 +24,11 @@ public class AdminController extends UserController implements Manager {
         market.addUserToList(newAdmin);
     }
 
-    @Override
+    public void createSupporter(HashMap<String, String> registerFields) {
+        Supporter newSupporter = new Supporter(new PersonalInfo(registerFields));
+        market.addUserToList(newSupporter);
+    }
+
     public Admin getItemById(String Id) {
         User user = market.getUserByUsername(Id);
         if (user == null || !user.getRole().equals("admin"))

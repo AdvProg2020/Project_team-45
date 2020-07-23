@@ -26,16 +26,17 @@ public class AuctionController {
     }
 
     public void setActiveAuctionById(String auctionId) {
-        activeAuction = market.getAuctionById(auctionId);
+//        activeAuction = market.getAuctionById(auctionId);
     }
 
     public ArrayList<HashMap<String, String>> getAuctionInfosList() {
-        ArrayList<HashMap<String, String>> auctionInfosList = new ArrayList<>();
-        for (Auction auction : market.getAllAuction()) {
-            if (auction.isAvailable())
-                auctionInfosList.add(auction.getAuctionInfo());
-        }
-        return auctionInfosList;
+//        ArrayList<HashMap<String, String>> auctionInfosList = new ArrayList<>();
+////        for (Auction auction : market.getAllAuction()) {
+//            if (auction.isAvailable())
+//                auctionInfosList.add(auction.getAuctionInfo());
+//        }
+//        return auctionInfosList;
+        return null;
     }
 
     public boolean hasActiveUserParticipatedInActiveAuction() {

@@ -13,7 +13,8 @@ public class P2PSocket extends Thread {
 
     public P2PSocket() {
         try {
-            ServerSocket serverSocket = new ServerSocket(0);
+            serverSocket = new ServerSocket(0);
+
         } catch (IOException exception) {
             exception.printStackTrace();
         }

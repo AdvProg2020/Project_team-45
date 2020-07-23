@@ -4,6 +4,7 @@ import client.controller.userControllers.*;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -17,10 +18,10 @@ import static javafx.scene.paint.Color.RED;
 
 public class UserRegisterPane extends Panel {
     public Label firstAdminLabel;
-
     public static String getFxmlFilePath() {
         return "/UserRegisterPane.fxml";
     }
+
 
     public GridPane personalInfoFieldsPane;
     public GridPane sellerCompanyInfoPane;
@@ -39,6 +40,7 @@ public class UserRegisterPane extends Panel {
 
     public Label registerErrorLabel;
     public Button createAdminButton;
+    public Button createSupporterButton;
     private ArrayList<Validator> personalInfoFields;
 
     public ChoiceBox<String> roleSelectionChoiceBox;
@@ -73,6 +75,19 @@ public class UserRegisterPane extends Panel {
 
     public void changeRegisterRole() {
         sellerCompanyInfoPane.setVisible(!roleSelectionChoiceBox.getValue().equals("customer"));
+    }
+
+    public void createSupporter(ActionEvent actionEvent) {
+        if (!checkPersonalInfoFields("suppurter"))
+            return;
+        HashMap<String, String> registerFields = getRegisterInfoHashMap();
+        registerFields.put("username", newUsernameField.getText());
+        registerErrorLabel.setTextFill(Color.LIGHTGREEN);
+        AdminController.getInstance().createSupporter(registerFields);
+        registerErrorLabel.setText("supporter profile created");
+        for (Validator personalInfoField : personalInfoFields) {
+            ((TextField) personalInfoField).clear();
+        }
     }
 
     public void createAdmin() {

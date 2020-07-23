@@ -22,4 +22,12 @@ public class AdminController extends UserController {
             throwable.printStackTrace();
         }
     }
+
+    public void createSupporter(HashMap<String, String> registerFields) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "createSupporter", registerFields);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
 }

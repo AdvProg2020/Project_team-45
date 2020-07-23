@@ -2,14 +2,14 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewHatami.UsersManagingMenu" >
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewHatami.UsersManagingMenu">
    <children>
       <ListView fx:id="usersList" layoutX="311.0" layoutY="73.0" prefHeight="209.0" prefWidth="264.0" />
-      <Button onAction="#viewSelectedUser" layoutX="462.0" layoutY="296.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="view user" />
-      <Button onAction="#deleteSelectedUser" layoutX="319.0" layoutY="297.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="92.0" text="delete user" />
-      <Button onAction="#openAdminCreatorPanel" layoutX="99.0" layoutY="173.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="92.0" text="create admin" />
+      <Button layoutX="462.0" layoutY="296.0" mnemonicParsing="false" onAction="#viewSelectedUser" prefHeight="26.0" prefWidth="92.0" text="view user" />
+      <Button layoutX="319.0" layoutY="297.0" mnemonicParsing="false" onAction="#deleteSelectedUser" prefHeight="26.0" prefWidth="92.0" text="delete user" />
+      <Button layoutX="98.0" layoutY="173.0" mnemonicParsing="false" onAction="#openUserCreatorPanel" prefHeight="54.0" prefWidth="92.0" text="create user" />
       <Label fx:id="errorLabel" layoutX="322.0" layoutY="339.0" prefHeight="26.0" prefWidth="247.0" />
-      <Button layoutX="98.0" layoutY="34.0" mnemonicParsing="false"  onAction="#back" prefHeight="26.0" prefWidth="62.0" text="back" />
+      <Button layoutX="98.0" layoutY="34.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="62.0" text="back" />
 
    </children>
 </AnchorPane>

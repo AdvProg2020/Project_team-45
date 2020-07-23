@@ -1,6 +1,8 @@
 package server.controller;
 
+import server.model.Market;
 import server.network.ClientHandler;
+import server.newModel.nedaei.FileProduct;
 
 import java.io.*;
 import java.net.Socket;
@@ -16,9 +18,10 @@ public class P2PController {
     private P2PController() {
     }
 
-    private boolean tellSellerSendFile(String fileInfoForServer, String p2pIP, int p2pPort) {
-        String sellerUserName = ""; // TODO nedaeai : get sellerUsername from fileInfoForServer
-        String message = ""; // TODO nedaeai : make message for seller P2PSocket to send file // not contain "%, &"
+    private boolean tellSellerSendFile(String fileId, String p2pIP, int p2pPort) {
+        FileProduct fileProduct = (FileProduct) Market.getInstance().getProductById(fileId);
+        String sellerUserName = fileProduct.getSellerUserName(); // TODO nedaeai : get sellerUsername from fileInfoForServer
+        String message = fileProduct.getPathInClient(); // TODO nedaeai : make message for seller P2PSocket to send file // not contain "%, &"
         ClientHandler sellerHandler = ServerManager.getInstance().findUserClientHandlerByUsername(sellerUserName);
         if (sellerHandler == null) {
             return false;

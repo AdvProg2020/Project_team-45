@@ -24,16 +24,11 @@ public class ClientHandler extends Thread {
     private String lastCommand;
     private String loggedInUsername;
 
-    private final ServerSecurityGate securityGate;
-
     public ClientHandler(int token, DataInputStream clientInputStream, DataOutputStream clientOutputStream) {
         this.token = token;
         this.clientInputStream = clientInputStream;
         this.clientOutputStream = clientOutputStream;
         isConnected = true;
-
-        securityGate = new ServerSecurityGate();
-        securityGate.exchangeKeys(clientInputStream, clientOutputStream);
 
         try {
             clientOutputStream.writeUTF(String.valueOf(token));

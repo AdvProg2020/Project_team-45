@@ -44,7 +44,7 @@ public class ClientSocket extends Thread {
             }
             // check if json is an exception
             // TODO
-        } catch (IOException exception) {
+        } catch (IOException | InterruptedException exception) {
             exception.printStackTrace();
         }
         return Json;

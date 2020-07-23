@@ -36,6 +36,7 @@ public class ClientMain extends Application {
     public static void main(String[] args) {
 //        Market.getInstance().initialize();
 
+
         launch(args);
 //        try {
 //            ClientSocket.getInstance().connectToServer();

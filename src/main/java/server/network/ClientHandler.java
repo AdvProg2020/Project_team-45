@@ -17,6 +17,10 @@ public class ClientHandler extends Thread {
     private final boolean isConnected;
     private final Object lock = new Object();
 
+    private String p2pIP;
+    private int p2pPORT;
+
+
     private String lastCommand;
     private String loggedInUsername;
 
@@ -34,6 +38,11 @@ public class ClientHandler extends Thread {
         try {
             clientOutputStream.writeUTF(String.valueOf(token));
             clientOutputStream.flush();
+
+            p2pIP = clientInputStream.readUTF();
+            p2pPORT = Integer.parseInt(clientInputStream.readUTF());
+            ServerManager.getInstance().addClient(this);
+
         } catch (IOException exception) {
             exception.printStackTrace();
         }
@@ -48,15 +57,16 @@ public class ClientHandler extends Thread {
                     clientMessage = clientInputStream.readUTF();
                     lastCommand = getInputReady(clientMessage);
                     ////////////////////////////////////////////////////
-                    ServerManager.getInstance().addClient(this);
+                    ServerManager.getInstance().addClientRequest(this);
                     lock.wait();
                 } catch (SocketException socketException) {
                     System.out.println("client disconnected.");
+                    ServerManager.getInstance().removeClient(this);
                     break;
                 } catch (IOException | InterruptedException exception) {
                     exception.printStackTrace();
                 } catch (WrongTokenException e) {
-                    System.err.println("token mismatch. client with token : " + token);
+                    System.err.println("token mismatch. clientHandler with token : " + token);
                 }
             }
         }
@@ -103,6 +113,23 @@ public class ClientHandler extends Thread {
     public void setLoggedInUsername(String loggedInUsername) {
         this.loggedInUsername = loggedInUsername;
     }
+
+    public int getP2pPORT() {
+        return p2pPORT;
+    }
+
+    public String getP2pIP() {
+        return p2pIP;
+    }
+
+    //    public void sendP2PConnectionInfo () {
+//        try {
+//            Socket clientP2PSocket = new Socket(p2pIP, p2pPORT);
+//
+//        } catch (IOException exception) {
+//            exception.printStackTrace();
+//        }
+//    }
 }
 
 class WrongTokenException extends Exception {

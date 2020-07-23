@@ -13,6 +13,8 @@ public class ServerManager extends Thread {
         return instance;
     }
 
+    private final ArrayList<ClientHandler> activeClients = new ArrayList<>();
+
     private ServerManager() {
     }
 
@@ -57,10 +59,37 @@ public class ServerManager extends Thread {
         // TODO : activeProduct , ...
     }
 
-    public void addClient(ClientHandler client) {
+    public void addClientRequest(ClientHandler requester) {
         synchronized (lock) {
-            clientsQueue.add(client);
+            clientsQueue.add(requester);
             lock.notify();
         }
     }
+
+    public void addClient(ClientHandler client) {
+        activeClients.add(client);
+    }
+
+    public void removeClient(ClientHandler client) {
+        activeClients.remove(client);
+    }
+
+    public ClientHandler findUserClientHandlerByUsername(String username) {
+        for (ClientHandler activeClient : activeClients) {
+            if (activeClient.getLoggedInUsername().equals(username))
+                return activeClient;
+        }
+        return null;
+    }
+
+    public ArrayList<String> getOnlineUsernames() {
+        ArrayList<String> usernames = new ArrayList<>();
+        for (ClientHandler activeClient : activeClients) {
+            String username = activeClient.getLoggedInUsername();
+            if (username != null && !usernames.contains(username))
+                usernames.add(activeClient.getLoggedInUsername());
+        }
+        return usernames;
+    }
+
 }

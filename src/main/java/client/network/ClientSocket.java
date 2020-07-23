@@ -7,6 +7,7 @@ public class ClientSocket {
     public static final int PORT = 8891;
     public static final String IP = "127.0.0.1";
 
+    private final P2PSocket p2pSocket = new P2PSocket();
     private static final ClientSocket instance = new ClientSocket();
 
     private int token;
@@ -50,13 +51,22 @@ public class ClientSocket {
 
     public void connectToServer() throws IOException {
         Socket socket = new Socket(IP, PORT);
-//        System.out.println("hi");
         inputStream = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
         outputStream = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 
         securityGate.exchangeKeys(inputStream, outputStream);
 
         token = Integer.parseInt(inputStream.readUTF());
+
+        outputStream.writeUTF(p2pSocket.IP);
+        outputStream.flush();
+        outputStream.writeUTF(String.valueOf(p2pSocket.PORT));
+        outputStream.flush();
+
+        p2pSocket.start();
     }
 
+    public P2PSocket getP2pSocket() {
+        return p2pSocket;
+    }
 }

@@ -6,7 +6,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="client.newViewBagheri.ChatWhitSupporterMenu"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="client.newViewBagheri.ChatWhitSupporterMenu"
+            prefHeight="600.0" prefWidth="1000.0">
+    <left>
+        <VBox>
+            <Label text="Online Supporter:"/>
+            <ScrollPane>
+                <VBox fx:id="onlineSupporterListBox" />
+            </ScrollPane>
+        </VBox>
+    </left>
+    <right>
+        <BorderPane fx:id="chatPane">
+            <top>
+                <Label text="Chat:" />
+            </top>
+            <center>
+                <ScrollPane prefHeight="281.0" prefWidth="450.0" BorderPane.alignment="CENTER">
+                    <content>
+                        <VBox fx:id="allMassagesBox" prefHeight="200.0" prefWidth="100.0"/>
+                    </content>
+                </ScrollPane>
+            </center>
+            <bottom>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <center>
+                        <ScrollPane prefHeight="110.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                            <TextArea fx:id="newMassageTextArea"/>
+                        </ScrollPane>
+                    </center>
+                    <bottom>
+                        <AnchorPane prefHeight="45.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <Button layoutX="870.0" layoutY="10.0" mnemonicParsing="false" text="Send"
+                                        onAction="#sendNewMassage"/>
+                            </children>
+                        </AnchorPane>
+                    </bottom>
+                </BorderPane>
+            </bottom>
+        </BorderPane>
+    </right>
+</BorderPane>

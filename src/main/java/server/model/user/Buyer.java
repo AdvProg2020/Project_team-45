@@ -12,6 +12,7 @@ import server.model.product.Product;
 import server.model.product.ProductSellInfo;
 import server.model.product.Rate;
 import server.newModel.bagheri.Auction;
+import server.newModel.bagheri.ChatRoom;
 import server.newModel.bagheri.wallet.BuyerWallet;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class Buyer extends User implements CartHolder, Savable {
     private HashMap<String, Rate> purchasedProducts; // productIds and rates
     private BuyerWallet wallet;
     private HashMap<Auction, Integer> allAuctions;
+    private ChatRoom activeChat;
 
     public Buyer(PersonalInfo personalInfo) {
         super(personalInfo);
@@ -217,5 +219,13 @@ public class Buyer extends User implements CartHolder, Savable {
 
     public BuyerWallet getWallet() {
         return wallet;
+    }
+
+    public void setActiveChat(ChatRoom activeChat) {
+        this.activeChat = activeChat;
+    }
+
+    public ChatRoom getActiveChat() {
+        return activeChat;
     }
 }

@@ -3,7 +3,6 @@ package client.controller;
 
 import client.network.MethodStringer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,7 +44,7 @@ public class AuctionController {
         }
     }
 
-    public void recordProposedPrice(String proposedPrice) throws IOException {
+    public void recordProposedPrice(String proposedPrice) throws Exception {
         try {
             MethodStringer.sampleMethod(getClass(), "recordProposedPrice", proposedPrice);
         } catch (Throwable throwable) {

@@ -3,7 +3,6 @@ package client.controller.userControllers;
 import client.network.MethodStringer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class SupporterController {
     private static final SupporterController instance = new SupporterController();
@@ -15,7 +14,7 @@ public class SupporterController {
         return instance;
     }
 
-    public ArrayList<ArrayList<String>> getActiveUserAllActiveChats() {
+    public ArrayList<ArrayList<String>> getActiveSupporterAllActiveChats() {
         try {
             return (ArrayList<ArrayList<String>>) MethodStringer.sampleMethod(getClass(),
                     "getSellerCompany");
@@ -25,5 +24,19 @@ public class SupporterController {
         }
     }
 
+    public ArrayList<String> getOnlineSupporter() {
+        return null;
+    }
 
+    public void startNewChatForActiveUser(String Username) {
+
+    }
+
+    public void addMassageForBuyer(String massageText) {
+
+    }
+
+    public void addMassageForSupporter() {
+
+    }
 }

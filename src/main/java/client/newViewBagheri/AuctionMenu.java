@@ -61,5 +61,6 @@ public class AuctionMenu {
 
     public void sendNewMassage() {
         auctionController.addMassageToActiveAuction(newMassageTextArea.getText());
+        addMassagesToChat();
     }
 }

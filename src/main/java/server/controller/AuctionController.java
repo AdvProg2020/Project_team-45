@@ -9,7 +9,6 @@ import server.model.user.User;
 import server.newModel.bagheri.Auction;
 import server.newModel.bagheri.Massage;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,20 +47,20 @@ public class AuctionController {
         return activeAuction.getSuggestedPrices().get(UserController.getActiveUser()) != null;
     }
 
-    public void recordProposedPrice(String proposedPriceText) throws IOException {
+    public void recordProposedPrice(String proposedPriceText) throws Exception {
         if (!activeAuction.isAvailable())
-            throw new IOException("The auction is over!");
+            throw new Exception("The auction is over!");
         Buyer activeBuyer = (Buyer) UserController.getActiveUser();
         int proposedPrice = Integer.parseInt(proposedPriceText);
         int usableBalance = activeBuyer.getWallet().getUsableBalance();
         Integer previousPrice = activeAuction.getSuggestedPrices().get(activeBuyer);
         if ((previousPrice == null && proposedPrice > usableBalance) ||
                 (previousPrice != null && proposedPrice - previousPrice > usableBalance))
-            throw new IOException("The wallet balance is not good!");
+            throw new Exception("The wallet balance is not good!");
         if (proposedPrice < activeAuction.getBasePrice())
-            throw new IOException("The bid price is lower than the base price!");
+            throw new Exception("The bid price is lower than the base price!");
         if (previousPrice != null && proposedPrice < previousPrice)
-            throw new IOException("The bid price is lower than the previous bid price!");
+            throw new Exception("The bid price is lower than the previous bid price!");
         activeAuction.addSuggestedPrice(activeBuyer, proposedPrice);
         activeBuyer.addAuction(activeAuction, proposedPrice);
     }

@@ -25,7 +25,7 @@ public class SupporterChatsMenu {
     }
 
     public void addAllActiveChats() {
-        for (ArrayList<String> chat : supporterController.getActiveUserAllActiveChats()) {
+        for (ArrayList<String> chat : supporterController.getActiveSupporterAllActiveChats()) {
             allChatsTabPain.getTabs().add(creatChatTab(chat));
         }
     }

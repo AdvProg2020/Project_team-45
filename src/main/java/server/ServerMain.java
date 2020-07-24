@@ -19,6 +19,7 @@ public class ServerMain {
             Market.getInstance().initializeBankVariables();
         } catch (IOException exception) {
             System.err.println("error in running socket");
+        }
         // connect to bank ...
         ServerEntranceSocket.getInstance().start();
 

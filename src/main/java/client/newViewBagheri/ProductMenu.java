@@ -137,11 +137,12 @@ public class ProductMenu implements Initializable {
     }
 
     private void addCommentsList() {
-        for (HashMap<String, String> commentFields : productController.getActiveProductCommentsList()) {
+        ArrayList list = productController.getActiveProductCommentsList();
+        for (Object commentFields : list) {
             BorderPane commentPane = new BorderPane();
-            Text titleText = new Text(commentFields.get("title"));
+            Text titleText = new Text(new HashMap<String, String>((LinkedTreeMap)commentFields).get("title"));
             commentPane.setTop(titleText);
-            Text contentText = new Text(commentFields.get("content"));
+            Text contentText = new Text(new HashMap<String, String>((LinkedTreeMap)commentFields).get("content"));
             commentPane.setCenter(contentText);
             commentsList.getChildren().add(commentPane);
         }
@@ -156,8 +157,9 @@ public class ProductMenu implements Initializable {
 
     private void addSimilarProductsList() {
         int i = 0;
-        for (HashMap<String, String> similarProductInfo : productController.getActiveProductSimilarProducts()) {
-            SimilarProductsListPain.add(createProductInfoVBox(similarProductInfo), i % 5, i / 5);
+        ArrayList similarProducts = productController.getActiveProductSimilarProducts();
+        for (Object similarProductInfo : similarProducts) {
+            SimilarProductsListPain.add(createProductInfoVBox(new HashMap<String, String>((LinkedTreeMap)similarProductInfo)), i % 5, i / 5);
             i++;
         }
     }

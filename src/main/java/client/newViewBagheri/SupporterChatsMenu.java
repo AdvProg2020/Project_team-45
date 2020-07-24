@@ -16,7 +16,7 @@ public class SupporterChatsMenu {
     private HashMap<String, Tab> allTabsList;
     private HashMap<String, VBox> allVBoxMassagesList;
 
-    private SupporterChatsMenu() {
+    public SupporterChatsMenu() {
     }
 
     public static String getFxmlFilePath() {

@@ -6,8 +6,8 @@
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="client.newViewBagheri.AuctionsMenu" prefHeight="600.0" prefWidth="1000.0">
     <center>
-    <ScrollPane prefHeight="600.0" prefWidth="1000.0">
-        <GridPane fx:id="productsListPain" prefWidth="980.0"/>
-    </ScrollPane>
+        <ScrollPane prefHeight="600.0" prefWidth="1000.0">
+            <GridPane fx:id="productsListPain" prefWidth="980.0"/>
+        </ScrollPane>
     </center>
 </BorderPane>

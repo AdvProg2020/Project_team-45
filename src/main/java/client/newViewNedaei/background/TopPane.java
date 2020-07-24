@@ -6,6 +6,7 @@ import client.controller.userControllers.UserController;
 import client.newViewBagheri.AuctionsMenu;
 import client.newViewBagheri.OffMenu;
 import client.newViewBagheri.ProductsMenu;
+import client.newViewBagheri.SupporterMenu;
 import client.newViewHatami.AdminMenu;
 import client.newViewHatami.LoginRegisterMenu;
 import client.newViewNedaei.MainMenu;
@@ -76,6 +77,9 @@ public class TopPane {
                     break;
                 case "buyer":
                     MenuController.getInstance().goToMenu(BuyerMenu.getFxmlFilePath());
+                    break;
+                case "supporter":
+                    MenuController.getInstance().goToMenu(SupporterMenu.getFxmlFilePath());
                     break;
             }
         }

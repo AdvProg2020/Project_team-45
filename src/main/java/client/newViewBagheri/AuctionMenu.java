@@ -62,11 +62,13 @@ public class AuctionMenu {
     
     private void addMassagesToChat() {
         ArrayList<String> allMassages = auctionController.getActiveAuctionAllMassages();
-        int size = allMassages.size();
-        for (String massage : allMassages.subList(massageNumber, size)) {
-            allMassagesBox.getChildren().add(new Text(massage));
+        if (allMassages != null && allMassages.size() != 0) {
+            int size = allMassages.size();
+            for (String massage : allMassages.subList(massageNumber, size)) {
+                allMassagesBox.getChildren().add(new Text(massage));
+            }
+            massageNumber = size;
         }
-        massageNumber = size;
     }
 
     public void goToParticipateAuctionPanel() {

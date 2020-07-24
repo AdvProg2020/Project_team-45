@@ -7,10 +7,12 @@ import client.newViewNedaei.user.buyer.discounts.DiscountCodesPanel;
 import client.newViewNedaei.user.buyer.orders.OrdersManagingMenu;
 import client.newViewNedaei.user.buyer.purchase.ReceiveInfoPanel;
 import client.controller.userControllers.BuyerController;
+import client.controller.BankController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -18,9 +20,11 @@ import java.io.IOException;
 
 // nedaei: turned to new format successfully!
 public class BuyerMenu {
-    public ValidatorField balance;
+    public Label balance;
     public Label error;
     public AnchorPane mainPane;
+    public ValidatorField charge;
+    public Label accountBalance;
 
     public static String getFxmlFilePath() {
         return "/BuyerMenu.fxml";
@@ -33,10 +37,15 @@ public class BuyerMenu {
             pane.setTranslateX(0);
             pane.setTranslateY(0);
             mainPane.getChildren().add(pane);
-            balance.setPromptText("" + BuyerController.getInstance().getBuyerBalance());
+            updateWalletAndAccount();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateWalletAndAccount() {
+        balance.setText("" + BuyerController.getInstance().getBuyerBalance());
+        accountBalance.setText("" + BuyerController.getInstance().getBuyerAccountBalance());
     }
 
     public void viewOrders() {
@@ -55,13 +64,18 @@ public class BuyerMenu {
         ((Validator) keyEvent.getSource()).validate();
     }
 
-    public void editBalance() {
-        if (!balance.validate()) {
-            error.setText("invalid balance format");
+
+    public void chargeWallet(MouseEvent mouseEvent) {
+        if (!charge.validate()) {
+            error.setText("invalid charge format");
             return;
         }
-        balance.setPromptText(balance.getText());
-        BuyerController.getInstance().setBuyerBalance(Integer.parseInt(balance.getText()));
-        error.setText("");
+        try {
+            BankController.getInstance().chargeWallet(Integer.parseInt(charge.getText()));
+            updateWalletAndAccount();
+            error.setText("");
+        } catch (Throwable e) {
+            error.setText(e.getMessage());
+        }
     }
 }

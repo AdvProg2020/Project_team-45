@@ -32,6 +32,15 @@ public class SellerController extends UserController {
         }
     }
 
+    public Integer getSellerAccountBalance() {
+        try {
+            return (Integer) MethodStringer.sampleMethod(getClass(), "getSellerAccountBalance");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
     // used in sales history panel
 
     public ArrayList<HashMap<String, String>> getSellerSellLogs() {

@@ -20,6 +20,7 @@ public class Log extends IdRecognized implements Savable {
     private String address;
     private String phoneNumber;
     private String deliveryStatus;
+    private String purchaseMode;
 
 
     public Log(ArrayList<ProductSellInfo> sellingProducts, String buyerUsername, String address, String phoneNumber) {
@@ -35,6 +36,14 @@ public class Log extends IdRecognized implements Savable {
 
     public Log(String id) {
         this.id = id;
+    }
+
+    public String getPurchaseMode() {
+        return purchaseMode;
+    }
+
+    public void setPurchaseMode(String purchaseMode) {
+        this.purchaseMode = purchaseMode;
     }
 
     @Override

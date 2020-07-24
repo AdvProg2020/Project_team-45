@@ -14,6 +14,7 @@ public class BuyerWallet extends Wallet{
         return usableBalance;
     }
 
+    //
     public void increaseBalance(int amount) {
         this.balance += amount;
         this.usableBalance += amount;

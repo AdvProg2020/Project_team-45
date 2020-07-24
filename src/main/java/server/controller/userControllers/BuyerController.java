@@ -44,6 +44,10 @@ public class BuyerController extends UserController implements Manager {
         return ((Buyer) UserController.getActiveUser()).getBalance();
     }
 
+    public Integer getBuyerAccountBalance() {
+        return ((Buyer) UserController.getActiveUser()).getAccountBalance();
+    }
+
     public void setBuyerBalance(int balance) {
         ((Buyer) UserController.getActiveUser()).setBalance(balance);
     }
@@ -164,9 +168,10 @@ public class BuyerController extends UserController implements Manager {
         return ((Buyer) UserController.getActiveUser()).isDiscountCodeValid(discountCode);
     }
 
-    public void applyDiscountCode(String discountCode) {
+    public void applyDiscountCode(String discountCode, String purchaseMode) {
         CodedDiscount discount = ((Buyer) UserController.getActiveUser()).getDiscountByCode(discountCode);
         log.setAppliedDiscount(discount);
+        log.setPurchaseMode(purchaseMode);
         ((Buyer) UserController.getActiveUser()).removeCodedDiscountFromList(discount);
     }
 
@@ -175,6 +180,11 @@ public class BuyerController extends UserController implements Manager {
     public Boolean canPurchase() {
         return ((Buyer) UserController.getActiveUser()).getCart().getTotalPrice() <=
                 ((Buyer) UserController.getActiveUser()).getBalance();
+    }
+
+    public Boolean canPurchaseByAccount() {
+        return ((Buyer) UserController.getActiveUser()).getCart().getTotalPrice() <=
+                ((Buyer) UserController.getActiveUser()).getAccountBalance();
     }
 
     public void purchase() {

@@ -23,7 +23,7 @@ public class PaymentPanel extends Panel {
     public void initialize() {
         if (!BuyerController.getInstance().canPurchase()) {
             message.setTextFill(Color.RED);
-            message.setText("do not have enough balance!");
+            message.setText("do not have enough wallet balance!");
             return;
         }
         message.setStyle("-fx-background-color: white");

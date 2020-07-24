@@ -57,6 +57,7 @@ public class BankSocket {
     public static String SendMessage(String msg) throws IOException {
         try {
             outputStream.writeUTF(msg);
+            outputStream.flush();
             return inputStream.readUTF();
         } catch (IOException e) {
             throw new IOException("Exception while sending message");

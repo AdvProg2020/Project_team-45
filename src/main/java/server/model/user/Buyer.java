@@ -1,5 +1,6 @@
 package server.model.user;
 
+import client.controller.BankController;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import server.model.CodedDiscount;
@@ -11,9 +12,11 @@ import server.model.log.SellLog;
 import server.model.product.Product;
 import server.model.product.ProductSellInfo;
 import server.model.product.Rate;
+import server.network.BankSocket;
 import server.newModel.bagheri.Auction;
 import server.newModel.bagheri.ChatRoom;
 import server.newModel.bagheri.wallet.BuyerWallet;
+import server.newModel.bagheri.wallet.SellerWallet;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,9 +25,10 @@ import java.util.HashMap;
 public class Buyer extends User implements CartHolder, Savable {
     private Cart cart;
     private ArrayList<CodedDiscount> listOfCodedDiscounts;
-    private int balance;
     private ArrayList<BuyLog> listOfBuyLogs;
     private HashMap<String, Rate> purchasedProducts; // productIds and rates
+    private int accountNumber;
+    private String accountToken;
     private BuyerWallet wallet;
     private HashMap<Auction, Integer> allAuctions;
     private ChatRoom activeChat;
@@ -32,16 +36,37 @@ public class Buyer extends User implements CartHolder, Savable {
     public Buyer(PersonalInfo personalInfo) {
         super(personalInfo);
         this.cart = new Cart();
-        this.balance = 100;
         this.listOfCodedDiscounts = new ArrayList<>();
         this.listOfBuyLogs = new ArrayList<>();
         this.purchasedProducts = new HashMap<>();
+        HashMap<String, Integer> testAccounts = new HashMap<>();
+//        testAccounts.put("b", 59385);
+        if (testAccounts.containsKey(personalInfo.getUsername())) {
+            accountNumber = testAccounts.get(personalInfo.getUsername());
+        } else {
+            accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());
+            System.out.println(personalInfo.getUsername() + ": " + accountNumber);
+        }
+        accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
+        BankSocket.payReceipt(BankSocket.createDepositReceipt(accountToken, 1000, accountNumber));
         this.wallet = new BuyerWallet(this);
     }
 
     public Buyer(String id) {
         super(id);
         this.cart = new Cart();
+    }
+
+    public int getAccountBalance() {
+        return BankSocket.getBalance(accountToken);
+    }
+
+    public void chargeWallet(int amount) throws Throwable {
+        if (getAccountBalance() < amount) {
+            throw new Throwable("not enough account balance");
+        }
+        BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, amount, accountNumber));
+        wallet.increaseBalance(amount);
     }
 
     public Cart getCart() {
@@ -58,11 +83,11 @@ public class Buyer extends User implements CartHolder, Savable {
     }
 
     public int getBalance() {
-        return balance;
+        return wallet.getBalance();
     }
 
     public void setBalance(int balance) {
-        this.balance = balance;
+        wallet.setBalance(balance);
     }
 
     public ArrayList<BuyLog> getListOfBuyLogs() {
@@ -117,14 +142,24 @@ public class Buyer extends User implements CartHolder, Savable {
             Seller seller = sellInfo.getSeller();
             SellLog sellLog = new SellLog(log, seller);
             seller.getListOfSellLogs().add(sellLog);
-            seller.setBalance(seller.getBalance() + sellLog.getIncome());
+            seller.setBalance(seller.getBalance() + (sellLog.getIncome() * (100 - Market.getInstance().getMarketPercentage()))/100);
+            Market.getInstance().depositAccount(sellLog.getIncome()*Market.getInstance().getMarketPercentage()/100);
             sellInfo.setStock(sellInfo.getStock() - cart.getProductAmountById(sellInfo.getId()));
         }
         BuyLog buyLog = new BuyLog(log);
         listOfBuyLogs.add(buyLog);
+
         log.calculateFinalPrice();
-        setBalance(getBalance() - log.getFinalPrice());
+        if (log.getPurchaseMode().equals("wallet")) {
+            setBalance(getBalance() - log.getFinalPrice());
+        } if (log.getPurchaseMode().equals("account")) {
+            withdrawAccount(log.getFinalPrice());
+        }
         cart = new Cart();
+    }
+
+    private void withdrawAccount(int finalPrice) {
+        BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, finalPrice, accountNumber));
     }
 
     public boolean canBuy() {
@@ -157,7 +192,7 @@ public class Buyer extends User implements CartHolder, Savable {
         }
         result.put("listOfCodedDiscounts", (new Gson()).toJson(discounts));
 
-        result.put("balance", "" + balance);
+        result.put("balance", "" + wallet.getBalance());
 
         ArrayList<HashMap<String, String>> buyLogs = new ArrayList<>();
         for (BuyLog buyLog : listOfBuyLogs) {
@@ -172,6 +207,8 @@ public class Buyer extends User implements CartHolder, Savable {
         }
         result.put("purchasedProducts", (new Gson()).toJson(products));
 
+        result.put("accountNumber", "" + accountNumber);
+        result.put("accountToken", accountToken);
         return result;
     }
 
@@ -185,7 +222,8 @@ public class Buyer extends User implements CartHolder, Savable {
             listOfCodedDiscounts.add(Market.getInstance().getCodedDiscountById(id));
         }
 
-        balance = Integer.parseInt((new Gson()).fromJson(theMap.get("balance"), String.class));
+        wallet = new BuyerWallet(this);
+        wallet.setBalance(Integer.parseInt((new Gson()).fromJson(theMap.get("balance"), String.class)));
 
         ArrayList<HashMap<String, String>> buyLogs = (new Gson()).fromJson(theMap.get("listOfBuyLogs"), new TypeToken<ArrayList<HashMap<String, String>>>() {
         }.getType());
@@ -202,6 +240,9 @@ public class Buyer extends User implements CartHolder, Savable {
         for (String productId : products.keySet()) {
             purchasedProducts.put(productId, Market.getInstance().getRateById(products.get(productId)));
         }
+
+        accountNumber = Integer.parseInt(theMap.get("accountNumber"));
+        accountToken = theMap.get("accountToken");
     }
 
     public void addAuction(Auction auction, int proposedPrice) {

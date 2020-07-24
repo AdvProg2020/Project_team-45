@@ -51,8 +51,10 @@ public class ClientMain extends Application {
 //        }
     }
 
-
-
+    @Override
+    public void stop() throws Exception {
+        ClientSocket.getInstance().closeSocket();
+    }
 
     private static void getFirstAdmin() {
         MenuController.getInstance().goToPanel(CreateAdminPanel.getFxmlFilePath());

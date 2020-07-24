@@ -19,6 +19,7 @@ public class ClientSocket extends Thread {
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
     private boolean isConnected;
+    private boolean isRunning;
 
     private final ClientSecurityGate securityGate;
     private final Object inputLock = new Object();
@@ -84,7 +85,8 @@ public class ClientSocket extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        isRunning = true;
+        while (isRunning) {
             try {
                 String serverMessage = inputStream.readUTF();
                 if (serverMessage.startsWith("%%update%%")) {
@@ -96,8 +98,17 @@ public class ClientSocket extends Thread {
                     }
                 }
             } catch (IOException exception) {
-                exception.printStackTrace();
+                System.err.println(exception.getMessage());
             }
         }
+    }
+
+    public void closeSocket() throws IOException {
+        isRunning = false;
+        try {
+            inputStream.close();
+        } catch (IOException ignored) {
+        }
+        p2pSocket.closeSocket();
     }
 }

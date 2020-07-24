@@ -4,6 +4,7 @@ import server.controller.ServerManager;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.IOException;
 import java.net.SocketException;
 import java.util.regex.Matcher;
@@ -53,7 +54,7 @@ public class ClientHandler extends Thread {
                     ////////////////////////////////////////////////////
                     ServerManager.getInstance().addClientRequest(this);
                     lock.wait();
-                } catch (SocketException socketException) {
+                } catch (SocketException | EOFException socketException) {
                     System.out.println("client disconnected.");
                     ServerManager.getInstance().removeClient(this);
                     break;

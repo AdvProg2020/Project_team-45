@@ -10,6 +10,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
@@ -25,6 +26,7 @@ public class P2PSocket extends Thread {
     private PrivateKey privateKey;
     private SecretKey secretKey;
     private String initializationVector;
+    private boolean isRunning;
 
     public P2PSocket() {
         try {
@@ -42,7 +44,8 @@ public class P2PSocket extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        isRunning = true;
+        while (isRunning) {
             try {
                 Socket clientSocket = serverSocket.accept();
                 DataInputStream dataInputStream =
@@ -63,6 +66,8 @@ public class P2PSocket extends Thread {
                     connectToSeller(clientSocket);
                 }
 
+            } catch (SocketException exception) {
+                System.out.println("p2pSocket Died");
             } catch (IOException exception) {
                 exception.printStackTrace();
             }
@@ -217,4 +222,8 @@ public class P2PSocket extends Thread {
         return IP;
     }
 
+    public void closeSocket() throws IOException {
+        isRunning = false;
+        serverSocket.close();
+    }
 }

@@ -3,6 +3,7 @@ package client.newViewBagheri;
 import client.controller.AuctionController;
 import client.controller.ProductController;
 import client.newViewNedaei.MenuController;
+import com.google.gson.internal.LinkedTreeMap;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -31,10 +32,10 @@ public class AuctionsMenu {
     }
 
     private void showProducts() {
-        ArrayList<HashMap<String, String>> productInfosList = auctionController.getAuctionInfosList();
+        ArrayList productInfosList = auctionController.getAuctionInfosList();
         int i = 0;
-        for (HashMap<String, String> productInfo : productInfosList) {
-            productsListPain.add(createProductInfoVBox(productInfo), i % 5, i / 5);
+        for (Object productInfo : productInfosList) {
+            productsListPain.add(createProductInfoVBox(new HashMap<String, String>((LinkedTreeMap) productInfo)), i % 5, i / 5);
             i++;
         }
     }

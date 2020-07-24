@@ -258,7 +258,7 @@ public class CategoryController {
     public ArrayList<String> getCategorySpecialFeatures(String categoryId) {
         try {
             return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
-                    "getCategorySpecialFeatures");
+                    "getCategorySpecialFeatures", categoryId);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;

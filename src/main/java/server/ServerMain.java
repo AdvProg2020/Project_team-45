@@ -41,6 +41,7 @@ public class ServerMain {
     private static void endServer() {
         ServerManager.getInstance().setRunning(false);
         ServerEntranceSocket.getInstance().stopSocket(false);
+        BankSocket.exit();
         // TODO : nedaeai : save to database
         DatabaseController.getInstance().writeToDatabase();
     }

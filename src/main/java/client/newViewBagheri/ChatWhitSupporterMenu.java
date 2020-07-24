@@ -8,6 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
+
 public class ChatWhitSupporterMenu {
     private final SupporterController supporterController = SupporterController.getInstance();
     public VBox onlineSupporterListBox;
@@ -47,5 +49,9 @@ public class ChatWhitSupporterMenu {
 
     private void addMassageToChat(String massage) {
         allMassagesBox.getChildren().add(new Text(massage));
+    }
+
+    private void updateChat() {
+        ArrayList<String> messages = SupporterController.getInstance().getMessages();
     }
 }

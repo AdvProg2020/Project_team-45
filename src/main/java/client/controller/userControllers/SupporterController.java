@@ -58,4 +58,14 @@ public class SupporterController {
             throwable.printStackTrace();
         }
     }
+
+    public ArrayList<String> getMessages() {
+        try {
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
+                    "getMessages");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
 }

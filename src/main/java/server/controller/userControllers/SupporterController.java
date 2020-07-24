@@ -64,6 +64,10 @@ public class SupporterController extends UserController implements Manager {
         //TODO: update Buyer
     }
 
+    public ArrayList<String> getMessages() {
+        return ((Buyer) UserController.getActiveUser()).getActiveChat().getAllMassagesText();
+    }
+
     @Override
     public Object getItemById(String Id) {
         return null;

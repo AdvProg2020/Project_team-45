@@ -90,7 +90,7 @@ public class AuctionController {
         try {
             Auction newAuction = new Auction(productSellInfo,
                     (new SimpleDateFormat("yyyy/MM/dd")).parse(auctionInfo.get("endDate")),
-                    Integer.parseInt(auctionInfo.get("basePrise")));
+                    Integer.parseInt(auctionInfo.get("basePrice")));
             productSellInfo.setAuction(newAuction);
             market.addAuctionToList(newAuction);
         } catch (ParseException parseException) {

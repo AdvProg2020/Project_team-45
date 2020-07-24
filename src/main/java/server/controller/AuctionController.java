@@ -1,14 +1,17 @@
 package server.controller;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import server.controller.userControllers.UserController;
 import server.model.Market;
+import server.model.product.Product;
+import server.model.product.ProductSellInfo;
 import server.model.user.Buyer;
 import server.model.user.User;
 import server.newModel.bagheri.Auction;
 import server.newModel.bagheri.Massage;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,17 +30,18 @@ public class AuctionController {
     }
 
     public void setActiveAuctionById(String auctionId) {
-//        activeAuction = market.getAuctionById(auctionId);
+        activeAuction = market.getAuctionById(auctionId);
     }
 
     public ArrayList<HashMap<String, String>> getAuctionInfosList() {
-//        ArrayList<HashMap<String, String>> auctionInfosList = new ArrayList<>();
-////        for (Auction auction : market.getAllAuction()) {
-//            if (auction.isAvailable())
-//                auctionInfosList.add(auction.getAuctionInfo());
-//        }
-//        return auctionInfosList;
-        return null;
+        ArrayList<HashMap<String, String>> auctionInfosList = new ArrayList<>();
+        for (Auction auction : market.getAllAuction()) {
+            if (auction.isAvailable())
+                auctionInfosList.add(auction.getAuctionInfo());
+            else if (!auction.isCompletePurchase())
+                CompletingPurchase(auction);
+        }
+        return auctionInfosList;
     }
 
     public boolean hasActiveUserParticipatedInActiveAuction() {
@@ -81,9 +85,29 @@ public class AuctionController {
     }
 
     public void createAuction(HashMap<String, String> auctionInfo) {
-        auctionInfo.get("productId");
-        auctionInfo.get("endDate");
-        auctionInfo.get("basePrise");
-        // TODO: Bagheri
+        Product product = market.getProductById(auctionInfo.get("productId"));
+        ProductSellInfo productSellInfo = product.getSellersList().get(UserController.getActiveUser());
+        try {
+            Auction newAuction = new Auction(productSellInfo,
+                    (new SimpleDateFormat("yyyy/MM/dd")).parse(auctionInfo.get("endDate")),
+                    Integer.parseInt(auctionInfo.get("basePrise")));
+            productSellInfo.setAuction(newAuction);
+            market.addAuctionToList(newAuction);
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
+        }
+    }
+
+    private void CompletingPurchase(Auction auction) {
+        Buyer winner = auction.getWinner();
+        if (winner != null) {
+            int finalPrice = auction.getHighestDidPrice();
+            for (Buyer buyer : auction.getSuggestedPrices().keySet()) {
+                buyer.getWallet().changeUsableBalance(finalPrice);
+            }
+            // TODO: buy
+            //winner.getWallet().increaseBalance(finalPrice);
+        }
+        auction.completingPurchase();
     }
 }

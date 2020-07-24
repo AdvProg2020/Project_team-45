@@ -17,6 +17,7 @@ public class Auction extends IdRecognized implements Savable {
     private Buyer winner;
     private final HashMap<Buyer, Integer> suggestedPrices;
     private final ChatRoom chatRoom;
+    private boolean CompletePurchase;
 
     public Auction(ProductSellInfo productSellInfo, Date endTime, int basePrice) {
         this.id = "" + IdKeeper.getInstance().getAuctionNewId();
@@ -95,5 +96,13 @@ public class Auction extends IdRecognized implements Savable {
 
     public boolean isAvailable() {
         return endTime.compareTo(new Date()) >= 0;
+    }
+
+    public boolean isCompletePurchase() {
+        return CompletePurchase;
+    }
+
+    public void completingPurchase() {
+        CompletePurchase = true;
     }
 }

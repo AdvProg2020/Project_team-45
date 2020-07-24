@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class ServerManager extends Thread {
     private static final ServerManager instance = new ServerManager();
 
+    private boolean isRunning;
+
     public static ServerManager getInstance() {
         return instance;
     }
@@ -23,7 +25,8 @@ public class ServerManager extends Thread {
 
     @Override
     public void run() {
-        while (true) {
+        isRunning = true;
+        while (isRunning) {
             synchronized (lock) {
                 if (clientsQueue.isEmpty()) {
                     try {
@@ -33,10 +36,11 @@ public class ServerManager extends Thread {
                     }
 
                 }
-                fetchCommand();
+                if (!clientsQueue.isEmpty())
+                    fetchCommand();
             }
         }
-
+        System.out.println("manager done");
     }
 
     private void fetchCommand() {
@@ -92,4 +96,10 @@ public class ServerManager extends Thread {
         return usernames;
     }
 
+    public void setRunning(boolean running) {
+        isRunning = running;
+        synchronized (lock) {
+            lock.notify();
+        }
+    }
 }

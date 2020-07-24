@@ -20,7 +20,6 @@ public class ClientHandler extends Thread {
     private String p2pIP;
     private int p2pPORT;
 
-
     private String lastCommand;
     private String loggedInUsername;
 

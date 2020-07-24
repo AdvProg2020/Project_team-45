@@ -5,8 +5,6 @@ import client.newViewHatami.ValidatorField;
 import client.newViewNedaei.Panel;
 import javafx.scene.control.Label;
 
-import java.io.IOException;
-
 public class ParticipateAuctionPanel extends Panel {
     private final AuctionController auctionController = AuctionController.getInstance();
     public ValidatorField proposedPrice;
@@ -18,12 +16,12 @@ public class ParticipateAuctionPanel extends Panel {
 
     public void submitProposedPrice() {
         if (proposedPrice.validate()) {
-            try {
-                auctionController.recordProposedPrice(proposedPrice.getText());
-                goBack();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+//            try {
+////                auctionController.recordProposedPrice(proposedPrice.getText());
+//                goBack();
+//            } catch (IOException e) {
+//                System.out.println(e.getMessage());
+//            }
         }
     }
 }

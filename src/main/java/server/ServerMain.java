@@ -4,7 +4,7 @@ import server.controller.ServerManager;
 import server.model.Market;
 import server.network.ServerEntranceSocket;
 
-import java.io.IOException;
+import java.util.Scanner;
 
 public class ServerMain {
 
@@ -12,10 +12,26 @@ public class ServerMain {
         Market.getInstance().initialize();
         ServerManager.getInstance().start();
         // connect to bank ...
-        try {
-            new ServerEntranceSocket().run();
-        } catch (IOException exception) {
-            System.err.println("error in running socket");
+        ServerEntranceSocket.getInstance().start();
+
+        waitForExit();
+    }
+
+    private static void waitForExit() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            String input = scanner.nextLine();
+            if (input.equals("exit")) {
+                endServer();
+                break;
+            }
         }
+    }
+
+    private static void endServer() {
+        ServerManager.getInstance().setRunning(false);
+        ServerEntranceSocket.getInstance().stopSocket(false);
+        // TODO : nedaeai : save to database
+
     }
 }

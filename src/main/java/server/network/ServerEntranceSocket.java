@@ -4,18 +4,30 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerEntranceSocket implements Runnable {
+public class ServerEntranceSocket extends Thread {
 
-    public static final int PORT = 8891;
+    private static final ServerEntranceSocket instance = new ServerEntranceSocket();
+
+    public static final int PORT = 6666;
     public static final String IP = "127.0.0.1";
 
+    private static boolean serverRunning;
 
-    private final ServerSocket serverSocket;
+    public static ServerEntranceSocket getInstance() {
+        return instance;
+    }
+
+    private ServerSocket serverSocket;
     private int lastTokenGiven;
 
-    public ServerEntranceSocket() throws IOException {
-        this.serverSocket = new ServerSocket(PORT);
+    private ServerEntranceSocket() {
+        try {
+            this.serverSocket = new ServerSocket(PORT);
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
         this.lastTokenGiven = 1000;
+        serverRunning = true;
     }
 
     public int getNextToken() {
@@ -25,7 +37,7 @@ public class ServerEntranceSocket implements Runnable {
     @Override
     public void run() {
         System.out.println("server is running...");
-        while (true) {
+        while (serverRunning) {
             try {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("a client connected.");
@@ -41,5 +53,15 @@ public class ServerEntranceSocket implements Runnable {
                 System.err.println(exception.getMessage());
             }
         }
+        System.out.println("entrance socket stopped");
+    }
+
+    public void stopSocket(boolean serverRunning) {
+        try {
+            serverSocket.close();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        ServerEntranceSocket.serverRunning = serverRunning;
     }
 }

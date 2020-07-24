@@ -128,6 +128,5 @@ public class TopPane {
 
     private void goToAuctionsMenu() {
         MenuController.getInstance().goToMenu(AuctionsMenu.getFxmlFilePath());
-
     }
 }

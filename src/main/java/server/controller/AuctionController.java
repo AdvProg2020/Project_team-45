@@ -105,8 +105,9 @@ public class AuctionController {
                 buyer.getWallet().changeUsableBalance(finalPrice);
             }
             // TODO: buy
-//            winner.getWallet().increaseBalance(-finalPrice);
-//            auction.getProductSellInfo().getSeller();
+            // todo: nedaei
+            winner.getWallet().increaseBalance(-finalPrice);
+            auction.getProductSellInfo().getSeller().getSellerWallet().increaseBalance(finalPrice);
         }
         auction.completingPurchase();
     }

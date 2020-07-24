@@ -107,8 +107,8 @@ public class BuyerController extends UserController {
         }
     }
 
-    // used in coded discounts panel
 
+    // used in coded discounts panel
     public ArrayList<HashMap<String, String>> getListOfCodedDiscounts() {
         try {
             return (ArrayList<HashMap<String, String>>) MethodStringer.sampleMethod(getClass(), "getListOfCodedDiscounts");
@@ -118,8 +118,8 @@ public class BuyerController extends UserController {
         }
     }
 
-    // used in receive info panel
 
+    // used in receive info panel
     public void createNewLog(HashMap<String, String> fieldsAndValues) {
         try {
             MethodStringer.sampleMethod(getClass(), "createNewLog", fieldsAndValues);
@@ -137,19 +137,27 @@ public class BuyerController extends UserController {
         }
     }
 
-    public void applyDiscountCode(String discountCode) {
+    public void applyDiscountCode(String discountCode, String purchaseMode) {
         try {
-            MethodStringer.sampleMethod(getClass(), "applyDiscountCode", discountCode);
+            MethodStringer.sampleMethod(getClass(), "applyDiscountCode", discountCode, purchaseMode);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
     }
 
     // used in payment panel
-
     public Boolean canPurchase() {
         try {
             return (Boolean) MethodStringer.sampleMethod(getClass(), "canPurchase");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public Boolean canPurchaseByAccount() {
+        try {
+            return (Boolean) MethodStringer.sampleMethod(getClass(), "canPurchaseByAccount");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;
@@ -171,7 +179,6 @@ public class BuyerController extends UserController {
             throwable.printStackTrace();
         }
     }
-
     // todo: nedaei, cart managing menu
 //    public void increaseCartProductById(String productId) {
 //        updateBuyer();
@@ -182,6 +189,7 @@ public class BuyerController extends UserController {
 //    public void decreaseCartProductById(String productId) {
 //        updateBuyer();
 //        Cart cart = buyer.getCart();
+
 //        cart.changeProductAmountById(productId, -1);
 
 //    }

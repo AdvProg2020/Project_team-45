@@ -49,6 +49,10 @@ public class Seller extends User {
         super(id);
     }
 
+    public SellerWallet getSellerWallet() {
+        return sellerWallet;
+    }
+
     public int getAccountBalance() {
         return BankSocket.getBalance(accountToken);
     }

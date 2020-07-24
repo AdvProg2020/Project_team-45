@@ -28,7 +28,7 @@ public class SellLog implements Savable {
     }
 
     private void findMyProductsAndIncome() {
-        this.soldProducts = new ArrayList<ProductSellInfo>();
+        this.soldProducts = new ArrayList<>();
         this.income = 0;
         for (ProductSellInfo sellingProduct : mainLog.getSellingProducts()) {
             if (sellingProduct.getSeller().equals(seller)) {

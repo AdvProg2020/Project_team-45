@@ -16,6 +16,7 @@ import server.network.BankSocket;
 import server.newModel.bagheri.Auction;
 import server.newModel.bagheri.ChatRoom;
 import server.newModel.bagheri.wallet.BuyerWallet;
+import server.newModel.bagheri.wallet.SellerWallet;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -141,14 +142,24 @@ public class Buyer extends User implements CartHolder, Savable {
             Seller seller = sellInfo.getSeller();
             SellLog sellLog = new SellLog(log, seller);
             seller.getListOfSellLogs().add(sellLog);
-            seller.setBalance(seller.getBalance() + sellLog.getIncome());
+            seller.setBalance(seller.getBalance() + (sellLog.getIncome() * (100 - Market.getInstance().getMarketPercentage()))/100);
+            Market.getInstance().depositAccount(sellLog.getIncome()*Market.getInstance().getMarketPercentage()/100);
             sellInfo.setStock(sellInfo.getStock() - cart.getProductAmountById(sellInfo.getId()));
         }
         BuyLog buyLog = new BuyLog(log);
         listOfBuyLogs.add(buyLog);
+
         log.calculateFinalPrice();
-        setBalance(getBalance() - log.getFinalPrice());
+        if (log.getPurchaseMode().equals("wallet")) {
+            setBalance(getBalance() - log.getFinalPrice());
+        } if (log.getPurchaseMode().equals("account")) {
+            withdrawAccount(log.getFinalPrice());
+        }
         cart = new Cart();
+    }
+
+    private void withdrawAccount(int finalPrice) {
+        BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, finalPrice, accountNumber));
     }
 
     public boolean canBuy() {

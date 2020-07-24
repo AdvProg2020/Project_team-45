@@ -435,4 +435,8 @@ public class Market {
     public boolean noAdmin() {
         return allUsers.isEmpty();
     }
+
+    public void depositAccount(int amount) {
+        BankSocket.payReceipt(BankSocket.createDepositReceipt(accountToken, amount, accountNumber));
+    }
 }

@@ -93,6 +93,7 @@ public class AuctionController {
                     Integer.parseInt(auctionInfo.get("basePrice")));
             productSellInfo.setAuction(newAuction);
             market.addAuctionToList(newAuction);
+            System.out.println("///////////////////////////////////////////////////////////");
         } catch (ParseException parseException) {
             parseException.printStackTrace();
         }

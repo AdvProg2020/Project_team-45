@@ -3,6 +3,7 @@ package client.newViewBagheri;
 import client.controller.AuctionController;
 import client.controller.userControllers.SellerController;
 import client.newViewNedaei.Panel;
+import com.google.gson.internal.LinkedTreeMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -27,9 +28,9 @@ public class AddAuctionPanel extends Panel {
     }
 
     private void addProductsToChoiceBox() {
-        ArrayList<HashMap<String, String>> availableProducts = SellerController.getInstance().getAvailableProducts();
-        for (HashMap<String, String> product : availableProducts) {
-            products.getItems().add(product.get("name") + " -> " + product.get("id"));
+        ArrayList availableProducts = SellerController.getInstance().getAvailableProducts();
+        for (Object product : availableProducts) {
+            products.getItems().add(new HashMap<>((LinkedTreeMap)product).get("name") + " -> " + new HashMap<>((LinkedTreeMap)product).get("id"));
         }
     }
 

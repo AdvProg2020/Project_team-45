@@ -1,9 +1,8 @@
 package server.controller.userControllers;
 
-import org.jcp.xml.dsig.internal.dom.DOMXPathFilter2Transform;
+import server.controller.ServerManager;
 import server.controller.managers.Manager;
 import server.model.user.Buyer;
-import server.newModel.bagheri.chatRoom.ChatRoom;
 import server.newModel.bagheri.Massage;
 import server.newModel.bagheri.Supporter;
 import server.newModel.bagheri.chatRoom.DoubleChatRoom;
@@ -13,6 +12,7 @@ import java.util.HashMap;
 
 public class SupporterController extends UserController implements Manager {
     private static final SupporterController instance = new SupporterController();
+    private final ServerManager serverManager = ServerManager.getInstance();
 
     private SupporterController() {
     }
@@ -31,7 +31,10 @@ public class SupporterController extends UserController implements Manager {
 
     public ArrayList<String> getOnlineSupporters() {
         ArrayList<String> onlineSupporters = new ArrayList<>();
-        //TODO: ...
+        for (String username : serverManager.getOnlineUsernames()) {
+            if(market.getUserByUsername(username).getRole().equals("supporter"))
+                onlineSupporters.add(username);
+        }
         return onlineSupporters;
     }
 

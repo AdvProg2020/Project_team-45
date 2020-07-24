@@ -196,6 +196,7 @@ public class ProductsMenu implements Initializable {
     private void changeProductsListPainProductInfos(ArrayList<HashMap<String, String>> productInfosList, int page) {
         productsListPain.getChildren().clear();
         int i = 0;
+        System.out.println(productInfosList.get(0).getClass());
         for (HashMap<String, String> productInfo : productInfosList.subList((page - 1) * 20, Math.min(page * 20, productInfosList.size()))) {
             productsListPain.add(createProductInfoVBox(productInfo), i % 4, i / 4);
             i++;

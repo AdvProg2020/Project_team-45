@@ -140,7 +140,9 @@ public class BankSocket {
 
     public static Integer getBalance(String token) {
         try {
-            return Integer.parseInt(SendMessage("get_balance " + token));
+            String answer = SendMessage("get_balance " + token);
+            System.out.println(token + answer);
+            return Integer.parseInt(answer);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

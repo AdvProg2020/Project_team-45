@@ -56,6 +56,7 @@ public class Buyer extends User implements CartHolder, Savable {
     }
 
     public int getAccountBalance() {
+        accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
         return BankSocket.getBalance(accountToken);
     }
 
@@ -63,6 +64,7 @@ public class Buyer extends User implements CartHolder, Savable {
         if (getAccountBalance() < amount) {
             throw new Exception("not enough account balance");
         }
+        accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
         BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, amount, accountNumber));
         Market.getInstance().depositAccount(amount);
         wallet.increaseBalance(amount);
@@ -178,6 +180,7 @@ public class Buyer extends User implements CartHolder, Savable {
     }
 
     private void withdrawAccount(int finalPrice) {
+        accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
         BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, finalPrice, accountNumber));
     }
 

@@ -36,14 +36,9 @@ public class Seller extends User {
         listOfAuctions = new HashMap<>();
         sellerWallet = new SellerWallet(this);
 
-        HashMap<String, Integer> testAccounts = new HashMap<>();
-//        testAccounts.put("s", 71731);
-        if (testAccounts.containsKey(personalInfo.getUsername())) {
-            accountNumber = testAccounts.get(personalInfo.getUsername());
-        } else {
-            accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());
-            System.out.println(personalInfo.getUsername() + ": " + accountNumber);
-        }
+
+        accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());
+        System.out.println(personalInfo.getUsername() + ": " + accountNumber);
         accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
     }
 
@@ -56,6 +51,8 @@ public class Seller extends User {
     }
 
     public int getAccountBalance() {
+        accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
+        System.out.println(accountToken);
         return BankSocket.getBalance(accountToken);
     }
 
@@ -63,6 +60,7 @@ public class Seller extends User {
         if (getAccountBalance() < amount) {
             throw new Exception("not enough account balance");
         }
+        accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
         BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, amount, accountNumber));
         Market.getInstance().depositAccount(amount);
         sellerWallet.increaseBalance(amount);
@@ -72,6 +70,7 @@ public class Seller extends User {
         if (!sellerWallet.decreaseBalance(amount)) {
             throw new Exception("not enough wallet balance");
         }
+        accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
         BankSocket.payReceipt(BankSocket.createDepositReceipt(accountToken, amount, accountNumber));
         Market.getInstance().withdrawAccount(amount);
     }

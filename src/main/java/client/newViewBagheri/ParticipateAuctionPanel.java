@@ -16,12 +16,12 @@ public class ParticipateAuctionPanel extends Panel {
 
     public void submitProposedPrice() {
         if (proposedPrice.validate()) {
-//            try {
-////                auctionController.recordProposedPrice(proposedPrice.getText());
-//                goBack();
-//            } catch (IOException e) {
-//                System.out.println(e.getMessage());
-//            }
+            try {
+                auctionController.recordProposedPrice(proposedPrice.getText());
+                goBack();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

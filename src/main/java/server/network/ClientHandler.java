@@ -1,6 +1,12 @@
 package server.network;
 
 import server.controller.ServerManager;
+import server.model.CodedDiscount;
+import server.model.Off;
+import server.model.category.Category;
+import server.model.product.Product;
+import server.model.product.ProductSellInfo;
+import server.newModel.bagheri.Auction;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -23,6 +29,14 @@ public class ClientHandler extends Thread {
 
     private String lastCommand;
     private String loggedInUsername;
+    private Auction activeAuction;
+    private Category activeCategory;
+    private boolean isOffMenu;
+    private CodedDiscount currentDiscount;
+    private Off currentOff;
+    private Product activeProduct;
+    private ProductSellInfo activeProductSelInfo;
+    private String activeSort;
 
     public ClientHandler(int token, DataInputStream clientInputStream, DataOutputStream clientOutputStream) {
         this.token = token;
@@ -125,6 +139,71 @@ public class ClientHandler extends Thread {
 //            exception.printStackTrace();
 //        }
 //    }
+
+
+    public Auction getActiveAuction() {
+        return activeAuction;
+    }
+
+    public void setActiveAuction(Auction activeAuction) {
+        this.activeAuction = activeAuction;
+    }
+
+    public Category getActiveCategory() {
+        return activeCategory;
+    }
+
+    public void setActiveCategory(Category activeCategory) {
+        this.activeCategory = activeCategory;
+    }
+
+    public boolean isOffMenu() {
+        return isOffMenu;
+    }
+
+    public void setOffMenu(boolean offMenu) {
+        isOffMenu = offMenu;
+    }
+
+    public CodedDiscount getCurrentDiscount() {
+        return currentDiscount;
+    }
+
+    public void setCurrentDiscount(CodedDiscount currentDiscount) {
+        this.currentDiscount = currentDiscount;
+    }
+
+    public Off getCurrentOff() {
+        return currentOff;
+    }
+
+    public void setCurrentOff(Off currentOff) {
+        this.currentOff = currentOff;
+    }
+
+    public Product getActiveProduct() {
+        return activeProduct;
+    }
+
+    public void setActiveProduct(Product activeProduct) {
+        this.activeProduct = activeProduct;
+    }
+
+    public ProductSellInfo getActiveProductSelInfo() {
+        return activeProductSelInfo;
+    }
+
+    public void setActiveProductSelInfo(ProductSellInfo activeProductSelInfo) {
+        this.activeProductSelInfo = activeProductSelInfo;
+    }
+
+    public String getActiveSort() {
+        return activeSort;
+    }
+
+    public void setActiveSort(String activeSort) {
+        this.activeSort = activeSort;
+    }
 }
 
 class WrongTokenException extends Exception {

@@ -54,12 +54,28 @@ public class ServerManager extends Thread {
 
     private void putServerOnClient(ClientHandler client) {
         client.setLoggedInUsername(UserController.getActiveUserUsername());
+        client.setActiveAuction(AuctionController.getInstance().getActiveAuction());
+        client.setActiveCategory(CategoryController.getInstance().getActiveCategory());
+        client.setOffMenu(CategoryController.getInstance().isOffMenu());
+        client.setCurrentDiscount(CodedDiscountController.getInstance().getCurrentDiscount());
+        client.setCurrentOff(OffController.getInstance().getCurrentOff());
+        client.setActiveProduct(ProductController.getInstance().getActiveProduct());
+        client.setActiveProductSelInfo(ProductController.getInstance().getActiveProductSellInfo());
+        client.setActiveSort(SortingController.getInstance().getActiveSort());
         // TODO : activeProduct , ...
     }
 
     private void putClientOnServer(ClientHandler client) {
         UserController.setActiveUserByUsername(client.getLoggedInUsername());
         UserController.setLoggedIn(client.getLoggedInUsername() != null);
+        AuctionController.getInstance().setActiveAuction(client.getActiveAuction());
+        CategoryController.getInstance().setActiveCategory(client.getActiveCategory());
+        CategoryController.getInstance().setOffMenu(client.isOffMenu());
+        CodedDiscountController.getInstance().setCurrentDiscount(client.getCurrentDiscount());
+        OffController.getInstance().setCurrentOff(client.getCurrentOff());
+        ProductController.getInstance().setActiveProduct(client.getActiveProduct());
+        ProductController.getInstance().setActiveProductSellInfo(client.getActiveProductSelInfo());
+        SortingController.getInstance().setActiveSort(client.getActiveSort());
         // TODO : activeProduct , ...
     }
 

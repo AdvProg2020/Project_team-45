@@ -55,4 +55,8 @@ public class SortingController {
                 break;
         }
     }
+
+    public String getActiveSort() {
+        return activeSort;
+    }
 }

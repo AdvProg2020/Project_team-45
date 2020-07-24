@@ -29,6 +29,10 @@ public class AuctionController {
         return instance;
     }
 
+    public void setActiveAuction(Auction activeAuction) {
+        this.activeAuction = activeAuction;
+    }
+
     public void setActiveAuctionById(String auctionId) {
         activeAuction = market.getAuctionById(auctionId);
     }
@@ -113,5 +117,9 @@ public class AuctionController {
             winner.auctionPurchase(log, finalPrice);
         }
         auction.completingPurchase();
+    }
+
+    public Auction getActiveAuction() {
+        return activeAuction;
     }
 }

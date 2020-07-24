@@ -329,7 +329,11 @@ public class CategoryController implements Deleter {
         market.getCategoryById(editingCategoryId).setName(newName);
     }
 
-//    public ArrayList<HashMap<String, String>> testii(String name) throws Exception {
+    public boolean isOffMenu() {
+        return isOffMenu;
+    }
+
+    //    public ArrayList<HashMap<String, String>> testii(String name) throws Exception {
 //        if (!name.isEmpty()) {
 //            throw new Exception("oh!");
 //        }
@@ -346,4 +350,13 @@ public class CategoryController implements Deleter {
 //        a.add(c);
 //        return a;
 //    }
+
+
+    public void setActiveCategory(Category activeCategory) {
+        this.activeCategory = activeCategory;
+    }
+
+    public void setOffMenu(boolean offMenu) {
+        isOffMenu = offMenu;
+    }
 }

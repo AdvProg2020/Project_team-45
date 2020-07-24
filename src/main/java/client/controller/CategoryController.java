@@ -88,7 +88,7 @@ public class CategoryController {
 
     public void clearActiveCategory() {
         try {
-            MethodStringer.sampleMethod(getClass(), "activeCategory");
+            MethodStringer.sampleMethod(getClass(), "clearActiveCategory");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

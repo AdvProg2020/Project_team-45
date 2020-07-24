@@ -3,6 +3,7 @@ package client.controller.userControllers;
 import client.network.MethodStringer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SupporterController {
     private static final SupporterController instance = new SupporterController();
@@ -14,10 +15,10 @@ public class SupporterController {
         return instance;
     }
 
-    public ArrayList<ArrayList<String>> getActiveSupporterAllActiveChats() {
+    public HashMap<String, ArrayList<String>> getActiveSupporterAllActiveChats() {
         try {
-            return (ArrayList<ArrayList<String>>) MethodStringer.sampleMethod(getClass(),
-                    "getSellerCompany");
+            return (HashMap<String, ArrayList<String>>) MethodStringer.sampleMethod(getClass(),
+                    "getActiveSupporterAllActiveChats");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;
@@ -25,18 +26,36 @@ public class SupporterController {
     }
 
     public ArrayList<String> getOnlineSupporter() {
-        return null;
+        try {
+            return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
+                    "getOnlineSupporter");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
     }
 
-    public void startNewChatForActiveUser(String Username) {
-
+    public void startNewChatForActiveBuyer(String Username) {
+        try {
+            MethodStringer.sampleMethod(getClass(),"startNewChatForActiveBuyer", Username);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public void addMassageForBuyer(String massageText) {
-
+        try {
+            MethodStringer.sampleMethod(getClass(),"addMassageForBuyer", massageText);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
-    public void addMassageForSupporter() {
-
+    public void addMassageForSupporter(String massageText, String buyerUsername) {
+        try {
+            MethodStringer.sampleMethod(getClass(),"getSellerCompany", massageText, buyerUsername);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 }

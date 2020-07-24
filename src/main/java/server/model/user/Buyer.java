@@ -14,7 +14,8 @@ import server.model.product.ProductSellInfo;
 import server.model.product.Rate;
 import server.network.BankSocket;
 import server.newModel.bagheri.Auction;
-import server.newModel.bagheri.ChatRoom;
+import server.newModel.bagheri.chatRoom.ChatRoom;
+import server.newModel.bagheri.chatRoom.DoubleChatRoom;
 import server.newModel.bagheri.wallet.BuyerWallet;
 import server.newModel.bagheri.wallet.SellerWallet;
 
@@ -31,7 +32,7 @@ public class Buyer extends User implements CartHolder, Savable {
     private String accountToken;
     private BuyerWallet wallet;
     private HashMap<Auction, Integer> allAuctions;
-    private ChatRoom activeChat;
+    private DoubleChatRoom activeChat;
 
     public Buyer(PersonalInfo personalInfo) {
         super(personalInfo);
@@ -262,11 +263,11 @@ public class Buyer extends User implements CartHolder, Savable {
         return wallet;
     }
 
-    public void setActiveChat(ChatRoom activeChat) {
+    public void setActiveChat(DoubleChatRoom activeChat) {
         this.activeChat = activeChat;
     }
 
-    public ChatRoom getActiveChat() {
+    public DoubleChatRoom getActiveChat() {
         return activeChat;
     }
 }

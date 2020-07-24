@@ -1,4 +1,6 @@
-package server.newModel.bagheri;
+package server.newModel.bagheri.chatRoom;
+
+import server.newModel.bagheri.Massage;
 
 import java.util.ArrayList;
 

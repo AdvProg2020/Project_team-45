@@ -1,5 +1,6 @@
 package server;
 
+import server.controller.DatabaseController;
 import server.controller.ServerManager;
 import server.model.Market;
 import server.network.BankSocket;
@@ -15,10 +16,10 @@ public class ServerMain {
         ServerManager.getInstance().start();
         try {
             BankSocket.ConnectToBankServer();
-//            BankSocket.StartListeningOnInput();
             Market.getInstance().initializeBankVariables();
         } catch (IOException exception) {
             System.err.println("error in running socket");
+            exception.printStackTrace();
         }
         // connect to bank ...
         ServerEntranceSocket.getInstance().start();
@@ -41,6 +42,6 @@ public class ServerMain {
         ServerManager.getInstance().setRunning(false);
         ServerEntranceSocket.getInstance().stopSocket(false);
         // TODO : nedaeai : save to database
-
+        DatabaseController.getInstance().writeToDatabase();
     }
 }

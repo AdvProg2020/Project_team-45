@@ -1,26 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.*?>
+
+<?import client.newViewHatami.ValidatorField?>
 <AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewNedaei.user.seller.SellerMenu">
    <children>
       <AnchorPane layoutX="500.0" prefHeight="600.0" prefWidth="500.0">
          <children>
-            <AnchorPane layoutX="10.0" layoutY="175.0" prefHeight="250.0" prefWidth="480.0">
+            <AnchorPane layoutX="10.0" layoutY="175.0" prefHeight="375.0" prefWidth="480.0">
                <children>
                   <Label alignment="CENTER" prefHeight="50.0" prefWidth="130.0" text="Company Name" />
-                  <Label alignment="CENTER" layoutY="100.0" prefHeight="50.0" prefWidth="130.0" text="Balance" />
+                  <Label alignment="CENTER" layoutY="100.0" prefHeight="50.0" prefWidth="130.0" text="Wallet Balance" />
                   <Label alignment="CENTER" layoutY="50.0" prefHeight="50.0" prefWidth="130.0" text="Company Info" />
-                  <Button layoutY="150.0" mnemonicParsing="false" onMouseClicked="#viewSales" prefHeight="50.0" prefWidth="120.0" text="Sales History" />
-                  <Button layoutX="120.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="50.0" prefWidth="120.0" text="Manage Products" />
-                  <Button layoutX="240.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#addProduct" prefHeight="50.0" prefWidth="120.0" text="Add Product" />
-                  <Button layoutX="360.0" layoutY="150.0" mnemonicParsing="false" onMouseClicked="#removeProduct" prefHeight="50.0" prefWidth="120.0" text="Remove Product" />
-                  <Button layoutY="200.0" mnemonicParsing="false" onMouseClicked="#showCategories" prefHeight="50.0" prefWidth="120.0" text="Show Categories" />
-                  <Button layoutX="120.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#viewOffs" prefHeight="50.0" prefWidth="120.0" text="View Offs" />
+                  <Button layoutY="275.0" mnemonicParsing="false" onMouseClicked="#viewSales" prefHeight="50.0" prefWidth="120.0" text="Sales History" />
+                  <Button layoutX="120.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#manageProducts" prefHeight="50.0" prefWidth="120.0" text="Manage Products" />
+                  <Button layoutX="240.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#addProduct" prefHeight="50.0" prefWidth="120.0" text="Add Product" />
+                  <Button layoutX="360.0" layoutY="275.0" mnemonicParsing="false" onMouseClicked="#removeProduct" prefHeight="50.0" prefWidth="120.0" text="Remove Product" />
+                  <Button layoutY="325.0" mnemonicParsing="false" onMouseClicked="#showCategories" prefHeight="50.0" prefWidth="120.0" text="Show Categories" />
+                  <Button layoutX="120.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#viewOffs" prefHeight="50.0" prefWidth="120.0" text="View Offs" />
                   <Label fx:id="companyInfo" alignment="CENTER" layoutX="130.0" layoutY="50.0" prefHeight="50.0" prefWidth="350.0" />
                   <Label fx:id="companyName" alignment="CENTER" layoutX="130.0" prefHeight="50.0" prefWidth="350.0" />
                   <Label fx:id="balance" alignment="CENTER" layoutX="130.0" layoutY="100.0" prefHeight="50.0" prefWidth="350.0" />
-                  <Button onMouseClicked="#addOff" layoutX="240.0" layoutY="200.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Add Off" />
+                  <Button layoutX="240.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#addOff" prefHeight="50.0" prefWidth="120.0" text="Add Off" />
+
+                  <Button onMouseClicked="#chargeWallet" layoutY="199.0" mnemonicParsing="false" prefWidth="130.0" text="Charge Wallet" />
+                  <Button onMouseClicked="#depositAccount" layoutY="224.0" mnemonicParsing="false" prefWidth="130.0" text="Deposit Account" />
+                  <Label fx:id="accountBalance" alignment="CENTER" layoutX="130.0" layoutY="150.0" prefHeight="50.0" prefWidth="300.0" />
+                  <Label alignment="CENTER" layoutY="150.0" prefHeight="50.0" prefWidth="130.0" text="Account Balance" />
+                  <ValidatorField fx:id="charge" onKeyReleased="#validate" validation="naturalNumber" layoutX="130.0" layoutY="199.0" prefWidth="300.0" />
+                  <ValidatorField fx:id="deposit" onKeyReleased="#validate" validation="naturalNumber" layoutX="130.0" layoutY="224.0" prefWidth="300.0" />
+                  <Label fx:id="error" layoutX="130.0" layoutY="249.0" prefHeight="25.0" prefWidth="300.0" />
                </children>
             </AnchorPane>
          </children>

@@ -10,6 +10,7 @@ import server.model.request.Request;
 import server.model.request.SellerRegisterRequest;
 import server.model.user.Seller;
 import server.model.user.User;
+import server.network.BankSocket;
 import server.newModel.bagheri.Auction;
 
 import java.util.ArrayList;
@@ -30,6 +31,11 @@ public class Market {
     private ArrayList<Company> allCompanies;
     private final ArrayList<Auction> allAuction;
 
+    private int accountNumber;
+    private String accountToken;
+
+    private int marketPercentage;
+
     private Market() {
         allUsers = new ArrayList<>();
         requestedSellers = new ArrayList<>();
@@ -44,6 +50,7 @@ public class Market {
         allRates = new ArrayList<>();
         allCompanies = new ArrayList<>();
         allAuction = new ArrayList<>();
+        marketPercentage = 10;
     }
 
     public static Market getInstance() {
@@ -56,6 +63,20 @@ public class Market {
         DatabaseController.getInstance().readFromDatabase();
         MarketCopier.getInstance().buildMarketWithIds();
         MarketCopier.getInstance().buildMarketWithHashMaps();
+    }
+
+    public void initializeBankVariables() {
+        accountNumber = 47039;
+//                BankSocket.createAccount("market", "market", "market3", "market");
+        accountToken = BankSocket.getToken("market3", "market");
+    }
+
+    public int getMarketPercentage() {
+        return marketPercentage;
+    }
+
+    public void setMarketPercentage(int marketPercentage) {
+        this.marketPercentage = marketPercentage;
     }
 
     public ArrayList<User> getAllUsers() {

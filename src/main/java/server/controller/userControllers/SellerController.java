@@ -1,5 +1,6 @@
 package server.controller.userControllers;
 
+import client.network.MethodStringer;
 import server.controller.OffController;
 import server.controller.managers.Manager;
 import server.model.Company;
@@ -40,6 +41,10 @@ public class SellerController extends UserController implements Manager {
 
     public Integer getSellerBalance() {
         return ((Seller) UserController.getActiveUser()).getBalance();
+    }
+
+    public Integer getSellerAccountBalance() {
+        return ((Seller) UserController.getActiveUser()).getAccountBalance();
     }
 
     // used in sales history panel

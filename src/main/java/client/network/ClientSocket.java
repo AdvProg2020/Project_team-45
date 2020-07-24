@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientSocket extends Thread {
+    // 8891
+    // "127.0.0.1"
     public static final int PORT = 8891;
     public static final String IP = "127.0.0.1";
 

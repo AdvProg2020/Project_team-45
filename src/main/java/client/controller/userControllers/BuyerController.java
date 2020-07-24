@@ -13,10 +13,18 @@ public class BuyerController extends UserController {
     }
 
     // used in buyer menu
-
     public Integer getBuyerBalance() {
         try {
             return (Integer) MethodStringer.sampleMethod(getClass(), "getBuyerBalance");
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+            return null;
+        }
+    }
+
+    public Integer getBuyerAccountBalance() {
+        try {
+            return (Integer) MethodStringer.sampleMethod(getClass(), "getBuyerAccountBalance");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;
@@ -165,7 +173,6 @@ public class BuyerController extends UserController {
     }
 
     // todo: nedaei, cart managing menu
-
 //    public void increaseCartProductById(String productId) {
 //        updateBuyer();
 //        Cart cart = buyer.getCart();
@@ -176,6 +183,7 @@ public class BuyerController extends UserController {
 //        updateBuyer();
 //        Cart cart = buyer.getCart();
 //        cart.changeProductAmountById(productId, -1);
+
 //    }
 
     // i dont know!
@@ -187,5 +195,4 @@ public class BuyerController extends UserController {
             throwable.printStackTrace();
         }
     }
-
 }

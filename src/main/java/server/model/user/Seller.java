@@ -8,6 +8,7 @@ import server.model.Off;
 import server.model.log.SellLog;
 import server.model.product.Product;
 import server.model.product.ProductSellInfo;
+import server.network.BankSocket;
 import server.newModel.bagheri.Auction;
 import server.newModel.bagheri.wallet.SellerWallet;
 
@@ -20,7 +21,8 @@ public class Seller extends User {
     private HashMap<Product, ProductSellInfo> availableProducts;
     private HashMap<String, Off> listOfOffs; // offIds and offs
     private HashMap<String, Auction> listOfAuctions; // auctionIds and auctions
-    private int balance;
+    private int accountNumber;
+    private String accountToken;
     private SellerWallet sellerWallet;
 
     public Seller(PersonalInfo personalInfo, Company company) {
@@ -31,10 +33,39 @@ public class Seller extends User {
         listOfOffs = new HashMap<>();
         listOfAuctions = new HashMap<>();
         sellerWallet = new SellerWallet(this);
+
+        HashMap<String, Integer> testAccounts = new HashMap<>();
+//        testAccounts.put("s", 71731);
+        if (testAccounts.containsKey(personalInfo.getUsername())) {
+            accountNumber = testAccounts.get(personalInfo.getUsername());
+        } else {
+            accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());
+            System.out.println(personalInfo.getUsername() + ": " + accountNumber);
+        }
+        accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
     }
 
     public Seller(String id) {
         super(id);
+    }
+
+    public int getAccountBalance() {
+        return BankSocket.getBalance(accountToken);
+    }
+
+    public void chargeWallet(int amount) throws Throwable {
+        if (getAccountBalance() < amount) {
+            throw new Throwable("not enough account balance");
+        }
+        BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, amount, accountNumber));
+        sellerWallet.increaseBalance(amount);
+    }
+
+    public void depositAccount(int amount) throws Throwable {
+        if (!sellerWallet.decreaseBalance(amount)) {
+            throw new Throwable("not enough wallet balance");
+        }
+        BankSocket.payReceipt(BankSocket.createDepositReceipt(accountToken, amount, accountNumber));
     }
 
     public Company getCompany() {
@@ -76,7 +107,7 @@ public class Seller extends User {
     }
 
     public int getBalance() {
-        return balance;
+        return sellerWallet.getBalance();
     }
 
     public Off getOffByOffId(String offId) {
@@ -100,7 +131,7 @@ public class Seller extends User {
     }
 
     public void setBalance(int balance) {
-        this.balance = balance;
+        sellerWallet.setBalance(balance);
     }
 
     @Override
@@ -133,7 +164,7 @@ public class Seller extends User {
         ArrayList<String> offs = new ArrayList<>(listOfOffs.keySet());
         result.put("listOfOffs", (new Gson()).toJson(offs));
 
-        result.put("balance", "" + balance);
+        result.put("balance", "" + sellerWallet.getBalance());
         return result;
     }
 
@@ -163,7 +194,8 @@ public class Seller extends User {
             listOfOffs.put(offId, Market.getInstance().getOffById(offId));
         }
 
-        balance = Integer.parseInt(theMap.get("balance"));
+        sellerWallet = new SellerWallet(this);
+        sellerWallet.setBalance(Integer.parseInt(theMap.get("balance")));
     }
 
     public SellLog getSellLogById(String id) {

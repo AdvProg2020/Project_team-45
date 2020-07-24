@@ -126,7 +126,7 @@ public class TopPane {
         MenuController.getInstance().goToMenu(OffMenu.getFxmlFilePath());
     }
 
-    private void goToAuctionsMenu() {
+    public void goToAuctionsMenu() {
         MenuController.getInstance().goToMenu(AuctionsMenu.getFxmlFilePath());
     }
 }

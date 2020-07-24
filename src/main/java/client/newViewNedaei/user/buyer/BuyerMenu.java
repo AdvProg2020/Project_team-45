@@ -1,5 +1,6 @@
 package client.newViewNedaei.user.buyer;
 
+import client.newViewBagheri.ChatWhitSupporterMenu;
 import client.newViewHatami.Validator;
 import client.newViewHatami.ValidatorField;
 import client.newViewNedaei.MenuController;
@@ -64,6 +65,9 @@ public class BuyerMenu {
         ((Validator) keyEvent.getSource()).validate();
     }
 
+    public void chatWithSupporters() {
+        MenuController.getInstance().goToMenu(ChatWhitSupporterMenu.getFxmlFilePath());
+    }
 
     public void chargeWallet(MouseEvent mouseEvent) {
         if (!charge.validate()) {

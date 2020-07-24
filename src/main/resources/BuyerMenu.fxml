@@ -20,6 +20,7 @@
                   <ValidatorField fx:id="charge" layoutX="130.0" layoutY="99.0" onKeyReleased="#validate" prefHeight="25.0" prefWidth="300.0" validation="naturalNumber" />
                   <Label fx:id="accountBalance" alignment="CENTER" layoutX="130.0" layoutY="50.0" prefHeight="50.0" prefWidth="300.0" />
                   <Label alignment="CENTER" layoutY="50.0" prefHeight="50.0" prefWidth="130.0" text="Account Balance" />
+                  <Button onMouseClicked="#chatWithSupporters" layoutX="360.0" layoutY="175.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Supporters" />
                </children></AnchorPane>
          </children>
       </AnchorPane>

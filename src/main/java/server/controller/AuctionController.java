@@ -2,6 +2,7 @@ package server.controller;
 
 import server.controller.userControllers.UserController;
 import server.model.Market;
+import server.model.log.Log;
 import server.model.product.Product;
 import server.model.product.ProductSellInfo;
 import server.model.user.Buyer;
@@ -104,10 +105,11 @@ public class AuctionController {
             for (Buyer buyer : auction.getSuggestedPrices().keySet()) {
                 buyer.getWallet().changeUsableBalance(finalPrice);
             }
-            // TODO: buy
-            // todo: nedaei
-            winner.getWallet().increaseBalance(-finalPrice);
-            auction.getProductSellInfo().getSeller().getSellerWallet().increaseBalance(finalPrice);
+
+            ArrayList<ProductSellInfo> sellingProduct = new ArrayList<>();
+            sellingProduct.add(auction.getProductSellInfo());
+            Log log = new Log(sellingProduct, winner.getUsername(), "-", winner.getPersonalInfo().getPhoneNumber());
+            winner.auctionPurchase(log, finalPrice);
         }
         auction.completingPurchase();
     }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import client.newViewHatami.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import client.newViewHatami.ValidatorField?>
 <AnchorPane fx:id="mainPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.newViewNedaei.user.seller.SellerMenu">
    <children>
       <AnchorPane layoutX="500.0" prefHeight="600.0" prefWidth="500.0">
@@ -24,13 +24,14 @@
                   <Label fx:id="balance" alignment="CENTER" layoutX="130.0" layoutY="100.0" prefHeight="50.0" prefWidth="350.0" />
                   <Button layoutX="240.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#addOff" prefHeight="50.0" prefWidth="120.0" text="Add Off" />
 
-                  <Button onMouseClicked="#chargeWallet" layoutY="199.0" mnemonicParsing="false" prefWidth="130.0" text="Charge Wallet" />
-                  <Button onMouseClicked="#depositAccount" layoutY="224.0" mnemonicParsing="false" prefWidth="130.0" text="Deposit Account" />
+                  <Button layoutY="199.0" mnemonicParsing="false" onMouseClicked="#chargeWallet" prefWidth="130.0" text="Charge Wallet" />
+                  <Button layoutY="224.0" mnemonicParsing="false" onMouseClicked="#depositAccount" prefWidth="130.0" text="Deposit Account" />
                   <Label fx:id="accountBalance" alignment="CENTER" layoutX="130.0" layoutY="150.0" prefHeight="50.0" prefWidth="300.0" />
                   <Label alignment="CENTER" layoutY="150.0" prefHeight="50.0" prefWidth="130.0" text="Account Balance" />
-                  <ValidatorField fx:id="charge" onKeyReleased="#validate" validation="naturalNumber" layoutX="130.0" layoutY="199.0" prefWidth="300.0" />
-                  <ValidatorField fx:id="deposit" onKeyReleased="#validate" validation="naturalNumber" layoutX="130.0" layoutY="224.0" prefWidth="300.0" />
+                  <ValidatorField fx:id="charge" layoutX="130.0" layoutY="199.0" onKeyReleased="#validate" prefWidth="300.0" validation="naturalNumber" />
+                  <ValidatorField fx:id="deposit" layoutX="130.0" layoutY="224.0" onKeyReleased="#validate" prefWidth="300.0" validation="naturalNumber" />
                   <Label fx:id="error" layoutX="130.0" layoutY="249.0" prefHeight="25.0" prefWidth="300.0" />
+                  <Button onMouseClicked="#addAuction" layoutX="360.0" layoutY="325.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Add Auction" />
                </children>
             </AnchorPane>
          </children>

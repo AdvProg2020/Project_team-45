@@ -162,6 +162,26 @@ public class Buyer extends User implements CartHolder, Savable {
         cart = new Cart();
     }
 
+    public void auctionPurchase(Log log, int finalPrice) {
+        ProductSellInfo sellInfo = log.getSellingProducts().get(0);
+        purchasedProducts.put(sellInfo.getProduct().getId(), null);
+        sellInfo.getProduct().addSellCount();
+        sellInfo.addSellCount();
+        sellInfo.getAllBuyers().put(this, 1);
+        Seller seller = sellInfo.getSeller();
+        SellLog sellLog = new SellLog(log, seller);
+        seller.getListOfSellLogs().add(sellLog);
+
+        seller.getSellerWallet().increaseBalance(finalPrice*(100 - Market.getInstance().getMarketPercentage())/100);
+        Market.getInstance().depositAccount(finalPrice*Market.getInstance().getMarketPercentage()/100);
+
+        sellInfo.setStock(sellInfo.getStock() - 1);
+        BuyLog buyLog = new BuyLog(log);
+        listOfBuyLogs.add(buyLog);
+
+        wallet.increaseBalance(-finalPrice);
+    }
+
     private void withdrawAccount(int finalPrice) {
         BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, finalPrice, accountNumber));
     }

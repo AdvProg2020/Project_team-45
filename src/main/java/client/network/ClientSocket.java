@@ -29,7 +29,6 @@ public class ClientSocket extends Thread {
     private ClientSocket() {
 
         securityGate = new ClientSecurityGate();
-
     }
 
     public static ClientSocket getInstance() {
@@ -43,6 +42,7 @@ public class ClientSocket extends Thread {
             String messageToServer = getOutPutReady(action);
             outputStream.writeUTF(messageToServer);
             outputStream.flush();
+            messageCounter++;
 
             // Server -> Json
             synchronized (inputLock) {
@@ -62,7 +62,7 @@ public class ClientSocket extends Thread {
     }
 
     private String getOutPutReady(String action) {
-        return "T" + token + "T" + action;
+        return messageCounter + "T" + token + "T" + action;
     }
 
     public void connectToServer() throws IOException {
@@ -87,6 +87,7 @@ public class ClientSocket extends Thread {
     @Override
     public void run() {
         isRunning = true;
+        messageCounter = 0;
         while (isRunning) {
             try {
                 String serverMessage = inputStream.readUTF();

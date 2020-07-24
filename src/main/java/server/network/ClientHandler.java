@@ -23,6 +23,7 @@ public class ClientHandler extends Thread {
     private final DataOutputStream clientOutputStream;
     private final boolean isConnected;
     private final Object lock = new Object();
+    private int messageCounter;
 
     private String p2pIP;
     private int p2pPORT;
@@ -43,6 +44,7 @@ public class ClientHandler extends Thread {
         this.clientInputStream = clientInputStream;
         this.clientOutputStream = clientOutputStream;
         isConnected = true;
+        messageCounter = 0;
 
         try {
             clientOutputStream.writeUTF(String.valueOf(token));
@@ -65,6 +67,8 @@ public class ClientHandler extends Thread {
                 try {
                     clientMessage = clientInputStream.readUTF();
                     lastCommand = getInputReady(clientMessage);
+                    messageCounter++;
+
                     ////////////////////////////////////////////////////
                     ServerManager.getInstance().addClientRequest(this);
                     lock.wait();
@@ -96,12 +100,13 @@ public class ClientHandler extends Thread {
     }
 
     private String getInputReady(String clientMessage) throws WrongTokenException {
-        Matcher tokenMatcher = Pattern.compile("^T(\\d+)T").matcher(clientMessage);
+        Matcher tokenMatcher = Pattern.compile("^(\\d+)T(\\d+)T").matcher(clientMessage);
         if (!tokenMatcher.find()) {
             throw new WrongTokenException();
         }
-        int receivedToken = Integer.parseInt(tokenMatcher.group(1));
-        if (this.token != receivedToken) {
+        int receivedToken = Integer.parseInt(tokenMatcher.group(2));
+        int receivedMC = Integer.parseInt(tokenMatcher.group(1));
+        if (this.token != receivedToken || receivedMC != messageCounter) {
             throw new WrongTokenException();
         }
         return clientMessage.substring(tokenMatcher.end());

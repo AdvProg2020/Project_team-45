@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class OffController implements Manager {
     private static final OffController instance = new OffController();
-    private Off currentOff;
+    private Off currentOff; // hotam
 
     private OffController() {
     }

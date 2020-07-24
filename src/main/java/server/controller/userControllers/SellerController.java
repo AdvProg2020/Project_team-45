@@ -1,6 +1,5 @@
 package server.controller.userControllers;
 
-import client.network.MethodStringer;
 import server.controller.OffController;
 import server.controller.managers.Manager;
 import server.model.Company;
@@ -24,7 +23,7 @@ import java.util.HashMap;
 public class SellerController extends UserController implements Manager {
     private static final SellerController instance = new SellerController();
 
-    private SellLog currentSellLog;
+    private SellLog currentSellLog; // hotam
 
     public static SellerController getInstance() {
         return instance;
@@ -109,7 +108,7 @@ public class SellerController extends UserController implements Manager {
             if (product.get("isFile").equals("true")) {
                 newProduct = new FileProduct(product.get("name"), (FinalCategory) market.getCategoryByName(product.get("categoryName")),
                         product.get("description"), "sth", "sth",
-                        ((Seller) UserController.getActiveUser()).getUsername(), product.get("filePath"));
+                        UserController.getActiveUser().getUsername(), product.get("filePath"));
             } else {
                 newProduct = new Product(product.get("name"), (FinalCategory) market.getCategoryByName(product.get("categoryName")),
                         product.get("description"), "sth", "sth");

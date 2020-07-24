@@ -1,6 +1,5 @@
 package server.controller;
 
-import client.network.MethodStringer;
 import server.controller.managers.Deleter;
 import server.model.Market;
 import server.model.category.Category;
@@ -15,8 +14,8 @@ import java.util.stream.Collectors;
 public class CategoryController implements Deleter {
     private static final CategoryController instance = new CategoryController();
     private final Market market;
-    private Category activeCategory;
-    private boolean isOffMenu;
+    private Category activeCategory; // hotam
+    private boolean isOffMenu; // hotam
     private final ProductController productController = ProductController.getInstance();
 
     private CategoryController() {

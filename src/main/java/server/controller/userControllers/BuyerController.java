@@ -17,9 +17,9 @@ import java.util.HashMap;
 public class BuyerController extends UserController implements Manager {
     private static final BuyerController instance = new BuyerController();
 
-    private Log log;
-    private CartHolder buyer;
-    private Log currentBuyLog;
+    private Log log; // hotam
+    private CartHolder buyer; // hotam
+    private Log currentBuyLog; // hotam
 
     public static BuyerController getInstance() {
         return instance;

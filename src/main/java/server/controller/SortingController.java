@@ -8,7 +8,7 @@ import java.util.Comparator;
 public class SortingController {
     private static final SortingController instance = new SortingController();
     private final ArrayList<String> sortTypes;
-    private String activeSort;
+    private String activeSort; // hotam
 
     private SortingController() {
         sortTypes = new ArrayList<>();

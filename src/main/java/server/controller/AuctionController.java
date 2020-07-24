@@ -19,7 +19,7 @@ public class AuctionController {
     private static final AuctionController instance = new AuctionController();
     private final UserController userController = UserController.getInstance();
     private final Market market;
-    private Auction activeAuction;
+    private Auction activeAuction; // hotam
 
     private AuctionController() {
         market = Market.getInstance();

@@ -14,9 +14,9 @@ import java.util.HashMap;
 public class UserController {
     private static final UserController instance = new UserController();
     protected final Market market;
-    private static User activeUser;
-    private static AnonymousUser anonymousUser = new AnonymousUser();
-    private static boolean loggedIn;
+    private static User activeUser;// hh
+    private static AnonymousUser anonymousUser = new AnonymousUser();// hotam
+    private static boolean loggedIn; // hh
 
     protected UserController() {
         this.market = Market.getInstance();

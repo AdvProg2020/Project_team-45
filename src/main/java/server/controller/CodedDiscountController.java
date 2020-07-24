@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class CodedDiscountController implements Deleter {
     private static final CodedDiscountController instance = new CodedDiscountController();
     private final Market market = Market.getInstance();
-    private CodedDiscount currentDiscount;
+    private CodedDiscount currentDiscount; // hotam
 
     private CodedDiscountController() {
 

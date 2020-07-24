@@ -1,18 +1,17 @@
 package client.newViewBagheri;
 
-import client.newViewHatami.ValidatorField;
-import client.newViewNedaei.MenuController;
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import client.controller.CategoryController;
 import client.controller.FilteringController;
 import client.controller.ProductController;
 import client.controller.SortingController;
+import client.newViewHatami.ValidatorField;
+import client.newViewNedaei.MenuController;
+import com.google.gson.internal.LinkedTreeMap;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.*;
@@ -193,12 +192,13 @@ public class ProductsMenu implements Initializable {
         }
     }
 
-    private void changeProductsListPainProductInfos(ArrayList<HashMap<String, String>> productInfosList, int page) {
+    private void changeProductsListPainProductInfos(ArrayList productInfosList, int page) {
         productsListPain.getChildren().clear();
         int i = 0;
-        System.out.println(productInfosList.get(0).getClass());
-        for (HashMap<String, String> productInfo : productInfosList.subList((page - 1) * 20, Math.min(page * 20, productInfosList.size()))) {
-            productsListPain.add(createProductInfoVBox(productInfo), i % 4, i / 4);
+
+        for (Object productInfo : productInfosList.subList((page - 1) * 20, Math.min(page * 20, productInfosList.size()))) {
+            HashMap<String, String> o = new HashMap<>((LinkedTreeMap) productInfo);
+            productsListPain.add(createProductInfoVBox(o), i % 4, i / 4);
             i++;
         }
     }
@@ -210,15 +210,15 @@ public class ProductsMenu implements Initializable {
         int sizePrefWidth = 195;
         productInfoVBox.setPrefWidth(sizePrefWidth);
         productInfoVBox.setPrefHeight(350.0);
-        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
-        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
-        productImageView.setPreserveRatio(true);
-        productImageView.setFitWidth(190.0);
-        productImageView.setFitHeight(250.0);
-        BorderPane imagePane = new BorderPane(productImageView);
-        BorderPane.setAlignment(productImageView, Pos.CENTER);
-        imagePane.setPrefWidth(sizePrefWidth);
-        imagePane.setPrefHeight(250.0);
+//        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
+//        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+//        productImageView.setPreserveRatio(true);
+//        productImageView.setFitWidth(190.0);
+//        productImageView.setFitHeight(250.0);
+//        BorderPane imagePane = new BorderPane(productImageView);
+//        BorderPane.setAlignment(productImageView, Pos.CENTER);
+//        imagePane.setPrefWidth(sizePrefWidth);
+//        imagePane.setPrefHeight(250.0);
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
         int labelSize = 30;
@@ -235,7 +235,8 @@ public class ProductsMenu implements Initializable {
         } else {
             productPriceLabel.setText("price: " + productPrice);
         }
-        productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPriceLabel);
+//        productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPriceLabel);
+        productInfoVBox.getChildren().addAll(productName, productScore, productPriceLabel);
         return productInfoVBox;
     }
 

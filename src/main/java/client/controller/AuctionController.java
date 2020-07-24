@@ -90,4 +90,12 @@ public class AuctionController {
             throwable.printStackTrace();
         }
     }
+
+    public void createAuction(HashMap<String, String> auctionInfo) {
+        try {
+            MethodStringer.sampleMethod(getClass(), "createAuction", auctionInfo);
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package server.controller;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import server.controller.userControllers.UserController;
 import server.model.Market;
 import server.model.user.Buyer;
@@ -77,5 +78,12 @@ public class AuctionController {
         User user = UserController.getActiveUser();
         Massage newMassage = new Massage(user, newMassageContent);
         activeAuction.getChatRoom().addMassage(newMassage);
+    }
+
+    public void createAuction(HashMap<String, String> auctionInfo) {
+        auctionInfo.get("productId");
+        auctionInfo.get("endDate");
+        auctionInfo.get("basePrise");
+        // TODO: Bagheri
     }
 }

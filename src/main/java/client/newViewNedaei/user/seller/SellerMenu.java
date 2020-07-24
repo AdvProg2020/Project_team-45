@@ -1,5 +1,6 @@
 package client.newViewNedaei.user.seller;
 
+import client.newViewBagheri.AddAuctionPanel;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.user.seller.off.AddOffPanel;
 import client.newViewNedaei.user.seller.off.OffsManagingMenu;
@@ -70,5 +71,9 @@ public class SellerMenu {
 
     public void addOff() {
         MenuController.getInstance().goToPanel(AddOffPanel.getFxmlFilePath());
+    }
+
+    public void addAuction() {
+        MenuController.getInstance().goToPanel(AddAuctionPanel.getFxmlFilePath());
     }
 }

@@ -87,6 +87,7 @@ public class Auction extends IdRecognized implements Savable {
         HashMap<String, String> auctionInfo = new HashMap<>();
         auctionInfo.put("auctionId", this.id);
         auctionInfo.put("basePrice", "" + this.basePrice);
+        auctionInfo.put("endDate", "" + endTime);
         HashMap<String, String> productInfo = productSellInfo.getProduct().getProductInfoForProductsList();
         auctionInfo.put("productId", productInfo.get("id"));
         auctionInfo.put("name", productInfo.get("name"));

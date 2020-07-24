@@ -9,6 +9,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class SupporterChatsMenu {
     private final SupporterController supporterController = SupporterController.getInstance();
@@ -25,13 +26,14 @@ public class SupporterChatsMenu {
     }
 
     public void addAllActiveChats() {
-        for (ArrayList<String> chat : supporterController.getActiveSupporterAllActiveChats()) {
-            allChatsTabPain.getTabs().add(creatChatTab(chat));
+        for (Map.Entry<String, ArrayList<String>> activeChat :
+                supporterController.getActiveSupporterAllActiveChats().entrySet()) {
+            allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue()));
         }
     }
 
-    public Tab creatChatTab(ArrayList<String> chatMassages) {
-        Tab newChatTab = new Tab();
+    public Tab creatChatTab(String buyerUsername, ArrayList<String> chatMassages) {
+        Tab newChatTab = new Tab(buyerUsername);
         ScrollPane scrollPane = new ScrollPane();
         VBox vBox = new VBox();
         for (String massage : chatMassages) {

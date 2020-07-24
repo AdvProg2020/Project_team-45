@@ -36,7 +36,7 @@ public class ChatWhitSupporterMenu {
     private void startNewChat(String supporterUsername) {
         chatPane.setVisible(true);
         allMassagesBox.getChildren().clear();
-        supporterController.startNewChatForActiveUser(supporterUsername);
+        supporterController.startNewChatForActiveBuyer(supporterUsername);
     }
 
     public void sendNewMassage() {

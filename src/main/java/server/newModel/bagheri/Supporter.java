@@ -2,12 +2,14 @@ package server.newModel.bagheri;
 
 import server.model.user.PersonalInfo;
 import server.model.user.User;
+import server.newModel.bagheri.chatRoom.ChatRoom;
+import server.newModel.bagheri.chatRoom.DoubleChatRoom;
 
 import java.util.ArrayList;
 
 public class Supporter extends User {
-    private ArrayList<ChatRoom> allChats;
-    private ArrayList<ChatRoom> activeChats;
+    private ArrayList<DoubleChatRoom> allChats;
+    private ArrayList<DoubleChatRoom> activeChats;
 
     public Supporter(PersonalInfo personalInfo) {
         super(personalInfo);
@@ -24,16 +26,24 @@ public class Supporter extends User {
         return "supporter";
     }
 
-    public ArrayList<ChatRoom> getActiveChats() {
+    public ArrayList<DoubleChatRoom> getActiveChats() {
         return activeChats;
     }
 
-    public void addNewChat(ChatRoom newChat) {
+    public void addNewChat(DoubleChatRoom newChat) {
         allChats.add(newChat);
         activeChats.add(newChat);
     }
 
     public void removeChat(ChatRoom newChat) {
         activeChats.remove(newChat);
+    }
+
+    public DoubleChatRoom getChatByBuyerUsername(String buyerUsername) {
+        for (DoubleChatRoom activeChat : activeChats) {
+            if (activeChat.getBuyer().getUsername().equals(buyerUsername))
+                return activeChat;
+        }
+        return null;
     }
 }

@@ -5,6 +5,7 @@ import server.model.IdRecognized;
 import server.model.Savable;
 import server.model.product.ProductSellInfo;
 import server.model.user.Buyer;
+import server.newModel.bagheri.chatRoom.ChatRoom;
 
 import java.util.Date;
 import java.util.HashMap;

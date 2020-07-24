@@ -6,9 +6,10 @@ import java.net.Socket;
 public class ClientSocket extends Thread {
 
     // server info
-//    public static final int PORT = 11457;
-//    public static final String IP = "2.tcp.ngrok.io";
+//    public static final int PORT = 15154;
+//    public static final String IP = "0.tcp.ngrok.io";
 
+    // in pc
     public static final int PORT = 6666;
     public static final String IP = "127.0.0.1";
     private int messageCounter;

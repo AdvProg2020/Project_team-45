@@ -21,7 +21,7 @@ public class SupporterController extends UserController implements Manager {
         return instance;
     }
 
-    public HashMap<String, ArrayList<String>> getActiveUserAllActiveChats() {
+    public HashMap<String, ArrayList<String>> getActiveSupporterAllActiveChats() {
         HashMap<String, ArrayList<String>> activeUserAllActiveChats = new HashMap<>();
         for (DoubleChatRoom activeChat : ((Supporter) UserController.getActiveUser()).getActiveChats()) {
             activeUserAllActiveChats.put(activeChat.getBuyer().getUsername(), activeChat.getAllMassagesText());

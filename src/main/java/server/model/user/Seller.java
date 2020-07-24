@@ -62,6 +62,7 @@ public class Seller extends User {
             throw new Throwable("not enough account balance");
         }
         BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, amount, accountNumber));
+        Market.getInstance().depositAccount(amount);
         sellerWallet.increaseBalance(amount);
     }
 
@@ -70,6 +71,7 @@ public class Seller extends User {
             throw new Throwable("not enough wallet balance");
         }
         BankSocket.payReceipt(BankSocket.createDepositReceipt(accountToken, amount, accountNumber));
+        Market.getInstance().withdrawAccount(amount);
     }
 
     public Company getCompany() {

@@ -69,6 +69,7 @@ public class Buyer extends User implements CartHolder, Savable {
             throw new Throwable("not enough account balance");
         }
         BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, amount, accountNumber));
+        Market.getInstance().depositAccount(amount);
         wallet.increaseBalance(amount);
     }
 

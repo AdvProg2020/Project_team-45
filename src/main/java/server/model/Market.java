@@ -79,6 +79,14 @@ public class Market {
         this.marketPercentage = marketPercentage;
     }
 
+//    public int getAccountNumber() {
+//        return accountNumber;
+//    }
+//
+//    public String getAccountToken() {
+//        return accountToken;
+//    }
+
     public ArrayList<User> getAllUsers() {
         return allUsers;
     }
@@ -438,5 +446,9 @@ public class Market {
 
     public void depositAccount(int amount) {
         BankSocket.payReceipt(BankSocket.createDepositReceipt(accountToken, amount, accountNumber));
+    }
+
+    public void withdrawAccount(int amount) {
+        BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, amount, accountNumber));
     }
 }

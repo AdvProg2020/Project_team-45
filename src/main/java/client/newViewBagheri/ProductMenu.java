@@ -3,6 +3,7 @@ package client.newViewBagheri;
 import client.controller.ProductController;
 import client.controller.userControllers.UserController;
 import client.newViewNedaei.MenuController;
+import com.google.gson.internal.LinkedTreeMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -51,7 +52,7 @@ public class ProductMenu implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         addProductInformation();
         addImage();
-        addVideo();
+//        addVideo();
         addDefaultSellerInfo();
         addSellersList();
         addFeaturesList();
@@ -99,14 +100,14 @@ public class ProductMenu implements Initializable {
     }
 
     private void addSellersList() {
-        ArrayList<HashMap<String, String>> sellInfos = productController.getActiveProductSellInfos();
+        ArrayList sellInfos = productController.getActiveProductSellInfos();
         if (sellInfos.isEmpty()) {
             // TODO
             return;
         }
         int i = 0;
-        for (HashMap<String, String> sellInfo : sellInfos) {
-            addSellerToSellersList(sellInfo, i);
+        for (Object sellInfo : sellInfos) {
+            addSellerToSellersList(new HashMap<>((LinkedTreeMap) sellInfo), i);
             i++;
         }
     }

@@ -21,6 +21,7 @@ public class AuctionMenu {
     public VBox allMassagesBox;
     private int massageNumber;
     public TextArea newMassageTextArea;
+    private boolean inChat;
 
     public static String getFxmlFilePath() {
         return "/AuctionMenu.fxml";
@@ -28,10 +29,24 @@ public class AuctionMenu {
 
     @FXML
     public void initialize() {
+        inChat = true;
         massageNumber = 0;
         addAuctionInfo();
         addProposedPrice();
         addMassagesToChat();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (inChat) {
+                    addMassagesToChat();
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 
     private void addAuctionInfo() {

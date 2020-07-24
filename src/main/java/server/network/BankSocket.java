@@ -11,7 +11,7 @@ import java.util.Scanner;
  * and also responses from Bank server.
  */
 public class BankSocket {
-    public static final int PORT = 8888;
+    public static final int PORT = 6667;
     public static final String IP = "127.0.0.1";
 
     private static DataOutputStream outputStream;

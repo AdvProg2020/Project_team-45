@@ -25,7 +25,7 @@ public class DiscountCodePanel extends Panel {
     }
 
     public void goNext() {
-        if (!BuyerController.getInstance().isDiscountCodeValid(code.getText())) {
+        if (!code.getText().equals("") && !BuyerController.getInstance().isDiscountCodeValid(code.getText())) {
             error.setText("invalid discount code");
             return;
         } if (walletOrAccount.getValue().equals("account") && !BuyerController.getInstance().canPurchaseByAccount()) {

@@ -8,6 +8,7 @@ import client.newViewNedaei.user.buyer.purchase.ReceiveInfoPanel;
 import client.controller.ProductController;
 import client.controller.userControllers.BuyerController;
 import client.controller.userControllers.UserController;
+import com.google.gson.internal.LinkedTreeMap;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 public class CartManagingMenu {
     public Label price;
     public GridPane grid;
-    private final ArrayList<HashMap<String, String>> cart;
+    private final ArrayList cart;
 
     public CartManagingMenu() {
         cart = BuyerController.getInstance().getCart();
@@ -37,8 +38,8 @@ public class CartManagingMenu {
     @FXML
     public void initialize() {
         int i = 0;
-        for (HashMap<String, String> product : cart) {
-            Pane pane = createProductDisplay(product);
+        for (Object product : cart) {
+            Pane pane = createProductDisplay(new HashMap<String, String>((LinkedTreeMap)product));
             grid.add(pane, i%5, i/5);
             i++;
         }
@@ -104,7 +105,7 @@ public class CartManagingMenu {
         view.setPrefHeight(50);
         view.setTranslateX(120);
         view.setTranslateY(120);
-        ProductController.getInstance().setActiveProductById(Integer.parseInt(product.get("id")));
+        ProductController.getInstance().setActiveProductById(product.get("id"));
         view.setOnMouseClicked(event -> MenuController.getInstance().goToMenu(ProductMenu.getFxmlFilePath()));
 
         pane.getChildren().add(nameAndAmount);

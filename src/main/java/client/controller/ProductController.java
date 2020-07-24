@@ -86,15 +86,6 @@ public class ProductController {
 
     // used in cart managing menu
 
-    public void setActiveProductById(int productId) {
-        try {
-            MethodStringer.sampleMethod(getClass(),
-            "setActiveProductById", productId);
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-    }
-
     public void setActiveProductById(String productId) {
         try {
             MethodStringer.sampleMethod(getClass(),
@@ -103,6 +94,7 @@ public class ProductController {
             throwable.printStackTrace();
         }
     }
+
 
     // used in products managing menu
 

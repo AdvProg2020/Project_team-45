@@ -171,15 +171,15 @@ public class ProductMenu implements Initializable {
         int sizePrefWidth = 195;
         productInfoVBox.setPrefWidth(sizePrefWidth);
         productInfoVBox.setPrefHeight(350.0);
-        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
-        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
-        productImageView.setPreserveRatio(true);
-        productImageView.setFitWidth(190.0);
-        productImageView.setFitHeight(250.0);
-        BorderPane imagePane = new BorderPane(productImageView);
-        BorderPane.setAlignment(productImageView, Pos.CENTER);
-        imagePane.setPrefWidth(sizePrefWidth);
-        imagePane.setPrefHeight(250.0);
+//        ImageView productImageView = new ImageView(new Image(productInfo.get("imageAddress")));
+//        productImageView.setOnMouseClicked(e -> goToProduct(productInfo.get("id")));
+//        productImageView.setPreserveRatio(true);
+//        productImageView.setFitWidth(190.0);
+//        productImageView.setFitHeight(250.0);
+//        BorderPane imagePane = new BorderPane(productImageView);
+//        BorderPane.setAlignment(productImageView, Pos.CENTER);
+//        imagePane.setPrefWidth(sizePrefWidth);
+//        imagePane.setPrefHeight(250.0);
         // TODO: productImageView.setFitWidth();
         // TODO: add pane and centering image
         int labelSize = 30;
@@ -196,7 +196,7 @@ public class ProductMenu implements Initializable {
         } else {
             productPriceLabel.setText("price: " + productPrice);
         }
-        productInfoVBox.getChildren().addAll(imagePane, productName, productScore, productPriceLabel);
+        productInfoVBox.getChildren().addAll(productName, productScore, productPriceLabel);
         return productInfoVBox;
     }
 

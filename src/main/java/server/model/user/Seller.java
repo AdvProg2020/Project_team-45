@@ -21,8 +21,10 @@ public class Seller extends User {
     private HashMap<Product, ProductSellInfo> availableProducts;
     private HashMap<String, Off> listOfOffs; // offIds and offs
     private HashMap<String, Auction> listOfAuctions; // auctionIds and auctions
+
     private int accountNumber;
     private String accountToken;
+
     private SellerWallet sellerWallet;
 
     public Seller(PersonalInfo personalInfo, Company company) {
@@ -57,18 +59,18 @@ public class Seller extends User {
         return BankSocket.getBalance(accountToken);
     }
 
-    public void chargeWallet(int amount) throws Throwable {
+    public void chargeWallet(int amount) throws Exception {
         if (getAccountBalance() < amount) {
-            throw new Throwable("not enough account balance");
+            throw new Exception("not enough account balance");
         }
         BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, amount, accountNumber));
         Market.getInstance().depositAccount(amount);
         sellerWallet.increaseBalance(amount);
     }
 
-    public void depositAccount(int amount) throws Throwable {
+    public void depositAccount(int amount) throws Exception {
         if (!sellerWallet.decreaseBalance(amount)) {
-            throw new Throwable("not enough wallet balance");
+            throw new Exception("not enough wallet balance");
         }
         BankSocket.payReceipt(BankSocket.createDepositReceipt(accountToken, amount, accountNumber));
         Market.getInstance().withdrawAccount(amount);
@@ -171,6 +173,8 @@ public class Seller extends User {
         result.put("listOfOffs", (new Gson()).toJson(offs));
 
         result.put("balance", "" + sellerWallet.getBalance());
+        result.put("accountNumber", "" + accountNumber);
+        result.put("accountToken", accountToken);
         return result;
     }
 
@@ -202,6 +206,9 @@ public class Seller extends User {
 
         sellerWallet = new SellerWallet(this);
         sellerWallet.setBalance(Integer.parseInt(theMap.get("balance")));
+
+        accountNumber = Integer.parseInt(theMap.get("accountNumber"));
+        accountToken = theMap.get("accountToken");
     }
 
     public SellLog getSellLogById(String id) {

@@ -14,7 +14,7 @@ public class BankController {
         return instance;
     }
 
-    public void chargeWallet(int parseInt) throws Throwable {
+    public void chargeWallet(Integer parseInt) throws Throwable {
         if (UserController.getActiveUser().getRole().equals("buyer")) {
             Buyer buyer = (Buyer) UserController.getActiveUser();
             buyer.chargeWallet(parseInt);
@@ -24,7 +24,7 @@ public class BankController {
         }
     }
 
-    public void depositAccount(int parseInt) throws Throwable {
+    public void depositAccount(Integer parseInt) throws Throwable {
         Seller seller = (Seller) UserController.getActiveUser();
         seller.depositAccount(parseInt);
     }

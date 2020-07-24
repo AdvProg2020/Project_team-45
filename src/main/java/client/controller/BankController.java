@@ -12,11 +12,11 @@ public class BankController {
         return instance;
     }
 
-    public void chargeWallet(int parseInt) throws Throwable {
+    public void chargeWallet(Integer parseInt) throws Throwable {
         MethodStringer.sampleMethod(getClass(), "chargeWallet", parseInt);
     }
 
-    public void depositAccount(int parseInt) throws Throwable {
+    public void depositAccount(Integer parseInt) throws Throwable {
         MethodStringer.sampleMethod(getClass(), "depositAccount", parseInt);
     }
 }

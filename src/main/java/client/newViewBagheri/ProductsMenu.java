@@ -83,7 +83,8 @@ public class ProductsMenu implements Initializable {
             featureVBox.getChildren().add(new Label(specialFeature.getKey() + ":"));
             ScrollPane valuesScrollPane = new ScrollPane();
             VBox valuesVBox = new VBox();
-            addCheckBoxListToVBox(specialFeature.getValue(), valuesVBox, specialFeature.getKey());
+            Set<String> specialFeatureWrapper = new HashSet<>(specialFeature.getValue());
+            addCheckBoxListToVBox(specialFeatureWrapper, valuesVBox, specialFeature.getKey());
             valuesScrollPane.setContent(valuesVBox);
             featureVBox.getChildren().add(valuesScrollPane);
         }

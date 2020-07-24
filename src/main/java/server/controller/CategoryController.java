@@ -1,5 +1,6 @@
 package server.controller;
 
+import client.network.MethodStringer;
 import server.controller.managers.Deleter;
 import server.model.Market;
 import server.model.category.Category;
@@ -292,7 +293,7 @@ public class CategoryController implements Deleter {
     }
 
     public String getCategoryId(String categoryName) {
-        return getItemById(categoryName).getId();
+        return market.getCategoryByName(categoryName).getId();
     }
 
     public String getActiveCategoryName() {
@@ -319,7 +320,9 @@ public class CategoryController implements Deleter {
         }
     }
 
-
+    public String getCategoryTypeByName(String text) {
+        return market.getCategoryByName(text).getType();
+    }
 
     //bagheri
 

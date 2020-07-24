@@ -99,9 +99,9 @@ public class SellerController extends UserController implements Manager {
         return result;
     }
 
-    // used in add product panel todo: nedaei, fix image and video address
+    // used in add product panel
 
-    public void createAddProductRequest(String mode, HashMap<String, String> product, int price, int stock) {
+    public void createAddProductRequest(String mode, HashMap<String, String> product, Integer price, Integer stock) {
         Product newProduct = null;
         if (mode.equals("existing")) {
             newProduct = market.getProductById(product.get("id"));

@@ -84,7 +84,7 @@ public class SellerController extends UserController {
 
     // used in add product panel
 
-    public void createAddProductRequest(String mode, HashMap<String, String> product, int price, int stock) {
+    public void createAddProductRequest(String mode, HashMap<String, String> product, Integer price, Integer stock) {
         try {
             MethodStringer.sampleMethod(getClass(), "createAddProductRequest", mode, product, price, stock);
         } catch (Throwable throwable) {

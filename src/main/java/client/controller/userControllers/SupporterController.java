@@ -25,10 +25,10 @@ public class SupporterController {
         }
     }
 
-    public ArrayList<String> getOnlineSupporter() {
+    public ArrayList<String> getOnlineSupporters() {
         try {
             return (ArrayList<String>) MethodStringer.sampleMethod(getClass(),
-                    "getOnlineSupporter");
+                    "getOnlineSupporters");
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             return null;

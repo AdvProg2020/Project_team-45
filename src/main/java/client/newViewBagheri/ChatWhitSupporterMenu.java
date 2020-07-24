@@ -26,7 +26,7 @@ public class ChatWhitSupporterMenu {
     }
 
     private void addOnlineSupporters() {
-        for (String supporter : supporterController.getOnlineSupporter()) {
+        for (String supporter : supporterController.getOnlineSupporters()) {
             Label supporterLabel = new Label(supporter);
             supporterLabel.setOnMouseClicked(e -> startNewChat(supporter));
             onlineSupporterListBox.getChildren().add(supporterLabel);

@@ -51,6 +51,7 @@ public class AddProductPanel extends Panel {
         existingPane.setVisible(false);
         newPane.setDisable(false);
         newPane.setVisible(true);
+        fileBrowse.setDisable(true);
     }
 
     public void actionCheckBox() {
@@ -97,10 +98,10 @@ public class AddProductPanel extends Panel {
         } if (!category.validate()) {
             newError.setText("invalid category name format");
             return;
-        } if (CategoryController.getInstance().getCategoryId(name.getText()) == null) {
+        } if (CategoryController.getInstance().getCategoryId(category.getText()) == null) {
             newError.setText("category does not exist");
             return;
-        } if (CategoryController.getInstance().getCategoryTypeByName(name.getText()).equals("FinalCategory")) {
+        } if (!CategoryController.getInstance().getCategoryTypeByName(category.getText()).equals("FinalCategory")) {
             newError.setText("category is not final");
             return;
         } if (!newPrice.validate()) {

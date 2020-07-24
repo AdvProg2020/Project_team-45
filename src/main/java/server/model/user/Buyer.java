@@ -30,8 +30,10 @@ public class Buyer extends User implements CartHolder, Savable {
     private ArrayList<CodedDiscount> listOfCodedDiscounts;
     private ArrayList<BuyLog> listOfBuyLogs;
     private HashMap<String, Rate> purchasedProducts; // productIds and rates
+
     private int accountNumber;
     private String accountToken;
+
     private BuyerWallet wallet;
     private HashMap<Auction, Integer> allAuctions;
     private DoubleChatRoom activeChat;
@@ -42,14 +44,7 @@ public class Buyer extends User implements CartHolder, Savable {
         this.listOfCodedDiscounts = new ArrayList<>();
         this.listOfBuyLogs = new ArrayList<>();
         this.purchasedProducts = new HashMap<>();
-        HashMap<String, Integer> testAccounts = new HashMap<>();
-//        testAccounts.put("b", 59385);
-        if (testAccounts.containsKey(personalInfo.getUsername())) {
-            accountNumber = testAccounts.get(personalInfo.getUsername());
-        } else {
-            accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());
-            System.out.println(personalInfo.getUsername() + ": " + accountNumber);
-        }
+        accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());System.out.println(personalInfo.getUsername() + ": " + accountNumber);
         accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
         BankSocket.payReceipt(BankSocket.createDepositReceipt(accountToken, 1000, accountNumber));
         this.wallet = new BuyerWallet(this);
@@ -64,9 +59,9 @@ public class Buyer extends User implements CartHolder, Savable {
         return BankSocket.getBalance(accountToken);
     }
 
-    public void chargeWallet(int amount) throws Throwable {
+    public void chargeWallet(int amount) throws Exception {
         if (getAccountBalance() < amount) {
-            throw new Throwable("not enough account balance");
+            throw new Exception("not enough account balance");
         }
         BankSocket.payReceipt(BankSocket.createWithdrawReceipt(accountToken, amount, accountNumber));
         Market.getInstance().depositAccount(amount);

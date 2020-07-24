@@ -14,6 +14,7 @@ import server.model.request.*;
 import server.model.user.PersonalInfo;
 import server.model.user.Seller;
 import server.model.user.User;
+import server.newModel.nedaei.FileProduct;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -105,8 +106,14 @@ public class SellerController extends UserController implements Manager {
         if (mode.equals("existing")) {
             newProduct = market.getProductById(product.get("id"));
         } else if (mode.equals("new")) {
-            newProduct = new Product(product.get("name"), (FinalCategory) market.getCategoryByName(product.get("categoryName")),
-                    product.get("description"), "sth", "sth");
+            if (product.get("isFile").equals("true")) {
+                newProduct = new FileProduct(product.get("name"), (FinalCategory) market.getCategoryByName(product.get("categoryName")),
+                        product.get("description"), "sth", "sth",
+                        ((Seller) UserController.getActiveUser()).getUsername(), product.get("filePath"));
+            } else {
+                newProduct = new Product(product.get("name"), (FinalCategory) market.getCategoryByName(product.get("categoryName")),
+                        product.get("description"), "sth", "sth");
+            }
         }
         newProduct.setCompany(((Seller) UserController.getActiveUser()).getCompany());
         ProductSellInfo productSellInfo = new ProductSellInfo(newProduct, (Seller) UserController.getActiveUser());

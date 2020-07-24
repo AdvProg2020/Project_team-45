@@ -86,7 +86,6 @@ public class P2PSocket extends Thread {
     }
 
     private void connectToBuyer(Socket buyerSocket, String fileInfo) {
-        // TODO : nedaei
         try {
             DataOutputStream dataOutputStream =
                     new DataOutputStream(new BufferedOutputStream(buyerSocket.getOutputStream()));
@@ -109,6 +108,12 @@ public class P2PSocket extends Thread {
                             initializationVector, publicKey));
             dataOutputStream.flush();
 
+            // 5
+            if (dataInputStream.readUTF().equals("buyer: give me format")) {
+                dataOutputStream.writeUTF(fileInfo.split("\\.")[1]);
+                dataOutputStream.flush();
+            }
+
             //
             new Thread(new Runnable() {
                 @Override
@@ -122,7 +127,6 @@ public class P2PSocket extends Thread {
     }
 
     private void connectToSeller(Socket sellerSocket) {
-        // TODO : nedaei
         try {
             DataInputStream dataInputStream =
                     new DataInputStream(new BufferedInputStream(sellerSocket.getInputStream()));
@@ -143,11 +147,17 @@ public class P2PSocket extends Thread {
                 secretKey = (new Gson()).fromJson(receivedMessage[1], (Type) Class.forName(receivedMessage[0]));
                 initializationVector = receivedMessage[2];
 
+                dataOutputStream.writeUTF("buyer: give me format");
+                dataOutputStream.flush();
+
+                // 6
+                String format = dataInputStream.readUTF();
+
                 //
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        receiveFileFromSeller(sellerSocket);
+                        receiveFileFromSeller(format, sellerSocket);
                     }
                 }).start();
             }
@@ -157,7 +167,6 @@ public class P2PSocket extends Thread {
     }
 
     private void sendFileForBuyer(Socket buyerSocket, String fileInfo) {
-        // todo : nedaei, check this
         // fileInfo is the file path in client
         try {
             BufferedInputStream fileInputStream = new BufferedInputStream(new FileInputStream(new File(fileInfo)));
@@ -187,10 +196,9 @@ public class P2PSocket extends Thread {
         }
     }
 
-    private void receiveFileFromSeller(Socket sellerSocket) {
+    private void receiveFileFromSeller(String format, Socket sellerSocket) {
         try {
-            // todo : nedaei, get the file format & check this
-            BufferedOutputStream fileOutputStream = new BufferedOutputStream(new FileOutputStream(new File("src/main/java/client/test.txt")));
+            BufferedOutputStream fileOutputStream = new BufferedOutputStream(new FileOutputStream(new File("src/main/java/client/test." + format)));
             String receivedMessage;
             int off = 0;
             DataOutputStream dataOutputStream =

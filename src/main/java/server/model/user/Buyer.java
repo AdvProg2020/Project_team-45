@@ -3,6 +3,7 @@ package server.model.user;
 import client.controller.BankController;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import server.controller.P2PController;
 import server.model.CodedDiscount;
 import server.model.Market;
 import server.model.Savable;
@@ -18,6 +19,7 @@ import server.newModel.bagheri.chatRoom.ChatRoom;
 import server.newModel.bagheri.chatRoom.DoubleChatRoom;
 import server.newModel.bagheri.wallet.BuyerWallet;
 import server.newModel.bagheri.wallet.SellerWallet;
+import server.newModel.nedaei.FileProduct;
 
 import java.util.ArrayList;
 import java.util.Date;

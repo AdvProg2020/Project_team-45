@@ -123,7 +123,7 @@ public class MenuController {
 
     public String pickPhoto() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open photo");
+        fileChooser.setTitle("Open");
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")

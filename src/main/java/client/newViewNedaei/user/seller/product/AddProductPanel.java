@@ -7,11 +7,14 @@ import client.newViewHatami.Validator;
 import client.newViewHatami.ValidatorField;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.util.HashMap;
@@ -31,9 +34,12 @@ public class AddProductPanel extends Panel {
     public GridPane newPane;
     public GridPane existingPane;
     public CheckBox checkBox;
+    public CheckBox isFile;
+    public Button fileBrowse;
 
     private String productPhotoPath;
     private String productVideoPath;
+    private String productFilePath;
 
     public static String getFxmlFilePath() {
         return "/AddProductPanel.fxml";
@@ -110,6 +116,12 @@ public class AddProductPanel extends Panel {
         product.put("description", description.getText());
         product.put("price", newPrice.getText());
         product.put("stock", newStock.getText());
+        if (isFile.isSelected()) {
+            product.put("isFile", "true");
+            product.put("filePath", productFilePath);
+        } else {
+            product.put("isFile", "false");
+        }
         SellerController.getInstance().createAddProductRequest("new", product, Integer.parseInt(newPrice.getText()), Integer.parseInt(newStock.getText()));
         newError.setText("");
     }
@@ -125,6 +137,21 @@ public class AddProductPanel extends Panel {
         String videoPath = MenuController.getInstance().pickVideo();
         if (videoPath != null) {
             productVideoPath = videoPath;
+        }
+    }
+
+    public void checkFileCheckBox(ActionEvent event) {
+        if (isFile.isSelected()) {
+            fileBrowse.setDisable(false);
+        } else {
+            fileBrowse.setDisable(true);
+        }
+    }
+
+    public void pickFile(MouseEvent mouseEvent) {
+        String filePath = MenuController.getInstance().pickPhoto();
+        if (filePath != null) {
+            productFilePath = filePath;
         }
     }
 }

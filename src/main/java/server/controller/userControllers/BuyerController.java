@@ -8,6 +8,7 @@ import server.model.log.Log;
 import server.model.product.ProductSellInfo;
 import server.model.product.Rate;
 import server.model.user.*;
+import server.newModel.nedaei.FileProduct;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -130,6 +131,7 @@ public class BuyerController extends UserController implements Manager {
             sellInfo.put("productName", productSellInfo.getProduct().getName());
             sellInfo.put("finalPrice", "" + productSellInfo.getFinalPrice());
             sellInfo.put("id", productSellInfo.getProduct().getId());
+            sellInfo.put("isFile", "" + (productSellInfo.getProduct() instanceof FileProduct));
             result.add(sellInfo);
         }
         return result;

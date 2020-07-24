@@ -1,11 +1,14 @@
 package client.newViewNedaei.user.buyer.orders;
 
+import client.controller.P2PController;
 import client.newViewNedaei.Panel;
 import client.controller.userControllers.BuyerController;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,6 +28,8 @@ public class BuyLogPanel extends Panel {
     public ChoiceBox<String> scores;
     public Label error;
 
+    private ArrayList<HashMap<String, String>> sellInfos;
+
     public static String getFxmlFilePath() {
         return "/BuyLogPanel.fxml";
     }
@@ -41,8 +46,7 @@ public class BuyLogPanel extends Panel {
         address.setText(buyLog.get("address"));
         phone.setText(buyLog.get("phoneNumber"));
 
-        ArrayList<HashMap<String, String>> sellInfos =
-                BuyerController.getInstance().getBuyLogSellInfosById(buyLog.get("id"));
+        sellInfos = BuyerController.getInstance().getBuyLogSellInfosById(buyLog.get("id"));
         for (HashMap<String, String> sellInfo : sellInfos) {
             products.getItems().add(sellInfo.get("productName") + " -> " + sellInfo.get("finalPrice"));
             ids.getItems().add(sellInfo.get("id"));
@@ -63,5 +67,13 @@ public class BuyLogPanel extends Panel {
         }
         BuyerController.getInstance().rateProductById(ids.getValue(), Integer.parseInt(scores.getValue()));
         error.setText("");
+    }
+
+    public void downloadFiles(MouseEvent mouseEvent) {
+        for (HashMap<String, String> sellInfo : sellInfos) {
+            if (sellInfo.get("isFile").equals("true")) {
+                P2PController.getInstance().receiveFile(sellInfo.get("id"));
+            }
+        }
     }
 }

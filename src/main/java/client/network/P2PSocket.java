@@ -16,8 +16,10 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 public class P2PSocket extends Thread {
-    public final int PORT;
-    public final String IP = "127.0.0.1";
+    public final int PORT = 19378;
+    public final String IP = "0.tcp.ngrok.io";
+
+    public final int localPort = 8888;
 
     private ServerSocket serverSocket;
     private final Object receiveFileLock = new Object();
@@ -30,12 +32,11 @@ public class P2PSocket extends Thread {
 
     public P2PSocket() {
         try {
-            serverSocket = new ServerSocket(0);
+            serverSocket = new ServerSocket(localPort);
 
         } catch (IOException exception) {
             exception.printStackTrace();
         }
-        PORT = serverSocket.getLocalPort();
     }
 
     public int getPORT() {
@@ -48,12 +49,15 @@ public class P2PSocket extends Thread {
         while (isRunning) {
             try {
                 Socket clientSocket = serverSocket.accept();
+                System.out.println("//////////////////////");
+
                 DataInputStream dataInputStream =
                         new DataInputStream(new BufferedInputStream(clientSocket.getInputStream()));
                 DataOutputStream dataOutputStream =
                         new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
                 String clientMessage = dataInputStream.readUTF();
 
+                System.out.println("p2p : a peer connected : " + clientMessage);
                 if (clientMessage.startsWith("server:")) {
                     try {
                         handleServerMessage(clientMessage);
@@ -63,7 +67,7 @@ public class P2PSocket extends Thread {
                     }
                     dataOutputStream.flush();
                 } else if (clientMessage.startsWith("seller:")) {
-                    connectToSeller(clientSocket);
+                    connectToSeller(clientSocket, dataInputStream, dataOutputStream);
                 }
 
             } catch (SocketException exception) {
@@ -76,7 +80,7 @@ public class P2PSocket extends Thread {
 
     private void handleServerMessage(String serverMessage) throws IOException {
         // for seller : send file for client
-        String[] messageParted = serverMessage.split(":", 1)[1].split("&", 2);
+        String[] messageParted = serverMessage.split(":", 2)[1].split("&", 3);
         String buyerIP = messageParted[0];
         int buyerPort = Integer.parseInt(messageParted[1]);
 
@@ -126,14 +130,16 @@ public class P2PSocket extends Thread {
         }
     }
 
-    private void connectToSeller(Socket sellerSocket) {
+    private void connectToSeller(Socket sellerSocket, DataInputStream dataInputStream, DataOutputStream dataOutputStream) {
         try {
-            DataInputStream dataInputStream =
-                    new DataInputStream(new BufferedInputStream(sellerSocket.getInputStream()));
-            DataOutputStream dataOutputStream =
-                    new DataOutputStream(new BufferedOutputStream(sellerSocket.getOutputStream()));
+//            DataInputStream dataInputStream =
+//                    new DataInputStream(new BufferedInputStream(sellerSocket.getInputStream()));
+//            DataOutputStream dataOutputStream =
+//                    new DataOutputStream(new BufferedOutputStream(sellerSocket.getOutputStream()));
 
-            if (dataInputStream.readUTF().equals("seller: give me your public key")) {
+            String p2 = dataInputStream.readUTF();
+            System.out.println("p2 : " + p2);
+            if (p2.equals("seller: give me your public key")) {
                 // 2
                 KeyPair keyPair = AsymmetricEncryption.getInstance().generateKeyPair();
                 privateKey = keyPair.getPrivate();
@@ -143,7 +149,9 @@ public class P2PSocket extends Thread {
                 dataOutputStream.flush();
 
                 // 4
-                String[] receivedMessage = dataInputStream.readUTF().split("::");
+                String p4 = AsymmetricEncryption.getInstance().decrypt(dataInputStream.readUTF(), privateKey);
+                System.out.println("p4 : " + p4);
+                String[] receivedMessage = p4.split("::");
                 secretKey = (new Gson()).fromJson(receivedMessage[1], (Type) Class.forName(receivedMessage[0]));
                 initializationVector = receivedMessage[2];
 
@@ -207,13 +215,14 @@ public class P2PSocket extends Thread {
                     new DataInputStream(new BufferedInputStream(sellerSocket.getInputStream()));
 
             while (!(receivedMessage = dataInputStream.readUTF()).equals("done")) {
-                String[] messageParts = AsymmetricEncryption.getInstance().decrypt(
-                        SymmetricEncryption.getInstance().decrypt(
-                                receivedMessage, secretKey, initializationVector), privateKey).split("::");
 
+                String[] messageParts = SymmetricEncryption.getInstance().decrypt(AsymmetricEncryption.getInstance().decrypt(
+                        receivedMessage, privateKey), secretKey, initializationVector).split("::");
+
+                System.out.println(messageParts[0] + "//////////" + messageParts[1]);
                 byte[] buffer = DatatypeConverter.parseHexBinary(messageParts[1]);
                 int bytesRead = Integer.parseInt(messageParts[0]);
-                fileOutputStream.write(buffer, off, bytesRead);
+                fileOutputStream.write(buffer, 0, bytesRead);
                 off += bytesRead;
 
                 dataOutputStream.writeUTF("go on");

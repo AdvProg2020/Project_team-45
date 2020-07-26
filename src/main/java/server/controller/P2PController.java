@@ -36,8 +36,10 @@ public class P2PController {
             dataOutputStream.writeUTF(message);
             dataOutputStream.flush();
             String sellerResponse = dataInputStream.readUTF();
+            System.out.println("////////////" + sellerResponse + "/////////");
             if (sellerResponse.equals("fail")) {
                 return false;
+
             } else if (sellerResponse.equals("done")) {
                 return true;
             }

@@ -5,14 +5,14 @@ import java.net.Socket;
 
 public class ClientSocket extends Thread {
 
-    // server info
-//    public static final int PORT = 13092;
-//    public static final String IP = "0.tcp.ngrok.io";
+//    // server info
+    public static final int PORT = 12331;
+    public static final String IP = "0.tcp.ngrok.io";
 
     // in pc
-    // 6666
-    public static final int PORT = 6667;
-    public static final String IP = "127.0.0.1";
+//    public static final int PORT = 6667;
+//    public static final String IP = "127.0.0.1";
+
     private int messageCounter;
 
     private final P2PSocket p2pSocket = new P2PSocket();

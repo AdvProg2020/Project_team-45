@@ -1,17 +1,15 @@
 package client.newViewNedaei.user.buyer.orders;
 
 import client.controller.P2PController;
-import client.newViewNedaei.Panel;
 import client.controller.userControllers.BuyerController;
+import client.newViewNedaei.Panel;
 import com.google.gson.internal.LinkedTreeMap;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -73,7 +71,7 @@ public class BuyLogPanel extends Panel {
     public void downloadFiles(MouseEvent mouseEvent) {
         for (Object sellInfo : sellInfos) {
             if (new HashMap<String, String>((LinkedTreeMap)sellInfo).get("isFile").equals("true")) {
-                P2PController.getInstance().receiveFile(new HashMap<String, String>((LinkedTreeMap)sellInfo).get("id"));
+                P2PController.getInstance().receiveFile((new HashMap<String, String>((LinkedTreeMap)sellInfo)).get("id"));
             }
         }
     }

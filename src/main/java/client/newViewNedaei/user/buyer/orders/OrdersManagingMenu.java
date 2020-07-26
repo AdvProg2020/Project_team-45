@@ -2,6 +2,7 @@ package client.newViewNedaei.user.buyer.orders;
 
 import client.newViewNedaei.MenuController;
 import client.controller.userControllers.BuyerController;
+import com.google.gson.internal.LinkedTreeMap;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -24,10 +25,10 @@ public class OrdersManagingMenu {
 
     @FXML
     public void initialize() {
-        ArrayList<HashMap<String, String>> buyLogs = BuyerController.getInstance().getListOfBuyLogs();
+        ArrayList buyLogs = BuyerController.getInstance().getListOfBuyLogs();
         int i = 0;
-        for (HashMap<String, String> buyLog : buyLogs) {
-            mainPane.add(createOrderDisplay(buyLog), i%5, i/5);
+        for (Object buyLog : buyLogs) {
+            mainPane.add(createOrderDisplay(new HashMap<String, String>((LinkedTreeMap) buyLog)), i%5, i/5);
             i++;
         }
     }

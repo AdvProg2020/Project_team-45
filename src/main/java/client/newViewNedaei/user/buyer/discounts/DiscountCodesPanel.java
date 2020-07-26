@@ -4,6 +4,7 @@ import client.controller.CodedDiscountController;
 import client.controller.userControllers.BuyerController;
 import client.newViewNedaei.MenuController;
 import client.newViewNedaei.Panel;
+import com.google.gson.internal.LinkedTreeMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ListView;
@@ -21,11 +22,11 @@ public class DiscountCodesPanel extends Panel {
 
     @FXML
     public void initialize() {
-        ArrayList<HashMap<String, String>> codes = BuyerController.getInstance().getListOfCodedDiscounts();
-        for (HashMap<String, String> code : codes) {
-            Hyperlink hyperlink = new Hyperlink(code.get("code") + " -> " + code.get("percentage") + "%");
+        ArrayList codes = BuyerController.getInstance().getListOfCodedDiscounts();
+        for (Object code : codes) {
+            Hyperlink hyperlink = new Hyperlink(new HashMap<String, String>((LinkedTreeMap)code).get("code") + " -> " + new HashMap<String, String>((LinkedTreeMap)code).get("percentage") + "%");
             hyperlink.setOnAction(event -> {
-                CodedDiscountController.getInstance().setCurrentDiscountById(code.get("id"));
+                CodedDiscountController.getInstance().setCurrentDiscountById(new HashMap<String, String>((LinkedTreeMap)code).get("id"));
                 MenuController.getInstance().goToPanel(DisplayDiscountCodePanel.getFxmlFilePath());
             });
             discounts.getItems().add(hyperlink);

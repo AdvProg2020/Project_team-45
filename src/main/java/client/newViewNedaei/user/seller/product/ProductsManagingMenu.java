@@ -3,6 +3,7 @@ package client.newViewNedaei.user.seller.product;
 import client.controller.ProductController;
 import client.controller.userControllers.SellerController;
 import client.newViewNedaei.MenuController;
+import com.google.gson.internal.LinkedTreeMap;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -25,10 +26,10 @@ public class ProductsManagingMenu {
 
     @FXML
     public void initialize() {
-        ArrayList<HashMap<String, String>> sellInfos = SellerController.getInstance().getSellInfos();
+        ArrayList sellInfos = SellerController.getInstance().getSellInfos();
         int i = 0;
-        for (HashMap<String, String> productSellInfo : sellInfos) {
-            mainPane.add(createProductDisplay(productSellInfo), i%5, i/5);
+        for (Object productSellInfo : sellInfos) {
+            mainPane.add(createProductDisplay(new HashMap<String, String>((LinkedTreeMap)productSellInfo)), i%5, i/5);
             i++;
         }
     }

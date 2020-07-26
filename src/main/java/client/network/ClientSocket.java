@@ -10,7 +10,8 @@ public class ClientSocket extends Thread {
 //    public static final String IP = "0.tcp.ngrok.io";
 
     // in pc
-    public static final int PORT = 6666;
+    // 6666
+    public static final int PORT = 6667;
     public static final String IP = "127.0.0.1";
     private int messageCounter;
 

@@ -111,7 +111,7 @@ public class SellerMenu {
             return;
         }
         try {
-            BankController.getInstance().depositAccount(Integer.parseInt(charge.getText()));
+            BankController.getInstance().depositAccount(Integer.parseInt(deposit.getText()));
             updateWalletAndAccount();
             error.setText("");
         } catch (Throwable e) {

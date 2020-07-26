@@ -3,6 +3,7 @@ package client.newViewNedaei.user.buyer.orders;
 import client.controller.P2PController;
 import client.newViewNedaei.Panel;
 import client.controller.userControllers.BuyerController;
+import com.google.gson.internal.LinkedTreeMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -28,7 +29,7 @@ public class BuyLogPanel extends Panel {
     public ChoiceBox<String> scores;
     public Label error;
 
-    private ArrayList<HashMap<String, String>> sellInfos;
+    private ArrayList sellInfos;
 
     public static String getFxmlFilePath() {
         return "/BuyLogPanel.fxml";
@@ -47,9 +48,9 @@ public class BuyLogPanel extends Panel {
         phone.setText(buyLog.get("phoneNumber"));
 
         sellInfos = BuyerController.getInstance().getBuyLogSellInfosById(buyLog.get("id"));
-        for (HashMap<String, String> sellInfo : sellInfos) {
-            products.getItems().add(sellInfo.get("productName") + " -> " + sellInfo.get("finalPrice"));
-            ids.getItems().add(sellInfo.get("id"));
+        for (Object sellInfo : sellInfos) {
+            products.getItems().add(new HashMap<String, String>((LinkedTreeMap)sellInfo).get("productName") + " -> " + new HashMap<String, String>((LinkedTreeMap)sellInfo).get("finalPrice"));
+            ids.getItems().add(new HashMap<String, String>((LinkedTreeMap)sellInfo).get("id"));
         }
 
         for (int i = 0; i < 6; i++) {
@@ -70,9 +71,9 @@ public class BuyLogPanel extends Panel {
     }
 
     public void downloadFiles(MouseEvent mouseEvent) {
-        for (HashMap<String, String> sellInfo : sellInfos) {
-            if (sellInfo.get("isFile").equals("true")) {
-                P2PController.getInstance().receiveFile(sellInfo.get("id"));
+        for (Object sellInfo : sellInfos) {
+            if (new HashMap<String, String>((LinkedTreeMap)sellInfo).get("isFile").equals("true")) {
+                P2PController.getInstance().receiveFile(new HashMap<String, String>((LinkedTreeMap)sellInfo).get("id"));
             }
         }
     }

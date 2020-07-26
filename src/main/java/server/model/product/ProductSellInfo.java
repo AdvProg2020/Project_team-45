@@ -171,6 +171,7 @@ public class ProductSellInfo extends IdRecognized implements Savable {
 
     public HashMap<String, String> getInformation() {
         HashMap<String, String> information = new HashMap<>();
+        information.put("productId", product.getId());
         information.put("sellerUsername", seller.getUsername());
         information.put("originalPrice", "" + price);
         information.put("finalPrice", "" + getFinalPrice());

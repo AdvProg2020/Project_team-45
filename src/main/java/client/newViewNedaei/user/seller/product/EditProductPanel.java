@@ -42,6 +42,8 @@ public class EditProductPanel extends Panel {
         fieldsAndValues.put("offId", offId.getText());
         fieldsAndValues.put("price", price.getText());
         fieldsAndValues.put("stock", stock.getText());
+        System.out.println("" + ProductController.getInstance()
+                .getActiveSellInfo());
         SellerController.getInstance().createProductEditionRequest(ProductController.getInstance()
                 .getActiveSellInfo().get("productId"), fieldsAndValues);
         error.setText("");

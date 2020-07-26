@@ -1,5 +1,6 @@
 package server.controller;
 
+import client.network.MethodStringer;
 import server.controller.managers.Deleter;
 import server.model.CodedDiscount;
 import server.model.Market;
@@ -87,5 +88,9 @@ public class CodedDiscountController implements Deleter {
             endDate = market.getCodedDiscountByCode(discountCode).getEndDate();
         }
         return startDate.before(endDate);
+    }
+
+    public void setCurrentDiscountById(String currentDiscountId) {
+        currentDiscount = market.getCodedDiscountById(currentDiscountId);
     }
 }

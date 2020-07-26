@@ -44,6 +44,10 @@ public class ProductController implements Deleter {
         return setActiveProductByListAndId(productsList, productId);
     }
 
+    public void setActiveProductSellInfo(String sellInfoId) {
+        activeProductSellInfo = market.getProductSellInfoById(sellInfoId);
+    }
+
     private boolean setActiveProductByListAndId(ArrayList<Product> productsList, String productId) {
         for (Product product : productsList) {
             if (product.getId().equals(productId)) {

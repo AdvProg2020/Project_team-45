@@ -14,10 +14,9 @@ import java.net.SocketException;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.util.Arrays;
 
 public class P2PSocket extends Thread {
-    public final int PORT = 19378;
+    public final int PORT = 17000;
     public final String IP = "0.tcp.ngrok.io";
 
     public final int localPort = 8888;

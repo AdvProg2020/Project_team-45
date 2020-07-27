@@ -12,6 +12,7 @@ import server.network.BankSocket;
 import server.newModel.bagheri.Auction;
 import server.newModel.bagheri.wallet.SellerWallet;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -37,7 +38,11 @@ public class Seller extends User {
         sellerWallet = new SellerWallet(this);
 
 
-        accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());
+        try {
+            accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(personalInfo.getUsername() + ": " + accountNumber);
         accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
     }

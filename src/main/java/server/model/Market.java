@@ -13,6 +13,7 @@ import server.model.user.User;
 import server.network.BankSocket;
 import server.newModel.bagheri.Auction;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Market {
@@ -66,8 +67,13 @@ public class Market {
     }
 
     public void initializeBankVariables() {
-        accountNumber = 47039;
-//                BankSocket.createAccount("market", "market", "market3", "market");
+        try {
+            accountNumber = BankSocket.createAccount("market", "market", "market3", "market");
+            System.out.println(accountNumber);
+        } catch (Exception e) {
+            accountNumber = 47039;
+//            accountNumber = 145807;
+        }
         accountToken = BankSocket.getToken("market3", "market");
     }
 

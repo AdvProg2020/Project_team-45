@@ -16,10 +16,13 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 public class P2PSocket extends Thread {
-    public final int PORT = 8888;
-    public final String IP = "0.tcp.ngrok.io";
+//    public final int PORT = 17000;
+//    public final String IP = "0.tcp.ngrok.io";
 
-    public final int localPort = 8888;
+    public final int PORT = 8889;
+    public final String IP = "127.0.0.1";
+
+    public final int localPort = 8889;
 
     private ServerSocket serverSocket;
     private final Object receiveFileLock = new Object();

@@ -57,7 +57,7 @@ public class SupporterController extends UserController implements Manager {
         //TODO: update Supporter
     }
 
-    public void addMassageForSupporter(String massageText, String buyerUsername) {
+    public void addMassageForSupporter(String buyerUsername, String massageText) {
         Supporter supporter = (Supporter) UserController.getActiveUser();
         Massage massage = new Massage(supporter, massageText);
         supporter.getChatByBuyerUsername(buyerUsername).addMassage(massage);
@@ -65,7 +65,8 @@ public class SupporterController extends UserController implements Manager {
     }
 
     public ArrayList<String> getMessages() {
-        return ((Buyer) UserController.getActiveUser()).getActiveChat().getAllMassagesText();
+        ArrayList<String> allMessagesText = ((Buyer) UserController.getActiveUser()).getActiveChat().getAllMassagesText();
+        return allMessagesText;
     }
 
     @Override

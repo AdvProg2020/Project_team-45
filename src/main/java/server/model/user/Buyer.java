@@ -21,6 +21,7 @@ import server.newModel.bagheri.wallet.BuyerWallet;
 import server.newModel.bagheri.wallet.SellerWallet;
 import server.newModel.nedaei.FileProduct;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -44,7 +45,12 @@ public class Buyer extends User implements CartHolder, Savable {
         this.listOfCodedDiscounts = new ArrayList<>();
         this.listOfBuyLogs = new ArrayList<>();
         this.purchasedProducts = new HashMap<>();
-        accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());System.out.println(personalInfo.getUsername() + ": " + accountNumber);
+        try {
+            accountNumber = BankSocket.createAccount(personalInfo.getFirstName(), personalInfo.getLastName(), personalInfo.getUsername(), personalInfo.getPassword());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(personalInfo.getUsername() + ": " + accountNumber);
         accountToken = BankSocket.getToken(personalInfo.getUsername(), personalInfo.getPassword());
         BankSocket.payReceipt(BankSocket.createDepositReceipt(accountToken, 1000, accountNumber));
         this.wallet = new BuyerWallet(this);

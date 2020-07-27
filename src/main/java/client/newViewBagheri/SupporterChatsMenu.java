@@ -25,8 +25,9 @@ public class SupporterChatsMenu {
 
     @FXML
     public void initialize() {
+        allTabsList = new HashMap<>();
+        allVBoxMassagesList = new HashMap<>();
         addAllActiveChats();
-        
     }
 
     public void addAllActiveChats() {
@@ -64,7 +65,7 @@ public class SupporterChatsMenu {
         addMassageToChat(username, massageContent);
     }
 
-    private void addMassageToChat(String massage, String username) {
+    private void addMassageToChat(String username, String massage) {
         VBox massageVBox = allVBoxMassagesList.get(username);
         if (massageVBox == null) {
             ArrayList<String> massages = new ArrayList<>();

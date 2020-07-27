@@ -9,6 +9,7 @@ public class ChatRoom {
     ArrayList<Massage> allMassages;
 
     public ChatRoom() {
+        allMassages = new ArrayList<>();
         isActive = true;
     }
 

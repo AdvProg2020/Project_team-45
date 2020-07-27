@@ -51,9 +51,9 @@ public class SupporterController {
         }
     }
 
-    public void addMassageForSupporter(String massageText, String buyerUsername) {
+    public void addMassageForSupporter(String buyerUsername, String massageText) {
         try {
-            MethodStringer.sampleMethod(getClass(),"getSellerCompany", massageText, buyerUsername);
+            MethodStringer.sampleMethod(getClass(),"addMassageForSupporter", buyerUsername, massageText);
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }

@@ -14,6 +14,9 @@ public class BankSocket {
     public static final int PORT = 8888;
     public static final String IP = "127.0.0.1";
 
+//    public static final int PORT = 11072;
+//    public static final String IP = "2.tcp.ngrok.io";
+
     private static DataOutputStream outputStream;
     private static DataInputStream inputStream;
 
@@ -84,13 +87,8 @@ public class BankSocket {
 
     // my methods
 
-    public static Integer createAccount(String firstName, String lastName, String username, String password) {
-        try {
-            return Integer.parseInt(SendMessage("create_account " + firstName + " " + lastName + " " + username + " " + password + " " + password));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static Integer createAccount(String firstName, String lastName, String username, String password) throws IOException {
+        return Integer.parseInt(SendMessage("create_account " + firstName + " " + lastName + " " + username + " " + password + " " + password));
     }
 
     public static String getToken(String username, String password) {

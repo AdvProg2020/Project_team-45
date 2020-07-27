@@ -33,9 +33,11 @@ public class SupporterChatsMenu {
     }
 
     public void addAllActiveChats() {
-        for (Map.Entry<String, ArrayList<String>> activeChat :
-                supporterController.getActiveSupporterAllActiveChats().entrySet()) {
-            Platform.runLater(() -> allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue())));
+        if (supporterController.getActiveSupporterAllActiveChats() != null) {
+            for (Map.Entry<String, ArrayList<String>> activeChat :
+                    supporterController.getActiveSupporterAllActiveChats().entrySet()) {
+                Platform.runLater(() -> allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue())));
+            }
         }
     }
 

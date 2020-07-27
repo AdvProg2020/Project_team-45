@@ -14,6 +14,7 @@ import java.net.SocketException;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.Arrays;
 
 public class P2PSocket extends Thread {
     public final int PORT;
@@ -53,7 +54,7 @@ public class P2PSocket extends Thread {
                 DataOutputStream dataOutputStream =
                         new DataOutputStream(new BufferedOutputStream(clientSocket.getOutputStream()));
                 String clientMessage = dataInputStream.readUTF();
-
+                System.out.println("client message " + clientMessage);
                 if (clientMessage.startsWith("server:")) {
                     try {
                         handleServerMessage(clientMessage);
@@ -76,7 +77,7 @@ public class P2PSocket extends Thread {
 
     private void handleServerMessage(String serverMessage) throws IOException {
         // for seller : send file for client
-        String[] messageParted = serverMessage.split(":", 1)[1].split("&", 2);
+        String[] messageParted = serverMessage.split(":", 2)[1].split("&", 3);
         String buyerIP = messageParted[0];
         int buyerPort = Integer.parseInt(messageParted[1]);
 
@@ -95,9 +96,14 @@ public class P2PSocket extends Thread {
             // 1
             dataOutputStream.writeUTF("seller: give me your public key");
             dataOutputStream.flush();
+            dataOutputStream.writeUTF("seller: give me your public key");
+            dataOutputStream.flush();
 
             // 3
-            String[] receivedMessage = dataInputStream.readUTF().split("::");
+            String response = dataInputStream.readUTF();
+            System.out.println(response);
+            String[] receivedMessage = response.split("::");
+            System.out.println("receivedMessage " + response);
             publicKey = (new Gson()).fromJson(receivedMessage[1], (Type) Class.forName(receivedMessage[0]));
 
             secretKey = SymmetricEncryption.getInstance().generateSecretKey();
@@ -170,7 +176,7 @@ public class P2PSocket extends Thread {
         // fileInfo is the file path in client
         try {
             BufferedInputStream fileInputStream = new BufferedInputStream(new FileInputStream(new File(fileInfo)));
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[10];
             int bytesRead;
             DataOutputStream dataOutputStream =
                     new DataOutputStream(new BufferedOutputStream(buyerSocket.getOutputStream()));
@@ -207,9 +213,11 @@ public class P2PSocket extends Thread {
                     new DataInputStream(new BufferedInputStream(sellerSocket.getInputStream()));
 
             while (!(receivedMessage = dataInputStream.readUTF()).equals("done")) {
-                String[] messageParts = AsymmetricEncryption.getInstance().decrypt(
-                        SymmetricEncryption.getInstance().decrypt(
-                                receivedMessage, secretKey, initializationVector), privateKey).split("::");
+                String[] messageParts = SymmetricEncryption.getInstance().decrypt(AsymmetricEncryption.getInstance().decrypt(
+                        receivedMessage, privateKey), secretKey, initializationVector).split("::");
+//                String[] messageParts = AsymmetricEncryption.getInstance().decrypt(
+//                        SymmetricEncryption.getInstance().decrypt(
+//                                receivedMessage, secretKey, initializationVector), privateKey).split("::");
 
                 byte[] buffer = DatatypeConverter.parseHexBinary(messageParts[1]);
                 int bytesRead = Integer.parseInt(messageParts[0]);

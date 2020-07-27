@@ -4,7 +4,7 @@ import client.network.ClientSocket;
 import client.network.MethodStringer;
 
 public class P2PController {
-    private static P2PController instance;
+    private static final P2PController instance = new P2PController();
 
     public static P2PController getInstance() {
         return instance;
@@ -23,7 +23,7 @@ public class P2PController {
         }
     }
 
-    public boolean tellSellerSendFile(String fileId, String p2pIP, int p2pPort) {
+    public boolean tellSellerSendFile(String fileId, String p2pIP, Integer p2pPort) {
         try {
             return (boolean) MethodStringer.sampleMethod(getClass(), "tellSellerSendFile", fileId, p2pIP, p2pPort);
         } catch (Throwable throwable) {

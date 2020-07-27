@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class P2PController {
 
-    private static P2PController instance;
+    private static P2PController instance = new P2PController();
 
     public static P2PController getInstance() {
         return instance;
@@ -18,7 +18,7 @@ public class P2PController {
     private P2PController() {
     }
 
-    private boolean tellSellerSendFile(String fileId, String p2pIP, int p2pPort) {
+    public boolean tellSellerSendFile(String fileId, String p2pIP, Integer p2pPort) {
         FileProduct fileProduct = (FileProduct) Market.getInstance().getProductById(fileId);
         String sellerUserName = fileProduct.getSellerUserName(); // TODO nedaeai : get sellerUsername from fileInfoForServer
         String message = fileProduct.getPathInClient(); // TODO nedaeai : make message for seller P2PSocket to send file // not contain "%, &"
@@ -36,6 +36,7 @@ public class P2PController {
             dataOutputStream.writeUTF(message);
             dataOutputStream.flush();
             String sellerResponse = dataInputStream.readUTF();
+            System.out.println("seller response " + sellerResponse);
             if (sellerResponse.equals("fail")) {
                 return false;
             } else if (sellerResponse.equals("done")) {

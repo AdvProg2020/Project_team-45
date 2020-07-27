@@ -92,7 +92,7 @@ public class SupporterChatsMenu {
             @Override
             public void run() {
                 while (true) {
-                    updateChats();
+                    Platform.runLater(() -> updateChats());
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
@@ -114,7 +114,8 @@ public class SupporterChatsMenu {
                         vBox.getChildren().add(new Text(message));
                     }
                 }
-                Platform.runLater(() -> allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue())));
+                else
+                   allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue()));
             }
         }
     }

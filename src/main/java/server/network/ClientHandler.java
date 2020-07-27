@@ -67,7 +67,7 @@ public class ClientHandler extends Thread {
                 try {
                     clientMessage = clientInputStream.readUTF();
                     lastCommand = getInputReady(clientMessage);
-                    messageCounter++;
+
 
                     ////////////////////////////////////////////////////
                     ServerManager.getInstance().addClientRequest(this);
@@ -109,6 +109,7 @@ public class ClientHandler extends Thread {
         if (this.token != receivedToken || receivedMC != messageCounter) {
             throw new WrongTokenException();
         }
+        messageCounter++;
         return clientMessage.substring(tokenMatcher.end());
     }
 

@@ -1,6 +1,7 @@
 package client.newViewBagheri;
 
 import client.controller.userControllers.SupporterController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
@@ -28,12 +29,13 @@ public class SupporterChatsMenu {
         allTabsList = new HashMap<>();
         allVBoxMassagesList = new HashMap<>();
         addAllActiveChats();
+        startUpdatingChats();
     }
 
     public void addAllActiveChats() {
         for (Map.Entry<String, ArrayList<String>> activeChat :
                 supporterController.getActiveSupporterAllActiveChats().entrySet()) {
-            allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue()));
+            Platform.runLater(() -> allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue())));
         }
     }
 
@@ -62,7 +64,7 @@ public class SupporterChatsMenu {
 
     private void sendNewMassage(String username, String massageContent) {
         supporterController.addMassageForSupporter(username, massageContent);
-        addMassageToChat(username, massageContent);
+//        addMassageToChat(username, massageContent);
     }
 
     private void addMassageToChat(String username, String massage) {
@@ -84,4 +86,21 @@ public class SupporterChatsMenu {
     public void removeChatTabFromList(String username) {
         allTabsList.remove(username);
     }
+
+    private void startUpdatingChats() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    addAllActiveChats();
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
 }

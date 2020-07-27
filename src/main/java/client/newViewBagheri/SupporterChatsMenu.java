@@ -33,11 +33,9 @@ public class SupporterChatsMenu {
     }
 
     public void addAllActiveChats() {
-        if (supporterController.getActiveSupporterAllActiveChats() != null) {
-            for (Map.Entry<String, ArrayList<String>> activeChat :
-                    supporterController.getActiveSupporterAllActiveChats().entrySet()) {
-                Platform.runLater(() -> allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue())));
-            }
+        for (Map.Entry<String, ArrayList<String>> activeChat :
+                supporterController.getActiveSupporterAllActiveChats().entrySet()) {
+            Platform.runLater(() -> allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue())));
         }
     }
 
@@ -94,7 +92,7 @@ public class SupporterChatsMenu {
             @Override
             public void run() {
                 while (true) {
-                    addAllActiveChats();
+                    updateChats();
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
@@ -105,4 +103,19 @@ public class SupporterChatsMenu {
         }).start();
     }
 
+    public void updateChats() {
+        if (supporterController.getActiveSupporterAllActiveChats() != null) {
+            for (Map.Entry<String, ArrayList<String>> activeChat :
+                    supporterController.getActiveSupporterAllActiveChats().entrySet()) {
+                VBox vBox = allVBoxMassagesList.get(activeChat.getKey());
+                if(vBox != null) {
+                    vBox.getChildren().clear();
+                    for (String message : activeChat.getValue()) {
+                        vBox.getChildren().add(new Text(message));
+                    }
+                }
+                Platform.runLater(() -> allChatsTabPain.getTabs().add(creatChatTab(activeChat.getKey(), activeChat.getValue())));
+            }
+        }
+    }
 }

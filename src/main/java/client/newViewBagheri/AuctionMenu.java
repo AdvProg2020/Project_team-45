@@ -2,6 +2,7 @@ package client.newViewBagheri;
 
 import client.controller.AuctionController;
 import client.newViewNedaei.MenuController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -34,19 +35,19 @@ public class AuctionMenu {
         addAuctionInfo();
         addProposedPrice();
         addMassagesToChat();
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while (inChat) {
-//                    addMassagesToChat();
-//                    try {
-//                        Thread.sleep(10000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (inChat) {
+                    addMassagesToChat();
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
     }
 
     private void addAuctionInfo() {
@@ -62,13 +63,11 @@ public class AuctionMenu {
     
     private void addMassagesToChat() {
         ArrayList<String> allMassages = auctionController.getActiveAuctionAllMassages();
-        if (allMassages != null && allMassages.size() != 0) {
-            int size = allMassages.size();
-            for (String massage : allMassages.subList(massageNumber, size)) {
-                allMassagesBox.getChildren().add(new Text(massage));
-            }
-            massageNumber = size;
+        int size = allMassages.size();
+        for (String massage : allMassages.subList(massageNumber, size)) {
+            Platform.runLater(() -> allMassagesBox.getChildren().add(new Text(massage)));
         }
+        massageNumber = size;
     }
 
     public void goToParticipateAuctionPanel() {

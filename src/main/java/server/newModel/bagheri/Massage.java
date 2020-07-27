@@ -22,6 +22,6 @@ public class Massage {
 
     @Override
     public String toString() {
-        return sender + ":\n" + content;
+        return sender.getUsername() + ":\n" + content;
     }
 }

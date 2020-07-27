@@ -1,6 +1,7 @@
 package client.newViewBagheri;
 
 import client.controller.userControllers.SupporterController;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -16,6 +17,7 @@ public class ChatWhitSupporterMenu {
     public BorderPane chatPane;
     public VBox allMassagesBox;
     public TextArea newMassageTextArea;
+    private int massageNumber;
 
     public static String getFxmlFilePath() {
         return "/ChatWhitSupporterMenu.fxml";
@@ -25,6 +27,8 @@ public class ChatWhitSupporterMenu {
     public void initialize() {
         chatPane.setVisible(false);
         addOnlineSupporters();
+        massageNumber = 0;
+        startUpdatingChat();
     }
 
     private void addOnlineSupporters() {
@@ -35,24 +39,42 @@ public class ChatWhitSupporterMenu {
         }
     }
 
+    private void startUpdatingChat() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    updateChat();
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
     private void startNewChat(String supporterUsername) {
         chatPane.setVisible(true);
         allMassagesBox.getChildren().clear();
         supporterController.startNewChatForActiveBuyer(supporterUsername);
+        massageNumber = 0;
     }
 
     public void sendNewMassage() {
         String massageText = newMassageTextArea.getText();
         supporterController.addMassageForBuyer(massageText);
-        addMassageToChat(massageText);
         newMassageTextArea.clear();
-    }
-
-    private void addMassageToChat(String massage) {
-        allMassagesBox.getChildren().add(new Text(massage));
+        updateChat();
     }
 
     private void updateChat() {
         ArrayList<String> messages = SupporterController.getInstance().getMessages();
+        int size = messages.size();
+        for (String message : messages.subList(massageNumber, size)) {
+            Platform.runLater(() -> allMassagesBox.getChildren().add(new Text(message)));
+        }
+        massageNumber = size;
     }
 }

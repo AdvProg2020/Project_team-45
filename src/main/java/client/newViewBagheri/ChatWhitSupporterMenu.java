@@ -71,10 +71,12 @@ public class ChatWhitSupporterMenu {
 
     private void updateChat() {
         ArrayList<String> messages = SupporterController.getInstance().getMessages();
-        int size = messages.size();
-        for (String message : messages.subList(massageNumber, size)) {
-            Platform.runLater(() -> allMassagesBox.getChildren().add(new Text(message)));
+        if (messages != null) {
+            int size = messages.size();
+            for (String message : messages.subList(massageNumber, size)) {
+                Platform.runLater(() -> allMassagesBox.getChildren().add(new Text(message)));
+            }
+            massageNumber = size;
         }
-        massageNumber = size;
     }
 }

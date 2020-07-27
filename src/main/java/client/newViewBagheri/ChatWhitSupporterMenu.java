@@ -45,6 +45,7 @@ public class ChatWhitSupporterMenu {
         String massageText = newMassageTextArea.getText();
         supporterController.addMassageForBuyer(massageText);
         addMassageToChat(massageText);
+        newMassageTextArea.clear();
     }
 
     private void addMassageToChat(String massage) {

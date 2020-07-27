@@ -47,11 +47,16 @@ public class SupporterChatsMenu {
         scrollPane.setContent(massagesVBox);
         TextArea textArea = new TextArea();
         Button sendButton = new Button("Send");
-        sendButton.setOnAction(e -> sendNewMassage(buyerUsername, textArea.getText()));
+        sendButton.setOnAction(e -> sendNewMassageFromSupporter(buyerUsername, textArea));
         chatVBox.getChildren().addAll(scrollPane, textArea, sendButton);
         newChatTab.setContent(chatVBox);
         addChatTOList(buyerUsername, newChatTab, massagesVBox);
         return newChatTab;
+    }
+
+    private void sendNewMassageFromSupporter(String buyerUsername, TextArea textArea) {
+        sendNewMassage(buyerUsername, textArea.getText());
+        textArea.clear();
     }
 
     private void sendNewMassage(String username, String massageContent) {

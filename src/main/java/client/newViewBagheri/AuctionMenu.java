@@ -34,19 +34,19 @@ public class AuctionMenu {
         addAuctionInfo();
         addProposedPrice();
         addMassagesToChat();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (inChat) {
-                    addMassagesToChat();
-                    try {
-                        Thread.sleep(10000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (inChat) {
+//                    addMassagesToChat();
+//                    try {
+//                        Thread.sleep(10000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }).start();
     }
 
     private void addAuctionInfo() {
@@ -79,5 +79,6 @@ public class AuctionMenu {
     public void sendNewMassage() {
         auctionController.addMassageToActiveAuction(newMassageTextArea.getText());
         addMassagesToChat();
+        newMassageTextArea.clear();
     }
 }
